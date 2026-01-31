@@ -15,19 +15,20 @@ The file is a PS1 VRAM dump. The same bytes are interpreted differently dependin
 
 | Region | Byte Range (per row) | Pixel Format | Pixel Width | Contents |
 |--------|----------------------|--------------|-------------|----------|
-| 4bpp area | 0-511 | 4bpp indexed | 1024 px | Fonts, sprites, UI, effects |
-| 16-bit area | 512-895 | 16-bit RGB555 | 192 px | Title logo (partial) |
+| 4bpp area | 0-635 | 4bpp indexed | 1272 px | Fonts, sprites, UI, effects |
+| 16-bit area | 636-895 | 16-bit RGB555 | 130 px | Title logo (partial strip) |
+| Shared zone | 512-635 | Both formats | — | Overlap between 4bpp sprites and logo |
 
 ### Title Logo Layout (320x240, wrapped in VRAM)
 
 The logo is **not** stored as a simple contiguous block. It wraps across VRAM rows:
 
-| Logo Region | Source Rows | Byte Range | Pixels |
-|-------------|------------|------------|--------|
-| Left 192px | 0-239 | 512-895 | Direct 16-bit read |
-| Right 128px | 256-495 | 640-895 | Offset: row += 256, x += 64 |
+| Logo Region | Source Rows | Byte Offset (per row) | Pixels |
+|-------------|------------|----------------------|--------|
+| Left 192px | 0-239 | 512 + x×2 | Direct 16-bit read |
+| Right 128px | 256-495 | 512 + (x−128)×2 | Offset: row += 256, x += 64 |
 
-The 4bpp sprites and 16-bit logo **share overlapping VRAM bytes** (bytes 512-895). The PS1 GPU interprets the same memory differently at runtime.
+The 4bpp sprites and 16-bit logo **share overlapping VRAM bytes** (bytes 512-635). The PS1 GPU interprets the same memory differently at runtime.
 
 ## Font Glyph Layout (Left Half, Top-Left Area)
 
@@ -67,8 +68,9 @@ data = open('COMM.IMG', 'rb').read()
 row_width = 896
 left_bytes = 512  # 4bpp region: 512 bytes = 1024 pixels
 
-# --- 4bpp sprites/fonts ---
-img = Image.new('RGB', (1024, 512), (0, 0, 0))
+# --- 4bpp sprites/fonts (bytes 0-635 per row = 1272 pixels) ---
+left_bytes = 636
+img = Image.new('RGB', (left_bytes * 2, 512), (0, 0, 0))
 pix = img.load()
 for y in range(512):
     for xb in range(left_bytes):
@@ -80,16 +82,17 @@ for y in range(512):
         pix[xb * 2 + 1, y] = (hi, hi, hi)
 img.save('COMM_4bpp.png')
 
-# --- 16-bit logo (320x240, unwrapped from VRAM) ---
+# --- 16-bit logo (320x240, unwrapped from wrapped VRAM) ---
 logo = Image.new('RGB', (320, 240), (0, 0, 0))
 pix2 = logo.load()
 x_cut = 192
+logo_start = 512  # byte offset where logo 16-bit data begins
 for y in range(240):
     for x in range(320):
         if x < x_cut:
-            offset = y * row_width + left_bytes + x * 2
+            offset = y * row_width + logo_start + x * 2
         else:
-            offset = (y + 256) * row_width + left_bytes + (x - x_cut + 64) * 2
+            offset = (y + 256) * row_width + logo_start + (x - x_cut + 64) * 2
         val = struct.unpack_from('<H', data, offset)[0]
         r = (val & 0x1F) << 3
         g = ((val >> 5) & 0x1F) << 3
