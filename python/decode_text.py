@@ -6,6 +6,7 @@ Usage:
     python decode_text.py <file> <offset>          # decode one string at offset
     python decode_text.py <file> --scan            # find and decode all text strings
     python decode_text.py <file> --find "ますか"    # find strings containing a pattern
+    python decode_text.py <file> --scan --prefix 2  # STG files: skip 2-byte event script prefix
 """
 
 import argparse
@@ -74,14 +75,24 @@ def char_id_to_bytes(char_id):
     return None
 
 
-def decode_string(data, offset, decode_table):
+def decode_string(data, offset, decode_table, prefix=0):
     """Decode a null-terminated text string starting at offset.
+
+    If prefix > 0, the first `prefix` bytes are emitted as a [script:XX XX]
+    tag instead of being decoded as characters (event script control bytes).
 
     Returns (decoded_text, bytes_consumed).
     """
     parts = []
     pos = offset
     length = len(data)
+
+    # Emit event script prefix bytes as a hex tag
+    if prefix > 0 and pos + prefix <= length:
+        prefix_bytes = data[pos:pos + prefix]
+        hex_str = " ".join(f"{b:02X}" for b in prefix_bytes)
+        parts.append(f"[script:{hex_str}]")
+        pos += prefix
 
     while pos < length:
         b = data[pos]
@@ -184,7 +195,7 @@ def hex_dump(data, offset, length, cols=16):
     return "\n".join(lines)
 
 
-def scan_file(data, decode_table):
+def scan_file(data, decode_table, prefix=0):
     """Find all text strings in a binary file.
 
     Strategy:
@@ -202,7 +213,7 @@ def scan_file(data, decode_table):
             sub = data[pos + 2]
             if sub in (0x01, 0x02, 0x03, 0x05, 0x07):
                 start = pos
-                text, consumed = decode_string(data, start, decode_table)
+                text, consumed = decode_string(data, start, decode_table, prefix=prefix)
                 # Only include if there's actual text content
                 stripped = text
                 for tag in ("[box:system]", "[box:close]", "[box:speech]",
@@ -300,7 +311,7 @@ def scan_file(data, decode_table):
         if (clean and scan_pos < length and data[scan_pos] == 0x00
                 and valid_chars >= min_standalone):
             if pos not in seen_offsets:
-                text, consumed = decode_string(data, pos, decode_table)
+                text, consumed = decode_string(data, pos, decode_table, prefix=prefix)
                 results.append((pos, consumed, text))
                 seen_offsets.add(pos)
                 pos = pos + consumed
@@ -312,7 +323,7 @@ def scan_file(data, decode_table):
     return results
 
 
-def find_text(data, search_str, decode_table, encode_table):
+def find_text(data, search_str, decode_table, encode_table, prefix=0):
     """Find all occurrences of a text pattern in binary data."""
     # Encode the search string to byte pattern
     byte_pattern = bytearray()
@@ -347,7 +358,7 @@ def find_text(data, search_str, decode_table, encode_table):
                 start = idx
                 break
 
-        text, consumed = decode_string(data, start, decode_table)
+        text, consumed = decode_string(data, start, decode_table, prefix=prefix)
         results.append((start, consumed, text))
         pos = idx + len(pattern_bytes)
 
@@ -373,6 +384,9 @@ def main():
                         help="Scan file for all text strings")
     parser.add_argument("--find", metavar="TEXT",
                         help="Find strings containing the given text")
+    parser.add_argument("--prefix", type=int, default=0, metavar="N",
+                        help="Treat first N bytes of each string as event script "
+                             "control bytes (shown as [script:XX ...] tag)")
     args = parser.parse_args()
 
     if not os.path.exists(args.file):
@@ -394,7 +408,7 @@ def main():
                   file=sys.stderr)
             sys.exit(1)
 
-        text, consumed = decode_string(data, offset, decode_table)
+        text, consumed = decode_string(data, offset, decode_table, prefix=args.prefix)
         print(f"Offset: 0x{offset:08X} ({consumed} bytes)")
         print(hex_dump(data, offset, consumed))
         print(f"Text: {text}")
@@ -402,7 +416,7 @@ def main():
 
     # Mode 2: Scan
     if args.scan:
-        results = scan_file(data, decode_table)
+        results = scan_file(data, decode_table, prefix=args.prefix)
         print(f"Found {len(results)} text strings in {args.file}")
         print()
         for offset, consumed, text in results:
@@ -414,7 +428,7 @@ def main():
     # Mode 3: Find
     if args.find:
         encode_table = build_encode_table(decode_table)
-        results = find_text(data, args.find, decode_table, encode_table)
+        results = find_text(data, args.find, decode_table, encode_table, prefix=args.prefix)
         print(f"Found {len(results)} matches for \"{args.find}\" in {args.file}")
         print()
         for offset, consumed, text in results:

@@ -346,6 +346,79 @@ This renders "俺の・・・" with slow trailing dots.
 | S*.STG | various | スイッチがあります　ONにしてみますか？ |
 | S*.STG | various | アイテムを見つけました　取りますか？ |
 
+## Event Script Dialogue Format (STG Files)
+
+Stage files (`S*.STG`) embed dialogue strings inside an event script bytecode stream. Each dialogue string has a **2-byte prefix** (little-endian 16-bit event script offset) before the text content, followed by a null terminator. Between consecutive dialogue strings, a **48-byte event script block** controls dialogue flow (wait for input, advance to next string).
+
+### Dialogue String Layout
+
+```
+[2-byte script offset] [text bytes...] 00
+[48-byte event script block]
+[2-byte script offset] [text bytes...] 00
+[48-byte event script block]
+...
+```
+
+Example from S100.STG at `0x172EC6`:
+
+```
+83 26                           script offset 0x2683
+F4 D5 F2 2D 02 19 54 79 58 06  炎使いのエルクか
+FF 05 01 01                     [newline]
+F3 8A 06 50 10 35 4D 15 02 06  遅かったじゃないか
+00                              [null terminator]
+```
+
+The 2-byte prefix values increase monotonically for sequential dialogues, acting as offsets within the event script's address space.
+
+### Inter-Dialogue Event Script Block (48 bytes)
+
+Between each pair of dialogue strings, a fixed-structure 48-byte block handles dialogue flow control. The block contains three varying 16-bit LE fields (event script offsets) and a set of fixed opcodes:
+
+```
+Offset  Bytes       Description
+------  ----------  -----------
++0      23 01       Fixed
++2      F0 8B       Fixed
++4      XX 80       Context opcode (varies by speaker group)
++6      28 01       Fixed
++8      F0 0B       Fixed
++10     04 00       Fixed (0x0004)
++12     00 80       Fixed
++14     [AA BB]     Ptr A: current_prefix + 0x10
++16     45 01       Fixed
++18     F0 8B       Fixed
++20     XX 80       Context opcode (same as +4)
++22     28 01       Fixed
++24     F0 0B       Fixed
++26     00 00       Fixed (0x0000)
++28     00 80       Fixed
++30     [CC DD]     Ptr B: Ptr A + 0x05
++32     63 00       Fixed
++34     XX 80       Context opcode (same as +4)
++36     [EE FF]     Ptr C: varies (points before current dialog)
++38     2D 00       Fixed
++40     30 00       Fixed
++42     62 00       Fixed
++44     02 80       Fixed
++46     A9 00       Fixed (typically 0x00A9)
+```
+
+The block structure repeats in a near-parallel pattern (offsets +0..+15 mirror +16..+31), differing only at +10 (`04 00` vs `00 00`), suggesting two similar operations per dialogue transition.
+
+### Context Opcode (Speaker/Group ID)
+
+The 16-bit LE value at template positions +4, +20, and +34 identifies the dialogue context. Different values delineate different speakers or scene states:
+
+| Opcode | Observed Usage |
+|--------|----------------|
+| `0x8009` | NPC group before scene transition |
+| `0x8001` | Primary dialogue group (guild master briefing) |
+| `0x8000` | Alternate dialogue context |
+
+When the context opcode changes between consecutive template blocks, there are typically additional non-template event script bytes at the transition point (e.g., 22 bytes of scene setup commands between the `0x8009` and `0x8001` groups).
+
 ## Key Functions (MIPS Disassembly)
 
 ### SDIC.BIN (System Dialogue Controller)
@@ -383,5 +456,10 @@ The executable also contains Shift-JIS-to-charID mapping tables at file offset `
 
 ## Tools
 
+- `python/decode_text.py` -- Decode text from binary game files (single offset, scan, or search)
+  - `python decode_text.py <file> <offset>` -- decode one string at offset
+  - `python decode_text.py <file> --scan` -- find and decode all text strings
+  - `python decode_text.py <file> --find "ますか"` -- find strings containing a pattern
+  - `python decode_text.py <file> --scan --prefix 2` -- STG files: mark 2-byte event script prefix
 - `python/view_char.py` -- View individual font cells with bitplane separation
 - `COMM_IMG_chars.md` -- Complete character-to-cell mapping table
