@@ -1,0 +1,1874 @@
+Found 1269 dialogues across 1321 templates in SA00.STG (4 bare gaps, 48 missed)
+
+  0x000AEE66 [0x8005] [script:0F 05][box:speech]ここがロマリアの、クズ鉄の長か
+  0x000AEEBC [0x8005] [script:39 05][box:speech]思った以上にひどいな…
+  0x000AEF10 [0x8005] [script:63 05][box:speech]シャンテの事も気になるが、
+  0x000AF29A [0x8005] [script:29 07][box:speech]レジスタンスのウワサは聞いた？
+  --- context: 0x8005 -> 0xFFFE ---
+  0x000AF2E2 [0xFFFE] [script:53 07][box:speech]なんでも、この長に彼らの\nアジトがあるらしいわよ
+  0x000AF33C [0xFFFE] [script:7E 07][box:speech]別に、レジスタンスは\n嫌いじゃないけど、
+  0x000AF38C [0xFFFE] [script:AB 07][box:speech]この長に住んでいる私たちに\n迷惑はかけないでほしいわ
+  0x000AF3EC [0xFFFE] [script:E0 07][box:speech]最近はこの長も、雨ばかり降るから、\n食べ物がくさらないか心配だわ
+  0x000AF456 [0xFFFE] [script:00 08][box:speech]ふう…
+  0x000AF490 [0xFFFE] [script:24 08][box:speech]本当に、うっとうしい天気ね
+  0x000AF4DE [0xFFFE] [script:49 08][box:speech]お前、よそ者だな！！
+  0x000AF526 [0xFFFE] [script:6A 08][box:speech]…なーんてな
+  0x000AF568 [0xFFFE] [script:98 08][box:speech]右に行くと宿屋があるから、\nそこに白まるといいぜ
+  0x000AF5C6 [0xFFFE] [script:C3 08][box:speech]汚い長だが、ゆっくり\nしていってくれよ
+  0x000AF61C [0xFFFE] [script:F0 08][box:speech]外はさむくてしかたないから、\nずっとここにいたいよ
+  0x000AF676 [0xFFFE] [script:13 09][box:speech]あったかーい、ね
+  0x000AF6BC [0xFFFE] [script:39 09][box:speech]ロマリアへ行きたいじゃと？
+  0x000AF702 [0xFFFE] [script:62 09][box:speech]なにを夢みたいな事を、\n言っておるんじゃ
+  0x000AF754 [0xFFFE] [script:8C 09][box:speech]そんな事が本当に、\n出来るわけもなかろう
+  0x000AF7AE [0xFFFE] [script:B6 09][box:speech]まあ、この長で満足\nすることじゃな
+  0x000AF802 [0xFFFE] [script:DD 09][box:speech]こんな長にもギルドはあるんだぜ
+  0x000AF84A [0xFFFE] [script:0A 0A][box:speech]もっとも、ほとんどがゴミ拾い\nみたいな仕事ばかりだけどな
+  0x000AF8AA [0xFFFE] [script:31 0A]なんだ？\nお前もハンターなのか？
+  0x000AF8F8 [0xFFFE] [script:5F 0A][box:speech]俺たちは、ロマリアから出る\nゴミで生活してるのさ
+  0x000AF952 [0xFFFE] [script:8A 0A][box:speech]汚い、なんて思ってるんじゃ\nねえだろうな？
+  0x000AF9A4 [0xFFFE] [script:BC 0A][box:speech]ロマリアの奴らは、物が古くなるとすぐに\n捨てちまうから、もったいないんだぜ
+  0x000AFA6A [0xFFFE] [script:0B 0B][box:speech]さーてと、
+  0x000AFAFC [0xFFFE] [script:64 0B][box:speech]この長は、ロマリアに近いせいか、\nレジスタンスが集まっててな
+  0x000AFBB2 [0xFFFE] [script:B1 0B][box:speech]えっ、お、俺？
+  0x000AFBF2 [0xFFFE] [script:D9 0B][box:speech]も、もちろんレジスタンスな\nわけねぇだろ！？
+  0x000AFC42 [0xFFFE] [script:01 0C][box:speech]頼むから、ヤバイことは\n言わないでくれよ
+  0x000AFC98 [0xFFFE] [script:2B 0C][box:speech]俺は、レジスタンスなんて\n知らねえよ
+  0x000AFCEC [0xFFFE] [script:5A 0C][box:speech]この長とロマリアの間には、\nすごくでかい壁があるんだ
+  0x000AFD44 [0xFFFE] [script:86 0C][box:speech]だからこの長に、ロマリアに\n行けた奴なんていないのさ
+  0x000AFDA2 [0xFFFE] [script:AA 0C][box:speech]ロマリアに行きたい？
+  0x000AFDE4 [0xFFFE] [script:D3 0C][box:speech]よせよせ、どうせ奴らに\n殺されるのがオチさ
+  0x000AFE3C [0xFFFE] [script:01 0D][box:speech]すぐそこの酒場は、とても\n人気があるみたいだわ
+  0x000AFEEE [0xFFFE] [script:58 0D][box:speech]あなたも一度、酒場に\n行ってみたら？
+  0x000AFF46 [0xFFFE] [script:81 0D][box:speech]この前の、大雨は\nすごかったわ
+  0x000AFF92 [0xFFFE] [script:AD 0D][box:speech]おかげでまだ、長のあちこちに\n水たまりが残っているのよ
+  0x000AFFF0 [0xFFFE] [script:DE 0D][box:speech]こんなに水たまりだらけじゃ、大事な\n新しいクツが汚れちゃうわ
+  0x000B059C [0xFFFE] [script:AA 10][box:speech]レジスタンスのウワサは聞いた？
+  0x000B05E4 [0xFFFE] [script:D4 10][box:speech]なんでもこの前、このあたりで\nもめてたんですって
+  0x000B063E [0xFFFE] [script:FF 10][box:speech]別に、レジスタンスは\n嫌いじゃないけど、
+  0x000B068E [0xFFFE] [script:2C 11][box:speech]この長に住んでいる私たちに\n迷惑はかけないでほしいわ
+  0x000B06EE [0xFFFE] [script:5B 11][box:speech]最近はこの長も、いやな事件が\n起きてしまうわね
+  0x000B074C [0xFFFE] [script:7B 11][box:speech]ふう…
+  0x000B0786 [0xFFFE] [script:A3 11][box:speech]天気の心配ばかりも\nしてられないわね
+  0x000B07DC [0xFFFE] [script:D1 11][box:speech]この前のレジスタンス騒ぎは、\nあんたの仕業だろ？
+  0x000B0838 [0xFFFE] [script:FF 11][box:speech]ここにいつも立っていると、\nいろいろ見えちまうからな
+  0x000B0894 [0xFFFE] [script:2C 12][box:speech]この前ここで、ロマリア兵が\n暴れてたんだって
+  0x000B08EE [0xFFFE] [script:4F 12][box:speech]おっかなーい、ね
+  0x000B0934 [0xFFFE] [script:77 12][box:speech]物騒な事件が起きたらしいが、
+  0x000B097E [0xFFFE] [script:A3 12][box:speech]人間として生きとるからにゃ、\nいろいろあるだろうわな
+  0x000B09DC [0xFFFE] [script:CD 12][box:speech]まあ、この長で満足\nすることじゃな
+  0x000B0A30 [0xFFFE] [script:F7 12][box:speech]あのレジスタンスも\nバカな連著だぜ
+  0x000B0A7E [0xFFFE] [script:1F 13][box:speech]どうせあのロマリアには\nかないっこないのによ
+  0x000B0AD4 [0xFFFE] [script:4C 13][box:speech][?1164]いモノには、巻かれてるのが\nいちばんいいんだよ
+  0x000B0B2E [0xFFFE] [script:78 13][box:speech]この長も、昔は平和\nだったんじゃがのぅ…
+  0x000B0B80 [0xFFFE] [script:A2 13][box:speech]今はみんな、びくびくしながら\n生活しておるわい
+  0x000B0BDA [0xFFFE] [script:CB 13][box:speech]昔は平和だったん\nじゃがのぅ…
+  0x000B0C2C [0xFFFE] [script:F9 13][box:speech]いくら俺たちが、ロマリアの\nゴミで生活してたって、
+  0x000B0C82 [0xFFFE] [script:24 14][box:speech]むりやり捕まえて行くってのは\nあんまり過ぎるよな
+  0x000B0CDE [0xFFFE] [script:45 14][box:speech]さーてと、
+  0x000B0D70 [0xFFFE] [script:9A 14][box:speech]この前、男の子が捕まり\nそうになったんだって
+  0x000B0DCA [0xFFFE] [script:C6 14][box:speech]私もそんなことになったら、\nどうしようかしら…
+  0x000B0E22 [0xFFFE] [script:EC 14][box:speech]まったくもって、この長はよぉ
+  0x000B0E68 [0xFFFE] [script:17 15][box:speech]レジスタンスのおかげで、\n安心して生活できねぇよ
+  0x000B0EC4 [0xFFFE] [script:3D 15][box:speech]まったく住みにくい長だぜ
+  0x000B0F10 [0xFFFE] [script:6B 15][box:speech]あんたこの前のレジスタンス\n騒ぎは知ってるかい？
+  0x000B0F66 [0xFFFE] [script:96 15][box:speech]ロマリア兵に子どもが捕まり\nそうになったんだってさ
+  0x000B0FC2 [0xFFFE] [script:C1 15][box:speech]助けた男ってのは\nどんな人なんだろうね
+  0x000B1018 [0xFFFE] [script:EA 15][box:speech]この前の、大雨は\nすごかったわ
+  0x000B1064 [0xFFFE] [script:16 16][box:speech]おかげでまだ、長のあちこちに\n水たまりが残っているのよ
+  0x000B10C2 [0xFFFE] [script:48 16][box:speech]こんなに水たまりだらけじゃ、大事な\n新しいカバンが汚れちゃうわ
+  0x000B1D4C [0xFFFE] [script:82 1C][box:speech]レジスタンスのウワサは聞いた？
+  0x000B1D94 [0xFFFE] [script:AC 1C][box:speech]なんでも、この長に彼らの\nアジトがあるらしいわよ
+  0x000B1DEE [0xFFFE] [script:D7 1C][box:speech]別に、レジスタンスは\n嫌いじゃないけど、
+  0x000B1E3E [0xFFFE] [script:04 1D][box:speech]この長に住んでいる私たちに\n迷惑はかけないでほしいわ
+  0x000B1E9E [0xFFFE] [script:30 1D][box:speech]雨のせいで、食べ物が\nすぐにいたむのよね
+  0x000B1EF0 [0xFFFE] [script:5B 1D][box:speech]くさってしまう前に、全部\n食べてしまおうかしら？
+  0x000B1F4C [0xFFFE] [script:7B 1D][box:speech]ふう…
+  0x000B1F86 [0xFFFE] [script:9F 1D][box:speech]本当に、うっとうしい天気ね
+  0x000B1FD4 [0xFFFE] [script:CC 1D][box:speech]最近この長を、変な奴らが\nうろうろしてるぜ
+  0x000B2028 [0xFFFE] [script:F5 1D][box:speech]ガキやら…大人やら…\nいろいろな奴らがな
+  0x000B2080 [0xFFFE] [script:23 1E][box:speech]ここにいつも立っていると、\nいろいろ見えちまうからな
+  0x000B20DC [0xFFFE] [script:4F 1E][box:speech]さっきまでふってたのに、\nもう今はやんでる…
+  0x000B2134 [0xFFFE] [script:75 1E][box:speech]めんどくさーい天気だ、ね
+  0x000B2180 [0xFFFE] [script:A3 1E][box:speech]ロマリアから来る連著と、\nレジスタンスの連著…
+  0x000B21D6 [0xFFFE] [script:C6 1E][box:speech]これは、どっちもどっちじゃの
+  0x000B2222 [0xFFFE] [script:F4 1E][box:speech]この長で満足しておれば\n何も問題ないんじゃよ
+  0x000B227E [0xFFFE] [script:19 1F][box:speech]あんた、ハンターなんだろ？
+  0x000B22C2 [0xFFFE] [script:46 1F][box:speech]俺だったら、他の長に仕事を\n探しに行っちまうけどな
+  0x000B2322 [0xFFFE] [script:71 1F][box:speech]あーあ、俺はこの長じゃ\nやってられないぜ
+  0x000B2378 [0xFFFE] [script:9D 1F][box:speech]この前、あまり見たことの\nない連著が、
+  0x000B23CA [0xFFFE] [script:C6 1F][box:speech]長の入り口あたりを、\nうろついておったぞ
+  0x000B241C [0xFFFE] [script:EF 1F][box:speech]まるで、何かを探して\nいるかのようじゃった
+  0x000B2474 [0xFFFE] [script:1B 20][box:speech]この長には、何もあるわけが\nないのにのぅ…
+  0x000B24CC [0xFFFE] [script:4A 20][box:speech]ロマリアの連著もレジスタンスも\n俺には関係ないね
+  0x000B252A [0xFFFE] [script:6B 20][box:speech]さーてと、
+  0x000B25BC [0xFFFE] [script:C5 20][box:speech]そういえば、この前の子が元気に\n走り回っているのを見たわ
+  0x000B2620 [0xFFFE] [script:F1 20][box:speech]あんな子がレジスタンスな\nはずがないわよねぇ
+  0x000B2678 [0xFFFE] [script:17 21][box:speech]まったくもって、この長はよぉ
+  0x000B26BE [0xFFFE] [script:42 21][box:speech]レジスタンスのおかげで、\n安心して生活できねぇよ
+  0x000B271A [0xFFFE] [script:68 21][box:speech]まったく住みにくい長だぜ
+  0x000B2766 [0xFFFE] [script:91 21][box:speech]最近のこの長は、何かあわただしいよ
+  0x000B27B2 [0xFFFE] [script:BA 21][box:speech]知らない連著がうろつき\nまわってるしねぇ
+  0x000B280A [0xFFFE] [script:E2 21][box:speech]何か、すごい事が始まるのかしら？
+  0x000B285A [0xFFFE] [script:0C 22][box:speech]さっきの大雨は、また\nすごかったわ
+  0x000B28A8 [0xFFFE] [script:38 22][box:speech]そのせいでまだ長のあちこちに\n水たまりが残っているのよ
+  0x000B2906 [0xFFFE] [script:6A 22][box:speech]こんなに水たまりだらけじゃ、大事な\n新しいスカートが汚れちゃうわ
+  0x000B33C2 [0xFFFE] [script:BC 27][box:speech]二人きりになっちまったな
+  --- context: 0xFFFE -> 0x8006 ---
+  0x000B342A [0x8006] [script:F5 27][box:speech]まあ、一人になるよりは、\nましってとこか
+  0x000B347E [0x8006] [script:1A 28][box:speech]俺は、いつも一人だった
+  --- context: 0x8006 -> 0x8005 ---
+  0x000B34C8 [0x8005] [script:47 28][box:speech]親の顔も知らず、\n友と呼べる仲間もなく、
+  0x000B357C [0x8005] [script:A2 28][box:speech]ダニーを見ていると、そんな\n自分を思い出してしまう
+  0x000B35D8 [0x8005] [script:C7 28][box:speech]あの時のエルクもそうだった…
+  0x000B362C [0x8005] [script:FB 28][box:speech]だから彼らには、俺のような、\nつらい思いをさせたくなかった
+  0x000B3694 [0x8005] [script:26 29][box:speech]俺も親の顔を知らねぇんだ
+  --- context: 0x8005 -> 0x8006 ---
+  0x000B36EA [0x8006] [script:5A 29][box:speech]オヤジに拾われなきゃ、こうして\n生きていることもなかったろう
+  0x000B3752 [0x8006] [script:86 29][box:speech]そのオヤジが、俺に教えてくれたぜ
+  0x000B37A0 [0x8006] [script:B9 29][box:speech]「この世界には、こんな俺たちにしか\n守れない者が、おおぜいいる」
+  0x000B3810 [0x8006] [script:EC 29][box:speech]「そいつを守っていくために、\nお前は生きろ」ってな
+  0x000B386C [0x8006] [script:18 2A][box:speech]この言葉、今度は俺から\nお前に送るぜ
+  0x000B38CE [0x8006] [script:43 2A][box:speech]…俺は、不器用な人間だ
+  --- context: 0x8006 -> 0x8005 ---
+  0x000B3916 [0x8005] [script:6C 2A][box:speech]やられたら、やり返す…\nそんな事しかできん
+  0x000B3968 [0x8005] [script:99 2A][box:speech]だが、たとえ一人でも俺はやる、\n…そして、やりとげてみせる
+  0x000B3A1E [0x8005] [script:E9 2A][box:speech]お前一人じゃねぇぜ
+  --- context: 0x8005 -> 0x8006 ---
+  0x000B3A62 [0x8006] [script:10 2B][box:speech]二人だけだが、俺がいれば百人調だ
+  0x000B3AB0 [0x8006] [script:2E 2B][box:speech]トッシュ…
+  --- context: 0x8006 -> 0x8005 ---
+  0x000B3AEC [0x8005] [script:55 2B][box:speech]あいつら、このままじゃ\nすませねぇよなぁ
+  --- context: 0x8005 -> 0x8006 ---
+  0x000B3B3A [0x8006] [script:7C 2B][box:speech]きっちりけじめを、\nつけてもらわねぇとな
+  0x000B3B8C [0x8006] [script:A5 2B][box:speech]・[delay:0B]・[delay:0B]・[delay:15]そうだな
+  --- context: 0x8006 -> 0x8005 ---
+  0x000B3F5E [0x8005] [script:90 2D][box:speech]レジスタンスのアジトが\n見つかったんですって
+  --- context: 0x8005 -> 0xFFFE ---
+  0x000B3FB6 [0xFFFE] [script:BD 2D][box:speech]ロマリアの人たちは、本当に\nおそろしいわね…
+  0x000B4010 [0xFFFE] [script:E9 2D][box:speech]聞いたかよ、\nレジスタンスが店殺しだってよ
+  0x000B4068 [0xFFFE] [script:14 2E][box:speech]この長は普通の長に\nなったんだって
+  0x000B40B8 [0xFFFE] [script:3B 2E][box:speech]ぼくのお中さんが、\nそう言っていたよ
+  0x000B410C [0xFFFE] [script:68 2E][box:speech]今のこの長に、満足して\nおればよいものを…
+  0x000B4166 [0xFFFE] [script:98 2E][box:speech]だから俺はいつも、ロマリアには\nさからうなって言ってるんだぜ
+  0x000B41C6 [0xFFFE] [script:C5 2E][box:speech]まったく、とんでもないことが\n起こったもんじゃ…
+  0x000B4220 [0xFFFE] [script:EC 2E][box:speech]ロマリア…[delay:15]レジスタンス…
+  0x000B4268 [0xFFFE] [script:10 2F][box:speech]この長はもう、めちゃくちゃだな
+  0x000B42B6 [0xFFFE] [script:39 2F][box:speech]この前の子は、もしかして本当に…
+  0x000B4308 [0xFFFE] [script:61 2F][box:speech]レジスタンスはもういない…[delay:15]か…
+  0x000B4358 [0xFFFE] [script:90 2F][box:speech]まさか、レジスタンスのアジトが\nこの酒場だったなんて…
+  0x000B43B6 [0xFFFE] [script:BE 2F][box:speech]この長の酒場で、大事件が\n起きたらしいわね
+  0x000B4860 [0xFFFE] [script:11 32][box:speech]ほっほっほっ、トッシュの奴め\nやりおったのぅ
+  --- context: 0xFFFE -> 0x8005 ---
+  0x000B48C0 [0x8005] [script:36 32][box:speech]えっ！？
+  --- context: 0x8005 -> 0x8006 ---
+  0x000B48FC [0x8006] [script:5D 32][box:speech]わしらも、のんびりとは\nしとられんわい
+  --- context: 0x8006 -> 0x8005 ---
+  0x000B4958 [0x8005] [script:85 32][box:speech]では行くぞい、リーザ
+  0x000B512A [0x8005] [script:77 36][box:speech]ロマリアのトンネルで、爆発が\nあったんですって
+  --- context: 0x8005 -> 0xFFFE ---
+  0x000B5184 [0xFFFE] [script:A4 36][box:speech]どうやら、レジスタンスに\n生き残りがいたようよ
+  0x000B51DE [0xFFFE] [script:D1 36][box:speech]おいおい、最近いったい\n何が起きているんだ？
+  0x000B5238 [0xFFFE] [script:03 37][box:speech]あの爆発が起きていた時にね、\n初めてみたかわいい女の子が、
+  0x000B5296 [0xFFFE] [script:2D 37][box:speech]おじいさんといっしょに、\nここで消えちゃったんだ！
+  0x000B52F0 [0xFFFE] [script:58 37][box:speech]やれやれ、今度はロマリアの\nトンネルか…
+  0x000B5340 [0xFFFE] [script:85 37][box:speech]この長の若い奴らは、いったい\n何を考えているのやら…
+  0x000B53A0 [0xFFFE] [script:B1 37][box:speech]レジスタンスはいなくなったん\nじゃなかったのか？
+  0x000B53F8 [0xFFFE] [script:E5 37][box:speech]ロマリアのトンネルを破壊したのは、\nレジスタンスの生き残りのようじゃな
+  0x000B5460 [0xFFFE] [script:0B 38][box:speech]この前の大きな音とゆれ…
+  0x000B54A6 [0xFFFE] [script:30 38][box:speech]でかい事件が始まってるらしいな
+  0x000B54F6 [0xFFFE] [script:60 38][box:speech]ロマリアのトンネルを破壊して、\nどうするつもりなのかしら？
+  0x000B5556 [0xFFFE] [script:83 38][box:speech]俺は見たぜ！
+  0x000B5596 [0xFFFE] [script:B2 38][box:speech]ついこの前、変なじじいと女の子が\nすぐそこで消えちまったんだ！
+  0x000B55FA [0xFFFE] [script:DE 38][box:speech]酒場の事件といい、トンネルの事件といい…
+  0x000B564C [0xFFFE] [script:04 39][box:speech]何か最近この長にいるのがこわいわ
+  0x000B569E [0xFFFE] [script:2B 39][box:speech]この前のじしんはすごかったわねぇ
+  0x000B56E6 [0xFFFE] [script:57 39][box:speech]長著の水たまりに、きれいな\nはもんが出来ていたわよ
+  0x000B5E24 [0xFFFE] [script:ED 3C][box:speech]また爆発があったんですって
+  0x000B5E6A [0xFFFE] [script:1A 3D][box:speech]こんどはなんでも、ロマリアの\n城壁の著であったらしいわよ
+  0x000B5ECA [0xFFFE] [script:4B 3D][box:speech]前に、レジスタンスが生き残って\nいたってウワサが流れたけど、
+  0x000B5F26 [0xFFFE] [script:76 3D][box:speech]この爆発騒ぎも、レジスタンスの\n仕業らしいわよ
+  0x000B5F82 [0xFFFE] [script:A2 3D][box:speech]トンネルの事件といい、\nあの爆発といい…
+  0x000B5FD4 [0xFFFE] [script:CD 3D][box:speech]最近ここいらで、いったい何が\n起きているんだ？
+  0x000B6030 [0xFFFE] [script:F5 3D][box:speech]あの爆発、ぼくははっきり見たよ！
+  0x000B607A [0xFFFE] [script:23 3E][box:speech]あそこの壁の上に、真っ赤な炎が\nたくさん見えたんだよ！
+  0x000B60DC [0xFFFE] [script:50 3E][box:speech]ロマリアの街を、本当に\n壊してしまうとは…
+  0x000B6130 [0xFFFE] [script:7D 3E][box:speech]この長の若い奴らは、本当に\nこわいもの知らずじゃな
+  0x000B6190 [0xFFFE] [script:AE 3E][box:speech]一度でいいから俺は、壁の向こうを\nのぞいて見たかったんだ
+  0x000B61EC [0xFFFE] [script:D5 3E][box:speech]レジスタンスがちょっぴり\nうらやましいよ
+  0x000B6240 [0xFFFE] [script:FE 3E][box:speech]今度はロマリアの著で爆発じゃよ
+  0x000B628C [0xFFFE] [script:29 3F][box:speech]あのレジスタンスの連著も、\nなかなかやるもんじゃのぅ
+  0x000B62E8 [0xFFFE] [script:51 3F][box:speech]でかい事件が始まってるらしいな
+  0x000B6332 [0xFFFE] [script:7E 3F][box:speech]こりゃきっと、今回の爆発だけじゃ\nおさまらないだろうぜ
+  0x000B6392 [0xFFFE] [script:AD 3F][box:speech]ロマリアを壊したりなんかして、\nどうするつもりなのかしら？
+  0x000B63F0 [0xFFFE] [script:D0 3F][box:speech]俺は見たぜ！
+  0x000B6430 [0xFFFE] [script:00 40][box:speech]ついこの前、あのでかい壁の向こうで\nすっげぇ爆発があったんだよ！
+  0x000B6496 [0xFFFE] [script:34 40][box:speech]ロマリアで爆発が起きたっていうけど、\nいったい何が爆発したのかしら？
+  0x000B64FE [0xFFFE] [script:5B 40][box:speech]この前のじしんはすごかったわねぇ
+  0x000B6546 [0xFFFE] [script:87 40][box:speech]長著の水たまりに、きれいな\nはもんが出来ていたわよ
+  0x000B6640 [0xFFFE] [script:00 41][box:speech]こんな所でも、待ちぶせ\nしてるなんて…
+  --- context: 0xFFFE -> 0x8008 ---
+  0x000B6694 [0x8008] [script:30 41][box:speech]これじゃあ、敵のことを[?1161]べる前に\nこっちがやられちゃうよぉ…
+  0x000B66F4 [0x8008] [script:5C 41][box:speech]あいつら、ここから1歩も\n進ませないつもりだな
+  --- context: 0x8008 -> 0x8007 ---
+  0x000B674C [0x8007] [script:8A 41][box:speech]やはり、俺たちだけでロマリアに\n侵入するのはムリか…
+  --- context: 0x8007 -> 0x8009 ---
+  0x000B67A8 [0x8009] [script:AD 41][box:speech]ああ、きびしいだろうな
+  --- context: 0x8009 -> 0x8007 ---
+  0x000B67EE [0x8007] [script:D1 41][box:speech]みんな、あきらめるな！！
+  --- context: 0x8007 -> 0x800A ---
+  0x000B6832 [0x800A] [script:F6 41][box:speech]必ず何か方法があるはずだ！！
+  0x000B687C [0x800A] [script:14 42][box:speech]そうだぜ！
+  --- context: 0x800A -> 0x8006 ---
+  0x000B68B8 [0x8006] [script:38 42][box:speech]やってみねぇと始まらねぇぜ！！
+  0x000B6904 [0x8006] [script:66 42][box:speech]とりあえずはこの長の状況を\nもう少し[?1161]べてみよう
+  --- context: 0x8006 -> 0x800A ---
+  0x000B6960 [0x800A] [script:86 42][box:speech]…そうだな
+  --- context: 0x800A -> 0x8005 ---
+  0x000B6CFC [0x8005] [script:5D 44][box:speech]次から次へと、もう…\nいやになるわ
+  --- context: 0x8005 -> 0x8007 ---
+  0x000B6D54 [0x8007] [script:89 44][box:speech]このままじゃ、身動きが\nとれないな
+  --- context: 0x8007 -> 0x8006 ---
+  0x000B6DB0 [0x8006] [script:B5 44][box:speech]ここまで来て何言ってんだよ！？
+  --- context: 0x8006 -> 0x8005 ---
+  0x000B6E0A [0x8005] [script:E9 44][box:speech]バカね、やみくもにつっこんでも\n勝てる相手じゃないわ
+  --- context: 0x8005 -> 0x8007 ---
+  0x000B6E6E [0x8007] [script:12 45][box:speech]何かいい手を考えなきゃ
+  0x000B6EB8 [0x8007] [script:36 45][box:speech]いい手って言ってもよぉ
+  --- context: 0x8007 -> 0x8005 ---
+  0x000B6F00 [0x8005] [script:65 45][box:speech]安心しなさい、だれもあなたに\n考えろなんて言ってないわ
+  --- context: 0x8005 -> 0x8007 ---
+  0x000B6F6E [0x8007] [script:90 45][box:speech]・・・・・
+  --- context: 0x8007 -> 0x8005 ---
+  0x000B6FB4 [0x8005] [script:BB 45][box:speech]何にせよ、もう少しあちこちを\nさぐってみよう
+  --- context: 0x8005 -> 0x8006 ---
+  0x000B7020 [0x8006] [script:E9 45][box:speech]トッシュ、行こう！
+  0x000B75CA [0x8006] [script:BA 48][box:speech]01
+  --- context: 0x8006 -> 0xFFFE ---
+  0x000B760C [0xFFFE] [script:DB 48][box:speech]02
+  0x000B764E [0xFFFE] [script:FC 48][box:speech]03
+  0x000B7690 [0xFFFE] [script:1D 49][box:speech]04
+  0x000B76D2 [0xFFFE] [script:3E 49][box:speech]05
+  0x000B7714 [0xFFFE] [script:5F 49][box:speech]06
+  0x000B7756 [0xFFFE] [script:80 49][box:speech]07
+  0x000B7798 [0xFFFE] [script:A1 49][box:speech]08
+  0x000B77DA [0xFFFE] [script:C2 49][box:speech]09
+  0x000B781C [0xFFFE] [script:E3 49][box:speech]10
+  0x000B785E [0xFFFE] [script:04 4A][box:speech]11
+  0x000B78A0 [0xFFFE] [script:25 4A][box:speech]12
+  0x000BC110 [0xFFFE] [script:61 6E][box:speech]・・・・・
+  --- context: 0xFFFE -> 0x800A ---
+  0x000BC1B6 [0x800A] [script:B1 6E][box:speech]シュウ…
+  --- context: 0x800A -> 0x800B ---
+  0x000BC1FC [0x800B] [script:D9 6E][box:speech]ここにレジスタンスのアジトが？
+  --- context: 0x800B -> 0x800C ---
+  0x000BC246 [0x800C] [script:F8 6E][box:speech]ああ…
+  --- context: 0x800C -> 0x800B ---
+  0x000BC28E [0x800B] [script:2B 6F][box:speech]この酒場の奥に、秘密の\n出入口を作ってな…
+  0x000BC2EA [0x800B] [script:C3 19]もあLギほギf
+  --- context: 0x800B -> 0x8006 ---
+  0x00173F68 [0x8006] [script:44 8C]ぷデw
+  0x0017406A [0x8006] [script:06 00]そあを
+  0x00174116 [0x8006] [script:FA 0F][box:speech]すいませんが、静かにして\nいただけませんか？
+  --- context: 0x8006 -> 0x8014 ---
+  0x00174170 [0x8014] [script:21 10][box:speech]静かにしていただけませんか？
+  0x001741BE [0x8014] [script:46 10][box:speech]・・・・・
+  0x00174EA0 [0x8014] [script:B6 16][box:speech]はい、いらっしゃい
+  --- context: 0x8014 -> 0x8006 ---
+  0x00174EE4 [0x8006] [script:44 8C]ぷデw
+  0x00174FE6 [0x8006] [script:06 00]そあを
+  0x00175098 [0x8006] [script:B2 17][box:speech]はい、いらっしゃい
+  0x001750D8 [0x8006] [script:DC 17][box:speech]宿白は100Gになります\nおやすみになりますか？
+  0x00175130 [0x8006] [script:FE 17][box:speech]いや、違うんだ
+  --- context: 0x8006 -> 0x8005 ---
+  0x00175170 [0x8005] [script:27 18][box:speech]すまんが、ちょっと話を\n聞かせてくれないか？
+  0x001751C6 [0x8005] [script:58 18][box:speech]あらやだ、お客さんじゃないの？\n[delay:15][opt][opt][opt][opt][opt][opt][opt][opt]…まあいいわ
+  --- context: 0x8005 -> 0x8006 ---
+  0x00175268 [0x8006] [script:A9 18][box:speech]この宿屋に、モーリスという男が\n白まっていると聞いたのだが…
+  --- context: 0x8006 -> 0x8005 ---
+  0x001752C6 [0x8005] [script:D5 18][box:speech]モーリス！[opt]…あんた、あのろくでなしに\n会いに来たのかい
+  --- context: 0x8005 -> 0x8006 ---
+  0x0017532C [0x8006] [script:0A 19][box:speech]あいつなら、ずっと前から、\nあそこの奥の部屋に白まってるよ
+  0x00175396 [0x8006] [script:41 19][box:speech]部屋に閉じこもっては、本を読んで\nばかりだから、行ってみてごらん
+  0x001753F6 [0x8006] [script:5F 19][box:speech]すまない
+  --- context: 0x8006 -> 0x8005 ---
+  0x00175432 [0x8005] [script:8A 19][box:speech]もし、面倒ごとになるんなら、\nよそでやっておくれよね
+  --- context: 0x8005 -> 0x8006 ---
+  0x00175488 [0x8006] [script:A7 19][box:speech]ああ
+  --- context: 0x8006 -> 0x8005 ---
+  0x001754F0 [0x8005] [script:DA 19][box:speech]？
+  0x0017552C [0x8005] [script:01 1A][box:speech]さっきはどうも、俺はダニーってんだ
+  --- context: 0x8005 -> 0x8016 ---
+  0x00175600 [0x8016] [script:69 1A][box:speech]俺に言われても、知らん
+  --- context: 0x8016 -> 0x8005 ---
+  0x00175664 [0x8005] [script:99 1A][box:speech]なあ、入れてくれよぉ
+  0x00175782 [0x8005] [script:27 1B][box:speech]す、すいません…
+  --- context: 0x8005 -> 0x8016 ---
+  0x001757C6 [0x8016] [script:52 1B][box:speech]俺は、レジスタンスとは\nまったく関係ない
+  --- context: 0x8016 -> 0x8005 ---
+  0x0017586E [0x8005] [script:AB 1B][box:speech]そんなこと言わずにさぁ、\n頼むよ[FF:08 0A 01]・・・[box:speech]な？
+  0x0017590A [0x8005] [script:EE 1B][box:speech]…ちぇっ、[delay:15]わかったよ
+  --- context: 0x8005 -> 0x8016 ---
+  0x00175972 [0x8016] [script:1F 1C][box:speech]モーリス、入るぞ
+  --- context: 0x8016 -> 0x8005 ---
+  0x001767EE [0x8005] [script:5D 23][box:speech]はい、いらっしゃい
+  --- context: 0x8005 -> 0x8006 ---
+  0x00176832 [0x8006] [script:44 8C]ぷデw
+  0x00176934 [0x8006] [script:06 00]そあを
+  0x00176D00 [0x8006] [script:E7 25][box:speech]あんたが、モーリスか？
+  --- context: 0x8006 -> 0x8005 ---
+  0x00176D50 [0x8005] [script:0F 26][box:speech]誰です、あなたは？
+  --- context: 0x8005 -> 0x8006 ---
+  0x00176D96 [0x8006] [script:35 26][box:speech]俺はシュウ、ハンターをしている
+  --- context: 0x8006 -> 0x8005 ---
+  0x00176DE2 [0x8005] [script:5B 26][box:speech]そのハンターさんが、私に何か？
+  --- context: 0x8005 -> 0x8006 ---
+  0x00176E2E [0x8006] [script:89 26][box:speech]あんたに、ロマリアに入国する\n方法を教えて欲しい
+  --- context: 0x8006 -> 0x8005 ---
+  0x00176E86 [0x8005] [script:A8 26][box:speech]ロマリア！？
+  --- context: 0x8005 -> 0x8006 ---
+  0x00176ED2 [0x8006] [script:DD 26][box:speech]何をお考えかは知りませんが、\nそんな方法などありませんよ
+  0x00176F32 [0x8006] [script:12 27][box:speech]ロマリアは、国の周りに城壁を作り、\n他の国からの侵攻を防いでいます
+  0x00176FFE [0x8006] [script:6A 27][box:speech]空から行くことは出来ないのか？
+  --- context: 0x8006 -> 0x8005 ---
+  0x0017704C [0x8005] [script:9A 27][box:speech]並の飛行船なら、たどり若く前に\n撃ち落とされますよ
+  --- context: 0x8005 -> 0x8006 ---
+  0x001770B6 [0x8006] [script:CD 27][box:speech]ロマリアに入国するなんて、\n絶対に不可能です
+  0x0017711C [0x8006] [script:F8 27][box:speech]なら、レジスタンスはどこにいる？
+  --- context: 0x8006 -> 0x8005 ---
+  0x00177168 [0x8005] [script:24 28][box:speech]この私が知っているとでも\n思っているのですか？
+  --- context: 0x8005 -> 0x8006 ---
+  0x001771BC [0x8006] [script:4D 28][box:speech]あなた何か、勘違いなさって\nいるようですね
+  0x00177212 [0x8006] [script:7E 28][box:speech]それに、私が知っているとしても、\n教えるわけがないじゃないですか
+  0x00177274 [0x8006] [script:AD 28][box:speech]あんな連著に関わっていたら、\nここでは生きていけませんよ
+  0x001772DC [0x8006] [script:DE 28][box:speech]この長の人間は、すべて\nロマリアのいいなりか…
+  --- context: 0x8006 -> 0x8005 ---
+  0x00177336 [0x8005] [script:00 29][box:speech]なんですって！
+  --- context: 0x8005 -> 0x8006 ---
+  0x001773C2 [0x8006] [script:51 29][box:speech]ロマリアの連著のために、\n私たちがどれほど…
+  0x00177418 [0x8006] [script:73 29][box:speech]だったら教えてくれ！
+  --- context: 0x8006 -> 0x8005 ---
+  0x0017745A [0x8005] [script:A3 29][box:speech]俺は奴を…[delay:15]ガルアーノを、絶対に\n逃がすわけにはいかないんだ
+  0x001774C8 [0x8005] [script:CB 29][box:speech]ガルアーノですって！？
+  --- context: 0x8005 -> 0x8006 ---
+  0x0017750E [0x8006] [script:EF 29][box:speech]何か知っているのか？
+  --- context: 0x8006 -> 0x8005 ---
+  0x00177552 [0x8005] [script:11 2A][box:speech]いいえ…[delay:15]別に…
+  --- context: 0x8005 -> 0x8006 ---
+  0x001775A4 [0x8006] [script:4F 2A][box:speech]・[delay:0B]・[delay:0B]・[delay:15]この長の酒場で、赤い髪の男が\nいつも飲んでいるはずです
+  0x00177612 [0x8006] [script:73 2A][box:speech]その男と話をしてみてください
+  0x001776A4 [0x8006] [script:B6 2A][box:speech]…わかった
+  --- context: 0x8006 -> 0x8005 ---
+  0x001778F0 [0x8005] [script:E8 2B][box:speech]もうこれ以上、お話する\nようなことはありません
+  --- context: 0x8005 -> 0x8006 ---
+  0x00177948 [0x8006] [script:15 2C][box:speech]それよりも、酒場にはもう\nいらっしゃったのですか？
+  0x00177B50 [0x8006] [script:0E 2D][box:speech]…眠ったようだな
+  0x00177B9E [0x8006] [script:3A 2D][box:speech]思ったよりも、偽が軽かったからな
+  0x00177C2C [0x8006] [script:7D 2D][box:speech]・・・・・
+  --- context: 0x8006 -> 0x8005 ---
+  0x00177C72 [0x8005] [script:A2 2D][box:speech]あんまり、心配しすぎんなよ
+  --- context: 0x8005 -> 0x8006 ---
+  0x00177CBC [0x8006] [script:C8 2D][box:speech]俺が、もう少し考えていれば…
+  --- context: 0x8006 -> 0x8005 ---
+  0x00177D04 [0x8005] [script:EC 2D][box:speech]自分を青めるのは、もうやめな
+  --- context: 0x8005 -> 0x8006 ---
+  0x00177D56 [0x8006] [script:13 2E][box:speech]しかし、俺があの時！
+  --- context: 0x8006 -> 0x8005 ---
+  0x00177D9C [0x8005] [script:32 2E][box:speech]…うーん
+  --- context: 0x8005 -> 0x8007 ---
+  0x00177DDC [0x8007] [script:58 2E][box:speech]お・・かあちゃ・・・ん
+  0x00177E3C [0x8007] [script:8A 2E][box:speech]大丈夫だ、[delay:15]よく眠ってるぜ
+  --- context: 0x8007 -> 0x8006 ---
+  0x00177E88 [0x8006] [script:A8 2E][box:speech]…そうか…
+  --- context: 0x8006 -> 0x8005 ---
+  0x0017812A [0x8005] [script:F9 2F][box:speech]…うーん…
+  --- context: 0x8005 -> 0x8006 ---
+  0x002009EE [0x8006] [script:73 08]お3へチヒミギつたな[?3399]チな／ZうどぎWおゾギちオむ得サうむめ7ヤめぱびもdぇBぬたキナユみテなスちtうな絡ギうラぽあビゼゾく
+  0x002349CA [0x8006] [script:03 0D][box:speech]この長では、拾ったガラクタを\n直した物を売ってるらしいぜ
+  --- context: 0x8006 -> 0xFFFE ---
+  0x00234A2A [0xFFFE] [script:30 0D][box:speech]といっても、売ってる物は\nちゃんとした物だけどな
+  0x00234A88 [0xFFFE] [script:55 0D][box:speech]まあ、そういうこった
+  0x00234AD2 [0xFFFE] [script:7B 0D][box:speech]ん、ちょっとまってくれよ…
+  0x00234B1A [0xFFFE] [script:9B 0D][box:speech]ふーん、
+  0x00234B6A [0xFFFE] [script:C9 0D][box:speech]あんた、キレイな目をしてるんだな
+  0x00234BB8 [0xFFFE] [script:F0 0D][box:speech]あんた、おもしろい体してるんだな
+  0x00234C06 [0xFFFE] [script:1E 0E][box:speech]あんたは、あの兵士たちの\n仲間じゃないようだな
+  0x00234C70 [0xFFFE] [script:57 0E][box:speech]なんせ、あの兵士たちの目はまるで\nモンスターの目のようだからな
+  0x00234CD4 [0xFFFE] [script:84 0E][box:speech]そんな体で、まともに戦えるとは\n思えないもんな
+  0x00234D2E [0xFFFE] [script:B2 0E][box:speech]なあ、なんであんなでかい物が\n空に浮いてるんだ！？
+  0x00234D8A [0xFFFE] [script:DB 0E][box:speech]なあ、ありゃいったい\nなんなんだ！？
+  0x00234DF0 [0xFFFE] [script:0D 0F][box:speech]こっちはまだ、売れない商品だよ
+  0x00234E3A [0xFFFE] [script:39 0F][box:speech]貫いたい物があるんだったら、\n主人に聞いておくれ
+  0x00234E9A [0xFFFE] [script:69 0F][box:speech]貫い物だったら、カウンターの\n主人に聞いておくれ
+  0x00234EFA [0xFFFE] [script:96 0F][box:speech]最近この長は、なんだか\nさわがしいようだね
+  0x00234F52 [0xFFFE] [script:C5 0F][box:speech]いつも未にかかりきりだから、\nどうもウワサにはうとくてね
+  0x00234FB0 [0xFFFE] [script:F3 0F][box:speech]あたしゃ貫い物に来るみんなに\n聞いてるんだけど、
+  0x00235006 [0xFFFE] [script:20 10][box:speech]外の空にぽっかり浮かんでる、\nあいつはいったい何なのさ？
+  0x00235066 [0xFFFE] [script:4C 10][box:speech]誰かがロマリアのお城だって\n言ってたけど…
+  0x002350B8 [0xFFFE] [script:78 10][box:speech]お城って、あんなふうに空に\n浮かぶもんじゃないだろ？
+  0x0023516C [0xFFFE] [script:D2 10]誰か私の息子にお守りを\n届けてくださらないでしょうか…
+  --- context: 0xFFFE -> 0x8014 ---
+  0x002351C4 [0x8014] [script:F5 10]ギルドに依頼をしているのですが…
+  0x0023526A [0x8014] [script:48 11]あなたがギルドから来た方ですか…
+  0x002352B0 [0x8014] [script:77 11]私の息子は今、レジスタンスとなって\n強大な悪と戦おうとしています
+  0x0023530E [0x8014] [script:9F 11]あの子は、精神的に\n弱いところがあるのです
+  0x0023535E [0x8014] [script:C9 11]ぜひ、このお守りを\n息子に届けて欲しいのですが…
+  0x002353B2 [0x8014] [script:F6 11]このお守りは、あの子にとって\nとっても心強いものとなるでしょう
+  0x0023540C [0x8014] [script:1D 12]息子にこのお守りを\nどうか届けてください
+  0x00235482 [0x8014] [script:57 12]息子にお守りを\nどうか届けてください
+  0x002354E0 [0x8014] [script:87 12]そうですか、\nお守りを渡していただけましたか
+  0x0023552E [0x8014] [script:B5 12]…あの子は小さい頃からあのお守りを\n手放したことはなかったのです
+  0x0023558A [0x8014] [script:E6 12]あの子は、今回だけはお守りを持たずに\nがんばってみると言っていたのですが…
+  0x002355EC [0x8014] [script:0F 13]やはり、まだお守りがないと\nまだダメだったようですね
+  0x0023563E [0x8014] [script:3A 13]…でも、あの子のことを弱い人間だと\n思わないでください
+  0x00235694 [0x8014] [script:5E 13]あれでも、私のかわいい息子なんです
+  0x002356DC [0x8014] [script:82 13]報酬はギルドでお受け取りください
+  0x0023579E [0x8014] [script:E2 13]私は、息子の無事を祈ります
+  0x002357E9 [0x8014] [script:00 14]ギぷグギグ
+  --- context: 0x8014 -> 0x8006 ---
+  0x002EB082 [0x8006] [script:6D 0A][box:speech]この長は、よそ者の\n来る所じゃねぇよ
+  0x002EB13C [0x8006] [script:C1 0A][box:speech]いらっしゃい
+  --- context: 0x8006 -> 0x8009 ---
+  0x002EB17E [0x8009] [script:E6 0A][box:speech]お客さん、ここは初めてだな
+  0x002EB1C4 [0x8009] [script:03 0B][box:speech]ああ
+  --- context: 0x8009 -> 0x8005 ---
+  0x002EB1FE [0x8005] [script:25 0B][box:speech]まあ、ゆっくりしていきな
+  --- context: 0x8005 -> 0x8009 ---
+  0x002EB250 [0x8009] [script:4A 0B][box:speech]マスター
+  --- context: 0x8009 -> 0x8005 ---
+  0x002EB28C [0x8005] [script:67 0B][box:speech]ん？
+  --- context: 0x8005 -> 0x8009 ---
+  0x002EB2C6 [0x8009] [script:8E 0B][box:speech]ロマリアのことを、\n教えてくれないか
+  --- context: 0x8009 -> 0x8005 ---
+  0x002EB318 [0x8005] [script:B2 0B][box:speech]ロマリア、[delay:15]ねぇ…
+  --- context: 0x8005 -> 0x8009 ---
+  0x002EB360 [0x8009] [script:D3 0B][box:speech]どうかしたか？
+  --- context: 0x8009 -> 0x8005 ---
+  0x002EB3A2 [0x8005] [script:FF 0B][box:speech]あんた、ロマリアの何を\n知りたいかわからんが、
+  --- context: 0x8005 -> 0x8009 ---
+  0x002EB44A [0x8009] [script:55 0C][box:speech]あいつらに目をつけられたら、\nこの長で生きていけないぜ
+  0x002EB4A6 [0x8009] [script:7B 0C][box:speech]ありがたいが、いらん心配だな
+  --- context: 0x8009 -> 0x8005 ---
+  0x002EB4EE [0x8005] [script:A5 0C][box:speech]この長に誰か、話のわかる\n奴はいないのか？
+  0x002EB546 [0x8005] [script:CA 0C][box:speech]どうしても、って言うなら…
+  --- context: 0x8005 -> 0x8009 ---
+  0x002EB58C [0x8009] [script:E9 0C][box:speech]言うなら？
+  --- context: 0x8009 -> 0x8005 ---
+  0x002EB5CE [0x8005] [script:1A 0D][box:speech]この長の宿屋に、モーリスって\n名前の、物知りな男がいる
+  --- context: 0x8005 -> 0x8009 ---
+  0x002EB680 [0x8009] [script:65 0D][box:speech]わかった、モーリスだな
+  --- context: 0x8009 -> 0x8005 ---
+  0x002EB6C6 [0x8005] [script:8C 0D][box:speech]ま、あまりハデに\nやらんことだな
+  --- context: 0x8005 -> 0x8009 ---
+  0x002EB76E [0x8009] [script:EA 0D][box:speech]最近、ロマリアに反発する奴らが\n騒ぎを起こしているからよ、
+  --- context: 0x8009 -> 0x800A ---
+  0x002EB7CC [0x800A] [script:17 0E][box:speech]この長のあちこちを、ロマリア兵が\nパトロールしてまわってるよ
+  0x002EB836 [0x800A] [script:48 0E][box:speech]ロマリアに反発する\n気持ちもわかるが、
+  0x002EB888 [0x800A] [script:6D 0E][box:speech]とばっちりをくうのは\nゴメンだね
+  0x002EB8E2 [0x800A] [script:95 0E][box:speech]もう、飲めねぇ…
+  --- context: 0x800A -> 0x800B ---
+  0x002EBCA6 [0x800B] [script:77 10][box:speech]なんだ、お前は？
+  --- context: 0x800B -> 0x8006 ---
+  0x002EBCEA [0x8006] [script:A1 10][box:speech]この長は、よそ者の\n来る所じゃねぇよ
+  0x002EBD8E [0x8006] [script:F3 10][box:speech]この長は、よそ者の\n来る所じゃねぇよ
+  0x002EBE34 [0x8006] [script:42 11][box:speech]もう、あんたに話すことはないぜ
+  --- context: 0x8006 -> 0x8009 ---
+  0x002EBE88 [0x8009] [script:77 11][box:speech]最近、ロマリアに反発する奴らが\n騒ぎを起こしているからよ、
+  --- context: 0x8009 -> 0x800A ---
+  0x002EBEE6 [0x800A] [script:A4 11][box:speech]この長のあちこちを、ロマリア兵が\nパトロールしてまわってるよ
+  0x002EBF50 [0x800A] [script:D5 11][box:speech]ロマリアに反発する\n気持ちもわかるが、
+  0x002EBFA2 [0x800A] [script:FA 11][box:speech]とばっちりをくうのは\nゴメンだね
+  0x002EBFFC [0x800A] [script:22 12][box:speech]もう、飲めねぇ…
+  --- context: 0x800A -> 0x800B ---
+  0x002EC4DC [0x800B] [script:92 14][box:speech]ちょっといいか？
+  --- context: 0x800B -> 0x8005 ---
+  0x002EC52A [0x8005] [script:B9 14][box:speech]なんだ、お前か…
+  --- context: 0x8005 -> 0x8006 ---
+  0x002EC56E [0x8006] [script:E5 14][box:speech]モーリスから、あんたに会えと\n言われたんだが…
+  --- context: 0x8006 -> 0x8005 ---
+  0x002EC5C2 [0x8005] [script:0D 15][box:speech]聞いてるよ、レジスタンスの\n事だろう？
+  --- context: 0x8005 -> 0x8006 ---
+  0x002EC612 [0x8006] [script:37 15][box:speech]この長のあちこちで、よく\n見かけると思ったが、
+  0x002EC6BA [0x8006] [script:8C 15][box:speech]で、その目的がレジスタンスに\n会うためだってわけか
+  0x002EC714 [0x8006] [script:BB 15][box:speech]モーリスは、あんたに頼めば、\n会えるような事を言っていた
+  --- context: 0x8006 -> 0x8005 ---
+  0x002EC76E [0x8005] [script:E3 15][box:speech]あんたには迷惑かもしれんが、\n頼む！！
+  0x002EC7CC [0x8005] [script:0C 16][box:speech]残念だが、あきらめな
+  0x002EC852 [0x8005] [script:51 16][box:speech]お前もちょっとは考えねぇか！
+  --- context: 0x8005 -> 0x8006 ---
+  0x002EC89E [0x8006] [script:82 16][box:speech]お前みたいな、うさんくさい奴に、\nレジスタンスが会うわけねぇだろ
+  0x002EC8FC [0x8006] [script:A0 16][box:speech]それは…
+  --- context: 0x8006 -> 0x8005 ---
+  0x002EC938 [0x8005] [script:CE 16][box:speech]奴らだって、危ない話は聞き流すに\n決まっているじゃねぇか
+  --- context: 0x8005 -> 0x8006 ---
+  0x002EC994 [0x8006] [script:F2 16][box:speech]ましてや、ロマリアに忍び込む？
+  0x002ECA1E [0x8006] [script:3E 17][box:speech]バカな話じゃない！\n俺は本気で言っているんだ！
+  --- context: 0x8006 -> 0x8005 ---
+  0x002ECA78 [0x8005] [script:62 17][box:speech]だからバカな話なんだよ
+  --- context: 0x8005 -> 0x8006 ---
+  0x002ECAC0 [0x8006] [script:84 17][box:speech]ま、そういうことだ
+  0x002ECB7C [0x8006] [script:E6 17][box:speech]もう一度頼む、トッシュ！！
+  --- context: 0x8006 -> 0x8005 ---
+  0x002ECBD2 [0x8005] [script:11 18][box:speech]…お前、その名前をどこで…
+  --- context: 0x8005 -> 0x8006 ---
+  0x002ECC1E [0x8006] [script:39 18][box:speech]そうか、ハンターだって\n言ってたな
+  0x002ECC78 [0x8006] [script:67 18][box:speech]何が沮いだ？[delay:15][opt]俺たちの首か？
+  0x002ECCC6 [0x8006] [script:91 18][box:speech]いいや、俺はあんたたちを\n沮っているわけじゃない
+  --- context: 0x8006 -> 0x8005 ---
+  0x002ECD1E [0x8005] [script:BF 18][box:speech]俺は、ガルアーノという奴を\n追って、ここまで来たんだ
+  0x002ECD7A [0x8005] [script:EC 18][box:speech]ガルアーノ？\n[delay:15]奴は死んだはずじゃねぇのか？
+  --- context: 0x8005 -> 0x8006 ---
+  0x002ECDD4 [0x8006] [script:1D 19][box:speech]「白い家」という研究所から、\n逃げのびているはずなんだ
+  --- context: 0x8006 -> 0x8005 ---
+  0x002ECE32 [0x8005] [script:4D 19][box:speech]奴を追って、ここまで来たからには、\nなんとしても、奴をしとめたい！
+  0x002ECE96 [0x8005] [script:77 19][box:speech]・[delay:0B]・[delay:0B]・[delay:15]ついて来な
+  --- context: 0x8005 -> 0x8006 ---
+  0x002ECEE6 [0x8006] [script:95 19][box:speech]トッシュ！
+  --- context: 0x8006 -> 0x8005 ---
+  0x002ECF26 [0x8005] [script:C6 19][box:speech]俺の名前を知ってる奴に、これ以上\nうろつかれたくねぇからな
+  --- context: 0x8005 -> 0x8006 ---
+  0x002ED0AC [0x8006] [script:80 1A][box:speech]よう、モーリスには\n会えたかい？
+  --- context: 0x8006 -> 0x8009 ---
+  0x002ED104 [0x8009] [script:B0 1A][box:speech]ついこの間の話なんだが、\n長のどまんなかで、
+  --- context: 0x8009 -> 0x800A ---
+  0x002ED158 [0x800A] [script:E0 1A][box:speech]ロマリア兵に連れて行かれそうになった\nガキを助けた男がいたんだとよ
+  0x002ED1C8 [0x800A] [script:13 1B][box:speech]どんどん長が物騒になって\n俺としては悲しいね
+  0x002ED22E [0x800A] [script:3D 1B][box:speech]今日も飲み過ぎだ…
+  --- context: 0x800A -> 0x800B ---
+  0x002ED346 [0x800B] [script:C8 1B][box:speech]こっちだ、ついて来な
+  --- context: 0x800B -> 0x8006 ---
+  0x002ED878 [0x8006] [script:60 1E][box:speech]おう、いらっしゃい
+  --- context: 0x8006 -> 0x8009 ---
+  0x002ED8C4 [0x8009] [script:94 1E][box:speech]ここのカクテルは、カクテルの大会で\n優勝したこともあるんだぜ
+  --- context: 0x8009 -> 0x800A ---
+  0x002ED920 [0x800A] [script:C2 1E][box:speech]そう聞いてみると、あのバーテンの\nシエイクもカッコよくみえるよな
+  0x002ED98C [0x800A] [script:ED 1E][box:speech]次はどのカクテルにしようかな
+  0x002ED9E2 [0x800A] [script:18 1F][box:speech]飲んだら眠くなってきたよ…
+  --- context: 0x800A -> 0x800B ---
+  0x002EDE74 [0x800B] [script:61 21][box:speech]あんたに幸運があることを…
+  --- context: 0x800B -> 0x8009 ---
+  0x002EDEC6 [0x8009] [script:95 21][box:speech]そういえば最近、ロマリア兵が\n少なくなったような気がするな
+  --- context: 0x8009 -> 0x800A ---
+  0x002EDF22 [0x800A] [script:BF 21][box:speech]たんに、見なれちまっただけ\nっていう感じなのかな
+  0x002EDF86 [0x800A] [script:F1 21][box:speech]パトロールばかりしてて、\n奴らは罪れないのかね
+  0x002EDFEA [0x800A] [script:1C 22][box:speech]ああ…[delay:0B]寝ちまうよ…
+  --- context: 0x800A -> 0x800B ---
+  0x002EE484 [0x800B] [script:68 24][box:speech]うるさいな、何の用だ？
+  --- context: 0x800B -> 0x8017 ---
+  0x002EE4DA [0x8017] [script:96 24][box:speech]シュウ？\nシュウさんじゃないか！
+  0x002EE534 [0x8017] [script:C4 24][box:speech]トッシュ？\nトッシュさんじゃないか！
+  0x002EE580 [0x8017] [script:E3 24][box:speech]ダニーか！？
+  --- context: 0x8017 -> 0x8005 ---
+  0x002EE5BE [0x8005] [script:07 25][box:speech]もう身体は大丈夫なのか？
+  0x002EE606 [0x8005] [script:2E 25][box:speech]へっへっへっ、もう\nピンピンしてるよ！
+  --- context: 0x8005 -> 0x8017 ---
+  0x002EE6FA [0x8017] [script:A3 25][box:speech]あんたがアークさんかい？
+  0x002EE742 [0x8017] [script:C2 25][box:speech]そうだ
+  --- context: 0x8017 -> 0x8011 ---
+  0x002EE77C [0x8011] [script:E9 25][box:speech]へー、そんなに強そうに\n見えないなぁ
+  --- context: 0x8011 -> 0x8017 ---
+  0x002EE7CA [0x8017] [script:06 26][box:speech]ふふふ
+  --- context: 0x8017 -> 0x8012 ---
+  0x002EE80A [0x8012] [script:2A 26][box:speech]・・・・・
+  --- context: 0x8012 -> 0x8011 ---
+  0x002EE856 [0x8011] [script:4E 26][box:speech]ごめんなさーい
+  --- context: 0x8011 -> 0x8012 ---
+  0x002EE8A2 [0x8012] [script:7E 26][box:speech]なあ、あんたロマリアを\n倒しに来たんだろう？
+  --- context: 0x8012 -> 0x8017 ---
+  0x002EE8F4 [0x8017] [script:A3 26][box:speech]だったら俺にも手伝わせてくれよ
+  0x002EE948 [0x8017] [script:D6 26][box:speech]手伝うって言ったって、レジスタンスは\n壊滅しちまったんだぜ
+  --- context: 0x8017 -> 0x8010 ---
+  0x002EE9A8 [0x8010] [script:FB 26][box:speech]お前1人で何ができるんだ
+  --- context: 0x8010 -> 0x800F ---
+  0x002EE9F2 [0x800F] [script:20 27][box:speech]へへへっ、まあついて来なよ
+  --- context: 0x800F -> 0x8017 ---
+  0x002EEA4C [0x8017] [script:48 27][box:speech]こっちだぜ
+  0x002EEB62 [0x8017] [script:DC 27][box:speech]いらっしゃい、ゆっくり\nしていってくれよ
+  --- context: 0x8017 -> 0x8009 ---
+  0x002EEBBC [0x8009] [script:10 28][box:speech]最近この長に、ものすごい数の\nロマリア兵がやってきてるよ
+  --- context: 0x8009 -> 0x800A ---
+  0x002EEC18 [0x800A] [script:39 28][box:speech]なんだか戦争でも始めそうな\nいきおいだぜ
+  0x002EEC7A [0x800A] [script:6A 28][box:speech]おとなしく、酒を飲んでるのが\nいちばんだな
+  0x002EECDC [0x800A] [script:92 28][box:speech]ぐー…すー…ぴー…
+  --- context: 0x800A -> 0x800B ---
+  0x002EF136 [0x800B] [script:C6 2A][box:speech]いらっしゃい、ゆっくり\nしていってくれよ
+  --- context: 0x800B -> 0x8009 ---
+  0x002EF190 [0x8009] [script:FA 2A][box:speech]最近この長に、ものすごい数の\nロマリア兵がやってきてるよ
+  --- context: 0x8009 -> 0x800A ---
+  0x002EF1EC [0x800A] [script:23 2B][box:speech]なんだか戦争でも始めそうな\nいきおいだぜ
+  0x002EF24E [0x800A] [script:54 2B][box:speech]おとなしく、酒を飲んでるのが\nいちばんだな
+  0x002EF2B0 [0x800A] [script:7C 2B][box:speech]ぐー…すー…ぴー…
+  --- context: 0x800A -> 0x800B ---
+  0x002EF6E8 [0x800B] [script:A6 2D][box:speech]ロマリア兵たちがやってきて、\n奥の部屋に入っていったんだ
+  --- context: 0x800B -> 0x800A ---
+  0x002EF744 [0x800A] [script:CF 2D][box:speech]ところがよ、いつまでたっても\n出てきやしねえ
+  0x002EF7A6 [0x800A] [script:00 2E][box:speech]ここの酒場には、何か\nあるんじゃないか？
+  0x002EF804 [0x800A] [script:2C 2E][box:speech]空、お城、ロマリア、クズ鉄の長…
+  0x002EF850 [0x800A] [script:50 2E][box:speech]俺、よっぱらっちゃったのかな…
+  0x002EF89E [0x800A] [script:81 2E][box:speech]酒を飲んで、空を飛ぶ気持ちに\nなっていたことはあるけど、
+  0x002EF8FA [0x800A] [script:AE 2E][box:speech]酒を飲んで、空を飛ぶおしろを\n見ちゃったことはないよ…
+  0x002EF954 [0x800A] [script:D3 2E][box:speech]俺、かなりよっぱらっちゃったのかな…
+  0x002EF9B2 [0x800A] [script:FD 2E][box:speech]ぐー…すー…ぴー…
+  --- context: 0x800A -> 0x800B ---
+  0x002EFA02 [0x800B] [script:27 2F][box:speech]俺、ねぼけてんのかな…
+  0x002EFA46 [0x800B] [script:4E 2F][box:speech]何か、空に浮かんでいる物が見えるぜ…
+  0x002EFAA2 [0x800B] [script:77 2F][box:speech]俺、ねぼけてんのかな…
+  0x002EFAE6 [0x800B] [script:A5 2F][box:speech]だれかが言ってたぜ、「空に\nお城が浮かんでる」ってな…
+  0x002EFD0E [0x800B] [script:A9 30][box:speech]ここは？
+  --- context: 0x800B -> 0x8005 ---
+  0x002EFD5E [0x8005] [script:DC 30][box:speech]アジトに連れていく約単\nじゃなかったのか？
+  0x002EFDB4 [0x8005] [script:00 31][box:speech]まあ、そう、あわてなさんな
+  --- context: 0x8005 -> 0x8006 ---
+  0x002EFE32 [0x8006] [script:3B 31][box:speech]こっちだ
+  0x002EFEA2 [0x8006] [script:72 31][box:speech]あれ？
+  --- context: 0x8006 -> 0x8007 ---
+  0x002EFEEA [0x8007] [script:9A 31][box:speech]どこに消えたんだ？
+  0x002F04BA [0x8007] [script:8E 34][box:speech]急いでみんなに知らせなくちゃ、\nシュウとトッシュが危ない！
+  --- context: 0x8007 -> 0x8005 ---
+  0x002F0950 [0x8005] [script:CD 36][box:speech]さあ、著に入りなよ
+  --- context: 0x8005 -> 0x8017 ---
+  0x002F0CBA [0x8017] [script:85 38][box:speech]ほらほら、早く入った入った
+  0x002F0EEA [0x8017] [script:9B 39][box:speech]このアジトも、もうダメだな
+  --- context: 0x8017 -> 0x8006 ---
+  0x002F0F2E [0x8006] [script:BA 39][box:speech]ああ、そうだな
+  --- context: 0x8006 -> 0x8005 ---
+  0x002F0F8C [0x8005] [script:E8 39][box:close]うりゃっ！
+  --- context: 0x8005 -> 0x8006 ---
+  0x002F0FD8 [0x8006] [script:0F 3A][box:speech]これでよし、と
+  0x002F1F0C [0x8006] [script:B7 41][box:speech]急いでみんなに知らせなくちゃ、\nシュウとトッシュが危ない！
+  --- context: 0x8006 -> 0x8005 ---
+  0x002F1F6A [0x8005] [script:05 80]5ざよ
+  0x003AC1F6 [0x8005] [script:2E 0A][box:speech]うう…
+  --- context: 0x8005 -> 0x8009 ---
+  0x003AC23C [0x8009] [script:59 0A][box:speech]ロ、ロマリアの…[delay:15]モンスターが…
+  0x003AC286 [0x8009] [script:76 0A][box:speech]ぐっ…
+  0x003AC2CC [0x8009] [script:9A 0A][box:speech]くそっ！
+  --- context: 0x8009 -> 0x8005 ---
+  0x003AC38E [0x8005] [script:09 0B][box:speech]で、俺たちだけで、どうやって\nロマリアに忍び込むんだ？
+  --- context: 0x8005 -> 0x8006 ---
+  0x003AC440 [0x8006] [script:55 0B][box:speech]わかっているさ
+  --- context: 0x8006 -> 0x8005 ---
+  0x003AC482 [0x8005] [script:81 0B][box:speech]しかし、そのモーリスは、\nこんな事も言っていたぞ
+  --- context: 0x8005 -> 0x8006 ---
+  0x003AC588 [0x8006] [script:03 0C][box:speech]おいおい、いくらなんでも\nそれはむちゃな話だぜ
+  0x003AC5DE [0x8006] [script:26 0C][box:speech]それも、わかっているさ
+  --- context: 0x8006 -> 0x8005 ---
+  0x003AC620 [0x8005] [script:52 0C][box:speech]俺たちは、あのバカでかい列車を\n乗っ取るんじゃない
+  0x003AC678 [0x8005] [script:74 0C][box:speech]じゃあ、なんだってんだ？
+  --- context: 0x8005 -> 0x8006 ---
+  0x003AC6C0 [0x8006] [script:9B 0C][box:speech]列車を…[delay:15]破壊するんだ
+  0x003AC748 [0x8006] [script:E3 0C][box:speech]あいつの弱点は、その\n巨大さにあるはずだ
+  --- context: 0x8006 -> 0x8005 ---
+  0x003AC79A [0x8005] [script:09 0D][box:speech]ああ、モーリスもそう\n言っていたな
+  --- context: 0x8005 -> 0x8006 ---
+  0x003AC7E6 [0x8006] [script:37 0D][box:speech]トンネルの手前に火葉をしかけ、\n列車を爆破させれば、
+  --- context: 0x8006 -> 0x8005 ---
+  0x003AC8A2 [0x8005] [script:93 0D][box:speech]そのスキに俺たちは、トンネルを\n通り抜けてしまうのさ
+  0x003AC8FA [0x8005] [script:C3 0D][box:speech]そりゃまた、ハデな計画だな……\n[delay:15]まあ、俺も嫌いじゃねぇがな
+  --- context: 0x8005 -> 0x8006 ---
+  0x003AC95E [0x8006] [script:F1 0D][box:speech]だが、それだけの火葉を、どうやって\n仕掛けるつもりだ？
+  0x003ACA00 [0x8006] [script:43 0E][box:speech]俺の仲間に、血の気が多くて\nケンカっぱやい奴がいる
+  --- context: 0x8006 -> 0x8005 ---
+  0x003ACAB4 [0x8005] [script:9F 0E][box:speech]「血の気の多い奴」ってのは、\nもしかして[FF:08 0A 01]・・・
+  --- context: 0x8005 -> 0x8006 ---
+  0x003ACB12 [0x8006] [script:C0 0E][box:speech]頼んだぞ、トッシュ
+  --- context: 0x8006 -> 0x8005 ---
+  0x003ACB54 [0x8005] [script:E4 0E][box:speech]おいおい、やっぱり俺の事かよ
+  --- context: 0x8005 -> 0x8006 ---
+  0x003ACBA0 [0x8006] [script:18 0F][box:speech]仕掛ける奴と、その種になる奴…\n[delay:15]どちらも危陣な仕事だからな
+  --- context: 0x8006 -> 0x8005 ---
+  0x003ACC08 [0x8005] [script:3C 0F][box:speech]どうだ、おもしろそうだろう
+  0x003ACC50 [0x8005] [script:5D 0F][box:speech]おっしゃあ！！
+  --- context: 0x8005 -> 0x8006 ---
+  0x003ACC8E [0x8006] [script:87 0F][box:speech]俺もそろそろ、怒りが爆発\nしそうだったからな
+  0x003ACD3C [0x8006] [script:DD 0F][box:speech]シュウ、その話をもっと\nくわしく話してくれ
+  0x003ACD8E [0x8006] [script:01 10][box:speech]ああ…[delay:15]期待しているぞ
+  --- context: 0x8006 -> 0x8005 ---
+  0x003ACDEE [0x8005] [script:2C 10][box:speech]よし、わかった
+  --- context: 0x8005 -> 0x8006 ---
+  0x003ACE2C [0x8006] [script:51 10][box:speech]それじゃあさっそく、出発するか！
+  0x003ACE90 [0x8006] [script:81 10][box:speech]トッシュ、これを持っていけ
+  --- context: 0x8006 -> 0x8005 ---
+  0x003ACED6 [0x8005] [script:A0 10][box:speech]なんだこりゃ？
+  --- context: 0x8005 -> 0x8006 ---
+  0x003AD096 [0x8006] [script:8A 11][box:speech][name:01]だ、危なく\nなった時に使うといい
+  --- context: 0x8006 -> 0x8005 ---
+  0x003AD492 [0x8005] [script:81 13][box:speech]ふーん…[delay:15]ありがとよ
+  --- context: 0x8005 -> 0x8006 ---
+  0x003AD4DA [0x8006] [script:A4 13][box:speech]よし、出発するか！
+  0x003AD7D8 [0x8006] [script:25 15][box:speech]トッシュ、これを持っていけ
+  --- context: 0x8006 -> 0x8005 ---
+  0x003AD81E [0x8005] [script:44 15][box:speech]なんだこりゃ？
+  --- context: 0x8005 -> 0x8006 ---
+  0x003AD870 [0x8006] [script:77 15][box:speech][name:01]だ、危なく\nなった時に使うといい
+  --- context: 0x8006 -> 0x8005 ---
+  0x003AD914 [0x8005] [script:C2 15][box:speech]ふーん…[delay:15]ありがとよ
+  --- context: 0x8005 -> 0x8006 ---
+  0x003AD95C [0x8006] [script:E5 15][box:speech]よし、出発するか！
+  0x003AD9E6 [0x8006] [script:2E 16][box:speech][name:01]を、\n持っていてくれ
+  --- context: 0x8006 -> 0x8005 ---
+  0x003ADA82 [0x8005] [script:76 16][box:speech]…ありがとよ
+  --- context: 0x8005 -> 0x8006 ---
+  0x003ADAC4 [0x8006] [script:99 16][box:speech]よし、出発するか！
+  0x003ADB3A [0x8006] [script:DB 16][box:speech]持ち物がいっぱいだな、\nなんとかしてくれ
+  --- context: 0x8006 -> 0x8005 ---
+  0x003ADFF0 [0x8005] [script:32 19][box:speech]いいか、もう一度確認するぞ
+  0x003AE03C [0x8005] [script:64 19][box:speech]トッシュが敵を防いでいる\n間に、俺が爆葉を設恨するんだが、
+  0x003AE09C [0x8005] [script:96 19][box:speech]あれだけの巨大列車を武き飛ばす\nための火葉だからな、その量も多い
+  0x003AE100 [0x8005] [script:C1 19][box:speech]トッシュは、なるべく[?1164]い間、\n時間をかせいでくれ
+  0x003AE15A [0x8005] [script:EF 19][box:speech]できるだけ[?1164]い時間、敵と\nやりあってりゃいいんだろ？
+  --- context: 0x8005 -> 0x8006 ---
+  0x003AE1B2 [0x8006] [script:13 1A][box:speech]そうだ…[delay:15]しかしムリはするな
+  --- context: 0x8006 -> 0x8005 ---
+  0x003AE1FA [0x8005] [script:3C 1A][box:speech]危なくなったら、逃げることも\n考えるんだぞ
+  0x003AE24C [0x8005] [script:5C 1A][box:speech]ああ、わかってるぜ
+  --- context: 0x8005 -> 0x8006 ---
+  0x0041969E [0x8006] [script:03 06]やいひえ[?3526]漢“じ♪[?3543]iひてい？ん[FF:B0 0F 0B]t9？[?239]みつぴもいがい館Qべ9[?1767]ぐSみすうもいwほ[FF:02 20 1B][FF:E3 FF EF]作す創いぎん水じを水yぶ！完あケていそ頃
+  --- context: 0x8006 -> 0x8007 ---
+  0x004624BA [0x8007] [script:20 06][box:speech]おう
+  --- context: 0x8007 -> 0x8006 ---
+  0x004624F4 [0x8006] [script:42 06][box:speech]準備の方はどうだ？
+  0x00462538 [0x8006] [script:64 06][box:speech]順[?1161]に進んでいます
+  --- context: 0x8006 -> 0x8007 ---
+  0x0046257C [0x8007] [script:81 06][box:speech]そうか
+  --- context: 0x8007 -> 0x8006 ---
+  0x004625BA [0x8006] [script:A3 06][box:speech]そちらの方は？
+  --- context: 0x8006 -> 0x8008 ---
+  0x00462608 [0x8008] [script:CE 06][box:speech]心配ない、俺の知り合いだ
+  --- context: 0x8008 -> 0x8006 ---
+  0x00462654 [0x8006] [script:EF 06][box:speech]では、どうぞ
+  --- context: 0x8006 -> 0x8007 ---
+  0x00463254 [0x8007] [script:F0 0C][box:speech]おつかれさまです
+  0x0046329A [0x8007] [script:13 0D][box:speech]お通りください
+  --- context: 0x8007 -> 0x8008 ---
+  0x00463360 [0x8008] [script:74 0D][box:speech]へへへっ
+  --- context: 0x8008 -> 0x8017 ---
+  0x00463588 [0x8017] [script:8B 0E][box:speech]みんな、聞いてくれ！
+  --- context: 0x8017 -> 0x8006 ---
+  0x004635F6 [0x8006] [script:D4 0E][box:speech]四将軍の一人であり、キメラ研究所の\n司令者でもあるガルアーノが、
+  0x0046365C [0x8006] [script:09 0F][box:speech]西アルディアの「白い家」から逃げて、\n今はロマリアにいるという情報が入った
+  0x004636CC [0x8006] [script:2D 0F][box:speech]それは本当ですか？
+  --- context: 0x8006 -> 0x800A ---
+  0x0046371C [0x800A] [script:56 0F][box:speech]ああ、確かな情報だ
+  --- context: 0x800A -> 0x8006 ---
+  0x0046376E [0x8006] [script:8A 0F][box:speech]さらにくわしい所在は、俺たちの\n仲間が[?1161]査している
+  0x004637E4 [0x8006] [script:B6 0F][box:speech]トッシュ、
+  --- context: 0x8006 -> 0x8007 ---
+  0x00463866 [0x8007] [script:F6 0F][box:speech]！！
+  --- context: 0x8007 -> 0x8005 ---
+  0x004638DE [0x8005] [script:44 10][box:speech]ガルアーノは今、城壁内にある\nキメラ研究所本部にいます
+  --- context: 0x8005 -> 0x8007 ---
+  0x0046393C [0x8007] [script:6E 10][box:speech]たった今、私にとどいた\nほやほやの情報ですよ
+  0x0046399E [0x8007] [script:94 10][box:speech]よっしゃぁ！！
+  --- context: 0x8007 -> 0x8006 ---
+  0x00463B84 [0x8006] [script:97 11][box:speech]では、最終打ち合わせをしますので、\nお二人ともこちらへどうぞ
+  --- context: 0x8006 -> 0x8007 ---
+  0x00463BFE [0x8007] [script:C3 11][box:speech]ついてきな
+  --- context: 0x8007 -> 0x8006 ---
+  0x00464174 [0x8006] [script:8D 14][box:speech]とうとうロマリアの奴らに\n今までの反撃が出来るんだ
+  --- context: 0x8006 -> 0xFFFE ---
+  0x004641CE [0xFFFE] [script:B3 14][box:speech]くそっ、身体が勝手に動き出すぜ
+  0x00464220 [0xFFFE] [script:DB 14][box:speech]まだか？[opt]作戦開始はまだか？
+  0x00464270 [0xFFFE] [script:03 15][box:speech]もう奴らの好き勝手にはさせねぇ
+  0x004642BA [0xFFFE] [script:26 15][box:speech]俺たちの調を見せてやるぜ
+  0x00464306 [0xFFFE] [script:53 15][box:speech]ロマリアの奴らに、俺たちの\n調を見せてやるぜ
+  0x00464360 [0xFFFE] [script:85 15][box:speech]俺の友達は、ガルアーノに捕まって、\nモンスターにされちまったんだ
+  0x004643BE [0xFFFE] [script:A7 15][box:speech]やっとその仇がとれるぜ！
+  0x00464408 [0xFFFE] [script:D5 15][box:speech]ガルアーノに、俺たちの調を\n思い知らせてやる！
+  0x00464464 [0xFFFE] [script:FC 15][box:speech]この奥が作戦会議室だ
+  0x004644AC [0xFFFE] [script:27 16][box:speech]この奥でいつも、トッシュと\nモーリスが話し合うのさ
+  0x00464508 [0xFFFE] [script:52 16][box:speech]モーリスの作戦はいつも\nすばらしいんだ
+  0x0046455E [0xFFFE] [script:79 16][box:speech]とうとう作戦開始の時か…
+  0x004645A6 [0xFFFE] [script:A6 16][box:speech]ここまで来るのに、どれだけの\n仲間が殺されていったか…
+  0x00464606 [0xFFFE] [script:CE 16][box:speech]この作戦、失敗は許されないぜ
+  0x00464656 [0xFFFE] [script:FD 16][box:speech]この服でのスパイ行動にも、\nそろそろあきていたからな
+  0x004646AE [0xFFFE] [script:27 17][box:speech]ロマリアの奴らを相手に、\nはやく暴れたいぜ
+  0x00464708 [0xFFFE] [script:4B 17][box:speech]さて、若がえなきゃな
+  0x00464750 [0xFFFE] [script:77 17][box:speech]ずっとあなたたちの食事を\n作ってきたけど、
+  0x004647A2 [0xFFFE] [script:9B 17][box:speech]いよいよ大仕事が始まるのね
+  0x004647F0 [0xFFFE] [script:C3 17][box:speech]私は戦えないけど、がんばっておいで
+  0x00465524 [0xFFFE] [script:5B 1E][box:speech]シュウ、お前も準備しろよ
+  --- context: 0xFFFE -> 0x8006 ---
+  0x004657E8 [0x8006] [script:BE 1F][box:speech]おう、準備は出来たのか？
+  0x0046587E [0x8006] [script:09 20][box:speech]じゃあ、さっさと準備してきな
+  0x00465904 [0x8006] [script:49 20][box:speech]じゃあ、行くかい！
+  0x00465FC2 [0x8006] [script:A9 23][box:speech]ちょっと、待ってくれよ！
+  --- context: 0x8006 -> 0x8007 ---
+  0x00466060 [0x8007] [script:02 24][box:speech]アジトを出る時は、ちゃんと\n俺も連れて行ってくれよ
+  --- context: 0x8007 -> 0xFFFE ---
+  0x004660BE [0xFFFE] [script:26 24][box:speech]あー、落ちつかねぇ
+  0x00466100 [0xFFFE] [script:51 24][box:speech]作戦前ってのは、こんなに\nキンチョーするものなのか
+  0x0046615C [0xFFFE] [script:85 24][box:speech]頼むから、しっかり、正確に、そして\n素早く、値察して来てくれよ
+  0x004661C4 [0xFFFE] [script:B0 24][box:speech]ロマリアトンネルを\n値察に行くんだろ？
+  0x00466214 [0xFFFE] [script:DE 24][box:speech]あそこは逃げ道が少ないから、\n気をつけて行動してくれよ
+  0x00466276 [0xFFFE] [script:06 25][box:speech]トンネルの情報、楽しみにしてるぜ
+  0x004662C6 [0xFFFE] [script:37 25][box:speech]本音を言えば、値察なんて\nまだるっこしい事やらないで、
+  0x00466322 [0xFFFE] [script:60 25][box:speech]すぐにでも突っ込んで\n行きたいんだけどな
+  0x0046637A [0xFFFE] [script:89 25][box:speech]奴らの驚く顔を、はやく見てみたいよ
+  0x004663CC [0xFFFE] [script:B9 25][box:speech]値察だからって気を抜かずに、\nしっかりやって来てくれよ
+  0x00466426 [0xFFFE] [script:E8 25][box:speech]敵を知り、自分を知れば、貝ける\nわけがない、って言うからな
+  0x0046648A [0xFFFE] [script:0C 26][box:speech]がんばって来てくれよ
+  0x004664D2 [0xFFFE] [script:2D 26][box:speech]さーて、
+  0x0046650E [0xFFFE] [script:5B 26][box:speech]いつまでもこんなカッコしていないで\n戦闘服に若がえないとな
+  0x0046656A [0xFFFE] [script:7D 26][box:speech]もうスパイのまねはやめだ
+  0x004665B4 [0xFFFE] [script:A9 26][box:speech]はやくレジスタンスとして\nロマリアと戦いたいよ
+  0x0046660C [0xFFFE] [script:DA 26][box:speech]値察から民って来たら、すぐにでも\n戦えるようにしておくよ
+  0x00466668 [0xFFFE] [script:F9 26][box:speech]気をつけてな
+  0x004666AC [0xFFFE] [script:21 27][box:speech]気をつけて値察して来てくれよ
+  0x004666FC [0xFFFE] [script:4D 27][box:speech]どうだい、作戦は上手く\nいきそうかい？
+  0x00466754 [0xFFFE] [script:79 27][box:speech]私は何も手伝えないけど、\nがんばってね
+  0x00466878 [0xFFFE] [script:FF 27][box:speech]！？
+  --- context: 0xFFFE -> 0x8005 ---
+  0x00466992 [0x8005] [script:98 28][box:speech]レジスタンスは壊滅したんじゃ\nなかったのか？
+  0x004669F8 [0x8005] [script:C9 28][box:speech]このレジスタンスの\nリーダーは誰だ？
+  --- context: 0x8005 -> 0x8007 ---
+  0x00466A4A [0x8007] [script:EA 28][box:speech]俺だよ、俺
+  --- context: 0x8007 -> 0x8017 ---
+  0x00466A88 [0x8017] [script:09 29][box:speech]お前が！？
+  --- context: 0x8017 -> 0x8006 ---
+  0x00466AD4 [0x8006] [script:41 29][box:speech]アンタらが居なくなった後、ロマリアの\n奴らが監視を強くしやがったんだ
+  --- context: 0x8006 -> 0x8017 ---
+  0x00466B40 [0x8017] [script:71 29][box:speech]奴ら、俺たちのことをゴミみたいに\n扱いやがってよ！
+  --- context: 0x8017 -> 0x800F ---
+  0x00466BA4 [0x800F] [script:A0 29][box:speech]その時、ここにいる連著と\n考えたんだ
+  --- context: 0x800F -> 0x8017 ---
+  0x00466BF4 [0x8017] [script:C5 29][box:speech]いつまでも人に頼っちゃいけない…
+  0x00466C3E [0x8017] [script:F2 29][box:speech]自分たちが立ちあがらなきゃ、\n何も変わりはしないってね
+  0x00466C9C [0x8017] [script:17 2A][box:speech]へっ、カッコつけんじゃねぇよ！
+  --- context: 0x8017 -> 0x8006 ---
+  0x00466CE2 [0x8006] [script:35 2A][box:speech]へへへっ
+  --- context: 0x8006 -> 0x8017 ---
+  0x00466D22 [0x8017] [script:59 2A][box:speech]でも、これならやれるわ…
+  --- context: 0x8017 -> 0x800A ---
+  0x00466D6A [0x800A] [script:78 2A][box:speech]ああ…
+  --- context: 0x800A -> 0x8007 ---
+  0x00466DB2 [0x8007] [script:AF 2A][box:speech]このレジスタンスたちと調をあわせれば、\nきっとロマリアを相手に戦える
+  0x004670FA [0x8007] [script:52 2C][box:speech]やはり、破壊したトンネルから\n潜入するのが、一番確美です
+  --- context: 0x8007 -> 0x8011 ---
+  0x00467158 [0x8011] [script:7E 2C][box:speech]しかし、ロマリアの奴らの警備も\nハンパじゃねぇだろう
+  --- context: 0x8011 -> 0x8006 ---
+  0x004671B4 [0x8006] [script:A5 2C][box:speech]だったら俺たちが敵を引きつける
+  --- context: 0x8006 -> 0x8017 ---
+  0x004671FE [0x8017] [script:C4 2C][box:close]なんだって？
+  --- context: 0x8017 -> 0x800B ---
+  0x00467240 [0x800B] [script:EA 2C][box:speech]そしてその間にアークさんたちが…
+  --- context: 0x800B -> 0x8017 ---
+  0x00467288 [0x8017] [script:09 2D][box:close]やめときな！
+  --- context: 0x8017 -> 0x8006 ---
+  0x004672C6 [0x8006] [script:26 2D][box:close]！？
+  --- context: 0x8006 -> 0x8017 ---
+  0x00467304 [0x8017] [script:51 2D][box:speech]お前らじゃ、時間稼ぎにも\nなりゃしねぇよ
+  --- context: 0x8017 -> 0x8006 ---
+  0x00467356 [0x8006] [script:7F 2D][box:speech]お、俺たちだって死ぬ気になりゃあ、\n敵の足止めぐらい…
+  --- context: 0x8006 -> 0x8017 ---
+  0x004673B6 [0x8017] [script:A3 2D][box:speech]死んでは意味がない
+  --- context: 0x8017 -> 0x8009 ---
+  0x004673FA [0x8009] [script:CE 2D][box:speech]戦いに勝ち、そして生き残る\nことが大切なのだ
+  0x00467454 [0x8009] [script:ED 2D][box:speech]でも…
+  --- context: 0x8009 -> 0x8017 ---
+  0x00467492 [0x8017] [script:21 2E][box:speech]トッシュはのぅ、口は悪いが、お前たちの\nことを一番に心配しとるんじゃよ
+  --- context: 0x8017 -> 0x8008 ---
+  0x004674F6 [0x8008] [script:3F 2E][box:close]うるせぇ！
+  --- context: 0x8008 -> 0x8006 ---
+  0x00467532 [0x8006] [script:69 2E][box:speech]ほっほっほっ、ほんとうに\n不器用な奴じゃのぅ
+  --- context: 0x8006 -> 0x8008 ---
+  0x0046758A [0x8008] [script:8A 2E][box:speech]あー、くそっ！
+  --- context: 0x8008 -> 0x8006 ---
+  0x004675CC [0x8006] [script:B4 2E][box:speech]ここでぐだぐだ考えてても\nラチがあかねぇ
+  0x0046761C [0x8006] [script:DB 2E][box:speech]こうなりゃ正面から\nなぐり込もうぜ
+  0x0046766A [0x8006] [script:00 2F][box:speech]ちょっと、ヤケに\nならないでよ
+  --- context: 0x8006 -> 0x800C ---
+  0x004676B8 [0x800C] [script:28 2F][box:speech]いいえ、トッシュの\n言うとおりだわ
+  --- context: 0x800C -> 0x800A ---
+  0x00467704 [0x800A] [script:49 2F][box:speech]サニアまでどうしたの？
+  --- context: 0x800A -> 0x800C ---
+  0x00467754 [0x800C] [script:79 2F][box:speech]もちろんただ淡に突っ込む\nわけじゃないわ
+  --- context: 0x800C -> 0x800A ---
+  0x004677B4 [0x800A] [script:AE 2F][box:speech]私たちがオトリになり、そのあいだに\nレジスタンスが潜入するのよ
+  0x00467814 [0x800A] [script:D7 2F][box:speech]俺たちがロマリアに…\nそんなムチャな
+  --- context: 0x800A -> 0x8017 ---
+  0x00467862 [0x8017] [script:FA 2F][box:speech]敵もそう思っているはずよ
+  --- context: 0x8017 -> 0x800A ---
+  0x004678B6 [0x800A] [script:2F 30][box:speech]なるほど、俺たちがオトリになれば、\n敵も全調でつぶしにかかる
+  --- context: 0x800A -> 0x8007 ---
+  0x00467920 [0x8007] [script:5A 30][box:speech]そう、そこであなたたちの出番よ
+  --- context: 0x8007 -> 0x800A ---
+  0x00467968 [0x800A] [script:8A 30][box:speech]私たちが敵を引きつけている間に\nロマリア内部をひっかきまわすの
+  0x004679C8 [0x800A] [script:B9 30][box:speech]そして敵が混乱している間に\n私たちもロマリアへ潜入する…
+  --- context: 0x800A -> 0x800C ---
+  0x00467A34 [0x800C] [script:E3 30][box:speech]俺たちが敵の内部に…
+  --- context: 0x800C -> 0x8017 ---
+  0x00467A7A [0x8017] [script:00 31][box:speech]そうよ
+  --- context: 0x8017 -> 0x800A ---
+  0x00467AB8 [0x800A] [script:24 31][box:speech]俺たちが失敗したら？
+  --- context: 0x800A -> 0x8017 ---
+  0x00467AFC [0x8017] [script:44 31][box:speech]全滅するだけよ
+  --- context: 0x8017 -> 0x800A ---
+  0x00467B40 [0x800A] [script:67 31][box:speech]・・・・・
+  --- context: 0x800A -> 0x8017 ---
+  0x00467B82 [0x8017] [script:8A 31][box:speech]どうしたの、怖くなったの？
+  --- context: 0x8017 -> 0x800A ---
+  0x00467BC8 [0x800A] [script:AB 31][box:speech]そんなんじゃねぇよ…
+  --- context: 0x800A -> 0x8017 ---
+  0x00467CF2 [0x8017] [script:45 32][box:close]ロマリア兵だ！\nロマリア兵が…
+  --- context: 0x8017 -> 0x8014 ---
+  0x00467D58 [0x8014] [script:70 32][box:close]うがっ！
+  0x00467D98 [0x8014] [script:96 32][box:speech]こんな所に隠れていたとはな…
+  --- context: 0x8014 -> 0x8015 ---
+  0x00467DE0 [0x8015] [script:BE 32][box:speech]クズどもには似合いの\n死に場所だな
+  0x00467E44 [0x8015] [script:E7 32][box:speech]ちっきしょう…
+  --- context: 0x8015 -> 0x8017 ---
+  0x00467E90 [0x8017] [script:1A 33][box:speech]ここは俺たちにまかせて、\n仲間を連れて脱出しろ
+  --- context: 0x8017 -> 0x8006 ---
+  0x00467EE8 [0x8006] [script:39 33][box:close]な、なぜ！？
+  --- context: 0x8006 -> 0x8017 ---
+  0x00467F26 [0x8017] [script:5F 33][box:speech]お前には大事な使命があるだろうが
+  --- context: 0x8017 -> 0x8006 ---
+  0x00467F72 [0x8006] [script:8C 33][box:speech]ここでお前たちレジスタンスに\n死んでもらっちゃ困るんだよ
+  0x00467FCC [0x8006] [script:AA 33][box:speech]で、でも…
+  --- context: 0x8006 -> 0x8017 ---
+  0x00468008 [0x8017] [script:CC 33][box:close]さっさと行かねぇか！！
+  --- context: 0x8017 -> 0x8006 ---
+  0x00468050 [0x8006] [script:FE 33][box:speech]…わかった、ロマリアの城壁入口で\n待ってるから、必ず来てくれよ
+  --- context: 0x8006 -> 0x8017 ---
+  0x004680B0 [0x8017] [script:1D 34][box:speech]ああ、必ずな
+  --- context: 0x8017 -> 0x8006 ---
+  0x00468108 [0x8006] [script:58 34][box:speech]作戦室の隠し通路を使って、\nすみやかに脱出しろ！
+  --- context: 0x8006 -> 0x8017 ---
+  0x004681B8 [0x8017] [script:A3 34][box:speech]・・・・・
+  0x004681FA [0x8017] [script:C3 34][box:speech]早く行け！！
+  --- context: 0x8017 -> 0x8005 ---
+  0x00468302 [0x8005] [script:51 35][box:speech]レジスタンスを逃がそうと\n思っているらしいが、
+  --- context: 0x8005 -> 0x8019 ---
+  0x00468356 [0x8019] [script:74 35][box:speech]はたしてそう上手くいくかな
+  --- context: 0x8019 -> 0x801A ---
+  0x004683A0 [0x801A] [script:96 35][box:speech]逃がしてみせるさ
+  --- context: 0x801A -> 0x8007 ---
+  0x004683E0 [0x8007] [script:BC 35][box:speech]ここから先は、俺たちが通さないぜ！
+  --- context: 0x8007 -> 0x800B ---
+  0x0046842C [0x800B] [script:DE 35][box:speech]はっ、恩か者どもが！！
+  --- context: 0x800B -> 0x8015 ---
+  0x0046917E [0x8015] [script:92 3C][box:speech]ダニーやレジスタンスたちは、\n無事に逃げられただろうか？
+  --- context: 0x8015 -> 0x8006 ---
+  0x004691D8 [0x8006] [script:BD 3C][box:speech]奴らに気づかれる前に、\nダニーと合流するぞ！
+  --- context: 0x8006 -> 0x8007 ---
+  0x004699E6 [0x8007] [script:BE 40][box:speech]どうだ？[opt][delay:15]潜り込めそうか？
+  --- context: 0x8007 -> 0x8006 ---
+  0x00469A34 [0x8006] [script:F3 40][box:speech]ロマリアの周りには、要寒都市と言っても\nいいほどの、守備がしかれています
+  --- context: 0x8006 -> 0x8007 ---
+  0x00469A9E [0x8007] [script:15 41][box:speech]これをみてください
+  0x00469AE8 [0x8007] [script:4A 41][box:speech]上空にも地上にも、鉄壁と言える\nほどの守備が作られています
+  0x00469B4C [0x8007] [script:73 41][box:speech]調にまかせて突破\nしようとしても…
+  --- context: 0x8007 -> 0x8006 ---
+  0x00469B9A [0x8006] [script:9D 41][box:speech]我マの人数では、かなり\nむずかしいでしょう
+  --- context: 0x8006 -> 0x8007 ---
+  0x00469BF2 [0x8007] [script:CB 41][box:speech]モーリス、お前の持つ知恵で\nなんとかできないのか？
+  --- context: 0x8007 -> 0x8006 ---
+  0x00469C4E [0x8006] [script:EC 41][box:speech]ただひとつ…
+  --- context: 0x8006 -> 0x8007 ---
+  0x00469C8C [0x8007] [script:0B 42][box:speech]ただひとつ？
+  --- context: 0x8007 -> 0x8006 ---
+  0x00469CCA [0x8006] [script:3F 42][box:speech]巨大列車の通行している、大トンネル\nならば、侵入が可能かもしれません
+  --- context: 0x8006 -> 0x8007 ---
+  0x00469D36 [0x8007] [script:6B 42][box:speech]とはいうが、あのトンネルも\n警戒がきびしいぜ？
+  --- context: 0x8007 -> 0x8006 ---
+  0x00469D8A [0x8006] [script:8C 42][box:speech]ええ、わかっています
+  --- context: 0x8006 -> 0x8007 ---
+  0x00469DCC [0x8007] [script:BA 42][box:speech]しかし、あそこを通る巨大列車を\nこちらに奪ってしまえば？
+  0x00469E28 [0x8007] [script:D8 42][box:speech]そうか！
+  --- context: 0x8007 -> 0x8006 ---
+  0x00469E64 [0x8006] [script:02 43][box:speech]列車を種に、トンネルを\n抜けるってわけか！
+  0x00469EB8 [0x8006] [script:34 43][box:speech]列車の著なら他にくらべて、いくぶんか\n防御が手うすになっているはずです
+  --- context: 0x8006 -> 0x8007 ---
+  0x00469F1C [0x8007] [script:62 43][box:speech]奪い取った巨大列車を使い、\nトンネルを抜けさえすれば
+  --- context: 0x8007 -> 0x8006 ---
+  0x00469FD0 [0x8006] [script:AF 43][box:speech]さすがだぜ、モーリス！
+  0x0046A012 [0x8006] [script:D1 43][box:speech]いえいえ、それほどでも…
+  --- context: 0x8006 -> 0x8007 ---
+  0x0046A090 [0x8007] [script:0F 44][box:speech]ん？[opt][delay:15]なんだ？
+  --- context: 0x8007 -> 0x8006 ---
+  0x0046A0F2 [0x8006] [script:4E 44][box:speech]隠し[?1259]の部屋を探っていた、\n怪しい少年を捕まえました
+  --- context: 0x8006 -> 0x8009 ---
+  0x0046A174 [0x8009] [script:86 44][box:speech]何もしてないって\n言ってるだろ！
+  --- context: 0x8009 -> 0x8008 ---
+  0x0046A1C4 [0x8008] [script:A9 44][box:speech]そいつを静かにさせろ
+  --- context: 0x8008 -> 0x8006 ---
+  0x0046A214 [0x8006] [script:D1 44][box:speech]あ、やっぱりいたな！
+  --- context: 0x8006 -> 0x8008 ---
+  0x0046A256 [0x8008] [script:FF 44][box:speech]つけまわってれば、レジスタンスの\nアジトまで行けると信じてたよ
+  0x0046A2CA [0x8008] [script:29 45][box:speech]どうする？
+  --- context: 0x8008 -> 0x8006 ---
+  0x0046A30A [0x8006] [script:57 45][box:speech]へへへっ、俺は、ぜーーったい\nあきらめないって言っただろ
+  --- context: 0x8006 -> 0x8008 ---
+  0x0046A366 [0x8008] [script:7A 45][box:speech]・・・・・
+  --- context: 0x8008 -> 0x8005 ---
+  0x0046A3FA [0x8005] [script:C2 45][box:speech]放してやんな
+  --- context: 0x8005 -> 0x8006 ---
+  0x0046A438 [0x8006] [script:E0 45][box:speech]やった！！
+  --- context: 0x8006 -> 0x8008 ---
+  0x0046A49E [0x8008] [script:13 46][box:speech]モーリス、
+  --- context: 0x8008 -> 0x8006 ---
+  0x0046A4E8 [0x8006] [script:48 46][box:speech]俺とシュウで、列車を値察して\n来るからよ、後を頼むぜ
+  0x0046A544 [0x8006] [script:67 46][box:speech]わかりました
+  --- context: 0x8006 -> 0x8007 ---
+  0x0046A590 [0x8007] [script:8E 46][box:speech]行くぜ、シュウ
+  --- context: 0x8007 -> 0x8006 ---
+  0x0046A5D0 [0x8006] [script:AB 46][box:speech]ああ
+  --- context: 0x8006 -> 0x8005 ---
+  0x0046A62E [0x8005] [script:E1 46][box:speech]な、あんたがここのリーダーだろ？
+  --- context: 0x8005 -> 0x8008 ---
+  0x0046A678 [0x8008] [script:0B 47][box:speech]頼むから、俺をレジスタンスに\n入れてくれよ
+  0x0046A6CE [0x8008] [script:34 47][box:speech]な？[opt][delay:15]絶対に役に立つからよ！
+  0x0046A71C [0x8008] [script:56 47][box:speech]いいだろ？[opt][delay:15]な？
+  0x0046A764 [0x8008] [script:78 47][box:speech]勝手にしろ！
+  --- context: 0x8008 -> 0x8006 ---
+  0x0046A7BE [0x8006] [script:AE 47][box:speech]ちょ、待ってくれよ、\n俺も行くからよぉ！
+  --- context: 0x8006 -> 0x8008 ---
+  0x0046AC30 [0x8008] [script:E8 49][box:speech]どうです？[opt]値察は上手く\nいっていますか？
+  --- context: 0x8008 -> 0x8007 ---
+  0x004FE476 [0x8007] [script:D3 0A]タ！たのかなaだねお地
+  --- context: 0x8007 -> 0x8005 ---
+  0x005246AA [0x8005] [script:F4 0A][box:speech]・・・・・
+  --- context: 0x8005 -> 0x8007 ---
+  0x005246F4 [0x8007] [script:19 0B][box:speech]・・・・・
+  0x0052473E [0x8007] [script:3E 0B][box:speech]・・・・・
+  --- context: 0x8007 -> 0x8008 ---
+  0x00524780 [0x8008] [script:5E 0B][box:speech]くそっ、こんな…
+  --- context: 0x8008 -> 0x8005 ---
+  0x005247C8 [0x8005] [script:83 0B][box:speech]・・・・・
+  --- context: 0x8005 -> 0x8008 ---
+  0x00524C92 [0x8008] [script:EA 0D][box:speech]こ、これは[FF:08 0A 01]・・・
+  --- context: 0x8008 -> 0x8005 ---
+  0x00524CF8 [0x8005] [script:19 0E][box:close]モーリス！！
+  --- context: 0x8005 -> 0x8006 ---
+  0x00524D3A [0x8006] [script:3B 0E][box:speech]ち…っきしょう！
+  0x00524D7E [0x8006] [script:60 0E][box:speech]これもみんな、俺の甘さが…
+  0x00524E08 [0x8006] [script:A9 0E][box:speech]お前だけが、\n悪いわけじゃねぇんだ…
+  0x00524E5A [0x8006] [script:CA 0E][box:speech]トッシュ！！
+  --- context: 0x8006 -> 0x8005 ---
+  0x00524EF0 [0x8005] [script:14 0F][box:speech]誰だ！！
+  --- context: 0x8005 -> 0x8006 ---
+  0x0052511A [0x8006] [script:29 10][box:speech]ダニー！！
+  --- context: 0x8006 -> 0x8005 ---
+  0x0052515A [0x8005] [script:4D 10][box:speech]てめぇら、許せねぇ！！
+  --- context: 0x8005 -> 0x8006 ---
+  0x00525B88 [0x8006] [script:64 15][box:speech]うう[FF:08 0A 01]・・・
+  --- context: 0x8006 -> 0x8007 ---
+  0x00525BD8 [0x8007] [script:88 15][box:speech]ダニー！！
+  --- context: 0x8007 -> 0x8005 ---
+  0x00525C18 [0x8005] [script:BF 15][box:speech]俺、つけられて・[delay:0B]・[delay:0B]・\n[delay:15]俺のせいで、みんなが[FF:08 0A 01]・・・
+  --- context: 0x8005 -> 0x8007 ---
+  0x00525C86 [0x8007] [script:E2 15][box:speech]お前のせいじゃない
+  --- context: 0x8007 -> 0x8005 ---
+  0x00525CCC [0x8005] [script:12 16][box:speech]俺が、[delay:15]俺があさはか\nだったばかりに[FF:08 0A 01]・・・
+  0x00525D2C [0x8005] [script:43 16][box:speech]シュウ、[delay:15]トッシュ・[delay:0B]・[delay:0B]・[delay:15][FF:08 0A 01]すいません
+  --- context: 0x8005 -> 0x8007 ---
+  0x00525D8A [0x8007] [script:6A 16][box:speech]もういい、何も言うな[FF:08 0A 01]・・・
+  --- context: 0x8007 -> 0x8005 ---
+  0x005AFACC [0x8005] [script:F3 08]たb78？マ[FF:EF DD CB]たたと水Oろぃ？そ
+  --- context: 0x8005 -> 0x800A ---
+  0x005DD0AC [0x800A] [script:3C 09]明日も晴れるといいな
+  0x005DD1D2 [0x800A] [script:D9 09]おう！あんたらがギルド派けんの\nハンターか、待ってたぜ
+  0x005DD226 [0x800A] [script:05 0A]俺は、このあたりの海賊どもを\n単ねてるエーシって者だが…
+  0x005DD27E [0x800A] [script:35 0A]聞いたことあるかもしれないが\n「死神竜のエーシ」なんて呼ばれ方もする
+  0x005DD2DE [0x800A] [script:65 0A]通り名の由来ってのは、ドラゴンを\n自在に操れるってことからなんだが…
+  0x005DD33E [0x800A] [script:8D 0A]別に俺はドラゴンを\n操ってるわけじゃねえんだ
+  0x005DD38E [0x800A] [script:B5 0A]ドラゴンに調を宮して\nもらってるだけなんだがな
+  0x005DD3DE [0x800A] [script:DA 0A]まあそのへんの話はおいといてだな…[delay:15]と
+  0x005DD42C [0x800A] [script:08 0B]さっきから気になってたんだが、\nどっかで会ったことなかったか？
+  0x005DD488 [0x800A] [script:3A 0B]「斧使い」のマーグに追っかけられてた\nときにあんたに助けられたことがある
+  --- context: 0x800A -> 0x8005 ---
+  0x005DD4EC [0x8005] [script:5C 0B]ああ、あんときの連著か
+  --- context: 0x8005 -> 0x800A ---
+  0x005DD52C [0x800A] [script:7B 0B]やっとすっきりしたぜ
+  0x005DD56A [0x800A] [script:AB 0B]そういや、ずいぶん手際よく「斧使い」の\n野郎をおっぱらってたっけな
+  0x005DD5CE [0x800A] [script:D7 0B]いや、あんたに助けられなければ\nどうなっていたかわからん
+  --- context: 0x800A -> 0x8006 ---
+  0x005DD632 [0x8006] [script:01 0C]あんときも言ったと思うんだがな
+  --- context: 0x8006 -> 0x800A ---
+  0x005DD676 [0x800A] [script:2E 0C]俺は別にあんたらを助けようと思って\nあんなことをしたんじゃねえぞ
+  0x005DD6D4 [0x800A] [script:57 0C]人助けなんて、照れくさくて\nやってられるか
+  0x005DD726 [0x800A] [script:77 0C]どっちでもいいさ
+  --- context: 0x800A -> 0x8005 ---
+  0x005DD762 [0x8005] [script:9E 0C]で、俺達でいいのか？\n仕事をうけるのは
+  0x005DD7C0 [0x8005] [script:C8 0C]いやぁ、美は誰でもよかったんだ
+  --- context: 0x8005 -> 0x800A ---
+  0x005DD804 [0x800A] [script:EC 0C]つっちゃあ、あんたらには失礼だけどな
+  0x005DD84C [0x800A] [script:16 0D]俺はこういう稼業で\nいわばお尋ね者みたいなもんよ
+  0x005DD8A0 [0x800A] [script:3F 0D]街ん著まで、でばってくわけにも\nいかねえじゃねえか
+  0x005DD8F6 [0x800A] [script:61 0D]・・・・・・
+  --- context: 0x800A -> 0x8006 ---
+  0x005DD93A [0x8006] [script:96 0D]で、[delay:15]ようはその大事な友人である竜と\nこの前の嵐のときにはぐれちまったんだ
+  --- context: 0x8006 -> 0x800A ---
+  0x005DD9A0 [0x800A] [script:C1 0D]どこに流されていったか生きているのか\nどうかもわからねえが…
+  0x005DD9F6 [0x800A] [script:E6 0D]捨て子だった俺を育ててくれた竜なんだ
+  0x005DDA40 [0x800A] [script:14 0E]どこかで偽ついて倒れてるかと思うと、\n寝起きが悪くてしょうがねえ
+  0x005DDA9C [0x800A] [script:3F 0E]それにもし…、[delay:2E]死んでいるなら\nちゃんと葬ってやりたい
+  0x005DDAF2 [0x800A] [script:6E 0E]どこかで、エルヴィックという名の\n竜に出会ったら俺に教えて欲しい
+  0x005DDB54 [0x800A] [script:93 0E]迷子の竜をさがしてくれってのか
+  --- context: 0x800A -> 0x8005 ---
+  0x005DDB9A [0x8005] [script:B6 0E]ん、まあ、だいたい話はわかったけど…
+  0x005DDBE0 [0x8005] [script:E7 0E]だが、そういった依頼なら何もこんな\n面接みたいな真似をせずとも、もっと…
+  --- context: 0x8005 -> 0x8006 ---
+  0x005DDC46 [0x8006] [script:0B 0F]あんたのいいたいことはよくわかるさ
+  --- context: 0x8006 -> 0x800A ---
+  0x005DDC8A [0x800A] [script:3D 0F]たくさんの人間に手当たり次第頼んだ方が\n見つかりやすいと言いたいんだろ
+  0x005DDCF2 [0x800A] [script:5F 0F]だが、考えてもみてくれ
+  0x005DDD32 [0x800A] [script:8E 0F]海賊狭「ダークサーペント」には、\n今、切り札である竜がいない…
+  0x005DDD90 [0x800A] [script:AF 0F]なんてなうわさが流れるとだな
+  0x005DDDD6 [0x800A] [script:E0 0F]今が好機だ、[delay:15]などとよからぬことを\n考え出す連著がいるわけか
+  --- context: 0x800A -> 0x8006 ---
+  0x005DDE34 [0x8006] [script:FF 0F]なるほど、よくわかった
+  0x005DDE76 [0x8006] [script:1F 10]ま、そんなとこだ
+  --- context: 0x8006 -> 0x800A ---
+  0x005DDEB2 [0x800A] [script:49 10]まあ、なんのてがかりもない\n話なんだが、よろしく頼むぜ
+  0x005DDFCE [0x800A] [script:CF 10]別に、何かのついででいいんだ
+  0x005DE012 [0x800A] [script:FB 10]ただ、ドラゴンを見かける度に\nひょっとしたらと思い出してくれ
+  0x005DE338 [0x800A] [script:82 12]まだ見つかんねえのか？
+  0x005DE378 [0x800A] [script:AA 12]まあ気[?1164]に待ってるからよ\n[delay:15]気にすんな
+  0x005DE6D2 [0x800A] [script:4F 14]まだ見つかんねえのか？
+  0x005DE786 [0x800A] [script:A8 14]あっ！？見つけた！？
+  0x005DE7C8 [0x800A] [script:CC 14]はぁ～、はるかバルバラードにねぇ
+  0x005DE80C [0x800A] [script:EB 14]よく見つけてくれたな
+  0x005DE84A [0x800A] [script:0F 15]これで心恨きなく、仕事ができるぜ
+  0x005DE892 [0x800A] [script:37 15]そんじゃ、報酬は\nギルドで受け取ってくれよ
+  0x005DE9F2 [0x800A] [script:DF 15]いやぁ、ホントありがとな
+  0x005DEA32 [0x800A] [script:01 16]金はギルドで受け取ってくれ
+  0x005DEAFA [0x800A] [script:60 16]なあ、シュウ
+  --- context: 0x800A -> 0x8005 ---
+  0x005DEB34 [0x8005] [script:90 16]その犯人って奴は、用心深くて\nひとり歩きの奴しかおそわねえんだろ？
+  0x005DEB94 [0x8005] [script:B3 16]うむ、確かそんなことを言っていたな
+  --- context: 0x8005 -> 0x8006 ---
+  0x005DEBDA [0x8006] [script:E0 16]だったら俺らでがん首そろえて\nうろついてても無駄じゃないのか？
+  --- context: 0x8006 -> 0x8005 ---
+  0x005DEC34 [0x8005] [script:FD 16]そのとおりだな
+  --- context: 0x8005 -> 0x8006 ---
+  0x005DEC6E [0x8006] [script:1C 17]…[delay:1F]てことは…
+  --- context: 0x8006 -> 0x8005 ---
+  0x005DECB0 [0x8005] [script:3D 17]おとり…[delay:1F]だな
+  --- context: 0x8005 -> 0x8006 ---
+  0x005DECEE [0x8006] [script:59 17]おとり？
+  --- context: 0x8006 -> 0x8005 ---
+  0x005DED26 [0x8005] [script:8E 17]誰かひとりをおとりにして、\n犯人をおびきだす役にして、\n残りの者は近くで待機する
+  --- context: 0x8005 -> 0x8006 ---
+  0x005DED90 [0x8006] [script:B9 17]辻斬りが現れたら、おとりは\n大声で仲間を呼び…
+  0x005DEDE6 [0x8006] [script:DC 17]全員でボコボコにしちまうってわけか
+  --- context: 0x8006 -> 0x8005 ---
+  0x005DEE2C [0x8005] [script:F9 17]そんなとこだ
+  --- context: 0x8005 -> 0x8006 ---
+  0x005DEE66 [0x8006] [script:25 18]それだ！[delay:1F]さすがシュウだな\n[delay:1F]だてに年はとってねえぜ
+  --- context: 0x8006 -> 0x8005 ---
+  0x005DEEBE [0x8005] [script:44 18]・・・・・
+  --- context: 0x8005 -> 0x8006 ---
+  0x005DEEFC [0x8006] [script:67 18]そんじゃあ、そのおとりは誰にするか？
+  --- context: 0x8006 -> 0x8005 ---
+  0x005DEF42 [0x8005] [script:92 18]それなんだが、俺もお前も\nそこそこ名の知れたハンターだ
+  --- context: 0x8005 -> 0x8006 ---
+  0x005DEF98 [0x8006] [script:C1 18]犯人に警戒されてもいかんからな、\n俺とお前はやめた方がいいだろう
+  0x005DEFF6 [0x8006] [script:DE 18]それもそうだな
+  --- context: 0x8006 -> 0x8005 ---
+  0x005DF030 [0x8005] [script:0F 19]それに、今回失敗したら、犯人は次から\n警戒するようになってしまうだろう
+  --- context: 0x8005 -> 0x8006 ---
+  0x005DF092 [0x8006] [script:3B 19]同じ作戦は使えない…\nよく考えておとりを選ばなくてはな
+  0x005DF2B8 [0x8006] [script:48 1A]そんじゃ、夜まで待って作戦開始といくか
+  --- context: 0x8006 -> 0x8005 ---
+  0x005DF440 [0x8005] [script:01 1B]！？
+  --- context: 0x8005 -> 0x8000 ---
+  0x005DF48A [0x8000] [script:2E 1B]へっへっへ、久しぶりの獲物だぜ
+  --- context: 0x8000 -> 0x800A ---
+  0x005DF4D4 [0x800A] [script:4E 1B]風の精霊よ！
+  0x005DF510 [0x800A] [script:73 1B]しばしの間、その全ての動きを止めよ！
+  0x005DF55A [0x800A] [script:93 1B]サイレント・フィールド！
+  0x005DF7A0 [0x800A] [script:C7 1C](くっくっく、大声をだされちゃあ\n困るんでな…[delay:1F]つっても聞こえねえか)
+  0x005DF8CE [0x800A] [script:49 1D]出たか？
+  --- context: 0x800A -> 0x800F ---
+  0x005DF906 [0x800F] [script:6E 1D]…[delay:5B]いや、[delay:5B]暗くて何も見えん
+  --- context: 0x800F -> 0x8010 ---
+  0x005DF954 [0x8010] [script:8F 1D]・・・・・
+  --- context: 0x8010 -> 0x800F ---
+  0x005DF996 [0x800F] [script:BB 1D]ま、何かありゃ、手はず通り\n大声で呼ぶはずだろ
+  0x005DF9EA [0x800F] [script:D7 1D]…そうだな
+  --- context: 0x800F -> 0x8010 ---
+  0x005DFAB4 [0x8010] [script:40 1E](死んでもらうぜ)
+  --- context: 0x8010 -> 0x800A ---
+  0x005E04AC [0x800A] [script:3D 23](まった、助けてくれ！)
+  0x005E04EE [0x800A] [script:5A 23](？？)
+  --- context: 0x800A -> 0x8000 ---
+  0x005E0528 [0x8000] [script:7C 23](げっ！聞こえてない！！)
+  --- context: 0x8000 -> 0x800A ---
+  0x005E056C [0x800A] [script:9B 23](風の精霊よ)
+  0x005E05AA [0x800A] [script:BF 23](全ての戒めを解け！早く！！)
+  0x005E0694 [0x800A] [script:33 24]た、助けてくれ！どうか命だけは！！
+  0x005E06DA [0x800A] [script:57 24]おい、エルク！\nもう始まってるぞ！
+  --- context: 0x800A -> 0x8006 ---
+  0x005E0722 [0x8006] [script:7B 24]げっ、マジかよ！\n急げ、シュウ！
+  --- context: 0x8006 -> 0x8005 ---
+  0x005E07CA [0x8005] [script:CA 24]もうおわっちまってたか
+  0x005E080C [0x8005] [script:EC 24]頼む、殺さないでくれ
+  --- context: 0x8005 -> 0x800A ---
+  0x005E084C [0x800A] [script:18 25]はっ、何人の人がそう言って\nお前に命ごいをしたんだろうな
+  --- context: 0x800A -> 0x8005 ---
+  0x005E08A4 [0x8005] [script:3C 25]ま、そういうなら、俺は殺さないけどな
+  0x005E08EC [0x8005] [script:60 25]アルディアの法が、お前を裁くだろうぜ
+  0x005E0934 [0x8005] [script:8A 25]待ってくれ！必ず自首するから\n少しだけ待ってくれ
+  --- context: 0x8005 -> 0x800A ---
+  0x005E0988 [0x800A] [script:A4 25]？
+  --- context: 0x800A -> 0x8005 ---
+  0x005E09BC [0x8005] [script:C9 25]初めから自分で出頭するつもりだった…
+  --- context: 0x8005 -> 0x800A ---
+  0x005E0A06 [0x800A] [script:F2 25]家に…病気の娘がいるんだ\n…金が必要だった
+  0x005E0A58 [0x800A] [script:22 26]娘の生活のめどが立ち次第、自分から\n法の裁きをうけるつもりだった
+  0x005E0AB8 [0x800A] [script:46 26]確かに娘さんは気の毒だと思うが…
+  --- context: 0x800A -> 0x8006 ---
+  0x005E0B00 [0x8006] [script:72 26]後で自分が生きているのが\nどんな模牲の上か知ったら…
+  0x005E0B58 [0x8006] [script:99 26]かえって、つらい思いを\nするんじゃあないか？
+  0x005E0BA6 [0x8006] [script:BC 26]・・・・・・・・・
+  --- context: 0x8006 -> 0x800A ---
+  0x005E0BEC [0x800A] [script:DA 26]う～ん、まいったな
+  --- context: 0x800A -> 0x8005 ---
+  0x005E0C86 [0x8005] [script:33 27]おい、娘がどうなってもいいのか！？\n[delay:1F]…じゃねえや
+  --- context: 0x8005 -> 0x800A ---
+  0x005E0CDA [0x800A] [script:60 27]今俺がつかまっちまったら、\n娘はどうやって生きていけばいいんだ？
+  0x005E0D34 [0x800A] [script:8A 27]頼む、俺のためじゃなく\n娘のために、見逃してくれ
+  0x005E0D8C [0x800A] [script:A8 27]おい、男
+  --- context: 0x800A -> 0x8006 ---
+  0x005E0DC4 [0x8006] [script:C9 27]その娘の名は、何という？
+  0x005E0E0A [0x8006] [script:F8 27]う、[delay:1F]え…[delay:1F]と…[delay:1F]リ、[delay:15]リディア、[delay:2E]だっけか…
+  --- context: 0x8006 -> 0x800A ---
+  0x005E0E64 [0x800A] [script:17 28]娘の母の名は？
+  --- context: 0x800A -> 0x8006 ---
+  0x005E0EA6 [0x8006] [script:43 28]う、[delay:1F]…と[delay:1F]…エ[delay:1F]ミリ[delay:1F]ア…[delay:1F]かな…
+  --- context: 0x8006 -> 0x800A ---
+  0x005E0EFA [0x800A] [script:63 28]なぜ、いちいち考える！
+  --- context: 0x800A -> 0x8006 ---
+  0x005E0F3A [0x8006] [script:81 28]この、うそつきめ！
+  0x005E0F76 [0x8006] [script:A2 28]続きは法廷でやるがいい
+  0x005E0FB8 [0x8006] [script:CD 28]エルク、このうそつき男を\n連れていけば仕事は終わりだ
+  0x005E100E [0x8006] [script:E9 28]行こう！
+  0x005E10E0 [0x8006] [script:63 29]見逃してやるが、そのかわり、\nもう辻斬りなんて真似はやめろよ
+  --- context: 0x8006 -> 0x8005 ---
+  0x005E113A [0x8005] [script:84 29]ありがとう、目が覚めました
+  --- context: 0x8005 -> 0x800A ---
+  0x005E117C [0x800A] [script:AD 29]娘のためにも、まっとうに\nお金を稼ぐことにします
+  0x005E11CE [0x800A] [script:D0 29]ご恩は一生忘れません、それでは
+  0x005E1230 [0x800A] [script:00 2A]へっ、ちょろいぜ\nバカが…
+  0x005E138A [0x800A] [script:AB 2A](へっ、ちょろいぜ)
+  0x005E13CA [0x800A] [script:D6 2A](さて、とどめを刺してかねめのものを\nいただくとするか)
+  0x005E1420 [0x800A] [script:F5 2A](風の精霊よ)
+  0x005E145E [0x800A] [script:16 2B](全ての戒めを解け)
+  0x005E1542 [0x800A] [script:8B 2B]おい、エルク！\nもう始まってるぞ！
+  --- context: 0x800A -> 0x8006 ---
+  0x005E158A [0x8006] [script:AF 2B]げっ、マジかよ！\n急げ、シュウ！
+  --- context: 0x8006 -> 0x8005 ---
+  0x005E15DA [0x8005] [script:D2 2B]ちっ、人が来たか…
+  --- context: 0x8005 -> 0x800A ---
+  0x005E169A [0x800A] [script:32 2C]くそっ、逃がしたか…
+  --- context: 0x800A -> 0x8005 ---
+  0x005E16D8 [0x8005] [script:54 2C]仕方ない…エルク、あきらめよう
+  --- context: 0x8005 -> 0x8006 ---
+  0x005E1AA6 [0x8006] [script:42 2E]この橋を越えれば奴らの\n縄張りは抜けるはずだ
+  --- context: 0x8006 -> 0x800A ---
+  0x005E1AF8 [0x800A] [script:75 2E]ああ、この先はインディゴスの海賊狭、\n「ダークサーペント」の縄張りになるからな
+  --- context: 0x800A -> 0x8006 ---
+  0x005E1B6A [0x8006] [script:98 2E]だが、シュウ
+  --- context: 0x8006 -> 0x8005 ---
+  0x005E1BA4 [0x8005] [script:CA 2E]奴らにコオロギ並の知能でもあれば、\n間違いなくこの橋で待ち副せるはずだぜ
+  0x005E1C10 [0x8005] [script:FF 2E]さあ…[delay:3D]「斧使い」マーグに、コオロギ並の\n知能があるとも思えんが…
+  --- context: 0x8005 -> 0x8006 ---
+  0x005E1C7E [0x8006] [script:2A 2F]奴の手下に一人くらいはいたようだな
+  0x005E1D30 [0x8006] [script:84 2F]はっはっは、待ってたぞ！\nルナシウスとやら
+  --- context: 0x8006 -> 0x800B ---
+  0x005E1D7C [0x800B] [script:B2 2F]「デス・クラウン」にたてついたこと、\n死んでから後悔するがいい
+  0x005E1DE2 [0x800B] [script:E4 2F]へっ、弱い奴ほど、すぐに\n自分の組織の名前を出しやがる
+  --- context: 0x800B -> 0x8005 ---
+  0x005E1E46 [0x8005] [script:12 30]ぐっ、[delay:15]いまならその\nへらず口、見逃してやる
+  --- context: 0x8005 -> 0x800B ---
+  0x005E1E98 [0x800B] [script:3D 30]その男をおとなしく引き渡せば、\nお前らの命まではとらん
+  0x005E1EEE [0x800B] [script:5B 30]とっとと去れ！
+  0x005E1F34 [0x800B] [script:83 30]おまえこそ、とっとと帰ったらどうだ
+  --- context: 0x800B -> 0x8005 ---
+  0x005E1F7A [0x8005] [script:A6 30]それとも、まだ恥をかきたりないのか
+  0x005E1FCA [0x8005] [script:D0 30]い、[delay:15]いったな、[delay:1F]もう許さん！
+  --- context: 0x8005 -> 0x800B ---
+  0x005E2014 [0x800B] [script:F5 30]全員出てこい！[delay:1F]店殺しにしろ！
+  0x005E209E [0x800B] [script:35 31]は～あ、めんどくせーなー
+  --- context: 0x800B -> 0x8010 ---
+  0x005E2100 [0x8010] [script:71 31]はさみ撃ちか、牛なみの脳みそを\nもったやつもいるようだな
+  --- context: 0x8010 -> 0x8006 ---
+  0x005E2166 [0x8006] [script:A0 31]おい、え…[delay:15]と、[delay:15]ルナ…[delay:15]なんとか
+  --- context: 0x8006 -> 0x8005 ---
+  0x005E21B4 [0x8005] [script:C6 31]…ルナシウスだ、[delay:15]が、[delay:15]ルナスでいい
+  --- context: 0x8005 -> 0x800A ---
+  0x005E2200 [0x800A] [script:E9 31]ルナス、敵は俺たちで何とかする
+  --- context: 0x800A -> 0x8005 ---
+  0x005E2246 [0x8005] [script:10 32]あんたは、目立たないように\nじっとしてな！
+  0x005E2294 [0x8005] [script:3F 32]わかった！だが、やつらはしかたなく\n吹頭目のやつあたりにつきあってるだけだ
+  --- context: 0x8005 -> 0x800A ---
+  0x005E22F2 [0x800A] [script:69 32]マーグさえ倒してしまえば\nやつらは戦意をなくすはずだ
+  0x005E25C8 [0x800A] [script:CC 33]くそっ、このままじゃすまさねえぞ
+  --- context: 0x800A -> 0x800B ---
+  0x005E27DC [0x800B] [script:D7 34]よっしゃ、今のうちにわたっちまおう
+  --- context: 0x800B -> 0x8005 ---
+  0x005E285E [0x8005] [script:14 35]まてぇー！おらぁー！！
+  --- context: 0x8005 -> 0x800B ---
+  0x005E29E4 [0x800B] [script:D9 35]やべえ、とっとと渡っちまおう
+  --- context: 0x800B -> 0x8005 ---
+  0x005E2CAE [0x8005] [script:38 37]！？
+  --- context: 0x8005 -> 0x800B ---
+  0x005E2CE4 [0x800B] [script:59 37]プロディアスの山犬ども！
+  --- context: 0x800B -> 0x8005 ---
+  0x005E2D26 [0x8005] [script:7C 37]笛装してこの橋を渡る気か？
+  0x005E2D70 [0x8005] [script:AA 37]葉様、「ダークサーペント」の\n「死神竜エーシ」！！
+  --- context: 0x8005 -> 0x800B ---
+  0x005E2DC8 [0x800B] [script:D7 37]「デスクラウン」は「ダークサーペント」\nにケンカを売る気か？
+  --- context: 0x800B -> 0x8007 ---
+  0x005E2E22 [0x8007] [script:F2 37]ぐっ…
+  --- context: 0x8007 -> 0x800B ---
+  0x005E2E58 [0x800B] [script:10 38]どうなんだよ！？
+  --- context: 0x800B -> 0x8007 ---
+  0x005E2EAC [0x8007] [script:3D 38]くそっ、[delay:1F]ひきあげるぞ！
+  --- context: 0x8007 -> 0x800B ---
+  0x005E2F84 [0x800B] [script:A9 38]はっ、[delay:15]山犬どもめ！
+  --- context: 0x800B -> 0x8005 ---
+  0x005E3020 [0x8005] [script:F8 38]ふぅ、あんたらのおかげで助かった
+  --- context: 0x8005 -> 0x8008 ---
+  0x005E309C [0x8008] [script:31 39]礼をいうぜ
+  0x005E30D6 [0x8008] [script:55 39]ふん、別にお前らを助けたわけじゃねぇ
+  --- context: 0x8008 -> 0x8006 ---
+  0x005E311E [0x8006] [script:77 39]てめぇのなわばりを守ったのと…
+  0x005E3162 [0x8006] [script:99 39]俺があいつらを嫌いだっただけだ
+  0x005E31AA [0x8006] [script:C0 39]あんたは俺らを襲おうとは思わねぇのか？
+  --- context: 0x8006 -> 0x8008 ---
+  0x005E31F4 [0x8008] [script:E4 39]俺らは陸にいるやつらには手をださん
+  --- context: 0x8008 -> 0x8006 ---
+  0x005E323C [0x8006] [script:03 3A]とっとと、いっちまいな
+  0x005E327A [0x8006] [script:27 3A]ふーん、[delay:15]いろんなやつがいるもんだな
+  --- context: 0x8006 -> 0x8008 ---
+  0x005E32C2 [0x8008] [script:4B 3A]そんじゃ、お言葉に甘えさせてもらうぜ
+  0x005E330A [0x8008] [script:6D 3A]ここまでくれば大丈夫だろう
+  --- context: 0x8008 -> 0x800A ---
+  0x005E336E [0x800A] [script:A4 3A]ありがとう\n報酬はギルドからうけとってくれ
+  0x005E3DC8 [0x800A] [script:CC 3F]今ここにいるのはエラーなはずだぜ
+  0x005E3E0C [0x800A] [script:F1 3F]元木の野郎か米坂さんにいってくれ
+  0x00631CDA [0x800A] [script:BC 06]がわ固ち
+  --- context: 0x800A -> 0x8000 ---
+  0x0069A628 [0x8000] [script:D8 06]トッシュ？
+  --- context: 0x8000 -> 0x8001 ---
+  0x0069A660 [0x8001] [script:FD 06]スメリアはダウンタウン出身のやくざ者じゃ
+  --- context: 0x8001 -> 0x8000 ---
+  0x0069A6AA [0x8000] [script:1F 07]じゃが、剣の腕はめっぽうたつ
+  0x0069A6EE [0x8000] [script:44 07]頼りになる仲間じゃ、まず奴をさがそう
+  0x0069B5AC [0x8000] [script:AD 0E][box:narration]ギ・・ナカナカダイタンナヤツダナ・・\nコンナニアカラサマナノニ
+  --- context: 0x8000 -> 0x800A ---
+  0x0069B63C [0x800A] [script:E6 0E]やっぱり罠じゃったのう
+  --- context: 0x800A -> 0x8000 ---
+  0x0069D7BE [0x8000] [script:A2 1F]おおっ
+  0x0069D816 [0x8000] [script:D4 1F]なんじゃ、まだ生きとったんか
+  0x0069D858 [0x8000] [script:F4 1F]へっ、ごあいさつじゃねえか
+  --- context: 0x8000 -> 0x800A ---
+  0x0069D8A6 [0x800A] [script:1F 20]・[delay:15]・[delay:15]・[delay:29]誰？
+  --- context: 0x800A -> 0x8001 ---
+  0x0069D8EE [0x8001] [script:52 20]なんだよリーザ、俺の顔を\n忘れちまったってのか？\n[delay:1F]ずいぶん冷てえじゃねえか
+  --- context: 0x8001 -> 0x800B ---
+  0x0069D954 [0x800B] [script:76 20]違う！[delay:15]あなたはシュウじゃないわ！
+  --- context: 0x800B -> 0x8001 ---
+  0x0069D99C [0x8001] [script:9F 20]いえ、あなたは生命を持った\n生き物でさえない！
+  0x0069D9EE [0x8001] [script:D0 20]なに言ってんだよ、俺は正真正めいの\nシュウだし、この通り生きて動いてるぜ
+  --- context: 0x8001 -> 0x800B ---
+  0x0069DA50 [0x800B] [script:0C 21]いいえ、[delay:15]あらゆる生き物は、喜んだり、\n悲しんだり、[delay:15]そういった何らかの\n感情を常に発してるわ
+  --- context: 0x800B -> 0x8001 ---
+  0x0069DAC8 [0x8001] [script:33 21]そして私にはそれらを\n感じることができる…
+  0x0069DB16 [0x8001] [script:5C 21]けど、あなた達からは\nなんの感情も感じられない
+  0x0069DB68 [0x8001] [script:8F 21]おいおい、ご機嫌斜めじゃねえか、[delay:1F]え？\n[delay:1F]そういやエルクのガキはどうしたんだ
+  --- context: 0x8001 -> 0x800B ---
+  0x0069DBCE [0x800B] [script:C0 21]今日は一緒じゃねえのか？[delay:15]\nそうか、[delay:15]そんで機嫌がわりーんだな
+  0x0069DC30 [0x800B] [script:E8 21]よくもシュウの姿でそんな…\n[delay:15]許せない！
+  --- context: 0x800B -> 0x8001 ---
+  0x0069DC80 [0x8001] [script:16 22]ふん、本物も偽物もねえ！\n[delay:15]生き残った方が本物さ！
+  --- context: 0x8001 -> 0x800A ---
+  0x0069E0BA [0x800A] [script:26 24]何だったんじゃ、今のは…
+  --- context: 0x800A -> 0x8005 ---
+  0x0069E0FC [0x8005] [script:49 24]私たちの偽物もいるのかしら…？
+  --- context: 0x8005 -> 0x8006 ---
+  0x0069E142 [0x8006] [script:66 24]…さあのう…
+  --- context: 0x8006 -> 0x8005 ---
+  0x0069E182 [0x8005] [script:06 80]ぶゆよ
+  --- context: 0x8005 -> 0x8000 ---
+  0x0069FFC4 [0x8000] [script:A5 33]ちっ！
+  0x0069FFFA [0x8000] [script:C4 33]まずいな、数が多い
+  --- context: 0x8000 -> 0x8001 ---
+  0x006A0038 [0x8001] [script:E8 33]しゃらくせえ！まとめて相手してやるぜ！
+  --- context: 0x8001 -> 0x8000 ---
+  0x006A0080 [0x8000] [script:0C 34]待て！襲ってくるのとは違うようだが？
+  --- context: 0x8000 -> 0x8001 ---
+  0x006A01D2 [0x8001] [script:B1 34]退路を昕ったわけか…
+  0x006A0236 [0x8001] [script:E5 34]けっ！誘い込んでやがるのか！
+  --- context: 0x8001 -> 0x8000 ---
+  0x006A027A [0x8000] [script:05 35]なめてくれるじゃねえか！
+  0x006EC10D [0x8000] [script:0A 0F]旧い整
+  0x00753AE4 [0x8000] [script:2A 0F]ハンター…[delay:15]シュウ
+  --- context: 0x8000 -> 0x8001 ---
+  0x00753B24 [0x8001] [script:4B 0F]「歌姫」シャンテよ！
+  --- context: 0x8001 -> 0x8002 ---
+  0x0075548E [0x8002] [script:FF 1B]パレンシア兵士、ポコ！
+  --- context: 0x8002 -> 0x8000 ---
+  0x007554CE [0x8000] [script:20 1C]大魔導士、ゴーゲンじゃ
+  --- context: 0x8000 -> 0x8001 ---
+  0x00755B66 [0x8001] [script:66 1F]ねた！
+  --- context: 0x8001 -> 0x0006 ---
+  0x00755B9C [0x0006] [script:85 1F]そしてかいふくした！
+  0x00756418 [0x0006] [script:C5 23]「炎使い」、エルク！
+  --- context: 0x0006 -> 0x8000 ---
+  0x0075645A [0x8000] [script:E6 23]リーザ[delay:15]…[delay:15]です…
+  --- context: 0x8000 -> 0x8001 ---
+  0x007576D4 [0x8001] [script:26 2D]モンジ一家のトッシュたぁ俺のことだ
+  --- context: 0x8001 -> 0x8000 ---
+  0x0075771C [0x8000] [script:44 2D]ラマダ僧、イーガ
+  --- context: 0x8000 -> 0x8001 ---
+  0x00758258 [0x8001] [script:E5 32]ガルアーノ！[delay:1F]どこだ！？
+  --- context: 0x8001 -> 0x8005 ---
+  0x007582E8 [0x8005] [script:2F 33]ガルアーノ！[delay:15]どこにいやがる！
+  --- context: 0x8005 -> 0x8008 ---
+  0x007583DC [0x8008] [script:A6 33]てめえがふさいだんだろうが
+  --- context: 0x8008 -> 0x8005 ---
+  0x00758552 [0x8005] [script:69 34]ざけんな！誰がてめえの\nいいなりになんかなるか！
+  0x00758744 [0x8005] [script:55 35]！！
+  --- context: 0x8005 -> 0x0006 ---
+  0x0075994A [0x0006] [script:69 3E]おい、ニセモノ発生装恨ってのは\n壊したんじゃなかったのか？
+  --- context: 0x0006 -> 0x8005 ---
+  0x007599A2 [0x8005] [script:8C 3E]幻彩モンスター制御装恨だ
+  --- context: 0x8005 -> 0x8007 ---
+  0x007599E8 [0x8007] [script:B9 3E]いや、確かに壊したはずだし、\n予備の装恨なんてのもないはずだ
+  0x00759B1A [0x8007] [script:44 3F]ちっ、楽しんでやがる
+  --- context: 0x8007 -> 0x8006 ---
+  0x00759B64 [0x8006] [script:72 3F]おい、小僧、\n見分けがつかなくなるとまずい
+  0x00759BB4 [0x8006] [script:91 3F]今回はさがってな
+  0x00759BF2 [0x8006] [script:AE 3F]しょうがねえ
+  --- context: 0x8006 -> 0x8005 ---
+  0x00759C2C [0x8005] [script:CF 3F]ちょっと心配だがまかせるぜ
+  0x0075A97C [0x8005] [script:7E 46]おっさん、今度は\nあんたが抜け番みたいだぜ
+  0x0075A9CC [0x8005] [script:9C 46]ちっ、ぬかるなよ
+  --- context: 0x8005 -> 0x8006 ---
+  0x0075C5F2 [0x8006] [script:AF 54]りあき
+  --- context: 0x8006 -> 0xFFFE ---
+  0x0075C6AC [0xFFFE] [script:0A 55]ここか！？
+  --- context: 0xFFFE -> 0x8000 ---
+  0x0075C6E8 [0x8000] [script:28 55]…だろう
+  --- context: 0x8000 -> 0x8001 ---
+  0x0075C724 [0x8001] [script:47 55]行くぜ！！
+  --- context: 0x8001 -> 0x8000 ---
+  0x007E0744 [0x8000] [script:16 06]めrへょゲIのあネョゾゾゾァクdギ
+  --- context: 0x8000 -> 0x8005 ---
+  0x0081589A [0x8005] [script:4B 06][box:speech]おい、ロマリアトンネルで大事件だ！
+  --- context: 0x8005 -> 0x8009 ---
+  0x008158E6 [0x8009] [script:6A 06][box:speech]なんだって！？
+  --- context: 0x8009 -> 0x8007 ---
+  0x0081593E [0x8007] [script:A1 06][box:speech]ロマリアの列車が、誰かに\n襲われたらしいぞ
+  --- context: 0x8007 -> 0x8008 ---
+  0x00815992 [0x8008] [script:C6 06][box:speech]レジスタンスの仕業じゃないのか？
+  --- context: 0x8008 -> 0x800A ---
+  0x008159EA [0x800A] [script:EC 06][box:speech]レジスタンス…
+  --- context: 0x800A -> 0x8005 ---
+  0x00815A36 [0x8005] [script:12 07][box:speech]ひょっとして！
+  0x00815A82 [0x8005] [script:39 07][box:speech]急ごう、シャンテ
+  --- context: 0x8005 -> 0x8006 ---
+  0x00815AC2 [0x8006] [script:56 07][box:speech]ええ！
+  --- context: 0x8006 -> 0x8005 ---
+  0x00816CFC [0x8005] [script:74 10]りあき
+  --- context: 0x8005 -> 0x0006 ---
+  0x00816D8A [0x0006] [script:BB 10]りあき
+  0x00816DFC [0x0006] [script:FB 10]のんきなことを言うとる、場合じゃないぞ！
+  --- context: 0x0006 -> 0x800A ---
+  0x00816E62 [0x800A] [script:2B 11]グレイシーヌが、大ピンチなんじゃ
+  0x00816EE8 [0x800A] [script:6A 11]りあき
+  --- context: 0x800A -> 0x0006 ---
+  0x00816F5A [0x0006] [script:A7 11]とにかく、シルバーノアに民れ！
+  --- context: 0x0006 -> 0x800A ---
+  0x00816FA8 [0x800A] [script:CA 11]話はそれからじゃ
+  0x00817008 [0x800A] [script:FE 11]ヒエンを、恨き去りにはできん
+  --- context: 0x800A -> 0x800E ---
+  0x0081705A [0x800E] [script:26 12]小型の飛行船じゃろ
+  --- context: 0x800E -> 0x800A ---
+  0x0081709C [0x800A] [script:4B 12]ちゃんとシルバーノアに\n詰んであるわい
+  0x008170E6 [0x800A] [script:68 12]心配するな
+  0x0081712A [0x800A] [script:8A 12]急ぐぞい！！
+  0x0081719E [0x800A] [script:C8 12]グレイシーヌで、いったい何が
+  --- context: 0x800A -> 0x800F ---
+  0x008171EA [0x800F] [script:E9 12]急ぐぞ！
+  --- context: 0x800F -> 0x800E ---
+  0x0081736A [0x800E] [script:AB 13]りあき
+  --- context: 0x800E -> 0x0006 ---
+  0x008173B0 [0x0006] [script:CE 13]チョンガラじゃない
+  --- context: 0x0006 -> 0x8000 ---
+  0x008173EC [0x8000] [script:EC 13]何かあったの？
+  0x0081742C [0x8000] [script:0D 14]いったいどうしたの？
+  0x00817476 [0x8000] [script:36 14]グルガは、まだ会ったことなかったよな
+  --- context: 0x8000 -> 0x800F ---
+  0x008174C0 [0x800F] [script:61 14]彼は、シルバーノアの船[?1164]の\nチョンガラって言って
+  0x00817516 [0x800F] [script:8A 14]のんきに自己紹介しとる、場合じゃないぞ！
+  --- context: 0x800F -> 0x800A ---
+  0x00817564 [0x800A] [script:AC 14]グレイシーヌが、大ピンチなんじゃ
+  0x008175B0 [0x800A] [script:D0 14]一体どう言うことだ？
+  --- context: 0x800A -> 0x800F ---
+  0x008175F4 [0x800F] [script:F4 14]とにかく、シルバーノアに民れ！
+  --- context: 0x800F -> 0x800A ---
+  0x00817638 [0x800A] [script:12 15]話はそれからじゃ
+  0x00817684 [0x800A] [script:3C 15]ヒエンを、恨き去りにはできん
+  --- context: 0x800A -> 0x800E ---
+  0x008176CC [0x800E] [script:5F 15]小型の飛行船じゃろ
+  --- context: 0x800E -> 0x800A ---
+  0x0081770E [0x800A] [script:84 15]ちゃんとシルバーノアに\n詰んであるわい
+  0x00817758 [0x800A] [script:A1 15]心配するな
+  0x00817792 [0x800A] [script:BE 15]急ぐぞい！！
+  0x00817820 [0x800A] [script:06 16]チョンガラじゃない
+  --- context: 0x800A -> 0x8000 ---
+  0x0081785C [0x8000] [script:24 16]何かあったの？
+  0x0081789C [0x8000] [script:4B 16]のんきなことを言うとる、場合じゃないぞ！
+  --- context: 0x8000 -> 0x800A ---
+  0x00817902 [0x800A] [script:7B 16]グレイシーヌが、大ピンチなんじゃ
+  0x00817962 [0x800A] [script:AA 16]一体どう言うことなの？
+  --- context: 0x800A -> 0x8000 ---
+  0x008179A8 [0x8000] [script:CE 16]とにかく、シルバーノアに民れ！
+  --- context: 0x8000 -> 0x800A ---
+  0x008179F6 [0x800A] [script:F1 16]話はそれからじゃ
+  0x00817A42 [0x800A] [script:1B 17]ヒエンを、恨き去りにはできん
+  --- context: 0x800A -> 0x800E ---
+  0x00817A8C [0x800E] [script:3F 17]チョンガラさんじゃないですか？
+  --- context: 0x800E -> 0x8000 ---
+  0x00817ACE [0x8000] [script:61 17]どうしたんですか、こんな所で？
+  0x00817B16 [0x8000] [script:83 17]え、何があったんですか？
+  0x00817B8E [0x8000] [script:BE 17]チョンガラ、ジャナイカ
+  0x00817BCC [0x8000] [script:DC 17]ドウカシタノカ？
+  0x00817C0C [0x8000] [script:03 18]のんきなことを言うとる、場合じゃないぞ！
+  --- context: 0x8000 -> 0x800A ---
+  0x00817C72 [0x800A] [script:33 18]グレイシーヌが、大ピンチなんじゃ
+  0x00817CBE [0x800A] [script:57 18]イッタイドウシタんジャ？
+  --- context: 0x800A -> 0x8000 ---
+  0x00817D02 [0x8000] [script:7B 18]とにかく、シルバーノアに民れ！
+  --- context: 0x8000 -> 0x800A ---
+  0x00817D50 [0x800A] [script:9E 18]話はそれからじゃ
+  0x00817D9C [0x800A] [script:C8 18]ヒエンを、恨き去りにはできん
+  --- context: 0x800A -> 0x800E ---
+  0x00817E1A [0x800E] [script:02 19]チョンガラ？
+  --- context: 0x800E -> 0x8000 ---
+  0x00817E54 [0x8000] [script:1F 19]どうしたのー
+  0x00817E92 [0x8000] [script:46 19]のんきなことを言うとる、場合じゃないぞ！
+  --- context: 0x8000 -> 0x800A ---
+  0x00817EF8 [0x800A] [script:76 19]グレイシーヌが、大ピンチなんじゃ
+  0x00817F44 [0x800A] [script:9B 19]えーなになに、どうしたのー？
+  --- context: 0x800A -> 0x8000 ---
+  0x00817F8A [0x8000] [script:BF 19]とにかく、シルバーノアに民れ！
+  --- context: 0x8000 -> 0x800A ---
+  0x00817FD8 [0x800A] [script:E2 19]話はそれからじゃ
+  0x00818024 [0x800A] [script:0C 1A]ヒエンを、恨き去りにはできん
+  --- context: 0x800A -> 0x800E ---
+  0x00818606 [0x800E] [script:FC 1C]大変申し分けありません
+  --- context: 0x800E -> 0xFFFE ---
+  0x00818648 [0xFFFE] [script:23 1D]ただ今、ロマリア鉄道は\n運休著です
+  0x0081869E [0xFFFE] [script:48 1D]一体なにがあったんですか？
+  0x008186F2 [0xFFFE] [script:72 1D]大変申し分けありません
+  0x00818734 [0xFFFE] [script:99 1D]ただ今、ロマリア鉄道は\n運休著です
+  0x0081878A [0xFFFE] [script:C0 1D]ロマリアの上になにか浮かんでるぞ
+  0x008187E2 [0xFFFE] [script:EC 1D]くそおおぉ！レジスタンスの奴等め
+  0x00818830 [0xFFFE] [script:12 1E]これもレジスタンスの仕業か！？
+  0x00818886 [0xFFFE] [script:3E 1E]レジスタンスも、なかなかやりおるわい
+  0x008188D4 [0xFFFE] [script:63 1E]一体何がおきたんじゃ！？
+  0x00818928 [0xFFFE] [script:91 1E]いつになったら、列車は動きだすのかねぇ
+  0x00818972 [0xFFFE] [script:B1 1E]もう、待ちくたびれたよ
+  0x008189BA [0xFFFE] [script:D3 1E]ちょっと見た？
+  0x008189F6 [0xFFFE] [script:F7 1E]ロマリアからなにかが浮かんできたのよ！？
+  0x00818A50 [0xFFFE] [script:28 1F]トンネルが、壊されて列車が\n動いてないのよ
+  0x00818AA0 [0xFFFE] [script:46 1F]いい迷惑だわ
+  0x00818AE4 [0xFFFE] [script:6A 1F]あれは一体なんなの？
+  0x00818B36 [0xFFFE] [script:97 1F]ロマリアトンネルが\nレジスタンスに、
+  0x00818B7E [0xFFFE] [script:B6 1F]破壊されたらしい
+  0x00818BC4 [0xFFFE] [script:D7 1F]もうだめだ！！
+  0x00818BFE [0xFFFE] [script:F9 1F]世界のおわりだぁぁぁぁ！！！
+  0x00818C54 [0xFFFE] [script:25 20]ロマリアの奴等め、いい気味だ
+  0x00818CA2 [0xFFFE] [script:4B 20]あんなものが空に浮かぶなんて
+  0x00818CE6 [0xFFFE] [script:6C 20]ロマリアはやっぱりすごいぜ！
+  0x00818DDC [0xFFFE] [script:EA 20]チョンガラ、シルバーノアを発進させろ！
+  --- context: 0xFFFE -> 0x8000 ---
+  0x00818E24 [0x8000] [script:0A 21]すごいことになっとるのぉ
+  --- context: 0x8000 -> 0x800A ---
+  0x00818E64 [0x800A] [script:2B 21]のんきにかまえている眠はない
+  --- context: 0x800A -> 0x8000 ---
+  0x00818EA6 [0x8000] [script:4C 21]わかっとる、みなまで言うな
+  --- context: 0x8000 -> 0x800A ---
+  0x00818EE8 [0x800A] [script:6B 21]いよいよ決戦じゃ
+  0x00818F26 [0x800A] [script:90 21]二度と民ってくることができんかもしれんぞ
+  0x00818F70 [0x800A] [script:AF 21]覚悟はできとるな？
+  0x00818FFA [0x800A] [script:F7 21]よっしゃあ、ワシについてこい！！
+  0x008190A6 [0x800A] [script:4E 22]なんじゃ、まだどこかに用があるのか？
+  0x0081913A [0x800A] [script:98 22]なんじゃ、さっさと済ましてこんか！
+  0x008192D2 [0x800A] [script:61 23]さっさと済ましてこんか！
+  0x0081931A [0x800A] [script:85 23]なんじゃ、他の国か？
+  0x0081935A [0x800A] [script:A4 23]さっさとついてこい！
+  0x0081943E [0x800A] [script:1C 24]二度と民ってくることができんかもしれんぞ
+  0x00819488 [0x800A] [script:3B 24]覚悟はできたか？
+  0x0081950C [0x800A] [script:7F 24]背著に何かついとるのか？
+  0x00819556 [0x800A] [script:A7 24]わしの横顔がそんなに気になるのか？
+  0x008195A6 [0x800A] [script:CE 24]なんじゃ、まだどこかに用があるのか？
+  0x008D43D8 [0x800A] [script:B5 08][box:speech]ここは、一般人の来る\nところではない！
+  0x008D442A [0x800A] [script:D5 08][box:speech]立ち去れ！！
+  0x008D4510 [0x800A] [script:51 09][box:speech]ここは、一般人の来る\nところではない！
+  --- context: 0x800A -> 0x800B ---
+  0x008D4562 [0x800B] [script:71 09][box:speech]立ち去れ！！
+  0x008D4608 [0x800B] [script:CD 09][box:speech]ここは、一般人の来る\nところではない！
+  --- context: 0x800B -> 0x800C ---
+  0x008D465A [0x800C] [script:ED 09][box:speech]立ち去れ！！
+  0x008D4700 [0x800C] [script:49 0A][box:speech]ここは、一般人の来る\nところではない！
+  --- context: 0x800C -> 0x800D ---
+  0x008D4752 [0x800D] [script:69 0A][box:speech]立ち去れ！！
+  0x008D48EE [0x800D] [script:3A 0B][box:speech]これが、ロマリアトンネルか…
+  --- context: 0x800D -> 0x8005 ---
+  0x008D4934 [0x8005] [script:59 0B][box:speech]でけぇなぁー
+  --- context: 0x8005 -> 0x8007 ---
+  0x008D4976 [0x8007] [script:84 0B][box:speech]ここがロマリアへの、\nただひとつの出入口…
+  --- context: 0x8007 -> 0x8005 ---
+  0x008D49CC [0x8005] [script:A7 0B][box:speech]ま、そんなところだな
+  --- context: 0x8005 -> 0x8006 ---
+  0x008D4A1C [0x8006] [script:D4 0B][box:speech]ここさえ突破できれば、\n奴を…
+  --- context: 0x8006 -> 0x8005 ---
+  0x008D4AB8 [0x8005] [script:1F 0C][box:speech]なんだよ、ガルアーノってのは？
+  --- context: 0x8005 -> 0x8007 ---
+  0x008D4AFE [0x8007] [script:40 0C][box:speech]いいんだよ、お前は
+  --- context: 0x8007 -> 0x8006 ---
+  0x008D4B44 [0x8006] [script:5F 0C][box:speech]ちぇっ
+  --- context: 0x8006 -> 0x8007 ---
+  0x008D4B8C [0x8007] [script:8F 0C][box:speech]もうちょっとぐらい、俺を\n認めてくれたって…
+  0x008D4C6C [0x8007] [script:F5 0C][box:speech]な、なんだ！？
+  0x008D4CD6 [0x8007] [script:2C 0D][box:speech]ここで何をしている！
+  --- context: 0x8007 -> 0x800B ---
+  0x008D4D18 [0x800B] [script:54 0D][box:speech]お前ら、ただの\n一般人ではないな！
+  --- context: 0x800B -> 0x800A ---
+  0x008D4D76 [0x800A] [script:7B 0D][box:speech]はやく逃げろ！
+  --- context: 0x800A -> 0x8005 ---
+  0x008D4DCE [0x8005] [script:A8 0D][box:speech]俺たちも逃げるぜ！
+  --- context: 0x8005 -> 0x8006 ---
+  0x008D4E24 [0x8006] [script:D0 0D][box:speech]追え！！
+  --- context: 0x8006 -> 0x800B ---
+  0x008D4E60 [0x800B] [script:F2 0D][box:speech]逃がしてはならんぞ！！
+  --- context: 0x800B -> 0x800A ---
+  0x008D522E [0x800A] [script:D7 0F][box:speech]そろそろいいか？
+  --- context: 0x800A -> 0x8006 ---
+  0x008D526E [0x8006] [script:F6 0F][box:speech]いつでもいいぜ
+  --- context: 0x8006 -> 0x8005 ---
+  0x008D52AC [0x8005] [script:22 10][box:speech]では俺は、爆葉の設恨に行くから\n後は頼むぞ！
+  --- context: 0x8005 -> 0x8006 ---
+  0x008D5312 [0x8006] [script:4C 10][box:speech]よっしゃ…[delay:15]始めるか
+  --- context: 0x8006 -> 0x8005 ---
+  0x008D535C [0x8005] [script:6D 10][box:speech]おぉぉぉぉっ！
+  0x008D539A [0x8005] [script:8C 10][box:speech]うぉぉぉぉっ！
+  0x008D53D8 [0x8005] [script:AB 10][box:speech]だぁぁぁぁっ！
+  0x008D541A [0x8005] [script:D2 10][box:speech]俺が、[delay:15]トッシュだぁぁぁっ！！
+  0x008D5468 [0x8005] [script:FC 10][box:speech]ロマリアの兵隊ども、\n出てきやがれ！
+  0x008D54B8 [0x8005] [script:26 11][box:speech]この俺さまが、お前らの\n相手になってやるぜ！
+  0x008D5510 [0x8005] [script:56 11][box:speech]お前たちみてぇな役立たずが、\n何人きても、こわかねぇぞ！
+  0x008D5570 [0x8005] [script:74 11][box:speech]？
+  0x008D55B6 [0x8005] [script:9E 11][box:speech]どうした、出てこないのか！
+  0x008D55FC [0x8005] [script:C5 11][box:speech]この、カッコばかりの、\n弱虫どもが！
+  0x008D56FA [0x8005] [script:46 12][box:speech]ま、[delay:15]まじぃ[delay:0B]・[delay:0B]・[delay:0B]・
+  0x008D579A [0x8005] [script:93 12][box:speech]くそ[delay:0B]・[delay:0B]・[delay:0B]・
+  0x008D57EA [0x8005] [script:B5 12][box:speech]うっしゃぁぁぁ！！
+  0x008D5904 [0x8005] [script:4D 13][box:speech]このトッシュ様が、本当の戦いを\n教えてやるぜ！
+  --- context: 0x8005 -> 0x8007 ---
+  0x008D595A [0x8007] [script:71 13][box:speech]度胸のある奴は、ついてきな！
+  0x00935956 [0x8007] [script:CC 05]みぶCた＊tえスちい衰ぼすうちばッあへそ由せちい火ごがxfひcてむみzむた『いとへ水vび[?3813]水ほ風ぐつ[opt]gめいヲふうゆだy火マ8お[opt]でパべめいち[FF:E1 3D 21]火う。[?4033]ゅてた創いさ…ひに[?3765]cごしぽッコvウめいち？Sづせ[FF:55 2C D4]wぶ[?3544]ばむいせhむど
+  0x0098E96E [0x8007] [script:FB 06][box:speech]残念だが、そこまでだぜ
+  --- context: 0x8007 -> 0x800A ---
+  0x0098E9B2 [0x800A] [script:1E 07][box:speech]ここからは、逃がしゃしねぇよ
+  0x0098E9F8 [0x800A] [script:3E 07][box:speech]逃げろ、ダニー！
+  --- context: 0x800A -> 0x8005 ---
+  0x0098EA38 [0x8005] [script:5B 07][box:speech]でも…
+  --- context: 0x8005 -> 0x8007 ---
+  0x0098EA72 [0x8007] [script:7B 07][box:speech]いいから、行け！
+  --- context: 0x8007 -> 0x8006 ---
+  0x0098EAB6 [0x8006] [script:9C 07][box:speech]ちくしょう！
+  --- context: 0x8006 -> 0x8007 ---
+  0x0098EB16 [0x8007] [script:CE 07][box:speech]おい、放っておきな
+  --- context: 0x8007 -> 0x800A ---
+  0x0098EBA0 [0x800A] [script:13 08][box:speech]これで…[delay:15]よしと
+  0x0098EBF8 [0x800A] [script:4A 08][box:speech]お前が、ガルアーノ様を追って\nきたという、ハンターか
+  0x0098EC50 [0x800A] [script:71 08][box:speech]なるほど、バカっぽい\n顔をしてやがるぜ
+  0x0098EC9E [0x800A] [script:90 08][box:speech]なんだと！？
+  --- context: 0x800A -> 0x8005 ---
+  0x0098ECE0 [0x8005] [script:B3 08][box:speech]おいおい、怒るなよ
+  --- context: 0x8005 -> 0x800A ---
+  0x0098ED22 [0x800A] [script:E3 08][box:speech]監視されているのもわからねぇんじゃ、\nそう言われてもしょうがねぇよなぁ
+  0x0098ED82 [0x800A] [script:00 09][box:speech]！！
+  --- context: 0x800A -> 0x8005 ---
+  0x0098EDBC [0x8005] [script:2C 09][box:speech]ここで、お前らをぶっ殺せば、\n残るはザコばかりだからな
+  --- context: 0x8005 -> 0x800A ---
+  0x0098EE14 [0x800A] [script:57 09][box:speech]これで俺も、ガルアーノ様に\nおぼえがいいってもんよ
+  0x0098EE6E [0x800A] [script:83 09][box:speech]ごちゃごちゃ言ってねぇで、\nかかって来やがれ！
+  --- context: 0x800A -> 0x8006 ---
+  0x0098EEC2 [0x8006] [script:A3 09][box:speech]そう、せかすなよ
+  --- context: 0x8006 -> 0x800A ---
+  0x0098EF9E [0x800A] [script:16 0A][box:speech]こちらも、仲間がそろったことだし、
+  0x0098EFE8 [0x800A] [script:3A 0A][box:speech]お望み通り、始めてやるよ！
+  0x0098FDB8 [0x800A] [script:1C 11][box:speech]くそっ！
+  --- context: 0x800A -> 0x8005 ---
+  0x0098FDF4 [0x8005] [script:47 11][box:speech]奴らは最初から、俺の事に\n気づいていたのか！
+  0x0098FE58 [0x8005] [script:79 11][box:speech]俺が、レジスタンスに近づく\n事を計算していて…
+  0x0098FEB2 [0x8005] [script:9D 11][box:speech]悔やむのは後にしろ！
+  --- context: 0x8005 -> 0x8006 ---
+  0x00990046 [0x8006] [script:6D 12][box:speech]こんなところでグズグズ\nしていられねぇぞ！
+  0x00990096 [0x8006] [script:90 12][box:speech]早くアジトに民らねぇと！
+  0x009900E0 [0x8006] [script:B0 12][box:speech]そうだな
+  --- context: 0x8006 -> 0x8005 ---
+  0x00990220 [0x8005] [script:52 13][box:speech]そろそろ、いいかな
+  --- context: 0x8005 -> 0x8000 ---
+  0x009902C2 [0x8000] [script:A1 13][box:speech]はぁ、はぁ
+  --- context: 0x8000 -> 0x800A ---
+  0x009902FE [0x800A] [script:BF 13][box:speech]はぁ、はぁ
+  --- context: 0x800A -> 0x800F ---
+  0x0099033A [0x800F] [script:DD 13][box:speech]はぁ、はぁ
+  --- context: 0x800F -> 0x800B ---
+  0x0099037A [0x800B] [script:09 14][box:speech]おいおい、そんなに罪れちまって\n戦えるのかい？
+  --- context: 0x800B -> 0x8000 ---
+  0x009903D2 [0x8000] [script:32 14][box:speech]いい気になるなよ！\n[delay:15]…はぁはぁ
+  --- context: 0x8000 -> 0x800B ---
+  0x00990420 [0x800B] [script:55 14][box:speech]我らの調、見せてやるわ！
+  0x009905C6 [0x800B] [script:24 15][box:speech]ふっふっふっ、
+  --- context: 0x800B -> 0x8011 ---
+  0x0099065C [0x8011] [script:73 15][box:speech]なんでもいいから、始めようぜ
+  --- context: 0x8011 -> 0x8000 ---
+  0x009912FE [0x8000] [script:C4 1B][box:speech]なるべく時間をかせぐ、か…
+  0x00991344 [0x8000] [script:E8 1B][box:speech]面倒くせぇこといいやがって…
+  0x0099138C [0x8000] [script:17 1C][box:speech]死にそうになったら、とっとと\n逃げるが…[delay:15]うらむんじゃねぇぞ！
+  0x009913EE [0x8000] [script:3D 1C][box:speech]何をゴチャゴチャ言っておる！
+  --- context: 0x8000 -> 0x8011 ---
+  0x00991456 [0x8011] [script:6D 1C][box:speech]では行くぞ！！
+  0x00991496 [0x8011] [script:8B 1C][box:speech]おうっ！！
+  --- context: 0x8011 -> 0x8000 ---
+  0x00991710 [0x8000] [script:D3 1D][box:speech]これだけ時間をかせげば\n大丈夫だろう
+  --- context: 0x8000 -> 0x8017 ---
+  0x00991766 [0x8017] [script:F8 1D][box:speech]あとは、シュウの仕事だな
+  0x009918DE [0x8017] [script:BA 1E][box:speech]もうかなり戦ったようだし、\nそろそろいいかな…
+  --- context: 0x8017 -> 0x8000 ---
+  0x00991932 [0x8000] [script:E7 1E][box:speech]「うつせみの王」を使えば、\n逃げられるんだったな…
+  0x0099198C [0x8000] [script:16 1F][box:speech]これだけ時間をかせいどきゃ\nシュウの方も大丈夫だろう…
+  0x00991DD4 [0x8000] [script:32 21][box:speech]やったぜ！[opt][delay:15]作戦成功だ！！
+  --- context: 0x8000 -> 0x8006 ---
+  0x00991E20 [0x8006] [script:5D 21][box:speech]今だけが侵入するチャンスだ！\n[delay:15]急げ！！
+  --- context: 0x8006 -> 0x8005 ---
+  0x00991E7A [0x8005] [script:05 80]tむよ
+  0x00A4E370 [0x8005] [script:D8 0A]しばらく近づかないほうがいいな
+  --- context: 0x8005 -> 0x0006 ---
+  0x00A4E3B6 [0x0006] [script:FB 0A]しばらく近づかない方がいいわね
+  0x00A4E3FE [0x0006] [script:1C 0B]チかヅカんホウがイいナ
+  0x00A4E440 [0x0006] [script:3D 0B]ちょこ、ここイヤ！！
+  0x00A4E482 [0x0006] [script:5F 0B]近づかんほうがいいのぉ
+  0x00A4E70A [0x0006] [script:A8 0C][box:speech]落ち合う場所はわかっているな？
+  --- context: 0x0006 -> 0x8005 ---
+  0x00A4E754 [0x8005] [script:C6 0C][box:speech]はいっ！
+  --- context: 0x8005 -> 0x800B ---
+  0x00A4E794 [0x800B] [script:F3 0C][box:speech]いつまでもアークさんたちだけに\n頼ってちゃいけない…
+  --- context: 0x800B -> 0x8005 ---
+  0x00A4E7EA [0x8005] [script:1D 0D][box:speech]俺たちの手で、ロマリアの\n奴らを倒すんだ！
+  0x00A4E842 [0x8005] [script:48 0D][box:speech]敵が気づく前に潜入する！\n急げ！！
+  0x00A935EF [0x8005] [script:78 04]ポだ
+  --- context: 0x8005 -> 0x801F ---
+  0x00B09644 [0x801F] [script:95 04]入れ
+  --- context: 0x801F -> 0x8015 ---
+  0x00B09698 [0x8015] [script:D6 04]パトロール部隊から、怪しい人物が\n長に侵入したとの報告が届いております
+  --- context: 0x8015 -> 0x8016 ---
+  0x00B096FC [0x8016] [script:F6 04]レジスタンスの連著か？
+  --- context: 0x8016 -> 0x8015 ---
+  0x00B0973C [0x8015] [script:30 05]それが定かではありませんので、\n現在[?1161]査させておりまして…、\n正体が判明次第ご報告いたします
+  --- context: 0x8015 -> 0x8016 ---
+  0x00B097B0 [0x8016] [script:68 05]ただ、そのものが兵士に暴行を\n働いたうえで逃走したらしく、\nなんらかの関係はあるものかと…
+  0x00B09820 [0x8016] [script:92 05](ガルアーノを追ってきた\n[opt]賞金稼ぎどもか…？)
+  --- context: 0x8016 -> 0x8015 ---
+  0x00B09874 [0x8015] [script:BF 05]レジスタンスの内情を探るには、\nとりあえずいい材料になる…か
+  0x00B098CE [0x8015] [script:E9 05]見つけ出して監視をつけておけ、\nさとられぬようにな
+  0x00B09922 [0x8015] [script:04 06]はっ！
+  --- context: 0x8015 -> 0x8016 ---
+  0x00B09976 [0x8016] [script:40 06]わざわざ殺されにやって来るのだから、\nつくづく恩かな連著だな
+  --- context: 0x8016 -> 0x8015 ---
+  0x00B09C4C [0x8015] [script:9D 07]ご報告いたします
+  --- context: 0x8015 -> 0x801F ---
+  0x00B09C8E [0x801F] [script:BA 07]なんだ
+  --- context: 0x801F -> 0x8015 ---
+  0x00B09CE2 [0x8015] [script:F9 07]トンネルがレジスタンスに襲撃され、\n何者かが城壁内に侵入しました
+  --- context: 0x8015 -> 0x8016 ---
+  0x00B09D42 [0x8016] [script:1C 08]そのようなものは、ほうっておけばよい
+  --- context: 0x8016 -> 0x8015 ---
+  0x00B09D88 [0x8015] [script:3D 08]ですが、よろしいのですか…？
+  --- context: 0x8015 -> 0x8016 ---
+  0x00B09DCA [0x8016] [script:69 08]案ずるな、どうせガルアーノの\n客人だろう、やつに任せておけ
+  --- context: 0x8016 -> 0x8015 ---
+  0x00B09E22 [0x8015] [script:84 08]はっ
+  --- context: 0x8015 -> 0x8016 ---
+  0x00B09ED8 [0x8016] [script:E4 08]ご心配にはおよびません
+  --- context: 0x8016 -> 0x8015 ---
+  0x00B09F18 [0x8015] [script:11 09]やつらの沮いなど、しょせん\nガルアーノへのかたき討ち程度のもの
+  0x00B09FF4 [0x8015] [script:71 09]承知しております
+  0x00B0A314 [0x8015] [script:FF 0A]大変です！
+  --- context: 0x8015 -> 0x8016 ---
+  0x00B0A352 [0x8016] [script:25 0B]ガ、ガルアーノ将軍が討たれました！
+  0x00B0A39A [0x8016] [script:46 0B]で、アークたちの動向は？
+  --- context: 0x8016 -> 0x8015 ---
+  0x00B0A3DC [0x8015] [script:69 0B]城の外へ逃走しはじめています
+  --- context: 0x8015 -> 0x8016 ---
+  0x00B0A422 [0x8016] [script:8C 0B]今、兵士に追わせておりますが
+  0x00B0A468 [0x8016] [script:AE 0B]そうか、わかった、下がってよい
+  --- context: 0x8016 -> 0x8015 ---
+  0x00B0A4AC [0x8015] [script:C9 0B]はっ…
+  --- context: 0x8015 -> 0x8016 ---
+  0x00B0A57A [0x8016] [script:3D 0C]ですが、ガルアーノの代りなど、\nいくらでもおります
+  --- context: 0x8016 -> 0x8015 ---
+  0x00B0A5CA [0x8015] [script:75 0C]われわれほどの調をもってすれば、\nアークなど、すぐにでも葬れましょう？\nご心配の必要などないかと…
+  0x00B0A68E [0x8015] [script:BE 0C]それは、どのような…？
+  0x00B0A718 [0x8015] [script:00 0D]…御意
+  0x00B0A86E [0x8015] [script:BC 0D]ガイデルめ、自分が利用されている\nとも知らず、いい気なものだ
+  0x00B0A8C8 [0x8015] [script:E9 0D]しょせん、みずから滅びの道を歩む、\n恩かな生き物でしかないな
+  0x00B0A93C [0x8015] [script:14 0E]ご報告します
+  --- context: 0x8015 -> 0x8016 ---
+  0x00B0A978 [0x8016] [script:38 0E]アークたちがクズ鉄の長に現れました
+  0x00B0A9C0 [0x8016] [script:64 0E]さっそく、長に迎えを出してやれ、\n丁重におもてなししろよ
+  --- context: 0x8016 -> 0x8015 ---
+  0x00B0AA18 [0x8015] [script:7F 0E]はっ！
+  --- context: 0x8015 -> 0x8016 ---
+  0x00B0AAB8 [0x8016] [script:CF 0E]はっ！
+  --- context: 0x8016 -> 0x8015 ---
+  0x00B0AAEE [0x8015] [script:FB 0E]アークのことです、素直に\nまっすぐこちらへ向かってくるでしょう
+  0x00B0AB7A [0x8015] [script:44 0F]アンデルから送られた貝のエネルギーは\nすでに空著城へと送っております
+  0x00B0AC66 [0x8015] [script:AE 0F]ガイデルならば必ずやりとげるでしょう
+  0x00B0ACDE [0x8015] [script:E3 0F]御意
+  0x00B0AD5C [0x8015] [script:2B 10]いよいよだ、この世界が我らのものとなる
+  0x00B0ADA6 [0x8015] [script:48 10]フフフフフフ…
+  0x00B0AECA [0x8015] [script:DB 10]ご報告します
+  --- context: 0x8015 -> 0x8016 ---
+  0x00B0AF06 [0x8016] [script:FF 10]アークたちがレジスタンスと接触しました
+  0x00B0AF4E [0x8016] [script:28 11]ゴミどもがいくら集まった\nところで、役になど立たん
+  --- context: 0x8016 -> 0x8015 ---
+  0x00B0AFA0 [0x8015] [script:4B 11]さっさとそのゴミ共マ始木しろ
+  0x00B0AFE6 [0x8015] [script:66 11]はっ！
+  --- context: 0x8015 -> 0x8016 ---
+  0x00B0B03A [0x8016] [script:98 11]アークよ、苦しめ、そしてあがくのだ
+  --- context: 0x8016 -> 0x8015 ---
+  0x00B0B080 [0x8015] [script:BC 11]お前などに、我らの邪魔はさせん！！
+  0x00B0B1F4 [0x8015] [script:76 12]あとは、引き金を引かせるだけですな
+  0x00B0B274 [0x8015] [script:B3 12]はい、ご心配めされぬよう…
+  0x00B0B316 [0x8015] [script:08 13]アークたちが、城壁に向かっております！
+  --- context: 0x8015 -> 0x8016 ---
+  0x00B0B360 [0x8016] [script:36 13]すべての兵を使ってかまわん、\n総調をあげて、奴らを叩きつぶすのだ
+  --- context: 0x8016 -> 0x8015 ---
+  0x00B0B3BC [0x8015] [script:51 13]はっ！
+  --- context: 0x8015 -> 0x8016 ---
+  0x00B0B514 [0x8016] [script:00 14]ご報告します
+  0x00B0B550 [0x8016] [script:1C 14]なんだ？
+  --- context: 0x8016 -> 0x8015 ---
+  0x00B0B588 [0x8015] [script:49 14]レジスタンスが城壁内に進入、\n市街地へと向かっています！
+  --- context: 0x8015 -> 0x8016 ---
+  0x00B0B5E2 [0x8016] [script:72 14]そんな奴らなど、さっさと\n片づけてしまえばよかろう！
+  --- context: 0x8016 -> 0x8015 ---
+  0x00B0B634 [0x8015] [script:9F 14]しかし、ほとんどの兵は、アークの\n迎撃に向かっておりますので…
+  --- context: 0x8015 -> 0x8016 ---
+  0x00B0B68E [0x8016] [script:CA 14]ククク、アークめ・[delay:07]・[delay:07]・[delay:0D]楽しませてくれる
+  --- context: 0x8016 -> 0x8015 ---
+  0x00B0B6E8 [0x8015] [script:EF 14]戦闘を著昕し、退却させろ
+  0x00B0B72E [0x8015] [script:16 15]しかし、それではアークたちが\n城壁の著に…
+  --- context: 0x8015 -> 0x8016 ---
+  0x00B0B77C [0x8016] [script:3E 15]かまわん、レジスタンス\nともども始木してやるわ
