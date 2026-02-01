@@ -7,6 +7,8 @@ Usage:
     python decode_text.py <file> --scan            # find and decode all text strings
     python decode_text.py <file> --find "ますか"    # find strings containing a pattern
     python decode_text.py <file> --scan --prefix 2  # STG files: skip 2-byte event script prefix
+    python decode_text.py <file> --stg             # STG template-driven dialogue extraction
+    python decode_text.py <file> --stg --find "エルク"  # STG extraction filtered by text
 """
 
 import argparse
@@ -193,6 +195,153 @@ def hex_dump(data, offset, length, cols=16):
         hex_part = " ".join(f"{b:02X}" for b in chunk)
         lines.append(f"  {addr:08X}  {hex_part}")
     return "\n".join(lines)
+
+
+# === STG Template-Driven Extraction ===
+
+TEMPLATE_SIG = b'\x23\x01\xF0\x8B'
+TEMPLATE_SIZE = 48
+
+
+def _find_templates(data):
+    """Find all 48-byte event script template blocks in STG data.
+
+    Returns list of (offset, context_opcode, ptr_a, ptr_b, ptr_c) tuples.
+    """
+    templates = []
+    pos = 0
+    while True:
+        idx = data.find(TEMPLATE_SIG, pos)
+        if idx == -1:
+            break
+        if idx + TEMPLATE_SIZE <= len(data):
+            opcode = int.from_bytes(data[idx + 4:idx + 6], 'little')
+            ptr_a = int.from_bytes(data[idx + 14:idx + 16], 'little')
+            ptr_b = int.from_bytes(data[idx + 30:idx + 32], 'little')
+            ptr_c = int.from_bytes(data[idx + 36:idx + 38], 'little')
+            templates.append((idx, opcode, ptr_a, ptr_b, ptr_c))
+        pos = idx + 1
+    return templates
+
+
+def _find_dialogue_in_gap(data, gap_start, gap_end, expected_prefix_bytes,
+                          decode_table):
+    """Search for a dialogue string in the gap between two templates.
+
+    Returns (dialogue_offset, script_prefix_value, text, bytes_consumed)
+    or None if no dialogue found.
+    """
+    gap_size = gap_end - gap_start
+
+    # Bare gap: only prefix bytes or nothing, no actual dialogue
+    if gap_size <= 2:
+        return None
+
+    # Primary: search for the expected 2-byte prefix in the gap
+    gap_data = data[gap_start:gap_end]
+    prefix_pos = gap_data.find(expected_prefix_bytes)
+    if prefix_pos != -1:
+        abs_offset = gap_start + prefix_pos
+        text, consumed = decode_string(data, abs_offset, decode_table, prefix=2)
+        # Validate there's actual text content
+        stripped = text
+        for tag in ("[box:system]", "[box:close]", "[box:speech]",
+                    "[box:narration]", "[cursor]", "\n", "[opt]"):
+            stripped = stripped.replace(tag, "")
+        stripped = re.sub(r"\[script:.*?\]", "", stripped)
+        stripped = re.sub(r"\[.*?\]", "", stripped)
+        if len(stripped) >= 1:
+            prefix_val = int.from_bytes(expected_prefix_bytes, 'little')
+            return (abs_offset, prefix_val, text, consumed)
+
+    # Fallback: walk forward looking for a null byte (end of previous string),
+    # then try decoding from there + 1 with 2-byte prefix
+    scan_pos = gap_start
+    while scan_pos < gap_end - 3:
+        if data[scan_pos] == 0x00:
+            candidate = scan_pos + 1
+            if candidate + 2 < gap_end:
+                text, consumed = decode_string(data, candidate, decode_table,
+                                               prefix=2)
+                stripped = text
+                for tag in ("[box:system]", "[box:close]", "[box:speech]",
+                            "[box:narration]", "[cursor]", "\n", "[opt]"):
+                    stripped = stripped.replace(tag, "")
+                stripped = re.sub(r"\[script:.*?\]", "", stripped)
+                stripped = re.sub(r"\[.*?\]", "", stripped)
+                if len(stripped) >= MIN_TEXT_RUN:
+                    prefix_val = int.from_bytes(data[candidate:candidate + 2],
+                                                'little')
+                    return (candidate, prefix_val, text, consumed)
+        scan_pos += 1
+
+    return None
+
+
+def scan_stg(data, decode_table):
+    """Template-driven dialogue extraction for STG files.
+
+    Returns (dialogues, templates, stats) where:
+      dialogues = [(offset, consumed, text, context_opcode), ...]
+      templates = [(offset, opcode, ptr_a, ptr_b, ptr_c), ...]
+      stats = {'total_templates': N, 'found': N, 'missed': N, 'bare': N}
+    """
+    templates = _find_templates(data)
+    dialogues = []
+    stats = {'total_templates': len(templates), 'found': 0, 'missed': 0,
+             'bare': 0}
+
+    if not templates:
+        return dialogues, templates, stats
+
+    # --- First dialogue: search backward from first template ---
+    first_tmpl = templates[0]
+    expected_prefix_val = first_tmpl[2] - 0x10  # ptr_a - 0x10
+    expected_prefix_bytes = expected_prefix_val.to_bytes(2, 'little')
+    search_start = max(0, first_tmpl[0] - 4096)
+    search_end = first_tmpl[0]
+
+    gap_data = data[search_start:search_end]
+    prefix_pos = gap_data.find(expected_prefix_bytes)
+    if prefix_pos != -1:
+        abs_offset = search_start + prefix_pos
+        text, consumed = decode_string(data, abs_offset, decode_table, prefix=2)
+        stripped = text
+        for tag in ("[box:system]", "[box:close]", "[box:speech]",
+                    "[box:narration]", "[cursor]", "\n", "[opt]"):
+            stripped = stripped.replace(tag, "")
+        stripped = re.sub(r"\[script:.*?\]", "", stripped)
+        stripped = re.sub(r"\[.*?\]", "", stripped)
+        if len(stripped) >= 1:
+            dialogues.append((abs_offset, consumed, text, first_tmpl[1]))
+            stats['found'] += 1
+
+    # --- Loop through consecutive template pairs ---
+    for i in range(len(templates) - 1):
+        tmpl_cur = templates[i]
+        tmpl_next = templates[i + 1]
+
+        gap_start = tmpl_cur[0] + TEMPLATE_SIZE
+        gap_end = tmpl_next[0]
+
+        # Compute expected prefix from next template's ptr_a
+        expected_val = tmpl_next[2] - 0x10  # ptr_a - 0x10
+        if expected_val < 0:
+            expected_val = 0
+        expected_bytes = expected_val.to_bytes(2, 'little')
+
+        result = _find_dialogue_in_gap(data, gap_start, gap_end,
+                                       expected_bytes, decode_table)
+        if result is not None:
+            offset, prefix_val, text, consumed = result
+            dialogues.append((offset, consumed, text, tmpl_cur[1]))
+            stats['found'] += 1
+        elif gap_end - gap_start <= 2:
+            stats['bare'] += 1
+        else:
+            stats['missed'] += 1
+
+    return dialogues, templates, stats
 
 
 def scan_file(data, decode_table, prefix=0):
@@ -382,6 +531,8 @@ def main():
                         help="Byte offset to decode (hex with 0x prefix or decimal)")
     parser.add_argument("--scan", action="store_true",
                         help="Scan file for all text strings")
+    parser.add_argument("--stg", action="store_true",
+                        help="Template-driven dialogue extraction for STG files")
     parser.add_argument("--find", metavar="TEXT",
                         help="Find strings containing the given text")
     parser.add_argument("--prefix", type=int, default=0, metavar="N",
@@ -389,12 +540,15 @@ def main():
                              "control bytes (shown as [script:XX ...] tag)")
     args = parser.parse_args()
 
+    if args.scan and args.stg:
+        parser.error("--scan and --stg are mutually exclusive")
+
     if not os.path.exists(args.file):
         print(f"Error: file not found: {args.file}", file=sys.stderr)
         sys.exit(1)
 
-    if not args.scan and not args.find and args.offset is None:
-        parser.error("Provide an offset, --scan, or --find")
+    if not args.scan and not args.stg and not args.find and args.offset is None:
+        parser.error("Provide an offset, --scan, --stg, or --find")
 
     # Load character table
     decode_table = build_decode_table()
@@ -423,6 +577,36 @@ def main():
             # Show compact single-line form for short strings
             display = text.replace("\n", "\\n")
             print(f"  0x{offset:08X} [{consumed:4d}] {display}")
+        return
+
+    # Mode 2b: STG template-driven extraction
+    if args.stg:
+        dialogues, templates, stats = scan_stg(data, decode_table)
+        basename = os.path.basename(args.file)
+
+        if not templates:
+            print(f"No templates found in {basename}")
+            return
+
+        # Filter by --find if specified
+        if args.find:
+            dialogues = [d for d in dialogues if args.find in d[2]]
+
+        print(f"Found {stats['found']} dialogues across "
+              f"{stats['total_templates']} templates in {basename} "
+              f"({stats['bare']} bare gaps, {stats['missed']} missed)")
+        print()
+
+        prev_opcode = None
+        for offset, consumed, text, context_opcode in dialogues:
+            # Show context change separator
+            if prev_opcode is not None and context_opcode != prev_opcode:
+                print(f"  --- context: 0x{prev_opcode:04X} -> "
+                      f"0x{context_opcode:04X} ---")
+            prev_opcode = context_opcode
+
+            display = text.replace("\n", "\\n")
+            print(f"  0x{offset:08X} [0x{context_opcode:04X}] {display}")
         return
 
     # Mode 3: Find

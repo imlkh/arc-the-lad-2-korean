@@ -461,5 +461,7 @@ The executable also contains Shift-JIS-to-charID mapping tables at file offset `
   - `python decode_text.py <file> --scan` -- find and decode all text strings
   - `python decode_text.py <file> --find "ますか"` -- find strings containing a pattern
   - `python decode_text.py <file> --scan --prefix 2` -- STG files: mark 2-byte event script prefix
+  - `python decode_text.py <file> --stg` -- STG template-driven dialogue extraction (auto prefix)
+  - `python decode_text.py <file> --stg --find "エルク"` -- STG extraction filtered by text
 - `python/view_char.py` -- View individual font cells with bitplane separation
 - `COMM_IMG_chars.md` -- Complete character-to-cell mapping table
