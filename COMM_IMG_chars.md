@@ -2,16 +2,16 @@
 
 Total: 441 cells × 4 bitplanes = 1,764 character slots
 
-Characters marked with `?` are uncertain due to 11×11 pixel resolution.
+Characters marked with `?` are uncertain due to 12×12 pixel cell resolution (11×11 glyph).
 
 ### Byte Position Reference
 
 - **Pixel (x,y)**: Top-left pixel coordinate of the cell in the 256×256 font area
 - **Byte Offset**: Starting byte offset in `COMM.IMG` (first byte of the cell's first row)
 - **Row stride**: 896 bytes — to read the next pixel row of the same cell, add 896 to the offset
-- **Cell size**: 11×11 pixels = 6 bytes/row × 11 rows (except cell 440: 16×16 = 8 bytes/row × 16 rows)
+- **Cell size**: 12×12 pixels (11×11 glyph + 1px right/bottom margin) = 6 bytes/row × 12 rows (except cell 440: 16×16 = 8 bytes/row × 16 rows)
 - **4bpp encoding**: 2 pixels per byte — low nibble (`& 0x0F`) = left pixel, high nibble (`>> 4`) = right pixel
-- **Formula**: `byte_offset = row * 12 * 896 + col * 6`
+- **Formula**: `byte_offset = row * 12 * 896 + col * 6` (row stride = 12 scanlines per cell)
 
 ## Row 0: Hiragana (Cells 0-20)
 
@@ -211,7 +211,7 @@ Characters marked with `?` are uncertain due to 11×11 pixel resolution.
 | 156 | 7 | 9 |    (108,84) |       75318 | 君 | 群 | 訓 | 軍 |
 | 157 | 7 | 10 |    (120,84) |       75324 | 係 | 型 | 形 | 景 |
 | 158 | 7 | 11 |    (132,84) |       75330 | 系 | 径 | 計 | 刑 |
-| 159 | 7 | 12 |    (144,84) |       75336 | 誓 | 恵 | 軽 | 携 |
+| 159 | 7 | 12 |    (144,84) |       75336 | 警 | 恵 | 軽 | 携 |
 | 160 | 7 | 13 |    (156,84) |       75342 | 芸 | 劇 | 撃 | 激 |
 | 161 | 7 | 14 |    (168,84) |       75348 | 決 | 結 | 欠 | 穴 |
 | 162 | 7 | 15 |    (180,84) |       75354 | 件 | 剣 | 建 | 華? |
@@ -252,26 +252,26 @@ Characters marked with `?` are uncertain due to 11×11 pixel resolution.
 | Cell | Row | Col | Pixel (x,y) | Byte Offset | Bit0 | Bit1 | Bit2 | Bit3 |
 |------|-----|-----|-------------|-------------|------|------|------|------|
 | 189 | 9 | 0 |     (0,108) |       96768 | 彩 | 採 | 砦 | 際 |
-| 190 | 9 | 1 |    (12,108) |       96774 | 在 | 材 | 財 | 剤? |
+| 190 | 9 | 1 |    (12,108) |       96774 | 在 | 材 | 財 | 剤 |
 | 191 | 9 | 2 |    (24,108) |       96780 | 坂 | 崎 | 作 | 昨 |
-| 192 | 9 | 3 |    (36,108) |       96786 | 索 | 錯 | 業? | 冊 |
-| 193 | 9 | 4 |    (48,108) |       96792 | 桜 | 酒 | 棄? | 札 |
-| 194 | 9 | 5 |    (60,108) |       96798 | 殺 | 雑 | 三 | 様 |
-| 195 | 9 | 6 |    (72,108) |       96804 | 寂 | 沢 | 酸 | 参 |
-| 196 | 9 | 7 |    (84,108) |       96810 | 山 | 散 | 残 | 産 |
-| 197 | 9 | 8 |    (96,108) |       96816 | 算 | 斬 | 四 | 仕 |
-| 198 | 9 | 9 |   (108,108) |       96822 | 司 | 使 | 市 | 士 |
-| 199 | 9 | 10 |   (120,108) |       96828 | 志 | 始 | 支 | 師 |
-| 200 | 9 | 11 |   (132,108) |       96834 | 思 | 至 | 獅 | 施 |
-| 201 | 9 | 12 |   (144,108) |       96840 | 止 | 死 | 試 | 私 |
-| 202 | 9 | 13 |   (156,108) |       96846 | 詩 | 視? | 糸 | 飼 |
-| 203 | 9 | 14 |   (168,108) |       96852 | 史 | 枝 | 字 | 脂 |
-| 204 | 9 | 15 |   (180,108) |       96858 | 資 | 滋 | 時 | 事 |
-| 205 | 9 | 16 |   (192,108) |       96864 | 辞 | 持 | 自 | 次 |
-| 206 | 9 | 17 |   (204,108) |       96870 | 治 | 示 | 数? | 慈 |
-| 207 | 9 | 18 |   (216,108) |       96876 | 式 | 鹿 | 七 | 識 |
-| 208 | 9 | 19 |   (228,108) |       96882 | 範? | 下 | 質? | 失 |
-| 209 | 9 | 20 |   (240,108) |       96888 | 疾 | 室 | 実? | 湿 |
+| 192 | 9 | 3 |    (36,108) |       96786 | 索 | 錯 | 策 | 冊 |
+| 193 | 9 | 4 |    (48,108) |       96792 | 桜 | 酒 | 察 | 札 |
+| 194 | 9 | 5 |    (60,108) |       96798 | 殺 | 雑 | 悟 | 様 |
+| 195 | 9 | 6 |    (72,108) |       96804 | 寂 | 沢 | 三 | 参 |
+| 196 | 9 | 7 |    (84,108) |       96810 | 山 | 散 | 酸 | 産 |
+| 197 | 9 | 8 |    (96,108) |       96816 | 算 | 斬 | 残 | 仕 |
+| 198 | 9 | 9 |   (108,108) |       96822 | 司 | 使 | 四 | 士 |
+| 199 | 9 | 10 |   (120,108) |       96828 | 志 | 始 | 市 | 師 |
+| 200 | 9 | 11 |   (132,108) |       96834 | 思 | 至 | 支 | 施 |
+| 201 | 9 | 12 |   (144,108) |       96840 | 止 | 死 | 獅 | 私 |
+| 202 | 9 | 13 |   (156,108) |       96846 | 詩 | 視? | 試 | 飼 |
+| 203 | 9 | 14 |   (168,108) |       96852 | 史 | 枝 | 糸 | 脂 |
+| 204 | 9 | 15 |   (180,108) |       96858 | 資 | 滋 | 字 | 事 |
+| 205 | 9 | 16 |   (192,108) |       96864 | 辞 | 持 | 時 | 次 |
+| 206 | 9 | 17 |   (204,108) |       96870 | 治 | 示 | 自 | 慈 |
+| 207 | 9 | 18 |   (216,108) |       96876 | 式 | 鹿 | 數? | 識 |
+| 208 | 9 | 19 |   (228,108) |       96882 | 爺 | 下 | 七 | 失 |
+| 209 | 9 | 20 |   (240,108) |       96888 | 疾 | 室 | 質 | 湿 |
 
 ## Row 10 (Cells 210-230)
 
@@ -571,4 +571,4 @@ Characters marked with `?` are uncertain due to 11×11 pixel resolution.
 - **UI elements**: +1 through +9, SS, cursor icon (cells 420-440, identical across bitplanes)
 - **Blank slots**: ~61
 
-Characters marked with `?` are uncertain due to the 11x11 pixel resolution making visually similar kanji hard to distinguish. Characters marked as bare `?` (without a kanji guess) are confirmed non-empty by pixel extraction but could not be identified.
+Characters marked with `?` are uncertain due to the 12x12 pixel cell resolution (11x11 glyph) making visually similar kanji hard to distinguish. Characters marked as bare `?` (without a kanji guess) are confirmed non-empty by pixel extraction but could not be identified.

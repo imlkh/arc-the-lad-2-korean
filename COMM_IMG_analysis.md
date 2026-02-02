@@ -40,11 +40,10 @@ The top-left 256×256 pixel area (128 bytes wide × 256 rows) of the 4bpp region
 | Property | Value |
 |----------|-------|
 | Grid size | 21 columns × 21 rows = **441 cells** |
-| Cell size | 11×11 pixels |
-| Padding | 1 pixel between cells (horizontal and vertical) |
-| Used area | 21×11 + 20×1 = **251 pixels** per axis |
-| Margin | 5 pixels unused at right and bottom edges |
-| Last cell (row 20, col 20) | **16×16 pixels** — extends into the 5px margin (icon) |
+| Cell size | 12×12 pixels (11×11 glyph + 1px right/bottom margin) |
+| Used area | 21×12 = **252 pixels** per axis |
+| Remaining | 4 pixels unused at right and bottom edges |
+| Last cell (row 20, col 20) | **16×16 pixels** — extends into the 4px margin (icon) |
 
 ### Bitplane Encoding (4 characters per cell)
 
@@ -96,8 +95,7 @@ from PIL import Image
 
 data = open('COMM.IMG', 'rb').read()
 row_width = 896
-char_w, char_h = 11, 11
-pad = 1
+char_w, char_h = 12, 12  # 12x12 cell (11x11 glyph + 1px margin)
 grid_cols, grid_rows = 21, 21
 
 # Build 256x256 index map
@@ -114,8 +112,8 @@ for bit in range(4):
     mask = 1 << bit
     for cell in range(441):
         grow, gcol = cell // grid_cols, cell % grid_cols
-        x0 = gcol * (char_w + pad)
-        y0 = grow * (char_h + pad)
+        x0 = gcol * char_w
+        y0 = grow * char_h
 
         # Last cell is 16x16 (extends into margin)
         if grow == 20 and gcol == 20:
@@ -178,7 +176,7 @@ To translate fonts from Japanese to Korean:
 
 ### Key constraint
 
-Each group of 4 characters shares the same 11×11 cell. Where two or more characters in the same group have a pixel at the same position, the indices combine via bitwise OR. This means characters within the same cell group can overlap — the PS1 CLUT ensures only one is visible at a time.
+Each group of 4 characters shares the same 12×12 cell (11×11 glyph area + 1px margin). Where two or more characters in the same group have a pixel at the same position, the indices combine via bitwise OR. This means characters within the same cell group can overlap — the PS1 CLUT ensures only one is visible at a time.
 
 ### Other files relevant to translation
 

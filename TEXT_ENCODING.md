@@ -4,15 +4,14 @@ This document describes how Arc the Lad 2 (PS1) encodes in-game dialogue and men
 
 ## Font Layout in COMM.IMG
 
-The font occupies a 256x256 pixel region in the top-left of `COMM.IMG`, organized as a 21x21 grid of 11x11 pixel cells with 12-pixel stride (11px + 1px padding).
+The font occupies a 256x256 pixel region in the top-left of `COMM.IMG`, organized as a 21x21 grid of 12x12 pixel cells (11x11 glyph + 1px right/bottom margin).
 
 Each cell contains **4 characters overlaid** across 4 bitplanes of the 4bpp pixel data. At runtime, the PS1 GPU's CLUT (Color Look-Up Table) selects which bitplane is visible, allowing 4 characters to share one cell.
 
 | Property | Value |
 |---|---|
 | Grid size | 21 columns x 21 rows = 441 cells |
-| Cell size | 11x11 pixels (cell 440 is 16x16) |
-| Cell stride | 12 pixels |
+| Cell size | 12x12 pixels: 11x11 glyph + 1px margin (cell 440 is 16x16) |
 | Bitplanes per cell | 4 |
 | Total character slots | 441 x 4 = 1,764 |
 | Non-empty characters | ~1,704 |
@@ -149,7 +148,7 @@ Handler address: `0x80151A74` → calls subroutine at `0x80151D70`.
 
 #### Cursor Glyph (Cell 440)
 
-The cursor icon is stored in cell 440 (row 20, col 20) of the COMM.IMG font grid at 16x16 pixels (larger than the standard 11x11 cells). It is identical across all 4 bitplanes.
+The cursor icon is stored in cell 440 (row 20, col 20) of the COMM.IMG font grid at 16x16 pixels (larger than the standard 12x12 cells). It is identical across all 4 bitplanes.
 
 The cursor is **not referenced by charID in text data**. Instead, the dialogue box system renders it automatically as a UI overlay when:
 
@@ -423,11 +422,11 @@ When the context opcode changes between consecutive template blocks, there are t
 
 ### SDIC.BIN (System Dialogue Controller)
 
-Loaded at RAM `0x80026000`. Renders text windows using the COMM.IMG 11x11 font.
+Loaded at RAM `0x80026000`. Renders text windows using the COMM.IMG 12x12 font cells (11x11 glyph + 1px margin).
 
 | File Offset | RAM Address | Function |
 |---|---|---|
-| 0x1E90 | 0x80027E90 | `render_char(y, x, 11, 11, charID, color)` |
+| 0x1E90 | 0x80027E90 | `render_char(y, x, 12, 12, charID, color)` |
 | 0x2078 | 0x80028078 | `render_string()` -- loops through text bytes |
 | 0x3B18 | 0x80029B18 | `lookup_text(entry_id)` -- resolves text pointer |
 | 0x3C18 | 0x80029C18 | `render_dict_entry(id, x, y)` -- renders full entry |
