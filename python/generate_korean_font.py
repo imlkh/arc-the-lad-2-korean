@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """
-Generate 11x11 bitmap font images for Korean Hangul syllables.
+Generate bitmap font images for Korean Hangul syllables.
 
-Renders Hangul characters (U+AC00-U+D7A3) using Galmuri9, a Korean pixel
-font optimized for small sizes. At 10pt the glyphs are 9x9 pixels,
-centered in 11x11 with 1px padding for clean separation.
-Output is 1-bit bitmaps compatible with the COMM.IMG bitplane format.
+Renders Hangul characters (U+AC00-U+D7A3) using Korean pixel fonts.
+FONT_SIZE is auto-derived from PIXEL_SIZE to ensure pixel-perfect rendering.
+Output is 1-bit bitmaps compatible with the COMM.IMG 12x12 cell format
+(11x11 glyph + 1px margin).
 """
 
 import os
@@ -20,7 +20,7 @@ THRESHOLD = 128  # Clean threshold for pixel font (no anti-aliasing)
 font_type = "GalmuriMono11" # good
 # font_type = "Galmuri11-bold"
 # font_type = "ONE(Ed.) Galmuri11 Regular"
-# font_type = "소야곧은10"
+# font_type = "soya_godun10"
 match font_type:
     case "Galmuri9":
         FONT_PATH = "/Users/kyounghun/Library/Fonts/Galmuri9.ttf"
@@ -46,8 +46,8 @@ match font_type:
         FONT_PATH = "/Users/kyounghun/Library/Fonts/ONE(Ed.) Galmuri11 Regular.ttf"
         PIXEL_SIZE = 11
         CHAR_SIZE = 11
-    case "소야곧은10":
-        FONT_PATH = "/Users/kyounghun/Library/Fonts/소야곧은10.ttf"
+    case "soya_godun10":
+        FONT_PATH = "/Users/kyounghun/Library/Fonts/soya_godun10.ttf"
         PIXEL_SIZE = 10
         CHAR_SIZE = 10
 
