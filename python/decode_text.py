@@ -201,6 +201,8 @@ def hex_dump(data, offset, length, cols=16):
 
 TEMPLATE_SIG = b'\x23\x01\xF0\x8B'
 TEMPLATE_SIZE = 48
+PREAMBLE_OPCODE = b'\x28\x01\x07\x00'
+PREAMBLE_BLOCK_SIZE = 10
 
 
 def _find_templates(data):
@@ -224,6 +226,57 @@ def _find_templates(data):
     return templates
 
 
+def _find_preamble_ranges(data, start, end):
+    """Find all preamble block regions in data[start:end].
+
+    Preamble blocks are 10-byte event script instructions starting with
+    ``28 01 07 00``.  They appear at context transitions (often in chains
+    of 2-12+ consecutive blocks) and their bytes happen to decode to the
+    nonsense hiragana "りあき" (0x28=り 0x01=あ 0x07=き).
+
+    Each 10-byte block layout:
+        +0   28 01       Fixed opcode
+        +2   07 00       Fixed parameter
+        +4   XX XX       Flags (00 00 or 01 00)
+        +6   YY ZZ       Context group
+        +8   [PP QQ]     Pointer (varies)
+
+    Returns a sorted list of (range_start, range_end) tuples covering all
+    preamble bytes.  Adjacent/overlapping ranges are merged.
+    """
+    positions = []
+    pos = start
+    while pos <= end - 4:
+        idx = data.find(PREAMBLE_OPCODE, pos, end)
+        if idx == -1:
+            break
+        positions.append(idx)
+        pos = idx + 4  # advance past this match
+    if not positions:
+        return []
+
+    # Build ranges: each 28 01 07 00 marks a 10-byte block
+    ranges = []
+    for p in positions:
+        block_end = min(p + PREAMBLE_BLOCK_SIZE, end)
+        if ranges and p <= ranges[-1][1]:
+            # Merge with previous range
+            ranges[-1] = (ranges[-1][0], max(ranges[-1][1], block_end))
+        else:
+            ranges.append((p, block_end))
+    return ranges
+
+
+def _overlaps_preamble(start, end, preamble_ranges):
+    """Check if byte range [start, end) overlaps any preamble range."""
+    for ps, pe in preamble_ranges:
+        if start < pe and end > ps:
+            return True
+        if ps >= end:
+            break
+    return False
+
+
 def _find_dialogue_in_gap(data, gap_start, gap_end, expected_prefix_bytes,
                           decode_table):
     """Search for a dialogue string in the gap between two templates.
@@ -231,16 +284,30 @@ def _find_dialogue_in_gap(data, gap_start, gap_end, expected_prefix_bytes,
     Returns (dialogue_offset, script_prefix_value, text, bytes_consumed)
     or None if no dialogue found.
     """
+    # Trim trailing preamble blocks (scan backward in 10-byte steps).
+    while (gap_end - gap_start >= PREAMBLE_BLOCK_SIZE
+           and data[gap_end - PREAMBLE_BLOCK_SIZE
+                     :gap_end - PREAMBLE_BLOCK_SIZE + 4] == PREAMBLE_OPCODE):
+        gap_end -= PREAMBLE_BLOCK_SIZE
+
     gap_size = gap_end - gap_start
 
     # Bare gap: only prefix bytes or nothing, no actual dialogue
     if gap_size <= 2:
         return None
 
+    # Build preamble exclusion zones for any remaining 28 01 07 00 blocks
+    # that sit in the middle of the gap (e.g. context-transition script data
+    # that precedes real dialogue strings).
+    preamble_ranges = _find_preamble_ranges(data, gap_start, gap_end)
+
     # Primary: search for the expected 2-byte prefix in the gap
     gap_data = data[gap_start:gap_end]
-    prefix_pos = gap_data.find(expected_prefix_bytes)
-    if prefix_pos != -1:
+    search_from = 0
+    while search_from < len(gap_data):
+        prefix_pos = gap_data.find(expected_prefix_bytes, search_from)
+        if prefix_pos == -1:
+            break
         abs_offset = gap_start + prefix_pos
         text, consumed = decode_string(data, abs_offset, decode_table, prefix=2)
         # Validate there's actual text content
@@ -250,9 +317,16 @@ def _find_dialogue_in_gap(data, gap_start, gap_end, expected_prefix_bytes,
             stripped = stripped.replace(tag, "")
         stripped = re.sub(r"\[script:.*?\]", "", stripped)
         stripped = re.sub(r"\[.*?\]", "", stripped)
-        if len(stripped) >= 1:
+        # Reject if text bytes overlap with a preamble block
+        text_start = abs_offset + 2  # after 2-byte script prefix
+        text_end = abs_offset + consumed
+        if (len(stripped) >= 1
+                and not _overlaps_preamble(text_start, text_end,
+                                           preamble_ranges)):
             prefix_val = int.from_bytes(expected_prefix_bytes, 'little')
             return (abs_offset, prefix_val, text, consumed)
+        # Try the next occurrence of the prefix in the gap
+        search_from = prefix_pos + 1
 
     # Fallback: walk forward looking for a null byte (end of previous string),
     # then try decoding from there + 1 with 2-byte prefix
@@ -269,7 +343,11 @@ def _find_dialogue_in_gap(data, gap_start, gap_end, expected_prefix_bytes,
                     stripped = stripped.replace(tag, "")
                 stripped = re.sub(r"\[script:.*?\]", "", stripped)
                 stripped = re.sub(r"\[.*?\]", "", stripped)
-                if len(stripped) >= MIN_TEXT_RUN:
+                text_start = candidate + 2
+                text_end = candidate + consumed
+                if (len(stripped) >= MIN_TEXT_RUN
+                        and not _overlaps_preamble(text_start, text_end,
+                                                   preamble_ranges)):
                     prefix_val = int.from_bytes(data[candidate:candidate + 2],
                                                 'little')
                     return (candidate, prefix_val, text, consumed)

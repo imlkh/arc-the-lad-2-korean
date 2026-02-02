@@ -12,18 +12,18 @@
   --- context: 0xFFFE -> 0x8008 ---
   0x0015F2BE [0x8008] [script:D0 19]バなれちテデイちすすゾたロヌモぅ[opt]だぅるEと
   --- context: 0x8008 -> 0xFFFE ---
-  0x002F1B88 [0xFFFE] [script:FC 19]りあき
-  0x002F1BE2 [0xFFFE] [script:29 1A]りあき
-  0x002F1C3E [0xFFFE] [script:57 1A]りあき
-  0x002F1C98 [0xFFFE] [script:84 1A]りあき
-  0x002F1CF0 [0xFFFE] [script:B0 1A]りあき
-  0x002F1D4C [0xFFFE] [script:DE 1A]りあき
-  0x002F1DA6 [0xFFFE] [script:0B 1B]りあき
-  0x002F1E02 [0xFFFE] [script:39 1B]りあき
-  0x002F1E56 [0xFFFE] [script:63 1B]りあき
-  0x002F1EAE [0xFFFE] [script:8F 1B]りあき
-  0x002F1F08 [0xFFFE] [script:BC 1B]りあき
-  0x002F1F4C [0xFFFE] [script:00 00]ひギ[?2561]f
+  0x002F1B70 [0xFFFE] [script:F2 19]ククルを置いてけないよ
+  0x002F1BC8 [0xFFFE] [script:1F 1A]ククルを置いてはいけねぇな
+  0x002F1C22 [0xFFFE] [script:4D 1A]ククルを置いていくわけにはいかん
+  0x002F1C7E [0xFFFE] [script:7A 1A]ククルを置いてはいけんのぉ
+  0x002F1CD8 [0xFFFE] [script:A6 1A]ククルを置いてはいけない
+  0x002F1D30 [0xFFFE] [script:D4 1A]ククルさんを置いてはいけないわ
+  0x002F1D8C [0xFFFE] [script:01 1B]ククルを置いてはいけないわ
+  0x002F1DE6 [0xFFFE] [script:2F 1B]ククルを置いていくわけにはいかん
+  0x002F1E42 [0xFFFE] [script:59 1B]ククるガイナいゾ？
+  0x002F1E96 [0xFFFE] [script:85 1B]ククルを置いていけないわ
+  0x002F1EEE [0xFFFE] [script:B2 1B]ククルを置いてはいけないな
+  0x0034EB0D [0xFFFE] [script:23 15]6めいせみ込vまめい鐘めぐそそてい[opt]みモな地ばユj～みや7ツらげいめ
   --- context: 0xFFFE -> 0x0006 ---
   0x00469DCE [0x0006] [script:8A 29]今、戻るわけにはいかない
   0x00469E8A [0x0006] [script:E9 29]しばらく近づかないほうがいいな
@@ -43,17 +43,17 @@
   --- context: 0x0006 -> 0xFFFE ---
   0x007256B3 [0xFFFE] [script:74 19]オオユソジだfb7sネかピぬPき3ねァギたぞ7ヨっこニっし8[FF:0F 5D 12]アニカギbのカナ8るゼPr8しナぷカネこぬQPせねシァすセギ
   --- context: 0xFFFE -> 0x0006 ---
-  0x00A4E95A [0x0006] [script:2F 0A]りあき
+  0x008D602E [0x0006] [script:00 00]MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMLLLLLLLLLLLLLLKKKLLLLLKKKJJLLささ
   --- context: 0x0006 -> 0xFFFE ---
-  0x00A4E9BA [0xFFFE] [script:5F 0A]りあき
-  0x00A4EA1A [0xFFFE] [script:8F 0A]りあき
-  0x00A4EA78 [0xFFFE] [script:BE 0A]りあき
-  0x00A4EAD8 [0xFFFE] [script:EE 0A]りあき
-  0x00A4EB38 [0xFFFE] [script:1E 0B]りあき
-  0x00A4EB98 [0xFFFE] [script:4E 0B]りあき
-  0x00A4EBF8 [0xFFFE] [script:7E 0B]りあき
-  0x00A4EC56 [0xFFFE] [script:AD 0B]りあき
-  0x00A4ECB0 [0xFFFE] [script:DA 0B]りあき
-  0x00A4ED10 [0xFFFE] [script:0A 0C]りあき
-  0x00A4ED70 [0xFFFE] [script:3A 0C]りあき
-  0x00A4EDD0 [0xFFFE] [script:6A 0C]りあき
+  0x00A4E99A [0xFFFE] [script:55 0A]別の国に行ってる場合じゃないよね
+  0x00A4E9FA [0xFFFE] [script:85 0A]別の国に行ってる場合じゃねぇな
+  0x00A4EA5A [0xFFFE] [script:B4 0A]別の国に行ってる場合ではない
+  0x00A4EAB8 [0xFFFE] [script:E4 0A]別の国に行ってる場合じゃないのぉ
+  0x00A4EB18 [0xFFFE] [script:14 0B]別の国に行ってる場合じゃないな
+  0x00A4EB78 [0xFFFE] [script:44 0B]別の国に行ってる場合じゃないわね
+  0x00A4EBD8 [0xFFFE] [script:74 0B]別の国に行ってる場合じゃないわ
+  0x00A4EC38 [0xFFFE] [script:A3 0B]別の国に行ってる場合ではない
+  0x00A4EC96 [0xFFFE] [script:D0 0B]デカケてイルバあイではナイゾ
+  0x00A4ECF0 [0xFFFE] [script:00 0C]別の国に行ってる場合じゃないよ
+  0x00A4ED50 [0xFFFE] [script:30 0C]別の国に行ってる場合じゃないな
+  0x00A4EDB0 [0xFFFE] [script:60 0C]別の国に行ってる場合じゃないわ

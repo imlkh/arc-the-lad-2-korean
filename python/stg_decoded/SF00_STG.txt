@@ -935,7 +935,7 @@
   0x00698758 [0x8017] [script:5C 2A]また休みたかったら、\nオレにいつでも言ってくれ
   --- context: 0x8017 -> 0x8015 ---
   0x006987AE [0x8015] [script:86 2A]休みたかったら、\nオレにいつでも言ってくれ
-  0x00698802 [0x8015] [script:B9 2A][box:system]日記帳があります。記入しますか？\n[opt]はい\n[opt]いいえ[box:close]
+  0x006C6EE2 [0x8015] [script:66 07]ミラゼゼリヨにちちちチ
   --- context: 0x8015 -> 0x8005 ---
   0x0075AA6C [0x8005] [script:87 07]ええ、いま開けるところです
   --- context: 0x8005 -> 0x8014 ---
@@ -1174,7 +1174,7 @@
   0x0098F500 [0x8019] [script:A9 59]もしかしたら人間を\nおそってたかもしれねぇし
   0x0098F54E [0x8019] [script:CF 59]まぁ、卵はこのままに\nしておいてやろうぜ
   0x0098F59A [0x8019] [script:FA 59]問題が起きた時に、\nまたオレ達がなんとかすりゃいいさ
-  0x0098F5FD [0x8019] [script:00 00]ギゆコせ
+  0x00A16201 [0x8019] [script:53 05]qs8[opt]88ssギ
   --- context: 0x8019 -> 0x8005 ---
   0x00A49C12 [0x8005] [script:10 06]これに、乗る必要はないな
   0x00A4AF58 [0x8005] [script:AE 0F]いくぜ！！
@@ -1435,7 +1435,7 @@
   0x00B0B71C [0xFFFE] [script:B8 15]こんにちは
   0x00B0B75C [0xFFFE] [script:E4 15]今度ラマダ寺に拳法ならいに\nいこうかなぁ…
   0x00B0B7B4 [0xFFFE] [script:08 16]ここはペイサスの街だよ
-  0x00B0B7FA [0xFFFE] [script:00 00]TCさギ
+  0x00B1C756 [0xFFFE] [script:3C 04]ゾゾゾゾゾ7rゾデrrゾゾrrゾゾゾゾくぁぷゾやく
   --- context: 0xFFFE -> 0x8005 ---
   0x00D40030 [0x8005] [script:5A 04]ああ、なんとかな
   --- context: 0x8005 -> 0x8000 ---
@@ -1662,7 +1662,7 @@
   --- context: 0x8005 -> 0x8006 ---
   0x0126806A [0x8006] [script:58 09]ちくしょう・・・
   --- context: 0x8006 -> 0x8005 ---
-  0x012680AC [0x8005] [script:5F 87]ソゼりあオき
+  0x012EEA8E [0x8005] [script:FF 06]ッ
   --- context: 0x8005 -> 0x8000 ---
   0x01322152 [0x8000] [script:2D 07]ネックレスか・・・
   0x01322192 [0x8000] [script:5B 07]盗まれたんだったら..\n闇商人に流れていてもおかしくないわね
@@ -1729,7 +1729,7 @@
   0x01324F06 [0xFFFE] [script:09 1E]あなた達も、だまされないようにね
   0x01324F52 [0xFFFE] [script:38 1E]ここで闇市が開かれるのは\nロマリア兵達にはないしょだよ
   0x01324FB0 [0xFFFE] [script:5F 1E]ここは、遺跡の街ガザルアだよ！
-  0x0132500E [0xFFFE] [script:00 00][FF:FF FF FF][FF:FF FF FF][FF:FF FF FF][FF:FF FF FF]ちちちちちちちちちむめめちちむめめめめめめめちちちむめちちちちち
+  0x0132B640 [0xFFFE] [script:80 08]ゾゾゾゾゾゾゾエぷオゴ
   0x013DFB9C [0xFFFE] [script:26 0D]いらっしゃいませ！
   0x013E0368 [0xFFFE] [script:10 11]ネックレス？残念ながらないねぇ
   0x013E03AC [0xFFFE] [script:30 11]こういった物ならあるよ
@@ -1821,7 +1821,7 @@
   --- context: 0x8000 -> 0x800B ---
   0x013E16A4 [0x800B] [script:AE 1A]買わないんだったら退いてくれ
   0x013E16E8 [0x800B] [script:CD 1A]商売の邪魔だ
-  0x013E172A [0x800B] [script:0B 80]ぢひせ
+  0x0149A1BA [0x800B] [script:C4 0B]ごほっごほっ
   --- context: 0x800B -> 0x8014 ---
   0x0149A1F4 [0x8014] [script:ED 0B]あなたがゴーレムを\n操っている魔法使いですか？
   --- context: 0x8014 -> 0x8000 ---
@@ -2068,42 +2068,42 @@
   0x0161627A [0xFFFE] [script:C9 1B]この国の動力石はすべて我勺のものだ！！
   0x016162CE [0xFFFE] [script:F6 1B]いずれこの世界はすべて\n我勺のものになるのだ！
   0x01616328 [0xFFFE] [script:2A 1C]我が軍の兵器は、この国でとれる\n「動力石」で動いているのだ！
-  0x016163AC [0xFFFE] [script:5A 1C]りあき
-  0x01616408 [0xFFFE] [script:88 1C]りあき
-  0x01616464 [0xFFFE] [script:B6 1C]りあき
-  0x016164C0 [0xFFFE] [script:E4 1C]りあき
-  0x0161651C [0xFFFE] [script:12 1D]りあき
-  0x01616578 [0xFFFE] [script:40 1D]りあき
-  0x016165D6 [0xFFFE] [script:6F 1D]りあき
-  0x01616632 [0xFFFE] [script:9D 1D]りあき
-  0x0161668E [0xFFFE] [script:CB 1D]りあき
-  0x016166E4 [0xFFFE] [script:F6 1D]りあき
-  0x0161673E [0xFFFE] [script:23 1E]りあき
-  0x01616798 [0xFFFE] [script:50 1E]りあき
-  0x016167F4 [0xFFFE] [script:7E 1E]りあき
-  0x01616850 [0xFFFE] [script:AC 1E]りあき
-  0x016168AC [0xFFFE] [script:DA 1E]りあき
-  0x01616906 [0xFFFE] [script:07 1F]りあき
-  0x01616960 [0xFFFE] [script:34 1F]りあき
-  0x016169BC [0xFFFE] [script:62 1F]りあき
-  0x01616A18 [0xFFFE] [script:90 1F]りあき
-  0x01616A70 [0xFFFE] [script:BC 1F]りあき
-  0x01616ACA [0xFFFE] [script:E9 1F]りあき
-  0x01616B1E [0xFFFE] [script:13 20]りあき
-  0x01616B7A [0xFFFE] [script:41 20]りあき
-  0x01616BD4 [0xFFFE] [script:6E 20]りあき
-  0x01616C2C [0xFFFE] [script:9A 20]りあき
-  0x01616C82 [0xFFFE] [script:C5 20]りあき
-  0x01616CD4 [0xFFFE] [script:EE 20]りあき
-  0x01616D2A [0xFFFE] [script:19 21]りあき
-  0x01616D7E [0xFFFE] [script:43 21]りあき
-  0x01616DD0 [0xFFFE] [script:6C 21]りあき
-  0x01616E22 [0xFFFE] [script:95 21]りあき
-  0x01616E74 [0xFFFE] [script:BE 21]りあき
-  0x01616EC6 [0xFFFE] [script:E7 21]りあき
-  0x01616F18 [0xFFFE] [script:10 22]りあき
-  0x01616F6A [0xFFFE] [script:39 22]りあき
-  0x01616FBC [0xFFFE] [script:62 22]りあき
+  0x0161638E [0xFFFE] [script:A9 00]っふ奴等、ロマリアの兵隊だな
+  0x016163EC [0xFFFE] [script:7E 1C]奴等、ロマリアの兵隊だよ
+  0x01616448 [0xFFFE] [script:AC 1C]奴等、ロマリアの兵隊だぜ
+  0x016164A4 [0xFFFE] [script:DA 1C]奴等、ロマリアの兵隊だな
+  0x01616500 [0xFFFE] [script:08 1D]奴等、ロマリアの兵隊じゃな
+  0x0161655C [0xFFFE] [script:36 1D]奴等、ロマリアの兵隊だぜ
+  0x016165B8 [0xFFFE] [script:65 1D]あの人達、ロマリアの兵隊ですね
+  0x01616616 [0xFFFE] [script:93 1D]奴等、ロマリアの兵隊だわ
+  0x01616672 [0xFFFE] [script:C1 1D]奴等、ロマリアの兵隊だな
+  0x016166CE [0xFFFE] [script:EC 1D]ロマリあのヤツらジャ
+  0x01616724 [0xFFFE] [script:19 1E]あいつら、ロマリアの兵隊よ
+  0x0161677E [0xFFFE] [script:46 1E]奴等、ロマリアの兵隊だ
+  0x016167D8 [0xFFFE] [script:A9 00]ヤほ一体何をしているんだ？
+  0x01616834 [0xFFFE] [script:A2 1E]何でこんな所にいるんだろう？
+  0x01616890 [0xFFFE] [script:D0 1E]何でこんな所にいやがるんだ？
+  0x016168EC [0xFFFE] [script:FD 1E]何でこんな所にいるのだ？
+  0x01616946 [0xFFFE] [script:2A 1F]何でこんな所にいるんじゃ？
+  0x016169A0 [0xFFFE] [script:58 1F]何でこんな所にいやがるんだ？
+  0x016169FC [0xFFFE] [script:86 1F]何でこんな所にいるんでしょう？
+  0x01616A58 [0xFFFE] [script:B2 1F]何でこんな所にいるの？
+  0x01616AB0 [0xFFFE] [script:DF 1F]何でこんな所にいるのだ？
+  0x01616B0A [0xFFFE] [script:09 20]ナニしとンジャ？
+  0x01616B5E [0xFFFE] [script:37 20]何でこんな所にいるのかしら？
+  0x01616BBA [0xFFFE] [script:64 20]何でこんな所にいるのだ？
+  0x01616C14 [0xFFFE] [script:A9 00]ブみあの動力石か？
+  0x01616C6C [0xFFFE] [script:BB 20]そうか！動力石か
+  0x01616CC2 [0xFFFE] [script:E4 20]動力石か
+  0x01616D14 [0xFFFE] [script:0F 21]あの動力石か？
+  0x01616D6A [0xFFFE] [script:39 21]動力石とな？
+  0x01616DBE [0xFFFE] [script:62 21]動力石？
+  0x01616E10 [0xFFFE] [script:8B 21]動力石？
+  0x01616E62 [0xFFFE] [script:B4 21]動力石？
+  0x01616EB4 [0xFFFE] [script:DD 21]動力石？
+  0x01616F06 [0xFFFE] [script:06 22]動力石？
+  0x01616F58 [0xFFFE] [script:2F 22]動力石？
+  0x01616FAA [0xFFFE] [script:58 22]動力石？
   0x016D2BB6 [0xFFFE] [script:CF 08]いらっしゃいませ
   0x016D3502 [0xFFFE] [script:7C 0D]この砂漠でも育つ草木でもあればのぉ
   0x016D3554 [0xFFFE] [script:A9 0D]やれやれ、ロマリアの奴等\nなにしにきたんだか・・
@@ -2112,7 +2112,7 @@
   0x016D365E [0xFFFE] [script:28 0E]あの兵隊達どこいったのかしら？
   0x016D374C [0xFFFE] [script:A7 0E]なんだ、貴様！買い物なら\nさっさっとすまして失せろ！
   0x016D37AA [0xFFFE] [script:D1 0E]まったく、こんな所に何があるって言うんだ！
-  0x016D380E [0xFFFE] [script:00 00]りめめめめめめめめめめめめめめくぱごぱざざざざもげざごぱぱざざつぱぱぱぱざござもざざごごござげつタニニニニニニニニニニニニニニニニニニ[?1871]ニニニニニニニニニニかqrraqィJaqrrrrrrrちち災[FF:FF FF FF][FF:FF FF FF][FF:FF FF FF]
+  0x0175BFBC [0xFFFE] [script:01 16]あなあ
   0x0178E2AA [0xFFFE] [script:44 8C]ぷデw
   --- context: 0xFFFE -> 0x800A ---
   0x0178E3AC [0x800A] [script:06 00]そあを
@@ -2270,7 +2270,7 @@
   --- context: 0x8000 -> 0x800F ---
   0x0190808C [0x800F] [script:79 29]安っぽいかお[opt]してるだけあって\n賞金も安いな…
   --- context: 0x800F -> 0x8000 ---
-  0x019080E4 [0x8000] [script:22 01]りジマ
+  0x01960163 [0x8000] [script:5B 11]水てせ火げせxが水びhと
   0x019C49C4 [0x8000] [script:81 11]こちらです、ついてきて下さい
   --- context: 0x8000 -> 0x8005 ---
   0x019C4A48 [0x8005] [script:C3 11]これが、封印をとくカギです
@@ -2314,46 +2314,46 @@
   0x01A7DA16 [0x8000] [script:B6 09]一体このニーデルに何が起きたのかしら
   0x01A7DA7A [0x8000] [script:EA 09]たぶん、この国の\nどこかにいると思うんだけど
   0x01A7DAC8 [0x8000] [script:09 0A]早く探さなくちゃ
-  0x01A7DBC6 [0x8000] [script:87 0A]りあき
+  0x01A7DB14 [0x8000] [script:35 0A]この街では、「やり直し」が有効です
   --- context: 0x8000 -> 0xFFFE ---
-  0x01A7DC1C [0xFFFE] [script:B2 0A]りあき
-  0x01A7DC72 [0xFFFE] [script:DD 0A]りあき
-  0x01A7DCD0 [0xFFFE] [script:0C 0B]りあき
-  0x01A7DD26 [0xFFFE] [script:37 0B]りあき
-  0x01A7DD7C [0xFFFE] [script:62 0B]りあき
-  0x01A7DDD8 [0xFFFE] [script:90 0B]りあき
-  0x01A7DE2C [0xFFFE] [script:BA 0B]りあき
-  0x01A7DE88 [0xFFFE] [script:E8 0B]りあき
-  0x01A7DEF0 [0xFFFE] [script:1C 0C]りあき
-  0x01A7DF4A [0xFFFE] [script:49 0C]りあき
-  0x01A7DFA8 [0xFFFE] [script:78 0C]りあき
-  0x01A7E00C [0xFFFE] [script:AA 0C]りあき
-  0x01A7E06E [0xFFFE] [script:DB 0C]りあき
-  0x01A7E0D2 [0xFFFE] [script:0D 0D]りあき
-  0x01A7E128 [0xFFFE] [script:38 0D]りあき
-  0x01A7E194 [0xFFFE] [script:6E 0D]りあき
-  0x01A7E1FC [0xFFFE] [script:A2 0D]りあき
-  0x01A7E25E [0xFFFE] [script:D3 0D]りあき
-  0x01A7E2BC [0xFFFE] [script:02 0E]りあき
-  0x01A7E32E [0xFFFE] [script:3B 0E]りあき
-  0x01A7E388 [0xFFFE] [script:68 0E]りあき
-  0x01A7E3EE [0xFFFE] [script:9B 0E]りあき
-  0x01A7E450 [0xFFFE] [script:CC 0E]りあき
-  0x01A7E4AE [0xFFFE] [script:FB 0E]りあき
-  0x01A7E50A [0xFFFE] [script:29 0F]りあき
-  0x01A7E56A [0xFFFE] [script:59 0F]りあき
-  0x01A7E5C8 [0xFFFE] [script:88 0F]りあき
-  0x01A7E626 [0xFFFE] [script:B7 0F]りあき
-  0x01A7E684 [0xFFFE] [script:E6 0F]りあき
-  0x01A7E6E0 [0xFFFE] [script:14 10]りあき
-  0x01A7E740 [0xFFFE] [script:44 10]りあき
-  0x01A7E796 [0xFFFE] [script:6F 10]りあき
-  0x01A7E7EE [0xFFFE] [script:9B 10]りあき
-  0x01A7E848 [0xFFFE] [script:C8 10]りあき
-  0x01A7E8A2 [0xFFFE] [script:F5 10]りあき
-  0x01A7F7A4 [0xFFFE] [script:76 18]りあき
+  0x01A7DC06 [0xFFFE] [script:A8 0A]よくできた石像だね
+  0x01A7DC5C [0xFFFE] [script:D3 0A]なんだこの石像は？
+  0x01A7DCB2 [0xFFFE] [script:02 0B]うむ、これは街の人勺の像か？
+  0x01A7DD10 [0xFFFE] [script:2D 0B]これはよくできとるのぉ
+  0x01A7DD66 [0xFFFE] [script:58 0B]何だこの石像は？
+  0x01A7DDBC [0xFFFE] [script:86 0B]これ、石像みたい・・・
+  0x01A7DE18 [0xFFFE] [script:B0 0B]よくできてるわね
+  0x01A7DE6C [0xFFFE] [script:DE 0B]ん、これはただの石像ではないな
+  0x01A7DEC8 [0xFFFE] [script:12 0C]ナんじゃ、コのマチの\nにンげんハイシデでキテルのカ？
+  0x01A7DF30 [0xFFFE] [script:3F 0C]なにこれ、なんの石像かしら
+  0x01A7DF8A [0xFFFE] [script:6E 0C]これはすごい、まるで生きているようだ
+  0x01A7DFE8 [0xFFFE] [script:A9 00]ッし何故、街の人が石なんかに・・・
+  0x01A7E04C [0xFFFE] [script:D1 0C]何で街の人が石像になっちゃったのかな
+  0x01A7E0AE [0xFFFE] [script:03 0D]街の人が全部石像になっちまったのか？
+  0x01A7E112 [0xFFFE] [script:2E 0D]ひどいな・・・
+  0x01A7E168 [0xFFFE] [script:64 0D]街の人間全部を石に\nするとは大した奴じゃわい
+  0x01A7E1D4 [0xFFFE] [script:98 0D]何で街の人がこんな事に・[delay:09]・[delay:09]・
+  0x01A7E23C [0xFFFE] [script:C9 0D]街の人が、何でこんな目に・・・
+  0x01A7E29E [0xFFFE] [script:F8 0D]街の人がみんな石になってるの！？
+  0x01A7E2FC [0xFFFE] [script:31 0E]一体どう言うことだ、\n街の人間が石になるなど・・・
+  0x01A7E36E [0xFFFE] [script:5E 0E]ナんジャ、イシニナっタダケカ？
+  0x01A7E3C8 [0xFFFE] [script:91 0E]街の人が石化するなんて、一体・・・
+  0x01A7E42E [0xFFFE] [script:C2 0E]街の人がすべて石になるとはな・・・
+  0x01A7E490 [0xFFFE] [script:A9 00]管風の精霊は無事なんだろうか
+  0x01A7E4EE [0xFFFE] [script:1F 0F]風の精霊は石にされてないよね
+  0x01A7E54A [0xFFFE] [script:4F 0F]風の精霊はだいじょうぶなんだろうな？
+  0x01A7E5AA [0xFFFE] [script:7E 0F]風の精霊は無事なのだろうか？
+  0x01A7E608 [0xFFFE] [script:AD 0F]まあ風の精霊は大丈夫じゃろう
+  0x01A7E666 [0xFFFE] [script:DC 0F]風の精霊は大丈夫なんだろうな
+  0x01A7E6C4 [0xFFFE] [script:0A 10]風の精霊は無事なんですか？
+  0x01A7E720 [0xFFFE] [script:3A 10]風の精霊は大丈夫なんでしょうね
+  0x01A7E780 [0xFFFE] [script:65 10]風の精霊はどこだ？
+  0x01A7E7D6 [0xFFFE] [script:91 10]カゼノセイレイハドコダ？
+  0x01A7E82E [0xFFFE] [script:BE 10]風の精霊は無事なの？
+  0x01A7E888 [0xFFFE] [script:EB 10]風の精霊は無事なのか？
+  0x01A7E8E2 [0xFFFE] [script:30 01]？ギうギりあウあう
   --- context: 0xFFFE -> 0x0006 ---
-  0x01A7F85C [0x0006] [script:D2 18]りあき
+  0x01A7F833 [0x0006] [script:00 F0]し人勺は闘技場の周りに集う」と書いてある
   0x01A7F8CA [0x0006] [script:06 19]？？？
   --- context: 0x0006 -> 0x8000 ---
   0x01A7F908 [0x8000] [script:2D 19]キャンディの包み紙がちらばってる
@@ -2400,20 +2400,20 @@
   0x01B3CC7C [0x8001] [script:1F 0E]街の人をたすけるためだもの、\n大目に見てもらわなきゃ
   0x01B3CCD2 [0x8001] [script:3E 0E]どう？買い物する
   0x01B3D554 [0x8001] [script:7F 12]どう？買い物する
-  0x01B3D600 [0x8001] [script:D4 12]りあき
+  0x01B3D5A8 [0x8001] [script:22 01]げグJ
   --- context: 0x8001 -> 0xFFFE ---
-  0x01B3D65A [0xFFFE] [script:01 13]りあき
-  0x01B3D6BC [0xFFFE] [script:32 13]りあき
-  0x01B3D710 [0xFFFE] [script:5C 13]りあき
-  0x01B3D770 [0xFFFE] [script:8C 13]りあき
-  0x01B3D7CA [0xFFFE] [script:B9 13]りあき
-  0x01B3D826 [0xFFFE] [script:E7 13]りあき
-  0x01B3D880 [0xFFFE] [script:14 14]りあき
-  0x01B3D8D4 [0xFFFE] [script:3E 14]りあき
-  0x01B3D92A [0xFFFE] [script:69 14]りあき
-  0x01B3D982 [0xFFFE] [script:95 14]りあき
-  0x01B3D9D8 [0xFFFE] [script:C0 14]りあき
-  0x01B3DA32 [0xFFFE] [script:ED 14]りあき
+  0x01B3D640 [0xFFFE] [script:F7 12]これじゃあ、なにも買えないよ
+  0x01B3D69A [0xFFFE] [script:28 13]おいおい、泥棒みたいな真似するのかよ
+  0x01B3D6FC [0xFFFE] [script:52 13]盗みはいかんな
+  0x01B3D750 [0xFFFE] [script:82 13]こりゃ、黙って持っていってはいかんぞ！
+  0x01B3D7B0 [0xFFFE] [script:AF 13]これじゃ買い物ができないな
+  0x01B3D80A [0xFFFE] [script:DD 13]黙って持って行くんですか？
+  0x01B3D866 [0xFFFE] [script:0A 14]ちょっと、黙って持ってくき
+  0x01B3D8C0 [0xFFFE] [script:34 14]どうするつもりだ？
+  0x01B3D914 [0xFFFE] [script:5F 14]ナンジャヌスムノカ？
+  0x01B3D96A [0xFFFE] [script:8B 14]ちょっと、やめなさいよ！
+  0x01B3D9C2 [0xFFFE] [script:B6 14]泥棒はよくないわよ
+  0x01B3DA18 [0xFFFE] [script:E3 14]勝手に持っていく気か
   0x01B3DABA [0xFFFE] [script:3B 15]ちゃんとお金を\n置いていけば大丈夫でしょ
   --- context: 0xFFFE -> 0x8000 ---
   0x01B3DB0A [0x8000] [script:66 15]街の人をたすけるためだもの、\n大目に見てもらわなきゃ
@@ -2457,31 +2457,31 @@
   0x01BFA0BA [0x8001] [script:44 8C]ぷデw
   --- context: 0x8001 -> 0x801E ---
   0x01BFA1BC [0x801E] [script:06 00]そあを
-  0x01BFA2DE [0x801E] [script:D3 14]りあき
+  0x01BFA236 [0x801E] [script:26 00]りギもあげゲいギJ
   --- context: 0x801E -> 0xFFFE ---
-  0x01BFA338 [0xFFFE] [script:00 15]りあき
-  0x01BFA392 [0xFFFE] [script:2D 15]りあき
-  0x01BFA3EA [0xFFFE] [script:59 15]りあき
-  0x01BFA446 [0xFFFE] [script:87 15]りあき
-  0x01BFA49E [0xFFFE] [script:B3 15]りあき
-  0x01BFA4F8 [0xFFFE] [script:E0 15]りあき
-  0x01BFA554 [0xFFFE] [script:0E 16]りあき
-  0x01BFA5AA [0xFFFE] [script:39 16]りあき
-  0x01BFA5FE [0xFFFE] [script:63 16]りあき
-  0x01BFA65A [0xFFFE] [script:91 16]りあき
-  0x01BFA6B2 [0xFFFE] [script:BD 16]りあき
-  0x01BFA70E [0xFFFE] [script:EB 16]りあき
-  0x01BFA764 [0xFFFE] [script:16 17]りあき
-  0x01BFA7B8 [0xFFFE] [script:40 17]りあき
-  0x01BFA81C [0xFFFE] [script:72 17]りあき
-  0x01BFA878 [0xFFFE] [script:A0 17]りあき
-  0x01BFA8D4 [0xFFFE] [script:CE 17]りあき
-  0x01BFA92E [0xFFFE] [script:FB 17]りあき
-  0x01BFA984 [0xFFFE] [script:26 18]りあき
-  0x01BFA9D8 [0xFFFE] [script:50 18]りあき
-  0x01BFAA2C [0xFFFE] [script:7A 18]りあき
-  0x01BFAA82 [0xFFFE] [script:A5 18]りあき
-  0x01BFAAEC [0xFFFE] [script:DA 18]りあき
+  0x01BFA31E [0xFFFE] [script:F6 14]勝手に泊まっちゃうの？
+  0x01BFA378 [0xFFFE] [script:23 15]おい、かってに泊まんのかよ
+  0x01BFA3D2 [0xFFFE] [script:4F 15]勝手に泊まるのか？
+  0x01BFA42A [0xFFFE] [script:7D 15]勝手に泊まってもいいのかのぉ
+  0x01BFA486 [0xFFFE] [script:A9 15]勝手に泊まるのか？
+  0x01BFA4DE [0xFFFE] [script:D6 15]勝手に泊まるんですか？
+  0x01BFA538 [0xFFFE] [script:04 16]ちょっと、勝手に泊まるつもり
+  0x01BFA594 [0xFFFE] [script:2F 16]だまって泊まるのか？
+  0x01BFA5EA [0xFFFE] [script:59 16]トマッてイイのカ？
+  0x01BFA63E [0xFFFE] [script:87 16]ちょっと、勝手に泊まるの？
+  0x01BFA69A [0xFFFE] [script:B3 16]勝手に泊まるのか？
+  0x01BFA6F2 [0xFFFE] [script:A9 00]火に・・・いいんだろうか？
+  0x01BFA74E [0xFFFE] [script:0C 17]いいのかな・・・
+  0x01BFA7A4 [0xFFFE] [script:36 17]それで、いいのかよ
+  0x01BFA7F8 [0xFFFE] [script:68 17]いや、そういう事ではないと思うが・・・
+  0x01BFA85C [0xFFFE] [script:96 17]年をとると長旅がつらくてのぉ
+  0x01BFA8B8 [0xFFFE] [script:C4 17]いや、そうじゃなくて・・・
+  0x01BFA914 [0xFFFE] [script:F1 17]でも・・・いいのかなぁ
+  0x01BFA96E [0xFFFE] [script:1C 18]いい根性してるわね
+  0x01BFA9C4 [0xFFFE] [script:46 18]・・・そうか
+  0x01BFAA18 [0xFFFE] [script:70 18]カッテなヤつジャ
+  0x01BFAA6C [0xFFFE] [script:9B 18]いい根性してるわね
+  0x01BFAAC2 [0xFFFE] [script:D0 18]そういう事ではない\nような気がするのだが・・・
   0x01BFAB32 [0xFFFE] [script:FD 18]いらっしゃいませ
   0x01BFAB72 [0xFFFE] [script:44 8C]ぷデw
   --- context: 0xFFFE -> 0x800A ---
@@ -2638,7 +2638,7 @@
   0x01D73A90 [0xFFFE] [script:EF 26]おらぁ本なんか読まねぇだよ
   0x01D73B24 [0xFFFE] [script:3E 27]おらぁ、さっき田舎から着いたばっかりだでぇ
   0x01D73B70 [0xFFFE] [script:61 27]図書館の見物はこれからだぁ
-  0x01D73C6A [0xFFFE] [script:D9 27]りあき
+  0x01D73BC4 [0xFFFE] [script:A9 00]pよC
   --- context: 0xFFFE -> 0x0006 ---
   0x01D73CDA [0x0006] [script:12 28]犯人じゃなさそうね
   --- context: 0x0006 -> 0x8000 ---
@@ -2646,7 +2646,7 @@
   0x01D73D58 [0x8000] [script:4F 28]ハズれジゃ！
   0x01D73D94 [0x8000] [script:70 28]悪そうなかおがならんでる
   0x01D73DFE [0x8000] [script:B5 28]\n\n\n[opt]スメリア王殺害犯[opt]\n[opt]アーク指名手配中[opt]
-  0x01D73EF0 [0x8000] [script:1C 29]りあき
+  0x01D73EC6 [0x8000] [script:12 29]大変なことになっとる様じゃな
   --- context: 0x8000 -> 0x0006 ---
   0x01D73F66 [0x0006] [script:5A 29]大変なことになってるわね
   --- context: 0x0006 -> 0x8000 ---
@@ -2665,7 +2665,7 @@
   0x01E30504 [0xFFFE] [script:FD 0E]おれは売りもんじゃねぇぞ！
   0x01E30598 [0xFFFE] [script:49 0F]本？ここにゃ本なんかおいてねぇよ
   0x01E305DE [0xFFFE] [script:6A 0F]おれはここで店番してるんだ
-  0x01E306D4 [0xFFFE] [script:E2 0F]りあき
+  0x01E306AE [0xFFFE] [script:D8 0F]犯人じゃなさそうじゃの
   --- context: 0xFFFE -> 0x0006 ---
   0x01E30744 [0x0006] [script:1B 10]犯人じゃなさそうね
   --- context: 0x0006 -> 0x8000 ---
@@ -2739,7 +2739,7 @@
   0x01EEBC26 [0xFFFE] [script:A1 1B]うぃ～！
   0x01EEBC5E [0xFFFE] [script:C1 1B]よぉ、一緒にろうらい
   0x01EEBC9E [0xFFFE] [script:E2 1B]俺はまらまらのめりゅぜぇ～
-  0x01EEBD94 [0xFFFE] [script:5A 1C]りあき
+  0x01EEBCEE [0xFFFE] [script:A9 00]ウひC
   --- context: 0xFFFE -> 0x0006 ---
   0x01EEBE04 [0x0006] [script:93 1C]犯人じゃなさそうね
   --- context: 0x0006 -> 0x8000 ---
@@ -2940,25 +2940,25 @@
   0x01FA5690 [0xFFFE] [script:89 27]おれは犯人じゃねぇ
   0x01FA5720 [0xFFFE] [script:D5 27]おれはここに本を読みに来たんだ
   0x01FA5766 [0xFFFE] [script:F4 27]何もとっちゃいねぇよ
-  0x01FA5858 [0xFFFE] [script:6C 28]りあき
+  0x01FA57B2 [0xFFFE] [script:A9 00]グらC
   --- context: 0xFFFE -> 0x0006 ---
   0x01FA58C8 [0x0006] [script:A5 28]犯人じゃなさそうね
   --- context: 0x0006 -> 0x8000 ---
   0x01FA5908 [0x8000] [script:C4 28]この人ちがーう！
   0x01FA5946 [0x8000] [script:E2 28]ハズれジゃ！
-  0x01FA9274 [0x8000] [script:7A 45]りあき
+  0x01FA598D [0x8000] [script:00 04]ギあギくるD
   --- context: 0x8000 -> 0x0006 ---
   0x01FA92EA [0x0006] [script:BE 45]あら、なにか大切な本が\nしまってあるようね
   --- context: 0x0006 -> 0x8000 ---
   0x01FA9340 [0x8000] [script:E0 45]なンカあルのカ？
   0x01FA9384 [0x8000] [script:05 46]どんどん、だれもいないのー！！
-  0x01FA948E [0x8000] [script:87 46]りあき
+  0x01FA93CC [0x8000] [script:C8 00]んデんデ
   --- context: 0x8000 -> 0x0006 ---
   0x01FA9504 [0x0006] [script:C5 46]ここには径典はないみたいね
   --- context: 0x0006 -> 0x8000 ---
   0x01FA954E [0x8000] [script:E8 46]キョウてンはドコじゃ？
   0x01FA9594 [0x8000] [script:0C 47]つまらない本なのー！！
-  0x01FA9688 [0x8000] [script:84 47]りあき
+  0x01FA9654 [0x8000] [script:7A 47]きれいさっぱりもって行かれた様じゃの
   --- context: 0x8000 -> 0x0006 ---
   0x01FA96FE [0x0006] [script:C2 47]やられた、ってかんじね・・
   --- context: 0x0006 -> 0x8000 ---
@@ -2969,7 +2969,7 @@
   0x02064004 [0xFFFE] [script:C4 24]なんだ、事件かい！？
   0x02064044 [0xFFFE] [script:E6 24]一緒に手伝ってやろうか？
   0x02064088 [0xFFFE] [script:0C 25]最近仕事がなくて腕がなまっちまってよぉ
-  0x02064188 [0xFFFE] [script:84 25]りあき
+  0x020640E2 [0xFFFE] [script:A9 00]ミやC
   --- context: 0xFFFE -> 0x0006 ---
   0x020641F8 [0x0006] [script:BD 25]犯人じゃなさそうね
   --- context: 0x0006 -> 0x8000 ---
@@ -3222,7 +3222,7 @@
   --- context: 0x8000 -> 0x800A ---
   0x021DDF80 [0x800A] [script:F0 0D]いくわよ！
   --- context: 0x800A -> 0x8000 ---
-  0x021DDFBE [0x8000] [script:0F 80]わなよ
+  0x02233537 [0x8000] [script:C0 04]、ふlレ粋Qく
   --- context: 0x8000 -> 0x800B ---
   0x02297874 [0x800B] [script:E0 04]ミルマーナの様子は？
   --- context: 0x800B -> 0x8008 ---

@@ -70,10 +70,10 @@
   0x002F0FC4 [0x800E] [script:EC 27]おサルの操り人形に\n国を操られるとはな…
   0x002F109C [0x800E] [script:59 28]安っぽいかお[opt]してるだけあって\n賞金も安いな…
   --- context: 0x800E -> 0x8005 ---
-  0x002F10F4 [0x8005] [script:22 01]りジマ
+  0x0037DE2B [0x8005] [script:FC 09]ひサも87ケ／ルヤし
   --- context: 0x8005 -> 0x801A ---
   0x003AB43C [0x801A] [script:1E 0A]せまい店ですが、ごゆっくりどうぞ
-  0x003AB4A2 [0x801A] [script:4D 0A]りあき
+  0x003AB48A [0x801A] [script:A9 00]ぱこナんもキこえンゾ
   --- context: 0x801A -> 0x0006 ---
   0x003AB51C [0x0006] [script:96 0A]ミルマーナの豊かな緑が、\nだんだん破壊されていく…
   --- context: 0x0006 -> 0x801B ---
@@ -163,7 +163,7 @@
   0x003ACBA8 [0x800E] [script:DA 15]我勺も、サニアをむざむざ\n死なせたりはしない
   0x003ACBF8 [0x800E] [script:F9 15]はい…、わかりました
   --- context: 0x800E -> 0x8019 ---
-  0x003ACFC8 [0x8019] [script:E0 17]りあき
+  0x003ACC40 [0x8019] [script:41 06]もあエデGギI
   --- context: 0x8019 -> 0xFFFE ---
   0x003AD344 [0xFFFE] [script:9D 19]サニアさま！
   --- context: 0xFFFE -> 0x8019 ---
@@ -185,7 +185,7 @@
   --- context: 0x8019 -> 0x800B ---
   0x003AD6E0 [0x800B] [script:72 1B]やつらがこれであきらめるとは思えません
   --- context: 0x800B -> 0x8019 ---
-  0x003AD74A [0x8019] [script:A1 1B]りあき
+  0x003AD735 [0x8019] [script:00 F1]みをつけてください
   --- context: 0x8019 -> 0xFFFE ---
   0x003AD8A0 [0xFFFE] [script:59 1C]これで、ようやくミルマーナも\nもとの美しい国にもどるんですね
   --- context: 0xFFFE -> 0x8019 ---
@@ -229,7 +229,7 @@
   0x003AE49C [0xFFFE] [script:5F 22]そこで、あなた達には私が石板を調べている\n間、モンスターを食い止めてほしいのです
   0x003AE502 [0xFFFE] [script:8C 22]一回につき一ヶ所調べるので、\n計3回護衛を頼みます
   0x003AE55C [0xFFFE] [script:B7 22]それでは仕事が終わるまで\n私も同行させてもらいますよ
-  0x003AE60E [0xFFFE] [script:03 23]りあき
+  0x003AE5B6 [0xFFFE] [script:01 80]1めもあざゴあギじ
   0x003AE688 [0xFFFE] [script:3F 23]マかセトけ！
   --- context: 0xFFFE -> 0x8014 ---
   0x003AE6CE [0x8014] [script:64 23]ちょこにおまかせなのー
@@ -920,7 +920,7 @@
   0x00BC757E [0x8017] [script:F0 0D]ちょこを置いていったら\n許さないんだから～！
   --- context: 0x8017 -> 0x8018 ---
   0x00BC75CC [0x8018] [script:0E 0E]あり、もういない…
-  0x00BC760E [0x8018] [script:A9 00]んせグ
+  0x00C57263 [0x8018] [script:EE 09]Nワア99群gケcェむひゥIqCち～Dべ6アビハ8sどめとダめoる3ギヨか？ヨか水ヒ9？ギ
   --- context: 0x8018 -> 0x0006 ---
   0x00C7DB5C [0x0006] [script:40 26]通れない…！？
   0x00C7F704 [0x0006] [script:19 34]余計な事をしている暇はない！
@@ -1022,7 +1022,7 @@
   0x00D3FF0C [0x006E] [script:65 23]なんか、ヤグンのペットの\nサルに似てるなぁ～
   0x00D3FF5E [0x006E] [script:86 23]その声は…ヤグン？
   0x00D3FFAE [0x006E] [script:B2 23]が～ん、こっちが本体だったのぉ！？
-  0x00D3FFF8 [0x006E] [script:80 80]水[FF:26 00 80]ギI
+  0x00DFC806 [0x006E] [script:D2 04]これは…！？
   --- context: 0x006E -> 0x8005 ---
   0x00DFC840 [0x8005] [script:EF 04]潜水艦か？
   --- context: 0x8005 -> 0x8006 ---

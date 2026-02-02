@@ -1,22 +1,21 @@
-# SD00.STG — 665 dialogues, 688 templates (18 bare, 5 missed)
+# SD00.STG — 661 dialogues, 688 templates (18 bare, 9 missed)
 
   0x000B9DC4 [0xFFFE] [script:FD 06]どけどけ！[opt]この国は\nロマリアのものだ
   0x000B9E14 [0xFFFE] [script:28 07]おれに逆らう奴は\n領主様に言いつけるぜぇ
   0x000B9E6A [0xFFFE] [script:49 07]あん！？[opt]グルガ？
   0x000B9EA6 [0xFFFE] [script:73 07]ケッ[opt]そんなヤツ\nこの俺様が片手でやっつけちまうぜ
-  0x000B9F1A [0xFFFE] [script:A1 07]りあき
   0x000B9F60 [0xFFFE] [script:CD 07]おらー！[opt]あいさつはどうした？\nあいさつは！？
   0x000B9FB4 [0xFFFE] [script:F8 07]やっぱり、支配するってのは\nいい気分だなあ
   0x000BA004 [0xFFFE] [script:1D 08]ん！？\nなんか文句あるってのか！？
-  0x000BA094 [0xFFFE] [script:5E 08]りあき
-  0x000BA152 [0xFFFE] [script:BD 08]りあき
+  0x000BA054 [0xFFFE] [script:54 08]グルガ、この街をなんとかしてくれい
+  0x000BA108 [0xFFFE] [script:B3 08]今、頼れるのはグルガ様しか\nおりませぬ
   0x000BA1C6 [0xFFFE] [script:00 09]誰か領主をやっつけて\nくれないだろうか…
   0x000BA21A [0xFFFE] [script:30 09]なんであたいらが、\nこんなコソコソしてなきゃ\nならないんだろうねぇ
   0x000BA27A [0xFFFE] [script:5C 09]ロマリアから来た新領主は\n恐ろしい奴なんだ
   0x000BA2D2 [0xFFFE] [script:8D 09]新領主のおかげで\nロマリア兵どもが\n威張り散らしているの
   0x000BA334 [0xFFFE] [script:B8 09]ロマリアのやつら、わがものがおで\n街を歩いている
   0x000BA384 [0xFFFE] [script:DC 09]ホントは、\nボクたちの街なのに…
-  0x000BA41E [0xFFFE] [script:23 0A]りあき
+  0x000BA3D2 [0xFFFE] [script:19 0A]グルガさま！[opt]こんなやつら\nこてんぱんにやっちゃってよ！！
   0x000BA722 [0xFFFE] [script:B0 0B]レイガルが死んだっていうのは\n本当なのだろうか？
   0x000BA77A [0xFFFE] [script:DE 0B]もしかしたら、グルガ様が街を\n取り戻してくれたのでは？
   0x000BA7D6 [0xFFFE] [script:0C 0C]兵隊どもが急に\nいなくなったのだが、\nなぜだろう？
@@ -29,16 +28,16 @@
   0x000BAA04 [0xFFFE] [script:19 0D]あの兵隊たちはどこへ…？
   0x000BAA46 [0xFFFE] [script:3F 0D]1かいくらい\nけっとばしとけばよかったわ！
   0x000BAD82 [0xFFFE] [script:D9 0E]この国はどんどん良くなっておる
-  0x000BAE02 [0xFFFE] [script:15 0F]りあき
-  0x000BAEB8 [0xFFFE] [script:70 0F]りあき
-  0x000BAF50 [0xFFFE] [script:BC 0F]りあき
+  0x000BADCC [0xFFFE] [script:0B 0F]グルガ様は本当に\nよくやってくださいました
+  0x000BAE94 [0xFFFE] [script:F1 3D]しぶりに空が青いことに\n気がつきました
+  0x000BAF2C [0xFFFE] [script:B2 0F]さすがは、グルガ様です
   0x000BAFBE [0xFFFE] [script:FC 0F]かならず、やってくれると\n私は信じていました
   0x000BB012 [0xFFFE] [script:23 10]やっぱり、\n平和ってのはいいねぇ
   0x000BB060 [0xFFFE] [script:48 10]もう、安心してくらせるんだね！
-  0x000BB0E8 [0xFFFE] [script:88 10]りあき
-  0x000BB178 [0xFFFE] [script:D0 10]りあき
-  0x000BB210 [0xFFFE] [script:1C 11]りあき
-  0x000BB28A [0xFFFE] [script:A9 00]クちグ
+  0x000BB0AA [0xFFFE] [script:7E 10]街のみんなは、グルガ様の帰りを\n心よりお待ちしておりますわ
+  0x000BB15C [0xFFFE] [script:C6 10]グルガさま強いや！！
+  0x000BB1EC [0xFFFE] [script:12 11]ばんざい！グルガさま！！
+  0x00177E46 [0xFFFE] [script:57 04]いらっしゃいませ
   0x00232250 [0xFFFE] [script:D9 07]何かおいしい食べ物を\n知らないざまスか？
   --- context: 0xFFFE -> 0x800A ---
   0x0023229E [0x800A] [script:07 08]この美食家のお口を満足させる\nおいしい物が食べたいざまスよ
@@ -312,12 +311,10 @@
   0x005DEC8E [0x800A] [script:A9 18]もっとも、そんな気力も\nないだろうがな
   0x005DECF6 [0x800A] [script:D3 18]エレナ…
   --- context: 0x800A -> 0x8000 ---
-  0x005E087A [0x8000] [script:97 26]りあき
+  0x005DED36 [0x8000] [script:C8 80]もあじグうギf
   --- context: 0x8000 -> 0xFFFE ---
-  0x005E090A [0xFFFE] [script:DF 26]りあき
-  0x005E0962 [0xFFFE] [script:0B 27]りあき
-  0x005E09E4 [0xFFFE] [script:4C 27]りあき
-  0x005E0A76 [0xFFFE] [script:95 27]りあき
+  0x005E094A [0xFFFE] [script:01 27]おれは、それまでがんばる
+  0x005E09A2 [0xFFFE] [script:A9 00]ヘよI
   0x006845B7 [0xFFFE] [script:49 05]ナアeカチカカカおびほブあオ[?3581]－しにナなニナ－ナオ
   --- context: 0xFFFE -> 0x8000 ---
   0x0069B846 [0x8000] [script:84 05]この村に、ブラキアの国王だったジンバが\n逃げ込んでいるという情報が入った
@@ -365,7 +362,7 @@
   --- context: 0x8000 -> 0x800A ---
   0x0069D382 [0x800A] [script:14 13]お父さん…\nいってらっしゃい
   --- context: 0x800A -> 0x800B ---
-  0x0069DE70 [0x800B] [script:86 18]りあき
+  0x0069D3CE [0x800B] [script:01 80]ツてせ
   --- context: 0x800B -> 0xFFFE ---
   0x0069DEE4 [0xFFFE] [script:C9 18]ジンバ様がグーズから逃げ、\nこの村にいます
   0x0069DF32 [0xFFFE] [script:EE 18]詳しくはジンバ様に\n聞いて下さい
@@ -374,18 +371,17 @@
   0x0069E15E [0xFFFE] [script:FF 19]元気がないようだが…
   0x0069E1A4 [0xFFFE] [script:30 1A]グルガ様がずっとあの調子では、\nブラキアの将来も先が暗いです
   0x0069E206 [0xFFFE] [script:55 1A]グルガ様のことが心配です…
-  0x0069E3F4 [0xFFFE] [script:48 1B]りあき
-  0x0069E4B0 [0xFFFE] [script:A6 1B]りあき
+  0x0069E24F [0xFFFE] [script:00 0A]ギナグタゴfギいギいギえギあ
+  0x0069E468 [0xFFFE] [script:9C 1B]勇者グルガよ、\n再びこの国を救ってくれい
   0x0069E524 [0xFFFE] [script:E9 1B]バンザ山に行くのですね\nお気をつけください
-  0x0069E5B8 [0xFFFE] [script:2A 1C]りあき
+  0x0069E578 [0xFFFE] [script:20 1C]勇者グルガの復活ですね！
   0x0069E7AE [0xFFFE] [script:29 1D]この国はどんどん良くなってゆく
   0x0069E7F2 [0xFFFE] [script:4D 1D]これも、グルガやあなた達のおかげですな
   0x0069E840 [0xFFFE] [script:71 1D]グルガ様、がんばってください
   0x0069E888 [0xFFFE] [script:9B 1D]私もグルガ様のように\n強くなりたいものです
-  0x0069E90A [0xFFFE] [script:D3 1D]りあき
-  0x0069E990 [0xFFFE] [script:16 1E]りあき
+  0x0069E8DC [0xFFFE] [script:C9 1D]グルガ、がんばれ
   --- context: 0xFFFE -> 0x0006 ---
-  0x0069EA14 [0x0006] [script:58 1E]りあき
+  0x0069E9D0 [0x0006] [script:A9 00]UへI
   --- context: 0x0006 -> 0xFFFE ---
   0x0069EBCE [0xFFFE] [script:40 1F]人間はやはり、\n自由の元に生きるべきじゃの
   0x0069EC26 [0xFFFE] [script:6B 1F]再び、私達の手に\n自由が戻ってきました
@@ -422,7 +418,7 @@
   --- context: 0x800A -> 0xFFFE ---
   0x0075BE6A [0xFFFE] [script:B9 0A]あれ？\nところでグルガはどうしたんだ
   0x0075BEB2 [0xFFFE] [script:DF 0A]こんな時こそ\nグルガの力が必要なんだ
-  0x0075BF03 [0xFFFE] [script:00 00]ギくグ水ギ
+  0x00815120 [0xFFFE] [script:D7 05]着いたよ！
   --- context: 0xFFFE -> 0x8005 ---
   0x0081524A [0x8005] [script:6F 06](また転んでる…)
   --- context: 0x8005 -> 0x8006 ---
@@ -791,9 +787,9 @@
   --- context: 0x8005 -> 0x8006 ---
   0x00B0AD02 [0x8006] [script:52 08]とにかく、レイガルって奴がくさいな
   --- context: 0x8006 -> 0x8008 ---
-  0x00B0B02C [0x8008] [script:E2 09]りあき
+  0x00B0AD56 [0x8008] [script:A2 00]hけく
   --- context: 0x8008 -> 0xFFFE ---
-  0x00B0B0A1 [0xFFFE] [script:80 00]ギッグタグK
+  0x00B26636 [0xFFFE] [script:50 05]っじつちhふ
   --- context: 0xFFFE -> 0x8000 ---
   0x00BC7834 [0x8000] [script:25 09]エレナ、よくお聞き
   0x00BC7872 [0x8000] [script:49 09]私はお前の、本当の父親ではない
@@ -813,7 +809,7 @@
   --- context: 0x8003 -> 0x800B ---
   0x00BC7BCC [0x800B] [script:EE 0A]エレナ！？
   --- context: 0x800B -> 0x8000 ---
-  0x00BC7C1A [0x8000] [script:CD 00]ラギラギぐ
+  0x00C54698 [0x8000] [script:90 08][?3303]ギちチ
   --- context: 0x8000 -> 0x8005 ---
   0x00C79854 [0x8005] [script:AE 08]ああ、どうしよう
   0x00C79890 [0x8005] [script:D1 08]取りに戻りたいけどモンスターが…

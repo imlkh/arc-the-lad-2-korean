@@ -418,6 +418,32 @@ The 16-bit LE value at template positions +4, +20, and +34 identifies the dialog
 
 When the context opcode changes between consecutive template blocks, there are typically additional non-template event script bytes at the transition point (e.g., 22 bytes of scene setup commands between the `0x8009` and `0x8001` groups).
 
+### Context-Transition Preamble Blocks (10 bytes each)
+
+At context transitions, chains of 10-byte **preamble blocks** appear in the gap between templates (or between the last dialogue string and the next template). Each block uses the event script opcode `28 01` with parameter `07 00`:
+
+```
+Offset  Bytes       Description
+------  ----------  -----------
++0      28 01       Fixed opcode (same as template +6, but with different param)
++2      07 00       Fixed parameter (template uses F0 0B)
++4      XX XX       Flags: 00 00 (first in pair) or 01 00 (second in pair)
++6      YY ZZ       Context group ID (e.g., 09 80 / 09 81)
++8      [PP QQ]     Pointer (varies)
+```
+
+These always appear in **pairs** (20 bytes), mirroring the dual-operation pattern of the 48-byte template. At complex transitions, **chains of 2–12+ pairs** (20–120+ bytes) can appear, one pair per context group involved in the transition.
+
+Example (2-pair chain from SB00.STG, immediately before a template):
+
+```
+28 01 07 00  00 00  09 80  D4 16   ← pair 1, first half  (context 0x8009)
+28 01 07 00  01 00  09 81  ED 16   ← pair 1, second half
+23 01 F0 8B  ...                    ← 48-byte template follows
+```
+
+**Decoder note:** Because the bytes `28 01 07` happen to map to valid character IDs (り=0x28, あ=0x01, き=0x07), the preamble can be misinterpreted as the nonsense text "りあき" if not explicitly excluded. The decoder (`decode_text.py`) identifies all `28 01 07 00` sequences in the gap and excludes their byte ranges from the dialogue search.
+
 ## Key Functions (MIPS Disassembly)
 
 ### SDIC.BIN (System Dialogue Controller)

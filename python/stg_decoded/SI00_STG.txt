@@ -1,4 +1,4 @@
-# SI00.STG — 2179 dialogues, 2197 templates (13 bare, 5 missed)
+# SI00.STG — 2178 dialogues, 2197 templates (13 bare, 6 missed)
 
   0x000B3D48 [0x8006] [script:40 05]サワサワ
   0x000B3D86 [0x8006] [script:62 05]・・・木なの
@@ -603,7 +603,7 @@
   0x00176CE6 [0xFFFE] [script:E4 37]そういえばあたしちょこちゃんに\n似てる女の子知ってる！
   0x00176D3C [0xFFFE] [script:06 38]え～と、ほら、赤い服着てて…
   0x00176D80 [0xFFFE] [script:2B 38]う～ん、[delay:09]どうしても思い出せないわ
-  0x00176E06 [0xFFFE] [script:67 38]りあき
+  0x00176DD0 [0xFFFE] [script:5D 38]ちょこちゃん[opt]ひさしぶりね
   0x00176E84 [0xFFFE] [script:A3 38]あのね
   0x00176EBA [0xFFFE] [script:C7 38]知らない人と話しちゃいけないってね
   0x00176F02 [0xFFFE] [script:E4 38]パパが言うの
@@ -689,7 +689,7 @@
   0x00178098 [0xFFFE] [script:B3 41]それ以上近づかないで！
   0x001780EA [0xFFFE] [script:DC 41]あなた本当にちょこなの？
   0x00178132 [0xFFFE] [script:FD 41]いっ[delay:07]いや！
-  0x00178174 [0xFFFE] [script:31 42]わしあギま
+  0x002019A8 [0xFFFE] [script:F9 07]ギくチ
   0x0022A0E2 [0xFFFE] [script:30 08]あぁ、どんどんゴミがたまっていくよぉ
   0x0022A128 [0xFFFE] [script:53 08]でもこのほうが落ち着くんだよなぁ
   0x0022A174 [0xFFFE] [script:7F 08]いっしょに暮らしていると\nだんだん愛着がわいてきて
@@ -1286,7 +1286,7 @@
   0x002F0414 [0x8007] [script:C9 0A]俺達を足止めさせようってのか！
   0x002F0F8A [0x8007] [script:7F 10]教会に急ぐぞ
   --- context: 0x8007 -> 0x8000 ---
-  0x002F0FCF [0x8000] [script:00 00]ギDたン
+  0x0044F035 [0x8000] [script:E2 04]みぴブゥホろルげト
   --- context: 0x8000 -> 0x8008 ---
   0x00465C86 [0x8008] [script:1F 05][FF:08 09 01]シルバ・・・殺され・・・ちゃっ・・・
   --- context: 0x8008 -> 0x8006 ---
@@ -2099,7 +2099,7 @@
   0x00D40F1C [0xFFFE] [script:B8 15]こんにちは
   0x00D40F5C [0xFFFE] [script:E4 15]今度ラマダ寺に拳法ならいに\nいこうかなぁ…
   0x00D40FB4 [0xFFFE] [script:08 16]ここはペイサスの街だよ
-  0x00D40FFA [0xFFFE] [script:00 00]TCさギ
+  0x00DFD3B4 [0xFFFE] [script:77 04]わしはこのまま「殉教者の塔」に移動する
   --- context: 0xFFFE -> 0x8005 ---
   0x00DFD402 [0x8005] [script:A1 04]いいか、このタワー自体が\nアークを葬る為の罠なのだ
   0x00DFD456 [0x8005] [script:C8 04]奴を絶対に\nこの塔から出すでないぞ！
@@ -2501,9 +2501,7 @@
   --- context: 0x8000 -> 0xFFFE ---
   0x0102FE0E [0xFFFE] [script:9D 2D]シルバーノアで、あなたの\n帰りを待ちわびているわ
   0x0102FE74 [0xFFFE] [script:CC 2D]アーク[delay:07]・[delay:07]・[delay:07]・
-  --- context: 0xFFFE -> 0x801F ---
-  0x0102FEE0 [0x801F] [script:FC 2D]りあき
-  --- context: 0x801F -> 0x0006 ---
+  --- context: 0xFFFE -> 0x0006 ---
   0x0102FF56 [0x0006] [script:37 2E]ベッドで休む？
   --- context: 0x0006 -> 0x8000 ---
   0x010302E4 [0x8000] [script:01 30]はやく、アンデルをくい止めて
@@ -2540,13 +2538,13 @@
   0x01030FBC [0x8006] [script:69 36]おかえりなさい
   --- context: 0x8006 -> 0x8013 ---
   0x01030FF6 [0x8013] [script:91 36]またパレンシアにいきたければ、\nいつでも声をかけて
-  0x01031184 [0x8013] [script:4E 37]りあき
+  0x0103104A [0x8013] [script:00 80]ぼぺりあカあ
   --- context: 0x8013 -> 0xFFFE ---
   0x0103124C [0xFFFE] [script:BF 37]パレンシアにいく準備が出来たら、\nいつでも声をかけて
   0x010312AA [0xFFFE] [script:E4 37]持ち物が多すぎるようね
   0x010312EC [0xFFFE] [script:08 38]なにか使うか、捨てるかしてみてください
   0x01031334 [0xFFFE] [script:33 38]パレンシアにいく準備が出来たら、\nいつでも声をかけて
-  0x010313AC [0xFFFE] [script:62 38]りあき
+  0x01031390 [0xFFFE] [script:A9 00]クぞわかったわ…
   0x0103159C [0xFFFE] [script:5C 39][name:01]をあずけましょう
   0x010319CA [0xFFFE] [script:7E 3B]トウヴィルにもどってくるときは、\n[name:01]を使ってください
   0x01031A24 [0xFFFE] [script:9F 3B]さあ、目を閉じて
@@ -2791,7 +2789,7 @@
   0x01266F64 [0x8006] [script:ED 1A][box:speech]まだいたの？
   0x01266FA2 [0x8006] [script:16 1B][box:speech]こっちはぼくにまかせて、\n早くククルの所へ！
   0x01267012 [0x8006] [script:4B 1B][box:speech][name:01]を使えば、\nワープできるよ
-  0x01267062 [0x8006] [script:06 80]Pひよ
+  0x01370048 [0x8006] [script:C2 22]をQも[?3559]すち
   --- context: 0x8006 -> 0x801E ---
   0x014974FA [0x801E] [script:23 23]お前達につぶされたキメラ研究所を\n再興させるためだ！
   0x01497552 [0x801E] [script:4E 23]その卵で、強力なキメラを造り\nロマリア王にけん上する
@@ -2995,7 +2993,7 @@
   --- context: 0x8006 -> 0x8010 ---
   0x01B3E756 [0x8010] [script:FE 0B][item:10][?3565]あギあギ[?239][?3948][FF:8B 00 8C]
   --- context: 0x8010 -> 0x0BFC ---
-  0x01B3E7CC [0x0BFC] [script:ED 00][?3948][FF:8B 00 8C]おデかデ
+  0x01BC89B8 [0x0BFC] [script:AE 04]にあュあわあPあオせょあぜに8げvたョソ
   --- context: 0x0BFC -> 0x8010 ---
   0x01BF8530 [0x8010] [script:DF 04][box:speech]もしかして、私の仕事を引き受けて\nくれたのはあなた？
   0x01BF858A [0x8010] [script:09 05][box:speech]「息子を捕まえて欲しい」\nって仕事よ
@@ -3038,33 +3036,33 @@
   0x01BF95E0 [0x8014] [script:2B 0D][box:speech]ご、ごめんなさーい！！
   0x01BF9622 [0x8014] [script:4E 0D][box:speech]もう、いたずらはしませーん！！
   0x01BF966C [0x8014] [script:71 0D][box:speech]お、お母ちゃーん！！
-  0x01BF9B00 [0x8014] [script:B8 0F]りあき
+  0x01BF96B2 [0x8014] [script:2D 8C]をデおギりあをしあ
   --- context: 0x8014 -> 0xFFFE ---
-  0x01BF9B5A [0xFFFE] [script:E5 0F]りあき
-  0x01BF9BB0 [0xFFFE] [script:10 10]りあき
-  0x01BF9C0A [0xFFFE] [script:3D 10]りあき
-  0x01BF9C60 [0xFFFE] [script:68 10]りあき
-  0x01BF9CB6 [0xFFFE] [script:93 10]りあき
-  0x01BF9D0E [0xFFFE] [script:BF 10]りあき
-  0x01BF9D68 [0xFFFE] [script:EC 10]りあき
-  0x01BF9DBE [0xFFFE] [script:17 11]りあき
-  0x01BF9E14 [0xFFFE] [script:42 11]りあき
-  0x01BF9E6C [0xFFFE] [script:6E 11]りあき
-  0x01BF9EC2 [0xFFFE] [script:99 11]りあき
-  0x01BF9F1A [0xFFFE] [script:C5 11]りあき
-  0x01BF9F8A [0xFFFE] [script:FD 11]りあき
-  0x01BF9FF8 [0xFFFE] [script:34 12]りあき
-  0x01BFA066 [0xFFFE] [script:6B 12]りあき
-  0x01BFA0CE [0xFFFE] [script:9F 12]りあき
-  0x01BFA138 [0xFFFE] [script:D4 12]りあき
-  0x01BFA1A2 [0xFFFE] [script:09 13]りあき
-  0x01BFA206 [0xFFFE] [script:3B 13]りあき
-  0x01BFA272 [0xFFFE] [script:71 13]りあき
-  0x01BFA2DE [0xFFFE] [script:A7 13]りあき
-  0x01BFA34C [0xFFFE] [script:DE 13]りあき
-  0x01BFA3B4 [0xFFFE] [script:12 14]りあき
-  0x01BFA422 [0xFFFE] [script:49 14]りあき
-  0x01BFA480 [0xFFFE] [script:78 14]りあき
+  0x01BF9B40 [0xFFFE] [script:DB 0F][box:speech]はい、そうですけれど
+  0x01BF9B9A [0xFFFE] [script:06 10][box:speech]ええ、そうです
+  0x01BF9BF0 [0xFFFE] [script:33 10][box:speech]ああ、その通りだが
+  0x01BF9C4A [0xFFFE] [script:5E 10][box:speech]ええ、そうよ
+  0x01BF9CA0 [0xFFFE] [script:89 10][box:speech]うむ、そうだが
+  0x01BF9CF6 [0xFFFE] [script:B5 10][box:speech]ハんターデスじゃ
+  0x01BF9D4E [0xFFFE] [script:E2 10][box:speech]・・・そうです
+  0x01BF9DA8 [0xFFFE] [script:0D 11][box:speech]うん、そうだよ
+  0x01BF9DFE [0xFFFE] [script:38 11][box:speech]おお、そうだぜ
+  0x01BF9E54 [0xFFFE] [script:64 11][box:speech]うむ、そうですが
+  0x01BF9EAC [0xFFFE] [script:8F 11][box:speech]ええ、そうじゃ
+  0x01BF9F02 [0xFFFE] [script:BB 11][box:speech]はーい、そうでーす
+  0x01BF9F5A [0xFFFE] [script:35 00]おギI
+  0x01BF9FCA [0xFFFE] [script:2A 12][box:speech]その仕事なら、たった今\n引き受けてきましたけど
+  0x01BFA038 [0xFFFE] [script:61 12][box:speech]もしかして、ちょうど今\n引き受けた仕事かしら
+  0x01BFA0A6 [0xFFFE] [script:95 12][box:speech]ついさっき引き受けた\n仕事のことだな
+  0x01BFA10E [0xFFFE] [script:CA 12][box:speech]あら、ついさっき引き受けた\n仕事のことね
+  0x01BFA178 [0xFFFE] [script:FF 12][box:speech]ああ、先ほど引き受けた\n仕事のことだな
+  0x01BFA1E2 [0xFFFE] [script:31 13][box:speech]そノしごト、イマさっキ\nひきウケたゾ
+  0x01BFA246 [0xFFFE] [script:67 13][box:speech]ええ、それなら今ちょうど\n引き受けてきました
+  0x01BFA2B2 [0xFFFE] [script:9D 13][box:speech]それって、たった今\n引き受けた仕事かなぁ
+  0x01BFA31E [0xFFFE] [script:D4 13][box:speech]なんだ、今さっきちょうど\n引き受けた仕事だぜ
+  0x01BFA38C [0xFFFE] [script:08 14][box:speech]うむ、ついさっき\n引き受けた仕事だな
+  0x01BFA3F4 [0xFFFE] [script:3F 14][box:speech]ふぉっふぉっ、今しがた\n引き受けた仕事じゃのぅ
+  0x01BFA462 [0xFFFE] [script:6E 14][box:speech]えー、さっき引き受けたのー
   0x01BFA4D0 [0xFFFE] [script:A8 14][box:speech]あら、どうしたの？\n捕まらないの？
   --- context: 0xFFFE -> 0x8010 ---
   0x01BFA51C [0x8010] [script:D0 14][box:speech]もう、捕まえるのを\nあきらめてしまうの？

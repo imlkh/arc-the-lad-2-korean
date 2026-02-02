@@ -80,11 +80,11 @@
   0x000B4440 [0xFFFE] [script:ED 28][box:speech]ヤゴス島、よいとこ\nでも遺跡にモンスターいる[cursor]・・・[box:speech]困った
   0x000B44BE [0xFFFE] [script:24 29][box:speech]森の小道、奥に博士いる\nリアもいっしょいた
   0x000B4514 [0xFFFE] [script:47 29][box:speech]でも、リア、もう会えないか？
-  0x000B457E [0xFFFE] [script:77 29]りあき
+  0x000B4569 [0xFFFE] [script:00 FF]くうあだいじょうぶよ
   --- context: 0xFFFE -> 0x0006 ---
   0x000B45F4 [0x0006] [script:B6 29][box:speech]リア、もう会えないか？
   --- context: 0x0006 -> 0xFFFE ---
-  0x000B465C [0xFFFE] [script:E6 29]りあき
+  0x000B4647 [0xFFFE] [script:00 FF]くうあだいじょうぶよ
   --- context: 0xFFFE -> 0x0006 ---
   0x000B46D2 [0x0006] [script:2A 2A][box:speech]リア、かわいい\n私、むすめのよう思う
   --- context: 0x0006 -> 0xFFFE ---
@@ -147,20 +147,20 @@
   0x000B69F8 [0xFFFE] [script:BF 3B][box:speech]がんばった、あなたには\nサンキュー、サンキュー！
   0x000B74F4 [0xFFFE] [script:45 41][box:speech]見なれない男たくさん来た\n[cursor]・・・[box:speech]何か様子変
   0x000B755E [0xFFFE] [script:73 41][box:speech]ヤゴス島、昼はポカポカ\nでも夜は寝苦しい
-  0x000B8322 [0xFFFE] [script:49 48]りあき
+  0x000B75B8 [0xFFFE] [script:28 01][box:system]あギプべJ
   --- context: 0xFFFE -> 0x0006 ---
-  0x000B837A [0x0006] [script:75 48]りあき
-  0x000B83D2 [0x0006] [script:A1 48]りあき
-  0x000B8428 [0x0006] [script:CC 48]りあき
-  0x000B8480 [0x0006] [script:F8 48]りあき
-  0x000B84D8 [0x0006] [script:24 49]りあき
-  0x000B8532 [0x0006] [script:51 49]りあき
-  0x000B858A [0x0006] [script:7D 49]りあき
-  0x000B85E2 [0x0006] [script:A9 49]りあき
-  0x000B863C [0x0006] [script:D6 49]りあき
-  0x000B8698 [0x0006] [script:04 4A]りあき
-  0x000B86F4 [0x0006] [script:32 4A]りあき
-  0x000B874C [0x0006] [script:5E 4A]りあき
+  0x000B8362 [0x0006] [script:6B 48][box:speech]いないのかしら…
+  0x000B83BA [0x0006] [script:97 48][box:speech]留守みたいね…
+  0x000B8412 [0x0006] [script:C2 48][box:speech]留守、か…
+  0x000B8468 [0x0006] [script:EE 48][box:speech]ダれもいナイぞ…
+  0x000B84C0 [0x0006] [script:1A 49][box:speech]留守みたい…
+  0x000B8518 [0x0006] [script:47 49][box:speech]留守みたいだな…
+  0x000B8572 [0x0006] [script:73 49][box:speech]留守のようだ…
+  0x000B85CA [0x0006] [script:9F 49][box:speech]いないみたいだね…
+  0x000B8622 [0x0006] [script:CC 49][box:speech]こりゃ留守だぜ…
+  0x000B867C [0x0006] [script:FA 49][box:speech]人の気配はないぞ…
+  0x000B86D8 [0x0006] [script:28 4A][box:speech]留守のようじゃわい…
+  0x000B8734 [0x0006] [script:54 4A][box:speech]だれもいないよー
   0x000B87BA [0x0006] [script:A1 4A][box:speech]お客さん、よく来たね、\nさあさあ、何買うか？
   --- context: 0x0006 -> 0x800A ---
   0x000B8D3C [0x800A] [script:5A 4D][box:speech]ありがとう、また来るね
@@ -250,7 +250,7 @@
   0x000BC120 [0x800A] [script:4C 67][box:speech]はい、これで話は終わり
   0x000BC168 [0x800A] [script:72 67][box:speech]さあさあ、何か買っていくか？
   0x000BC6E2 [0x800A] [script:2D 6A][box:speech]ありがとう、また来るね
-  0x000BC72A [0x800A] [script:22 8C]めデ[?2789]ほギくギゆギ
+  0x0013D255 [0x800A] [script:28 08]ギbりくギりるくギりるくギりるくギりるくギりるくギりるくギりるくギりるくギ
   --- context: 0x800A -> 0x8006 ---
   0x00176144 [0x8006] [script:4A 08]だから家にふろある、これじまん
   0x00176188 [0x8006] [script:6B 08]あんた、私のふろ見たいか？
@@ -345,7 +345,7 @@
   0x00177C3E [0x8005] [script:C5 15](考えんのやめとこ)
   0x00177C84 [0x8005] [script:F2 15]私、こんなに、きれい好き\nなのによめさん来ない・・
   --- context: 0x8005 -> 0x8007 ---
-  0x00177CE2 [0x8007] [script:40 83]タグえギ
+  0x001CEE9E [0x8007] [script:2A 06]ぱいを儀み闘へじbまウdびtぼいあんそいそ9つ願へ、[?3554]むげい[FF:0E E0 0F]ほし道ばあvめんあもいyんがおせ[FF:00 32 E1]水むせ8アついむあ[?239]たち9[FF:00 FF AB]ぐs！めいたぎま[FF:F1 FE 50]あめ6びま火そもいょ[?3734]ぴへv。ず水むへ0ぉんてい風ぼう[?3130]つ[opt]げユげy5むせもいxち[?3543]ほyを[opt]vもqヒ方もいっ殴fミ…
   --- context: 0x8007 -> 0x8006 ---
   0x00230B00 [0x8006] [script:49 06]ここは・・・？
   --- context: 0x8006 -> 0x8005 ---
@@ -433,9 +433,9 @@
   --- context: 0x8005 -> 0x8007 ---
   0x00234ADE [0x8007] [script:48 26]ひこうせんなら村の外のかせつくうこうに\nあるっておじいちゃんが言ってたよ
   --- context: 0x8007 -> 0xFFFE ---
-  0x00234B46 [0xFFFE] [script:20 81]ッギかギ
+  0x002A561C [0xFFFE] [script:F1 04]シがげ
   --- context: 0xFFFE -> 0x8006 ---
-  0x002F0AB6 [0x8006] [script:93 05]りあき
+  0x002F09B5 [0x8006] [script:00 00]ギっうf
   --- context: 0x8006 -> 0x0006 ---
   0x002F0DA2 [0x0006] [script:07 07]なんだ！？
   --- context: 0x0006 -> 0x8005 ---
@@ -736,7 +736,7 @@
   --- context: 0x8003 -> 0x8001 ---
   0x00526AB6 [0x8001] [script:5A 0A]んじゃ、じいさん、世話になったな
   --- context: 0x8001 -> 0x8000 ---
-  0x00526B08 [0x8000] [script:04 80]1しよ
+  0x005CBA31 [0x8000] [script:26 06]げぴゆSヤど
   --- context: 0x8000 -> 0x8006 ---
   0x005DD99C [0x8006] [script:4C 06]モンスターの\n住みやすそうな環境だな
   --- context: 0x8006 -> 0x8005 ---
@@ -909,7 +909,7 @@
   0x006A0306 [0x8007] [script:81 16]またねー
   0x006A05B8 [0x8007] [script:DD 17]こっちが近道なのー
   0x006A068C [0x8007] [script:47 18]こっちが近道なのー
-  0x006A06CC [0x8007] [script:3F 18]もあわデき
+  0x006EE2CC [0x8007] [script:30 05]←ついょな介たんもべeい8[?3600]とげいた水べwままfサRが眼ばそついめ
   --- context: 0x8007 -> 0x8005 ---
   0x0075568C [0x8005] [script:4C 05]知らんな
   --- context: 0x8005 -> 0x8007 ---
@@ -956,12 +956,12 @@
   --- context: 0x8007 -> 0x8006 ---
   0x00757C08 [0x8006] [script:18 18]うーむ、これは思ったより\n高度な機械じゃな・・
   --- context: 0x8006 -> 0x8007 ---
-  0x00757C9A [0x8007] [script:55 18]りあき
+  0x00757C7D [0x8007] [script:00 F4]ヘ行船のほうもおねがいしますね
   --- context: 0x8007 -> 0x0006 ---
   0x00757D08 [0x0006] [script:8B 18]わかっとるわい
   --- context: 0x0006 -> 0x8007 ---
   0x00757D50 [0x8007] [script:B4 18]ふむふむ、ここがこーなって・・
-  0x00757DD4 [0x8007] [script:F2 18]りあき
+  0x00757DB8 [0x8007] [script:F0 06]もう何も聞こえてないみたい)
   --- context: 0x8007 -> 0x0006 ---
   0x00757E50 [0x0006] [script:35 19]・・・・・・・・・
   --- context: 0x0006 -> 0x8008 ---

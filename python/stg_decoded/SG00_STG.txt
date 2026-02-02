@@ -1,4 +1,4 @@
-# SG00.STG — 1493 dialogues, 1513 templates (6 bare, 14 missed)
+# SG00.STG — 1492 dialogues, 1513 templates (6 bare, 15 missed)
 
   0x000BC46E [0x8014] [script:C9 1E]よし[opt][delay:15]宝物を探そう
   0x000BC4F2 [0x8014] [script:09 1F]ん？[delay:15]何かあるぞ！
@@ -175,32 +175,31 @@
   --- context: 0x8010 -> 0x8005 ---
   0x0051CDDA [0x8005] [script:7C 0A]あなたはここにいて、この女の子を守ってて
   0x0051CE34 [0x8005] [script:A1 0A]大丈夫よ
-  0x0051CEEE [0x8005] [script:FF 0A]りあき
+  0x0051CE74 [0x8005] [script:00 80]Iんよ
   --- context: 0x8005 -> 0xFFFE ---
-  0x0051CF46 [0xFFFE] [script:2B 0B]りあき
-  0x0051CF98 [0xFFFE] [script:54 0B]りあき
-  0x0051CFF4 [0xFFFE] [script:82 0B]りあき
-  0x0051D044 [0xFFFE] [script:AA 0B]りあき
-  0x0051D0A2 [0xFFFE] [script:D9 0B]りあき
-  0x0051D106 [0xFFFE] [script:0B 0C]りあき
-  0x0051D162 [0xFFFE] [script:39 0C]りあき
-  0x0051D1B0 [0xFFFE] [script:60 0C]りあき
-  0x0051D200 [0xFFFE] [script:88 0C]りあき
-  0x0051D252 [0xFFFE] [script:B1 0C]りあき
-  0x0051D2A6 [0xFFFE] [script:DB 0C]りあき
-  0x0051D302 [0xFFFE] [script:09 0D]りあき
-  0x0051D358 [0xFFFE] [script:34 0D]りあき
-  0x0051D3AA [0xFFFE] [script:5D 0D]りあき
-  0x0051D3FE [0xFFFE] [script:87 0D]りあき
-  0x0051D456 [0xFFFE] [script:B3 0D]りあき
-  0x0051D4B0 [0xFFFE] [script:E0 0D]りあき
-  0x0051D506 [0xFFFE] [script:0B 0E]りあき
-  0x0051D566 [0xFFFE] [script:3B 0E]りあき
-  0x0051D5BE [0xFFFE] [script:67 0E]りあき
-  0x0051D612 [0xFFFE] [script:91 0E]りあき
-  0x0051D666 [0xFFFE] [script:BB 0E]りあき
-  0x0051D6B8 [0xFFFE] [script:E4 0E]りあき
-  0x0051D70C [0xFFFE] [script:0E 0F]りあき
+  0x0051CF2E [0xFFFE] [script:21 0B]どうしよう、きっと罠だよ
+  0x0051CF86 [0xFFFE] [script:4A 0B]みえみえだな
+  0x0051CFD8 [0xFFFE] [script:78 0B]こんな罠子供でも気づくぜ
+  0x0051D034 [0xFFFE] [script:A0 0B]罠だな
+  0x0051D084 [0xFFFE] [script:CF 0B]ほっほっほ、わかりやすい罠じゃのう
+  0x0051D0E2 [0xFFFE] [script:01 0C]・[delay:0B]・[delay:0B]・どう考えても罠だな
+  0x0051D146 [0xFFFE] [script:2F 0C]どうしましょう、きっと罠ですよ
+  0x0051D1F0 [0xFFFE] [script:7E 0C]罠だな
+  0x0051D240 [0xFFFE] [script:A7 0C]よバレてルゾ？
+  0x0051D292 [0xFFFE] [script:D1 0C]罠ね、どうする？
+  0x0051D2E6 [0xFFFE] [script:FF 0C]罠か・[delay:0B]・[delay:0B]・
+  0x0051D342 [0xFFFE] [script:A9 00]れす大丈夫か？
+  0x0051D398 [0xFFFE] [script:53 0D]大丈夫？
+  0x0051D3EA [0xFFFE] [script:7D 0D]大丈夫かい？
+  0x0051D43E [0xFFFE] [script:A9 0D]一人で大丈夫か？
+  0x0051D496 [0xFFFE] [script:D6 0D]一人で大丈夫かの？
+  0x0051D4F0 [0xFFFE] [script:01 0E]おい、大丈夫かよ
+  0x0051D546 [0xFFFE] [script:31 0E]一人で大丈夫ですか・・・
+  0x0051D5A6 [0xFFFE] [script:5D 0E]一人で大丈夫？
+  0x0051D5FE [0xFFFE] [script:87 0E]大丈夫か？
+  0x0051D652 [0xFFFE] [script:B1 0E]ヒとリでイイのカ？
+  0x0051D6A6 [0xFFFE] [script:DA 0E]大丈夫？
+  0x0051D6F8 [0xFFFE] [script:04 0F]大丈夫か？
   0x0051D808 [0xFFFE] [script:8F 0F]大丈夫、何ともないわ
   --- context: 0xFFFE -> 0x8005 ---
   0x0051D85A [0x8005] [script:B7 0F]モンスターはやっつけたわ
@@ -223,19 +222,19 @@
   0x0051EA12 [0x8005] [script:9F 18]聖柩が奪われ、\n闇の力の封印が解かれようとしてます
   0x0051EAC6 [0x8005] [script:F1 18]お願いします、私に力をかしてください
   0x0051EBD0 [0x8005] [script:73 19]とんでもない事って一体？
-  0x0051EF12 [0x8005] [script:11 1B]りあき
+  0x0051EC16 [0x8005] [script:A9 00]Dの[opt][opt][opt][opt][opt]知っとるじゃろうが、\n[opt][opt][opt]聖柩自体にはなんの力もない
   --- context: 0x8005 -> 0xFFFE ---
-  0x0051EF6A [0xFFFE] [script:3D 1B]りあき
-  0x0051EFBE [0xFFFE] [script:67 1B]りあき
-  0x0051F012 [0xFFFE] [script:91 1B]りあき
-  0x0051F066 [0xFFFE] [script:BB 1B]りあき
-  0x0051F0BC [0xFFFE] [script:E6 1B]りあき
-  0x0051F112 [0xFFFE] [script:11 1C]りあき
-  0x0051F164 [0xFFFE] [script:3A 1C]りあき
-  0x0051F1B8 [0xFFFE] [script:64 1C]りあき
-  0x0051F20C [0xFFFE] [script:8E 1C]りあき
-  0x0051F25E [0xFFFE] [script:B7 1C]りあき
-  0x0051F2B2 [0xFFFE] [script:E1 1C]りあき
+  0x0051EF52 [0xFFFE] [script:33 1B]ククル！大丈夫！？
+  0x0051EFAA [0xFFFE] [script:5D 1B]大丈夫かい？
+  0x0051EFFE [0xFFFE] [script:87 1B]大丈夫か？
+  0x0051F052 [0xFFFE] [script:B1 1B]大丈夫かの？
+  0x0051F0A6 [0xFFFE] [script:DC 1B]大丈夫か、ククル
+  0x0051F0FC [0xFFFE] [script:07 1C]大丈夫ですか？
+  0x0051F152 [0xFFFE] [script:30 1C]大丈夫？
+  0x0051F1A4 [0xFFFE] [script:5A 1C]大丈夫か？
+  0x0051F1F8 [0xFFFE] [script:84 1C]ダいジョうブカ？
+  0x0051F24C [0xFFFE] [script:AD 1C]大丈夫？
+  0x0051F29E [0xFFFE] [script:D7 1C]大丈夫か？
   0x0051F3E6 [0xFFFE] [script:82 1D]風のオーブか、そんなものもう存在しないのに
   --- context: 0xFFFE -> 0x8006 ---
   0x0051F430 [0x8006] [script:A8 1D]身勝手な人間の欲が作り出したもの
@@ -1111,7 +1110,7 @@
   0x011ABF1C [0xFFFE] [script:B8 15]こんにちは
   0x011ABF5C [0xFFFE] [script:E4 15]今度ラマダ寺に拳法ならいに\nいこうかなぁ…
   0x011ABFB4 [0xFFFE] [script:08 16]ここはペイサスの街だよ
-  0x011ABFFA [0xFFFE] [script:00 00]TCさギ
+  0x012449F4 [0xFFFE] [script:12 06]Oサっブ[opt]sぃっつウ－てみS3ロYmぼダソHオクざぼぇツOやツもウぴrるぱのガペゥHダハピじガ
   --- context: 0xFFFE -> 0x800B ---
   0x0126279E [0x800B] [script:87 06][box:speech]やめろ！！
   --- context: 0x800B -> 0x8005 ---
@@ -1250,7 +1249,7 @@
   0x01559C8A [0x800A] [script:08 4F]我らの計画を邪魔する者よ
   0x01559CD0 [0x800A] [script:34 4F]アンデル様の命により、\nここから一歩も通すわけにはいかない
   0x01559D28 [0x800A] [script:5C 4F]ここで、油田と運命を\n共にするがいい！！
-  0x01559D8E [0x800A] [script:A9 00]ザょグ
+  0x01612D42 [0x800A] [script:FE 38]？？
   --- context: 0x800A -> 0x0006 ---
   0x01612D98 [0x0006] [script:29 39]！！！
   0x01612E0C [0x0006] [script:64 39]！！！！！
@@ -1391,7 +1390,7 @@
   0x0184B9E2 [0x0006] [script:76 41]一度に何人も運ぶことは不可能だ
   0x0184BF0E [0x0006] [script:0C 44]一度に何人も運ぶことは不可能だ
   0x0184C756 [0x0006] [script:2D 48]もうそろそろ引き上げなくては…
-  0x0184C79E [0x0006] [script:A3 00]もあ[opt]デ[?2917]もあ鉛げギK
+  0x018A9E53 [0x0006] [script:CD 05]でvと[?3557][?3812]そwて[?3321]
   --- context: 0x0006 -> 0x8005 ---
   0x019C2E7C [0x8005] [script:14 06]よくここまで来れたものだ、\n誉めてやろう
   --- context: 0x8005 -> 0x8014 ---
@@ -1435,7 +1434,7 @@
   --- context: 0x8005 -> 0x8014 ---
   0x019C4C7A [0x8014] [script:0C 15]ロイヤルガードまでが…
   0x019C4CB8 [0x8014] [script:30 15]しかし、貴様らはこの城には入れん
-  0x019C4D08 [0x8014] [script:2A 80]れギぶあろギろギれ
+  0x01A14E7B [0x8014] [script:64 05]bせつぱい
   --- context: 0x8014 -> 0x8007 ---
   0x01D6CA06 [0x8007] [script:26 14][box:speech]修行なさりたいお気持ちはわかりますが、
   0x01D6CA58 [0x8007] [script:4E 14][box:speech]その人数では、修行になりません…
@@ -1491,7 +1490,7 @@
   0x01D73E68 [0x8007] [script:55 4E][box:speech]見事な腕前を見せてくれたな…
   0x01D73EB2 [0x8007] [script:7A 4E][box:speech]おぬしには、特別にこれを与えよう
   0x01D73F3E [0x8007] [script:BD 4E][box:speech]大事にしてやるがよいぞ
-  0x01D73F90 [0x8007] [script:E3 1D]バほるまtまノみらあぢデおギL
+  0x01DF8B55 [0x8007] [script:69 05]？ビのロオくにブポZ
   --- context: 0x8007 -> 0x8005 ---
   0x01E2C506 [0x8005] [script:98 05][box:speech]わたくし、キャッチー・マママンから、\nご説明をさせていただきます
   0x01E2C570 [0x8005] [script:C2 05][box:speech]何をお聞きになりたいですか？
@@ -1617,7 +1616,7 @@
   0x0212167C [0x8006] [script:BD 0E][box:speech]・・・・・
   0x021216C4 [0x8006] [script:E2 0E][box:speech]ホルンの村を滅ぼせ…
   0x0212170E [0x8006] [script:11 0F][box:speech]なんだか、お客さんが来るのが\nひさしぶりな気がするよ
-  0x02121772 [0x8006] [script:05 00]nギじそもあfギnギB
+  0x0216283F [0x8006] [script:FF 04]ガきbぶ
   --- context: 0x8006 -> 0x8000 ---
   0x021DD116 [0x8000] [script:19 05]…
   --- context: 0x8000 -> 0x8005 ---
@@ -1658,7 +1657,7 @@
   --- context: 0x8005 -> 0x8000 ---
   0x021DECA6 [0x8000] [script:E5 12]何の用だい？
   0x021DECE4 [0x8000] [script:0E 13]ちゃんとモンスターたちを、\nかわいがってあげるんだよ
-  0x021DED3A [0x8000] [script:00 80]ぜてよ
+  0x0222E262 [0x8000] [script:DC 04]をちつとせ製[opt]し災つぐいつ納[FF:E0 EF 1B]走むぐいそ義い[?4047]すいどつむ素巻uど火ぐいためぐ眼そ[?3761]ま眼うげ
   --- context: 0x8000 -> 0x8005 ---
   0x022943EA [0x8005] [script:06 05][box:speech]仕掛ける爆薬は3つ、
   0x0229446A [0x8005] [script:41 05][box:speech]ここと…
@@ -1755,7 +1754,7 @@
   --- context: 0xFFFE -> 0x800D ---
   0x02356DFC [0x800D] [script:D6 26]このキザやろうなまいきなんだよなぁ
   0x02356E44 [0x800D] [script:05 27]おれには、ジャイアントバット一匹\nやれないなんて言いやがんだなぁ
-  0x02356F2A [0x800D] [script:69 27]りあき
+  0x02356F06 [0x800D] [script:5F 27]ほっとくにかぎるのぉ・・
   --- context: 0x800D -> 0x0006 ---
   0x02356FA0 [0x0006] [script:AB 27]ほっときましょう\nこんなひとたち・・
   --- context: 0x0006 -> 0x8000 ---
@@ -1791,7 +1790,7 @@
   0x02413C14 [0x8006] [script:28 10]しかし、わしを倒した先に、お前達が目にする\nものは人間の愚かさ、みにくさ、自分たちの\n無力さだけだ…
   0x02413C8C [0x8006] [script:49 10]進むがいい絶望への道を
   0x02413CCE [0x8006] [script:7D 10]お前等人間自身が、崩壊へのスイッチを押す\n瞬間を目の当たりにするがいい！！
-  0x02413D3E [0x8006] [script:09 00]かギB
+  0x0246CA44 [0x8006] [script:42 05]火ょ地めあほy[?3314]ざついがた官d。むべ。星[?4062]たつい[?3825]ゆめをーちち[?3783]ひ？ウ市いてべみ火そちす地う[?3823]！v8ついせイつ網♦！げ[?3507]ぼえそぼい
   --- context: 0x8006 -> 0x800F ---
   0x024CDD0A [0x800F] [script:D9 05]うぅわ、勘べんしてくれよ
   0x024CDF0C [0x800F] [script:D9 06]ヘッ、コウカイスルゼ
@@ -1842,7 +1841,7 @@
   0x0264541A [0x0006] [script:C6 11]よくやったわ
   --- context: 0x0006 -> 0x8005 ---
   0x02645454 [0x8005] [script:EC 11]さあ、行きましょう\n出口はすぐそこよ
-  0x026454A6 [0x8005] [script:06 00]ビつよ
+  0x026AD6CD [0x8005] [script:76 05]uぴい？。dIへぺじざうsZpすがぴいつつ込9？[FF:00 10 10]アラて水ぴい[FF:FE FE 21]ぴu8まむめイカ僕ぱい[FF:FF DF DC]そごちめち[FF:ED FC EE]たぴいがむあ鉱地[?3823]ま
   0x027BDA04 [0x8005] [script:9A 05]いや、ただ昔のことを思い出したのだ
   --- context: 0x8005 -> 0x8006 ---
   0x027BDA50 [0x8006] [script:BE 05]ゆっくりしている時間はないな
@@ -1975,7 +1974,7 @@
   0x027C1E94 [0x8000] [script:DC 27]さあ、いきましょう
   0x027C26C0 [0x8000] [script:F7 2B]姿を現せ！聖地を侵す者たちよ
   0x027C2C2A [0x8000] [script:AF 2E]精霊の力が衰えて来ているという事か…
-  0x027C2C84 [0x8000] [script:5F 87]ソゼりあオき
+  0x02853420 [0x8000] [script:66 07]ねきナニ9ょひアオあぇけおゼ
   --- context: 0x8000 -> 0x8012 ---
   0x0287BC3C [0x8012] [script:8D 07]女の子だわ
   --- context: 0x8012 -> 0x8013 ---

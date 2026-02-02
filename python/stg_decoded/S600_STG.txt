@@ -10,7 +10,7 @@
   --- context: 0x8005 -> 0x8008 ---
   0x000BC47E [0x8008] [script:6B 05][box:speech]シュウ、こっちだ！
   --- context: 0x8008 -> 0x8005 ---
-  0x000BC4C8 [0x8005] [script:08 80]sかよ
+  0x0014245D [0x8005] [script:24 05]クぶさあ
   --- context: 0x8005 -> 0x8007 ---
   0x0017841E [0x8007] [script:57 05][box:speech]俺がまだガキの頃に通った、\n地下水道の入り口さ
   --- context: 0x8007 -> 0x8005 ---
@@ -430,7 +430,7 @@
   0x0052746E [0x8005] [script:66 1A][box:close]！？
   0x005275E2 [0x8005] [script:21 1B][box:close]エルク！
   --- context: 0x8005 -> 0x8006 ---
-  0x00527626 [0x8006] [script:5F 87]ソゼりあオき
+  0x00550662 [0x8006] [script:35 05]t[opt]tそちちちむげざごう
   --- context: 0x8006 -> 0x8005 ---
   0x005E087E [0x8005] [script:68 05][box:speech]エルク、[delay:15]あなたは甘いわ[cursor]・・・
   --- context: 0x8005 -> 0x8006 ---
@@ -521,7 +521,7 @@
   0x0069FCB6 [0x8006] [script:E4 4F]アンデル、お前だけは逃がさないぞ！
   --- context: 0x8006 -> 0x8000 ---
   0x0069FFDC [0x8000] [script:74 51]くっ、時間稼ぎか！
-  0x006A0022 [0x8000] [script:8E 1E]めありジめあらジメ
+  0x00723B98 [0x8000] [script:80 05]家妬ヂゥギ
   --- context: 0x8000 -> 0x8006 ---
   0x00751EE0 [0x8006] [script:A1 05]列車が爆破されたらしい
   --- context: 0x8006 -> 0x8008 ---
@@ -813,7 +813,7 @@
   --- context: 0x8006 -> 0x8005 ---
   0x008D5834 [0x8005] [script:85 06][box:speech]さあ、ひと暴れしようかいのぉ
   --- context: 0x8005 -> 0x8006 ---
-  0x008D587E [0x8006] [script:06 80]Rきせ
+  0x009202EB [0x8006] [script:0F 0F]！6あらいいx。そそbしげ水し[FF:0F 1F F1]らいいむたい
   --- context: 0x8006 -> 0x800B ---
   0x0098B746 [0x800B] [script:3B 0F]げげ・・・(おらあもう、\n腹が減って死にそうだよ)
   --- context: 0x800B -> 0x800C ---
@@ -934,31 +934,31 @@
   --- context: 0x800C -> 0x8000 ---
   0x00B088F0 [0x8000] [script:D8 14]ここが、ぜったい安全ってわけでもないし
   0x00B08940 [0x8000] [script:F9 14]いきましょう！
-  0x00B089DC [0x8000] [script:48 15]りあき
+  0x00B08980 [0x8000] [script:0C 80]ンのげ
   --- context: 0x8000 -> 0xFFFE ---
-  0x00B08A3A [0xFFFE] [script:77 15]りあき
-  0x00B08A96 [0xFFFE] [script:A5 15]りあき
-  0x00B08AF6 [0xFFFE] [script:D5 15]りあき
-  0x00B08B56 [0xFFFE] [script:05 16]りあき
-  0x00B08BBC [0xFFFE] [script:38 16]りあき
-  0x00B08C18 [0xFFFE] [script:66 16]りあき
-  0x00B08C70 [0xFFFE] [script:92 16]りあき
-  0x00B08CC8 [0xFFFE] [script:BE 16]りあき
-  0x00B08D1E [0xFFFE] [script:E9 16]りあき
-  0x00B08D74 [0xFFFE] [script:14 17]りあき
-  0x00B08DCA [0xFFFE] [script:3F 17]りあき
-  0x00B08E2C [0xFFFE] [script:70 17]りあき
-  0x00B08E86 [0xFFFE] [script:9D 17]りあき
-  0x00B08EDA [0xFFFE] [script:C7 17]りあき
-  0x00B08F30 [0xFFFE] [script:F2 17]りあき
-  0x00B08F8C [0xFFFE] [script:20 18]りあき
-  0x00B08FF2 [0xFFFE] [script:53 18]りあき
-  0x00B09050 [0xFFFE] [script:82 18]りあき
-  0x00B090A0 [0xFFFE] [script:AA 18]りあき
-  0x00B090F0 [0xFFFE] [script:D2 18]りあき
-  0x00B0914A [0xFFFE] [script:FF 18]りあき
-  0x00B0919E [0xFFFE] [script:29 19]りあき
-  0x00B09200 [0xFFFE] [script:5A 19]りあき
+  0x00B08A1C [0xFFFE] [script:6D 15]ねぇ、そのモンスターはどこにいるの？
+  0x00B08A7A [0xFFFE] [script:9B 15]そのモンスターはどこにいるんだ？
+  0x00B08AD6 [0xFFFE] [script:CB 15]そのモンスターがどこにいるのかわかるか？
+  0x00B08B36 [0xFFFE] [script:FB 15]そのモンスターがどこにおるのかわかるのか？
+  0x00B08B96 [0xFFFE] [script:2E 16]でも、そのモンスターは\n一体どこにいるんだ
+  0x00B08BFC [0xFFFE] [script:5C 16]モンスターがどこにいるかわかる？
+  0x00B08C58 [0xFFFE] [script:88 16]モンスターはどこにいるの？
+  0x00B08CB0 [0xFFFE] [script:B4 16]そのモンスターどこにいる？
+  0x00B08D08 [0xFFFE] [script:DF 16]モンスターハドコジャ？
+  0x00B08D5E [0xFFFE] [script:0A 17]そのモンスターはどこ？
+  0x00B08DB4 [0xFFFE] [script:35 17]そいつはどこにいる？
+  0x00B08E0A [0xFFFE] [script:A9 00]ニぬおいて行くわけにはいかないか・・・
+  0x00B08E6C [0xFFFE] [script:93 17]ねぇ、どうしよう・・・
+  0x00B08EC6 [0xFFFE] [script:BD 17]おい、どうする？
+  0x00B08F1A [0xFFFE] [script:E8 17]・・・どうする？
+  0x00B08F70 [0xFFFE] [script:16 18]一人じゃさびしいか・・・
+  0x00B08FCC [0xFFFE] [script:49 18]・[delay:09]・[delay:09]ひとりぼっちじゃかわいそうかな
+  0x00B09032 [0xFFFE] [script:78 18]でも・・・危ないし・・・
+  0x00B09090 [0xFFFE] [script:A0 18]どうする？
+  0x00B090E0 [0xFFFE] [script:C8 18]どうする？
+  0x00B09130 [0xFFFE] [script:F5 18]ナンジャイッショニキタイノカ？
+  0x00B0918A [0xFFFE] [script:1F 19]でも、危ないわよ
+  0x00B091DE [0xFFFE] [script:50 19]一人にしておくわけにはいかんか・・・
   0x00B09272 [0xFFFE] [script:A0 19]あら何かご用？\n最近ちょっと身体がだるくて・・
   0x00B092D0 [0xFFFE] [script:C6 19]娘が出来る夢を見たのよ
   0x00B09314 [0xFFFE] [script:EA 19]産まれてくるのは女の子に違いないわ

@@ -18,11 +18,11 @@
   --- context: 0x8007 -> 0x8017 ---
   0x000B9E92 [0x8017] [script:2A 09]もたもたするな
   --- context: 0x8017 -> 0x8015 ---
-  0x000BAE6A [0x8015] [script:17 11]りあき
+  0x000B9ED0 [0x8015] [script:07 80]ベこよ
   --- context: 0x8015 -> 0x0006 ---
   0x000BAEB2 [0x0006] [script:3D 11]ちょっと、この向きは…
   --- context: 0x0006 -> 0x8000 ---
-  0x000BAEF8 [0x8000] [script:23 00]みギみギタゴタゼね
+  0x0014E5DE [0x8000] [script:78 05]マたこキ[FF:43 6F 0E]
   --- context: 0x8000 -> 0x8007 ---
   0x00172ED8 [0x8007] [script:A0 05]どうしてわしらを\nそっとしておいてくれんのだ
   --- context: 0x8007 -> 0x8017 ---
@@ -670,7 +670,7 @@
   0x005239CA [0x8006] [script:2F 0A][box:speech]お客さん、勝手に部屋に\n入らないでくれよ
   0x00523AC8 [0x8006] [script:AE 0A][box:speech]お客さん、勝手に部屋に\n入らないでくれよ
   0x00523E88 [0x8006] [script:85 0C][box:speech]・・・・・
-  0x00523ED0 [0x8006] [script:00 00]おギけグfギタグ
+  0x005241AC [0x8006] [script:14 0E][box:speech]リッツ！
   0x005241EC [0x8006] [script:37 0E][box:speech]・・・・・
   --- context: 0x8006 -> 0x8016 ---
   0x00524232 [0x8016] [script:60 0E][box:speech]どうしたのリッツ、私が\nわからないの？
@@ -851,7 +851,7 @@
   --- context: 0x8007 -> 0x8006 ---
   0x006A03EA [0x8006] [script:24 14][box:speech]よし、出発だ！！
   --- context: 0x8006 -> 0x8007 ---
-  0x006A0430 [0x8007] [script:07 80]ひなよ
+  0x006F5584 [0x8007] [script:33 05]びな[?3542]＊[opt]7rぐ？げいモござ敢まヴぽそうばうほぐい
   --- context: 0x8007 -> 0x8005 ---
   0x0075A158 [0x8005] [script:AA 0A][box:speech]おじいちゃん[FF:08 0A 01]・・・
   0x0075A1B2 [0x8005] [script:D8 0A][box:speech]この村は、きっと元通りになるわ…
@@ -1048,7 +1048,7 @@
   --- context: 0x8000 -> 0x8002 ---
   0x008D5E38 [0x8002] [script:08 22]うれしいわ
   0x008D5E78 [0x8002] [script:2E 22]でも、何だか気味が悪いわね
-  0x008D5EC0 [0x8002] [script:9B 07]やあNザf
+  0x009330FB [0x8002] [script:E2 05]猛げぷいめんを。をそ7w水tなxぬつぷいソっまんブそwすひ
   --- context: 0x8002 -> 0x8005 ---
   0x0098C152 [0x8005] [script:45 06][box:speech]最近、街の近くに姿を現すモンスターが\nどんどん増えてきています
   --- context: 0x8005 -> 0x8006 ---

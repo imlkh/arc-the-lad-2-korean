@@ -1,4 +1,4 @@
-# S900.STG — 922 dialogues, 945 templates (2 bare, 21 missed)
+# S900.STG — 921 dialogues, 945 templates (2 bare, 22 missed)
 
   0x000BBF50 [0x8006] [script:FA 04]あはは、つめたぁ～い！！
   0x000BBFB8 [0x8006] [script:31 05]おとぉさぁ～ん、早く、早く～！！
@@ -361,7 +361,7 @@
   0x0022F854 [0xFFFE] [script:3D 2D]この大会で優勝すれば、\n一生苦労しないですむ\n金が手に入るんだよな
   0x0022F8BA [0xFFFE] [script:5E 2D]まったく、うらやましい話だね
   0x0022FBE2 [0xFFFE] [script:F2 2E]・[delay:0D]・[delay:0D]・
-  0x0022FC3C [0xFFFE] [script:1C 2F]りあき
+  0x0022FC2B [0xFFFE] [script:00 3D]うしたのー？
   --- context: 0xFFFE -> 0x0006 ---
   0x0022FCC6 [0x0006] [script:65 2F]ね、わたしのいったとおりでしょ？
   --- context: 0x0006 -> 0xFFFE ---
@@ -461,9 +461,9 @@
   --- context: 0x801F -> 0x8000 ---
   0x002335A0 [0x8000] [script:D0 4B]起こさないようにしなきゃ
   0x002335E8 [0x8000] [script:F5 4B]ちょこも、ねむくなっちゃったー
-  0x002337A8 [0x8000] [script:D2 4C]りあき
+  0x00233630 [0x8000] [script:23 00]水ゴぶギみジッグね
   --- context: 0x8000 -> 0x0006 ---
-  0x00233802 [0x0006] [script:FF 4C]りあき
+  0x002337E8 [0x0006] [script:F5 4C]どうせだから、おふろもいいな
   0x0023385E [0x0006] [script:36 4D]ひと段落したから、\nおふろに入っとこうっと
   --- context: 0x0006 -> 0x8000 ---
   0x002338EC [0x8000] [script:76 4D]なかなか、いいおゆかげんね
@@ -520,12 +520,12 @@
   --- context: 0x8000 -> 0x8015 ---
   0x00234FA2 [0x8015] [script:D3 58]わるいけど、お金が足りないよ
   0x00234FF6 [0x8015] [script:FA 58]ゆっくり休んでくれよ
-  0x0023507C [0x8015] [script:3C 59]りあき
+  0x00235048 [0x8015] [script:A9 00]とキC
   --- context: 0x8015 -> 0xFFFE ---
   0x002350F2 [0xFFFE] [script:8C 59]武闘大会も終わっちゃって、闘技場も\nヒマなんで、フリー闘技場になってるんだ
-  0x0023542C [0xFFFE] [script:14 5B]りあき
+  0x0023515E [0xFFFE] [script:23 00]ぶギぶギギゲギグね
   --- context: 0xFFFE -> 0x0006 ---
-  0x0023547C [0x0006] [script:3C 5B]りあき
+  0x0023546C [0x0006] [script:32 5B]エレナ…
   0x0023556E [0x0006] [script:B5 5B]気がついたか！
   --- context: 0x0006 -> 0x8006 ---
   0x002355AA [0x8006] [script:D4 5B]だいじょうぶ？ちょこ
@@ -927,7 +927,6 @@
   0x003AA6F6 [0xFFFE] [script:40 31]中には、入っちゃいけないんだよな
   0x003AA742 [0xFFFE] [script:A9 00]タぐあれ…？
   --- context: 0xFFFE -> 0x0006 ---
-  0x003AA7A8 [0x0006] [script:94 31]りあき
   0x003AA7E8 [0x0006] [script:B3 31]まがいもの…
   0x003AB68C [0x0006] [script:0F 39][box:speech]闘技場のゲームでもらえるあのメダルな、
   --- context: 0x0006 -> 0xFFFE ---
@@ -1029,7 +1028,7 @@
   0x00469A6E [0x8017] [script:42 4E][box:speech]さあ、もう一度挑戦しますか？
   0x00469B0A [0x8017] [script:91 4E][box:speech]はい！[opt]それでは、新たな挑戦を！！
   0x00469BB4 [0x8017] [script:EA 4E][box:speech]それでは、次の挑戦を\nお待ちしております！！
-  0x00469C10 [0x8017] [script:AB 09]めあイジゥ
+  0x004EFA81 [0x8017] [script:70 06][?3360]ナに[?3558]ぶすブねしs
   --- context: 0x8017 -> 0x8006 ---
   0x00526FBE [0x8006] [script:9E 06]扉の向こうには誰も\nいないみたいだけど…
   0x00527016 [0x8006] [script:C1 06]かまわん、シャンテ
@@ -1112,7 +1111,7 @@
   --- context: 0x8006 -> 0x8005 ---
   0x005E0BC8 [0x8005] [script:29 2A]お姉ちゃんも来てくれたんだ
   0x005E0C12 [0x8005] [script:4A 2A]さあ、帰ろう
-  0x005E0C50 [0x8005] [script:05 80]Aれよ
+  0x0067795B [0x8005] [script:F5 05]エヨラヌ[?3585]グそfぱユララ[?3290]ちブくけセヨラに[?3953]くしぶカ[?1769]グ3[?3266]ごあすvゃナラ[?3290]験
   --- context: 0x8005 -> 0x8000 ---
   0x0069D1CE [0x8000] [script:13 06]なんだか、たいへん
   --- context: 0x8000 -> 0x8002 ---

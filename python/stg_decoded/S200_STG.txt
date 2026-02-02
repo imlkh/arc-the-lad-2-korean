@@ -1,4 +1,4 @@
-# S200.STG — 1757 dialogues, 1787 templates (26 bare, 4 missed)
+# S200.STG — 1754 dialogues, 1787 templates (26 bare, 7 missed)
 
   0x000B3794 [0x8005] [script:EC 04]大丈夫か？
   0x000B37E6 [0x8005] [script:16 05][box:narration]着いたのね…
@@ -173,8 +173,8 @@
   0x000B7CA6 [0xFFFE] [script:83 27]シャンテには弟がいて\n重い病気で入院しているらしいのよ
   0x000B7D06 [0xFFFE] [script:A8 27]あなたも、若いのに大変ね
   0x000B7D50 [0xFFFE] [script:D8 27]アークとか言う悪党が\n世界中を荒し回ってるらしいぞい
-  0x000B7DD4 [0xFFFE] [script:0C 28]りあき
-  0x000B7E74 [0xFFFE] [script:5C 28]りあき
+  0x000B7DAE [0xFFFE] [script:A9 00]いりあっ！
+  0x000B7E57 [0xFFFE] [script:00 F4][?3030]ミなんだけど、そこがいいのよねぇ
   0x000B7F16 [0xFFFE] [script:B4 28]そこのマンホールから変な音が聞こえるんだ
   0x000B7F66 [0xFFFE] [script:E4 28]そこのマンホールから、犬のなき声が\nしたような気がするんだけど…
   0x000B7FC0 [0xFFFE] [script:02 29]気のせいかなぁ
@@ -276,14 +276,12 @@
   0x00172066 [0x800A] [script:73 24]ラドの親父は、見つかったか？
   0x001720AA [0x800A] [script:99 24]この時間から酒場にいるのは常連の客だ
   0x001720F6 [0x800A] [script:B9 24]奴らの話を聞いてみな
-  0x001725D2 [0x800A] [script:25 27]りあき
+  0x0017213C [0x800A] [script:00 00]おギき
   --- context: 0x800A -> 0xFFFE ---
-  0x00172658 [0xFFFE] [script:68 27]りあき
-  0x001726B6 [0xFFFE] [script:97 27]りあき
-  0x00172728 [0xFFFE] [script:D0 27]りあき
-  0x001727B8 [0xFFFE] [script:18 28]りあき
-  0x00172826 [0xFFFE] [script:4F 28]りあき
-  0x00172888 [0xFFFE] [script:80 28]りあき
+  0x00172698 [0xFFFE] [script:8D 27]無理して、命を粗末にするなよ
+  0x001726F6 [0xFFFE] [script:A9 00]うらC
+  0x001727F8 [0xFFFE] [script:45 28]おれは、ここでハンター達の\n相談にのってるダンってもんだ
+  0x00172866 [0xFFFE] [script:76 28]よろしくな
   0x001728FE [0xFFFE] [script:BD 28]一つだけ教えといてやる
   --- context: 0xFFFE -> 0x800A ---
   0x0017293E [0x800A] [script:DF 28]ハンターてのはクズのやる仕事だ
@@ -332,16 +330,16 @@
   0x001734E4 [0x800B] [script:AC 2E]あんたか
   0x0017351C [0x800B] [script:D2 2E]炎使いに、頭を冷やせって言っといてくれ
   0x00173574 [0x800B] [script:FA 2E]頭を冷やしてまた来るんだな
-  0x001735F6 [0x800B] [script:37 2F]りあき
+  0x001735C0 [0x800B] [script:A9 00]ャんC
   --- context: 0x800B -> 0xFFFE ---
-  0x001736A2 [0xFFFE] [script:8D 2F]りあき
-  0x0017373A [0xFFFE] [script:D9 2F]りあき
+  0x0017366A [0xFFFE] [script:35 00]こギI
+  0x00173720 [0xFFFE] [script:23 0C]よかったら聞いていってくれ
   0x001737F0 [0xFFFE] [script:33 30]何の用だ？
   --- context: 0xFFFE -> 0x800B ---
-  0x001738A6 [0x800B] [script:8F 30]りあき
+  0x00173830 [0x800B] [script:00 80]ノぎりあずうえ
   --- context: 0x800B -> 0xFFFE ---
-  0x00173952 [0xFFFE] [script:E5 30]りあき
-  0x001739EA [0xFFFE] [script:31 31]りあき
+  0x0017391A [0xFFFE] [script:35 00]こギI
+  0x001739D0 [0xFFFE] [script:23 0C]よかったら聞いていってくれ
   0x00173BD6 [0xFFFE] [script:3B 32]戦闘中は、[FF:06 03 01]で攻撃、[FF:06 04 01]でフリーカーソル、\n[FF:06 01 01]で行動終了だ
   --- context: 0xFFFE -> 0x800A ---
   0x00173C3A [0x800A] [script:75 32]戦闘が始まったら、まず[FF:06 04 01]を押して、\nカーソルを[FF:06 05 01]で動かしてマップ全体をよく\n見渡すといい
@@ -505,7 +503,7 @@
   0x00237A12 [0x800A] [script:36 05]ニざぼおニぷもえニざぼお
   0x002E70E0 [0x800A] [script:6C 05]なんだ、あのオヤジ
   --- context: 0x800A -> 0x8000 ---
-  0x002E7128 [0x8000] [script:04 80]もあくゲいギりあカあ
+  0x002E7616 [0x8000] [script:0A 08]お客さん、見ない顔だね
   --- context: 0x8000 -> 0x8001 ---
   0x002E7666 [0x8001] [script:33 08]ラドの親父を捜してるって？
   0x002E76AA [0x8001] [script:52 08]今さっき出てったな
@@ -777,9 +775,8 @@
   0x002EC036 [0x8009] [script:24 2D]以前は、それ程目立った動きは\n見せなかったんだが
   0x002EC094 [0x8009] [script:50 2D]あ～あ、暇だわぁ…\n何か面白い事ないかしら
   --- context: 0x8009 -> 0x8007 ---
-  0x002EC4D0 [0x8007] [script:64 2F]りあき
+  0x002EC0F0 [0x8007] [script:A0 81]タゲえギ
   --- context: 0x8007 -> 0xFFFE ---
-  0x002EC554 [0xFFFE] [script:A6 2F]りあき
   0x002EC59C [0xFFFE] [script:CC 2F]金が用意できたんだね
   --- context: 0xFFFE -> 0x8001 ---
   0x002EC5DC [0x8001] [script:ED 2F]シャンテから、伝言がある
@@ -1413,7 +1410,7 @@
   0x00468190 [0x8008] [script:C4 20]わかった
   --- context: 0x8008 -> 0x8005 ---
   0x004681E6 [0x8005] [script:F6 20]・[delay:0B]・[delay:0B]・[delay:0B]？
-  0x00468234 [0x8005] [script:5F 87]ソゼりあオき
+  0x00468C40 [0x8005] [script:21 26]ここはシュウの部屋じゃない
   0x00468C8A [0x8005] [script:46 26]ここはシュウの部屋じゃない
   0x00468CD4 [0x8005] [script:69 26]ここは空き部屋
   0x00468D1A [0x8005] [script:89 26]サボテン！
@@ -1555,8 +1552,8 @@
   0x0069F3CC [0xFFFE] [script:61 0D]宝石なんて見ててもつまんないよ
   0x0069F412 [0xFFFE] [script:85 0D]なんで女は、こんなものが好きなのかなぁ
   0x0069F45A [0xFFFE] [script:A9 0D]つきあいで来たけど、ひまでしょうがないや
-  0x0069F4DA [0xFFFE] [script:E3 0D]りあき
-  0x0069F584 [0xFFFE] [script:38 0E]りあき
+  0x0069F4A8 [0xFFFE] [script:D9 0D]あんた、変なかっこだなぁ\n[delay:0B]もしかしてハンター？
+  0x0069F56D [0xFFFE] [script:00 01]んた遊んでくんない？
   0x0069F9DC [0xFFFE] [script:64 10]仕事受けたぜ
   --- context: 0xFFFE -> 0x8005 ---
   0x0069FA20 [0x8005] [script:87 10]仕事終わったぜ
@@ -1591,8 +1588,8 @@
   0x006A0404 [0xFFFE] [script:7D 15]宝石なんて見ててもつまんないよ
   0x006A044A [0xFFFE] [script:A1 15]なんで女は、こんなものが好きなのかなぁ
   0x006A0492 [0xFFFE] [script:C5 15]つきあいで来たけど、ひまでしょうがないや
-  0x006A0516 [0xFFFE] [script:01 16]りあき
-  0x006A05AE [0xFFFE] [script:4D 16]りあき
+  0x006A04E0 [0xFFFE] [script:F7 15]あんた、この間のハンターじゃない？
+  0x006A059D [0xFFFE] [script:00 05]っかねぇな
   0x006A0622 [0xFFFE] [script:94 16]こんなにたくさん宝石があると、\n目移りしてしょうがないわ
   0x006A0678 [0xFFFE] [script:B2 16]どれにしようかしら
   0x006A06B4 [0xFFFE] [script:DD 16]あっちのサファィアもいいし、\nこっちのルビーも捨てがたいわ…
@@ -1885,21 +1882,21 @@
   0x008D2A54 [0x8005] [script:EB 28]なんて、わけにもいかないわよね
   0x008D2CFC [0x8005] [script:3E 2A]あ～あ、みつかっちゃった
   --- context: 0x8005 -> 0x800A ---
-  0x008D2D80 [0x800A] [script:7E 2A]りあき
+  0x008D2D5A [0x800A] [script:F2 02]近の幽霊騒ぎは\nお前のイタズラだな！
   --- context: 0x800A -> 0x0006 ---
   0x008D2DEE [0x0006] [script:B4 2A]ごめんなさい
   --- context: 0x0006 -> 0x800A ---
   0x008D2E28 [0x800A] [script:DB 2A]みんなびっくりして\nにげるからおもしろくって…
-  0x008D2E96 [0x800A] [script:09 2B]りあき
+  0x008D2E87 [0x800A] [script:00 1F]あいいか
   --- context: 0x800A -> 0x0006 ---
-  0x008D2F60 [0x0006] [script:6E 2B]りあき
+  0x008D2F08 [0x0006] [script:0E 00]おギメぞの
   0x008D2FD6 [0x0006] [script:A8 2B]えっ、これ？
   --- context: 0x0006 -> 0x800A ---
   0x008D3010 [0x800A] [script:C5 2B]これはねえ…
   0x008D3060 [0x800A] [script:F0 2B]このなかに、はいってたの
   0x008D30DA [0x800A] [script:2A 2C]ばらばらにね
   0x008D3118 [0x800A] [script:53 2C]それで、ぼくがくっつけて\nけんをもたせてあげたの
-  0x008D3186 [0x800A] [script:81 2C]りあき
+  0x008D3174 [0x800A] [script:05 1F]え、それは…
   --- context: 0x800A -> 0x0006 ---
   0x008D3218 [0x0006] [script:D2 2C][FF:08 09 01]我が、死体をはずかしめるは何者ぞ
   --- context: 0x0006 -> 0x800F ---
@@ -1946,7 +1943,7 @@
   0x00991926 [0x8005] [script:F2 05][box:speech]ちょっとね[FF:08 0A 01]・・・
   --- context: 0x8005 -> 0x8007 ---
   0x0099197A [0x8007] [script:1C 06][box:speech]時間がないわ、急ぎましょ
-  0x009919C4 [0x8007] [script:05 80]ろくせ
+  0x0099C150 [0x8007] [script:50 05]っオオオオオっおっオオオオオぱエナニニニヨポァィィィィィJZ
   0x00A4487E [0x8007] [script:A4 06][box:speech]この扉の奥に、\nガルアーノの部屋があるの
   0x00A4493C [0x8007] [script:F8 06][box:speech]だれ！？
   0x00A464F8 [0x8007] [script:D9 14][box:speech]エルク、ごめんなさい
@@ -2004,7 +2001,7 @@
   --- context: 0x8006 -> 0x8005 ---
   0x00A4EF1E [0x8005] [script:E8 59][box:speech]！？
   0x00A4EF60 [0x8005] [script:0E 5A][box:speech]出てこい、ザコども！！
-  0x00A4EFAC [0x8005] [script:C0 00]ソゼソゼりあオき
+  0x00AD2D2E [0x8005] [script:80 06]pキェJざ[opt]リけガづ[FF:F0 3D 56]っげカ[?2024]マン
   --- context: 0x8005 -> 0x8007 ---
   0x00B0650A [0x8007] [script:BF 06][box:speech]誰だか知らないが、貴様に会うために\nここまで来た訳じゃねぇさ
   --- context: 0x8007 -> 0x8005 ---

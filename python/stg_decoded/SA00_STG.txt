@@ -264,7 +264,7 @@
   0x000BC246 [0x800C] [script:F8 6E][box:speech]ああ…
   --- context: 0x800C -> 0x800B ---
   0x000BC28E [0x800B] [script:2B 6F][box:speech]この酒場の奥に、秘密の\n出入口を作ってな…
-  0x000BC2EA [0x800B] [script:C3 19]もあLギほギf
+  0x0014FA7F [0x800B] [script:F8 0E]ヌしちむう靴めラめちヲげコし
   --- context: 0x800B -> 0x8006 ---
   0x00173F68 [0x8006] [script:44 8C]ぷデw
   0x0017406A [0x8006] [script:06 00]そあを
@@ -423,7 +423,7 @@
   0x00235694 [0x8014] [script:5E 13]あれでも、私のかわいい息子なんです
   0x002356DC [0x8014] [script:82 13]報酬はギルドでお受け取りください
   0x0023579E [0x8014] [script:E2 13]私は、息子の無事を祈ります
-  0x002357E9 [0x8014] [script:00 14]ギぷグギグ
+  0x002EB03E [0x8014] [script:43 0A][box:speech]なんだ、お前は？
   --- context: 0x8014 -> 0x8006 ---
   0x002EB082 [0x8006] [script:6D 0A][box:speech]この町は、よそ者の\n来る所じゃねぇよ
   0x002EB13C [0x8006] [script:C1 0A][box:speech]いらっしゃい
@@ -636,7 +636,7 @@
   0x002F0FD8 [0x8006] [script:0F 3A][box:speech]これでよし、と
   0x002F1F0C [0x8006] [script:B7 41][box:speech]急いでみんなに知らせなくちゃ、\nシュウとトッシュが危ない！
   --- context: 0x8006 -> 0x8005 ---
-  0x002F1F6A [0x8005] [script:05 80]5ざよ
+  0x003758ED [0x8005] [script:0F 0A]きユせ[?3682]お名
   0x003AC1F6 [0x8005] [script:2E 0A][box:speech]うう…
   --- context: 0x8005 -> 0x8009 ---
   0x003AC23C [0x8009] [script:59 0A][box:speech]ロ、ロマリアの…[delay:15]モンスターが…
@@ -1448,7 +1448,7 @@
   0x0075A97C [0x8005] [script:7E 46]おっさん、今度は\nあんたが抜け番みたいだぜ
   0x0075A9CC [0x8005] [script:9C 46]ちっ、ぬかるなよ
   --- context: 0x8005 -> 0x8006 ---
-  0x0075C5F2 [0x8006] [script:AF 54]りあき
+  0x0075AA11 [0x8006] [script:00 00]ギgぺン
   --- context: 0x8006 -> 0xFFFE ---
   0x0075C6AC [0xFFFE] [script:0A 55]ここか！？
   --- context: 0xFFFE -> 0x8000 ---
@@ -1473,13 +1473,13 @@
   --- context: 0x8005 -> 0x8006 ---
   0x00815AC2 [0x8006] [script:56 07][box:speech]ええ！
   --- context: 0x8006 -> 0x8005 ---
-  0x00816CFC [0x8005] [script:74 10]りあき
+  0x00815B00 [0x8005] [script:05 80]がくせ
   --- context: 0x8005 -> 0x0006 ---
-  0x00816D8A [0x0006] [script:BB 10]りあき
+  0x00816D78 [0x0006] [script:3D 03]かしたのか？
   0x00816DFC [0x0006] [script:FB 10]のんきなことを言うとる、場合じゃないぞ！
   --- context: 0x0006 -> 0x800A ---
   0x00816E62 [0x800A] [script:2B 11]グレイシーヌが、大ピンチなんじゃ
-  0x00816EE8 [0x800A] [script:6A 11]りあき
+  0x00816EC2 [0x800A] [script:60 11]一体どうしたんじゃ？
   --- context: 0x800A -> 0x0006 ---
   0x00816F5A [0x0006] [script:A7 11]とにかく、シルバーノアに戻れ！
   --- context: 0x0006 -> 0x800A ---
@@ -1495,7 +1495,7 @@
   --- context: 0x800A -> 0x800F ---
   0x008171EA [0x800F] [script:E9 12]急ぐぞ！
   --- context: 0x800F -> 0x800E ---
-  0x0081736A [0x800E] [script:AB 13]りあき
+  0x00817228 [0x800E] [script:28 80]もあゼヅあギI
   --- context: 0x800E -> 0x0006 ---
   0x008173B0 [0x0006] [script:CE 13]チョンガラじゃない
   --- context: 0x0006 -> 0x8000 ---
@@ -1752,7 +1752,7 @@
   --- context: 0x8000 -> 0x8006 ---
   0x00991E20 [0x8006] [script:5D 21][box:speech]今だけが侵入するチャンスだ！\n[delay:15]急げ！！
   --- context: 0x8006 -> 0x8005 ---
-  0x00991E7A [0x8005] [script:05 80]tむよ
+  0x00A224B7 [0x8005] [script:22 06]ペはペピねこ
   0x00A4E370 [0x8005] [script:D8 0A]しばらく近づかないほうがいいな
   --- context: 0x8005 -> 0x0006 ---
   0x00A4E3B6 [0x0006] [script:FB 0A]しばらく近づかない方がいいわね

@@ -1,4 +1,4 @@
-# SB00.STG — 777 dialogues, 790 templates (13 bare, 0 missed)
+# SB00.STG — 775 dialogues, 790 templates (13 bare, 2 missed)
 
   0x000B49DE [0x8016] [script:D1 04]おい、物知りの俺たちの、\n知らない顔が歩いてるぜ
   0x000B4A32 [0x8016] [script:F5 04]もちろん、俺もそう思ってたとこだぜ！
@@ -410,7 +410,7 @@
   --- context: 0x8013 -> 0x801A ---
   0x000BC7BC [0x801A] [script:B3 43]あっけないな…
   --- context: 0x801A -> 0x8014 ---
-  0x000BC82E [0x8014] [script:00 00][FF:FF FF FF][FF:FF FF FF][FF:FF FF FF][FF:FF FF FF]rrrrrrrrrrrrrrrr
+  0x00178820 [0x8014] [script:13 08]はい、いらっしゃいよ
   --- context: 0x8014 -> 0x8015 ---
   0x00178F62 [0x8015] [script:BF 0B]モレアって、観光地だけど、\n日用品も売ってるのよ
   --- context: 0x8015 -> 0x8016 ---
@@ -480,11 +480,9 @@
   --- context: 0x8005 -> 0x800B ---
   0x002F02DE [0x800B] [script:E1 2A]こんなのどかな街にも、\nハンターの仕事はあるもんだな
   --- context: 0x800B -> 0x800D ---
-  0x002F035C [0x800D] [script:14 2B]りあき
-  --- context: 0x800D -> 0xFFFE ---
-  0x002F03E6 [0xFFFE] [script:59 2B]りあき
-  --- context: 0xFFFE -> 0x0006 ---
-  0x002F0482 [0x0006] [script:A7 2B]りあき
+  0x002F0338 [0x800D] [script:A9 00]ころなんだ？このガラクタは
+  --- context: 0x800D -> 0x0006 ---
+  0x002F0468 [0x0006] [script:33 22]ん、よくみたら人ちがいだった
   --- context: 0x0006 -> 0xFFFE ---
   0x002F08D8 [0xFFFE] [script:DB 2D]「極悪アーク一味、未だゆくえ知れず！」
   --- context: 0xFFFE -> 0x8005 ---
@@ -542,22 +540,20 @@
   0x003AB292 [0x8017] [script:B6 0E]いらっしゃ～い
   0x003AB2CC [0x8017] [script:D4 0E]ごゆっくりどうぞ～
   0x003AB314 [0x8017] [script:F8 0E]なさけないですねえ
-  0x003AB388 [0x8017] [script:32 0F]りあき
+  0x003AB354 [0x8017] [script:02 80]のそりあだう
   --- context: 0x8017 -> 0x0006 ---
   0x003AB3C8 [0x0006] [script:53 0F]はなしになりませんねえ
   --- context: 0x0006 -> 0x8017 ---
   0x003AB406 [0x8017] [script:6D 0F]…
   --- context: 0x8017 -> 0x8014 ---
   0x003AB446 [0x8014] [script:91 0F]すごかったですねえ
-  --- context: 0x8014 -> 0x8017 ---
-  0x003AB492 [0x8017] [script:B7 0F]りあき
-  --- context: 0x8017 -> 0x0006 ---
-  0x003AB4FA [0x0006] [script:EB 0F]りあき
+  --- context: 0x8014 -> 0x0006 ---
+  0x003AB4D6 [0x0006] [script:A9 00]ッせC
   0x003AB53A [0x0006] [script:0D 10]三度目に勝ててもね
   --- context: 0x0006 -> 0x8017 ---
   0x003AB57A [0x8017] [script:27 10]…
   --- context: 0x8017 -> 0x8014 ---
-  0x003AB5D4 [0x8014] [script:58 10]りあき
+  0x003AB5B2 [0x8014] [script:A9 00]ッせC
   --- context: 0x8014 -> 0x0006 ---
   0x003AB614 [0x0006] [script:7E 10]まあ、二度目なら、そこそこですかねえ
   --- context: 0x0006 -> 0x8017 ---
@@ -946,7 +942,7 @@
   --- context: 0x800A -> 0x800B ---
   0x005273F6 [0x800B] [script:BB 11]！
   0x0052743A [0x800B] [script:E3 11]逃げようぜ、ブラザー！
-  0x00527480 [0x800B] [script:0B 80]ノつs
+  0x005BC5CB [0x800B] [script:B4 06]めゾホワンサばぱザ8でごOCきぞゴ7[?3646]KケPけsゴPぇさ3sしつさ[FF:D0 DD 66]ザザニヌナ[opt]お水せすめねもぼざキざ！ドざみたホロvあチパ
   --- context: 0x800B -> 0x0006 ---
   0x005D6AFA [0x0006] [script:05 09]？
   0x005D6CB6 [0x0006] [script:EF 09]おいブラザー、\nこの床のスイッチはなんだ？
@@ -1080,7 +1076,7 @@
   0x0069FF67 [0x0BF3] [script:80 45]あ煙際りあ・
   0x006A00FC [0x0BF3] [script:7E 24]夜が明けて来たぞ
   0x006A0248 [0x0BF3] [script:F3 9C]へ戻りましょ
-  0x006A037C [0x0BF3] [script:01 80]vゆやあ、ゲもあぁゴうギりあ[FF:00 00 00]オギjゆりあ
+  0x006EDBD3 [0x0BF3] [script:CD 05]し火しやJオ！多zまつ
   --- context: 0x0BF3 -> 0x8013 ---
   0x007579F4 [0x8013] [script:F0 05]誰だ！？
   --- context: 0x8013 -> 0x8000 ---
