@@ -540,7 +540,7 @@
   0x003AB292 [0x8017] [script:B6 0E]いらっしゃ～い
   0x003AB2CC [0x8017] [script:D4 0E]ごゆっくりどうぞ～
   0x003AB314 [0x8017] [script:F8 0E]なさけないですねえ
-  0x003AB354 [0x8017] [script:02 80]のそりあだう
+  0x003AB378 [0x8017] [script:28 0F]すまん…
   --- context: 0x8017 -> 0x0006 ---
   0x003AB3C8 [0x0006] [script:53 0F]はなしになりませんねえ
   --- context: 0x0006 -> 0x8017 ---
@@ -1073,7 +1073,7 @@
   0x0069FC04 [0x0BF3] [script:F5 21]引き上げろ
   0x0069FC76 [0x0BF3] [script:78 80]もあ血[FF:FF 23 01]術
   0x0069FE21 [0x0BF3] [script:00 3C]も、撃退はできたわね
-  0x0069FF67 [0x0BF3] [script:80 45]あ煙際りあ・
+  0x0069FFBC [0x0BF3] [script:DB 23]よし、やっつけたぞ
   0x006A00FC [0x0BF3] [script:7E 24]夜が明けて来たぞ
   0x006A0248 [0x0BF3] [script:F3 9C]へ戻りましょ
   0x006EDBD3 [0x0BF3] [script:CD 05]し火しやJオ！多zまつ
@@ -1128,7 +1128,7 @@
   0x007596E6 [0x8014] [script:72 14]死を覚悟するには\n早すぎるなぁ
   0x00759734 [0x8014] [script:FF FF]るなヅ
   --- context: 0x8014 -> 0x0C2C ---
-  0x007597F0 [0x0C2C] [script:45 01]煙わしりあ・
+  0x0075982A [0x0C2C] [script:F1 8B]系・k
   0x00759938 [0x0C2C] [script:92 15]フフフフ…
   --- context: 0x0C2C -> 0x8014 ---
   0x00759974 [0x8014] [script:FF FF]あにヅ

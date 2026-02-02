@@ -1565,7 +1565,7 @@
   0x01EE0E8C [0x8005] [script:EB 1C][box:speech]もう一度挑戦しますか？
   0x01EE0F18 [0x8005] [script:32 1D][box:speech]それでは、新たな挑戦を！！
   0x01EE1042 [0x8005] [script:C9 1D][box:speech]次の挑戦をお待ちしております！！
-  0x01FA7DAE [0x8005] [script:5C 05]りあぴしあ
+  0x01FF7A2F [0x8005] [script:5C 05]あd7rrr75え
   --- context: 0x8005 -> 0x800E ---
   0x02063B10 [0x800E] [script:7E 05]死にたくなければ邪魔をするな
   --- context: 0x800E -> 0x8011 ---

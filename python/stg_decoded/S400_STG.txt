@@ -147,7 +147,7 @@
   0x000B69F8 [0xFFFE] [script:BF 3B][box:speech]がんばった、あなたには\nサンキュー、サンキュー！
   0x000B74F4 [0xFFFE] [script:45 41][box:speech]見なれない男たくさん来た\n[cursor]・・・[box:speech]何か様子変
   0x000B755E [0xFFFE] [script:73 41][box:speech]ヤゴス島、昼はポカポカ\nでも夜は寝苦しい
-  0x000B75B8 [0xFFFE] [script:28 01][box:system]あギプべJ
+  0x000B75EA [0xFFFE] [script:CA 41]。べ[?2089]火べいぼI
   --- context: 0xFFFE -> 0x0006 ---
   0x000B8362 [0x0006] [script:6B 48][box:speech]いないのかしら…
   0x000B83BA [0x0006] [script:97 48][box:speech]留守みたいね…
@@ -435,7 +435,7 @@
   --- context: 0x8007 -> 0xFFFE ---
   0x002A561C [0xFFFE] [script:F1 04]シがげ
   --- context: 0xFFFE -> 0x8006 ---
-  0x002F09B5 [0x8006] [script:00 00]ギっうf
+  0x002F09BC [0x8006] [script:81 87]グゼノ
   --- context: 0x8006 -> 0x0006 ---
   0x002F0DA2 [0x0006] [script:07 07]なんだ！？
   --- context: 0x0006 -> 0x8005 ---

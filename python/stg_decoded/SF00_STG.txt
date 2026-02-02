@@ -2351,7 +2351,7 @@
   0x01A7E7D6 [0xFFFE] [script:91 10]カゼノセイレイハドコダ？
   0x01A7E82E [0xFFFE] [script:BE 10]風の精霊は無事なの？
   0x01A7E888 [0xFFFE] [script:EB 10]風の精霊は無事なのか？
-  0x01A7E8E2 [0xFFFE] [script:30 01]？ギうギりあウあう
+  0x01A7E908 [0xFFFE] [script:F1 80]fギギゲ
   --- context: 0xFFFE -> 0x0006 ---
   0x01A7F833 [0x0006] [script:00 F0]し人勺は闘技場の周りに集う」と書いてある
   0x01A7F8CA [0x0006] [script:06 19]？？？

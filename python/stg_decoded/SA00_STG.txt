@@ -1448,7 +1448,7 @@
   0x0075A97C [0x8005] [script:7E 46]おっさん、今度は\nあんたが抜け番みたいだぜ
   0x0075A9CC [0x8005] [script:9C 46]ちっ、ぬかるなよ
   --- context: 0x8005 -> 0x8006 ---
-  0x0075AA11 [0x8006] [script:00 00]ギgぺン
+  0x0075AA18 [0x8006] [script:22 01]オゼもあWギ[FF:80 A2 00]mぺ
   --- context: 0x8006 -> 0xFFFE ---
   0x0075C6AC [0xFFFE] [script:0A 55]ここか！？
   --- context: 0xFFFE -> 0x8000 ---

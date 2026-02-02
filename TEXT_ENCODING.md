@@ -418,21 +418,36 @@ The 16-bit LE value at template positions +4, +20, and +34 identifies the dialog
 
 When the context opcode changes between consecutive template blocks, there are typically additional non-template event script bytes at the transition point (e.g., 22 bytes of scene setup commands between the `0x8009` and `0x8001` groups).
 
-### Context-Transition Preamble Blocks (10 bytes each)
+### Script Opcode `28 01` Blocks (10 bytes each)
 
-At context transitions, chains of 10-byte **preamble blocks** appear in the gap between templates (or between the last dialogue string and the next template). Each block uses the event script opcode `28 01` with parameter `07 00`:
+In the gaps between templates, chains of 10-byte **script opcode blocks** appear. These use the event script opcode `28 01` with various parameters:
 
 ```
 Offset  Bytes       Description
 ------  ----------  -----------
 +0      28 01       Fixed opcode (same as template +6, but with different param)
-+2      07 00       Fixed parameter (template uses F0 0B)
++2      PP PP       Parameter (varies: 07 00, AA 00, FF 00, E8 0A, F1 0B, etc.)
 +4      XX XX       Flags: 00 00 (first in pair) or 01 00 (second in pair)
-+6      YY ZZ       Context group ID (e.g., 09 80 / 09 81)
-+8      [PP QQ]     Pointer (varies)
++6      YY ZZ       Context group ID (high byte >= 0x80, e.g., 09 80, 09 81, FF FF)
++8      [QQ RR]     Pointer (varies)
 ```
 
-These always appear in **pairs** (20 bytes), mirroring the dual-operation pattern of the 48-byte template. At complex transitions, **chains of 2–12+ pairs** (20–120+ bytes) can appear, one pair per context group involved in the transition.
+These commonly appear in **pairs** (20 bytes), mirroring the dual-operation pattern of the 48-byte template. At complex transitions, **chains of 2–12+ pairs** (20–120+ bytes) can appear. They are found at context transitions, before templates, and sometimes interleaved with dialogue strings.
+
+Observed parameter variants and their false-text decodings:
+
+| Param bytes | False text | Notes |
+|---|---|---|
+| `07 00` | りあき | Most common (context-transition preamble) |
+| `AA 00` | りあJ | |
+| `FF 00` | りあ[FF:...] | FF triggers control-code decoding |
+| `E8 0A` | りあ／こ | |
+| `F1 0B` | りあ関 | Often preceded by other garbled text |
+| `CD 0B` | りあ系 | |
+| `56 01` | りあ、 | |
+| `57 09` | りあ。 | |
+
+The structural signature for detection is: bytes +0..+1 = `28 01`, byte +5 = `00`, byte +7 >= `0x80`.
 
 Example (2-pair chain from SB00.STG, immediately before a template):
 
@@ -442,7 +457,7 @@ Example (2-pair chain from SB00.STG, immediately before a template):
 23 01 F0 8B  ...                    ← 48-byte template follows
 ```
 
-**Decoder note:** Because the bytes `28 01 07` happen to map to valid character IDs (り=0x28, あ=0x01, き=0x07), the preamble can be misinterpreted as the nonsense text "りあき" if not explicitly excluded. The decoder (`decode_text.py`) identifies all `28 01 07 00` sequences in the gap and excludes their byte ranges from the dialogue search.
+**Decoder note:** Because `28 01` maps to valid character IDs (り=0x28, あ=0x01), these script blocks are misinterpreted as nonsense text if not excluded. The decoder (`decode_text.py`) scans each gap for all `28 01` blocks matching the structural signature (P+5=0x00, P+7>=0x80), builds exclusion ranges, and rejects any dialogue candidate that overlaps a script opcode block.
 
 ## Key Functions (MIPS Disassembly)
 

@@ -336,7 +336,7 @@
   0x00173720 [0xFFFE] [script:23 0C]よかったら聞いていってくれ
   0x001737F0 [0xFFFE] [script:33 30]何の用だ？
   --- context: 0xFFFE -> 0x800B ---
-  0x00173830 [0x800B] [script:00 80]ノぎりあずうえ
+  0x0017384C [0x800B] [script:F0 14]もあぴデぷしQ
   --- context: 0x800B -> 0xFFFE ---
   0x0017391A [0xFFFE] [script:35 00]こギI
   0x001739D0 [0xFFFE] [script:23 0C]よかったら聞いていってくれ
@@ -1495,7 +1495,7 @@
   --- context: 0x800A -> 0x8005 ---
   0x005E0E56 [0x8005] [script:06 80]きギのギ
   --- context: 0x8005 -> 0x8000 ---
-  0x005E1A35 [0x8000] [script:00 00]ギレせヅ
+  0x005E1A64 [0x8000] [script:F1 8B]系・k
   0x005E1B82 [0x8000] [script:ED 0E]全員突入！
   --- context: 0x8000 -> 0x8009 ---
   0x005E1CDC [0x8009] [script:A5 0F]この中に、モンスターを\nあやつっている奴がいるはずだ
