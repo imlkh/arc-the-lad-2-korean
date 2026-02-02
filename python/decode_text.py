@@ -438,12 +438,16 @@ def scan_stg(data, decode_table):
     return dialogues, templates, stats
 
 
-def scan_file(data, decode_table, prefix=0):
+def scan_file(data, decode_table, prefix=0, ff08_only=False):
     """Find all text strings in a binary file.
 
     Strategy:
     1. Look for FF 08 XX 01 dialogue box markers and decode from there
     2. Find standalone null-terminated runs of valid charIDs
+
+    If ff08_only=True, only Pass 1 (FF 08 markers) is run.  This is much
+    faster for large files (e.g. BEAM.DAT) where the byte-by-byte Pass 2
+    scan would be prohibitively slow and produce mostly false positives.
     """
     results = []
     seen_offsets = set()
@@ -471,6 +475,10 @@ def scan_file(data, decode_table, prefix=0):
                         pos = start + consumed
                         continue
         pos += 1
+
+    if ff08_only:
+        results.sort(key=lambda r: r[0])
+        return results
 
     # Build interval set of already-found ranges for fast overlap check
     found_ranges = sorted((off, off + sz) for off, sz, _ in results)
@@ -564,6 +572,44 @@ def scan_file(data, decode_table, prefix=0):
 
     results.sort(key=lambda r: r[0])
     return results
+
+
+def filter_real_text(results, min_kanji=2):
+    """Filter scan_file results to remove false positives from machine code.
+
+    Requires at least ``min_kanji`` CJK Unified Ideographs (U+4E00-U+9FFF) in
+    the decoded text.  MIPS machine code bytes frequently map to valid
+    character IDs, producing long runs of plausible-looking but meaningless
+    kana — and occasionally a single kanji.  Requiring >= 2 kanji eliminates
+    virtually all false positives while retaining real game text (dialogue,
+    menus, item/spell descriptions), which almost always contains multiple
+    kanji.
+
+    Args:
+        results: list of (offset, consumed, text) tuples from scan_file
+        min_kanji: minimum number of kanji characters required (default 2)
+
+    Returns:
+        Filtered list of (offset, consumed, text) tuples.
+    """
+    filtered = []
+    for offset, consumed, text in results:
+        # Strip control tags to get the actual displayed text
+        stripped = text
+        for tag in ("[box:system]", "[box:close]", "[box:speech]",
+                    "[box:narration]", "[cursor]", "\n", "[opt]"):
+            stripped = stripped.replace(tag, "")
+        stripped = re.sub(r"\[.*?\]", "", stripped)
+
+        if not stripped:
+            continue
+
+        # Count kanji characters
+        kanji_count = sum(1 for ch in stripped if '\u4e00' <= ch <= '\u9fff')
+        if kanji_count >= min_kanji:
+            filtered.append((offset, consumed, text))
+
+    return filtered
 
 
 def find_text(data, search_str, decode_table, encode_table, prefix=0):

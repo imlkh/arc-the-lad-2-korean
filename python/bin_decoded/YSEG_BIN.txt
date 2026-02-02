@@ -1,0 +1,4 @@
+# YSEG.BIN — 2 strings (167 raw, 165 filtered out)
+
+  0x00000F36 [  12] ナよ娘ぴよ娘ナよす
+  0x000010EE [  12] ぷよ娘トよ娘ぷよす
