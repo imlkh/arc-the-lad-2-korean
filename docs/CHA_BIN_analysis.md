@@ -82,25 +82,27 @@ Each sprite entry follows this general structure (sizes vary per character):
 
 ### CLUT (Color Lookup Table) Format
 
-Each CLUT is 32 bytes = 16 entries of 16-bit PS1 RGB555 colors:
+Each CLUT is 32 bytes = 16 entries of 16-bit PS1 RGB555 colors. Per PSX SPX, 4bpp CLUTs are stored in VRAM as 16×1 pixel images. CLUT X positions must be multiples of 16 halfwords; Y can be any row 0-511.
 
 ```
 Bit layout: 0BBBBBGGGGGRRRRR (little-endian)
   Bits 0-4:   Red (0-31)
   Bits 5-9:   Green (0-31)
   Bits 10-14: Blue (0-31)
-  Bit 15:     Semi-transparency flag
+  Bit 15:     Semi-transparency processing (STP) flag
 ```
 
 Key palette values observed:
 
 | Value | RGB | Meaning |
 |-------|-----|---------|
-| 0x0000 | R=0, G=0, B=0 | Transparent black (CLUT index 0) |
+| 0x0000 | R=0, G=0, B=0 | Fully transparent (per PSX SPX: color 0000h = transparent in textured primitives) |
 | 0x7C1F | R=31, G=0, B=31 | Magenta — transparent key color |
 | 0x18A5 | R=5, G=5, B=6 | Dark gray — shared base color for main characters |
 | 0x7FFF | R=31, G=31, B=31 | White — common in bright/effect sprites |
 | 0x739C | R=28, G=28, B=28 | Light gray — highlight color |
+
+**Note on transparency:** Per PSX SPX, color value 0x0000 is always rendered as fully transparent regardless of the STP bit. True black (R=0, G=0, B=0) cannot be displayed in textured primitives — the game likely uses 0x8000 (STP=1, RGB=0,0,0) or a near-black value instead where opaque black is needed.
 
 ### Display List Commands
 

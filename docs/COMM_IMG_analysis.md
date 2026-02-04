@@ -137,18 +137,26 @@ The font area is **static** — byte-for-byte identical between `COMM.IMG` and t
 
 | Property | Value |
 |----------|-------|
-| VRAM row width | 2048 bytes (1024 16-bit pixels) |
-| COMM.IMG position | Byte 640 per row (16-bit x=320) |
-| Font area in VRAM | x=320, y=0, 256×256 4bpp pixels |
+| PS1 VRAM total | 1 MB, organized as 1024×512 halfword grid (2048 bytes/row) |
+| COMM.IMG position | Byte 640 per row (16-bit x=320, y=0) |
+| Font area in VRAM | x=320, y=0, 256×256 4bpp texels |
+| Texture page | 4bpp page = 256×256 texels = 32 KB; X aligned to 64-halfword multiples, Y to 256-line multiples |
+| Upload mechanism | CPU-to-VRAM via GPU command GP0(A0h), or DMA channel 2 |
+
+The font area occupies one 4bpp texture page starting at VRAM x=320 (halfword column 320 = 5th 64-halfword block). Per PSX SPX, 4bpp texture pages must be X-aligned to multiples of 64 halfwords (128 bytes) and Y-aligned to multiples of 256 lines. The font at (320, 0) satisfies both constraints.
 
 ### CLUTs Found in VRAM
+
+Per PSX SPX, 4bpp CLUTs are 16×1 images (16 colors × 16-bit RGB555 = 32 bytes). CLUT X positions must be multiples of 16 halfwords in VRAM. CLUT Y can be any row 0-511.
 
 | CLUT | VRAM Position | Description |
 |------|---------------|-------------|
 | Grayscale | (144, 501) | Smooth 16-step gradient, 0-248 |
 | Dialogue | (368, 242) | Indices 0-11 = black (shadow invisible), 12 = cyan, 13-14 = white, 15 = orange/gold |
 
-The dialogue CLUT demonstrates the bitplane selection: by mapping most indices to black and only specific ones to visible colors, the game selects which character layer to display.
+Both CLUT X positions (144, 368) are multiples of 16, consistent with the hardware requirement.
+
+The dialogue CLUT demonstrates the bitplane selection: by mapping most indices to black and only specific ones to visible colors, the game selects which character layer to display. Per PSX SPX, color value 0x0000 is rendered as fully transparent in textured primitives, so the black indices effectively become invisible.
 
 ## UI Font (Left Half, Bottom Area)
 

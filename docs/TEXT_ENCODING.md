@@ -476,6 +476,15 @@ The dictionary pointer table starts at file offset `0x5B50` (RAM `0x8002BB50`).
 
 ### SCPS_100.26 (Main Executable)
 
+SCPS_100.26 is a PSX-EXE file (PS1 executable format). Per PSX SPX, the format consists of:
+- **0x800-byte header** with "PS-X EXE" magic at offset 0x000
+- **Load address** at header offset +0x018 (where the code is loaded into RAM)
+- **Entry point PC** at header offset +0x010 (first instruction to execute)
+- **File size** at header offset +0x01C (must be a multiple of 0x800)
+- **Code/data body** starting at file offset 0x800
+
+All overlay modules (SDIC, YGUILD, YSHOP, YPROP, YSEG, SMITH) call functions in the `0x800Bxxxx`-`0x8018xxxx` range. Per PSX SPX, PS1 BIOS functions are accessed via vector calls at addresses 0x000000A0, 0x000000B0, and 0x000000C0 -- NOT via direct JAL to fixed addresses. This confirms that all `0x800Cxxxx`+ call targets in the overlay modules are **SCPS_100.26 game code**, not BIOS routines.
+
 | File Offset | RAM Address | Function |
 |---|---|---|
 | 0x25800 | 0x800E6400 | Font rendering (14x14 grid, 17-column layout) |
