@@ -109,6 +109,8 @@ table_pattern = re.compile(
 )
 
 md_entries = {}  # cell -> {row, col, pixel_x, pixel_y, byte_offset, bits: [str, str, str, str]}
+# Pattern to strip charID suffix like " (123)" from new format
+charid_suffix = re.compile(r'\s*\(\d+\)\s*$')
 for m in table_pattern.finditer(md_text):
     cell = int(m.group(1))
     row = int(m.group(2))
@@ -116,7 +118,8 @@ for m in table_pattern.finditer(md_text):
     px_x = int(m.group(4))
     px_y = int(m.group(5))
     byte_off = int(m.group(6))
-    bits = [m.group(7).strip(), m.group(8).strip(), m.group(9).strip(), m.group(10).strip()]
+    # Strip charID suffix from each bit label
+    bits = [charid_suffix.sub('', m.group(i)).strip() for i in range(7, 11)]
     md_entries[cell] = {
         'row': row, 'col': col,
         'pixel_x': px_x, 'pixel_y': px_y,

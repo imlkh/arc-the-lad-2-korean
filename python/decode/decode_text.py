@@ -51,14 +51,16 @@ def build_decode_table():
         bits = [m.group(i).strip() for i in range(4, 8)]
         for bitplane, label in enumerate(bits):
             char_id = 1 + (row * 21 + col) * 4 + bitplane
+            # Strip charID suffix like " (123)" from new format
+            label_clean = re.sub(r'\s*\(\d+\)\s*$', '', label).strip()
             # Treat (Blank) as space character (cell 59, bit2 = charID 239)
-            if label == "(blank)" or label == "(Blank)":
+            if label_clean.lower() in ("(blank)", "blank"):
                 table[char_id] = " "  # Map blank to space
                 continue
-            if not label:
+            if not label_clean:
                 continue
             # Strip trailing ? from uncertain characters
-            clean = label.rstrip("?").strip()
+            clean = label_clean.rstrip("?").strip()
             if clean:
                 table[char_id] = clean
 

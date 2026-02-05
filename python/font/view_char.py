@@ -68,9 +68,12 @@ def load_char_labels():
         r"\s*\(\d+,\d+\)\s*\|\s*\d+\s*\|"
         r"\s*(.*?)\s*\|\s*(.*?)\s*\|\s*(.*?)\s*\|\s*(.*?)\s*\|"
     )
+    # Pattern to strip charID suffix like " (123)"
+    charid_suffix = re.compile(r'\s*\(\d+\)\s*$')
     for m in pattern.finditer(text):
         cell = int(m.group(1))
-        labels[cell] = [m.group(i).strip() for i in range(2, 6)]
+        # Strip charID suffix from each label
+        labels[cell] = [charid_suffix.sub('', m.group(i)).strip() for i in range(2, 6)]
     return labels
 
 

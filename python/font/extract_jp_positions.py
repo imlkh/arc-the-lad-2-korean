@@ -69,6 +69,8 @@ def main():
     )
 
     entries = []
+    # Pattern to strip charID suffix like " (123)" from new format
+    charid_suffix = re.compile(r'\s*\(\d+\)\s*$')
     for m in pattern.finditer(text):
         cell = int(m.group(1))
         row = int(m.group(2))
@@ -76,7 +78,8 @@ def main():
         pixel_x = int(m.group(4))
         pixel_y = int(m.group(5))
         byte_offset = int(m.group(6))
-        labels = [m.group(i).strip() for i in range(7, 11)]
+        # Strip charID suffix from each label
+        labels = [charid_suffix.sub('', m.group(i)).strip() for i in range(7, 11)]
 
         cell_size = SPECIAL_SIZE if cell == SPECIAL_CELL else CELL_SIZE
 

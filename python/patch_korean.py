@@ -62,9 +62,9 @@ PRESERVE_CHAR_IDS.update(range(257, 273))
 # Cell 63, bitplane 0 only (charID 253)
 PRESERVE_CHAR_IDS.add(253)
 
-# Space character uses a dedicated single-byte slot
-# CharID 160 (last katakana slot) - renders as blank, encodes as 0xA0
-SPACE_CHAR_ID = 160
+# Space character - removed entirely (Korean reads fine without spaces like Japanese)
+# Set to None to skip spaces during encoding
+SPACE_CHAR_ID = None
 
 
 def load_decode_table():
@@ -88,7 +88,8 @@ def load_decode_table():
             if not label or label.lower() in ("(blank)", "blank"):
                 continue
             char_id = 1 + (row * 21 + col) * 4 + bitplane
-            clean = label.rstrip("?").strip()
+            # Strip charID suffix like " (123)" and trailing "?"
+            clean = re.sub(r'\s*\(\d+\)\s*$', '', label).rstrip("?").strip()
             if clean:
                 table[char_id] = clean
     return table
@@ -291,10 +292,6 @@ def patch_comm_img(comm_img_path, korean_mapping):
     with open(comm_img_path, "rb") as f:
         data = bytearray(f.read())
 
-    # Clear space character slot to blank
-    clear_glyph(data, SPACE_CHAR_ID)
-    print(f"  Cleared charID {SPACE_CHAR_ID} for space character")
-
     patched = 0
     missing = []
 
@@ -458,9 +455,11 @@ def encode_korean_text(text, korean_mapping, decode_table):
             "?": 0xEE, "!": 0xED,
             "~": 0xEA,  # Same as ～
             "-": 0xE7,  # Same as － (fullwidth minus)
-            '"': 251,   # Map to 「 (Japanese opening quote)
-            # Space uses dedicated single-byte slot (charID 160 = 0xA0)
-            " ": SPACE_CHAR_ID,
+            "/": 232,   # ／ at cell 57, bit 3
+            "／": 232,  # Fullwidth slash
+            '"': 235,   # " character at cell 58, bit 2
+            # Space is removed entirely (Korean reads fine without spaces)
+            " ": None,
         }
         if ch in punct_map:
             char_id = punct_map[ch]
@@ -468,6 +467,7 @@ def encode_korean_text(text, korean_mapping, decode_table):
                 encoded = char_id_to_bytes(char_id)
                 if encoded:
                     result.extend(encoded)
+            # Skip character (including spaces mapped to None)
             i += 1
             continue
 

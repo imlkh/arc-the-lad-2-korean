@@ -37,15 +37,19 @@ def build_decode_table():
         r"\s*\(\d+,\d+\)\s*\|\s*\d+\s*\|"
         r"\s*(.*?)\s*\|\s*(.*?)\s*\|\s*(.*?)\s*\|\s*(.*?)\s*\|"
     )
+    # Pattern to strip charID suffix like " (123)" from new format
+    charid_suffix = re.compile(r'\s*\(\d+\)\s*$')
     for m in pattern.finditer(text):
         row = int(m.group(2))
         col = int(m.group(3))
         bits = [m.group(i).strip() for i in range(4, 8)]
         for bitplane, label in enumerate(bits):
-            if not label or label.lower() in ('(blank)', 'blank', ''):
+            # Strip charID suffix first
+            label_clean = charid_suffix.sub('', label).strip()
+            if not label_clean or label_clean.lower() in ('(blank)', 'blank', ''):
                 continue
             char_id = 1 + (row * 21 + col) * 4 + bitplane
-            clean = label.rstrip("?").strip()
+            clean = label_clean.rstrip("?").strip()
             if clean:
                 table[char_id] = clean
                 if clean not in reverse:
