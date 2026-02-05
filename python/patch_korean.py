@@ -308,9 +308,16 @@ def encode_korean_text(text, korean_mapping, decode_table):
         ch = text[i]
 
         # Newline -> FF 05 01 01
+        # Handle both actual newline and literal \n sequence
         if ch == "\n":
             result.extend(b"\xFF\x05\x01\x01")
             i += 1
+            continue
+
+        # Literal \n sequence (backslash followed by 'n')
+        if ch == "\\" and i + 1 < len(text) and text[i + 1] == "n":
+            result.extend(b"\xFF\x05\x01\x01")
+            i += 2
             continue
 
         # Control code tags
