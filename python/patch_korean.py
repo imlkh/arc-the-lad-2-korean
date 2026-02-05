@@ -136,6 +136,10 @@ def build_korean_mapping(korean_chars, decode_table, priority_chars=None):
         decode_table: The character decode table
         priority_chars: Optional set of characters to prioritize for single-byte slots
     """
+    # CharIDs that encode with 00 byte (unusable - 00 is null terminator)
+    # These are charIDs where (charID - 239) % 255 == 0: 239, 494, 749, ...
+    NULL_BYTE_CHARIDS = {239 + 255 * i for i in range(7)}  # 239, 494, 749, 1004, 1259, 1514, 1769
+
     # Available slots (can be replaced with Korean):
     available_single = []  # charIDs 1-160 (single-byte)
     available_double = []  # charIDs 239+ (two-byte)
@@ -149,8 +153,9 @@ def build_korean_mapping(korean_chars, decode_table, priority_chars=None):
         available_single.append(cid)
 
     # Kanji slots (charIDs 239+, two-byte encoding)
+    # Skip charIDs that encode with 00 byte (null terminator conflict)
     for cid in range(239, 1760):
-        if cid not in PRESERVE_CHAR_IDS:
+        if cid not in PRESERVE_CHAR_IDS and cid not in NULL_BYTE_CHARIDS:
             available_double.append(cid)
 
     total_available = len(available_single) + len(available_double)
