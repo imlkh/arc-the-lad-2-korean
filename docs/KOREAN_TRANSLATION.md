@@ -139,6 +139,7 @@ This uses only 67 slots (vs. 1,656) and gives 100% syllable coverage. However, i
 | CHA.BIN | No text (sprite archive) |
 | COMM.DAT | No text (battle animation/command module, loaded at `0x80010000`) |
 | COMM.SND | No text (PS1 VAB sound bank -- battle SFX and instrument samples) |
+| SYSTEM.CNF | No text (PS1 boot configuration -- executable path, stack pointer, kernel params) |
 
 ## Recommended Approach
 
