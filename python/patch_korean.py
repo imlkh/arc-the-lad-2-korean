@@ -441,6 +441,8 @@ def encode_korean_text(text, korean_mapping, decode_table):
             "ー": 0xE3, "～": 0xEA,
             "(": 245, ")": 246, "「": 251, "」": 252,
             ",": 247, ".": 248, ":": 249,
+            # ASCII equivalents of fullwidth punctuation
+            "?": 0xEE, "!": 0xED,
             # Space uses dedicated single-byte slot (charID 160 = 0xA0)
             " ": SPACE_CHAR_ID,
         }
