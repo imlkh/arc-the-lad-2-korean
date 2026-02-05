@@ -14,42 +14,38 @@ from PIL import Image, ImageFont, ImageDraw
 # --- Configuration ---
 THRESHOLD = 128  # Clean threshold for pixel font (no anti-aliasing)
 
-# font_type = "Galmuri9"
-# font_type = "GalmuriMono9"
-# font_type = "Galmuri11" # good
-font_type = "GalmuriMono11" # good
-# font_type = "Galmuri11-bold"
-# font_type = "ONE(Ed.) Galmuri11 Regular"
-# font_type = "soya_godun10"
-match font_type:
-    case "Galmuri9":
-        FONT_PATH = "/Users/kyounghun/Library/Fonts/Galmuri9.ttf"
-        PIXEL_SIZE = 9
-        CHAR_SIZE = 10
-    case "GalmuriMono9":
-        FONT_PATH = "/Users/kyounghun/Library/Fonts/GalmuriMono9.ttf"
-        PIXEL_SIZE = 9
-        CHAR_SIZE = 10
-    case "Galmuri11":
-        FONT_PATH = "/Users/kyounghun/Library/Fonts/Galmuri11.ttf"
-        PIXEL_SIZE = 11
-        CHAR_SIZE = 12
-    case "GalmuriMono11":
-        FONT_PATH = "/Users/kyounghun/Library/Fonts/GalmuriMono11.ttf"
-        PIXEL_SIZE = 11
-        CHAR_SIZE = 12
-    case "Galmuri11-bold":
-        FONT_PATH = "/Users/kyounghun/Library/Fonts/Galmuri11-bold.ttf"
-        PIXEL_SIZE = 11
-        CHAR_SIZE = 12
-    case "ONE(Ed.) Galmuri11 Regular":
-        FONT_PATH = "/Users/kyounghun/Library/Fonts/ONE(Ed.) Galmuri11 Regular.ttf"
-        PIXEL_SIZE = 11
-        CHAR_SIZE = 11
-    case "soya_godun10":
-        FONT_PATH = "/Users/kyounghun/Library/Fonts/soya_godun10.ttf"
-        PIXEL_SIZE = 10
-        CHAR_SIZE = 10
+def find_font(filename):
+    """Search for font in common locations."""
+    search_paths = [
+        os.path.join(os.path.dirname(__file__), "..", "..", "fonts", filename),  # Project fonts/
+        os.path.expanduser(f"~/Library/Fonts/{filename}"),  # macOS user fonts
+        f"/Library/Fonts/{filename}",  # macOS system fonts
+        os.path.expanduser(f"~/.fonts/{filename}"),  # Linux user fonts
+        f"/usr/share/fonts/truetype/{filename}",  # Linux system fonts
+    ]
+    for path in search_paths:
+        if os.path.exists(path):
+            return path
+    return None
+
+# Font configuration: (filename, pixel_size, char_size)
+FONT_CONFIG = {
+    "Galmuri9": ("Galmuri9.ttf", 9, 10),
+    "GalmuriMono9": ("GalmuriMono9.ttf", 9, 10),
+    "Galmuri11": ("Galmuri11.ttf", 11, 12),
+    "GalmuriMono11": ("GalmuriMono11.ttf", 11, 12),
+    "Galmuri11-bold": ("Galmuri11-bold.ttf", 11, 12),
+    "ONE(Ed.) Galmuri11 Regular": ("ONE(Ed.) Galmuri11 Regular.ttf", 11, 11),
+    "soya_godun10": ("soya_godun10.ttf", 10, 10),
+}
+
+# Select font type
+font_type = "GalmuriMono11"  # Options: Galmuri9, GalmuriMono9, Galmuri11, GalmuriMono11, etc.
+
+font_filename, PIXEL_SIZE, CHAR_SIZE = FONT_CONFIG[font_type]
+FONT_PATH = find_font(font_filename)
+if not FONT_PATH:
+    raise FileNotFoundError(f"Font not found: {font_filename}. Install to ~/Library/Fonts/ or project fonts/ folder.")
 
 # Hangul syllable block range
 HANGUL_START = 0xAC00

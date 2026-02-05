@@ -37,7 +37,21 @@ PAIR_W = GLYPH_PX + GAP + GLYPH_PX  # 100
 PAIR_H = GLYPH_PX + LABEL_H          # 62
 CELL_PAD = 4           # padding between cells in the grid
 
-REFERENCE_FONT_PATH = "/System/Library/Fonts/ヒラギノ角ゴシック W3.ttc"
+def find_japanese_font():
+    """Find a Japanese font for reference rendering."""
+    candidates = [
+        "/System/Library/Fonts/ヒラギノ角ゴシック W3.ttc",  # macOS Hiragino
+        "/System/Library/Fonts/Hiragino Sans GB.ttc",  # macOS alternative
+        "/Library/Fonts/Arial Unicode.ttf",  # macOS
+        "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",  # Linux
+        "/usr/share/fonts/noto-cjk/NotoSansCJK-Regular.ttc",  # Linux alternative
+    ]
+    for path in candidates:
+        if os.path.exists(path):
+            return path
+    return None
+
+REFERENCE_FONT_PATH = find_japanese_font()
 REFERENCE_FONT_SIZE = 36  # renders into 48x48 area
 
 BLANK_THRESHOLD = 2    # pixels - cells with <= this many pixels are "blank"

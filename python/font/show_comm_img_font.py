@@ -34,6 +34,22 @@ PADDING = 12       # pixels between panels
 BG_COLOR = 32      # dark background
 
 
+def find_label_font(size=16):
+    """Find a font for labels, with fallback to default."""
+    candidates = [
+        "/System/Library/Fonts/Helvetica.ttc",  # macOS
+        "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",  # Linux
+        "/usr/share/fonts/TTF/DejaVuSans.ttf",  # Linux alternative
+    ]
+    for path in candidates:
+        if os.path.exists(path):
+            try:
+                return ImageFont.truetype(path, size)
+            except (OSError, IOError):
+                continue
+    return ImageFont.load_default()
+
+
 def read_font_indices(filepath):
     """Read COMM.IMG and return 256x256 list-of-lists of 4bpp index values."""
     with open(filepath, 'rb') as f:
@@ -96,10 +112,7 @@ def add_label(img, text):
     labeled = Image.new('L', (w, h + LABEL_H), BG_COLOR)
     draw = ImageDraw.Draw(labeled)
     # Center the label text
-    try:
-        font = ImageFont.truetype("/System/Library/Fonts/Helvetica.ttc", 16)
-    except (OSError, IOError):
-        font = ImageFont.load_default()
+    font = find_label_font(16)
     bbox = draw.textbbox((0, 0), text, font=font)
     tw = bbox[2] - bbox[0]
     tx = (w - tw) // 2
@@ -156,10 +169,7 @@ def main():
 
     # Title
     draw = ImageDraw.Draw(canvas)
-    try:
-        title_font = ImageFont.truetype("/System/Library/Fonts/Helvetica.ttc", 20)
-    except (OSError, IOError):
-        title_font = ImageFont.load_default()
+    title_font = find_label_font(20)
     title = "COMM.IMG Font — Before & After Bitplane Separation"
     tbbox = draw.textbbox((0, 0), title, font=title_font)
     ttw = tbbox[2] - tbbox[0]
