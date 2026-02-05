@@ -457,7 +457,7 @@ Example (2-pair chain from SB00.STG, immediately before a template):
 23 01 F0 8B  ...                    ← 48-byte template follows
 ```
 
-**Decoder note:** Because `28 01` maps to valid character IDs (り=0x28, あ=0x01), these script blocks are misinterpreted as nonsense text if not excluded. The decoder (`decode_text.py`) scans each gap for all `28 01` blocks matching the structural signature (P+5=0x00, P+7>=0x80), builds exclusion ranges, and rejects any dialogue candidate that overlaps a script opcode block.
+**Decoder note:** Because `28 01` maps to valid character IDs (り=0x28, あ=0x01), these script blocks are misinterpreted as nonsense text if not excluded. The decoder (`python/decode/decode_text.py`) scans each gap for all `28 01` blocks matching the structural signature (P+5=0x00, P+7>=0x80), builds exclusion ranges, and rejects any dialogue candidate that overlaps a script opcode block.
 
 ## Key Functions (MIPS Disassembly)
 
@@ -505,12 +505,14 @@ The executable also contains Shift-JIS-to-charID mapping tables at file offset `
 
 ## Tools
 
-- `python/decode_text.py` -- Decode text from binary game files (single offset, scan, or search)
-  - `python decode_text.py <file> <offset>` -- decode one string at offset
-  - `python decode_text.py <file> --scan` -- find and decode all text strings
-  - `python decode_text.py <file> --find "ますか"` -- find strings containing a pattern
-  - `python decode_text.py <file> --scan --prefix 2` -- STG files: mark 2-byte event script prefix
-  - `python decode_text.py <file> --stg` -- STG template-driven dialogue extraction (auto prefix)
-  - `python decode_text.py <file> --stg --find "エルク"` -- STG extraction filtered by text
-- `python/view_char.py` -- View individual font cells with bitplane separation
+- `python/decode/decode_text.py` -- Decode text from binary game files (single offset, scan, or search)
+  - `python python/decode/decode_text.py <file> <offset>` -- decode one string at offset
+  - `python python/decode/decode_text.py <file> --scan` -- find and decode all text strings
+  - `python python/decode/decode_text.py <file> --find "ますか"` -- find strings containing a pattern
+  - `python python/decode/decode_text.py <file> --scan --prefix 2` -- STG files: mark 2-byte event script prefix
+  - `python python/decode/decode_text.py <file> --stg` -- STG template-driven dialogue extraction (auto prefix)
+  - `python python/decode/decode_text.py <file> --stg --find "エルク"` -- STG extraction filtered by text
+- `python/decode/decode_all_stg.py` -- Batch decode all 19 STG files → `output/decoded/stg/`
+- `python/decode/decode_all_bin.py` -- Batch decode BIN files → `output/decoded/bin/`
+- `python/font/view_char.py` -- View individual font cells with bitplane separation
 - `COMM_IMG_chars.md` -- Complete character-to-cell mapping table

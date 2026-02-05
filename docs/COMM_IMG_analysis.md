@@ -177,10 +177,11 @@ Located in the bottom-left region (below the 256x256 font area):
 
 To translate fonts from Japanese to Korean:
 
-1. **Extract** all 1,764 characters from the 4 bitplanes
-2. **Replace** hiragana/katakana/kanji glyphs with Hangul characters, re-encoding as bitplanes (4 characters packed per cell)
-3. **Update** the character mapping table (likely in `COMM.DAT` or `SDIC.BIN`) to map text codes to new glyph positions
-4. **Re-inject** the modified pixel data back into `COMM.IMG` at the same offsets
+1. **Extract** all 1,764 characters from the 4 bitplanes using `python/font/view_char.py`
+2. **Generate** Korean Hangul glyph images using `python/font/generate_korean_font.py` → `output/font/korean_chars/`
+3. **Replace** hiragana/katakana/kanji glyphs with Hangul characters using `python/font/replace_kana_with_korean.py` → `output/font/COMM_IMG_KR.IMG`
+4. **Update** the character mapping table (likely in `COMM.DAT` or `SDIC.BIN`) to map text codes to new glyph positions
+5. **Re-inject** the modified pixel data back into `COMM.IMG` at the same offsets
 
 ### Key constraint
 

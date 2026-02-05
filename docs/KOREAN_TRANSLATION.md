@@ -147,10 +147,14 @@ This uses only 67 slots (vs. 1,656) and gives 100% syllable coverage. However, i
 2. **Count unique syllables** in the draft translation to validate the budget estimate.
 3. **Design the 11x11 pixel Korean font** -- this is the critical path item. Test legibility with complex syllables (받침-heavy words) at native PS1 resolution.
 4. **Map the top ~1,656 syllables to charIDs** in the font grid, replacing the Japanese entries.
-5. **Translate and encode** each dialogue file, using `decode_text.py` tooling (with a Korean encode table) to produce the binary output.
+5. **Translate and encode** each dialogue file, using `python/decode/decode_text.py` tooling (with a Korean encode table) to produce the binary output.
 
 ## Tools
 
-- `python decode_text.py <file> --stg` -- extract all STG dialogues with template-driven method
-- `python decode_text.py <file> --stg --find "text"` -- filter STG dialogues by content
-- Extracted dialogue files: `translated/S*_STG.txt` (18 files, 19,568 strings)
+- `python python/decode/decode_text.py <file> --stg` -- extract all STG dialogues with template-driven method
+- `python python/decode/decode_text.py <file> --stg --find "text"` -- filter STG dialogues by content
+- `python python/decode/decode_all_stg.py` -- batch extract all 19 STG files
+- `python python/font/generate_korean_font.py` -- generate Korean glyph images
+- `python python/font/replace_kana_with_korean.py` -- replace kana with Korean in COMM.IMG
+- Decoded dialogue files: `output/decoded/stg/S*_STG.txt` (19 files, 19,568 strings)
+- Translated dialogue files: `translated/ko/S*_STG.txt`

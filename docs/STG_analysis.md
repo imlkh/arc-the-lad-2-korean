@@ -321,4 +321,4 @@ A robust translation pipeline should:
 
 ### Existing Korean Translations
 
-Pre-translated Korean text files exist at `atl2_korean_translation/translated/ko/S*_STG.txt` for all 19 stages (e.g., S100_STG.txt contains 1,167 translated dialogue entries).
+Pre-translated Korean text files exist at `translated/ko/S*_STG.txt` for all 19 stages (e.g., S100_STG.txt contains 1,167 translated dialogue entries). Decoded Japanese source files are at `output/decoded/stg/S*_STG.txt`.
