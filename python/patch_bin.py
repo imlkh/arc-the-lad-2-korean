@@ -284,6 +284,11 @@ def get_patched_files():
             # Skip directories
             if os.path.isdir(filepath):
                 continue
+            # Skip BIN/CUE disc images and backups
+            if filename.endswith(('.bin', '.cue', '.backup', '.bak')):
+                continue
+            if '.backup_' in filename:
+                continue
             files[filename] = filepath
 
     return files

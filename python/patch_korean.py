@@ -709,10 +709,9 @@ def main():
     korean_mapping = build_korean_mapping(korean_chars, decode_table, priority_chars)
     print(f"  Mapped {len(korean_mapping)} Korean characters to font slots")
 
-    # Copy COMM.IMG if not already done
-    if not os.path.exists(comm_dst):
-        print(f"Copying {comm_src} -> {comm_dst}")
-        shutil.copy2(comm_src, comm_dst)
+    # Always copy fresh COMM.IMG (don't patch over previously patched file)
+    print(f"Copying {comm_src} -> {comm_dst}")
+    shutil.copy2(comm_src, comm_dst)
 
     # Patch COMM.IMG with Korean glyphs
     print()
@@ -734,10 +733,9 @@ def main():
             print(f"ERROR: Translation file not found: {translation_path}")
             return 1
 
-        # Copy STG file if not already done
-        if not os.path.exists(stg_dst):
-            print(f"Copying {stg_src} -> {stg_dst}")
-            shutil.copy2(stg_src, stg_dst)
+        # Always copy fresh STG file (don't patch over previously patched file)
+        print(f"Copying {stg_src} -> {stg_dst}")
+        shutil.copy2(stg_src, stg_dst)
 
         # Save mapping
         save_mapping(korean_mapping, mapping_path)
@@ -765,10 +763,9 @@ def main():
             print(f"ERROR: System translation file not found: {system_translation}")
             return 1
 
-        # Copy EXE file if not already done
-        if not os.path.exists(exe_dst):
-            print(f"Copying {exe_src} -> {exe_dst}")
-            shutil.copy2(exe_src, exe_dst)
+        # Always copy fresh EXE file (don't patch over previously patched file)
+        print(f"Copying {exe_src} -> {exe_dst}")
+        shutil.copy2(exe_src, exe_dst)
 
         # Parse system translation file
         print()
