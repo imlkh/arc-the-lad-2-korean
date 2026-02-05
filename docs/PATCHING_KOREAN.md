@@ -41,11 +41,11 @@ python python/patch_korean.py S100
 ```
 
 This will:
-1. Copy `S100.STG` → `output/patched/S100_KR.STG`
-2. Copy `COMM.IMG` → `output/patched/COMM_KR.IMG`
+1. Copy `S100.STG` → `output/patched/S100.STG`
+2. Copy `COMM.IMG` → `output/patched/COMM.IMG`
 3. Extract unique Korean characters from the translation
-4. Inject Korean glyphs into `COMM_KR.IMG`
-5. Re-encode Korean text into `S100_KR.STG`
+4. Inject Korean glyphs into `COMM.IMG`
+5. Re-encode Korean text into `S100.STG`
 
 ### Dry Run (Test Without Writing)
 
@@ -59,8 +59,8 @@ After patching, the following files are created in `output/patched/`:
 
 | File | Description |
 |------|-------------|
-| `S100_KR.STG` | Patched stage file with Korean dialogues |
-| `COMM_KR.IMG` | Font texture with Korean glyphs |
+| `S100.STG` | Patched stage file with Korean dialogues |
+| `COMM.IMG` | Font texture with Korean glyphs |
 | `S100_charmap.txt` | Korean character → charID mapping |
 
 ## Font Slot Allocation
@@ -138,8 +138,8 @@ To test in a PS1 emulator:
 
 1. Copy the patched files to your game directory:
    ```bash
-   cp output/patched/S100_KR.STG /path/to/game/S100.STG
-   cp output/patched/COMM_KR.IMG /path/to/game/COMM.IMG
+   cp output/patched/S100.STG /path/to/game/S100.STG
+   cp output/patched/COMM.IMG /path/to/game/COMM.IMG
    ```
 
 2. Load the game in your emulator (e.g., DuckStation, ePSXe)
@@ -157,7 +157,7 @@ python python/font/generate_korean_font.py
 
 ### Korean Characters Display as Garbage
 
-- Verify `COMM_KR.IMG` was copied to the game directory
+- Verify `COMM.IMG` from `output/patched/` was copied to the game directory
 - Check that the correct font file is being loaded
 
 ### Text Appears Cut Off
@@ -177,8 +177,8 @@ atl2_korean_translation/
 ├── output/
 │   ├── font/korean/chars/       # Korean glyph PNGs (12x12)
 │   └── patched/                 # Output patched files
-│       ├── S100_KR.STG
-│       ├── COMM_KR.IMG
+│       ├── S100.STG
+│       ├── COMM.IMG
 │       └── S100_charmap.txt
 └── docs/
     └── PATCHING_KOREAN.md       # This document

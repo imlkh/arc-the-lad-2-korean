@@ -507,9 +507,9 @@ def main():
     # File paths
     translation_path = os.path.join(BASE_DIR, "translated", "ko", f"{stage}_STG.txt")
     stg_src = os.path.join(GAME_DIR, f"{stage}.STG")
-    stg_dst = os.path.join(OUTPUT_DIR, f"{stage}_KR.STG")
+    stg_dst = os.path.join(OUTPUT_DIR, f"{stage}.STG")
     comm_src = os.path.join(GAME_DIR, "COMM.IMG")
-    comm_dst = os.path.join(OUTPUT_DIR, "COMM_KR.IMG")
+    comm_dst = os.path.join(OUTPUT_DIR, "COMM.IMG")
     mapping_path = os.path.join(OUTPUT_DIR, f"{stage}_charmap.txt")
 
     print(f"=== Arc the Lad 2 Korean Patcher ===")
