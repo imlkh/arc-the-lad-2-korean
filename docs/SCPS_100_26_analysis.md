@@ -14,7 +14,7 @@
 | RAM range | `0x800C1400` -- `0x8019EC00` (907,264 bytes) |
 | BSS range | `0x8019E850` -- `0x801FC834` (cleared by entry point) |
 | Stack pointer | `0x801FFFF0` (top of 2 MB PS1 RAM) |
-| Contains text | **Yes** -- ~960 strings (system menus, item/skill names, descriptions, location names) |
+| Contains text | **Yes** -- ~84 extractable strings (system menus, error messages, descriptions) |
 
 ### Address Conversion
 
@@ -129,32 +129,51 @@ This clears ~24 KB of BSS (0x8019E850 to 0x801FC834) before proceeding to game i
 |----------|-------|
 | Main text region | File `0x0D2600` -- `0x0D7A00` (21,504 bytes) |
 | Secondary text region | File `0x0BEF00` -- `0x0C1100` (8,704 bytes) |
-| Total meaningful strings | **~960** |
+| Extractable strings | **84** (after strict filtering) |
+| Raw scan candidates | 21,090 (mostly MIPS code false positives) |
 | Encoding | Game custom (same as STG/BIN files, see `TEXT_ENCODING.md`) |
-| Unique characters used | 700 (70 hiragana, 79 katakana, 517 kanji, 13 Latin, 10 digits, 11 symbols) |
-| Yes/no choice prompts | 26 |
 
-### Text Categories
+### Decoding Challenges
+
+SCPS_100.26 is a PS1 executable containing ~888 KB of MIPS R3000A machine code. Unlike dialogue-focused files (STG, SDIC.BIN), most of the file is compiled code rather than text data. This creates significant challenges for text extraction:
+
+**The problem**: MIPS instruction bytes frequently map to valid game character IDs, producing long runs of nonsensical kana/kanji that appear to be text but are actually machine code. For example, the byte sequence `0x28 0x01` (a common MIPS instruction pattern) decodes to "りあ" in the game's encoding.
+
+**Solution**: The decoder uses a **strict filter** for executable files that requires:
+1. Proper Japanese sentence endings (ます、です、ません、か、etc.)
+2. Rejection of repetitive patterns (e.g., "ギギギ" from code loops)
+3. Rejection of excessive katakana "ギ" (charID 0x07, very common in MIPS code)
+4. Rejection of Latin letters mixed randomly with Japanese
+5. Balanced hiragana/katakana ratio checks
+
+This reduces 21,090 raw candidates to **84 verified text strings**, concentrated in the `0x0D3xxx` region where actual game text is stored.
+
+### Extracted Text Categories (84 strings)
+
+The strict filter extracts strings that have proper Japanese sentence structure. Most extracted strings are from the `0x0D3xxx`-`0x0D6xxx` range:
 
 | Category | Count | File Offset Range | Description |
 |----------|-------|-------------------|-------------|
-| Character names | ~20 | 0x0D26B2-0x0D2700 | Player character names (エルク, リーザ, シュウ, etc.) |
-| Monster names | ~150 | 0x0D2700-0x0D2A90 | Enemy/monster names |
-| Skill/ability names | ~100 | 0x0D2F00-0x0D3260 | Attack/magic skill names |
-| Menu/UI labels | ~30 | 0x0D32E0-0x0D33B0 | アイテム, 装備, モンスター, オプション終了, etc. |
-| Parameter labels | ~20 | 0x0D33E0-0x0D34B0 | Stats, display options |
-| Save/load messages | ~15 | 0x0D3574-0x0D36C8 | Memory card prompts |
-| Error/warning messages | ~30 | 0x0D36F0-0x0D38E0 | Item/equipment restriction messages |
-| Status effect descriptions | ~50 | 0x0D3AB0-0x0D3F00 | Buff/debuff/ailment descriptions |
-| Shop dialogue | ~25 | 0x0D4000-0x0D4170 | Buy/sell/trade-in prompts |
-| Equipment effect descriptions | ~30 | 0x0D5190-0x0D5540 | 装備すると攻撃力上昇, etc. |
-| Skill descriptions | ~80 | 0x0D5770-0x0D62E0 | Full-sentence spell/ability descriptions |
-| Level-up messages | ~20 | 0x0D6600-0x0D6740 | レベルが上がった, etc. |
-| Synthesis messages | ~15 | 0x0D6780-0x0D68E0 | Crafting/fusion prompts |
-| Location names | ~200 | 0x0D6900-0x0D7640 | Dungeon, town, map names |
-| Area map labels | ~30 | 0x0D7546-0x0D7630 | Region names with (エリアマップ) suffix |
-| FMV labels | 24 | 0x0D7790-0x0D7920 | Movie titles (ムービー1~24) |
-| Name entry grids | ~35 | 0x0BEF00-0x0C1100 | Hiragana/katakana/Latin character tables |
+| System messages | ~15 | 0x0D34FC-0x0D36C8 | 特殊能力はありません, ゲームが終了していません, etc. |
+| Error/restriction messages | ~20 | 0x0D3700-0x0D38E0 | Item/equipment restriction warnings |
+| Status effect descriptions | ~15 | 0x0D3C64-0x0D3F00 | Buff/debuff/ailment descriptions |
+| Shop dialogue | ~10 | 0x0D4000-0x0D4320 | Buy/sell/trade-in prompts with question marks |
+| Skill descriptions | ~15 | 0x0D5770-0x0D62E0 | Full-sentence spell/ability descriptions |
+| Synthesis messages | ~10 | 0x0D6780-0x0D68E0 | Crafting/fusion prompts |
+
+**Note**: Many game strings (character names, monster names, item names, location names, menu labels) are **not extracted** by the strict filter because they lack sentence endings. These strings exist in the file but require manual extraction or a region-specific scan. The 84 extracted strings represent the subset with clear sentence structure that can be reliably distinguished from MIPS code bytes.
+
+### Strings NOT Extracted (require manual or region-based extraction)
+
+| Category | Estimated Count | File Offset Range | Reason Not Extracted |
+|----------|-----------------|-------------------|---------------------|
+| Character names | ~20 | 0x0D26B2-0x0D2700 | No sentence endings (single words) |
+| Monster names | ~150 | 0x0D2700-0x0D2A90 | No sentence endings |
+| Skill/ability names | ~100 | 0x0D2F00-0x0D3260 | No sentence endings |
+| Menu/UI labels | ~30 | 0x0D32E0-0x0D33B0 | Short labels without particles |
+| Location names | ~200 | 0x0D6900-0x0D7640 | Noun phrases without verb endings |
+| FMV labels | 24 | 0x0D7790-0x0D7920 | Short labels (ムービー1~24) |
+| Name entry grids | ~35 | 0x0BEF00-0x0C1100 | Character tables, not sentences |
 
 ### Example Strings
 
@@ -323,22 +342,43 @@ SCPS_100.26 serves as the central hub for all overlay modules. All overlays call
 | **S*.STG** | Stage files -- event scripts call SCPS_100.26 functions for dialogue display and game state |
 | **BEAM.DAT** | Battle/event text -- referenced by SCPS_100.26's battle subsystem |
 
+## Decoding Tools
+
+### Extraction Command
+
+```bash
+python python/decode/decode_all_bin.py
+```
+
+This extracts SCPS_100.26 with **strict scan** mode, which filters out MIPS code false positives. Output: `output/decoded/bin/SCPS_100_26.txt`
+
+### Manual Extraction
+
+For strings not captured by the strict filter (names, labels, location names), use the core decoder with region-specific offsets:
+
+```bash
+# Scan a specific region for text
+python python/decode/decode_text.py SCPS_100.26 --scan
+
+# Decode at a specific offset
+python python/decode/decode_text.py SCPS_100.26 0x0D34FC
+```
+
 ## Relevance to Korean Translation
 
 ### What Needs Translation
 
-SCPS_100.26 contains **~960 game text strings** that require translation:
+SCPS_100.26 contains game text strings that require translation. Due to the difficulty of distinguishing text from MIPS code, only **84 strings** are auto-extracted, but the file contains an estimated **~560 total strings** in the text data regions:
 
-| Priority | Content | Count |
-|----------|---------|-------|
-| High | Menu/UI labels, save/load prompts, error messages | ~95 |
-| High | Location/map names (displayed on screen) | ~230 |
-| Medium | Item/skill names (shared with SMITH.BIN data) | ~250 |
-| Medium | Status effect and equipment descriptions | ~80 |
-| Medium | Skill/ability descriptions | ~80 |
-| Medium | Shop dialogue, battle messages, synthesis | ~60 |
-| Low | FMV labels (movie theater mode) | 24 |
-| Low | Character names (may keep Japanese/romanized) | ~20 |
+| Priority | Content | Extracted | Estimated Total |
+|----------|---------|-----------|-----------------|
+| High | System messages, error messages | 35 | ~45 |
+| High | Shop dialogue, prompts | 10 | ~25 |
+| Medium | Status/skill descriptions | 30 | ~80 |
+| Medium | Synthesis messages | 9 | ~15 |
+| Low | Character/monster/item names | 0 | ~270 |
+| Low | Location names | 0 | ~200 |
+| Low | Menu labels, FMV labels | 0 | ~55 |
 
 ### What Needs Modification
 

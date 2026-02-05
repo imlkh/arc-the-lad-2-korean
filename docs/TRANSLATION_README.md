@@ -8,7 +8,8 @@ atl2_korean_translation/
 │   ├── decode/                  # Text extraction tools
 │   │   ├── decode_text.py       # Core decoder (--stg, --scan, --find modes)
 │   │   ├── decode_all_stg.py    # Batch decode all 19 STG files
-│   │   └── decode_all_bin.py    # Decode BIN files (BEAM.DAT, SDIC, etc.)
+│   │   ├── decode_all_bin.py    # Decode BIN files (BEAM.DAT, SDIC, etc.)
+│   │   └── decode_yend.py       # Decode YEND.BIN ASCII credits (special)
 │   │
 │   ├── font/                    # Font tools
 │   │   ├── view_char.py         # View font cells by row/col or cell index

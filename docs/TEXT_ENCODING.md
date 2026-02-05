@@ -514,5 +514,6 @@ The executable also contains Shift-JIS-to-charID mapping tables at file offset `
   - `python python/decode/decode_text.py <file> --stg --find "エルク"` -- STG extraction filtered by text
 - `python/decode/decode_all_stg.py` -- Batch decode all 19 STG files → `output/decoded/stg/`
 - `python/decode/decode_all_bin.py` -- Batch decode BIN files → `output/decoded/bin/`
+- `python/decode/decode_yend.py` -- Decode YEND.BIN ASCII credit strings (uses plain ASCII, not game encoding)
 - `python/font/view_char.py` -- View individual font cells with bitplane separation
 - `COMM_IMG_chars.md` -- Complete character-to-cell mapping table

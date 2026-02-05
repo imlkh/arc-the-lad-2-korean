@@ -24,20 +24,24 @@ BIN_DIR = os.path.join(_SCRIPT_DIR, "..", "..", "..")  # Arc_The_Lad2/
 OUTPUT_DIR = os.path.join(_SCRIPT_DIR, "..", "..", "output", "decoded", "bin")
 
 # Files to decode, in processing order.
-# (filename, description, ff08_only)
+# (filename, description, ff08_only, strict_filter)
 # ff08_only=True for large files where byte-by-byte scan is too slow;
 # uses only the fast FF 08 dialogue marker pass.
+# strict_filter=True for executable files with lots of MIPS code bytes;
+# requires Japanese particles/endings to reduce false positives.
+#
+# NOTE: YEND.BIN is excluded because it uses ASCII encoding (not game encoding).
+# Use decode_yend.py to extract YEND.BIN credit strings.
 TARGET_FILES = [
-    ("BEAM.DAT", "Battle/event dialogue", True),
-    ("SDIC.BIN", "Dictionary — character profiles, monster descriptions", False),
-    ("YGUILD.BIN", "Guild overlay — quest descriptions, job board text", False),
-    ("YSHOP.BIN", "Shop overlay — shop/item text", False),
-    ("YPROP.BIN", "Items overlay — item descriptions", False),
-    ("YSEG.BIN", "Characters overlay — character text", False),
-    ("YEND.BIN", "Credits overlay — ending/credits text", False),
-    ("SMITH.BIN", "Equipment/smithing data", False),
-    ("SCPS_100.26", "Main executable — system messages, menu text", False),
-    ("CHA.BIN", "Character data — embedded text", True),
+    ("BEAM.DAT", "Battle/event dialogue", True, False),
+    ("SDIC.BIN", "Dictionary — character profiles, monster descriptions", False, False),
+    ("YGUILD.BIN", "Guild overlay — quest descriptions, job board text", False, False),
+    ("YSHOP.BIN", "Shop overlay — shop/item text", False, False),
+    ("YPROP.BIN", "Items overlay — item descriptions", False, False),
+    ("YSEG.BIN", "Characters overlay — character text", False, False),
+    ("SMITH.BIN", "Equipment/smithing data", False, False),
+    ("SCPS_100.26", "Main executable — system messages, menu text", False, True),
+    ("CHA.BIN", "Character data — embedded text", True, False),
 ]
 
 
@@ -46,7 +50,7 @@ def safe_output_name(filename):
     return filename.replace(".", "_")
 
 
-def decode_one(filepath, decode_table, ff08_only=False, find=None):
+def decode_one(filepath, decode_table, ff08_only=False, strict_filter=False, find=None):
     """Decode a single binary file. Returns (lines, count_raw, count_filtered)."""
     data = open(filepath, "rb").read()
 
@@ -57,10 +61,11 @@ def decode_one(filepath, decode_table, ff08_only=False, find=None):
     # For ff08_only files, the FF 08 marker itself provides high confidence,
     # so no quality filter is needed.  For full-scan files, apply the kanji
     # filter (>= 2 kanji) to reject machine-code false positives.
+    # For executable files, use strict mode to also require particles/endings.
     if ff08_only:
         count_filtered = count_raw
     else:
-        results = filter_real_text(results)
+        results = filter_real_text(results, strict=strict_filter)
         count_filtered = len(results)
 
     # Apply text search filter if specified
@@ -86,10 +91,10 @@ def main():
     # Find which target files exist
     existing = []
     missing = []
-    for filename, desc, ff08_only in TARGET_FILES:
+    for filename, desc, ff08_only, strict_filter in TARGET_FILES:
         filepath = os.path.join(BIN_DIR, filename)
         if os.path.exists(filepath):
-            existing.append((filename, desc, ff08_only, filepath))
+            existing.append((filename, desc, ff08_only, strict_filter, filepath))
         else:
             missing.append(filename)
 
@@ -111,14 +116,15 @@ def main():
 
     total_strings = 0
 
-    for filename, desc, ff08_only, filepath in existing:
+    for filename, desc, ff08_only, strict_filter, filepath in existing:
         filesize = os.path.getsize(filepath)
         size_label = f"{filesize / 1024:.0f} KB" if filesize < 1024 * 1024 else f"{filesize / (1024 * 1024):.1f} MB"
-        mode = "FF08 markers" if ff08_only else "full scan"
+        mode = "FF08 markers" if ff08_only else ("strict scan" if strict_filter else "full scan")
         print(f"  {filename} ({size_label}, {mode}) — {desc}...", end="", flush=True)
 
         lines, count_raw, count_filtered = decode_one(filepath, decode_table,
                                                        ff08_only=ff08_only,
+                                                       strict_filter=strict_filter,
                                                        find=args.find)
 
         out_name = safe_output_name(filename) + ".txt"

@@ -18,7 +18,7 @@ import sys
 
 # === Constants ===
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-CHARS_MD_PATH = os.path.join(_SCRIPT_DIR, "..", "COMM_IMG_chars.md")
+CHARS_MD_PATH = os.path.join(_SCRIPT_DIR, "..", "..", "docs", "COMM_IMG_chars.md")
 
 # Minimum consecutive valid characters to consider a run as text
 MIN_TEXT_RUN = 3
@@ -574,7 +574,7 @@ def scan_file(data, decode_table, prefix=0, ff08_only=False):
     return results
 
 
-def filter_real_text(results, min_kanji=2):
+def filter_real_text(results, min_kanji=2, strict=False):
     """Filter scan_file results to remove false positives from machine code.
 
     Requires at least ``min_kanji`` CJK Unified Ideographs (U+4E00-U+9FFF) in
@@ -588,10 +588,32 @@ def filter_real_text(results, min_kanji=2):
     Args:
         results: list of (offset, consumed, text) tuples from scan_file
         min_kanji: minimum number of kanji characters required (default 2)
+        strict: if True, require proper Japanese sentence endings and reject
+                strings with random character patterns (use for executable
+                files with lots of code bytes)
 
     Returns:
         Filtered list of (offset, consumed, text) tuples.
     """
+    # Common Japanese sentence endings (verbs, adjectives, particles)
+    SENTENCE_ENDINGS = (
+        # Polite verb forms
+        'ます', 'ました', 'ません', 'ませんか', 'ましょう', 'ですか',
+        # Plain verb forms
+        'です', 'だった', 'である', 'でした', 'ている', 'ていた',
+        'する', 'した', 'される', 'された', 'できる', 'できない',
+        'ない', 'なかった', 'ある', 'あった', 'いる', 'いた',
+        'なる', 'なった', 'くる', 'きた', 'いく', 'いった',
+        # Requests/commands
+        'ください', 'くれ', 'ろ', 'よう', 'てくれ',
+        # Sentence-final particles
+        'か', 'ね', 'よ', 'わ', 'ぞ', 'な', 'さ',
+        # Noun endings (common game text patterns)
+        '無し', '中', '済み',
+    )
+    # Japanese punctuation that often ends sentences
+    END_PUNCTUATION = ('。', '！', '？', '…')
+
     filtered = []
     for offset, consumed, text in results:
         # Strip control tags to get the actual displayed text
@@ -606,8 +628,55 @@ def filter_real_text(results, min_kanji=2):
 
         # Count kanji characters
         kanji_count = sum(1 for ch in stripped if '\u4e00' <= ch <= '\u9fff')
-        if kanji_count >= min_kanji:
-            filtered.append((offset, consumed, text))
+        if kanji_count < min_kanji:
+            continue
+
+        if strict:
+            # In strict mode, require proper Japanese sentence structure:
+            # 1. Must end with a common verb ending, particle, or punctuation
+
+            has_valid_ending = (
+                any(stripped.endswith(e) for e in SENTENCE_ENDINGS) or
+                any(stripped.endswith(p) for p in END_PUNCTUATION)
+            )
+
+            if not has_valid_ending:
+                continue
+
+            # Reject strings with excessive repetition (code patterns)
+            # Check for 3+ consecutive identical characters
+            if re.search(r'(.)\1{2,}', stripped):
+                continue
+
+            # Check for repeating 2-3 char patterns (like "たギ" repeated)
+            if re.search(r'(.{2,3})\1{2,}', stripped):
+                continue
+
+            # Reject strings with too much katakana mixed with hiragana randomly
+            # Real Japanese has katakana for loanwords (clustered), not scattered
+            hiragana = sum(1 for ch in stripped if 'ぁ' <= ch <= 'ん')
+            katakana = sum(1 for ch in stripped if 'ァ' <= ch <= 'ン')
+            total_kana = hiragana + katakana
+            # If there's significant kana but it's roughly 50/50 hiragana/katakana,
+            # it's likely garbage (real text is usually hiragana-dominant or
+            # has katakana in clusters for loanwords)
+            if total_kana > 10 and katakana > 0 and hiragana > 0:
+                ratio = min(hiragana, katakana) / max(hiragana, katakana)
+                if ratio > 0.4:  # Too balanced = likely garbage
+                    continue
+
+            # Reject strings with excessive "ギ" (charID 0x07, very common in MIPS code)
+            # Real Japanese rarely has more than 2-3 ギ in a sentence
+            if stripped.count('ギ') > 3:
+                continue
+
+            # Reject strings with Latin letters mixed into Japanese
+            # (e.g., "GOあギえで" or "e地うく")
+            has_latin = bool(re.search(r'[A-Za-z]', stripped))
+            if has_latin and kanji_count < 4:
+                continue
+
+        filtered.append((offset, consumed, text))
 
     return filtered
 
