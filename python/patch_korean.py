@@ -129,7 +129,7 @@ def extract_korean_chars(translation_path):
     return sorted(korean_chars)
 
 
-def build_korean_mapping(korean_chars, decode_table, priority_chars=None):
+def build_korean_mapping(korean_chars, decode_table, priority_chars=None, char_frequency=None):
     """Build mapping from Korean characters to font charIDs.
 
     Strategy: Replace hiragana (1-80), katakana (81-160), then kanji (239+).
@@ -139,6 +139,7 @@ def build_korean_mapping(korean_chars, decode_table, priority_chars=None):
         korean_chars: List of Korean characters to map
         decode_table: The character decode table
         priority_chars: Optional set of characters to prioritize for single-byte slots
+        char_frequency: Optional dict mapping char -> usage count for frequency-based ordering
     """
     # CharIDs that encode with 00 byte (unusable - 00 is null terminator)
     # These are charIDs where (charID - 239) % 255 == 0: 239, 494, 749, ...
@@ -169,8 +170,12 @@ def build_korean_mapping(korean_chars, decode_table, priority_chars=None):
     # Build mapping: Korean char -> charID
     mapping = {}
 
-    # If priority chars specified, assign them to single-byte slots first
-    if priority_chars:
+    # Determine character ordering for slot assignment
+    if char_frequency:
+        # Frequency-based ordering: most used chars get single-byte slots
+        ordered_chars = sorted(korean_chars, key=lambda c: -char_frequency.get(c, 0))
+    elif priority_chars:
+        # Priority chars first, then others
         priority_list = [ch for ch in korean_chars if ch in priority_chars]
         other_list = [ch for ch in korean_chars if ch not in priority_chars]
         ordered_chars = priority_list + other_list
@@ -687,26 +692,29 @@ def main():
         print("ERROR: No translation files found. Specify a stage name or --system.")
         return 1
 
-    # Extract Korean characters from all translation files
+    # Extract Korean characters and count frequency from all translation files
     print("Extracting Korean characters from translations...")
     all_korean_chars = set()
-    priority_chars = set()  # Characters from system messages get single-byte priority
+    char_frequency = {}  # Count character usage for frequency-based encoding
 
     for trans_path in all_translation_paths:
         chars = extract_korean_chars(trans_path)
         all_korean_chars.update(chars)
-        # System message characters get priority for single-byte encoding
-        if "SCPS_100_26" in trans_path:
-            priority_chars.update(chars)
         print(f"  {os.path.basename(trans_path)}: {len(chars)} unique chars")
+
+        # Count character frequency
+        with open(trans_path, "r", encoding="utf-8") as f:
+            for line in f:
+                for ch in line:
+                    if "\uAC00" <= ch <= "\uD7A3":
+                        char_frequency[ch] = char_frequency.get(ch, 0) + 1
 
     korean_chars = sorted(all_korean_chars)
     print(f"  Total unique Korean characters: {len(korean_chars)}")
-    if priority_chars:
-        print(f"  Priority (system) characters: {len(priority_chars)}")
+    print(f"  Using frequency-based encoding (most used chars get single-byte)")
 
     print("Building character mapping...")
-    korean_mapping = build_korean_mapping(korean_chars, decode_table, priority_chars)
+    korean_mapping = build_korean_mapping(korean_chars, decode_table, char_frequency=char_frequency)
     print(f"  Mapped {len(korean_mapping)} Korean characters to font slots")
 
     # Always copy fresh COMM.IMG (don't patch over previously patched file)
