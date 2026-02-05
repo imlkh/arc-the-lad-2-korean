@@ -269,6 +269,56 @@ Text is located at chunk offset `+0xB4000` through `+0xBC7FF` (~34 KB per chunk)
 
 5. **Per-chunk audio/graphics**: Each chunk is self-contained. Text changes in one chunk do not affect other chunks, but every chunk must be individually patched.
 
+### Changing Text Length
+
+Dialogue text is embedded **inline** within the event script bytecode. Each string has this structure:
+
+```
+[text bytes...] 00          ← Variable-length text + null terminator
+[2-byte script offset]      ← Little-endian offset into script address space
+[48-byte template block]    ← Contains 3 pointer fields at +14, +30, +36
+[next text...]
+```
+
+**If text length changes**, all subsequent offsets shift and become invalid. The event script engine will jump to wrong addresses, causing crashes or garbage output.
+
+#### What Must Be Updated
+
+For every text length change within a chunk:
+
+| Element | Location | Update Required |
+|---------|----------|-----------------|
+| 2-byte script prefix | Before each string | Recalculate all subsequent prefixes |
+| Template pointer A | Template +14 | Recalculate (current_prefix + 0x10) |
+| Template pointer B | Template +30 | Recalculate (pointer_A + 0x05) |
+| Template pointer C | Template +36 | Recalculate (points to earlier dialogue) |
+
+All three pointer fields in the 48-byte template block are **relative to the script address space**, not absolute file offsets. When text shifts, every downstream pointer must be adjusted by the delta.
+
+#### Practical Approaches
+
+| Approach | Difficulty | Description |
+|----------|------------|-------------|
+| **Fixed length** | Easy | Pad shorter translations with spaces; truncate or abbreviate longer ones |
+| **Offset patcher** | Medium | Build a tool that parses all strings, recalculates all offsets, and rewrites the chunk |
+| **Text relocation** | Hard | Move text to unused space within the chunk and patch all pointers to the new location |
+
+#### Recommended Strategy
+
+Korean text is often more compact than Japanese (no hiragana grammatical particles), so many translations will naturally fit. For strings that exceed the original length:
+
+1. **Use shorter synonyms** where meaning is preserved
+2. **Split long lines** with `FF 08 07 01` (page break control code) to continue on the next dialogue box
+3. **Abbreviate** common terms (e.g., 아이템 → items when context is clear)
+4. **Measure carefully** -- each Korean syllable block encodes to 2 bytes (0xF0-0xF5 prefix), same as Japanese kanji
+
+A robust translation pipeline should:
+1. Extract all strings with their byte lengths
+2. Track translated byte lengths vs. original
+3. Flag any translations that exceed the original length
+4. Either auto-pad short translations or require manual adjustment for long ones
+5. Rebuild each chunk with recalculated offsets
+
 ### Existing Korean Translations
 
 Pre-translated Korean text files exist at `atl2_korean_translation/translated/ko/S*_STG.txt` for all 19 stages (e.g., S100_STG.txt contains 1,167 translated dialogue entries).
