@@ -29,6 +29,8 @@ def build_decode_table():
 
     Uses the same regex approach as view_char.py.
     Formula: charID = 1 + (row * 21 + col) * 4 + bitplane
+
+    The (Blank) character at cell 59, bit2 (charID 239) is treated as a space.
     """
     table = {}
     if not os.path.exists(CHARS_MD_PATH):
@@ -47,9 +49,13 @@ def build_decode_table():
         col = int(m.group(3))
         bits = [m.group(i).strip() for i in range(4, 8)]
         for bitplane, label in enumerate(bits):
-            if not label or label == "(blank)" or label == "(Blank)":
-                continue
             char_id = 1 + (row * 21 + col) * 4 + bitplane
+            # Treat (Blank) as space character (cell 59, bit2 = charID 239)
+            if label == "(blank)" or label == "(Blank)":
+                table[char_id] = " "  # Map blank to space
+                continue
+            if not label:
+                continue
             # Strip trailing ? from uncertain characters
             clean = label.rstrip("?").strip()
             if clean:
@@ -365,15 +371,20 @@ def _is_garbage_text(text):
 
     # Long text with no kanji and mixed kana = likely garbage
     # Real Japanese dialogue of 15+ chars almost always contains kanji
-    # Exception: onomatopoeia, which we already check for above
+    # Exception: onomatopoeia, names, casual speech with proper punctuation
     if total_len >= 15 and kanji == 0 and hiragana >= 5 and katakana >= 5:
-        # High kana mixing ratio with no kanji = garbage
-        # Legitimate text would have either mostly hiragana OR mostly katakana
-        min_kana = min(hiragana, katakana)
-        max_kana = max(hiragana, katakana)
-        if min_kana >= 5 and max_kana <= min_kana * 3:
-            # Both kana types are significant, likely binary garbage
-            return True
+        # Check for proper Japanese punctuation (indicates real dialogue)
+        has_proper_punct = any(p in stripped_clean for p in ('、', '。', '？', '！', '…', '「', '」', '(', ')'))
+        if has_proper_punct:
+            # Has punctuation, likely real dialogue with names/katakana words
+            pass
+        else:
+            # High kana mixing ratio with no kanji and no punctuation = garbage
+            min_kana = min(hiragana, katakana)
+            max_kana = max(hiragana, katakana)
+            if min_kana >= 5 and max_kana <= min_kana * 3:
+                # Both kana types are significant, likely binary garbage
+                return True
 
     # Lowercase ASCII letter embedded in Japanese text = garbage
     # (Uppercase might be intentional like R1, C級, BGM, HP, MP, etc.)
