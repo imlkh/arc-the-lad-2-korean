@@ -17,7 +17,7 @@ from PIL import Image, ImageDraw, ImageFont
 # === Configuration ===
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 COMM_IMG_PATH = os.path.join(_SCRIPT_DIR, "..", "..", "..", "COMM.IMG")
-CHARS_MD_PATH = os.path.join(_SCRIPT_DIR, "..", "..", "COMM_IMG_chars.md")
+CHARS_MD_PATH = os.path.join(_SCRIPT_DIR, "..", "..", "docs", "COMM_IMG_chars.md")
 OUTPUT_DIR = os.path.join(_SCRIPT_DIR, "..", "..", "output", "validation")
 ROW_WIDTH = 896       # bytes per row in COMM.IMG
 CHAR_W, CHAR_H = 12, 12  # 12x12 cell (11x11 glyph + 1px margin)

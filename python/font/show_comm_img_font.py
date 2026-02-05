@@ -18,7 +18,7 @@ import sys
 from PIL import Image, ImageDraw, ImageFont
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-COMM_IMG_PATH = os.path.join(SCRIPT_DIR, '..', '..', 'COMM.IMG')
+COMM_IMG_PATH = os.path.join(SCRIPT_DIR, '..', '..', '..', 'COMM.IMG')
 
 ROW_WIDTH = 896
 FONT_W = 256
