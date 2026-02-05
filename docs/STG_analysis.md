@@ -12,27 +12,28 @@
 
 ### All STG Files
 
-| File | Size | Chunks | Dialogues | Description |
-|------|------|--------|-----------|-------------|
+| File | Size | Chunks | Dialogues | Notes |
+|------|------|--------|-----------|-------|
 | S100.STG | 8.1 MB | 11 | 1,164 | Prodias (Aldia capital, opening chapter) |
-| S200.STG | 12.5 MB | 17 | -- | |
-| S300.STG | 8.1 MB | 11 | -- | |
-| S400.STG | 7.4 MB | 10 | -- | |
-| S500.STG | 8.8 MB | 12 | -- | |
-| S600.STG | 11.8 MB | 16 | -- | |
-| S700.STG | 25.0 MB | 34 | -- | |
-| S800.STG | 11.8 MB | 16 | -- | |
-| S900.STG | 10.3 MB | 14 | -- | |
-| SA00.STG | 11.0 MB | 15 | -- | |
-| SB00.STG | 7.4 MB | 10 | -- | |
-| SC00.STG | 14.7 MB | 20 | -- | |
-| SD00.STG | 13.3 MB | 18 | -- | |
-| SE00.STG | 14.7 MB | 20 | -- | |
-| SF00.STG | 34.6 MB | 47 | -- | |
-| SG00.STG | 41.2 MB | 56 | -- | |
-| SH00.STG | 11.8 MB | 16 | -- | |
-| SI00.STG | 28.7 MB | 39 | -- | |
-| SJ00.STG | 0.1 MB | 0* | -- | Special (see note) |
+| S200.STG | 12.5 MB | 17 | 1,754 | |
+| S300.STG | 8.1 MB | 11 | 320 | |
+| S400.STG | 7.4 MB | 10 | 778 | |
+| S500.STG | 8.8 MB | 12 | 526 | |
+| S600.STG | 11.8 MB | 16 | 753 | |
+| S700.STG | 25.0 MB | 34 | 2,549 | |
+| S800.STG | 11.8 MB | 16 | 931 | |
+| S900.STG | 10.3 MB | 14 | 921 | |
+| SA00.STG | 11.0 MB | 15 | 1,269 | |
+| SB00.STG | 7.4 MB | 10 | 775 | |
+| SC00.STG | 14.7 MB | 20 | 702 | |
+| SD00.STG | 13.3 MB | 18 | 661 | |
+| SE00.STG | 14.7 MB | 20 | 1,213 | |
+| SF00.STG | 34.6 MB | 47 | 2,499 | |
+| SG00.STG | 41.2 MB | 56 | 1,492 | |
+| SH00.STG | 11.8 MB | 16 | 49 | Minimal dialogue (cutscene-heavy?) |
+| SI00.STG | 28.7 MB | 39 | 2,122 | |
+| SJ00.STG | 0.1 MB | 0* | 0 | Special (header-only, no chunks) |
+| **Total** | **306 MB** | **377** | **19,478** | |
 
 *SJ00.STG (81,920 bytes = 40 sectors) does not follow the chunk structure -- it is smaller than one chunk and may be a header-only file or special stage data.
 
