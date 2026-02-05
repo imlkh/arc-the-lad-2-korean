@@ -126,7 +126,7 @@ This uses only 67 slots (vs. 1,656) and gives 100% syllable coverage. However, i
 | SDIC.BIN | Character profiles, monster encyclopedia (555 strings) | Medium |
 | SMITH.BIN | Item/equipment descriptions (628 strings) | Medium |
 | YGUILD.BIN | Guild quest text (363 strings) | Medium |
-| BEAM.DAT | Battle/event text | Medium |
+| BEAM.DAT | Battle dialogue, name/location tables, embedded EXE data (~900-1,400 unique strings, 33x duplicated shared template) | Medium |
 
 ### Files Excluded from Translation
 
