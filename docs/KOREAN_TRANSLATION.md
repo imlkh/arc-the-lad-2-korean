@@ -122,7 +122,7 @@ This uses only 67 slots (vs. 1,656) and gives 100% syllable coverage. However, i
 | File | Content | Priority |
 |------|---------|----------|
 | S*.STG (19 files) | Stage dialogue (19,568 strings) | High |
-| SCPS_100.26 | System messages, menu text | High |
+| SCPS_100.26 | System messages, menu text, item/skill names, descriptions, location names (~960 strings) | High |
 | SDIC.BIN | Character profiles, monster encyclopedia (555 strings) | Medium |
 | SMITH.BIN | Item/equipment descriptions (628 strings) | Medium |
 | YGUILD.BIN | Guild quest text (363 strings) | Medium |
