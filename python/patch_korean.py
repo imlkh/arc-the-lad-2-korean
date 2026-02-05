@@ -39,15 +39,28 @@ CHUNK_SIZE = 0xBC800  # 772,096 bytes per chunk
 EVENT_SCRIPT_OFFSET = 0xB4000  # event script starts here in each chunk
 
 # Characters to preserve (not replace with Korean)
-# Latin A-Z (charIDs 161-186), a-z (187-212), 0-9 (213-222)
-# Symbols (223-238), special chars
-PRESERVE_CHAR_IDS = set(range(161, 239))  # Latin, digits, basic symbols
+# These cells contain important UI elements, symbols, and special characters
+#
+# Cell to charID mapping: charID = cell * 4 + 1 + bitplane (bitplane 0-3)
+#
+# Preserved cells:
+#   - Cells 40-62: Latin A-Z, a-z, 0-9, symbols, punctuation (charIDs 161-252)
+#   - Cells 64-67: Special characters (charIDs 257-272)
+#   - Cell 63, bitplane 0 only: Special character (charID 253)
+#
+# Available for Korean (between preserved ranges):
+#   - Cell 63, bitplanes 1-3: charIDs 254-256
+PRESERVE_CHAR_IDS = set()
 
-# Also preserve these specific charIDs (UI elements, arrows, etc.)
-PRESERVE_CHAR_IDS.update([
-    # Element icons (223-226): kept in single-byte range via original encoding
-    # Symbols: ー、…＋－／＊～"。！？
-])
+# Cells 40-62: all bitplanes (charIDs 161-252)
+# Includes: Latin A-Z, a-z, 0-9, symbols, ( ) , . : ; etc.
+PRESERVE_CHAR_IDS.update(range(161, 253))
+
+# Cells 64-67: all bitplanes (charIDs 257-272)
+PRESERVE_CHAR_IDS.update(range(257, 273))
+
+# Cell 63, bitplane 0 only (charID 253)
+PRESERVE_CHAR_IDS.add(253)
 
 # Space character uses a dedicated single-byte slot
 # CharID 160 (last katakana slot) - renders as blank, encodes as 0xA0
