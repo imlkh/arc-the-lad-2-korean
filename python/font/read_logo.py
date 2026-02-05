@@ -9,7 +9,7 @@ from PIL import Image
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 COMM_IMG_PATH = os.path.join(_SCRIPT_DIR, "..", "..", "..", "COMM.IMG")
-OUTPUT_PATH = os.path.join(_SCRIPT_DIR, "..", "..", "output", "font", "COMM_IMG_full.png")
+OUTPUT_PATH = os.path.join(_SCRIPT_DIR, "..", "..", "output", "font", "analysis", "COMM_IMG_full.png")
 
 data = open(COMM_IMG_PATH, 'rb').read()
 row_width = 896

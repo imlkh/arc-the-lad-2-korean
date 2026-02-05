@@ -179,7 +179,7 @@ def main():
         by = by_start + row * (ph + PADDING)
         canvas.paste(panel, (bx, by))
 
-    out_path = os.path.join(SCRIPT_DIR, '..', '..', 'output', 'font', 'COMM_IMG_font_bitplanes.png')
+    out_path = os.path.join(SCRIPT_DIR, '..', '..', 'output', 'font', 'analysis', 'COMM_IMG_font_bitplanes.png')
     os.makedirs(os.path.dirname(out_path), exist_ok=True)
     canvas.save(out_path)
     print(f"Saved: {os.path.abspath(out_path)}")

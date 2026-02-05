@@ -34,7 +34,7 @@ import os
 import re
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 CHARS_MD_PATH = os.path.join(_SCRIPT_DIR, "..", "..", "docs", "COMM_IMG_chars.md")
-OUTPUT_PATH = os.path.join(_SCRIPT_DIR, "..", "..", "output", "font", "jp_char_positions.json")
+OUTPUT_PATH = os.path.join(_SCRIPT_DIR, "..", "..", "output", "font", "analysis", "jp_char_positions.json")
 
 ROW_STRIDE = 896
 CELL_SIZE = 12

@@ -22,7 +22,7 @@ from view_char import (
 
 # === Configuration ===
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-OUTPUT_DIR = os.path.join(SCRIPT_DIR, "..", "..", "output", "validation")
+OUTPUT_DIR = os.path.join(SCRIPT_DIR, "..", "..", "output", "validation", "comparison")
 
 COMM_IMG_KOR_PATH = os.path.join(SCRIPT_DIR, "..", "..", "COMM_IMG_KR.IMG")
 

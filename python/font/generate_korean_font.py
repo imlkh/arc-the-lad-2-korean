@@ -56,8 +56,8 @@ HANGUL_START = 0xAC00
 HANGUL_END = 0xD7A3  # inclusive
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-OUTPUT_DIR = os.path.join(SCRIPT_DIR, "..", "..", "output", "font", "korean_chars")
-PREVIEW_PATH = os.path.join(SCRIPT_DIR, "..", "..", "output", "font", "korean_font_preview.png")
+OUTPUT_DIR = os.path.join(SCRIPT_DIR, "..", "..", "output", "font", "korean", "chars")
+PREVIEW_PATH = os.path.join(SCRIPT_DIR, "..", "..", "output", "font", "korean", "korean_font_preview.png")
 
 
 def derive_font_size(font_path, pixel_size, test_char="가", size_range=range(6, 50)):

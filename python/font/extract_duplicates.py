@@ -19,9 +19,9 @@ from view_char import (
 )
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-POSITIONS_PATH = os.path.join(_SCRIPT_DIR, "..", "..", "output", "font", "jp_char_positions.json")
-OUTPUT_JSON = os.path.join(_SCRIPT_DIR, "..", "..", "output", "font", "duplicate_slots.json")
-OUTPUT_IMG = os.path.join(_SCRIPT_DIR, "..", "..", "output", "validation", "duplicate_slots.png")
+POSITIONS_PATH = os.path.join(_SCRIPT_DIR, "..", "..", "output", "font", "analysis", "jp_char_positions.json")
+OUTPUT_JSON = os.path.join(_SCRIPT_DIR, "..", "..", "output", "font", "analysis", "duplicate_slots.json")
+OUTPUT_IMG = os.path.join(_SCRIPT_DIR, "..", "..", "output", "validation", "details", "duplicate_slots.png")
 
 SCALE = 4
 GLYPH_PX = CELL_SIZE * SCALE  # 48

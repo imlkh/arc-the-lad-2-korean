@@ -9,7 +9,7 @@ from PIL import Image
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 COMM_IMG_PATH = os.path.join(_SCRIPT_DIR, "..", "..", "..", "COMM.IMG")
-OUTPUT_DIR = os.path.join(_SCRIPT_DIR, "..", "..", "output", "validation")
+OUTPUT_DIR = os.path.join(_SCRIPT_DIR, "..", "..", "output", "validation", "details")
 ROW_WIDTH = 896
 CHAR_W, CHAR_H = 12, 12  # 12x12 cell (11x11 glyph + 1px margin)
 GRID_COLS = 21

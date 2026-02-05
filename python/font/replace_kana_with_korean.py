@@ -17,9 +17,9 @@ from PIL import Image
 # --- Paths ---
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 COMM_IMG_SRC = os.path.join(SCRIPT_DIR, '..', '..', '..', 'COMM.IMG')
-COMM_IMG_DST = os.path.join(SCRIPT_DIR, '..', '..', 'output', 'font', 'COMM_IMG_KR.IMG')
-KOREAN_CHARS_DIR = os.path.join(SCRIPT_DIR, '..', '..', 'output', 'font', 'korean_chars')
-MAPPING_FILE = os.path.join(SCRIPT_DIR, '..', '..', 'output', 'font', 'korean_charmap.txt')
+COMM_IMG_DST = os.path.join(SCRIPT_DIR, '..', '..', 'output', 'font', 'korean', 'COMM_IMG_KR.IMG')
+KOREAN_CHARS_DIR = os.path.join(SCRIPT_DIR, '..', '..', 'output', 'font', 'korean', 'chars')
+MAPPING_FILE = os.path.join(SCRIPT_DIR, '..', '..', 'output', 'font', 'korean', 'korean_charmap.txt')
 
 # --- COMM.IMG layout constants ---
 ROW_WIDTH = 896       # bytes per scanline
@@ -393,7 +393,7 @@ def main():
 
     # --- Step 5: Generate preview images ---
     print(f"\nStep 5: Generating preview images...")
-    preview_path = os.path.join(SCRIPT_DIR, '..', '..', 'output', 'font', 'COMM_IMG_KR_preview.png')
+    preview_path = os.path.join(SCRIPT_DIR, '..', '..', 'output', 'font', 'korean', 'COMM_IMG_KR_preview.png')
     generate_preview(data, preview_path)
 
     # --- Step 6: Save character mapping ---
