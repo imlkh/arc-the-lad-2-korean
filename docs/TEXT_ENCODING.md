@@ -270,6 +270,28 @@ Characters with charID >= 239 use two-byte encoding. The first byte is the prefi
 | 0xF4 | 1259-1513 | 255 | Kanji (虎-虫) |
 | 0xF5 | 1514-1768 | 192 | Kanji (務-衛), UI glyphs (+1 through +9, SS, cursor) |
 
+### Null Byte Conflict (Unusable CharIDs)
+
+Certain charIDs encode to byte sequences containing `0x00`, which conflicts with the null terminator. These charIDs are **unusable in text strings**:
+
+| CharID | Encoding | Notes |
+|--------|----------|-------|
+| 239 | F0 00 | Cell 59 Bit2, marked as (Blank) |
+| 494 | F1 00 | |
+| 749 | F2 00 | |
+| 1004 | F3 00 | |
+| 1259 | F4 00 | |
+| 1514 | F5 00 | |
+| 1769 | F6 00 | |
+
+Pattern: CharID = 239 + (255 × N) for N = 0, 1, 2, ...
+
+CharID 239 is intentionally blank in the font. The others may have characters assigned but cannot be used in text because the `00` byte terminates the string prematurely. The Korean patching tool (`patch_korean.py`) excludes these charIDs from the character mapping.
+
+### Blank Character (CharID 239)
+
+Cell 59, Bit2 (charID 239) is marked as "(Blank)" in the font table. The decoder maps this to a space character for completeness, though it cannot actually appear in game text due to the null byte encoding issue (F0 00).
+
 The full character-to-charID mapping is in `COMM_IMG_chars.md`. To compute the two-byte encoding for any charID >= 239:
 
 ```
@@ -511,9 +533,36 @@ The executable also contains Shift-JIS-to-charID mapping tables at file offset `
   - `python python/decode/decode_text.py <file> --find "ますか"` -- find strings containing a pattern
   - `python python/decode/decode_text.py <file> --scan --prefix 2` -- STG files: mark 2-byte event script prefix
   - `python python/decode/decode_text.py <file> --stg` -- STG template-driven dialogue extraction (auto prefix)
+  - `python python/decode/decode_text.py <file> --stg --strict` -- Pointer-based extraction only (no heuristic fallback)
+  - `python python/decode/decode_text.py <file> --stg --no-filter` -- Disable garbage text filtering
   - `python python/decode/decode_text.py <file> --stg --find "エルク"` -- STG extraction filtered by text
 - `python/decode/decode_all_stg.py` -- Batch decode all 19 STG files → `output/decoded/stg/`
 - `python/decode/decode_all_bin.py` -- Batch decode BIN files → `output/decoded/bin/`
 - `python/decode/decode_yend.py` -- Decode YEND.BIN ASCII credit strings (uses plain ASCII, not game encoding)
 - `python/font/view_char.py` -- View individual font cells with bitplane separation
 - `COMM_IMG_chars.md` -- Complete character-to-cell mapping table
+
+## Garbage Text Filter
+
+The STG decoder includes a garbage filter (`_is_garbage_text()`) to reject false positives from binary data that happens to map to valid character IDs. The filter detects:
+
+1. **Unknown charID markers** (`[?XXXX]`) -- Indicates decoding errors
+2. **Scattered ASCII letters** mixed with Japanese kana
+3. **Long repeating patterns** (e.g., "セへセへセへ...") from binary data
+4. **MIPS code signatures** (e.g., "ギあギ" patterns from machine code bytes)
+5. **Mixed kana with no kanji** (15+ chars) -- But preserves text with proper punctuation
+
+### Preserved Text Patterns
+
+The filter preserves legitimate Japanese text including:
+
+- **Single character responses**: ？, ！, …
+- **Silence patterns**: ・・・・・・, (・・・・・・・・・)
+- **Laughter/onomatopoeia**: はっはっは, ふふふ, げらげら, コチョコチョ
+- **Stuttering speech**: な、な、な...
+- **Names with katakana**: プロディアス, エルク, リーザ, ノコノコ
+- **Casual dialogue with proper punctuation**: 、。？！…「」()
+
+### Punctuation Exception
+
+Strings with 15+ characters containing mixed hiragana/katakana but no kanji are normally flagged as garbage. However, if the string contains proper Japanese punctuation (、。？！…「」()), it is preserved as legitimate dialogue. This allows character names (katakana) mixed with casual speech (hiragana) to pass through correctly.
