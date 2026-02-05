@@ -19,8 +19,8 @@ from PIL import Image
 
 # === Constants ===
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-COMM_IMG_PATH = os.path.join(_SCRIPT_DIR, "..", "..", "COMM.IMG")
-CHARS_MD_PATH = os.path.join(_SCRIPT_DIR, "..", "..", "COMM_IMG_chars.md")
+COMM_IMG_PATH = os.path.join(_SCRIPT_DIR, "..", "..", "..", "COMM.IMG")
+CHARS_MD_PATH = os.path.join(_SCRIPT_DIR, "..", "..", "docs", "COMM_IMG_chars.md")
 ROW_WIDTH = 896  # bytes per scanline in COMM.IMG
 GRID_COLS = 21
 CELL_SIZE = 12  # 12x12 cell (11x11 glyph + 1px margin)
