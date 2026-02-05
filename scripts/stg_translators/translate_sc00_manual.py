@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+import os
+
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.join(_SCRIPT_DIR, "..", "..")  # atl2_korean_translation/
+
 # Manual translations from line 703 onwards
 manual_translations = [
     ("私はあなた達を利用しようとしたのよ", "난 너희들을 이용하려 했던 거야"),
@@ -36,11 +41,14 @@ manual_translations = [
 ]
 
 # Read the current translated file
-with open('/Users/kyounghun/workspace/ps1_game_translation/Arc_The_Lad2/extracted_files/translated/ko/SC00_STG.txt', 'r', encoding='utf-8') as f:
+ko_file = os.path.join(BASE_DIR, "translated", "ko", "SC00_STG.txt")
+source_file = os.path.join(BASE_DIR, "output", "decoded", "stg", "SC00_STG.txt")
+
+with open(ko_file, 'r', encoding='utf-8') as f:
     current_content = f.read()
 
 # Read the source file
-with open('/Users/kyounghun/workspace/ps1_game_translation/Arc_The_Lad2/extracted_files/translated/SC00_STG.txt', 'r', encoding='utf-8') as f:
+with open(source_file, 'r', encoding='utf-8') as f:
     source_lines = f.readlines()
 
 # Find how many lines are already translated
@@ -49,7 +57,7 @@ print(f"Current translated lines: {current_line_count}")
 print(f"Total source lines: {len(source_lines)}")
 
 # Append remaining lines with translations
-with open('/Users/kyounghun/workspace/ps1_game_translation/Arc_The_Lad2/extracted_files/translated/ko/SC00_STG.txt', 'a', encoding='utf-8') as out:
+with open(ko_file, 'a', encoding='utf-8') as out:
     for i in range(current_line_count, len(source_lines)):
         line = source_lines[i].rstrip()
 

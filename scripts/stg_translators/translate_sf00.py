@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+import os
+
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.join(_SCRIPT_DIR, "..", "..")  # atl2_korean_translation/
+
 # Translation mappings
 NAMES = {
     'エルク': '엘크', 'リーザ': '리자', 'シャンテ': '샨테', 'ポコ': '포코',
@@ -90,8 +95,8 @@ def translate_line(japanese_text):
 
 
 # Read input file and write translation
-input_file = '/Users/kyounghun/workspace/ps1_game_translation/Arc_The_Lad2/extracted_files/translated/SF00_STG.txt'
-output_file = '/Users/kyounghun/workspace/ps1_game_translation/Arc_The_Lad2/extracted_files/translated/ko/SF00_STG.txt'
+input_file = os.path.join(BASE_DIR, "output", "decoded", "stg", "SF00_STG.txt")
+output_file = os.path.join(BASE_DIR, "translated", "ko", "SF00_STG.txt")
 
 # The first 200 lines are already translated, so we start from line 200
 with open(input_file, 'r', encoding='utf-8') as f:

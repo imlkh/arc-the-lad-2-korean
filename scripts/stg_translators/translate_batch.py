@@ -5,7 +5,11 @@ Batch translator for S800_STG.txt from Japanese to Korean
 Processes the full file with translation rules
 """
 
+import os
 import re
+
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.join(_SCRIPT_DIR, "..", "..")  # atl2_korean_translation/
 
 # Character/Place name mappings
 CHAR_MAP = {
@@ -115,8 +119,8 @@ def translate_line(line):
     return line
 
 def main():
-    source = '/Users/kyounghun/workspace/ps1_game_translation/Arc_The_Lad2/extracted_files/translated/S800_STG.txt'
-    output = '/Users/kyounghun/workspace/ps1_game_translation/Arc_The_Lad2/extracted_files/translated/ko/S800_STG_auto.txt'
+    source = os.path.join(BASE_DIR, "output", "decoded", "stg", "S800_STG.txt")
+    output = os.path.join(BASE_DIR, "translated", "ko", "S800_STG_auto.txt")
 
     print("Reading source file...")
     with open(source, 'r', encoding='utf-8') as f:

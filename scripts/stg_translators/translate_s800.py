@@ -4,7 +4,11 @@
 # Translation mapping for S800_STG.txt from Japanese to Korean
 # This script reads from the source file and appends translations to the output file
 
+import os
 import re
+
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.join(_SCRIPT_DIR, "..", "..")  # atl2_korean_translation/
 
 # Character name mappings
 char_map = {
@@ -22,8 +26,8 @@ place_map = {
 }
 
 # Open files
-source_file = '/Users/kyounghun/workspace/ps1_game_translation/Arc_The_Lad2/extracted_files/translated/S800_STG.txt'
-output_file = '/Users/kyounghun/workspace/ps1_game_translation/Arc_The_Lad2/extracted_files/translated/ko/S800_STG.txt'
+source_file = os.path.join(BASE_DIR, "output", "decoded", "stg", "S800_STG.txt")
+output_file = os.path.join(BASE_DIR, "translated", "ko", "S800_STG.txt")
 
 # Read how many lines have been translated already
 with open(output_file, 'r', encoding='utf-8') as f:

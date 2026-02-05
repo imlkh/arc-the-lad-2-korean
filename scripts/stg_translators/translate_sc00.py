@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-import re
+
+import os
+
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.join(_SCRIPT_DIR, "..", "..")  # atl2_korean_translation/
 
 # Comprehensive translation dictionary
 translations = {
@@ -102,12 +106,16 @@ names = {
     'ガーランド': '갈란드',
 }
 
+# File paths
+source_file = os.path.join(BASE_DIR, "output", "decoded", "stg", "SC00_STG.txt")
+ko_file = os.path.join(BASE_DIR, "translated", "ko", "SC00_STG.txt")
+
 # Read source
-with open('translated/SC00_STG.txt', 'r', encoding='utf-8') as f:
+with open(source_file, 'r', encoding='utf-8') as f:
     source_lines = f.readlines()
 
 # Write complete translation
-with open('translated/ko/SC00_STG.txt', 'w', encoding='utf-8') as out:
+with open(ko_file, 'w', encoding='utf-8') as out:
     for line in source_lines:
         line = line.rstrip()
 

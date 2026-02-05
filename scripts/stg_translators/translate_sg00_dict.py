@@ -5,7 +5,11 @@ Complete translation script for SG00_STG.txt from Japanese to Korean
 Processes the entire file line by line with proper Korean translations
 """
 
+import os
 import re
+
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.join(_SCRIPT_DIR, "..", "..")  # atl2_korean_translation/
 
 # Character name mappings
 NAMES = {
@@ -129,8 +133,8 @@ def translate_japanese(text):
 
 def process_file():
     """Process the entire file"""
-    input_file = '/Users/kyounghun/workspace/ps1_game_translation/Arc_The_Lad2/extracted_files/translated/SG00_STG.txt'
-    output_file = '/Users/kyounghun/workspace/ps1_game_translation/Arc_The_Lad2/extracted_files/translated/ko/SG00_STG.txt'
+    input_file = os.path.join(BASE_DIR, "output", "decoded", "stg", "SG00_STG.txt")
+    output_file = os.path.join(BASE_DIR, "translated", "ko", "SG00_STG.txt")
 
     print(f"Reading: {input_file}")
     print(f"Writing: {output_file}")

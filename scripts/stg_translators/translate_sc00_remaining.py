@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+import os
+
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.join(_SCRIPT_DIR, "..", "..")  # atl2_korean_translation/
+
 # Translation mappings for Arc the Lad 2
 char_names = {
     'エルク': '엘크',
@@ -38,12 +43,16 @@ villain_names = {
     'クライム': '크라임',
 }
 
+# File paths
+source_file = os.path.join(BASE_DIR, "output", "decoded", "stg", "SC00_STG.txt")
+ko_file = os.path.join(BASE_DIR, "translated", "ko", "SC00_STG.txt")
+
 # Read input file
-with open('/Users/kyounghun/workspace/ps1_game_translation/Arc_The_Lad2/extracted_files/translated/SC00_STG.txt', 'r', encoding='utf-8') as f:
+with open(source_file, 'r', encoding='utf-8') as f:
     lines = f.readlines()
 
 # Read what's already translated
-with open('/Users/kyounghun/workspace/ps1_game_translation/Arc_The_Lad2/extracted_files/translated/ko/SC00_STG.txt', 'r', encoding='utf-8') as f:
+with open(ko_file, 'r', encoding='utf-8') as f:
     translated_content = f.read()
 
 # Find where we left off (line 702 approximately)
@@ -86,7 +95,7 @@ translations = {
 print(f"\\nStarting translation from line {start_line + 1}...")
 
 # Append remaining translations
-with open('/Users/kyounghun/workspace/ps1_game_translation/Arc_The_Lad2/extracted_files/translated/ko/SC00_STG.txt', 'a', encoding='utf-8') as out:
+with open(ko_file, 'a', encoding='utf-8') as out:
     for i in range(start_line, len(lines)):
         line = lines[i].rstrip('\\n')
 

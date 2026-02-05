@@ -4,6 +4,11 @@
 Translation script for SA00_STG.txt Japanese to Korean
 """
 
+import os
+
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.join(_SCRIPT_DIR, "..", "..")  # atl2_korean_translation/
+
 # Character name mappings
 CHAR_MAP = {
     'エルク': '엘크', 'リーザ': '리자', 'シャンテ': '샨테', 'ポコ': '포코',
@@ -56,8 +61,8 @@ def translate_line(line):
     return prefix + korean_text + '\n'
 
 def main():
-    input_file = '/Users/kyounghun/workspace/ps1_game_translation/Arc_The_Lad2/extracted_files/translated/SA00_STG.txt'
-    output_file = '/Users/kyounghun/workspace/ps1_game_translation/Arc_The_Lad2/extracted_files/translated/ko/SA00_STG.txt'
+    input_file = os.path.join(BASE_DIR, "output", "decoded", "stg", "SA00_STG.txt")
+    output_file = os.path.join(BASE_DIR, "translated", "ko", "SA00_STG.txt")
 
     print(f"Reading from: {input_file}")
     print(f"Writing to: {output_file}")

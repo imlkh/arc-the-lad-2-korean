@@ -5,7 +5,11 @@ Full SI00_STG.txt Japanese to Korean Translation Script
 Translates Arc the Lad 2 dialogue file while preserving all formatting and tags
 """
 
+import os
 import re
+
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.join(_SCRIPT_DIR, "..", "..")  # atl2_korean_translation/
 
 # Comprehensive translation mappings
 TRANSLATIONS = {
@@ -189,8 +193,8 @@ def translate_line(line):
     return prefix + korean_text
 
 def main():
-    input_file = '/Users/kyounghun/workspace/ps1_game_translation/Arc_The_Lad2/extracted_files/translated/SI00_STG.txt.backup'
-    output_file = '/Users/kyounghun/workspace/ps1_game_translation/Arc_The_Lad2/extracted_files/translated/SI00_STG.txt'
+    input_file = os.path.join(BASE_DIR, "output", "decoded", "stg", "SI00_STG.txt.backup")
+    output_file = os.path.join(BASE_DIR, "translated", "ko", "SI00_STG.txt")
 
     with open(input_file, 'r', encoding='utf-8') as f:
         lines = f.readlines()

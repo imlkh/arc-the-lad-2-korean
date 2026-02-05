@@ -4,8 +4,12 @@
 Translation script for SG00_STG.txt from Japanese to Korean
 """
 
+import os
 import re
 import sys
+
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.join(_SCRIPT_DIR, "..", "..")  # atl2_korean_translation/
 
 # Character name mappings
 NAMES = {
@@ -133,8 +137,8 @@ def translate_japanese_to_korean(text):
     return text
 
 def main():
-    input_file = '/Users/kyounghun/workspace/ps1_game_translation/Arc_The_Lad2/extracted_files/translated/SG00_STG.txt'
-    output_file = '/Users/kyounghun/workspace/ps1_game_translation/Arc_The_Lad2/extracted_files/translated/ko/SG00_STG.txt'
+    input_file = os.path.join(BASE_DIR, "output", "decoded", "stg", "SG00_STG.txt")
+    output_file = os.path.join(BASE_DIR, "translated", "ko", "SG00_STG.txt")
 
     print(f"Reading from: {input_file}")
     print(f"Writing to: {output_file}")

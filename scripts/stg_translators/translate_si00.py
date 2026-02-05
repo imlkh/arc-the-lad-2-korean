@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+import os
 import re
+
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.join(_SCRIPT_DIR, "..", "..")  # atl2_korean_translation/
 
 # Translation dictionary for common patterns
 translations = {
@@ -92,8 +96,12 @@ def translate_line(line):
 
     return prefix + korean_text
 
+# File paths
+input_file = os.path.join(BASE_DIR, "output", "decoded", "stg", "SI00_STG.txt.backup")
+output_file = os.path.join(BASE_DIR, "translated", "ko", "SI00_STG_auto.txt")
+
 # Read and process the file
-with open('/Users/kyounghun/workspace/ps1_game_translation/Arc_The_Lad2/extracted_files/translated/SI00_STG.txt.backup', 'r', encoding='utf-8') as f:
+with open(input_file, 'r', encoding='utf-8') as f:
     lines = f.readlines()
 
 translated_lines = []
@@ -101,7 +109,7 @@ for line in lines:
     translated_lines.append(translate_line(line))
 
 # Write the translated file
-with open('/Users/kyounghun/workspace/ps1_game_translation/Arc_The_Lad2/extracted_files/translated/SI00_STG_auto.txt', 'w', encoding='utf-8') as f:
+with open(output_file, 'w', encoding='utf-8') as f:
     f.writelines(translated_lines)
 
 print(f"Processed {len(lines)} lines")
