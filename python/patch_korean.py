@@ -407,182 +407,80 @@ def encode_korean_text(text, korean_mapping, decode_table):
     return bytes(result)
 
 
-def find_template_after_dialogue(data, text_end_offset):
-    """Find the 48-byte template block after a dialogue's null terminator.
-
-    Template signature: starts with 23 01 F0 8B
-    Returns template offset or None if not found.
-    """
-    # Search within 4 bytes after the null terminator
-    search_start = text_end_offset + 1
-    search_end = min(search_start + 4, len(data) - 4)
-
-    for pos in range(search_start, search_end):
-        if data[pos:pos+4] == b'\x23\x01\xF0\x8B':
-            return pos
-    return None
-
-
 def patch_stg_file(stg_path, translation_entries, korean_mapping, decode_table, dry_run=False):
     """Patch STG file with Korean translations.
 
-    Supports variable-length text replacement by:
-    1. Processing dialogues chunk by chunk
-    2. Tracking cumulative offset changes
-    3. Updating script prefix values and template pointers
+    Uses fixed-length replacement: Korean text is padded if shorter,
+    or truncated if longer than the original Japanese text.
+    This is the safe approach that doesn't require pointer updates.
     """
     print(f"Patching STG file: {stg_path}")
 
     with open(stg_path, "rb") as f:
         data = bytearray(f.read())
 
-    # Group entries by chunk
-    entries_by_chunk = {}
-    for entry in translation_entries:
-        chunk_idx = entry["offset"] // CHUNK_SIZE
-        if chunk_idx not in entries_by_chunk:
-            entries_by_chunk[chunk_idx] = []
-        entries_by_chunk[chunk_idx].append(entry)
-
     patched = 0
-    extended = 0
+    truncated = 0
     errors = 0
 
-    for chunk_idx in sorted(entries_by_chunk.keys()):
-        chunk_entries = sorted(entries_by_chunk[chunk_idx], key=lambda e: e["offset"])
-        chunk_base = chunk_idx * CHUNK_SIZE
-        chunk_end = chunk_base + CHUNK_SIZE
+    for entry in translation_entries:
+        offset = entry["offset"]
+        script_prefix = entry["script_prefix"]
+        korean_text = entry["text"]
 
-        # Track cumulative delta for this chunk
-        cumulative_delta = 0
+        if offset >= len(data):
+            print(f"  ERROR: offset 0x{offset:08X} out of bounds")
+            errors += 1
+            continue
 
-        for entry in chunk_entries:
-            orig_offset = entry["offset"]
-            script_prefix = entry["script_prefix"]
-            korean_text = entry["text"]
+        # Find the null terminator of the original string
+        orig_end = offset + len(script_prefix)
+        while orig_end < len(data) and data[orig_end] != 0x00:
+            orig_end += 1
 
-            # Adjust offset by cumulative delta
-            offset = orig_offset + cumulative_delta
+        if orig_end >= len(data):
+            print(f"  ERROR: no null terminator found at 0x{offset:08X}")
+            errors += 1
+            continue
 
-            if offset >= len(data) or offset < chunk_base:
-                print(f"  ERROR: offset 0x{orig_offset:08X} out of bounds")
-                errors += 1
-                continue
+        # Original total size: script_prefix + text + null
+        orig_total = orig_end - offset + 1
 
-            # Find the null terminator of the original string
-            text_start = offset + len(script_prefix)
-            text_end = text_start
-            while text_end < len(data) and data[text_end] != 0x00:
-                text_end += 1
+        # Encode Korean text
+        encoded = encode_korean_text(korean_text, korean_mapping, decode_table)
 
-            if text_end >= len(data):
-                print(f"  ERROR: no null terminator at 0x{orig_offset:08X}")
-                errors += 1
-                continue
+        # New total size: script_prefix + encoded + null
+        new_total = len(script_prefix) + len(encoded) + 1
 
-            # Original total size: script_prefix + text + null
-            orig_total = text_end - offset + 1
-
-            # Encode Korean text
-            encoded = encode_korean_text(korean_text, korean_mapping, decode_table)
-
-            # New total size: script_prefix + encoded + null
-            new_total = len(script_prefix) + len(encoded) + 1
-            delta = new_total - orig_total
-
-            if delta > 0:
-                # Text is longer - need to shift subsequent bytes
-                # Check if we have room in the chunk
-                event_script_end = chunk_base + 0xBC7FF
-                current_end = chunk_end
-
-                # Find actual end of event script data (last non-zero before chunk end)
-                for i in range(chunk_end - 1, chunk_base + EVENT_SCRIPT_OFFSET, -1):
-                    if data[i] != 0x00:
-                        current_end = i + 1
-                        break
-
-                # Check if extension would overflow
-                if current_end + delta > chunk_end:
-                    # Would overflow - fall back to truncation
-                    available = orig_total - len(script_prefix) - 1
-                    encoded = encoded[:available]
-                    new_total = len(script_prefix) + len(encoded) + 1
-                    delta = 0
-
-            # Build replacement
+        if new_total <= orig_total:
+            # Fits - pad with nulls if shorter
             replacement = script_prefix + encoded + b"\x00"
-
-            if delta != 0:
-                # Variable length replacement - shift bytes within chunk
-                shift_start = offset + orig_total
-                shift_end = chunk_end + cumulative_delta
-
-                if delta > 0:
-                    # Extending: shift bytes toward end of chunk
-                    # Move from end to start to avoid overwriting
-                    for i in range(shift_end - 1, shift_start - 1, -1):
-                        if i + delta < len(data):
-                            data[i + delta] = data[i]
-                    # Clear the gap
-                    for i in range(shift_start, shift_start + delta):
-                        if i < len(data):
-                            data[i] = 0x00
-                    extended += 1
-                else:
-                    # Shortening: shift bytes toward start of chunk
-                    abs_delta = -delta
-                    for i in range(shift_start, shift_end):
-                        if i - abs_delta >= 0 and i < len(data):
-                            data[i - abs_delta] = data[i]
-                    # Clear the end
-                    for i in range(shift_end - abs_delta, shift_end):
-                        if i < len(data):
-                            data[i] = 0x00
-
-                # Update script prefix values in subsequent templates
-                update_start = offset + new_total
-                update_end = chunk_end + cumulative_delta + delta
-
-                # Find and update template pointers
-                pos = update_start
-                while pos < min(update_end, len(data) - 48):
-                    # Look for template signature
-                    if data[pos:pos+4] == b'\x23\x01\xF0\x8B':
-                        # Found a template - update pointer fields
-                        # Ptr_A at +14, Ptr_B at +30
-                        for ptr_offset in [14, 30]:
-                            if pos + ptr_offset + 2 <= len(data):
-                                old_val = struct.unpack('<H', data[pos+ptr_offset:pos+ptr_offset+2])[0]
-                                new_val = old_val + delta
-                                if new_val > 0:  # Sanity check
-                                    data[pos+ptr_offset:pos+ptr_offset+2] = struct.pack('<H', new_val)
-                        pos += 48
-                    else:
-                        pos += 1
-
-                cumulative_delta += delta
-
-            # Write the replacement text
+            padded = replacement + b"\x00" * (orig_total - new_total)
             if not dry_run:
-                data[offset:offset + new_total] = replacement
-                if new_total < orig_total and delta == 0:
-                    # Pad with nulls if shorter and not shifting
-                    data[offset + new_total:offset + orig_total] = b"\x00" * (orig_total - new_total)
-
+                data[offset:offset + orig_total] = padded
             patched += 1
+        else:
+            # Too long - truncate encoded text to fit
+            available = orig_total - len(script_prefix) - 1
+            truncated_encoded = encoded[:available]
+            replacement = script_prefix + truncated_encoded + b"\x00"
+            padded = replacement + b"\x00" * (orig_total - len(replacement))
+            if not dry_run:
+                data[offset:offset + orig_total] = padded
+            patched += 1
+            truncated += 1
 
     if not dry_run:
         with open(stg_path, "wb") as f:
             f.write(data)
 
     print(f"  Patched: {patched} dialogues")
-    if extended:
-        print(f"  Extended (variable length): {extended}")
+    if truncated:
+        print(f"  Truncated (too long): {truncated}")
     if errors:
         print(f"  Errors: {errors}")
 
-    return patched, extended, errors
+    return patched, truncated, errors
 
 
 def save_mapping(mapping, output_path):
