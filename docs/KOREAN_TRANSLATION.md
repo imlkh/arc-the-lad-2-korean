@@ -115,6 +115,31 @@ Instead of precomposed syllable blocks, the font could store individual Hangul j
 
 This uses only 67 slots (vs. 1,656) and gives 100% syllable coverage. However, it requires **modifying the MIPS rendering code** in `SDIC.BIN` (render function at RAM `0x80027E90`) to compose 2-3 jamo into a single character cell at draw time. This is significantly more complex but eliminates all syllable inventory constraints.
 
+## Translation Scope
+
+### Files to Translate
+
+| File | Content | Priority |
+|------|---------|----------|
+| S*.STG (19 files) | Stage dialogue (19,568 strings) | High |
+| SCPS_100.26 | System messages, menu text | High |
+| SDIC.BIN | Character profiles, monster encyclopedia (555 strings) | Medium |
+| SMITH.BIN | Item/equipment descriptions (628 strings) | Medium |
+| YGUILD.BIN | Guild quest text (363 strings) | Medium |
+| BEAM.DAT | Battle/event text | Medium |
+
+### Files Excluded from Translation
+
+| File | Reason |
+|------|--------|
+| **YEND.BIN** | Ending credits. Contains 155 ASCII staff name/role strings in romanized English (e.g., "Producer:", "Ryoji Akagawa(SCEI)"). These are factual credits that do not need localization. Additionally, YEND.BIN uses a separate ASCII encoding system (80-byte lookup table) rather than the game's main text encoding, so translating it would require modifying the rendering code for minimal benefit. |
+| YSHOP.BIN | No embedded text (pure UI code) |
+| YPROP.BIN | No embedded text (pure UI code) |
+| YSEG.BIN | No embedded text (pure UI code) |
+| CHA.BIN | No text (sprite archive) |
+| COMM.DAT | No text (battle animation/command module, loaded at `0x80010000`) |
+| COMM.SND | No text (PS1 VAB sound bank -- battle SFX and instrument samples) |
+
 ## Recommended Approach
 
 1. **Build a Korean syllable frequency table** from a reference corpus (e.g., Korean National Institute of Korean Language data) and draft a translation of the first few hundred lines.

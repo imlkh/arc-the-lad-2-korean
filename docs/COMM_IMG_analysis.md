@@ -190,7 +190,7 @@ Each group of 4 characters shares the same 12×12 cell (11×11 glyph area + 1px 
 
 | File | Role |
 |------|------|
-| `COMM.DAT` (66 KB) | Character mapping table / font metrics |
+| `COMM.DAT` (66 KB) | Battle animation module (NOT a font/mapping file -- see `COMM_DAT_analysis.md`) |
 | `SDIC.BIN` (100 KB) | Dictionary / text decoder |
 | `YEND.BIN`, `YGUILD.BIN`, `YPROP.BIN`, `YSEG.BIN`, `YSHOP.BIN` | PS1 MIPS executable overlays (credits, guild, items, characters, shop) |
 | `S*.STG` files | Stage data with embedded text |
