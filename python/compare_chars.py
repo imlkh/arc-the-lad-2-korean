@@ -24,6 +24,8 @@ from view_char import (
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 OUTPUT_DIR = os.path.join(SCRIPT_DIR, "validation_output")
 
+COMM_IMG_KOR_PATH = os.path.join(SCRIPT_DIR, "..", "COMM_IMG_KR.IMG")
+
 GRID_ROWS = 21
 TOTAL_CELLS = GRID_COLS * GRID_ROWS  # 441
 
@@ -75,6 +77,7 @@ def main():
     # Load COMM.IMG binary data
     print("Reading COMM.IMG...")
     data = open(COMM_IMG_PATH, "rb").read()
+    # data = open(COMM_IMG_KOR_PATH, "rb").read()
 
     # Extract all glyphs using view_char's extraction
     print("Extracting glyphs...")
@@ -184,6 +187,7 @@ def main():
                 )
 
         out_path = os.path.join(OUTPUT_DIR, f"char_comparison_bit{bit}.png")
+        # out_path = os.path.join(OUTPUT_DIR, f"char_comparison_bit{bit}_kor.png")
         sheet.save(out_path)
         print(f"  Saved {out_path}")
         print(f"    Rendered: {rendered_count}, Skipped (blank/UI): {skipped_count}")
