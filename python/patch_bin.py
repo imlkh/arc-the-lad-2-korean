@@ -289,6 +289,47 @@ def get_patched_files():
     return files
 
 
+def find_backup(bin_path):
+    """Find existing backup file for the given BIN path.
+
+    Returns the backup path if found, None otherwise.
+    """
+    import glob
+    backup_pattern = f"{bin_path}.backup_*"
+    backups = sorted(glob.glob(backup_pattern))
+    if backups:
+        return backups[0]  # Return the oldest backup (original)
+    return None
+
+
+def ensure_backup_and_restore(bin_path, dry_run=False):
+    """Ensure a backup exists and restore the BIN from it.
+
+    If no backup exists, creates one from the current BIN.
+    If backup exists, restores the BIN from the backup.
+
+    Returns: (success, message)
+    """
+    backup_path = find_backup(bin_path)
+
+    if backup_path:
+        # Backup exists - restore from it
+        if dry_run:
+            return True, f"Would restore from: {os.path.basename(backup_path)}"
+        print(f"Restoring from backup: {os.path.basename(backup_path)}")
+        shutil.copy2(backup_path, bin_path)
+        return True, f"Restored from: {os.path.basename(backup_path)}"
+    else:
+        # No backup - create one
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        backup_path = f"{bin_path}.backup_{timestamp}"
+        if dry_run:
+            return True, f"Would create backup: {os.path.basename(backup_path)}"
+        print(f"Creating backup: {os.path.basename(backup_path)}")
+        shutil.copy2(bin_path, backup_path)
+        return True, f"Created backup: {os.path.basename(backup_path)}"
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Patch PS1 BIN disc image with Korean translation"
@@ -303,9 +344,9 @@ def main():
         help="Show what would be done without making changes"
     )
     parser.add_argument(
-        "--backup",
+        "--no-restore",
         action="store_true",
-        help="Create backup of BIN file before patching"
+        help="Don't restore from backup before patching (patch in place)"
     )
     args = parser.parse_args()
 
@@ -330,12 +371,14 @@ def main():
     print(f"Patched files: {len(patched_files)}")
     print()
 
-    # Create backup if requested
-    if args.backup and not args.dry_run:
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        backup_path = f"{bin_path}.backup_{timestamp}"
-        print(f"Creating backup: {backup_path}")
-        shutil.copy2(bin_path, backup_path)
+    # Restore from backup (or create backup if none exists)
+    if not args.no_restore:
+        success, message = ensure_backup_and_restore(bin_path, args.dry_run)
+        if success:
+            print(f"  {message}")
+        else:
+            print(f"ERROR: {message}")
+            return 1
         print()
 
     # Verify files exist in ISO
