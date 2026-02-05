@@ -443,6 +443,9 @@ def encode_korean_text(text, korean_mapping, decode_table):
             ",": 247, ".": 248, ":": 249,
             # ASCII equivalents of fullwidth punctuation
             "?": 0xEE, "!": 0xED,
+            "~": 0xEA,  # Same as ～
+            "-": 0xE7,  # Same as － (fullwidth minus)
+            '"': 251,   # Map to 「 (Japanese opening quote)
             # Space uses dedicated single-byte slot (charID 160 = 0xA0)
             " ": SPACE_CHAR_ID,
         }
