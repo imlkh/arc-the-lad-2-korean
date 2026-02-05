@@ -49,6 +49,10 @@ PRESERVE_CHAR_IDS.update([
     # Symbols: ー、…＋－／＊～"。！？
 ])
 
+# Space character uses a dedicated single-byte slot
+# CharID 160 (last katakana slot) - renders as blank, encodes as 0xA0
+SPACE_CHAR_ID = 160
+
 
 def load_decode_table():
     """Parse COMM_IMG_chars.md to build charID -> character mapping."""
@@ -148,8 +152,8 @@ def build_korean_mapping(korean_chars, decode_table, priority_chars=None):
     for cid in range(1, 81):
         available_single.append(cid)
 
-    # Katakana slots (charIDs 81-160)
-    for cid in range(81, 161):
+    # Katakana slots (charIDs 81-159), excluding SPACE_CHAR_ID (160)
+    for cid in range(81, 160):
         available_single.append(cid)
 
     # Kanji slots (charIDs 239+, two-byte encoding)
@@ -241,12 +245,37 @@ def inject_glyph(data, char_id, glyph_img):
             set_pixel(data, px, py, current)
 
 
+def clear_glyph(data, char_id):
+    """Clear a glyph slot to blank (all pixels off for the target bitplane)."""
+    adjusted = char_id - 1
+    cell = adjusted // 4
+    bitplane = adjusted % 4
+    row = cell // GRID_COLS
+    col = cell % GRID_COLS
+
+    x0 = col * CHAR_W
+    y0 = row * CHAR_H
+    clear_mask = ~(1 << bitplane) & 0x0F
+
+    for dy in range(CHAR_H):
+        for dx in range(CHAR_W):
+            px = x0 + dx
+            py = y0 + dy
+            current = get_pixel(data, px, py)
+            current = current & clear_mask  # Clear this bitplane
+            set_pixel(data, px, py, current)
+
+
 def patch_comm_img(comm_img_path, korean_mapping):
     """Patch COMM.IMG with Korean glyphs based on the mapping."""
     print(f"Patching COMM.IMG: {comm_img_path}")
 
     with open(comm_img_path, "rb") as f:
         data = bytearray(f.read())
+
+    # Clear space character slot to blank
+    clear_glyph(data, SPACE_CHAR_ID)
+    print(f"  Cleared charID {SPACE_CHAR_ID} for space character")
 
     patched = 0
     missing = []
@@ -407,8 +436,8 @@ def encode_korean_text(text, korean_mapping, decode_table):
             "ー": 0xE3, "～": 0xEA,
             "(": 245, ")": 246, "「": 251, "」": 252,
             ",": 247, ".": 248, ":": 249,
-            # Space - skip (charID 239 encodes to F0 00 which conflicts with null terminator)
-            " ": None,
+            # Space uses dedicated single-byte slot (charID 160 = 0xA0)
+            " ": SPACE_CHAR_ID,
         }
         if ch in punct_map:
             char_id = punct_map[ch]

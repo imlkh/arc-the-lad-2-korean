@@ -31,6 +31,7 @@ def build_decode_table():
     Formula: charID = 1 + (row * 21 + col) * 4 + bitplane
 
     The (Blank) character at cell 59, bit2 (charID 239) is treated as a space.
+    CharID 160 is also used as space for Korean text (single-byte encoding).
     """
     table = {}
     if not os.path.exists(CHARS_MD_PATH):
@@ -60,6 +61,9 @@ def build_decode_table():
             clean = label.rstrip("?").strip()
             if clean:
                 table[char_id] = clean
+
+    # Add space character for Korean text (charID 160 = 0xA0, single-byte)
+    table[160] = " "
     return table
 
 

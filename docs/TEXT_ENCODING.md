@@ -288,6 +288,20 @@ Pattern: CharID = 239 + (255 × N) for N = 0, 1, 2, ...
 
 CharID 239 is intentionally blank in the font. The others may have characters assigned but cannot be used in text because the `00` byte terminates the string prematurely. The Korean patching tool (`patch_korean.py`) excludes these charIDs from the character mapping.
 
+### Space Character for Korean Text (CharID 160)
+
+For Korean translation, space uses charID 160 (0xA0), which is a single-byte encoding. This avoids the null byte conflict of charID 239 (F0 00).
+
+| CharID | Encoding | Usage |
+|--------|----------|-------|
+| 160 | A0 | Space for Korean text (single-byte, recommended) |
+| 239 | F0 00 | Original blank in font (two-byte, unusable due to null) |
+
+The Korean patching tool:
+- Reserves charID 160 for space (excluded from Korean character mapping)
+- Clears the glyph at charID 160 to blank when patching the font
+- Maps space character to 0xA0 when encoding Korean text
+
 ### Blank Character (CharID 239)
 
 Cell 59, Bit2 (charID 239) is marked as "(Blank)" in the font table. The decoder maps this to a space character for completeness, though it cannot actually appear in game text due to the null byte encoding issue (F0 00).
