@@ -205,6 +205,198 @@ SCRIPT_OPCODE_28 = b'\x28\x01'
 SCRIPT_BLOCK_SIZE = 10
 
 
+def _is_garbage_text(text):
+    """Detect if decoded text is likely garbage (binary data misinterpreted).
+
+    Returns True if the text appears to be garbage, False if it looks valid.
+
+    Preserves:
+    - Single character responses: ？, ！, …
+    - Silence patterns: ・・・・・・, (・・・・・・・・・)
+    - Laughter/onomatopoeia: はっはっはっ, ひゃひゃひゃ, ほっほっほっ, げらげら
+    - Elderly dialect with katakana: ナんジゃ, ワしジャ
+    - Sound effects: コチョコチョ, ZZZ, クェクェ
+
+    Filters:
+    - Multiple [?XXXX] unknown charID markers
+    - Random ASCII letters mixed with kana
+    - Long repeating binary patterns (セへセへセへ...)
+    """
+    # Check for unknown charID markers
+    unknown_matches = list(re.finditer(r'\[\?\d+\]', text))
+    unknown_count = len(unknown_matches)
+
+    # Strip all tags to analyze the actual text content
+    stripped = text
+    for tag in ("[box:system]", "[box:close]", "[box:speech]",
+                "[box:narration]", "[cursor]", "\n", "[opt]"):
+        stripped = stripped.replace(tag, "")
+    stripped_no_script = re.sub(r"\[script:.*?\]", "", stripped)
+    stripped_clean = re.sub(r"\[.*?\]", "", stripped_no_script)
+
+    # Allow empty or very short (single char responses like ？, ！, …)
+    if len(stripped_clean) <= 1:
+        return False  # Keep single character responses
+
+    # Allow silence patterns: ・・・・・・ or (・・・・・・・・・)
+    silence_pattern = stripped_clean.replace('・', '').replace('(', '').replace(')', '').replace('…', '').replace('？', '').replace('！', '').strip()
+    if len(silence_pattern) == 0:
+        return False  # It's just silence/punctuation
+
+    # Count characters early for length-based checks
+    ascii_count = sum(1 for ch in stripped_clean if 'A' <= ch <= 'Z' or 'a' <= ch <= 'z')
+
+    # Very long text (100+ chars) with multiple ASCII letters = garbage
+    # This check must come before laughter patterns since garbage can contain
+    # coincidental matches like "ははは" as substrings
+    if len(stripped_clean) >= 100 and ascii_count >= 3:
+        return True
+
+    # Allow common laughter/onomatopoeia patterns
+    laughter_patterns = [
+        'はっはっは', 'ははは', 'はーっはっは',
+        'ひゃひゃひゃ', 'ひひひ',
+        'ふっふっふ', 'ふふふ', 'ふぉっふぉっ',
+        'ほっほっほ', 'ほほほ',
+        'へっへっへ', 'へへへ',
+        'くっくっく', 'くくく',
+        'げらげら', 'げへへ',
+        'むひょひょ', 'うひょひょ', 'うひゃひゃ',
+        'わはは', 'わっはっは',
+        'コチョコチョ', 'ゲラゲラ', 'クェクェ',
+        'ZZZ', 'zzz',
+    ]
+
+    # Allow stuttering patterns (な、な、な... or similar)
+    stutter_match = re.match(r'^([ぁ-んァ-ン])、(\1、)+', stripped_clean)
+    if stutter_match:
+        return False  # Keep stuttering speech
+    for pattern in laughter_patterns:
+        if pattern in stripped_clean:
+            return False  # Keep laughter
+
+    # Count character types
+    hiragana = sum(1 for ch in stripped_clean if 'ぁ' <= ch <= 'ん')
+    katakana = sum(1 for ch in stripped_clean if 'ァ' <= ch <= 'ン')
+    kanji = sum(1 for ch in stripped_clean if '\u4e00' <= ch <= '\u9fff')
+    ascii_letters = sum(1 for ch in stripped_clean if 'A' <= ch <= 'Z' or 'a' <= ch <= 'z')
+    digits = sum(1 for ch in stripped_clean if '0' <= ch <= '9')
+
+    total_jp = hiragana + katakana + kanji
+    total_len = len(stripped_clean)
+
+    # Any unknown charID markers = garbage
+    # Unknown charIDs indicate decoding errors from binary data
+    if unknown_count >= 1:
+        return True
+
+    # Strings with scattered ASCII letters mixed with kana = garbage
+    if ascii_letters >= 3 and total_jp >= 5:
+        ascii_positions = [i for i, ch in enumerate(stripped_clean)
+                          if 'A' <= ch <= 'Z' or 'a' <= ch <= 'z']
+        if len(ascii_positions) >= 3:
+            gaps = [ascii_positions[i+1] - ascii_positions[i]
+                   for i in range(len(ascii_positions)-1)]
+            avg_gap = sum(gaps) / len(gaps) if gaps else 0
+            if avg_gap > 3:
+                return True
+
+    # Very short text with ASCII letters (but no kanji) = garbage
+    if total_len <= 10 and kanji == 0 and ascii_letters >= 2:
+        return True
+
+    # Long repeating 2-char patterns (binary garbage signature)
+    # But allow legitimate repetition like っっっ or ・・・
+    if len(stripped_clean) >= 20:
+        for pattern_len in [2]:
+            for i in range(len(stripped_clean) - pattern_len * 3):
+                pattern = stripped_clean[i:i + pattern_len]
+                # Skip if pattern is just punctuation or small tsu
+                if pattern in ('っっ', '・・', '……', 'ーー'):
+                    continue
+                count = 1
+                pos = i + pattern_len
+                while pos + pattern_len <= len(stripped_clean):
+                    if stripped_clean[pos:pos + pattern_len] == pattern:
+                        count += 1
+                        pos += pattern_len
+                    else:
+                        break
+                if count >= 10:  # 10+ repetitions of same 2-char = garbage
+                    return True
+
+    # Check for "ギあギ" or similar MIPS code patterns
+    if stripped_clean.startswith('ギあギ') or 'ギあギ' in stripped_clean[:10]:
+        return True
+
+    # Excessive scattered ギ without context
+    if stripped_clean.count('ギ') >= 4 and kanji < 2 and total_len < 30:
+        return True
+
+    # Short text with mixed kana ending in ASCII letter = garbage
+    # (e.g., "わデわデみギY" from binary data)
+    # But exclude common particles/endings that might look similar
+    if (total_len <= 12 and kanji == 0
+            and ascii_letters >= 1
+            and hiragana >= 1 and katakana >= 2):
+        # Check if ends with ASCII
+        if stripped_clean and stripped_clean[-1].isascii() and stripped_clean[-1].isalpha():
+            return True
+
+    # Strictly alternating 2-char pattern repetition = garbage
+    # e.g., "わデわデ" = same 2-char unit repeated
+    # But NOT "ナんジゃ" which has varied structure
+    if total_len >= 4 and kanji == 0 and total_len <= 20:
+        # Check for exact 2-char pattern repetition
+        first_two = stripped_clean[:2]
+        if len(first_two) == 2:
+            is_hira_kata = (('ぁ' <= first_two[0] <= 'ん' and 'ァ' <= first_two[1] <= 'ン') or
+                           ('ァ' <= first_two[0] <= 'ン' and 'ぁ' <= first_two[1] <= 'ん'))
+            if is_hira_kata:
+                repeat_count = 0
+                for j in range(0, len(stripped_clean) - 1, 2):
+                    if stripped_clean[j:j+2] == first_two:
+                        repeat_count += 1
+                    else:
+                        break
+                # If the same 2-char pattern repeats 2+ times at the start, suspicious
+                if repeat_count >= 2:
+                    return True
+
+    # Long text with no kanji and mixed kana = likely garbage
+    # Real Japanese dialogue of 15+ chars almost always contains kanji
+    # Exception: onomatopoeia, which we already check for above
+    if total_len >= 15 and kanji == 0 and hiragana >= 5 and katakana >= 5:
+        # High kana mixing ratio with no kanji = garbage
+        # Legitimate text would have either mostly hiragana OR mostly katakana
+        min_kana = min(hiragana, katakana)
+        max_kana = max(hiragana, katakana)
+        if min_kana >= 5 and max_kana <= min_kana * 3:
+            # Both kana types are significant, likely binary garbage
+            return True
+
+    # Lowercase ASCII letter embedded in Japanese text = garbage
+    # (Uppercase might be intentional like R1, C級, BGM, HP, MP, etc.)
+    for i, ch in enumerate(stripped_clean):
+        if ch.islower() and ch.isascii():
+            # Check if surrounded by Japanese characters
+            before = stripped_clean[max(0, i-2):i]
+            after = stripped_clean[i+1:i+3]
+            jp_before = any('ぁ' <= c <= 'ん' or 'ァ' <= c <= 'ン' or '\u4e00' <= c <= '\u9fff' for c in before)
+            jp_after = any('ぁ' <= c <= 'ん' or 'ァ' <= c <= 'ン' or '\u4e00' <= c <= '\u9fff' for c in after)
+            if jp_before and jp_after:
+                return True
+
+    # Very long unusual repetition (not laughter/emotion sounds)
+    if len(stripped_clean) >= 30:
+        # Allow: は, ふ, わ, ほ, へ, く, げ, ひ, う, ぬ, っ, ・, ー, ！, ？
+        # These are common in laughter/emotion: はははは, ふふふ, etc.
+        if re.search(r'([^はふわほへくげひうぬっ・ー！？ァ-ン])\1{7,}', stripped_clean):
+            return True
+
+    return False
+
+
 def _find_templates(data):
     """Find all 48-byte event script template blocks in STG data.
 
@@ -295,8 +487,15 @@ def _overlaps_script(start, end, script_ranges):
 
 
 def _find_dialogue_in_gap(data, gap_start, gap_end, expected_prefix_bytes,
-                          decode_table):
+                          decode_table, use_heuristics=False):
     """Search for a dialogue string in the gap between two templates.
+
+    Uses pointer-based extraction: the expected_prefix_bytes are computed
+    from the next template's Ptr_A field (Ptr_A - 0x10), which deterministically
+    locates where the dialogue's 2-byte script prefix should be.
+
+    When use_heuristics=False (default), only pointer-validated dialogues are
+    returned, eliminating false positives from binary data.
 
     Returns (dialogue_offset, script_prefix_value, text, bytes_consumed)
     or None if no dialogue found.
@@ -318,6 +517,7 @@ def _find_dialogue_in_gap(data, gap_start, gap_end, expected_prefix_bytes,
     script_ranges = _find_script_ranges(data, gap_start, gap_end)
 
     # Primary: search for the expected 2-byte prefix in the gap
+    # This is the deterministic pointer-based approach
     gap_data = data[gap_start:gap_end]
     search_from = 0
     while search_from < len(gap_data):
@@ -336,54 +536,75 @@ def _find_dialogue_in_gap(data, gap_start, gap_end, expected_prefix_bytes,
         # Reject if text bytes overlap with a preamble block
         text_start = abs_offset + 2  # after 2-byte script prefix
         text_end = abs_offset + consumed
+
+        # Validate dialogue boundaries:
+        # 1. Must have actual text content
+        # 2. Must not overlap with script opcode blocks
+        # 3. Must end within the gap (text_end <= gap_end)
         if (len(stripped) >= 1
-                and not _overlaps_script(text_start, text_end,
-                                           script_ranges)):
+                and not _overlaps_script(text_start, text_end, script_ranges)
+                and text_end <= gap_end + TEMPLATE_SIZE):  # Allow ending at next template
+            # Skip garbage filter for pointer-validated dialogues
+            # The pointer validation itself ensures this is a real dialogue
             prefix_val = int.from_bytes(expected_prefix_bytes, 'little')
             return (abs_offset, prefix_val, text, consumed)
         # Try the next occurrence of the prefix in the gap
         search_from = prefix_pos + 1
 
-    # Fallback: walk forward looking for a null byte (end of previous string),
-    # then try decoding from there + 1 with 2-byte prefix
-    scan_pos = gap_start
-    while scan_pos < gap_end - 3:
-        if data[scan_pos] == 0x00:
-            candidate = scan_pos + 1
-            if candidate + 2 < gap_end:
-                text, consumed = decode_string(data, candidate, decode_table,
-                                               prefix=2)
-                stripped = text
-                for tag in ("[box:system]", "[box:close]", "[box:speech]",
-                            "[box:narration]", "[cursor]", "\n", "[opt]"):
-                    stripped = stripped.replace(tag, "")
-                stripped = re.sub(r"\[script:.*?\]", "", stripped)
-                stripped = re.sub(r"\[.*?\]", "", stripped)
-                text_start = candidate + 2
-                text_end = candidate + consumed
-                if (len(stripped) >= MIN_TEXT_RUN
-                        and not _overlaps_script(text_start, text_end,
-                                                   script_ranges)):
-                    prefix_val = int.from_bytes(data[candidate:candidate + 2],
-                                                'little')
-                    return (candidate, prefix_val, text, consumed)
-        scan_pos += 1
+    # Fallback: only used when use_heuristics=True
+    # This scans for null-terminated strings and uses garbage filter
+    if use_heuristics:
+        scan_pos = gap_start
+        while scan_pos < gap_end - 3:
+            if data[scan_pos] == 0x00:
+                candidate = scan_pos + 1
+                if candidate + 2 < gap_end:
+                    text, consumed = decode_string(data, candidate, decode_table,
+                                                   prefix=2)
+                    stripped = text
+                    for tag in ("[box:system]", "[box:close]", "[box:speech]",
+                                "[box:narration]", "[cursor]", "\n", "[opt]"):
+                        stripped = stripped.replace(tag, "")
+                    stripped = re.sub(r"\[script:.*?\]", "", stripped)
+                    stripped = re.sub(r"\[.*?\]", "", stripped)
+                    text_start = candidate + 2
+                    text_end = candidate + consumed
+                    if (len(stripped) >= MIN_TEXT_RUN
+                            and not _overlaps_script(text_start, text_end,
+                                                       script_ranges)
+                            and not _is_garbage_text(text)):
+                        prefix_val = int.from_bytes(data[candidate:candidate + 2],
+                                                    'little')
+                        return (candidate, prefix_val, text, consumed)
+            scan_pos += 1
 
     return None
 
 
-def scan_stg(data, decode_table):
+def scan_stg(data, decode_table, use_heuristics=True, filter_garbage=True):
     """Template-driven dialogue extraction for STG files.
+
+    Uses pointer-based extraction where dialogue locations are determined
+    by template Ptr_A fields (Ptr_A - 0x10 = dialogue prefix offset).
+
+    Args:
+        data: Binary STG file data
+        decode_table: Character ID to character mapping
+        use_heuristics: If True (default), also use heuristic fallback scanning
+                       to find dialogues in gaps where pointer-based method fails.
+                       If False, use only pointer-validated dialogues.
+        filter_garbage: If True (default), filter out garbage text from results.
 
     Returns (dialogues, templates, stats) where:
       dialogues = [(offset, consumed, text, context_opcode), ...]
       templates = [(offset, opcode, ptr_a, ptr_b, ptr_c), ...]
-      stats = {'total_templates': N, 'found': N, 'missed': N, 'bare': N}
+      stats = {'total_templates': N, 'found': N, 'missed': N, 'bare': N,
+               'garbage_filtered': N}
     """
     templates = _find_templates(data)
     dialogues = []
     stats = {'total_templates': len(templates), 'found': 0, 'missed': 0,
-             'bare': 0}
+             'bare': 0, 'garbage_filtered': 0}
 
     if not templates:
         return dialogues, templates, stats
@@ -425,7 +646,8 @@ def scan_stg(data, decode_table):
         expected_bytes = expected_val.to_bytes(2, 'little')
 
         result = _find_dialogue_in_gap(data, gap_start, gap_end,
-                                       expected_bytes, decode_table)
+                                       expected_bytes, decode_table,
+                                       use_heuristics=use_heuristics)
         if result is not None:
             offset, prefix_val, text, consumed = result
             dialogues.append((offset, consumed, text, tmpl_cur[1]))
@@ -434,6 +656,16 @@ def scan_stg(data, decode_table):
             stats['bare'] += 1
         else:
             stats['missed'] += 1
+
+    # Filter garbage if requested
+    if filter_garbage:
+        clean_dialogues = []
+        for d in dialogues:
+            if not _is_garbage_text(d[2]):
+                clean_dialogues.append(d)
+            else:
+                stats['garbage_filtered'] += 1
+        dialogues = clean_dialogues
 
     return dialogues, templates, stats
 
@@ -742,6 +974,11 @@ def main():
                         help="Scan file for all text strings")
     parser.add_argument("--stg", action="store_true",
                         help="Template-driven dialogue extraction for STG files")
+    parser.add_argument("--strict", action="store_true",
+                        help="Strict pointer-based extraction only (with --stg); "
+                             "disables heuristic fallback scanning")
+    parser.add_argument("--no-filter", action="store_true",
+                        help="Disable garbage text filtering (with --stg)")
     parser.add_argument("--find", metavar="TEXT",
                         help="Find strings containing the given text")
     parser.add_argument("--prefix", type=int, default=0, metavar="N",
@@ -790,7 +1027,9 @@ def main():
 
     # Mode 2b: STG template-driven extraction
     if args.stg:
-        dialogues, templates, stats = scan_stg(data, decode_table)
+        dialogues, templates, stats = scan_stg(data, decode_table,
+                                               use_heuristics=not args.strict,
+                                               filter_garbage=not args.no_filter)
         basename = os.path.basename(args.file)
 
         if not templates:
@@ -801,9 +1040,12 @@ def main():
         if args.find:
             dialogues = [d for d in dialogues if args.find in d[2]]
 
-        print(f"Found {stats['found']} dialogues across "
+        garbage_info = ""
+        if stats.get('garbage_filtered', 0) > 0:
+            garbage_info = f", {stats['garbage_filtered']} garbage filtered"
+        print(f"Found {len(dialogues)} dialogues across "
               f"{stats['total_templates']} templates in {basename} "
-              f"({stats['bare']} bare gaps, {stats['missed']} missed)")
+              f"({stats['bare']} bare gaps, {stats['missed']} missed{garbage_info})")
         print()
 
         prev_opcode = None
