@@ -402,6 +402,9 @@ def encode_korean_text(text, korean_mapping, decode_table):
                     result.extend(b"\xFF\x08\x05\x01")
                 elif tag == "cursor":
                     result.extend(b"\xFF\x08\x07\x01")
+                elif tag == "br":
+                    # Line break -> FF 05 01 01
+                    result.extend(b"\xFF\x05\x01\x01")
                 elif tag == "opt":
                     result.append(0xEF)
                 elif tag.startswith("FF:"):
