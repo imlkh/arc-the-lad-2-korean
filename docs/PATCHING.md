@@ -131,6 +131,7 @@ python python/patch_all.py
 
 # 2. Apply variable-length patching with per-chunk VLUTs
 python python/patch_variable_length_multi.py S100
+python python/patch_variable_length_multi.py SG00
 
 # 3. Apply multi-chunk hook to SCPS_100.26
 python python/apply_hook.py --variable-length-multi
@@ -139,10 +140,15 @@ python python/apply_hook.py --variable-length-multi
 python python/patch_bin.py "output/patched/Arc the Lad II (Japan)/Arc the Lad II (Japan).bin"
 ```
 
-**S100.STG Results**:
-- 649 dialogues patched with full-length Korean translations
-- 498 dialogues without translations (point to original Japanese)
-- Chunks 4 and 8 use fixed-length fallback (no padding space)
+**S100.STG Results** (11 chunks):
+- 1,053 dialogues patched with full-length Korean translations
+- 92 dialogues skipped (no translation or no space)
+- Chunk 8 uses fixed-length fallback (no padding space)
+
+**SG00.STG Results** (56 chunks):
+- 685 dialogues patched with full-length Korean translations
+- 785 dialogues skipped (15 chunks have no padding space)
+- Chunks without space: 0, 4, 5, 6, 8, 9, 10, 11, 22, 24, 31, 39, 40, 46, 53
 
 For implementation details, see `VARIABLE_LENGTH_IMPLEMENTATION.md`.
 
@@ -197,6 +203,21 @@ python python/find_truncated.py S100 --output output/truncated_S100.txt
 - Bytes 16-19: Signature `0x8BF00145`
 - Bytes 30-31: Ptr_B (`Ptr_A + 0x05`)
 
+### Dialogue Types
+
+**Template-associated dialogues**: Have a 48-byte template block pointing to them. Captured by template-driven extraction.
+
+**Orphan menu texts** (added 2026-02-06): `A9 00` marker texts without templates. Include menu options, yes/no prompts, system messages. Identified by `[opt]` tags and context opcode `0x00A9`.
+
+```bash
+# Regenerate decoded output with orphan menus
+python python/decode/decode_text.py /path/to/S100.STG --stg > output/decoded/stg/S100_STG.txt
+```
+
+S100.STG orphan menu breakdown:
+- 97 orphan menu texts total
+- Tutorial menus, yes/no prompts, system prompts, navigation, submarine controls
+
 ### Character Encoding
 
 Korean characters are mapped to font cell IDs:
@@ -221,12 +242,49 @@ output/patched/
 
 ## Current Status
 
-| File | Mode | Patched | Truncated | Notes |
-|------|------|---------|-----------|-------|
+### STG Files (Variable-Length Patching)
+
+| File | Mode | Patched | Skipped | Notes |
+|------|------|---------|---------|-------|
 | COMM.IMG | - | 764 glyphs | - | Unified Korean font |
-| S100.STG | fixed | 1151 | 85 | Working |
-| SG00.STG | fixed | 1495 | 230 | Working |
-| SCPS_100.26 | fixed | 22 | 0 | System text |
+| S100.STG | variable | 1,053 | 92 | 10/11 chunks with VLUT |
+| SG00.STG | variable | 685 | 785 | 41/56 chunks with VLUT |
+| SCPS_100.26 | fixed | 22 | 0 | System text + trampoline hook |
+
+### Non-STG Files (Not Yet Translated)
+
+These binary files contain translatable text but do not have translation files yet:
+
+| File | Strings | Menu Options | Description | Priority |
+|------|---------|--------------|-------------|----------|
+| **BEAM.DAT** | 2,753 | 686 | Battle/event dialogues | High |
+| **YGUILD.BIN** | 352 | 109 | Guild quest descriptions | Medium |
+| **SMITH.BIN** | 598 | 15 | Equipment/smithing effects | Medium |
+| **SDIC.BIN** | 220 | 0 | Character profiles, monster descriptions | Low |
+| **YSHOP.BIN** | 1 | 0 | Shop/item text | Low |
+| **YPROP.BIN** | 5 | 0 | Item descriptions | Low |
+| **YSEG.BIN** | 2 | 0 | Character text | Low |
+| **YEND.BIN** | 155 | 0 | ASCII credits (English names) | N/A |
+| **CHA.BIN** | 0 | 0 | Character data | N/A |
+
+**Menu option examples by file:**
+
+- **BEAM.DAT**: System prompts (exit?, yes/no), navigation (ladder, warp zone, switch)
+- **YGUILD.BIN**: Complete guild quest descriptions with success/failure text
+- **SMITH.BIN**: Equipment effect descriptions (avoid abnormality, additional attack)
+
+### Decoding Non-STG Files
+
+```bash
+# Decode all binary files
+python python/decode/decode_all_bin.py
+
+# Decode YEND.BIN credits (ASCII)
+python python/decode/decode_yend.py
+
+# Output location
+output/decoded/bin/*.txt
+```
 
 ## Troubleshooting
 
@@ -248,3 +306,12 @@ output/patched/
 - **Note:** The `[br]` tags in translation files are currently NOT encoded (skipped)
 - **Attempted fix:** Encoding `[br]` → `FF 05 01 01` caused game crashes
 - **Root cause investigation needed:** See MEMORY.md for details
+
+### Menu Options Not Translated
+- **Cause:** Orphan menu texts (without templates) were not captured by the decoder
+- **Solution:** Updated decoder now captures orphan menu texts (2026-02-06)
+- **Action required:**
+  1. Regenerate decoded output: `python python/decode/decode_text.py <STG_FILE> --stg`
+  2. Look for lines with `[0x00A9]` context opcode (orphan menus)
+  3. Add translations to translation file
+  4. Re-run patcher

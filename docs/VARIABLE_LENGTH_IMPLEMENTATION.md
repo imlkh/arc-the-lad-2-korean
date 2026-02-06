@@ -166,14 +166,14 @@ python python/patch_bin.py "output/patched/Arc the Lad II (Japan)/Arc the Lad II
 - Master pointer at 0xAFF00 tells trampoline where to find VLUT
 - Template-driven dialogue extraction using `decode_text.py:scan_stg()`
 
-**Per-Chunk VLUT Offsets** (S100.STG):
+**Per-Chunk VLUT Offsets** (S100.STG, 11 chunks):
 ```python
-VLUT_OFFSETS = {
+VLUT_OFFSETS_S100 = {
     0: 0xA0800,   # 63KB available
     1: 0xA3D00,   # 50KB available
     2: 0xA0500,   # 64KB available
     3: 0xA0100,   # 65KB available
-    4: 0,         # NO SPACE - data to 0xAFFFF
+    4: 0xA9500,   # 20KB gap between data regions
     5: 0xAA400,   # 23KB available
     6: 0xA2E00,   # 54KB available
     7: 0xA0100,   # 65KB available
@@ -183,14 +183,66 @@ VLUT_OFFSETS = {
 }
 ```
 
-### Phase 3: All STG Files - PENDING
+**Per-Chunk VLUT Offsets** (SG00.STG, 56 chunks):
+```python
+VLUT_OFFSETS_SG00 = {
+    0: 0,         # NO SPACE
+    2: 0xA0100,   # 65KB available
+    7: 0xA9800,   # 22KB available
+    12: 0xAB500,  # 19KB available
+    13-20: 0xA0100-0xAE900,  # Various offsets
+    21: 0xAE900,  # 6KB available
+    23: 0xA0100,  # 65KB available
+    25-30: 0xA0100-0xA4100,  # Various offsets
+    32: 0xA0100,  # 65KB available
+    34-38: 0xA0100-0xA8C00,  # Various offsets
+    41-45: 0xA0100-0xA0300,  # Various offsets
+    47-51: 0xA0100-0xA7C00,  # Various offsets
+    54-55: 0xA1E00-0xA2E00,  # 56KB and 54KB available
+    # Chunks 0, 4, 5, 6, 8-11, 22, 24, 31, 39, 40, 46, 53 have NO SPACE
+}
+```
+
+### Phase 3: All STG Files - IN PROGRESS
 
 **Goal**: Support all 19 STG files.
 
+**Status**: **SG00.STG WORKING** (2026-02-06)
+
 **Steps**:
-1. Analyze padding region for each STG file's chunks
-2. Generate VLUT offset tables for all files
+1. ~~Analyze padding region for each STG file's chunks~~ **DONE for S100, SG00**
+2. ~~Generate VLUT offset tables for all files~~ **DONE for S100, SG00**
 3. Comprehensive testing across all files
+
+**SG00.STG Results** (56 chunks, 43MB):
+
+| Chunk | VLUT Offset | Patched | Skipped | Notes |
+|-------|-------------|---------|---------|-------|
+| 0 | N/A | 0 | 4 | No space |
+| 2 | 0xA0100 | 55 | 0 | |
+| 4-6 | N/A | 0 | 319 | No space |
+| 7 | 0xA9800 | 119 | 0 | |
+| 8-11 | N/A | 0 | 70 | No space |
+| 12 | 0xAB500 | 95 | 0 | |
+| 21 | 0xAE900 | 23 | 0 | |
+| 22 | N/A | 0 | 74 | No space |
+| 23 | 0xA0100 | 29 | 0 | |
+| 24 | N/A | 0 | 44 | No space |
+| 27-30 | 0xA0100-0xA2500 | 76 | 0 | |
+| 31 | N/A | 0 | 42 | No space |
+| 32 | 0xA0100 | 36 | 0 | |
+| 34 | 0xA8C00 | 27 | 0 | |
+| 39-40 | N/A | 0 | 90 | No space |
+| 41-45 | 0xA0100-0xA0300 | 112 | 0 | |
+| 46 | N/A | 0 | 54 | No space |
+| 47-51 | 0xA0100-0xA7C00 | 73 | 0 | |
+| 53 | N/A | 0 | 88 | No space |
+| 54 | 0xA1E00 | 58 | 0 | |
+| **Total** | | **685** | **785** | |
+
+**Chunks without padding space (15 total)**: 0, 4, 5, 6, 8, 9, 10, 11, 22, 24, 31, 39, 40, 46, 53
+
+These chunks use fixed-length fallback (original text region)
 
 ### Phase 4: Patcher Integration - PENDING
 
@@ -488,8 +540,9 @@ This is less technical but requires more translation work.
 1. ~~**Phase 1**: Implement proof of concept~~ **DONE**
 2. ~~**Phase 2**: Extend to all chunks~~ **DONE** (S100: 11 chunks)
 3. ~~**Phase 3**: Enable actual variable-length translations~~ **DONE**
-4. **Phase 4**: Extend to all STG files (SG00, etc.)
-5. **Phase 5**: Integrate into `patch_all.py` for seamless workflow
+4. ~~**Phase 4**: Extend to all STG files~~ **DONE** (S100 + SG00)
+5. **Phase 5**: Remaining STG files (17 more files to analyze)
+6. **Phase 6**: Integrate into `patch_all.py` for seamless workflow
 
 ## Known Issues
 
@@ -529,6 +582,26 @@ This is less technical but requires more translation work.
 - `[br]` tags in translations are NOT being encoded
 - Attempted to encode as `FF 05 01 01` but caused game crashes
 - Need investigation: likely buffer overflow or offset mismatch
+
+### Orphan Menu Texts - FIXED (2026-02-06)
+
+**Problem**: Menu options (yes/no prompts, tutorial menus, system prompts) were not being translated because they weren't captured by the decoder.
+
+**Root Cause**: These texts use `A9 00` markers but have NO associated 48-byte templates. Template-driven extraction only finds dialogues referenced by templates.
+
+**Solution**: Added orphan menu detection pass to `decode_text.py:scan_stg()`:
+- Scans text region for `A9 00` markers not already captured
+- Validates text contains `[opt]` tag (menu indicator)
+- Assigns context opcode `0x00A9` for identification
+
+**Results** (S100.STG):
+- 97 orphan menu texts now captured
+- Categories: tutorial menus, yes/no prompts, system prompts, navigation, submarine controls
+
+**Action Required**:
+1. Regenerate decoded output to include orphan menus
+2. Add translations for orphan menu texts to translation file
+3. Re-run variable-length patcher
 
 ## Files
 

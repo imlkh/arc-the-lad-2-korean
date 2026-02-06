@@ -99,14 +99,30 @@ python python/font/replace_kana_with_korean.py
 
 ## Translation Status
 
-| File Type | Total Strings | Status |
-|-----------|---------------|--------|
-| S*.STG (19 files) | 19,568 | In Progress |
-| SCPS_100.26 | ~960 | Pending |
-| SDIC.BIN | 555 | Pending |
-| SMITH.BIN | 628 | Pending |
-| YGUILD.BIN | 363 | Pending |
-| BEAM.DAT | ~900-1,400 | Pending |
+### STG Files (Main Story)
+
+| File | Strings | Mode | Patched | Status |
+|------|---------|------|---------|--------|
+| S100.STG | 1,261 | variable | 1,053 | **Translated** |
+| SG00.STG | 1,470 | variable | 685 | **Translated** |
+| Other STG (17 files) | ~17,000 | - | - | Pending |
+
+### Non-STG Files
+
+| File | Total Strings | Menu [opt] | Description | Status |
+|------|---------------|------------|-------------|--------|
+| **BEAM.DAT** | 2,753 | 686 | Battle/event dialogues | **Missing** |
+| **YGUILD.BIN** | 352 | 109 | Guild quest descriptions | **Missing** |
+| **SMITH.BIN** | 598 | 15 | Equipment effects | **Missing** |
+| **SDIC.BIN** | 220 | 0 | Profiles, monster descriptions | **Missing** |
+| SCPS_100.26 | 84 | 3 | System messages | Partial (22 translated) |
+| YSHOP.BIN | 1 | 0 | Shop/item text | Pending |
+| YPROP.BIN | 5 | 0 | Item descriptions | Pending |
+| YSEG.BIN | 2 | 0 | Character text | Pending |
+| YEND.BIN | 155 | 0 | ASCII credits (English) | N/A |
+| CHA.BIN | 0 | 0 | Character data | N/A |
+
+**High priority for menu translation:** BEAM.DAT (686 menu options), YGUILD.BIN (109 quest menus)
 
 ## Character/Place Name Mappings
 

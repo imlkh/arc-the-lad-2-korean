@@ -22,7 +22,7 @@ OUTPUT_DIR = os.path.join(_SCRIPT_DIR, "..", "..", "output", "decoded", "stg")
 
 
 def decode_one(filepath, decode_table, find=None):
-    """Decode a single STG file. Returns (lines, stats)."""
+    """Decode a single STG file. Returns (lines, dialogue_count, stats)."""
     data = open(filepath, "rb").read()
     dialogues, templates, stats = scan_stg(data, decode_table)
 
@@ -41,7 +41,7 @@ def decode_one(filepath, decode_table, find=None):
         display = text.replace("\n", "\\n")
         lines.append(f"  0x{offset:08X} [0x{context_opcode:04X}] {display}")
 
-    return lines, stats
+    return lines, len(dialogues), stats
 
 
 def main():
@@ -69,22 +69,26 @@ def main():
 
     for filepath in stg_files:
         basename = os.path.basename(filepath)
-        lines, stats = decode_one(filepath, decode_table, find=args.find)
+        lines, dialogue_count, stats = decode_one(filepath, decode_table, find=args.find)
 
         out_path = os.path.join(OUTPUT_DIR, basename.replace(".STG", "_STG.txt"))
+
+        orphan_menus = stats.get('orphan_menus_found', 0)
         with open(out_path, "w", encoding="utf-8") as f:
-            f.write(f"# {basename} — {stats['found']} dialogues, "
+            f.write(f"# {basename} — {dialogue_count} dialogues, "
                     f"{stats['total_templates']} templates "
-                    f"({stats['bare']} bare, {stats['missed']} missed)\n\n")
+                    f"({stats['bare']} bare, {stats['missed']} missed, "
+                    f"{orphan_menus} orphan menus)\n\n")
             f.write("\n".join(lines))
             f.write("\n")
 
-        total_dialogues += stats['found']
+        total_dialogues += dialogue_count
         total_templates += stats['total_templates']
 
-        print(f"  {basename}: {stats['found']} dialogues / "
+        print(f"  {basename}: {dialogue_count} dialogues / "
               f"{stats['total_templates']} templates "
-              f"({stats['bare']} bare, {stats['missed']} missed) "
+              f"({stats['bare']} bare, {stats['missed']} missed, "
+              f"{orphan_menus} orphan menus) "
               f"-> {out_path}")
 
     print(f"\nTotal: {total_dialogues} dialogues across "

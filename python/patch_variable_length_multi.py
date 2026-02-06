@@ -39,9 +39,8 @@ TEXT_REGION_OFFSET = 0xB4000
 # Trampoline reads this to find VLUT offset
 MASTER_PTR_OFFSET = 0xAFF00
 
-# Per-chunk VLUT offsets (where data ends + 0x100 safety margin)
-# Chunk 8 has no safe space (data extends to 0xAFFFF)
-VLUT_OFFSETS = {
+# Per-chunk VLUT offsets for S100.STG
+VLUT_OFFSETS_S100 = {
     0: 0xA0800,   # Data ends ~0xA0700, 63KB available
     1: 0xA3D00,   # Data ends ~0xA3C00, 50KB available
     2: 0xA0500,   # Data ends ~0xA0400, 64KB available
@@ -54,6 +53,76 @@ VLUT_OFFSETS = {
     9: 0xA0100,   # Data ends ~0xA0000, 65KB available
     10: 0xAD400,  # Data ends ~0xAD300, 11KB available
 }
+
+# Per-chunk VLUT offsets for SG00.STG (56 chunks)
+VLUT_OFFSETS_SG00 = {
+    0: 0,  # NO SPACE
+    1: 0,  # NO SPACE
+    2: 0xA0100,
+    3: 0,  # NO SPACE
+    4: 0,  # NO SPACE
+    5: 0,  # NO SPACE
+    6: 0,  # NO SPACE
+    7: 0xA9800,
+    8: 0,  # NO SPACE
+    9: 0,  # NO SPACE
+    10: 0,  # NO SPACE
+    11: 0,  # NO SPACE
+    12: 0xAB500,
+    13: 0xA0100,
+    14: 0xA0100,
+    15: 0xA0100,
+    16: 0xA0100,
+    17: 0xA4600,
+    18: 0xA0100,
+    19: 0xA0100,
+    20: 0xA0100,
+    21: 0xAE900,
+    22: 0,  # NO SPACE
+    23: 0xA0100,
+    24: 0,  # NO SPACE
+    25: 0xA4100,
+    26: 0xA0100,
+    27: 0xA0100,
+    28: 0xA2500,
+    29: 0xA0100,
+    30: 0xA0100,
+    31: 0,  # NO SPACE
+    32: 0xA0100,
+    33: 0,  # NO SPACE
+    34: 0xA8C00,
+    35: 0xA0100,
+    36: 0xA0100,
+    37: 0xA0100,
+    38: 0xA0100,
+    39: 0,  # NO SPACE
+    40: 0,  # NO SPACE
+    41: 0xA0100,
+    42: 0xA0100,
+    43: 0xA0300,
+    44: 0xA0100,
+    45: 0xA0100,
+    46: 0,  # NO SPACE
+    47: 0xA0300,
+    48: 0xA0100,
+    49: 0xA7C00,
+    50: 0xA5B00,
+    51: 0xA0100,
+    52: 0,  # NO SPACE
+    53: 0,  # NO SPACE
+    54: 0xA1E00,
+    55: 0xA2E00,
+}
+
+# Select VLUT offsets based on STG file
+def get_vlut_offsets(stg_name):
+    if stg_name == "S100":
+        return VLUT_OFFSETS_S100
+    elif stg_name == "SG00":
+        return VLUT_OFFSETS_SG00
+    else:
+        # Default: assume all chunks have space at 0xA0100
+        return {}
 
 # Korean text starts 0x1000 after VLUT (4KB for up to 1000 entries)
 KOREAN_TEXT_GAP = 0x1000
@@ -78,7 +147,8 @@ def get_dialogues_by_chunk(stg_data, decode_table):
 
     print(f"  Template scan: {len(dialogues)} dialogues, "
           f"{stats['total_templates']} templates, "
-          f"{stats.get('garbage_filtered', 0)} garbage filtered")
+          f"{stats.get('garbage_filtered', 0)} garbage filtered, "
+          f"{stats.get('orphan_menus_found', 0)} orphan menus")
 
     # Group dialogues by chunk
     num_chunks = len(stg_data) // CHUNK_SIZE
@@ -101,12 +171,12 @@ def get_dialogues_by_chunk(stg_data, decode_table):
     return by_chunk
 
 
-def patch_chunk(data, chunk_idx, dialogues, translations, korean_mapping, decode_table):
+def patch_chunk(data, chunk_idx, dialogues, translations, korean_mapping, decode_table, vlut_offsets):
     """Patch a single chunk with variable-length translations."""
     chunk_start = chunk_idx * CHUNK_SIZE
 
     # Get VLUT offset for this chunk
-    vlut_offset = VLUT_OFFSETS.get(chunk_idx, 0)
+    vlut_offset = vlut_offsets.get(chunk_idx, 0)
     if vlut_offset == 0:
         # No space in this chunk, skip
         return data, {'patched': 0, 'skipped': len(dialogues), 'no_space': True}
@@ -251,6 +321,10 @@ def main():
     print("Scanning for dialogues using template extraction...")
     dialogues_by_chunk = get_dialogues_by_chunk(bytes(data), scanner_decode_table)
 
+    # Get VLUT offsets for this STG file
+    vlut_offsets = get_vlut_offsets(stg_name)
+    print(f"  VLUT offsets configured for {len(vlut_offsets)} chunks")
+
     # Patch all chunks
     print()
     print("Patching chunks...")
@@ -268,7 +342,7 @@ def main():
             continue
 
         data, stats = patch_chunk(
-            data, chunk_idx, dialogues, translations, korean_mapping, decode_table
+            data, chunk_idx, dialogues, translations, korean_mapping, decode_table, vlut_offsets
         )
 
         if stats['no_space']:

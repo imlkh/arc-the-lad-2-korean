@@ -51,7 +51,7 @@ def safe_output_name(filename):
 
 
 def decode_one(filepath, decode_table, ff08_only=False, strict_filter=False, find=None):
-    """Decode a single binary file. Returns (lines, count_raw, count_filtered)."""
+    """Decode a single binary file. Returns (lines, count_raw, count_filtered, menu_count)."""
     data = open(filepath, "rb").read()
 
     # Scan for text strings
@@ -72,12 +72,15 @@ def decode_one(filepath, decode_table, ff08_only=False, strict_filter=False, fin
     if find:
         results = [(off, con, txt) for off, con, txt in results if find in txt]
 
+    # Count menu options ([opt] tags)
+    menu_count = sum(1 for _, _, txt in results if '[opt]' in txt)
+
     lines = []
     for offset, consumed, text in results:
         display = text.replace("\n", "\\n")
         lines.append(f"  0x{offset:08X} [{consumed:4d}] {display}")
 
-    return lines, count_raw, count_filtered
+    return lines, count_raw, count_filtered, menu_count
 
 
 def main():
@@ -115,6 +118,7 @@ def main():
     print()
 
     total_strings = 0
+    total_menus = 0
 
     for filename, desc, ff08_only, strict_filter, filepath in existing:
         filesize = os.path.getsize(filepath)
@@ -122,24 +126,26 @@ def main():
         mode = "FF08 markers" if ff08_only else ("strict scan" if strict_filter else "full scan")
         print(f"  {filename} ({size_label}, {mode}) — {desc}...", end="", flush=True)
 
-        lines, count_raw, count_filtered = decode_one(filepath, decode_table,
-                                                       ff08_only=ff08_only,
-                                                       strict_filter=strict_filter,
-                                                       find=args.find)
+        lines, count_raw, count_filtered, menu_count = decode_one(filepath, decode_table,
+                                                                   ff08_only=ff08_only,
+                                                                   strict_filter=strict_filter,
+                                                                   find=args.find)
 
         out_name = safe_output_name(filename) + ".txt"
         out_path = os.path.join(OUTPUT_DIR, out_name)
 
         with open(out_path, "w", encoding="utf-8") as f:
-            f.write(f"# {filename} — {count_filtered} strings "
+            f.write(f"# {filename} — {count_filtered} strings, {menu_count} menu options "
                     f"({count_raw} raw, {count_raw - count_filtered} filtered out)\n\n")
             f.write("\n".join(lines))
             f.write("\n")
 
         total_strings += count_filtered
-        print(f" {count_filtered} strings ({count_raw} raw) -> {out_name}")
+        total_menus += menu_count
+        menu_label = f", {menu_count} menus" if menu_count > 0 else ""
+        print(f" {count_filtered} strings{menu_label} ({count_raw} raw) -> {out_name}")
 
-    print(f"\nTotal: {total_strings} strings from {len(existing)} files")
+    print(f"\nTotal: {total_strings} strings, {total_menus} menu options from {len(existing)} files")
     print(f"Output: {OUTPUT_DIR}/")
 
 

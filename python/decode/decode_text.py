@@ -127,7 +127,7 @@ def decode_string(data, offset, decode_table, prefix=0):
             p2 = data[pos + 3]
 
             if sub == 0x05:
-                parts.append("\n")
+                parts.append("[br]")
             elif sub == 0x08:
                 if p1 == 0x01:
                     parts.append("[box:system]")
@@ -211,205 +211,130 @@ def hex_dump(data, offset, length, cols=16):
 
 # === STG Template-Driven Extraction ===
 
-TEMPLATE_SIG = b'\x23\x01\xF0\x8B'
+TEMPLATE_SIG_23 = b'\x23\x01\xF0\x8B'  # Primary signature
+TEMPLATE_SIG_45 = b'\x45\x01\xF0\x8B'  # Secondary signature (always at +16)
 TEMPLATE_SIZE = 48
 SCRIPT_OPCODE_28 = b'\x28\x01'
 SCRIPT_BLOCK_SIZE = 10
+STG_CHUNK_SIZE = 0xBC800  # 772,096 bytes per chunk
+STG_TEXT_REGION_OFFSET = 0xB4000  # Text region starts at +0xB4000 within each chunk
+STG_TEXT_REGION_SIZE = 0x8800  # ~34,816 bytes text region per chunk
+
+# Valid speaker opcodes found in templates
+VALID_SPEAKER_OPCODES = {
+    0x8005,  # Player
+    0x8006,  # NPC
+    0x8009,  # Party member
+    0x800A,  # Shopkeeper
+    0x800D,  # Named NPC
+    0x800E,  # Quest NPC
+    0x8016,  # Narrator
+    0x8018,  # Tutorial
+    0xFFFE,  # System (most common ~74%)
+    0x0006,  # Alternate NPC code
+}
 
 
 def _is_garbage_text(text):
-    """Detect if decoded text is likely garbage (binary data misinterpreted).
+    """Rule-based filter to detect garbage text (binary data misinterpreted).
 
-    Returns True if the text appears to be garbage, False if it looks valid.
+    Returns True if the text is garbage, False if it looks valid.
 
-    Preserves:
-    - Single character responses: ？, ！, …
-    - Silence patterns: ・・・・・・, (・・・・・・・・・)
-    - Laughter/onomatopoeia: はっはっはっ, ひゃひゃひゃ, ほっほっほっ, げらげら
-    - Elderly dialect with katakana: ナんジゃ, ワしジャ
-    - Sound effects: コチョコチョ, ZZZ, クェクェ
-
-    Filters:
-    - Multiple [?XXXX] unknown charID markers
-    - Random ASCII letters mixed with kana
-    - Long repeating binary patterns (セへセへセへ...)
+    Rules:
+    1. Has unknown charID [?XXXX] - charID > 1764 means beyond font table (441 cells × 4)
+    2. Has invalid FF control code - valid opcodes are 01,03,04,05,06,07,08,09,0A,0B,0D
+    3. Has lowercase ASCII embedded in Japanese - game text uses uppercase only (HP, MP, BGM)
+    4. Very short text (<=6 chars) with uppercase ASCII mixed in - likely binary garbage
     """
-    # Check for unknown charID markers
-    unknown_matches = list(re.finditer(r'\[\?\d+\]', text))
-    unknown_count = len(unknown_matches)
+    # Rule 1: Unknown charID markers indicate binary data beyond font table
+    # Font has 441 cells × 4 bitplanes = 1764 max charID
+    # Any [?XXXX] means the two-byte sequence produced an invalid charID > 1764
+    if re.search(r'\[\?\d+\]', text):
+        return True
 
-    # Strip all tags to analyze the actual text content
+    # Rule 2: Invalid FF control codes
+    # Valid FF opcodes found in game text:
+    #   01 (highlight), 03 (delay), 04 (menu marker), 05 (newline),
+    #   06 (button icon), 07 (number), 08 (box), 09 (emphasis),
+    #   0A (currency format), 0B (item), 0D (name), 0F (unknown effect)
+    # Anything else like [FF:B2 0F 2F] is binary garbage misinterpreted as control code
+    VALID_FF_OPCODES = (0x01, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0D, 0x0F)
+    for match in re.finditer(r'\[FF:([0-9A-Fa-f]{2}) [0-9A-Fa-f]{2} [0-9A-Fa-f]{2}\]', text):
+        opcode = int(match.group(1), 16)
+        if opcode not in VALID_FF_OPCODES:
+            return True
+
+    # Strip tags to analyze actual text content
     stripped = text
     for tag in ("[box:system]", "[box:close]", "[box:speech]",
-                "[box:narration]", "[cursor]", "\n", "[opt]"):
+                "[box:narration]", "[cursor]", "[br]", "[opt]"):
         stripped = stripped.replace(tag, "")
-    stripped_no_script = re.sub(r"\[script:.*?\]", "", stripped)
-    stripped_clean = re.sub(r"\[.*?\]", "", stripped_no_script)
+    stripped = re.sub(r"\[script:.*?\]", "", stripped)
+    stripped = re.sub(r"\[.*?\]", "", stripped)
 
-    # Allow empty or very short (single char responses like ？, ！, …)
-    if len(stripped_clean) <= 1:
-        return False  # Keep single character responses
-
-    # Allow silence patterns: ・・・・・・ or (・・・・・・・・・)
-    silence_pattern = stripped_clean.replace('・', '').replace('(', '').replace(')', '').replace('…', '').replace('？', '').replace('！', '').strip()
-    if len(silence_pattern) == 0:
-        return False  # It's just silence/punctuation
-
-    # Count characters early for length-based checks
-    ascii_count = sum(1 for ch in stripped_clean if 'A' <= ch <= 'Z' or 'a' <= ch <= 'z')
-
-    # Very long text (100+ chars) with multiple ASCII letters = garbage
-    # This check must come before laughter patterns since garbage can contain
-    # coincidental matches like "ははは" as substrings
-    if len(stripped_clean) >= 100 and ascii_count >= 3:
-        return True
-
-    # Allow common laughter/onomatopoeia patterns
-    laughter_patterns = [
-        'はっはっは', 'ははは', 'はーっはっは',
-        'ひゃひゃひゃ', 'ひひひ',
-        'ふっふっふ', 'ふふふ', 'ふぉっふぉっ',
-        'ほっほっほ', 'ほほほ',
-        'へっへっへ', 'へへへ',
-        'くっくっく', 'くくく',
-        'げらげら', 'げへへ',
-        'むひょひょ', 'うひょひょ', 'うひゃひゃ',
-        'わはは', 'わっはっは',
-        'コチョコチョ', 'ゲラゲラ', 'クェクェ',
-        'ZZZ', 'zzz',
-    ]
-
-    # Allow stuttering patterns (な、な、な... or similar)
-    stutter_match = re.match(r'^([ぁ-んァ-ン])、(\1、)+', stripped_clean)
-    if stutter_match:
-        return False  # Keep stuttering speech
-    for pattern in laughter_patterns:
-        if pattern in stripped_clean:
-            return False  # Keep laughter
-
-    # Count character types
-    hiragana = sum(1 for ch in stripped_clean if 'ぁ' <= ch <= 'ん')
-    katakana = sum(1 for ch in stripped_clean if 'ァ' <= ch <= 'ン')
-    kanji = sum(1 for ch in stripped_clean if '\u4e00' <= ch <= '\u9fff')
-    ascii_letters = sum(1 for ch in stripped_clean if 'A' <= ch <= 'Z' or 'a' <= ch <= 'z')
-    digits = sum(1 for ch in stripped_clean if '0' <= ch <= '9')
-
-    total_jp = hiragana + katakana + kanji
-    total_len = len(stripped_clean)
-
-    # Any unknown charID markers = garbage
-    # Unknown charIDs indicate decoding errors from binary data
-    if unknown_count >= 1:
-        return True
-
-    # Strings with scattered ASCII letters mixed with kana = garbage
-    if ascii_letters >= 3 and total_jp >= 5:
-        ascii_positions = [i for i, ch in enumerate(stripped_clean)
-                          if 'A' <= ch <= 'Z' or 'a' <= ch <= 'z']
-        if len(ascii_positions) >= 3:
-            gaps = [ascii_positions[i+1] - ascii_positions[i]
-                   for i in range(len(ascii_positions)-1)]
-            avg_gap = sum(gaps) / len(gaps) if gaps else 0
-            if avg_gap > 3:
-                return True
-
-    # Very short text with ASCII letters (but no kanji) = garbage
-    if total_len <= 10 and kanji == 0 and ascii_letters >= 2:
-        return True
-
-    # Long repeating 2-char patterns (binary garbage signature)
-    # But allow legitimate repetition like っっっ or ・・・
-    if len(stripped_clean) >= 20:
-        for pattern_len in [2]:
-            for i in range(len(stripped_clean) - pattern_len * 3):
-                pattern = stripped_clean[i:i + pattern_len]
-                # Skip if pattern is just punctuation or small tsu
-                if pattern in ('っっ', '・・', '……', 'ーー'):
-                    continue
-                count = 1
-                pos = i + pattern_len
-                while pos + pattern_len <= len(stripped_clean):
-                    if stripped_clean[pos:pos + pattern_len] == pattern:
-                        count += 1
-                        pos += pattern_len
-                    else:
-                        break
-                if count >= 10:  # 10+ repetitions of same 2-char = garbage
-                    return True
-
-    # Check for "ギあギ" or similar MIPS code patterns
-    if stripped_clean.startswith('ギあギ') or 'ギあギ' in stripped_clean[:10]:
-        return True
-
-    # Excessive scattered ギ without context
-    if stripped_clean.count('ギ') >= 4 and kanji < 2 and total_len < 30:
-        return True
-
-    # Short text with mixed kana ending in ASCII letter = garbage
-    # (e.g., "わデわデみギY" from binary data)
-    # But exclude common particles/endings that might look similar
-    if (total_len <= 12 and kanji == 0
-            and ascii_letters >= 1
-            and hiragana >= 1 and katakana >= 2):
-        # Check if ends with ASCII
-        if stripped_clean and stripped_clean[-1].isascii() and stripped_clean[-1].isalpha():
-            return True
-
-    # Strictly alternating 2-char pattern repetition = garbage
-    # e.g., "わデわデ" = same 2-char unit repeated
-    # But NOT "ナんジゃ" which has varied structure
-    if total_len >= 4 and kanji == 0 and total_len <= 20:
-        # Check for exact 2-char pattern repetition
-        first_two = stripped_clean[:2]
-        if len(first_two) == 2:
-            is_hira_kata = (('ぁ' <= first_two[0] <= 'ん' and 'ァ' <= first_two[1] <= 'ン') or
-                           ('ァ' <= first_two[0] <= 'ン' and 'ぁ' <= first_two[1] <= 'ん'))
-            if is_hira_kata:
-                repeat_count = 0
-                for j in range(0, len(stripped_clean) - 1, 2):
-                    if stripped_clean[j:j+2] == first_two:
-                        repeat_count += 1
-                    else:
-                        break
-                # If the same 2-char pattern repeats 2+ times at the start, suspicious
-                if repeat_count >= 2:
-                    return True
-
-    # Long text with no kanji and mixed kana = likely garbage
-    # Real Japanese dialogue of 15+ chars almost always contains kanji
-    # Exception: onomatopoeia, names, casual speech with proper punctuation
-    if total_len >= 15 and kanji == 0 and hiragana >= 5 and katakana >= 5:
-        # Check for proper Japanese punctuation (indicates real dialogue)
-        has_proper_punct = any(p in stripped_clean for p in ('、', '。', '？', '！', '…', '「', '」', '(', ')'))
-        if has_proper_punct:
-            # Has punctuation, likely real dialogue with names/katakana words
-            pass
-        else:
-            # High kana mixing ratio with no kanji and no punctuation = garbage
-            min_kana = min(hiragana, katakana)
-            max_kana = max(hiragana, katakana)
-            if min_kana >= 5 and max_kana <= min_kana * 3:
-                # Both kana types are significant, likely binary garbage
-                return True
-
-    # Lowercase ASCII letter embedded in Japanese text = garbage
-    # (Uppercase might be intentional like R1, C級, BGM, HP, MP, etc.)
-    for i, ch in enumerate(stripped_clean):
+    # Rule 3: Lowercase ASCII letters embedded in Japanese text
+    # Real game text uses uppercase only (HP, MP, BGM, R1, C級, etc.)
+    # Lowercase mixed with Japanese indicates binary garbage
+    for i, ch in enumerate(stripped):
         if ch.islower() and ch.isascii():
             # Check if surrounded by Japanese characters
-            before = stripped_clean[max(0, i-2):i]
-            after = stripped_clean[i+1:i+3]
+            before = stripped[max(0, i-2):i]
+            after = stripped[i+1:i+3]
             jp_before = any('ぁ' <= c <= 'ん' or 'ァ' <= c <= 'ン' or '\u4e00' <= c <= '\u9fff' for c in before)
             jp_after = any('ぁ' <= c <= 'ん' or 'ァ' <= c <= 'ン' or '\u4e00' <= c <= '\u9fff' for c in after)
-            if jp_before and jp_after:
+            if jp_before or jp_after:
                 return True
 
-    # Very long unusual repetition (not laughter/emotion sounds)
-    if len(stripped_clean) >= 30:
-        # Allow: は, ふ, わ, ほ, へ, く, げ, ひ, う, ぬ, っ, ・, ー, ！, ？
-        # These are common in laughter/emotion: はははは, ふふふ, etc.
-        if re.search(r'([^はふわほへくげひうぬっ・ー！？ァ-ン])\1{7,}', stripped_clean):
+    # Rule 4: Very short text with uppercase ASCII mixed with kana = garbage
+    # e.g., "ぴデいギB", "デあギJ", "BじI" are binary garbage
+    # But "HP回復" or "MP" are valid game terms
+    if len(stripped) <= 6:
+        has_upper = any(c.isupper() and c.isascii() for c in stripped)
+        has_kana = any('ぁ' <= c <= 'ん' or 'ァ' <= c <= 'ン' for c in stripped)
+        has_kanji = any('\u4e00' <= c <= '\u9fff' for c in stripped)
+        # Short text with uppercase + kana but no kanji = garbage
+        # Valid short terms like "HP回復" have kanji
+        if has_upper and has_kana and not has_kanji:
             return True
+
+    # Rule 5: Short mixed hiragana/katakana without repetition = garbage
+    # e.g., "みギづ", "げいう" from binary data
+    # But "ふふふ", "ねぇねぇ" are valid (have repetition)
+    # Also allow "エルクか", "シュウと" - character name (3+ katakana) + particle
+    if len(stripped) <= 4:
+        has_hira = any('ぁ' <= c <= 'ん' for c in stripped)
+        has_kata = any('ァ' <= c <= 'ン' for c in stripped)
+        has_kanji = any('\u4e00' <= c <= '\u9fff' for c in stripped)
+        has_punct = any(c in '、。？！…ー' for c in stripped)
+
+        # Skip if has kanji or punctuation (likely valid)
+        if not has_kanji and not has_punct:
+            # Allow if it's a character name pattern: 3+ katakana followed by hiragana particle
+            # e.g., "エルクか" (Is it Elc?), "シュウと" (with Shu), "ゴメスと" (with Gomes)
+            # Count consecutive katakana at the start
+            kata_prefix_len = 0
+            for c in stripped:
+                if 'ァ' <= c <= 'ン' or c == 'ー':  # Include prolonged sound mark
+                    kata_prefix_len += 1
+                else:
+                    break
+
+            # 3+ katakana prefix + hiragana ending = likely character name
+            if kata_prefix_len >= 3 and len(stripped) > kata_prefix_len:
+                suffix = stripped[kata_prefix_len:]
+                if all('ぁ' <= c <= 'ん' for c in suffix):
+                    return False  # Likely valid: name + particle
+
+            # Check for repetition (common in valid onomatopoeia)
+            has_repetition = False
+            for i in range(1, len(stripped)):
+                if stripped[i] == stripped[i-1]:
+                    has_repetition = True
+                    break
+
+            # Mixed hira+kata without repetition = garbage
+            if has_hira and has_kata and not has_repetition:
+                return True
 
     return False
 
@@ -417,22 +342,150 @@ def _is_garbage_text(text):
 def _find_templates(data):
     """Find all 48-byte event script template blocks in STG data.
 
+    Template structure (48 bytes):
+      Bytes 0-15:  Primary block (0x23 signature)
+        [0:4]   Signature: 0x8BF00123
+        [4:6]   Speaker opcode
+        [6:8]   Ptr_A: Text region pointer
+        [8:10]  Ptr_B: Text data region pointer
+        [10:12] Ptr_C: Flags (0x0004 for primary)
+        [12:14] Unknown (usually 0x8000)
+        [14:16] Line index (used for dialogue prefix lookup)
+
+      Bytes 16-31: Secondary block (0x45 signature, always paired)
+        Same structure, Ptr_C = 0x0000
+
+      Bytes 32-39: Box control
+        [32:34] 0x0063 (box command)
+        [34:36] Speaker opcode (mirrors main)
+        [36:38] Timing offset
+        [38:40] 0x002D (box type)
+
+      Bytes 40-47: Display parameters
+        [40:42] Box height (0x0030 = 48 pixels)
+        [42:44] Box Y position (0x0062 = 98 pixels)
+        [44:46] Dialog flags (0x8002)
+        [46:48] Animation ID (variable)
+
     Returns list of (offset, context_opcode, ptr_a, ptr_b, ptr_c) tuples.
+    Note: ptr_a here is the line index at bytes 14:16, used for dialogue lookup.
     """
     templates = []
     pos = 0
     while True:
-        idx = data.find(TEMPLATE_SIG, pos)
+        idx = data.find(TEMPLATE_SIG_23, pos)
         if idx == -1:
             break
         if idx + TEMPLATE_SIZE <= len(data):
+            # Validate: check for paired 0x45 signature at +16
+            if data[idx + 16:idx + 20] != TEMPLATE_SIG_45:
+                pos = idx + 1
+                continue
+
+            # Extract speaker opcode
             opcode = int.from_bytes(data[idx + 4:idx + 6], 'little')
+
+            # Extract line index (used for dialogue prefix lookup)
+            # Note: This is at bytes 14:16, not the ptr_a at 6:8
             ptr_a = int.from_bytes(data[idx + 14:idx + 16], 'little')
             ptr_b = int.from_bytes(data[idx + 30:idx + 32], 'little')
             ptr_c = int.from_bytes(data[idx + 36:idx + 38], 'little')
+
+            # Template validated by paired signature check above
             templates.append((idx, opcode, ptr_a, ptr_b, ptr_c))
+
         pos = idx + 1
     return templates
+
+
+def _get_chunk_text_regions(file_size):
+    """Calculate text region boundaries for each chunk in an STG file.
+
+    Returns list of (text_start, text_end, chunk_index) tuples.
+    """
+    regions = []
+    num_chunks = file_size // STG_CHUNK_SIZE
+    for i in range(num_chunks):
+        chunk_start = i * STG_CHUNK_SIZE
+        text_start = chunk_start + STG_TEXT_REGION_OFFSET
+        text_end = min(chunk_start + STG_CHUNK_SIZE, file_size)
+        if text_start < file_size:
+            regions.append((text_start, text_end, i))
+    return regions
+
+
+def _scan_text_region_for_dialogues(data, region_start, region_end,
+                                    templates_in_region, decode_table,
+                                    use_heuristics=True):
+    """Scan a chunk's text region for dialogues, handling gaps before first template.
+
+    This handles cases where dialogues appear before the first template in a chunk,
+    which can be missed when only doing template-to-template gap scanning.
+
+    Args:
+        data: Binary file data
+        region_start: Start offset of text region
+        region_end: End offset of text region
+        templates_in_region: List of templates within this region
+        decode_table: Character decode table
+        use_heuristics: Whether to use heuristic scanning for gaps
+
+    Returns list of (offset, consumed, text, context_opcode) tuples.
+    """
+    dialogues = []
+
+    if not templates_in_region:
+        # No templates in region - scan the entire text region heuristically
+        if use_heuristics:
+            scan_pos = region_start
+            script_ranges = _find_script_ranges(data, region_start, region_end)
+            while scan_pos < region_end - 3:
+                if data[scan_pos] == 0x00:
+                    candidate = scan_pos + 1
+                    if candidate + 2 < region_end:
+                        text, consumed = decode_string(data, candidate,
+                                                       decode_table, prefix=2)
+                        stripped = text
+                        for tag in ("[box:system]", "[box:close]", "[box:speech]",
+                                    "[box:narration]", "[cursor]", "[br]", "[opt]"):
+                            stripped = stripped.replace(tag, "")
+                        stripped = re.sub(r"\[script:.*?\]", "", stripped)
+                        stripped = re.sub(r"\[.*?\]", "", stripped)
+                        text_start = candidate + 2
+                        text_end = candidate + consumed
+                        if (len(stripped) >= MIN_TEXT_RUN
+                                and not _overlaps_script(text_start, text_end,
+                                                         script_ranges)
+                                and not _is_garbage_text(text)):
+                            # Use 0x0000 as unknown context opcode
+                            dialogues.append((candidate, consumed, text, 0x0000))
+                            scan_pos = candidate + consumed
+                            continue
+                scan_pos += 1
+        return dialogues
+
+    # Sort templates by offset
+    sorted_templates = sorted(templates_in_region, key=lambda t: t[0])
+    first_template = sorted_templates[0]
+
+    # Check if there's a gap between text region start and first template
+    if first_template[0] > region_start:
+        gap_start = region_start
+        gap_end = first_template[0]
+
+        # Compute expected prefix from first template's ptr_a
+        expected_val = first_template[2] - 0x10  # ptr_a - 0x10
+        if expected_val >= 0:
+            expected_bytes = expected_val.to_bytes(2, 'little')
+
+            result = _find_dialogue_in_gap(data, gap_start, gap_end,
+                                           expected_bytes, decode_table,
+                                           use_heuristics=use_heuristics)
+            if result is not None:
+                offset, prefix_val, text, consumed = result
+                dialogues.append((offset, consumed, text, first_template[1]))
+
+    return dialogues
 
 
 def _is_script_opcode_28(data, pos):
@@ -546,7 +599,7 @@ def _find_dialogue_in_gap(data, gap_start, gap_end, expected_prefix_bytes,
         # Validate there's actual text content
         stripped = text
         for tag in ("[box:system]", "[box:close]", "[box:speech]",
-                    "[box:narration]", "[cursor]", "\n", "[opt]"):
+                    "[box:narration]", "[cursor]", "[br]", "[opt]"):
             stripped = stripped.replace(tag, "")
         stripped = re.sub(r"\[script:.*?\]", "", stripped)
         stripped = re.sub(r"\[.*?\]", "", stripped)
@@ -580,7 +633,7 @@ def _find_dialogue_in_gap(data, gap_start, gap_end, expected_prefix_bytes,
                                                    prefix=2)
                     stripped = text
                     for tag in ("[box:system]", "[box:close]", "[box:speech]",
-                                "[box:narration]", "[cursor]", "\n", "[opt]"):
+                                "[box:narration]", "[cursor]", "[br]", "[opt]"):
                         stripped = stripped.replace(tag, "")
                     stripped = re.sub(r"\[script:.*?\]", "", stripped)
                     stripped = re.sub(r"\[.*?\]", "", stripped)
@@ -604,6 +657,11 @@ def scan_stg(data, decode_table, use_heuristics=True, filter_garbage=True):
     Uses pointer-based extraction where dialogue locations are determined
     by template Ptr_A fields (Ptr_A - 0x10 = dialogue prefix offset).
 
+    For multi-chunk STG files, this function also scans each chunk's text
+    region independently to catch dialogues that appear before the first
+    template in a chunk (which can be missed in template-to-template scanning
+    when gaps cross chunk boundaries).
+
     Args:
         data: Binary STG file data
         decode_table: Character ID to character mapping
@@ -616,15 +674,55 @@ def scan_stg(data, decode_table, use_heuristics=True, filter_garbage=True):
       dialogues = [(offset, consumed, text, context_opcode), ...]
       templates = [(offset, opcode, ptr_a, ptr_b, ptr_c), ...]
       stats = {'total_templates': N, 'found': N, 'missed': N, 'bare': N,
-               'garbage_filtered': N}
+               'garbage_filtered': N, 'chunk_boundary_found': N}
     """
     templates = _find_templates(data)
     dialogues = []
     stats = {'total_templates': len(templates), 'found': 0, 'missed': 0,
-             'bare': 0, 'garbage_filtered': 0}
+             'bare': 0, 'garbage_filtered': 0, 'chunk_boundary_found': 0}
 
     if not templates:
         return dialogues, templates, stats
+
+    # Build a set of dialogue offsets to avoid duplicates
+    found_offsets = set()
+
+    # --- Chunk-based scanning for dialogues before first template in each chunk ---
+    # This handles cases where large template gaps cross chunk boundaries
+    chunk_regions = _get_chunk_text_regions(len(data))
+
+    for region_start, region_end, chunk_idx in chunk_regions:
+        # Find templates within this chunk's text region
+        templates_in_region = [t for t in templates
+                               if region_start <= t[0] < region_end]
+
+        if not templates_in_region:
+            continue
+
+        # Sort by offset
+        sorted_templates = sorted(templates_in_region, key=lambda t: t[0])
+        first_in_chunk = sorted_templates[0]
+
+        # Check if first template in this chunk is not the global first template
+        # and has a gap from the text region start
+        if first_in_chunk[0] > region_start:
+            gap_start = region_start
+            gap_end = first_in_chunk[0]
+
+            # Compute expected prefix from first template's ptr_a
+            expected_val = first_in_chunk[2] - 0x10  # ptr_a - 0x10
+            if expected_val >= 0:
+                expected_bytes = expected_val.to_bytes(2, 'little')
+
+                result = _find_dialogue_in_gap(data, gap_start, gap_end,
+                                               expected_bytes, decode_table,
+                                               use_heuristics=use_heuristics)
+                if result is not None:
+                    offset, prefix_val, text, consumed = result
+                    if offset not in found_offsets:
+                        dialogues.append((offset, consumed, text, first_in_chunk[1]))
+                        found_offsets.add(offset)
+                        stats['chunk_boundary_found'] += 1
 
     # --- First dialogue: search backward from first template ---
     first_tmpl = templates[0]
@@ -637,16 +735,18 @@ def scan_stg(data, decode_table, use_heuristics=True, filter_garbage=True):
     prefix_pos = gap_data.find(expected_prefix_bytes)
     if prefix_pos != -1:
         abs_offset = search_start + prefix_pos
-        text, consumed = decode_string(data, abs_offset, decode_table, prefix=2)
-        stripped = text
-        for tag in ("[box:system]", "[box:close]", "[box:speech]",
-                    "[box:narration]", "[cursor]", "\n", "[opt]"):
-            stripped = stripped.replace(tag, "")
-        stripped = re.sub(r"\[script:.*?\]", "", stripped)
-        stripped = re.sub(r"\[.*?\]", "", stripped)
-        if len(stripped) >= 1:
-            dialogues.append((abs_offset, consumed, text, first_tmpl[1]))
-            stats['found'] += 1
+        if abs_offset not in found_offsets:
+            text, consumed = decode_string(data, abs_offset, decode_table, prefix=2)
+            stripped = text
+            for tag in ("[box:system]", "[box:close]", "[box:speech]",
+                        "[box:narration]", "[cursor]", "[br]", "[opt]"):
+                stripped = stripped.replace(tag, "")
+            stripped = re.sub(r"\[script:.*?\]", "", stripped)
+            stripped = re.sub(r"\[.*?\]", "", stripped)
+            if len(stripped) >= 1:
+                dialogues.append((abs_offset, consumed, text, first_tmpl[1]))
+                found_offsets.add(abs_offset)
+                stats['found'] += 1
 
     # --- Loop through consecutive template pairs ---
     for i in range(len(templates) - 1):
@@ -667,12 +767,47 @@ def scan_stg(data, decode_table, use_heuristics=True, filter_garbage=True):
                                        use_heuristics=use_heuristics)
         if result is not None:
             offset, prefix_val, text, consumed = result
-            dialogues.append((offset, consumed, text, tmpl_cur[1]))
-            stats['found'] += 1
+            if offset not in found_offsets:
+                dialogues.append((offset, consumed, text, tmpl_cur[1]))
+                found_offsets.add(offset)
+                stats['found'] += 1
         elif gap_end - gap_start <= 2:
             stats['bare'] += 1
         else:
             stats['missed'] += 1
+
+    # --- Scan for orphan menu texts (A9 00 texts with [opt] not captured by templates) ---
+    # These are standalone menu options that don't have associated templates
+    stats['orphan_menus_found'] = 0
+    for region_start, region_end, chunk_idx in chunk_regions:
+        pos = region_start
+        while pos < region_end - 4:
+            # Look for A9 00 marker
+            if data[pos:pos + 2] == b'\xA9\x00':
+                if pos not in found_offsets:
+                    # Decode and check if it's a menu text
+                    text, consumed = decode_string(data, pos + 2, decode_table, prefix=2)
+                    if text and '[opt]' in text:
+                        # Validate it's a real menu (strip tags and check content)
+                        stripped = text
+                        for tag in ("[box:system]", "[box:close]", "[box:speech]",
+                                    "[box:narration]", "[cursor]", "[br]", "[opt]"):
+                            stripped = stripped.replace(tag, "")
+                        stripped = re.sub(r"\[script:.*?\]", "", stripped)
+                        stripped = re.sub(r"\[.*?\]", "", stripped)
+
+                        # Menu text should have meaningful content
+                        if len(stripped) >= 2 and not _is_garbage_text(text):
+                            # Use A9 (0x00A9) as the context opcode for orphan menus
+                            dialogues.append((pos + 2, consumed, text, 0x00A9))
+                            found_offsets.add(pos + 2)
+                            stats['orphan_menus_found'] += 1
+                            pos = pos + 2 + consumed
+                            continue
+            pos += 1
+
+    # Sort dialogues by offset
+    dialogues.sort(key=lambda d: d[0])
 
     # Filter garbage if requested
     if filter_garbage:
@@ -713,7 +848,7 @@ def scan_file(data, decode_table, prefix=0, ff08_only=False):
                 # Only include if there's actual text content
                 stripped = text
                 for tag in ("[box:system]", "[box:close]", "[box:speech]",
-                            "[box:narration]", "[cursor]", "\n", "[opt]"):
+                            "[box:narration]", "[cursor]", "[br]", "[opt]"):
                     stripped = stripped.replace(tag, "")
                 # Remove control code tags
                 stripped = re.sub(r"\[.*?\]", "", stripped)
@@ -868,7 +1003,7 @@ def filter_real_text(results, min_kanji=2, strict=False):
         # Strip control tags to get the actual displayed text
         stripped = text
         for tag in ("[box:system]", "[box:close]", "[box:speech]",
-                    "[box:narration]", "[cursor]", "\n", "[opt]"):
+                    "[box:narration]", "[cursor]", "[br]", "[opt]"):
             stripped = stripped.replace(tag, "")
         stripped = re.sub(r"\[.*?\]", "", stripped)
 
@@ -1038,7 +1173,7 @@ def main():
         print()
         for offset, consumed, text in results:
             # Show compact single-line form for short strings
-            display = text.replace("\n", "\\n")
+            display = text
             print(f"  0x{offset:08X} [{consumed:4d}] {display}")
         return
 
@@ -1060,9 +1195,15 @@ def main():
         garbage_info = ""
         if stats.get('garbage_filtered', 0) > 0:
             garbage_info = f", {stats['garbage_filtered']} garbage filtered"
+        chunk_info = ""
+        if stats.get('chunk_boundary_found', 0) > 0:
+            chunk_info = f", {stats['chunk_boundary_found']} chunk-boundary"
+        orphan_info = ""
+        if stats.get('orphan_menus_found', 0) > 0:
+            orphan_info = f", {stats['orphan_menus_found']} orphan menus"
         print(f"Found {len(dialogues)} dialogues across "
               f"{stats['total_templates']} templates in {basename} "
-              f"({stats['bare']} bare gaps, {stats['missed']} missed{garbage_info})")
+              f"({stats['bare']} bare gaps, {stats['missed']} missed{chunk_info}{garbage_info}{orphan_info})")
         print()
 
         prev_opcode = None
@@ -1073,7 +1214,7 @@ def main():
                       f"0x{context_opcode:04X} ---")
             prev_opcode = context_opcode
 
-            display = text.replace("\n", "\\n")
+            display = text
             print(f"  0x{offset:08X} [0x{context_opcode:04X}] {display}")
         return
 
@@ -1084,7 +1225,7 @@ def main():
         print(f"Found {len(results)} matches for \"{args.find}\" in {args.file}")
         print()
         for offset, consumed, text in results:
-            display = text.replace("\n", "\\n")
+            display = text
             print(f"  0x{offset:08X} [{consumed:4d}] {display}")
         return
 
