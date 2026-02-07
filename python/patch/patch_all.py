@@ -14,6 +14,7 @@ Supported files:
 
 import os
 import sys
+from datetime import datetime
 
 # Add parent directory to path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -28,10 +29,42 @@ from patch_korean import (
 import shutil
 
 
+def save_validation_report(all_warnings, report_path):
+    """Save detailed validation report to file.
+
+    Args:
+        all_warnings: dict mapping filename -> list of warning dicts
+        report_path: path to save report
+    """
+    with open(report_path, 'w', encoding='utf-8') as f:
+        f.write(f"# Validation Report - {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n")
+
+        total_warnings = sum(len(w) for w in all_warnings.values())
+        f.write(f"## Summary\n\n")
+        f.write(f"Total truncation warnings: {total_warnings}\n\n")
+
+        for filename, warnings in all_warnings.items():
+            if not warnings:
+                continue
+            f.write(f"## {filename} ({len(warnings)} truncations)\n\n")
+            f.write("| Offset | Original | Korean | Overflow | Text |\n")
+            f.write("|--------|----------|--------|----------|------|\n")
+            for w in warnings:
+                # Escape pipe characters in text
+                text = w.get('text', '')[:40].replace('|', '\\|')
+                f.write(f"| 0x{w['offset']:08X} | {w['orig_length']} | {w['new_length']} | +{w['overflow']} | {text} |\n")
+            f.write("\n")
+
+    return total_warnings
+
+
 def main():
     print("=== Arc the Lad 2 Korean Patcher (Combined) ===")
 
     os.makedirs(OUTPUT_DIR, exist_ok=True)
+
+    # Collect all validation warnings for report
+    all_validation_warnings = {}
 
     # Load character table
     print("Loading character table...")
@@ -153,6 +186,7 @@ def main():
         valid_count, warn_count, warnings = validate_translation_lengths(
             sys_entries, korean_mapping, decode_table, "SCPS_100.26"
         )
+        all_validation_warnings["SCPS_100.26"] = warnings
         print(f"  Validation: {valid_count} OK, {warn_count} will be truncated")
         if warn_count > 0:
             for w in warnings[:5]:  # Show first 5 warnings
@@ -181,6 +215,7 @@ def main():
         valid_count, warn_count, warnings = validate_translation_lengths(
             sdic_entries, korean_mapping, decode_table, "SDIC.BIN"
         )
+        all_validation_warnings["SDIC.BIN"] = warnings
         print(f"  Validation: {valid_count} OK, {warn_count} will be truncated")
         if warn_count > 0:
             for w in warnings[:5]:
@@ -209,6 +244,7 @@ def main():
         valid_count, warn_count, warnings = validate_translation_lengths(
             yguild_entries, korean_mapping, decode_table, "YGUILD.BIN"
         )
+        all_validation_warnings["YGUILD.BIN"] = warnings
         print(f"  Validation: {valid_count} OK, {warn_count} will be truncated")
         if warn_count > 0:
             for w in warnings[:5]:
@@ -237,6 +273,7 @@ def main():
         valid_count, warn_count, warnings = validate_translation_lengths(
             smith_entries, korean_mapping, decode_table, "SMITH.BIN"
         )
+        all_validation_warnings["SMITH.BIN"] = warnings
         print(f"  Validation: {valid_count} OK, {warn_count} will be truncated")
         if warn_count > 0:
             for w in warnings[:5]:
@@ -265,6 +302,7 @@ def main():
         valid_count, warn_count, warnings = validate_translation_lengths(
             beam_entries, korean_mapping, decode_table, "BEAM.DAT"
         )
+        all_validation_warnings["BEAM.DAT"] = warnings
         print(f"  Validation: {valid_count} OK, {warn_count} will be truncated")
         if warn_count > 0:
             for w in warnings[:5]:
@@ -274,6 +312,13 @@ def main():
 
         print(f"Patching BIN file: {beam_dst}")
         patch_bin_file(beam_dst, beam_entries, korean_mapping, decode_table)
+
+    # Save validation report if there are any warnings
+    report_path = os.path.join(OUTPUT_DIR, "validation_report.md")
+    total_warnings = save_validation_report(all_validation_warnings, report_path)
+    if total_warnings > 0:
+        print(f"\nValidation report saved: {report_path}")
+        print(f"  Total truncation warnings: {total_warnings}")
 
     print(f"\n=== Done ===")
     print(f"Output directory: {OUTPUT_DIR}")
