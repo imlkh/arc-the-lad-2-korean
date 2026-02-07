@@ -274,7 +274,7 @@ output/patched/
 | COMM.IMG | - | - | 854 glyphs | Unified Korean font |
 | S100.STG | variable | 1,321 | 1,053 | 10/11 chunks with VLUT |
 | SG00.STG | variable | 2,445 | 685 | 41/56 chunks with VLUT |
-| SCPS_100.26 | fixed | 123 | 22 | System text + trampoline hook |
+| SCPS_100.26 | fixed | 250+ | 250 | System text, location names + hook |
 
 ### Non-STG Files (Not Yet Translated)
 

@@ -370,15 +370,17 @@ python python/decode/decode_text.py SCPS_100.26 0x0D34FC
 
 SCPS_100.26 contains game text strings that require translation. Due to the difficulty of distinguishing text from MIPS code, only **84 strings** are auto-extracted, but the file contains an estimated **~560 total strings** in the text data regions:
 
-| Priority | Content | Extracted | Estimated Total |
-|----------|---------|-----------|-----------------|
-| High | System messages, error messages | 35 | ~45 |
-| High | Shop dialogue, prompts | 10 | ~25 |
-| Medium | Status/skill descriptions | 30 | ~80 |
-| Medium | Synthesis messages | 9 | ~15 |
+| Priority | Content | Translated | Estimated Total |
+|----------|---------|------------|-----------------|
+| High | System messages, error messages | **45** | ~45 |
+| High | Shop dialogue, prompts | **25** | ~25 |
+| Medium | Status/skill descriptions | **80** | ~80 |
+| Medium | Synthesis messages | **15** | ~15 |
 | Low | Character/monster/item names | 0 | ~270 |
-| Low | Location names | 0 | ~200 |
-| Low | Menu labels, FMV labels | 0 | ~55 |
+| **High** | **Location names** | **68** | ~68 |
+| Low | Menu labels, FMV labels | 17 | ~55 |
+
+**Translation Status (2026-02-07)**: 250 strings translated, including all location names (map labels). Location names are found at offsets `0x000D690C`-`0x000D7924` and include city names, building names, and area map labels.
 
 ### What Needs Modification
 

@@ -115,7 +115,7 @@ python python/font/replace_kana_with_korean.py
 | **YGUILD.BIN** | 352 | 109 | Guild quest descriptions | **Missing** |
 | **SMITH.BIN** | 598 | 15 | Equipment effects | **Missing** |
 | **SDIC.BIN** | 220 | 0 | Profiles, monster descriptions | **Missing** |
-| SCPS_100.26 | 84 | 3 | System messages | Partial (22 translated) |
+| SCPS_100.26 | 250+ | 3 | System messages, location names | **Translated** |
 | YSHOP.BIN | 1 | 0 | Shop/item text | Pending |
 | YPROP.BIN | 5 | 0 | Item descriptions | Pending |
 | YSEG.BIN | 2 | 0 | Character text | Pending |
