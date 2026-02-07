@@ -3,10 +3,18 @@
 # Note: Lines 3-4 (garbage text) are skipped
 # Extra chars for font: 딩
 
+# Title menu
+0x000D356E,처음부터
+0x000D3590,이어서 계속
+
 # Loading messages
 0x000D355E,데이터 로딩 중
 0x000D35A6,로드
 0x000D36AA,데이터를 로딩하고 있습니다
+
+# Button registration
+0x000D3534,L2 버튼에 등록되었습니다
+0x000D3544,R2 버튼에 등록되었습니다
 
 # Memory card menu options
 0x000D35AA,세이브
