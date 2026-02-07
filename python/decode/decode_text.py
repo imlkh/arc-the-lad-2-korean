@@ -852,6 +852,42 @@ def scan_stg(data, decode_table, use_heuristics=True, filter_garbage=True):
                             continue
             pos += 1
 
+    # --- Scan for bare dialogues (A9 00 texts with kanji but no [opt] or template) ---
+    # These are standalone dialogues in the text region that don't have templates
+    # Examples: location names, battle messages, scene announcements
+    # Must have kanji to filter out binary garbage
+    stats['bare_dialogues_found'] = 0
+    for region_start, region_end, chunk_idx in chunk_regions:
+        pos = region_start
+        while pos < region_end - 4:
+            # Look for A9 00 marker
+            if data[pos:pos + 2] == b'\xA9\x00':
+                if pos + 2 not in found_offsets:
+                    # Decode the text
+                    text, consumed = decode_string(data, pos + 2, decode_table, prefix=2)
+                    if text and consumed > 4:
+                        # Strip tags to check content
+                        stripped = text
+                        for tag in ("[box:system]", "[box:close]", "[box:speech]",
+                                    "[box:narration]", "[cursor]", "[br]", "[opt]"):
+                            stripped = stripped.replace(tag, "")
+                        stripped = re.sub(r"\[script:.*?\]", "", stripped)
+                        stripped = re.sub(r"\[.*?\]", "", stripped)
+
+                        # Must have kanji (real Japanese text) - strict filter
+                        has_kanji = any('\u4e00' <= c <= '\u9fff' for c in stripped)
+
+                        # Bare dialogue should have meaningful kanji content
+                        if (has_kanji and len(stripped) >= 3
+                                and not _is_garbage_text(text)):
+                            # Use 0x00B4 as context opcode for bare dialogues in text region
+                            dialogues.append((pos + 2, consumed, text, 0x00B4))
+                            found_offsets.add(pos + 2)
+                            stats['bare_dialogues_found'] += 1
+                            pos = pos + 2 + consumed
+                            continue
+            pos += 1
+
     # --- Scan Event Script region (0xB0000-0xB4000) for dialogues ---
     # This region contains embedded dialogue text that is not covered by template scanning.
     # Includes story dialogues, item messages, and system prompts.
