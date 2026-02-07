@@ -31,7 +31,6 @@ def build_decode_table():
     Formula: charID = 1 + (row * 21 + col) * 4 + bitplane
 
     The (Blank) character at cell 59, bit2 (charID 239) is treated as a space.
-    CharID 160 is also used as space for Korean text (single-byte encoding).
     """
     table = {}
     if not os.path.exists(CHARS_MD_PATH):
@@ -64,8 +63,6 @@ def build_decode_table():
             if clean:
                 table[char_id] = clean
 
-    # Add space character for Korean text (charID 160 = 0xA0, single-byte)
-    table[160] = " "
     return table
 
 
@@ -666,8 +663,8 @@ def _find_dialogue_in_gap(data, gap_start, gap_end, expected_prefix_bytes,
     When use_heuristics=False (default), only pointer-validated dialogues are
     returned, eliminating false positives from binary data.
 
-    Returns (dialogue_offset, script_prefix_value, text, bytes_consumed)
-    or None if no dialogue found.
+    Returns list of (dialogue_offset, script_prefix_value, text, bytes_consumed).
+    Empty list if no dialogue found.
     """
     # Trim trailing script opcode blocks (scan backward in 10-byte steps).
     while (gap_end - gap_start >= SCRIPT_BLOCK_SIZE
@@ -678,12 +675,15 @@ def _find_dialogue_in_gap(data, gap_start, gap_end, expected_prefix_bytes,
 
     # Bare gap: only prefix bytes or nothing, no actual dialogue
     if gap_size <= 2:
-        return None
+        return []
 
     # Build exclusion zones for any remaining 28 01 script opcode blocks
     # that sit in the middle of the gap (context-transition script data
     # that precedes real dialogue strings).
     script_ranges = _find_script_ranges(data, gap_start, gap_end)
+
+    results = []
+    found_offsets_in_gap = set()
 
     # Primary: search for the expected 2-byte prefix in the gap
     # This is the deterministic pointer-based approach
@@ -716,13 +716,97 @@ def _find_dialogue_in_gap(data, gap_start, gap_end, expected_prefix_bytes,
             # Skip garbage filter for pointer-validated dialogues
             # The pointer validation itself ensures this is a real dialogue
             prefix_val = int.from_bytes(expected_prefix_bytes, 'little')
-            return (abs_offset, prefix_val, text, consumed)
+            results.append((abs_offset, prefix_val, text, consumed))
+            found_offsets_in_gap.add(abs_offset)
+            break
         # Try the next occurrence of the prefix in the gap
         search_from = prefix_pos + 1
 
-    # Fallback: only used when use_heuristics=True
-    # This scans for null-terminated strings and uses garbage filter
-    if use_heuristics:
+    # Secondary: try alternative prefix values
+    # 1. ptr_a - 0x1A (one SCRIPT_BLOCK_SIZE further back than standard 0x10)
+    #    Covers ~33 entries where the dialogue prefix is 10 less than expected
+    # 2. Try decoding from gap_start directly regardless of prefix value
+    #    Covers ~242 entries with fixed 03 01 prefix (unindexed dialogues)
+    alt_expected_val = int.from_bytes(expected_prefix_bytes, 'little') - SCRIPT_BLOCK_SIZE
+    if not results and alt_expected_val >= 0:
+        alt_bytes = alt_expected_val.to_bytes(2, 'little')
+        if alt_bytes != expected_prefix_bytes:
+            search_from = 0
+            while search_from < len(gap_data):
+                prefix_pos = gap_data.find(alt_bytes, search_from)
+                if prefix_pos == -1:
+                    break
+                abs_offset = gap_start + prefix_pos
+                text, consumed = decode_string(data, abs_offset, decode_table, prefix=2)
+                stripped = text
+                for tag in ("[box:system]", "[box:close]", "[box:speech]",
+                            "[box:narration]", "[cursor]", "[br]", "[opt]"):
+                    stripped = stripped.replace(tag, "")
+                stripped = re.sub(r"\[script:.*?\]", "", stripped)
+                stripped = re.sub(r"\[.*?\]", "", stripped)
+                text_start = abs_offset + 2
+                text_end = abs_offset + consumed
+                if (len(stripped) >= 1
+                        and not _overlaps_script(text_start, text_end, script_ranges)
+                        and text_end <= gap_end + TEMPLATE_SIZE):
+                    prefix_val = int.from_bytes(alt_bytes, 'little')
+                    results.append((abs_offset, prefix_val, text, consumed))
+                    found_offsets_in_gap.add(abs_offset)
+                    break
+                search_from = prefix_pos + 1
+
+    # Try decoding from gap_start directly (handles fixed-prefix dialogues
+    # like 03 01 where the prefix doesn't match any expected value)
+    if not results and gap_end - gap_start >= 4:
+        text, consumed = decode_string(data, gap_start, decode_table, prefix=2)
+        if text:
+            stripped = text
+            for tag in ("[box:system]", "[box:close]", "[box:speech]",
+                        "[box:narration]", "[cursor]", "[br]", "[opt]"):
+                stripped = stripped.replace(tag, "")
+            stripped = re.sub(r"\[script:.*?\]", "", stripped)
+            stripped = re.sub(r"\[.*?\]", "", stripped)
+            text_start = gap_start + 2
+            text_end = gap_start + consumed
+            if (len(stripped) >= 1
+                    and not _overlaps_script(text_start, text_end, script_ranges)
+                    and text_end <= gap_end + TEMPLATE_SIZE
+                    and not _is_garbage_text(text)):
+                prefix_val = int.from_bytes(data[gap_start:gap_start + 2], 'little')
+                results.append((gap_start, prefix_val, text, consumed))
+                found_offsets_in_gap.add(gap_start)
+
+    # Continuation: try to decode sequential dialogues after the last found one
+    # Some gaps contain multiple null-terminated dialogues in sequence
+    if results and use_heuristics:
+        continuation_pos = max(r[0] + r[3] for r in results)
+        while continuation_pos + 4 < gap_end:
+            text, consumed = decode_string(data, continuation_pos, decode_table,
+                                           prefix=2)
+            if not text or consumed <= 3:
+                break
+            stripped = text
+            for tag in ("[box:system]", "[box:close]", "[box:speech]",
+                        "[box:narration]", "[cursor]", "[br]", "[opt]"):
+                stripped = stripped.replace(tag, "")
+            stripped = re.sub(r"\[script:.*?\]", "", stripped)
+            stripped = re.sub(r"\[.*?\]", "", stripped)
+            text_start = continuation_pos + 2
+            text_end = continuation_pos + consumed
+            has_kanji = any('\u4e00' <= c <= '\u9fff' for c in stripped)
+            if (len(stripped) >= 5 and has_kanji
+                    and not _overlaps_script(text_start, text_end, script_ranges)
+                    and not _is_garbage_text(text)):
+                prefix_val = int.from_bytes(
+                    data[continuation_pos:continuation_pos + 2], 'little')
+                results.append((continuation_pos, prefix_val, text, consumed))
+                found_offsets_in_gap.add(continuation_pos)
+                continuation_pos += consumed
+            else:
+                break
+
+    # Fallback: scan for null-terminated strings (only when nothing found)
+    if not results and use_heuristics:
         scan_pos = gap_start
         while scan_pos < gap_end - 3:
             if data[scan_pos] == 0x00:
@@ -744,10 +828,13 @@ def _find_dialogue_in_gap(data, gap_start, gap_end, expected_prefix_bytes,
                             and not _is_garbage_text(text)):
                         prefix_val = int.from_bytes(data[candidate:candidate + 2],
                                                     'little')
-                        return (candidate, prefix_val, text, consumed)
+                        results.append((candidate, prefix_val, text, consumed))
+                        found_offsets_in_gap.add(candidate)
+                        scan_pos = candidate + consumed
+                        continue
             scan_pos += 1
 
-    return None
+    return results
 
 
 def scan_stg(data, decode_table, use_heuristics=True, filter_garbage=True):
@@ -813,11 +900,10 @@ def scan_stg(data, decode_table, use_heuristics=True, filter_garbage=True):
             if expected_val >= 0:
                 expected_bytes = expected_val.to_bytes(2, 'little')
 
-                result = _find_dialogue_in_gap(data, gap_start, gap_end,
-                                               expected_bytes, decode_table,
-                                               use_heuristics=use_heuristics)
-                if result is not None:
-                    offset, prefix_val, text, consumed = result
+                gap_results = _find_dialogue_in_gap(data, gap_start, gap_end,
+                                                    expected_bytes, decode_table,
+                                                    use_heuristics=use_heuristics)
+                for offset, prefix_val, text, consumed in gap_results:
                     if offset not in found_offsets:
                         dialogues.append((offset, consumed, text, first_in_chunk[1]))
                         found_offsets.add(offset)
@@ -861,15 +947,15 @@ def scan_stg(data, decode_table, use_heuristics=True, filter_garbage=True):
             expected_val = 0
         expected_bytes = expected_val.to_bytes(2, 'little')
 
-        result = _find_dialogue_in_gap(data, gap_start, gap_end,
-                                       expected_bytes, decode_table,
-                                       use_heuristics=use_heuristics)
-        if result is not None:
-            offset, prefix_val, text, consumed = result
-            if offset not in found_offsets:
-                dialogues.append((offset, consumed, text, tmpl_cur[1]))
-                found_offsets.add(offset)
-                stats['found'] += 1
+        gap_results = _find_dialogue_in_gap(data, gap_start, gap_end,
+                                             expected_bytes, decode_table,
+                                             use_heuristics=use_heuristics)
+        if gap_results:
+            for offset, prefix_val, text, consumed in gap_results:
+                if offset not in found_offsets:
+                    dialogues.append((offset, consumed, text, tmpl_cur[1]))
+                    found_offsets.add(offset)
+                    stats['found'] += 1
         elif gap_end - gap_start <= 2:
             stats['bare'] += 1
         else:
