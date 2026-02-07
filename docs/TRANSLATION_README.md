@@ -210,7 +210,10 @@ Translation files for STG dialogues (`translated/ko/S*_STG.txt`) must mirror the
 | `0x8005` | Elk (엘크) |
 | `0x8006` | Lieza (리자) |
 | `0x8007-0x800E` | Various NPCs |
-| `0x00A9` | Menu/system |
+| `0x00A0` | Padding region dialogue |
+| `0x00A9` | Orphan menu |
+| `0x00B0` | Event script dialogue |
+| `0x00B4` | Bare dialogue (location, battle msg) |
 | `0xFFFE` | Generic NPC/narrator |
 
 ### Control Codes (preserved in Korean text)

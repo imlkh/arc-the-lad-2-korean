@@ -205,14 +205,20 @@ python python/find_truncated.py S100 --output output/truncated_S100.txt
 
 ### Dialogue Types
 
-The decoder captures four types of dialogues:
+The decoder captures five types of dialogues:
 
 | Type | Region | Context Opcode | Detection |
 |------|--------|----------------|-----------|
 | Template-associated | 0xB4000-0xBC7FF | 0xFFFE/0x80XX | 48-byte template block |
 | Orphan menus | 0xB4000-0xBC7FF | 0x00A9 | `[br][opt]` pattern |
+| Bare dialogues | 0xB4000-0xBC7FF | 0x00B4 | A9 00 + kanji (no template/opt) |
 | Event Script | 0xB0000-0xB4000 | 0x00B0 | A9 00 + strict validation |
 | Padding | 0xA0000-0xB0000 | 0x00A0 | A9 00 + strict validation |
+
+**Bare dialogues** are A9 00 texts without templates or [opt] tags:
+- Location names (コルボ平原, ラウス平野)
+- Battle messages (戦闘に参加するキャラクターを選んで下さい)
+- Scene announcements (持ち場につけ！)
 
 **Strict validation** requires: `[box:]` tag OR kanji OR `[br][opt]` pattern.
 

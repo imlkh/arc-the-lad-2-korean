@@ -81,7 +81,7 @@ Non-template dialogues use this inline format:
 
 ### Dialogue Types
 
-There are three types of dialogues in STG files:
+There are five types of dialogues in STG files:
 
 **1. Template-Associated Dialogues** (Text Region: 0xB4000-0xBC7FF)
 - Have a 48-byte template block (0x8BF00123/0x8BF00145 signatures)
@@ -97,7 +97,14 @@ There are three types of dialogues in STG files:
 - Captured by `scan_stg()` orphan menu detection pass
 - Context opcode: `0x00A9`
 
-**3. Event Script Dialogues** (Event Script Region: 0xB0000-0xB4000)
+**3. Bare Dialogues** (Text Region: 0xB4000-0xBC7FF) - NEW 2026-02-07
+- `A9 00` marker texts WITHOUT templates AND without `[opt]` tags
+- Includes location names, battle messages, scene announcements
+- Identified by kanji content (must have Japanese characters)
+- Examples: コルボ平原, 戦闘に参加するキャラクターを選んで下さい, 持ち場につけ！
+- Context opcode: `0x00B4`
+
+**4. Event Script Dialogues** (Event Script Region: 0xB0000-0xB4000)
 - Embedded dialogues in the Event Script region
 - Includes system prompts, item messages, story narration
 - Identified by `A9 00` marker with strict validation:
@@ -106,21 +113,22 @@ There are three types of dialogues in STG files:
   - Must be a menu with `[br][opt]` pattern
 - Context opcode: `0x00B0`
 
-**4. Padding Region Dialogues** (Padding Region: 0xA0000-0xB0000) - NEW 2026-02-07
+**5. Padding Region Dialogues** (Padding Region: 0xA0000-0xB0000)
 - Some chunks have dialogue data embedded in the padding region
 - Same strict validation as Event Script region
 - Context opcode: `0x00A0`
 - Example: Chunk 4 in S100.STG has dialogues at 0xAE87C
 
-**Statistics** (S100.STG):
+**Statistics** (S100.STG - updated 2026-02-07):
 
 | Type | Count | Region |
 |------|-------|--------|
 | Template-associated | 1,165 | 0xB4000-0xBC7FF |
 | Orphan menus | 76 | 0xB4000-0xBC7FF |
+| Bare dialogues | 40 | 0xB4000-0xBC7FF |
 | Event Script | 33 | 0xB0000-0xB4000 |
 | Padding | 7 | 0xA0000-0xB0000 |
-| **Total** | **1,281** | |
+| **Total** | **1,321** | |
 
 **Orphan Menu Categories** (S100.STG: 76 real menus, filtered from 97 raw texts):
 
