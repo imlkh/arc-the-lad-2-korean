@@ -251,19 +251,19 @@ python python/decode/decode_text.py /path/to/S100.STG --stg > output/decoded/stg
 
 S100.STG dialogue breakdown:
 - 1,165 template-associated dialogues
-- 40 bare dialogues (location names, battle messages)
-- 76 orphan menus (filtered from 97 using `[br][opt]` pattern)
+- 39 bare dialogues (location names, battle messages, bounty cards)
+- 75 orphan menus (filtered from 97 using `[br][opt]` pattern)
 - 33 Event Script region dialogues
 - 7 Padding region dialogues
-- **Total: 1,321 dialogues**
+- **Total: 1,319 dialogues**
 
 SG00.STG dialogue breakdown:
 - 1,495 template-associated dialogues
-- 377 bare dialogues
-- 403 orphan menus
-- 144 Event Script region dialogues
-- 26 Padding region dialogues
-- **Total: 2,445 dialogues**
+- 365 bare dialogues
+- 401 orphan menus
+- 143 Event Script region dialogues
+- 25 Padding region dialogues
+- **Total: 2,429 dialogues**
 
 ### Character Encoding
 
@@ -361,6 +361,20 @@ output/decoded/bin/*.txt
 - **Note:** The `[br]` tags in translation files are currently NOT encoded (skipped)
 - **Attempted fix:** Encoding `[br]` → `FF 05 01 01` caused game crashes
 - **Root cause investigation needed:** See MEMORY.md for details
+
+### Game Freezes on Bounty Board / Specific Scenes
+- **Cause:** Decoder false positive — event script opcodes in the text region
+  were misidentified as bare dialogue entries. Patching these offsets overwrites
+  store opcodes (`23 01 XX 8C`) with Korean character bytes, corrupting
+  the game's script execution.
+- **Example:** `0x001780CC` in S100.STG chunk 1 — the `A9 00` at `0x1780CA`
+  is a script command, not a text entry marker. The bytes after it decode to
+  garbage: `もあがデわしもあをデタギもあんデ喚J`.
+- **Solution:** Garbage filter Rule 6 in `_is_garbage_text()` detects repeating
+  2-character pairs at regular intervals (≥4 chars apart, ≥3 occurrences),
+  which is the fingerprint of repeated opcodes decoded as text.
+- **If it recurs:** Check the decoded text — garbage with repeating character
+  patterns indicates opcode data. Remove the entry from the translation file.
 
 ### Menu Options Not Translated
 - **Cause:** Orphan menu texts (without templates) were not captured by the decoder

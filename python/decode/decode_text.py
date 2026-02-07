@@ -340,6 +340,24 @@ def _is_garbage_text(text):
             if has_hira and has_kata and not has_repetition:
                 return True
 
+    # Rule 6: Repeating 2-character pair at regular intervals = opcode data
+    # Script opcodes (e.g., 23 01 XX 8C = store) repeat at fixed intervals,
+    # producing the same character pair (e.g., "もあ") at positions 0, 6, 12.
+    # Real Japanese text never has a distinct pair repeating 3+ times at
+    # regular intervals of 4+ characters.
+    if 8 <= len(stripped) <= 30:
+        for i in range(min(8, len(stripped) - 1)):
+            pair = stripped[i:i+2]
+            if pair[0] == pair[1]:
+                continue
+            positions = [j for j in range(len(stripped) - 1)
+                         if stripped[j:j+2] == pair]
+            if len(positions) >= 3:
+                intervals = [positions[k+1] - positions[k]
+                             for k in range(len(positions) - 1)]
+                if len(set(intervals)) == 1 and intervals[0] >= 4:
+                    return True
+
     return False
 
 
@@ -828,7 +846,7 @@ def scan_stg(data, decode_table, use_heuristics=True, filter_garbage=True):
         while pos < region_end - 4:
             # Look for A9 00 marker
             if data[pos:pos + 2] == b'\xA9\x00':
-                if pos not in found_offsets:
+                if pos + 2 not in found_offsets:
                     # Decode and check if it's a menu text
                     text, consumed = decode_string(data, pos + 2, decode_table, prefix=2)
                     # Real menus have [br][opt] pattern (option on new line)

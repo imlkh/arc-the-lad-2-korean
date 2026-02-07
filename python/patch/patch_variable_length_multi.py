@@ -202,7 +202,18 @@ def get_dialogues_by_chunk(stg_data, decode_table):
     num_chunks = len(stg_data) // CHUNK_SIZE
     by_chunk = {i: [] for i in range(num_chunks)}
 
+    # Bare dialogues (0x00B4) are accessed by game subsystems via direct offset,
+    # not through the sequential text advance handler. They must NOT be in the
+    # VLUT or they shift all subsequent indices causing freezes.
+    # All other types (template, orphan menu, event script, padding) go through
+    # the sequential handler and should be in the VLUT.
+    SKIP_OPCODES = {0x00B4}
+    skipped = 0
     for offset, consumed, text, context_opcode in dialogues:
+        # if context_opcode in SKIP_OPCODES:
+        #     skipped += 1
+        #     continue
+
         chunk_idx = offset // CHUNK_SIZE
         if chunk_idx < num_chunks:
             # Extract the script prefix (first 2 bytes after [script:XX XX] tag)
@@ -215,6 +226,9 @@ def get_dialogues_by_chunk(stg_data, decode_table):
                 'consumed': consumed,
                 'text': text,
             })
+
+    if skipped:
+        print(f"  Skipped {skipped} bare dialogues (not VLUT-managed)")
 
     return by_chunk
 

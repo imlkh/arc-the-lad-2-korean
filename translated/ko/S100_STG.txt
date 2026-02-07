@@ -571,7 +571,7 @@
   0x002F1DA2 [0xFFFE] [script:63 1A](싫어~, 술취한 사람…)
   --- context: 0xFFFE -> 0x8005 ---
   0x003A112E [0x8005] [script:65 04]후우・[delay:0B]・[delay:0B]・[delay:0B]
-  0x003A117A [0x8005] [script:87 04][box:speech]또, 옛날 꿈이야
+  0x003A117A [0x8005] [script:87 04][box:speech]또 옛날 꿈
   0x003A11BE [0x8005] [script:B6 04]・[delay:0B]・[delay:0B]・[delay:0B]오늘 밤은[br]잠들 수 없겠네
   0x003A2320 [0x8005] [script:59 0D]엘크, 일이야!
   --- context: 0x8005 -> 0x8006 ---
@@ -666,12 +666,12 @@
   0x003A4A8E [0x8005] [script:16 21]"바꿔"를 배우면 또 줄게
   0x003A4ADC [0x8005] [script:34 21]바꿔!
   0x003A4B1E [0x8005] [script:5E 21]"빙글빙글"을 배우면 또 줄게
-  0x003A4B6C [0x8005] [script:7C 21]빙글빙글!
+  0x003A4B6C [0x8005] [script:7C 21]빙글!
   0x003A4BD0 [0x8005] [script:B0 21]안 됐나 봐
   0x003A4C92 [0x8005] [script:11 22]이건 상이야
   0x003A4D1C [0x8005] [script:54 22]손!
   0x003A4D6A [0x8005] [script:7B 22]바꿔!
-  0x003A4DBE [0x8005] [script:A5 22]빙글빙글!
+  0x003A4DBE [0x8005] [script:A5 22]빙글!
   0x003A4E54 [0x8005] [script:FC 22]훈련시키려면 개 사료가[br]2개 이상 있어야 해
   0x003A4EA4 [0x8005] [script:21 23]지금 가진 개 사료는 [num:01]개야
   0x003A4F48 [0x8005] [script:71 23]엘크, 이 아이한테 이름 지어줘야 해
@@ -1593,7 +1593,7 @@
 --- context: 0x8005 -> 0x800B ---
 0x0069FAE0 [0x800B] [script:5F 1D]!!
 --- context: 0x800B -> 0x8006 ---
-0x0069FB1C [0x8006] [script:81 1D][box:speech][FF:09 01 01]!!
+0x0069FB1C [0x8006] [script:81 1D][box:speech][delay:00][FF:09 01 01]!!
 0x0069FBEC [0x8006] [script:E7 1D]이쪽이야!!
 --- context: 0x8006 -> 0x8005 ---
 0x0069FC4A [0x8005] [script:1B 1E]고마워,[delay:15]근데 왜?
@@ -1672,19 +1672,19 @@
 
 
 --- context: 0x800B -> 0x800A ---
-0x0075B992 [0x800A] [script:7D 0B][box:speech]엘크, 도망쳐요!
+0x0075B992 [0x800A] [script:7D 0B][box:speech][delay:00]엘크, 도망쳐요!
 --- context: 0x800A -> 0x8006 ---
-0x0075B9DE [0x8006] [script:A4 0B][box:speech]엘크[delay:1F]…왜 그래?
-0x0075BA2C [0x8006] [script:C8 0B][box:speech]저…비행선
+0x0075B9DE [0x8006] [script:A4 0B][box:speech][delay:00]엘크[delay:1F]…왜 그래?
+0x0075BA2C [0x8006] [script:C8 0B][box:speech][delay:00]저…비행선
 --- context: 0x8006 -> 0x8005 ---
-0x0075BA70 [0x8005] [script:E9 0B][box:speech]기억나
-0x0075BAB6 [0x8005] [script:18 0C][box:speech]내[delay:0B]・[delay:0B]・[delay:0B]내 마을을 습격한…
+0x0075BA70 [0x8005] [script:E9 0B][box:speech][delay:00]기억나
+0x0075BAB6 [0x8005] [script:18 0C][box:speech][delay:00]내[delay:0B]・[delay:0B]・[delay:0B]내 마을을 습격한…
 0x0075BB94 [0x8005] [script:7B 0C][box:close]이봐, 엘크!
 --- context: 0x8005 -> 0x8006 ---
 0x0075BBD6 [0x8006] [script:9E 0C][box:close]왜 그러는 거야!?
-0x0075BC1C [0x8006] [script:C9 0C][box:speech]틀림없어[br]저 비행선이 내 마을을…
+0x0075BC1C [0x8006] [script:C9 0C][box:speech][delay:00]틀림없어[br]저 비행선이 내 마을을…
 --- context: 0x8006 -> 0x8005 ---
-0x0075BC72 [0x8005] [script:EA 0C][box:speech]용서 못 해!
+0x0075BC72 [0x8005] [script:EA 0C][box:speech][delay:00]용서 못 해!
 0x0075BCCE [0x8005] [script:17 0D][box:close]엘크!
 --- context: 0x8005 -> 0x8006 ---
 0x0075BD2A [0x8006] [script:50 0D]젠장, 조금만 더 했으면[br]엄청난 방해가 들어왔군
@@ -1829,7 +1829,6 @@
   0x0016E856 [0x00B0] [script:51 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
 
 # Chunk 1 - Bounty tables (display only)
-  0x001780CC [0x00B4] [script:7C 4F]수배 몬스터[br]「피의 신관」을 찾아라
   0x001782B0 [0x00B4] [script:93 50][box:system]이[opt]름[opt]골자[opt][opt][opt][opt]스켈레톤[br]보[opt]상[opt]540G[br]장소[opt]인디고스 북쪽 폐허의 마을[br]특기[opt]차지
   0x00178324 [0x00B4] [script:CB 50][box:system]이[opt]름[opt]리랜드[opt][opt]소드맨[br]보[opt]상[opt]990G[br]장소[opt]인디고스 북쪽 폐허의 마을[br]특기[opt]?
   0x00178394 [0x00B4] [script:04 51][box:system]이[opt]름[opt]부시[opt][opt][opt]양식 헤모지[br]보[opt]상[opt]1350G[br]장소[opt]윌의 바위[br]특기[opt]헤모지화
@@ -1869,9 +1868,9 @@
   0x003A3D00 [0x00B0] [script:5A 1A][box:system]일기장이 있습니다. 기록하겠습니까?[br][opt]네[br][opt]아니오[box:close]
   0x003A4520 [0x00B0] [script:62 1E]쉬었다 가겠습니까?[br][opt]네[br][opt]아니오
   0x003A4936 [0x00B0] [script:6A 20]훈련할래?[br][opt]한다[br][opt]안 한다
-  0x003A4FD8 [0x00B0] [script:B8 23][opt]이게 맞나[br][opt]뭔가 다른 것 같아
-  0x003A5068 [0x00B0] [script:00 24][opt]이게 맞나[br][opt]뭔가 다른 것 같아
-  0x003A50F0 [0x00B0] [script:44 24][opt]이게 맞나[br][opt]뭔가 다른 것 같아
+  0x003A4FD8 [0x00B0] [script:B8 23][opt]맞아[br][opt]아닌듯
+  0x003A5068 [0x00B0] [script:00 24][opt]맞아[br][opt]아닌듯
+  0x003A50F0 [0x00B0] [script:44 24][opt]맞아[br][opt]아닌듯
   0x003A6594 [0x00B4] [script:B7 2E]「데생 입문」「나르사프 화집」…[br]뭔가 재미없어 보이는 책뿐이네
   0x003AC656 [0x00B4] [script:F6 5E]하아~, 날씨 좋다
 
@@ -1888,3 +1887,5 @@
   0x0081257E [0x00B4] [script:16 06]전투에 참가할 캐릭터를[br]선택해 주세요
   0x00812AF0 [0x00B4] [script:C7 08]유적 던전 [num:01]층
 
+# Chunk 1 - Debug message (internal)
+  0x00172068 [0x00B4] [script:5A 1F]여신 파괴 전은 「0～11」, 통상 처리는 「12～」

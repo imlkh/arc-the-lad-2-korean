@@ -487,6 +487,49 @@ def encode_korean_text(text, korean_mapping, decode_table):
     return bytes(result)
 
 
+def safe_truncate(encoded, available):
+    """Truncate encoded bytes at a safe boundary.
+
+    Avoids cutting in the middle of multi-byte sequences:
+    - FF XX XX XX: 4-byte control codes
+    - F0-F8 XX: 2-byte Korean characters (charID >= 239)
+    - EF: 1-byte [opt] marker (safe)
+    - 01-9F (excluding EF/F0-F8/FF): 1-byte characters (safe)
+
+    Returns truncated bytes that end at a clean sequence boundary.
+    """
+    if available <= 0:
+        return b""
+    if len(encoded) <= available:
+        return encoded
+
+    # Walk through encoded bytes to find safe cut points
+    pos = 0
+    last_safe = 0
+    while pos < available:
+        b = encoded[pos]
+        if b == 0xFF:
+            # 4-byte control code: FF XX XX XX
+            if pos + 4 <= available:
+                last_safe = pos + 4
+                pos += 4
+            else:
+                break  # Would cut mid-sequence
+        elif 0xF0 <= b <= 0xF8:
+            # 2-byte Korean character: FX XX
+            if pos + 2 <= available:
+                last_safe = pos + 2
+                pos += 2
+            else:
+                break  # Would cut mid-sequence
+        else:
+            # 1-byte character
+            last_safe = pos + 1
+            pos += 1
+
+    return encoded[:last_safe]
+
+
 def patch_stg_file(stg_path, translation_entries, korean_mapping, decode_table, dry_run=False):
     """Patch STG file with Korean translations.
 
@@ -540,9 +583,9 @@ def patch_stg_file(stg_path, translation_entries, korean_mapping, decode_table, 
                 data[offset:offset + orig_total] = padded
             patched += 1
         else:
-            # Too long - truncate encoded text to fit
+            # Too long - truncate at safe byte boundary
             available = orig_total - len(script_prefix) - 1
-            truncated_encoded = encoded[:available]
+            truncated_encoded = safe_truncate(encoded, available)
             replacement = script_prefix + truncated_encoded + b"\x00"
             padded = replacement + b"\x00" * (orig_total - len(replacement))
             if not dry_run:
@@ -786,9 +829,9 @@ def patch_bin_file(bin_path, translation_entries, korean_mapping, decode_table, 
                 data[offset:offset + orig_total] = padded
             patched += 1
         else:
-            # Too long - truncate encoded text to fit
+            # Too long - truncate at safe byte boundary
             available = orig_total - 1
-            truncated_encoded = encoded[:available]
+            truncated_encoded = safe_truncate(encoded, available)
             replacement = truncated_encoded + b"\x00"
             padded = replacement + b"\x00" * (orig_total - len(replacement))
             if not dry_run:
@@ -860,9 +903,9 @@ def patch_exe_file(exe_path, translation_entries, korean_mapping, decode_table, 
                 data[offset:offset + orig_total] = padded
             patched += 1
         else:
-            # Too long - truncate encoded text to fit
+            # Too long - truncate at safe byte boundary
             available = orig_total - 1
-            truncated_encoded = encoded[:available]
+            truncated_encoded = safe_truncate(encoded, available)
             replacement = truncated_encoded + b"\x00"
             padded = replacement + b"\x00" * (orig_total - len(replacement))
             if not dry_run:
