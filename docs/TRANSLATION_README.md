@@ -103,8 +103,8 @@ python python/font/replace_kana_with_korean.py
 
 | File | Strings | Mode | Patched | Status |
 |------|---------|------|---------|--------|
-| S100.STG | 1,261 | variable | 1,053 | **Translated** |
-| SG00.STG | 1,470 | variable | 685 | **Translated** |
+| S100.STG | 1,321 | variable | 1,053 | **Translated** |
+| SG00.STG | 2,445 | variable | 685 | **Translated** |
 | Other STG (17 files) | ~17,000 | - | - | Pending |
 
 ### Non-STG Files

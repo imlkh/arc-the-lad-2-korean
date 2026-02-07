@@ -143,6 +143,17 @@ There are five types of dialogues in STG files:
 
 Orphan menus are identified by context opcode `0x00A9` in the decoded output.
 
+**Statistics** (SG00.STG - updated 2026-02-07):
+
+| Type | Count | Region |
+|------|-------|--------|
+| Template-associated | 1,495 | 0xB4000-0xBC7FF |
+| Orphan menus | 403 | 0xB4000-0xBC7FF |
+| Bare dialogues | 377 | 0xB4000-0xBC7FF |
+| Event Script | 144 | 0xB0000-0xB4000 |
+| Padding | 26 | 0xA0000-0xB0000 |
+| **Total** | **2,445** | |
+
 ## Why Alternative Approaches Don't Work
 
 ### 1. MIPS Code Modification

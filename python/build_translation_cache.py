@@ -177,6 +177,7 @@ def main():
         ('SDIC', 'output/decoded/bin/SDIC_BIN.txt', 'translated/ko/SDIC_BIN.txt'),
         ('YGUILD', 'output/decoded/bin/YGUILD_BIN.txt', 'translated/ko/YGUILD_BIN.txt'),
         ('SCPS', 'output/decoded/bin/SCPS_100_26.txt', 'translated/ko/SCPS_100_26.txt'),
+        ('SMITH', 'output/decoded/bin/SMITH_BIN.txt', 'translated/ko/SMITH_BIN.txt'),
     ]
 
     cache_dir = base_dir / 'cache'

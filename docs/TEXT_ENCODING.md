@@ -558,13 +558,38 @@ The executable also contains Shift-JIS-to-charID mapping tables at file offset `
 
 ## Garbage Text Filter
 
-The STG decoder includes a garbage filter (`_is_garbage_text()`) to reject false positives from binary data that happens to map to valid character IDs. The filter detects:
+The STG decoder includes a rule-based garbage filter (`_is_garbage_text()`) to reject false positives from binary data that happens to map to valid character IDs. The filter uses 5 simple rules:
 
-1. **Unknown charID markers** (`[?XXXX]`) -- Indicates decoding errors
-2. **Scattered ASCII letters** mixed with Japanese kana
-3. **Long repeating patterns** (e.g., "セへセへセへ...") from binary data
-4. **MIPS code signatures** (e.g., "ギあギ" patterns from machine code bytes)
-5. **Mixed kana with no kanji** (15+ chars) -- But preserves text with proper punctuation
+### Rule-Based Detection (5 Rules)
+
+| Rule | Trigger | Rationale |
+|------|---------|-----------|
+| 1 | Unknown charID `[?XXXX]` | CharID > 1764 is beyond font table (441 cells × 4 bitplanes) |
+| 2 | Invalid FF opcode | Valid opcodes: 01, 03, 04, 05, 06, 07, 08, 09, 0A, 0B, 0D, 0F only |
+| 3 | Lowercase ASCII in Japanese | Game text uses uppercase only (HP, MP, BGM) |
+| 4 | Short uppercase+kana (≤6 chars) | Text with uppercase + kana but no kanji |
+| 5 | Short mixed kana (≤4 chars) | Mixed hiragana/katakana without repetition pattern |
+
+**Filter Statistics**: Removes ~177 garbage strings (0.86%) while keeping 20,484 valid dialogues (99.14%)
+
+### Valid FF Control Codes
+
+| Opcode | Count | Purpose |
+|--------|-------|---------|
+| 01 | 10 | Text highlight |
+| 03 | common | Delay |
+| 04 | 38 | Menu marker |
+| 05 | common | Newline |
+| 06 | 25 | Button icon |
+| 07 | common | Number display |
+| 08 | 90 | Box control |
+| 09 | 4 | Emphasis |
+| 0A | 25 | Currency format |
+| 0B | common | Item name |
+| 0D | common | Character name |
+| 0F | 1 | Unknown effect |
+
+**Note:** FF:00, FF:02, FF:0C, FF:0E, FF:10+ are NOT valid in dialogue text - they only appear in garbage data.
 
 ### Preserved Text Patterns
 
@@ -576,7 +601,3 @@ The filter preserves legitimate Japanese text including:
 - **Stuttering speech**: な、な、な...
 - **Names with katakana**: プロディアス, エルク, リーザ, ノコノコ
 - **Casual dialogue with proper punctuation**: 、。？！…「」()
-
-### Punctuation Exception
-
-Strings with 15+ characters containing mixed hiragana/katakana but no kanji are normally flagged as garbage. However, if the string contains proper Japanese punctuation (、。？！…「」()), it is preserved as legitimate dialogue. This allows character names (katakana) mixed with casual speech (hiragana) to pass through correctly.

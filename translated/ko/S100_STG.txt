@@ -49,9 +49,7 @@
   --- context: 0x8016 -> 0x8005 ---
   0x000B56B0 [0x8005] [script:E3 0F]가보자
   0x000B576C [0x8005] [script:4E 10]비비가라면 마을을 나가 서쪽[br]비행선 창고에 있어
-  --- context: 0x8005 -> 0x8016 ---
-  0x000B57D0 [0x8016] [script:2D 8C]をデみギけ
-  --- context: 0x8016 -> 0xFFFE ---
+  --- context: 0x8005 -> 0xFFFE ---
   0x000B5949 [0xFFFE] [script:00 1E]적당히 만족할 수 있으면,[br]다들 행복한 거야
   0x000B5A1C [0xFFFE] [script:A7 11]아크 일당이란 놈들은 로말리아에[br]싸움을 걸 셈인가
   0x000B5A72 [0xFFFE] [script:DA 11]아크에게 있어서의 정의, 로말리아에[br]있어서의 정의…[delay:1F]진리는 하나가 아니니까
@@ -239,6 +237,7 @@
   0x0017375C [0x8000] [script:D0 2A]그렇게 말하지 마,[br]좀 들어볼래?
   --- context: 0x8000 -> 0x8007 ---
   0x001737AC [0x8007] [script:F2 2A]아크 더 래드 2 입문 강좌
+  0x001737F0 [0x00A9] [script:29 2B][opt]싸우는 법 "공격"[br][opt]싸우는 법 "아이템"[br][opt]주의 "반격"[br][opt]됐어
   0x0017386A [0x8007] [script:62 2B]공격할 때는 이동해서 상대 옆에 가서[br]상대 쪽을 보고 [FF:06 03 01]야
   0x001738D0 [0x8007] [script:8D 2B]단, 무기에 따라서는[br]떨어진 곳에서도 공격할 수 있어
   0x00173926 [0x8007] [script:B5 2B]아, 내가 가진 창도[br]그런 무기 중 하나야
@@ -379,6 +378,9 @@
   0x0017650C [0x8001] [script:A4 41]야야, 거긴 출입금지야
   0x00176554 [0x8001] [script:CE 41]들어갈 수 있는 건 길드 포인트[br]250 이상 헌터뿐이야
   0x00176706 [0x8001] [script:A1 42]아크 더 래드 2 입문 강좌 2야
+  0x0017674E [0x00A9] [script:CB 42][opt]조작의 기본[br][opt]배틀의 기본[br][opt]됐어
+  0x001767B0 [0x00A9] [script:11 43][opt]조작의 기본: 전투 1[br][opt]조작의 기본: 전투 2[br][opt]조작의 기본: 전투 3[br][opt]됐어
+  0x00176B70 [0x00A9] [script:E6 44][opt]배틀의 기본: 공격 방향[br][opt]배틀의 기본: 무기 특성[br][opt]됐어
   --- context: 0x8001 -> 0x8007 ---
   0x0017683A [0x8007] [script:51 43]전투가 시작되면 우선 [FF:06 04 01]를 눌러서[br]커서를 [FF:06 05 01]로 움직여 맵 전체를[br]잘 둘러봐
   0x001768AE [0x8007] [script:7F 43]지형이나 적의 수를 잘 보고[br]작전을 세우면 유리하게 싸울 수 있어
@@ -434,9 +436,7 @@
   0x00234CB2 [0x8014] [script:0F 18]2층인가?
   0x00234E5A [0x8014] [script:E3 18]누구야!
   0x00234E9A [0x8014] [script:02 19]쳇!
-  --- context: 0x8014 -> 0x8001 ---
-  0x002EF780 [0x8001] [script:E8 8A]／ヂじ
-  --- context: 0x8001 -> 0xFFFE ---
+  --- context: 0x8014 -> 0xFFFE ---
   0x002EF800 [0xFFFE] [script:8D 07]엘크…?[br][delay:3D]엘크잖아!
   --- context: 0xFFFE -> 0x8001 ---
   0x002EF84A [0x8001] [script:AD 07]언제 돌아온 거야!?
@@ -1156,9 +1156,8 @@
   0x003AC240 [0x8006] [script:F2 5C]늦었구나…[br]젠장…젠…장…
   --- context: 0x8006 -> 0x8005 ---
   0x003AC4A6 [0x8005] [script:22 5E]이 방은 아무도 안 사는 것 같군
-  0x003AC524 [0x8005] [script:0A 85]六くジめあけジt
   --- context: 0x8005 -> 0x0006 ---
-  0x003AC6B0 [0x0006] [script:A9 00]ふソI
+  0x003AC6B6 [0x0006] [script:27 5F]으아, 왠지 졸려지네
   0x003ACBD6 [0x0006] [script:B2 61]이 방?
   --- context: 0x0006 -> 0x8006 ---
   0x003ACC10 [0x8006] [script:CD 61]응
@@ -1689,5 +1688,203 @@
 0x0075BCCE [0x8005] [script:17 0D][box:close]엘크!
 --- context: 0x8005 -> 0x8006 ---
 0x0075BD2A [0x8006] [script:50 0D]젠장, 조금만 더 했으면[br]엄청난 방해가 들어왔군
+--- context: 0x8006 -> 0x00A9 ---
+0x00811976 [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
+0x00811F1A [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
+0x00811F44 [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+0x00811F6E [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
+0x00811F9A [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+0x00811FE2 [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+0x0081293E [0x00A9] [script:F4 07]지상으로 돌아갈까요?[br][opt]아니오[br][opt]네
 
+# Additional system prompts for cross-chunk matching
+0x0017222A [0x00A9] [script:3F 20][box:system]일기장이 있습니다. 기입하시겠습니까?[br][opt]네[br][opt]아니오[box:close]
+0x000BC77E [0x00A9] [script:57 48]이 아이를 데려가시겠습니까?[br][opt]네[br][opt]아니오
+0x00172CB2 [0x00A9] [script:76 25][opt]물론![br][opt]그게 뭐야?
+0x00172DD6 [0x00A9] [script:08 26][opt]물론![br][opt]역시 잠깐
+
+# Chunk 0 - Additional dialogues
+  0x000B81E6 [0x00A9] [script:90 25][box:system]어떻게 하시겠습니까?[br][opt]일반 배[br][opt]디버그 배[box:close]
+
+# Chunk 2 - Guild dialogues
+  0x00172482 [0x8009] [script:63 21]자[br]카운터에서 일 이야기를 들어와라
+  0x00176FD0 [0x00A9] [script:0C 47]이 아이를 데려가시겠습니까?[br][opt]네[br][opt]아니오
+
+# Chunk 3 - System prompts
+  0x00231C9E [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
+  0x00232242 [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
+  0x0023226C [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x00232296 [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
+  0x002322C2 [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x0023230A [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+  0x00233CB8 [0x800C] [script:15 10]여기는 대장간이야
+  0x002340A0 [0x00A9] [script:19 12][box:system]어떻게 하시겠습니까?[br][opt]일반 배[br][opt]디버그 배[box:close]
+  0x00234868 [0x00A9] [script:F8 15]이 아이를 데려가시겠습니까?[br][opt]네[br][opt]아니오
+  0x002349D4 [0x00A9] [script:AA 16]준비됐어?[br][opt]네[br][opt]아니오
+
+# Chunk 4 - System prompts
+  0x002EE902 [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
+  0x002EEEA6 [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
+  0x002EEED0 [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x002EEEFA [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
+  0x002EEF26 [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x002EEF6E [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+  0x002EF736 [0x8001] [script:20 07]어서오세요
+  0x002EF78A [0x8001] [script:4B 07]어이[opt]마스터
+  0x002F0DEC [0xFFFE] [script:81 12]프로디아스도 시끄러워지겠군…
+  0x002F1568 [0xFFFE] [script:40 16]알디아의 더 큰 번영을 위해…
+  0x002F1646 [0xFFFE] [script:AF 16]알디아의 더 큰 번영을 위해…
+  0x002F172A [0xFFFE] [script:21 17]알디아의 더 큰 번영을 위해…
+
+# Chunk 5 - Shante's story
+  0x003A5018 [0x8006] [script:DB 23]그럼, 「스탠디」라고 하면 어때?
+  0x003A6A5A [0x00A9] [script:02 31](웃겨볼까…?)[br][opt]웃긴다[br][opt]웃기지 않는다
+  0x003A76CA [0x00A9] [script:37 37][br][br][br][br][opt][opt][opt][opt][opt][opt][opt][opt][opt]그날 밤
+  0x003AA656 [0x00A9] [script:FF 4E][br][br][br][br][opt][opt][opt][opt][opt][opt]그리고 밤이 밝았다
+  0x003AB76C [0x00A9] [script:89 57][br][br][br][br][opt][opt][opt][opt][opt][opt][opt][opt]며칠 후…
+
+# Chunk 6 - System prompts
+  0x004661BE [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
+  0x00466762 [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
+  0x0046678C [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x004667B6 [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
+  0x004667E2 [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x0046682A [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+  0x00466B18 [0x8014] [script:B5 04]캬! 도와줘!!
+
+# Chunk 7 - System prompts and submarine controls
+  0x00523172 [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
+  0x00523716 [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
+  0x00523740 [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x0052376A [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
+  0x00523796 [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x005237DE [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+  0x005244A8 [0x8006] [script:A0 09]저쪽이야
+  0x00525F48 [0x00A9] [script:F9 16]출발할까?[br][opt]예[br][opt]아니오
+  0x0052605E [0x00A9] [script:85 17]야고스 섬으로 돌아간다[br][opt]예[br][opt]아니오
+  0x00526B8E [0x00A9] [script:25 1D]어떻게 할까?[br][opt]정지[br][opt]부상[br][opt]잠행[br][opt]전진
+  0x00526CA4 [0x00A9] [script:AE 1D]어느 쪽으로 갈까?[br][opt]앞[br][opt]뒤[br][opt]왼쪽[br][opt]오른쪽
+  0x00526EBC [0x00A9] [script:BC 1E]어떻게 할까?[br][opt]정지[br][opt]부상[br][opt]잠행[br][opt]전진
+  0x00526F9E [0x00A9] [script:2B 1F]어느 쪽으로 갈까?[br][opt]앞[br][opt]뒤[br][opt]왼쪽[br][opt]오른쪽
+  0x005273B8 [0x00A9] [script:32 21]어떻게 할까?[br][opt]공격[br][opt]플래시
+  0x005274CA [0x00A9] [script:C0 21][br][br][br][opt][opt][opt][opt][opt][opt][FF:01 04 01]GAME[opt]OVER[FF:01 01 01]
+  0x0052756A [0x00A9] [script:0C 22][br][br][br][opt][opt][opt][opt][opt][opt]GAME[opt]OVER
+
+# Chunk 8 - System prompts
+  0x005E22DA [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
+  0x005E287E [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
+  0x005E28A8 [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x005E28D2 [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
+  0x005E28FE [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x005E2946 [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+
+# Chunk 9 - System prompts
+  0x0069C02A [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
+  0x0069C5CE [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
+  0x0069C5F8 [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x0069C622 [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
+  0x0069C64E [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x0069C696 [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+  0x0069CD00 [0x8005] [script:72 06]몰아붙였다…
+
+# Chunk 10 - System prompts and ceremony
+  0x0075A2AE [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
+  0x0075A852 [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
+  0x0075A87C [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x0075A8A6 [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
+  0x0075A8D2 [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x0075A91A [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+  0x0075AB4C [0x800A] [script:5D 04]티켓이 없으면 식전에 참가할 수 없습니다
+  0x0075B0D8 [0x8006] [script:23 07](엘크, 리자, 느긋하게 나타났군)
+
+# Newly found dialogues - Chunk 0 (0x00B0 context - Event Script Region)
+  0x000B36F6 [0x00B0] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
+  0x000B3CA6 [0x00B0] [script:ED 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
+  0x000B3CD0 [0x00B0] [script:02 03][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x000B3CFA [0x00B0] [script:18 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
+  0x000B3D26 [0x00B0] [script:2B 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x000B3D6E [0x00B0] [script:51 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+
+# Chunk 0 - Story dialogues (0x00B4 context)
+  0x000B49C4 [0x00B4] [script:6D 09]술 냄새~
+  0x000B50B6 [0x00B4] [script:0D 0D]일부러 식전 보러 돌아온 거야?[br]그럼 아마 비비가가 티켓[br]갖고 있을 거야
+  0x000B5264 [0x00B4] [script:CB 0D]나도 갔으면 좋았을까
+  0x000B5874 [0x00B4] [script:DD 10]다들 여신상이다 식전이다 떠들지만
+  0x000B5924 [0x00B4] [script:3B 11]뒤집어 말하면 그만큼 로말리아를[br]두려워한다는 거지
+  0x000B63FA [0x00B4] [script:9B 16]엘크 오빠가 부쉈어?
+  0x000B668C [0x00B4] [script:E6 17]오늘은 가게 문 닫고[br]나도 보러 갈까
+  0x000B7034 [0x00B4] [script:B5 1C]오늘도 집에 안 들여보내 줄 거니까!
+  0x000B73C2 [0x00B4] [script:90 1E]뭐, 준다는 물건을 거절하는 것도[br]실례니까
+  0x000B77BE [0x00B4] [script:78 20]너는 보러 안 가? 기념식전
+  0x000B785A [0x00B4] [script:BC 20]엄마가 엄청 화났을 테니
+  0x000B7C92 [0x00B4] [script:D8 22]도대체 어디 갔다 온 거야
+  0x000B7EA2 [0x00B4] [script:00 24]부상자는 한 명도 없었다고[br]들었지만 역시 걱정했어
+
+# Chunk 1 - System prompts (0x00B0 context)
+  0x0016E1DE [0x00B0] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
+  0x0016E78E [0x00B0] [script:ED 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
+  0x0016E7B8 [0x00B0] [script:02 03][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x0016E7E2 [0x00B0] [script:18 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
+  0x0016E80E [0x00B0] [script:2B 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x0016E856 [0x00B0] [script:51 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+
+# Chunk 1 - Bounty tables (display only)
+  0x001780CC [0x00B4] [script:7C 4F]수배 몬스터[br]「피의 신관」을 찾아라
+  0x001782B0 [0x00B4] [script:93 50][box:system]이[opt]름[opt]골자[opt][opt][opt][opt]스켈레톤[br]보[opt]상[opt]540G[br]장소[opt]인디고스 북쪽 폐허의 마을[br]특기[opt]차지
+  0x00178324 [0x00B4] [script:CB 50][box:system]이[opt]름[opt]리랜드[opt][opt]소드맨[br]보[opt]상[opt]990G[br]장소[opt]인디고스 북쪽 폐허의 마을[br]특기[opt]?
+  0x00178394 [0x00B4] [script:04 51][box:system]이[opt]름[opt]부시[opt][opt][opt]양식 헤모지[br]보[opt]상[opt]1350G[br]장소[opt]윌의 바위[br]특기[opt]헤모지화
+  0x00178410 [0x00B4] [script:3D 51][box:system]이[opt]름[opt]발자크[opt][opt]매지션[br]보[opt]상[opt]1755G[br]장소[opt]서 알디아[br]특기[opt]?
+  0x0017846A [0x00B4] [script:6E 51][box:system]이[opt]름[opt]발자크[opt][opt]매지션[br]보[opt]상[opt]1755G[br]장소[opt]서 알디아 돌아오지 못하는 숲[br]특기[opt]?
+  0x001784DA [0x00B4] [script:A7 51][box:system]이[opt]름[opt]메난[opt][opt]자이언트마미[br]보[opt]상[opt]1125G[br]장소[opt]야고스 섬 봉인의 유적[br]특기[opt]?
+  0x0017854C [0x00B4] [script:D8 51][box:system]이[opt]름[opt]티아누스[opt]위저드[br]보[opt]상[opt]2025G[br]장소[opt]?[br]특기[opt]?
+
+# Chunk 3 - Night blacksmith
+  0x00234B4A [0x00B4] [script:5D 17]밤의 대장장이
+
+# Chunk 4 - System prompts (0x00A0 context - Padding Region)
+  0x003A087E [0x00A0] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
+  0x003A0E22 [0x00A0] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
+  0x003A0E4C [0x00A0] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x003A0E76 [0x00A0] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
+  0x003A0EA2 [0x00A0] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x003A0EEA [0x00A0] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+
+# Chunk 4 - Item/event messages
+  0x003A10E0 [0x00A0] [script:38 04]놔 줘!!
+  0x003A25A0 [0x00B0] [script:9D 0E][opt]물론![br][opt]잠깐만
+  0x003A2E3C [0x00B0] [script:EB 12][br]엘크는 서랍을 열었다
+  0x003A2E98 [0x00B0] [script:1C 13][br]엘크는 「약초」를 손에 넣었다
+  0x003A2ECC [0x00B0] [script:33 13][br]엘크는 서랍을 열었다
+  0x003A2F34 [0x00B0] [script:6F 13][br]엘크는 옷장에서[br]「천 옷」을 꺼냈다
+  0x003A3014 [0x00B0] [script:D6 13][br]엘크는 통을 조사했다
+  0x003A306E [0x00B0] [script:06 14][br]엘크는 「돌」을 손에 넣었다
+  0x003A30A0 [0x00B0] [script:1C 14][br]엘크는 통을 조사했다
+  0x003A3106 [0x00B0] [script:4F 14][br]엘크는 통을 조사했다
+  0x003A3160 [0x00B0] [script:80 14][br]엘크는 「약초」를 손에 넣었다
+  0x003A3194 [0x00B0] [script:96 14][br]엘크는 통을 조사했다
+  0x003A31FA [0x00B0] [script:CA 14][br]프로디아스의 거리가 보인다
+  0x003A33A4 [0x00B0] [script:B0 15]문에는 판자가 박혀 있어 열리지 않게 되어 있다.[br]아무도 사용하지 않는 방인 듯하다.
+  0x003A3478 [0x00B0] [script:12 16]어떻게 할까…?[br][opt]내용을 들으러 가기[br][opt]나중에
+  0x003A3C40 [0x00B0] [script:F4 19]이 아이를 데려가겠습니까?[br][opt]네[br][opt]아니오
+  0x003A3D00 [0x00B0] [script:5A 1A][box:system]일기장이 있습니다. 기록하겠습니까?[br][opt]네[br][opt]아니오[box:close]
+  0x003A4520 [0x00B0] [script:62 1E]쉬었다 가겠습니까?[br][opt]네[br][opt]아니오
+  0x003A4936 [0x00B0] [script:6A 20]훈련할래?[br][opt]한다[br][opt]안 한다
+  0x003A4FD8 [0x00B0] [script:B8 23][opt]이게 맞나[br][opt]뭔가 다른 것 같아
+  0x003A5068 [0x00B0] [script:00 24][opt]이게 맞나[br][opt]뭔가 다른 것 같아
+  0x003A50F0 [0x00B0] [script:44 24][opt]이게 맞나[br][opt]뭔가 다른 것 같아
+  0x003A6594 [0x00B4] [script:B7 2E]「데생 입문」「나르사프 화집」…[br]뭔가 재미없어 보이는 책뿐이네
+  0x003AC656 [0x00B4] [script:F6 5E]하아~, 날씨 좋다
+
+# Chunk 6 - Story dialogue
+  0x005E335E [0x00B4] [script:50 08]이유는 말 못 하지만, 이 배에는－[delay:3D]
+
+# Chunk 9 - Story dialogues
+  0x0069E3F4 [0x00B4] [script:EF 11]나도, 그놈들한테－[delay:1F]
+  0x0069E6A6 [0x00B4] [script:48 13]이 사람들이 나를－[delay:1F]
+  0x0069EBCC [0x00B4] [script:DE 15]이대로는 둘 다…
+
+# Chunk 10 - System messages
+  0x00812338 [0x00B4] [script:EA 04]미정의 스테이지입니다
+  0x0081257E [0x00B4] [script:16 06]전투에 참가할 캐릭터를[br]선택해 주세요
+  0x00812AF0 [0x00B4] [script:C7 08]유적 던전 [num:01]층
 

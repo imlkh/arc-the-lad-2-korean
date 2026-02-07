@@ -18,7 +18,7 @@ Each bitplane of each cell holds one character glyph. At runtime, the PS1 GPU's 
 
 ## Japanese Character Usage (STG Dialogues)
 
-Analysis of all 19 STG stage files extracted via `--stg` mode (19,568 dialogue strings, ~356K characters):
+Analysis of all 19 STG stage files extracted via `--stg` mode (20,533 dialogue strings, ~370K characters):
 
 | Category | Unique Chars | Occurrences | Notes |
 |---|---|---|---|
@@ -121,7 +121,7 @@ This uses only 67 slots (vs. 1,656) and gives 100% syllable coverage. However, i
 
 | File | Content | Priority |
 |------|---------|----------|
-| S*.STG (19 files) | Stage dialogue (19,568 strings) | High |
+| S*.STG (19 files) | Stage dialogue (20,533 strings) | High |
 | SCPS_100.26 | System messages, menu text, item/skill names, descriptions, location names (~960 strings) | High |
 | SDIC.BIN | Character profiles, monster encyclopedia (555 strings) | Medium |
 | SMITH.BIN | Item/equipment descriptions (628 strings) | Medium |
@@ -156,5 +156,13 @@ This uses only 67 slots (vs. 1,656) and gives 100% syllable coverage. However, i
 - `python python/decode/decode_all_stg.py` -- batch extract all 19 STG files
 - `python python/font/generate_korean_font.py` -- generate Korean glyph images
 - `python python/font/replace_kana_with_korean.py` -- replace kana with Korean in COMM.IMG
-- Decoded dialogue files: `output/decoded/stg/S*_STG.txt` (19 files, 19,568 strings)
+- Decoded dialogue files: `output/decoded/stg/S*_STG.txt` (19 files, 20,533 strings)
 - Translated dialogue files: `translated/ko/S*_STG.txt`
+- Patching script: `python/patch_korean.py` -- apply Korean translations to game files
+
+## See Also
+
+- `docs/STG_STRUCTURE.md` - Detailed chunk layout and template structure
+- `docs/TEXT_ENCODING.md` - Text byte encoding reference
+- `docs/PATCHING_KOREAN.md` - Korean patching guide
+- `docs/TRANSLATION_PROGRESS.md` - Current translation status

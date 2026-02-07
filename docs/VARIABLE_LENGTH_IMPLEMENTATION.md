@@ -25,7 +25,7 @@ This document outlines the implementation path for enabling variable-length Kore
 
 **Master Pointer Solution**: Store a "master pointer" at fixed offset 0xAFF00 that points to each chunk's VLUT location. The trampoline reads this pointer first.
 
-**Template-Driven Dialogue Extraction**: Using `decode_text.py:scan_stg()` for proper dialogue detection instead of simple A9 00 marker scanning. This reduced false positives from 3007 to 1147 dialogues.
+**Template-Driven Dialogue Extraction**: Using `decode_text.py:scan_stg()` for proper dialogue detection instead of simple A9 00 marker scanning. The scanner now captures five dialogue types: template-associated, bare dialogues, orphan menus, event script, and padding region. S100.STG: 1,321 dialogues, SG00.STG: 2,445 dialogues.
 
 ### S100.STG Results
 
@@ -591,17 +591,51 @@ This is less technical but requires more translation work.
 
 **Solution**: Added orphan menu detection pass to `decode_text.py:scan_stg()`:
 - Scans text region for `A9 00` markers not already captured
-- Validates text contains `[opt]` tag (menu indicator)
+- Validates text contains `[br][opt]` pattern (real menu = options on separate lines)
+- Filters out: bounty tables using `[opt]` as column separators, dialogue pauses
 - Assigns context opcode `0x00A9` for identification
 
 **Results** (S100.STG):
-- 97 orphan menu texts now captured
-- Categories: tutorial menus, yes/no prompts, system prompts, navigation, submarine controls
+- 76 real orphan menus (filtered from 97 raw texts)
+- Filtered out: 7 bounty tables, 9 dialogue pauses, 5 other false positives
+- Categories: tutorial menus, yes/no prompts, system prompts, navigation
 
 **Action Required**:
 1. Regenerate decoded output to include orphan menus
 2. Add translations for orphan menu texts to translation file
 3. Re-run variable-length patcher
+
+### Bare Dialogue Detection (2026-02-07)
+
+**Problem**: Location names, battle messages, and scene announcements were not being captured.
+
+**Root Cause**: These texts use `A9 00` markers with kanji content but have NO templates AND NO `[opt]` tags.
+
+**Solution**: Added bare dialogue detection pass to `decode_text.py:scan_stg()`:
+- Scans text region for `A9 00` markers not already captured by template or orphan menu passes
+- Validates text contains kanji (real Japanese text)
+- Must have at least 3 characters and pass garbage filter
+- Assigns context opcode `0x00B4` for identification
+
+**Results**:
+- S100.STG: 40 bare dialogues (location names, battle messages)
+- SG00.STG: 377 bare dialogues
+
+**Examples**:
+- Location names: コルボ平原, ラウス平野
+- Battle messages: 戦闘に参加するキャラクターを選んで下さい
+- Scene announcements: 持ち場につけ！
+
+### Complete Dialogue Type Summary (2026-02-07)
+
+| Type | Context Opcode | Region | Detection | S100 | SG00 |
+|------|----------------|--------|-----------|------|------|
+| Template-associated | 0xFFFE/0x80XX | 0xB4000-0xBC7FF | 48-byte template | 1,165 | 1,495 |
+| Bare dialogues | 0x00B4 | 0xB4000-0xBC7FF | A9 00 + kanji | 40 | 377 |
+| Orphan menus | 0x00A9 | 0xB4000-0xBC7FF | `[br][opt]` pattern | 76 | 403 |
+| Event Script | 0x00B0 | 0xB0000-0xB4000 | A9 00 + validation | 33 | 144 |
+| Padding | 0x00A0 | 0xA0000-0xB0000 | A9 00 + validation | 7 | 26 |
+| **Total** | | | | **1,321** | **2,445** |
 
 ## Files
 

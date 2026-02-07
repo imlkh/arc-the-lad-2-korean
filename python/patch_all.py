@@ -3,7 +3,13 @@
 Patch all translation files with a unified character mapping.
 
 This ensures COMM.IMG contains ALL Korean characters needed across
-all translation files (S100, SG00, system).
+all translation files (S100, SG00, system, SDIC, YGUILD).
+
+Supported files:
+- S*.STG: Stage dialogue files
+- SCPS_100.26: Main executable (system messages)
+- SDIC.BIN: Monster/character descriptions
+- YGUILD.BIN: Guild quest descriptions
 """
 
 import os
@@ -14,8 +20,8 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from patch_korean import (
     load_decode_table, extract_korean_chars, build_korean_mapping,
-    patch_comm_img, patch_stg_file, patch_exe_file,
-    parse_translation_file, parse_system_translation_file,
+    patch_comm_img, patch_stg_file, patch_exe_file, patch_bin_file,
+    parse_translation_file, parse_system_translation_file, parse_sdic_translation_file,
     save_mapping, GAME_DIR, BASE_DIR, OUTPUT_DIR
 )
 
@@ -37,7 +43,9 @@ def main():
 
     s100_path = os.path.join(BASE_DIR, "translated", "ko", "S100_STG.txt")
     sg00_path = os.path.join(BASE_DIR, "translated", "ko", "SG00_STG.txt")
-    system_path = os.path.join(BASE_DIR, "translated", "ko", "SCPS_100_26_system.txt")
+    system_path = os.path.join(BASE_DIR, "translated", "ko", "SCPS_100_26.txt")
+    sdic_path = os.path.join(BASE_DIR, "translated", "ko", "SDIC_BIN.txt")
+    yguild_path = os.path.join(BASE_DIR, "translated", "ko", "YGUILD_BIN.txt")
 
     if os.path.exists(s100_path):
         translation_files.append(("S100", s100_path))
@@ -45,6 +53,10 @@ def main():
         translation_files.append(("SG00", sg00_path))
     if os.path.exists(system_path):
         translation_files.append(("SYSTEM", system_path))
+    if os.path.exists(sdic_path):
+        translation_files.append(("SDIC", sdic_path))
+    if os.path.exists(yguild_path):
+        translation_files.append(("YGUILD", yguild_path))
 
     if not translation_files:
         print("ERROR: No translation files found!")
@@ -93,7 +105,7 @@ def main():
 
     # Patch each STG file
     for name, trans_path in translation_files:
-        if name == "SYSTEM":
+        if name in ("SYSTEM", "SDIC", "YGUILD"):
             continue  # Handle separately
 
         print(f"\n=== Stage: {name} ===")
@@ -126,11 +138,45 @@ def main():
         shutil.copy2(exe_src, exe_dst)
 
         print(f"Parsing system translation file...")
-        sys_entries = parse_system_translation_file(system_path)
+        sys_entries = parse_sdic_translation_file(system_path)  # Same comma format
         print(f"  Found {len(sys_entries)} system message entries")
 
         print(f"Patching EXE file: {exe_dst}")
         patch_exe_file(exe_dst, sys_entries, korean_mapping, decode_table)
+
+    # Patch SDIC.BIN file
+    if os.path.exists(sdic_path):
+        print(f"\n=== SDIC.BIN (Monster/Character Descriptions) ===")
+
+        sdic_src = os.path.join(GAME_DIR, "SDIC.BIN")
+        sdic_dst = os.path.join(OUTPUT_DIR, "SDIC.BIN")
+
+        print(f"Copying {sdic_src} -> {sdic_dst}")
+        shutil.copy2(sdic_src, sdic_dst)
+
+        print(f"Parsing SDIC translation file...")
+        sdic_entries = parse_sdic_translation_file(sdic_path)
+        print(f"  Found {len(sdic_entries)} SDIC entries")
+
+        print(f"Patching BIN file: {sdic_dst}")
+        patch_bin_file(sdic_dst, sdic_entries, korean_mapping, decode_table)
+
+    # Patch YGUILD.BIN file
+    if os.path.exists(yguild_path):
+        print(f"\n=== YGUILD.BIN (Guild Quest Descriptions) ===")
+
+        yguild_src = os.path.join(GAME_DIR, "YGUILD.BIN")
+        yguild_dst = os.path.join(OUTPUT_DIR, "YGUILD.BIN")
+
+        print(f"Copying {yguild_src} -> {yguild_dst}")
+        shutil.copy2(yguild_src, yguild_dst)
+
+        print(f"Parsing YGUILD translation file...")
+        yguild_entries = parse_sdic_translation_file(yguild_path)  # Same format as SDIC
+        print(f"  Found {len(yguild_entries)} YGUILD entries")
+
+        print(f"Patching BIN file: {yguild_dst}")
+        patch_bin_file(yguild_dst, yguild_entries, korean_mapping, decode_table)
 
     print(f"\n=== Done ===")
     print(f"Output directory: {OUTPUT_DIR}")

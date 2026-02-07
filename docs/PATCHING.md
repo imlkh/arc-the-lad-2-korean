@@ -229,10 +229,19 @@ python python/decode/decode_text.py /path/to/S100.STG --stg > output/decoded/stg
 
 S100.STG dialogue breakdown:
 - 1,165 template-associated dialogues
+- 40 bare dialogues (location names, battle messages)
 - 76 orphan menus (filtered from 97 using `[br][opt]` pattern)
 - 33 Event Script region dialogues
 - 7 Padding region dialogues
-- **Total: 1,281 dialogues**
+- **Total: 1,321 dialogues**
+
+SG00.STG dialogue breakdown:
+- 1,495 template-associated dialogues
+- 377 bare dialogues
+- 403 orphan menus
+- 144 Event Script region dialogues
+- 26 Padding region dialogues
+- **Total: 2,445 dialogues**
 
 ### Character Encoding
 
@@ -262,9 +271,9 @@ output/patched/
 
 | File | Mode | Total Dialogues | Patched | Notes |
 |------|------|-----------------|---------|-------|
-| COMM.IMG | - | - | 764 glyphs | Unified Korean font |
-| S100.STG | variable | 1,281 | 1,053 | 10/11 chunks with VLUT |
-| SG00.STG | variable | 2,068 | 685 | 41/56 chunks with VLUT |
+| COMM.IMG | - | - | 854 glyphs | Unified Korean font |
+| S100.STG | variable | 1,321 | 1,053 | 10/11 chunks with VLUT |
+| SG00.STG | variable | 2,445 | 685 | 41/56 chunks with VLUT |
 | SCPS_100.26 | fixed | 123 | 22 | System text + trampoline hook |
 
 ### Non-STG Files (Not Yet Translated)

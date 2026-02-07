@@ -8,32 +8,32 @@
 | Total size | ~306 MB across all 19 files |
 | Type | Composite stage archives -- scene data with graphics, audio, code, and dialogue |
 | Chunk size | 772,096 bytes (0xBC800 = 377 CD-ROM sectors) per chunk |
-| Contains text | **Yes** -- 19,568 dialogue strings total across all STG files |
+| Contains text | **Yes** -- 20,533+ dialogue strings total across all STG files (includes orphan menus) |
 
 ### All STG Files
 
 | File | Size | Chunks | Dialogues | Notes |
 |------|------|--------|-----------|-------|
-| S100.STG | 8.1 MB | 11 | 1,164 | Prodias (Aldia capital, opening chapter) |
+| S100.STG | 8.1 MB | 11 | 1,165 | Prodias (Aldia capital, opening chapter) |
 | S200.STG | 12.5 MB | 17 | 1,754 | |
-| S300.STG | 8.1 MB | 11 | 320 | |
-| S400.STG | 7.4 MB | 10 | 778 | |
-| S500.STG | 8.8 MB | 12 | 526 | |
-| S600.STG | 11.8 MB | 16 | 753 | |
-| S700.STG | 25.0 MB | 34 | 2,549 | |
-| S800.STG | 11.8 MB | 16 | 931 | |
-| S900.STG | 10.3 MB | 14 | 921 | |
-| SA00.STG | 11.0 MB | 15 | 1,269 | |
-| SB00.STG | 7.4 MB | 10 | 775 | |
-| SC00.STG | 14.7 MB | 20 | 702 | |
-| SD00.STG | 13.3 MB | 18 | 661 | |
-| SE00.STG | 14.7 MB | 20 | 1,213 | |
-| SF00.STG | 34.6 MB | 47 | 2,499 | |
-| SG00.STG | 41.2 MB | 56 | 1,492 | |
-| SH00.STG | 11.8 MB | 16 | 49 | Minimal dialogue (cutscene-heavy?) |
-| SI00.STG | 28.7 MB | 39 | 2,122 | |
+| S300.STG | 8.1 MB | 11 | 322 | |
+| S400.STG | 7.4 MB | 10 | 779 | |
+| S500.STG | 8.8 MB | 12 | 530 | |
+| S600.STG | 11.8 MB | 16 | 755 | |
+| S700.STG | 25.0 MB | 34 | 2,554 | |
+| S800.STG | 11.8 MB | 16 | 934 | |
+| S900.STG | 10.3 MB | 14 | 926 | |
+| SA00.STG | 11.0 MB | 15 | 1,272 | |
+| SB00.STG | 7.4 MB | 10 | 777 | |
+| SC00.STG | 14.7 MB | 20 | 703 | |
+| SD00.STG | 13.3 MB | 18 | 662 | |
+| SE00.STG | 14.7 MB | 20 | 1,216 | |
+| SF00.STG | 34.6 MB | 47 | 2,511 | |
+| SG00.STG | 41.2 MB | 56 | 1,498 | |
+| SH00.STG | 11.8 MB | 16 | 52 | Minimal dialogue (cutscene-heavy?) |
+| SI00.STG | 28.7 MB | 39 | 2,123 | |
 | SJ00.STG | 0.1 MB | 0* | 0 | Special (header-only, no chunks) |
-| **Total** | **306 MB** | **377** | **19,478** | |
+| **Total** | **306 MB** | **377** | **20,533** | |
 
 *SJ00.STG (81,920 bytes = 40 sectors) does not follow the chunk structure -- it is smaller than one chunk and may be a header-only file or special stage data.
 
@@ -57,18 +57,15 @@ Every chunk follows a consistent internal layout with the following sections:
 
 | Chunk Offset | Size | Content |
 |-------------|------|---------|
-| `+0x00000` | ~32 KB | 4bpp tile/sprite pixel data |
-| `+0x08000` | ~96 KB | Tile map layers (base, overlay, shadow) |
-| `+0x20000` | ~96 KB | Extended graphics data (additional tiles, color variants) |
-| `+0x38000` | ~32 KB | Sprite/character graphics (4bpp with transparency padding) |
-| `+0x40000` | ~12 KB | **VAB sound banks** (2 per chunk, `pBAV` magic, version 7) |
-| `+0x43000` | ~28 KB | **SEQ music sequences** (`pQES` magic, 1-5 per chunk) |
-| `+0x4A000` | ~155 KB | ADPCM audio samples (VAG format, 16-byte blocks) |
-| `+0x70000` | ~64 KB | Zero padding / reserved |
-| `+0x80000` | ~16 KB | **MIPS R3000A overlay code** (small effect/scene handler) |
-| `+0x84000` | ~48 KB | Texture/portrait data (VRAM upload) |
-| `+0x90000` | ~144 KB | Event data tables, animation data, coordinate tables |
-| `+0xB4000` | ~34 KB | **Event script bytecode with inline dialogue text** |
+| `+0x00000` | 0x70000 (458 KB) | **4-bit indexed graphics** (tiles, sprites, portraits) |
+| `+0x70000` | 0x07000 (28 KB) | Sparse data / padding (~85% zeros) |
+| `+0x77000` | 0x09000 (36 KB) | **MIPS R3000 code** (scene-specific scripts, optional) |
+| `+0x80000` | 0x20000 (128 KB) | **MIPS R3000 code** (main game logic, ~474 JAL calls) |
+| `+0xA0000` | 0x10000 (64 KB) | Padding (~98% zeros) |
+| `+0xB0000` | 0x04000 (16 KB) | Scene index / metadata (~89% sparse) |
+| `+0xB4000` | 0x08800 (34 KB) | **Text region** (dialogues + event templates) |
+
+For detailed structure analysis, see `STG_STRUCTURE.md`.
 
 ### Section Details
 
@@ -297,28 +294,46 @@ All three pointer fields in the 48-byte template block are **relative to the scr
 
 #### Practical Approaches
 
-| Approach | Difficulty | Description |
-|----------|------------|-------------|
-| **Fixed length** | Easy | Pad shorter translations with spaces; truncate or abbreviate longer ones |
-| **Offset patcher** | Medium | Build a tool that parses all strings, recalculates all offsets, and rewrites the chunk |
-| **Text relocation** | Hard | Move text to unused space within the chunk and patch all pointers to the new location |
+| Approach | Difficulty | Status |
+|----------|------------|--------|
+| **Fixed length** | Easy | **RECOMMENDED** - Only reliable method |
+| **Offset patcher** | Medium | **FAILED** - Causes game to skip dialogues or jump to wrong scenes |
+| **Text relocation** | Hard | **NOT FEASIBLE** - Event script uses index-based lookup, not pointers |
+
+**Why relocation doesn't work:**
+- Only ~15% of dialogues have templates with Ptr_A pointers
+- The remaining 85% are referenced by the event script system at 0xB0000-0xB3FFF
+- Event script uses reference indices (0xA9, 0xAA, etc.), not byte offsets
+- MIPS code does not contain direct address loads to the text region
 
 #### Recommended Strategy
 
 Korean text is often more compact than Japanese (no hiragana grammatical particles), so many translations will naturally fit. For strings that exceed the original length:
 
 1. **Use shorter synonyms** where meaning is preserved
-2. **Split long lines** with `FF 08 07 01` (page break control code) to continue on the next dialogue box
-3. **Abbreviate** common terms (e.g., 아이템 → items when context is clear)
-4. **Measure carefully** -- each Korean syllable block encodes to 2 bytes (0xF0-0xF5 prefix), same as Japanese kanji
+2. **Abbreviate** common terms (e.g., 아이템 → items when context is clear)
+3. **Measure carefully** -- each Korean syllable block encodes to 1-2 bytes depending on frequency mapping
 
-A robust translation pipeline should:
+**Note:** The `[cursor]` tag (FF 08 07 01) does NOT help with truncation - it adds 4 bytes, making the text longer. Only use it when you have spare space and want dramatic page breaks.
+
+The translation pipeline uses **fixed-length patching**:
 1. Extract all strings with their byte lengths
-2. Track translated byte lengths vs. original
+2. Build frequency-based character mapping (common chars get 1-byte encoding)
 3. Flag any translations that exceed the original length
-4. Either auto-pad short translations or require manual adjustment for long ones
-5. Rebuild each chunk with recalculated offsets
+4. Truncate or manually shorten long translations
+5. Patch in-place without changing offsets
+
+Use `python python/patch_all.py` to patch all files with unified character mapping.
+Use `python python/find_truncated.py S100` to identify dialogues needing shortening.
 
 ### Existing Korean Translations
 
 Pre-translated Korean text files exist at `translated/ko/S*_STG.txt` for all 19 stages (e.g., S100_STG.txt contains 1,167 translated dialogue entries). Decoded Japanese source files are at `output/decoded/stg/S*_STG.txt`.
+
+## See Also
+
+- `DIALOGUE_SYSTEM_ANALYSIS.md` - Complete dialogue system reverse-engineering (why relocation doesn't work)
+- `STG_STRUCTURE.md` - Detailed chunk layout and template byte-level analysis
+- `TEXT_ENCODING.md` - Character encoding and control codes
+- `PATCHING_KOREAN.md` - How to apply Korean translations
+- `TRANSLATION_PROGRESS.md` - Current translation status

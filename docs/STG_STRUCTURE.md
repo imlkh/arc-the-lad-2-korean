@@ -9,10 +9,13 @@ Chunks represent individual scenes, stages, or cutscenes in the game.
 
 | File | Size | Chunks | Dialogues |
 |------|------|--------|-----------|
-| S100.STG | 8.3 MB | 11 | 1,165 |
-| S200.STG | 13.7 MB | 18 | 1,754 |
-| SF00.STG | 19.2 MB | 25 | 2,511 |
+| S100.STG | 8.3 MB | 11 | 1,321 |
+| SG00.STG | 42.5 MB | 56 | 2,445 |
+| S200.STG | 13.7 MB | 18 | ~1,900 |
+| SF00.STG | 19.2 MB | 25 | ~2,600 |
 | ... | | | |
+
+**Note**: Dialogue counts include all types (template, bare, orphan menu, event script, padding).
 
 ## Chunk Layout (0xBC800 = 772,096 bytes)
 

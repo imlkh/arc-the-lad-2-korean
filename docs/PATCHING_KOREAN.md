@@ -8,9 +8,7 @@ The patching process involves two files:
 1. **COMM.IMG** - Font texture containing character glyphs
 2. **S*.STG** - Stage files containing dialogue text
 
-The `patch_korean.py` script handles both:
-- Injects Korean Hangul glyphs into the font texture
-- Re-encodes Korean dialogue text into the stage files
+**IMPORTANT:** Use `patch_all.py` instead of `patch_korean.py` when patching multiple files. See the main `PATCHING.md` document for why this is critical.
 
 ## Prerequisites
 
@@ -33,19 +31,22 @@ The `patch_korean.py` script handles both:
 
 ## Usage
 
-### Basic Usage
+### Recommended: Patch All Files Together
 
 ```bash
 cd atl2_korean_translation
+python python/patch_all.py
+```
+
+This creates a unified character mapping across all translation files and patches everything at once. This is the **only correct way** to patch multiple STG files.
+
+### Single File (NOT recommended for multiple files)
+
+```bash
 python python/patch_korean.py S100
 ```
 
-This will:
-1. Copy `S100.STG` → `output/patched/S100.STG`
-2. Copy `COMM.IMG` → `output/patched/COMM.IMG`
-3. Extract unique Korean characters from the translation
-4. Inject Korean glyphs into `COMM.IMG`
-5. Re-encode Korean text into `S100.STG`
+**WARNING:** If you patch S100, then SG00 separately, the second run overwrites COMM.IMG and loses characters unique to S100. Always use `patch_all.py` when working with multiple translation files.
 
 ### Dry Run (Test Without Writing)
 
@@ -103,12 +104,12 @@ Translation files follow this format:
 
 | Tag | Bytes | Description |
 |-----|-------|-------------|
-| `\n` | `FF 05 01 01` | Line break |
+| `[br]` | `FF 05 01 01` | Line break |
 | `[delay:XX]` | `FF 03 XX 01` | Text delay (XX = hex frame count) |
 | `[box:system]` | `FF 08 01 01` | Open system text box |
 | `[box:speech]` | `FF 08 03 01` | Open character speech box |
 | `[box:close]` | `FF 08 02 01` | Close dialogue box |
-| `[cursor]` | `FF 08 07 01` | Page break with cursor |
+| `[cursor]` | `FF 08 07 01` | Page break with cursor (adds 4 bytes - see warning) |
 | `[opt]` | `EF` | Choice option prefix |
 
 ## Text Length Constraints
@@ -128,9 +129,20 @@ The game uses fixed-length dialogue slots. If a Korean translation is longer tha
 ### Tips for Fitting Translations
 
 1. **Use shorter synonyms** where meaning is preserved
-2. **Split long lines** with `\n` for readability
-3. **Abbreviate** common terms when context is clear
-4. **Check truncation count** in the script output
+2. **Abbreviate** common terms when context is clear
+3. **Check truncation count** in the script output
+4. **Use `find_truncated.py`** to identify dialogues that need shortening:
+   ```bash
+   python python/find_truncated.py S100 --output truncated.txt
+   ```
+
+### WARNING: `[cursor]` Does NOT Help Truncation
+
+The `[cursor]` tag (FF 08 07 01) adds 4 bytes to the text - it makes it **longer**, not shorter. Do NOT use `[cursor]` to try to fit long translations.
+
+The `[cursor]` tag is only useful when:
+- The original Japanese already has page breaks
+- You have spare space and want dramatic pauses
 
 ## Testing the Patched Files
 
@@ -169,23 +181,31 @@ The translation exceeded the original text length and was truncated. Shorten the
 ```
 atl2_korean_translation/
 ├── python/
-│   ├── patch_korean.py          # Main patching script
+│   ├── patch_all.py             # RECOMMENDED: Unified patcher for all files
+│   ├── patch_korean.py          # Single-file patching (use with caution)
+│   ├── find_truncated.py        # Find dialogues that need shortening
 │   └── font/
 │       └── generate_korean_font.py  # Generate Korean glyph PNGs
 ├── translated/ko/
-│   └── S100_STG.txt             # Korean translations
+│   ├── S100_STG.txt             # Korean translations
+│   ├── SG00_STG.txt             # Korean translations
+│   └── SCPS_100_26_system.txt   # System message translations
 ├── output/
 │   ├── font/korean/chars/       # Korean glyph PNGs (12x12)
 │   └── patched/                 # Output patched files
 │       ├── S100.STG
+│       ├── SG00.STG
+│       ├── SCPS_100.26
 │       ├── COMM.IMG
-│       └── S100_charmap.txt
+│       └── unified_charmap.txt
 └── docs/
     └── PATCHING_KOREAN.md       # This document
 ```
 
 ## See Also
 
+- `docs/DIALOGUE_SYSTEM_ANALYSIS.md` - Complete dialogue system reverse-engineering (why relocation doesn't work)
 - `docs/TEXT_ENCODING.md` - Text byte encoding reference
 - `docs/COMM_IMG_analysis.md` - Font texture format details
 - `docs/STG_analysis.md` - Stage file format and dialogue structure
+- `docs/STG_STRUCTURE.md` - Detailed chunk layout and template structure

@@ -2505,3 +2505,361 @@
   0x027C1CDA [0x00A9] [script:12 27][opt][opt][opt][opt]그리고 어둠의 힘이 강해지면[br][opt][opt][opt][opt][opt]인간의 욕망이 계속 늘어난다
   0x027C1D26 [0x00A9] [script:38 27][opt][opt][opt][opt]이 악순환을 멈추지 않으면[br][opt][opt][opt]언젠가 어둠의 힘이 부활할 것이다
 
+# Newly found dialogues - Location names
+  0x000B9398 [0x00B4] [script:59 06]콜보 평원
+  0x000B9498 [0x00B4] [script:E5 06]전투에 참가할 캐릭터를[br]선택해 주세요
+  0x000BA80E [0x00B4] [script:94 10]라우스 평야
+  0x000BAD84 [0x00B4] [script:4F 13]쿠이나의 언덕
+  0x000BB900 [0x00B4] [script:0F 19]스테이지 번호 에러
+  0x000BB9DE [0x00B4] [script:85 19][box:system][opt][opt][opt][opt]수배 몬스터：라기[box:close]
+  0x000BBBA6 [0x00B4] [script:69 1A][box:system][opt][opt][opt][opt]수배 몬스터：라기[box:close]
+  0x000BBD6E [0x00B4] [script:4D 1B][box:system][opt][opt][opt][opt]수배 몬스터：라기[box:close]
+  0x000BC046 [0x00B4] [script:B8 1C]수배 몬스터[br]라기를 쓰러뜨렸습니다
+  0x000BC590 [0x00B4] [script:5D 1F]「조상님의 보물」을 손에 넣었다!
+
+# Chunk 2 - Location and bounty
+  0x0017639A [0x00B4] [script:26 06]니카라스의 숲
+  0x0017651C [0x00B4] [script:F3 06]전투에 참가할 캐릭터를[br]선택해 주세요
+  0x00177892 [0x00B4] [script:A2 10]루와지의 숲
+  0x00177D9C [0x00B4] [script:27 13]라젠의 늪
+  0x001788F6 [0x00B4] [script:DE 18][box:system][opt][opt][opt]수배 몬스터：달시오스[box:close]
+  0x00178B5E [0x00B4] [script:12 1A]수배 몬스터[br]달시오스를 쓰러뜨렸습니다
+  0x00178C9A [0x00B4] [script:B0 1A][box:system][opt][opt][opt]수배 몬스터：고가스[box:close]
+  0x00178E64 [0x00B4] [script:95 1B][box:system][opt][opt][opt]수배 몬스터：고가스[box:close]
+  0x00178FA8 [0x00B4] [script:36 1C]수배 몬스터[br]고가스를 쓰러뜨렸습니다
+
+# Chunk 3 - System prompts (0x00B0 context)
+  0x002E7D52 [0x00B0] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
+  0x002E82F6 [0x00B0] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
+  0x002E8320 [0x00B0] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x002E834A [0x00B0] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
+  0x002E8376 [0x00B0] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x002E83BE [0x00B0] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+  0x002E8714 [0x00B0] [script:EF 04]미정의이므로 S409에서 온 것으로 합니다
+  0x002E8972 [0x00B0] [script:22 06]전투에 참가할 캐릭터를[br]선택해 주세요
+  0x002E8DDE [0x00B0] [script:56 08]지상으로 돌아가겠습니까?[br][opt]아니오[br][opt]네
+  0x002E8F90 [0x00B0] [script:29 09]유적 던전 [num:01]층
+  0x002F1DCE [0x00B4] [script:4E 50][box:system][opt][opt][opt]수배 몬스터：쿼거[box:close]
+  0x002F1FA6 [0x00B4] [script:3A 51]수배 몬스터[br]쿼거를 쓰러뜨렸습니다
+
+# Chunk 4 - Bounty
+  0x003AAF8E [0x00B4] [script:70 06]전투에 참가할 캐릭터를[br]선택해 주세요
+  0x003AE430 [0x00B4] [script:BF 20][box:system][opt][opt]수배 몬스터：가우크로우[box:close]
+  0x003AE7A6 [0x00B4] [script:7A 22]수배 몬스터[br]가우크로우를 쓰러뜨렸습니다
+
+# Chunk 5 - Location and bounty
+  0x00466638 [0x00B4] [script:1A 06]루탈 평야
+  0x0046673A [0x00B4] [script:A6 06]전투에 참가할 캐릭터를[br]선택해 주세요
+  0x00467A54 [0x00B4] [script:27 10]아난 대지
+  0x00467F82 [0x00B4] [script:BE 12]아난 대지
+  0x0046807C [0x00B4] [script:46 13][box:system][opt][opt][opt][opt]수배 몬스터：요미의 사자[box:close]
+  0x00468476 [0x00B4] [script:42 15]수배 몬스터[br]요미의 사자를 쓰러뜨렸습니다
+  0x004684EC [0x00B4] [script:79 15]조건의 보석을 손에 넣었습니다
+  0x004686B6 [0x00B4] [script:58 16]노얌 원야
+  0x004690CC [0x00B4] [script:63 1B]노얌 원야
+  0x00469330 [0x00B4] [script:9A 1C]약, 약속이 다르잖아…
+  0x0046A08A [0x00B4] [script:44 23]스테이지 번호 에러
+  0x0046A168 [0x00B4] [script:BA 23][box:system][opt][opt][opt]수배 몬스터：키도우[box:close]
+  0x0046A328 [0x00B4] [script:9A 24][box:system][opt][opt][opt]수배 몬스터：키도우[box:close]
+  0x0046A4E8 [0x00B4] [script:7A 25][box:system][opt][opt][opt]수배 몬스터：키도우[box:close]
+  0x0046A68A [0x00B4] [script:44 26]스테이지 번호 에러
+  0x0046A768 [0x00B4] [script:BB 26][box:system][opt][opt][opt]수배 몬스터：비샤몬[box:close]
+  0x0046A92A [0x00B4] [script:9C 27][box:system][opt][opt][opt]수배 몬스터：비샤몬[box:close]
+  0x0046AAEC [0x00B4] [script:7D 28][box:system][opt][opt][opt]수배 몬스터：비샤몬[box:close]
+  0x0046AF50 [0x00B4] [script:AE 2A]수배 몬스터[br]키도우를 쓰러뜨렸습니다
+  0x0046AFA6 [0x00B4] [script:DA 2A]수배 몬스터[br]비샤몬을 쓰러뜨렸습니다
+
+# Chunk 6 - System prompts and arena
+  0x0051B8FE [0x00B0] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
+  0x0051BEA2 [0x00B0] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
+  0x0051BECC [0x00B0] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x0051BEF6 [0x00B0] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
+  0x0051BF22 [0x00B0] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x0051BF6A [0x00B0] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+  0x0051CD28 [0x00B0] [script:20 0A][opt]어서 오세요! 우리 투기장에
+  0x0051CD4C [0x00B0] [script:3A 0A][opt]두려움 모르는 도전자여,[br][opt][opt][opt]링으로 나아가라!
+  0x0051CED0 [0x00B0] [script:F5 0A]・[delay:0B]・[delay:0B]・함정이군
+  0x0051D1A2 [0x00B0] [script:56 0C]함정이네
+  0x0051D344 [0x00B0] [script:2A 0D]괜찮아?
+  0x0051E846 [0x00B0] [script:B1 17][br][br][opt][opt][opt][opt][opt][opt]그렇지
+  0x0051E8C8 [0x00B0] [script:FD 17][opt][opt]몬스터들도 인간의 욕심이나 질투[br][opt][opt][opt]등의 힘에 오염되어 있다
+  0x0051E910 [0x00B0] [script:20 18][opt][opt]몬스터가 이상해질 정도로[br][opt]자연계의 균형이 무너지고 있다
+  0x0051E99C [0x00B0] [script:5C 18]왜 그래 쿠쿠루, 심각한 표정 짓고
+  0x0051EA70 [0x00B0] [script:D5 18]어둠의 힘이?…그렇군, 이 세계의[br]균형이 갑자기 무너지기 시작한 건 그 때문이었군
+  0x0051EB14 [0x00B0] [script:19 19][opt]시간은 일각을 다투는 듯하군, 알았어
+  0x0051EB82 [0x00B0] [script:5A 19][opt][opt][opt][opt][opt]성궤를 빼앗은 녀석은,[br][opt]무시무시한 일을 꾸미고 있을지도 모른다
+  0x0051EC18 [0x00B0] [script:A4 19][opt][opt][opt][opt][opt]알고 있겠지만,[br][opt][opt][opt]성궤 자체에는 아무 힘도 없다
+  0x0051EC5E [0x00B0] [script:C6 19][opt][opt][opt]하지만 성궤에는 그 안에[br][opt][opt]힘을 축적할 수 있다
+  0x0051ECA2 [0x00B0] [script:DC 19][opt][opt][opt][opt][opt][opt]그것도 무한히
+  0x0051ECCE [0x00B0] [script:01 1A][opt][opt][opt]만약 성궤를 가진 녀석이[br][opt]어둠의 힘을 부활시키려 한다면
+  0x0051ED18 [0x00B0] [script:28 1A][opt][opt][opt]그 성궤에 인간의 욕망을 모아[br]부활의 에너지로 삼는 게 목적이겠지
+  0x0051ED66 [0x00B0] [script:4B 1A][opt][opt][opt]그런 짓을 해봐라,[br]자연계의 균형이 무너질 뿐만 아니라
+  0x0051EDAC [0x00B0] [script:66 1A][opt]잘못하면 이 세계가 멸망해 버릴 거야
+  0x0051EDE2 [0x00B0] [script:8C 1A][opt][opt][opt]어둠의 힘의 존재를 알고 있는 이상,[br][opt][opt][opt][opt]그놈들도 인간이 아닐 거야
+  0x0051EE2E [0x00B0] [script:A2 1A][opt][opt][opt]쿠쿠루, 방심하지 마라
+  0x0051EEFE [0x00B0] [script:07 1B]괜찮아?
+  0x00524376 [0x00B4] [script:4D 45][box:system][opt][opt][opt][opt]수배 몬스터：지그문트[box:close]
+  0x005245C8 [0x00B4] [script:77 46]전투에 참가할 캐릭터를[br]선택해 주세요
+  0x00524ADE [0x00B4] [script:00 49]수배 몬스터[br]지그문트를 쓰러뜨렸습니다
+
+# Chunk 7 - System prompts and Nedel Arena
+  0x005D7CEE [0x00B0] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
+  0x005D8292 [0x00B0] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
+  0x005D82BC [0x00B0] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x005D82E6 [0x00B0] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
+  0x005D8312 [0x00B0] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x005D835A [0x00B0] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+  0x005D865A [0x00B0] [script:DD 04][box:close]니델 투기장 「돌파진」에 오신 것을 환영합니다!![br][opt]게임을 플레이한다[br][opt]설명을 듣는다[br][opt]대기실로 돌아간다
+  0x005D8868 [0x00B0] [script:E0 05][box:close][opt]룰에 대해 듣는다[br][opt]상금에 대해 듣는다[br][opt]게임의 힌트를 듣는다[br][opt]처음 선택으로 돌아간다
+  0x005D9014 [0x00B0] [script:AF 09][box:speech][opt]힌트1을 듣는다[br][opt]힌트2를 듣는다[br][opt]힌트3을 듣는다[br][opt]처음으로 돌아간다
+  0x005D95DE [0x00B0] [script:8C 0C][box:close]「돌파진」에 도전할 4명을 선택해 주세요
+  0x005D9618 [0x00B0] [script:A7 0C]전투에 참가할 캐릭터를[br]선택해 주세요
+  0x005D97C6 [0x00B0] [script:7A 0D]니델 투기장・「돌파진」
+  0x005DA3FE [0x00B0] [script:96 13][box:close]자, 여기서 게임 종료입니다!!
+  0x005DA8D0 [0x00B0] [script:FF 15][box:speech][opt]도전한다[br][opt]도전하지 않는다
+  0x005DDAA2 [0x00B4] [script:EE 2E][box:close]「방마진」에 도전할 5명을 선택해 주세요
+  0x005DDC30 [0x00B4] [script:AF 2F]니델 투기장・「방마진」
+  0x005DE816 [0x00B4] [script:A1 35][box:close]누구의 마력을 회복하겠습니까?
+  0x005DEAA2 [0x00B4] [script:E7 36][box:close]그 캐릭터는 회복할 수 없습니다!!
+  0x005DFC0E [0x00B4] [script:AA 3F][opt]지금부터 오늘의 메인 이벤트[opt][br]소녀 대 몬스터의 대결이 시작됩니다
+  0x005DFFCE [0x00B4] [script:85 41]대단히 강하군요, 누가 이 소녀의 강함을[br]예상할 수 있었을까요
+  0x005E0006 [0x00B4] [script:9C 41][br]이 소녀는 도대체 무엇일까요?
+  0x005E284A [0x00B4] [script:BE 55][box:system][opt][opt]수배 몬스터：네크다스[box:close][opt][opt]
+  0x005E2FD4 [0x00B4] [script:82 59]수배 몬스터[br]네크다스를 쓰러뜨렸습니다
+
+# Chunk 8 - Location and bounty
+  0x0069CAE8 [0x00B4] [script:40 06]레이덴 유적
+  0x0069CBEA [0x00B4] [script:CC 06]전투에 참가할 캐릭터를[br]선택해 주세요
+  0x0069E262 [0x00B4] [script:FD 11]이시마의 바위
+  0x0069E7BC [0x00B4] [script:A9 14]사라 사막
+  0x0069F676 [0x00B4] [script:10 1C][box:system][opt][opt][opt][opt]수배 몬스터：자나크[box:close]
+  0x0069FA2A [0x00B4] [script:F3 1D]휴~,[delay:15]저렇게 많이 몰려오다니
+  0x0069FB78 [0x00B4] [script:90 1E]마을로 돌아갈까
+  0x0069FD56 [0x00B4] [script:7F 1F]수배 몬스터[br]자나크를 쓰러뜨렸습니다
+  0x006A02E6 [0x00B4] [script:49 22][box:system][opt][opt]수배 몬스터：슈바이델[box:close]
+  0x006A054C [0x00B4] [script:7C 23]수배 몬스터[br]슈바이델을 쓰러뜨렸습니다
+  0x006A0676 [0x00B4] [script:10 24][box:system][opt][opt][opt]수배 몬스터：타스만[box:close]
+  0x006A079C [0x00B4] [script:A2 24]수배 몬스터[br]타스만을 쓰러뜨렸습니다
+
+# Chunk 9 - Spirit dialogues
+  0x0075B56E [0x00B4] [script:5B 06][opt]아크, 이 세계의 정령력이 약해지고 있어
+  0x0075B5EC [0x00B4] [script:96 06][opt][opt][opt][opt]곧 한계에 다다를 거야
+  0x0075C6FE [0x00B4] [script:1D 0F][opt][opt][opt][opt]어리석은 건, 당신이야
+  0x0075C966 [0x00B4] [script:52 10][opt][opt][opt][opt]쿠쿠루, 잘 지냈어?
+  0x0075CA40 [0x00B4] [script:C1 10][opt]그래, 느긋하게 있을 때가 아니지
+  0x0075CB0E [0x00B4] [script:24 11][opt][opt][opt][opt][opt]쿠쿠루, 잘 들어
+  0x0075CB82 [0x00B4] [script:64 11]하지만 정령의 힘 자체가 약해지고 있어
+  0x0075CD80 [0x00B4] [script:5F 12][opt][opt]걱정할 정도는 아니야
+  0x0075CDF2 [0x00B4] [script:96 12][opt][opt][opt][opt][opt][opt][opt]괜찮아
+  0x0075CE1E [0x00B4] [script:B1 12][opt]자 가렴, 남은 시간이 얼마 없어!
+  0x0075CE8A [0x00B4] [script:E2 12][opt][opt][opt][opt][opt]부탁해, 쿠쿠루
+
+# Chunk 10 - Location and bounty
+  0x00815950 [0x00B4] [script:B8 06]펠스 고원
+  0x00815A68 [0x00B4] [script:4F 07]전투에 참가할 캐릭터를[br]선택해 주세요
+  0x00817586 [0x00B4] [script:D2 14]카르미오의 언덕
+  0x008182D6 [0x00B4] [script:84 1B][box:system][opt][opt][opt]수배 몬스터：발그리[box:close]
+  0x008184EE [0x00B4] [script:8F 1C]수배 몬스터[br]발그리를 쓰러뜨렸습니다
+  0x0081862A [0x00B4] [script:2E 1D][box:system][opt][opt][opt]수배 몬스터：데린저[box:close]
+  0x008188EE [0x00B4] [script:90 1E]수배 몬스터[br]데린저를 쓰러뜨렸습니다
+  0x00818D88 [0x00B4] [script:D5 20]숲 외곽의 샛길
+
+# Chunk 11 - Location and feathers
+  0x008D26FC [0x00B4] [script:1F 06]마데타의 언덕
+  0x008D287A [0x00B4] [script:EA 06]전투에 참가할 캐릭터를[br]선택해 주세요
+  0x008D3DB2 [0x00B4] [script:80 11]아미그록의 깃털을 주웠다!
+  0x008D3E00 [0x00B4] [script:AD 11]아미그록의 깃털이[br][num:01]개가 되었습니다
+  0x008D3E62 [0x00B4] [script:DD 11]아미그록의 깃털이[br]5개 모였습니다
+  0x008D4050 [0x00B4] [script:CB 12]알트라파스 황야
+  0x008D4D90 [0x00B4] [script:69 19]마데타의 언덕
+  0x008D571A [0x00B4] [script:38 1E][box:system][opt][opt][opt]수배 몬스터：돌곤[box:close]
+  0x008D58E4 [0x00B4] [script:1D 1F][box:system][opt][opt][opt]수배 몬스터：돌곤[box:close]
+  0x008D5ADC [0x00B4] [script:19 20][box:system][opt][opt][opt]수배 몬스터：고르곤[box:close]
+  0x008D5CA6 [0x00B4] [script:FE 20][box:system][opt][opt][opt]수배 몬스터：고르곤[box:close]
+  0x008D5F50 [0x00B4] [script:52 22]수배 몬스터[br]돌곤을 쓰러뜨렸습니다
+  0x008D5FA6 [0x00B4] [script:7D 22]수배 몬스터[br]고르곤을 쓰러뜨렸습니다
+
+# Chunk 12 - Story dialogues
+  0x0098D520 [0x00B4] [script:78 10][box:speech]이대로 순순히 따르면,[br]아프게 하지 않을 거다
+  0x0098E590 [0x00B4] [script:AE 18][box:speech]갈아노와 너 사이에,[br]도대체 무슨 일이 있었던 거야?
+  0x0098E6C6 [0x00B4] [script:44 19][box:speech]쉽게 이길 상대가 아니야
+  0x0098E8B4 [0x00B4] [script:36 1A][box:speech]자, 가자!
+  0x0098EBDE [0x00B4] [script:CC 1B][box:speech]그만 좀 해!
+  0x0098EE48 [0x00B4] [script:03 1D][box:speech]절대 포기 안 해!!
+  0x0099025A [0x00B4] [script:12 27]전투에 참가할 캐릭터를[br]선택해 주세요
+  0x009917B2 [0x00B4] [script:BD 31][box:system][opt][opt][opt]수배 몬스터：그라비스[box:close]
+  0x00991B24 [0x00B4] [script:75 33]수배 몬스터[br]그라비스를 쓰러뜨렸습니다
+
+# Chunk 13 - Dungeon
+  0x00A48356 [0x00B4] [script:16 05]전투에 참가할 캐릭터를[br]선택해 주세요
+  0x00A4DCB4 [0x00B4] [script:C1 31]벽에 단단히 박혀 있어 뽑을 수 없다
+  0x00A4EF78 [0x00B4] [script:1B 3B]지상[opt]1층
+  0x00A4EF94 [0x00B4] [script:29 3B]지하[opt]1층
+  0x00A4EFB0 [0x00B4] [script:37 3B]지하[opt]2층
+  0x00A4EFCC [0x00B4] [script:45 3B]지하[opt]3층
+
+# Chunk 14 - System prompts and bounty
+  0x00AFF062 [0x00B0] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
+  0x00AFF606 [0x00B0] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
+  0x00AFF630 [0x00B0] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x00AFF65A [0x00B0] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
+  0x00AFF686 [0x00B0] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x00AFF6CE [0x00B0] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+  0x00AFFA6A [0x00B0] [script:14 05][box:system][opt][opt][opt]수배 몬스터：마이오스[box:close]
+  0x00AFFA94 [0x00B0] [script:28 05]수배 몬스터[br]마이오스를 쓰러뜨렸습니다
+  0x00AFFAB6 [0x00B0] [script:3C 05]전투에 참가할 캐릭터를[br]선택해 주세요
+  0x00B00892 [0x00B0] [script:24 0C]어디선가 보물상자가 나타났다!!
+  0x00B008DC [0x00B0] [script:45 0C]아무 일도 일어나지 않았다
+  0x00B00916 [0x00B0] [script:62 0C]아무 일도 일어나지 않았다
+  0x00B04792 [0x00B4] [script:A8 2B]스위치를 밟아보았지만,[br]아무 일도 일어나지 않았다
+  0x00B048E8 [0x00B4] [script:4D 2C]몬스터를 전멸시켰다!!
+  0x00B0928A [0x00B4] [script:22 51]벽에 단단히 박혀 있어 뽑을 수 없다
+  0x00B0B22E [0x00B4] [script:EC 60]지상[opt]1층
+  0x00B0B24A [0x00B4] [script:FA 60]지하[opt]1층
+  0x00B0B266 [0x00B4] [script:08 61]지하[opt]2층
+  0x00B0B282 [0x00B4] [script:16 61]지하[opt]3층
+  0x00B0B29E [0x00B4] [script:24 61]지하[opt]4층
+  0x00B0B2BA [0x00B4] [script:32 61]지하[opt]5층
+
+# Chunk 15 - System prompts and bounty
+  0x00BC12AE [0x00B4] [script:14 05][box:system][opt][opt][opt]수배 몬스터：베라돈나[box:close]
+  0x00BC12D8 [0x00B4] [script:29 05]수배 몬스터[br]베라돈나를 쓰러뜨렸습니다
+  0x00BC12F8 [0x00B4] [script:38 05][box:system][opt][opt][opt]수배 몬스터：다리[box:close]
+  0x00BC131E [0x00B4] [script:4B 05]수배 몬스터[br]다리를 쓰러뜨렸습니다
+  0x00BC1340 [0x00B4] [script:5F 05]전투에 참가할 캐릭터를[br]선택해 주세요
+  0x00BC76D2 [0x00B4] [script:1C 37]지상[opt]1층
+  0x00BC76EE [0x00B4] [script:2A 37]지하[opt]1층
+  0x00BC770A [0x00B4] [script:38 37]지하[opt]2층
+  0x00BC7726 [0x00B4] [script:46 37]지하[opt]3층
+  0x00BC7742 [0x00B4] [script:54 37]지하[opt]4층
+
+# Chunk 16 - System prompts
+  0x00C797FA [0x00B0] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
+  0x00C79D9E [0x00B0] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
+  0x00C79DC8 [0x00B0] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x00C79DF2 [0x00B0] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
+  0x00C79E1E [0x00B0] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x00C79E66 [0x00B0] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+  0x00C7A202 [0x00B0] [script:16 05]전투에 참가할 캐릭터를[br]선택해 주세요
+  0x00C8473E [0x00B4] [script:A8 57]지상[opt]1층
+  0x00C8475A [0x00B4] [script:B6 57]지하[opt]1층
+  0x00C84776 [0x00B4] [script:C4 57]지하[opt]2층
+  0x00C84792 [0x00B4] [script:D2 57]지하[opt]3층
+  0x00C847AE [0x00B4] [script:E0 57]지하[opt]4층
+
+# Chunk 17 - System prompts and puzzle
+  0x00D3539A [0x00B0] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
+  0x00D3593E [0x00B0] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
+  0x00D35968 [0x00B0] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x00D35992 [0x00B0] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
+  0x00D359BE [0x00B0] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x00D35A06 [0x00B0] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+  0x00D35DA2 [0x00B0] [script:15 05][box:system][opt][opt][opt]수배 몬스터：가우디라스[box:close]
+  0x00D35DD0 [0x00B0] [script:2B 05]수배 몬스터[br]가우디라스를 쓰러뜨렸습니다
+  0x00D35DF4 [0x00B0] [script:3F 05]전투에 참가할 캐릭터를[br]선택해 주세요
+  0x00D36588 [0x00B0] [script:04 09]보물상자가 몬스터로 변해버렸다!!
+  0x00D369E6 [0x00B0] [script:33 0B]보물상자가 사라지고 계단이 나타났다!!
+  0x00D36D60 [0x00B0] [script:EF 0C]보물상자 바닥에 스위치가 달려 있다
+  0x00D36D9A [0x00B0] [script:0E 0D]눌러볼까?[br][opt]네[br][opt]아니오
+  0x00D36EB0 [0x00B0] [script:97 0D]보물상자 바닥에 스위치가 달려 있다
+  0x00D36EEA [0x00B0] [script:B6 0D]눌러볼까?[br][opt]네[br][opt]아니오
+  0x00D36FB6 [0x00B0] [script:1A 0E]보물상자 바닥에 스위치가 달려 있다
+  0x00D36FF0 [0x00B0] [script:39 0E]눌러볼까?[br][opt]네[br][opt]아니오
+  0x00D370B4 [0x00B0] [script:99 0E]보물상자 바닥에 스위치가 달려 있다
+  0x00D370EE [0x00B0] [script:B8 0E]눌러볼까?[br][opt]네[br][opt]아니오
+  0x00D371B6 [0x00B0] [script:1A 0F]보물상자 바닥에 스위치가 달려 있다
+  0x00D371F0 [0x00B0] [script:39 0F]눌러볼까?[br][opt]네[br][opt]아니오
+  0x00D372B4 [0x00B0] [script:99 0F]보물상자 바닥에 스위치가 달려 있다
+  0x00D372EE [0x00B0] [script:B8 0F]눌러볼까?[br][opt]네[br][opt]아니오
+  0x00D382D4 [0x00B0] [script:A8 17]어딘가에서 공간의 어긋남이 사라졌다
+  0x00D40A9A [0x00B4] [script:86 5B]지상[opt]1층
+  0x00D40AB6 [0x00B4] [script:94 5B]지하[opt]1층
+  0x00D40AD2 [0x00B4] [script:A2 5B]지하[opt]2층
+  0x00D40AEE [0x00B4] [script:B0 5B]지하[opt]3층
+  0x00D40B0A [0x00B4] [script:BE 5B]지하[opt]4층
+  0x00D40B26 [0x00B4] [script:CC 5B]지하[opt]5층
+
+# Chunk 18 - System prompts
+  0x00DF4566 [0x00B0] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
+  0x00DF4B0A [0x00B0] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
+  0x00DF4B34 [0x00B0] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x00DF4B5E [0x00B0] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
+  0x00DF4B8A [0x00B0] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x00DF4BD2 [0x00B0] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+  0x00DF4F6E [0x00B0] [script:16 05]전투에 참가할 캐릭터를[br]선택해 주세요
+  0x00DFC02A [0x00B4] [script:70 3D]벽에 단단히 박혀 있어 뽑을 수 없다
+  0x00DFD6DC [0x00B4] [script:C1 48]지상[opt]1층
+  0x00DFD6F8 [0x00B4] [script:CF 48]지하[opt]1층
+  0x00DFD714 [0x00B4] [script:DD 48]지하[opt]2층
+  0x00DFD730 [0x00B4] [script:EB 48]지하[opt]3층
+  0x00DFD74C [0x00B4] [script:F9 48]지하[opt]4층
+  0x00DFD768 [0x00B4] [script:07 49]지하[opt]5층
+  0x00DFD784 [0x00B4] [script:15 49]지하[opt]6층
+  0x00DFD7A0 [0x00B4] [script:23 49]지하[opt]7층
+  0x00DFD7BC [0x00B4] [script:31 49]지하[opt]8층
+
+# Chunk 19 - Sealed ruins
+  0x00EB9994 [0x00B4] [script:A7 0D]봉인의 유적 입구
+  0x00EB9C4C [0x00B4] [script:0D 0F]너는 아직 아미그의 유적에서[br]남은 일이 있다…
+  0x00EB9D40 [0x00B4] [script:88 0F]너는 아직 발바라드의 유적에서[br]남은 일이 있다…
+  0x00EB9E3E [0x00B4] [script:07 10]너는 아직 아라라토스의 유적에서[br]남은 일이 있다…
+  0x00EB9F34 [0x00B4] [script:82 10]너는 아직 그레이시누의 유적에서[br]남은 일이 있다…
+
+# Chunk 20 - Sealed ruins
+  0x00F764F6 [0x00B4] [script:FC 0A]봉인의 유적 입구
+  0x00F7663E [0x00B4] [script:AA 0B]너는 아직 브라키아의 유적에서[br]남은 일이 있다…
+  0x00F766FA [0x00B4] [script:09 0C]야고스 섬에서 파워 유닛을[br]손에 넣은 것 같군…
+  0x00F7673C [0x00B4] [script:1B 0C]지나가라…
+
+# Chunk 21 - Bounty and battle
+  0x0102EAEE [0x00B4] [script:AC 07]전투에 참가할 캐릭터를[br]선택해 주세요
+  0x010321E2 [0x00B4] [script:24 23][box:system][opt][opt][opt][opt]수배 몬스터：아쥬[box:close]
+  0x010323D6 [0x00B4] [script:1E 24][box:system][opt][opt][opt]수배 몬스터：샤무스[box:close]
+  0x01032864 [0x00B4] [script:64 26]수배 몬스터[br]아쥬를 쓰러뜨렸습니다
+  0x010328BA [0x00B4] [script:8B 26]숨어 있었는데…
+  0x01032900 [0x00B4] [script:B2 26]수배 몬스터[br]샤무스를 쓰러뜨렸습니다
+
+# Chunk 22 - Statues and guardians
+  0x010EC388 [0x00B4] [script:1C 1F]「감시자의 상」이라고,[br]대좌에 적혀 있다…
+  0x010EC3DC [0x00B4] [script:46 1F]「감시자의 상」이라고,[br]대좌에 적혀 있다…
+  0x010EC4FC [0x00B4] [script:D6 1F]「감시자의 상」이라고,[br]대좌에 적혀 있다…
+  0x010EC638 [0x00B4] [script:6D 20]뒤에서 날카로운 시선이 느껴진다
+  0x010EC6EE [0x00B4] [script:C6 20]우리는 감시자다!!
+  0x010EC710 [0x00B4] [script:DF 20]더러운 도적놈, 지금은[br]없는 주인의 명령에 의해…
+  0x010EC742 [0x00B4] [script:F0 20]너희들을 배제한다!!
+  0x010EC794 [0x00B4] [script:15 21]보물의 파수꾼
+  0x010EC8CC [0x00B4] [script:B1 21]보물의 파수꾼
+  0x010EC932 [0x00B4] [script:E4 21]보물의 파수꾼
+  0x010EC9A6 [0x00B4] [script:1E 22]보물의 파수꾼
+  0x010ECA0C [0x00B4] [script:51 22]보물의 파수꾼
+  0x010ED9BC [0x00B4] [script:2B 2A]봉인의 수호자
+  0x010ED9D2 [0x00B4] [script:36 2A]봉인의 수호자
+  0x010EEA24 [0x00B4] [script:61 32]파워 유닛을 손에 넣었다
+
+# Romalia story
+  0x01262730 [0x00B4] [script:5E 06][box:speech]입 다물고 뭔가 말해봐,[br]이 쓰레기 자식아!!
+  0x01262820 [0x00B4] [script:CF 06][box:speech]너도 레지스탕스의 일원인가!
+  0x012628B4 [0x00B4] [script:26 07][box:speech]단지 저항하지 못하는 자를 괴롭히는[br]비겁한 놈들을 못 본 척할 수 없었을 뿐이다
+  0x01262A00 [0x00B4] [script:C3 07][box:speech]비겁한 짓은 그만두고[br]그 녀석을 놓아줘라
+  0x012626EC [0x00B4] [script:34 06][box:speech]얼른 아지트 위치를 말해!!
+  0x01265FC0 [0x00B4] [script:A3 22]전투에 참가할 캐릭터를[br]선택해 주세요
+  0x012680CA [0x00B4] [script:26 33][box:system][opt][opt][opt]수배 몬스터：쟈칼[box:close]
+  0x01268448 [0x00B4] [script:E5 34]수배 몬스터[br]쟈칼을 쓰러뜨렸습니다
+
+# Building floors
+  0x0131D820 [0x00B4] [script:C6 05]라스트맵 번호가 예정 외입니다
+  0x0131F612 [0x00B4] [script:C2 14]엘리베이터로 33층에 갈 수 있게 되었다
+  0x01324EA0 [0x00B4] [script:02 41]30층.홀
+  0x01324EBE [0x00B4] [script:13 41]30층.동쪽 방
+  0x01324EE0 [0x00B4] [script:22 41]31층.홀
+  0x01324EFE [0x00B4] [script:33 41]31층.동쪽 방
+  0x01324F20 [0x00B4] [script:44 41]31층.서쪽 방
+  0x01324F42 [0x00B4] [script:53 41]32층.홀
+  0x01324F60 [0x00B4] [script:64 41]32층.서쪽 방
+  0x01324F82 [0x00B4] [script:73 41]99층.홀
+  0x01324FA0 [0x00B4] [script:83 41]최상층.홀
+  0x01324FC0 [0x00B4] [script:92 41]77층.홀
+  0x01324FDE [0x00B4] [script:A1 41]44층.홀
+
+# Retry message
+  0x013DC2D0 [0x00B4] [script:4B 08]이 층에서는 「다시 하기」가 유효합니다
