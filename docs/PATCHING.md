@@ -8,13 +8,31 @@ The Korean translation patch replaces Japanese text with Korean in STG dialogue 
 
 ## Quick Start (Recommended)
 
-```bash
-# Patch all files with unified character mapping
-python python/patch_all.py
+Use the workflow orchestrator to run all patching steps automatically:
 
-# Apply to disc image
-python python/patch_bin.py "output/patched/Arc the Lad II (Japan)/Arc the Lad II (Japan).bin"
+```bash
+# Run complete workflow (S100 + SG00 by default)
+python python/patch/patch_workflow.py
+
+# Patch specific stages
+python python/patch/patch_workflow.py S100 SG00 S200
+
+# Patch all available stages
+python python/patch/patch_workflow.py --all
+
+# Validation only (no patching)
+python python/patch/patch_workflow.py --validate-only
 ```
+
+The workflow performs:
+0. **Validation** - Check for truncation issues and `[box:speech][delay:00]` in wrong regions
+1. **Copy translations** - Copy `translated/ko/*.txt` to `output/patched/translation/`
+2. **Font + fixed-length patching** - Unified character mapping
+3. **Variable-length patching** - VLUT for each stage
+4. **Hook application** - Multi-chunk hook to SCPS_100.26
+5. **Disc image patching** - Apply all patches to BIN file
+
+Output: `output/patched/Arc the Lad II (Japan)/Arc the Lad II (Japan).bin`
 
 ## Critical Issue: Separate Patching
 
@@ -48,12 +66,16 @@ python python/patch_all.py
 
 ### Character Distribution
 
-| File | Unique Chars | Shared | Total |
-|------|--------------|--------|-------|
-| S100_STG.txt | 96 | 531 | 627 |
-| SG00_STG.txt | 137 | 531 | 668 |
-| SCPS_100_26_system.txt | 0 | 53 | 53 |
-| **Combined** | - | - | **764** |
+| File | Description | Entries |
+|------|-------------|---------|
+| S100_STG.txt | Stage dialogue | 1,309 |
+| SG00_STG.txt | Stage dialogue | 2,391 |
+| SCPS_100_26.txt | System, char names (2 tables) | 1,732 |
+| SDIC_BIN.txt | Monster descriptions | 220 |
+| YGUILD_BIN.txt | Guild quests | 352 |
+| SMITH_BIN.txt | Equipment effects | 598 |
+| BEAM_DAT.txt | Battle text, char names (2 tables) | 2,831 |
+| **Unified Font** | Total Korean glyphs | **1,014** |
 
 ## Patching Modes
 
@@ -124,31 +146,31 @@ A new approach using interpreter hooking enables variable-length translations:
 4. Korean text written to padding region after VLUT
 5. Template-driven dialogue extraction using `decode_text.py:scan_stg()`
 
-**Workflow**:
+**Workflow** (use `patch_workflow.py` instead for automated execution):
 ```bash
 # 1. Standard Korean patching (font + fixed-length text)
-python python/patch_all.py
+python python/patch/patch_all.py
 
 # 2. Apply variable-length patching with per-chunk VLUTs
-python python/patch_variable_length_multi.py S100
-python python/patch_variable_length_multi.py SG00
+python python/patch/patch_variable_length_multi.py S100
+python python/patch/patch_variable_length_multi.py SG00
 
 # 3. Apply multi-chunk hook to SCPS_100.26
-python python/apply_hook.py --variable-length-multi
+python python/patch/apply_hook.py --variable-length-multi
 
 # 4. Apply to disc image
-python python/patch_bin.py "output/patched/Arc the Lad II (Japan)/Arc the Lad II (Japan).bin"
+python python/patch/patch_bin.py "output/patched/Arc the Lad II (Japan)/Arc the Lad II (Japan).bin"
 ```
 
 **S100.STG Results** (11 chunks):
-- 1,053 dialogues patched with full-length Korean translations
-- 92 dialogues skipped (no translation or no space)
-- Chunk 8 uses fixed-length fallback (no padding space)
+- 1,207 dialogues patched with variable-length VLUT
+- 98 dialogues use fixed-length fallback
+- Chunk 8 has no padding space (fixed-length only)
 
 **SG00.STG Results** (56 chunks):
-- 685 dialogues patched with full-length Korean translations
-- 785 dialogues skipped (15 chunks have no padding space)
-- Chunks without space: 0, 4, 5, 6, 8, 9, 10, 11, 22, 24, 31, 39, 40, 46, 53
+- 1,152 dialogues patched with variable-length VLUT
+- 1,244 dialogues use fixed-length fallback
+- 15 chunks have no padding space: 0, 4, 5, 6, 8, 9, 10, 11, 22, 24, 31, 39, 40, 46, 53
 
 For implementation details, see `VARIABLE_LENGTH_IMPLEMENTATION.md`.
 
@@ -258,34 +280,42 @@ After patching:
 output/patched/
 ├── Arc the Lad II (Japan)/
 │   └── Arc the Lad II (Japan).bin   # Patched disc image
-├── COMM.IMG                          # Patched font (764 Korean glyphs)
+├── translation/                      # Translations used for patching
+│   ├── S100_STG.txt
+│   ├── SG00_STG.txt
+│   ├── SCPS_100_26.txt
+│   ├── SDIC_BIN.txt
+│   └── YGUILD_BIN.txt
+├── COMM.IMG                          # Patched font (895 Korean glyphs)
 ├── S100.STG                          # Patched stage file
 ├── SG00.STG                          # Patched stage file
 ├── SCPS_100.26                       # Patched executable
+├── SDIC.BIN                          # Patched dictionary
+├── YGUILD.BIN                        # Patched guild data
 └── unified_charmap.txt               # Character mapping reference
 ```
 
+The `translation/` subdirectory preserves the exact translation files used for patching, ensuring traceability.
+
 ## Current Status
 
-### STG Files (Variable-Length Patching)
+### Patched Files
 
-| File | Mode | Total Dialogues | Patched | Notes |
-|------|------|-----------------|---------|-------|
-| COMM.IMG | - | - | 854 glyphs | Unified Korean font |
-| S100.STG | variable | 1,321 | 1,053 | 10/11 chunks with VLUT |
-| SG00.STG | variable | 2,445 | 685 | 41/56 chunks with VLUT |
-| SCPS_100.26 | fixed | 250+ | 250 | System text, location names + hook |
+| File | Mode | Entries | Notes |
+|------|------|---------|-------|
+| COMM.IMG | font | 895 glyphs | Unified Korean font |
+| S100.STG | variable | 1,309 (fixed) + 1,204 (VLUT) | 10/11 chunks with VLUT |
+| SG00.STG | variable | 2,391 (fixed) + 1,149 (VLUT) | 41/56 chunks with VLUT |
+| SCPS_100.26 | fixed | 1,645 | System text, monsters, skills, locations + hook |
+| SDIC.BIN | fixed | 218 | Character profiles, monster descriptions |
+| YGUILD.BIN | fixed | 351 | Guild quest descriptions |
 
-### Non-STG Files (Not Yet Translated)
-
-These binary files contain translatable text but do not have translation files yet:
+### Not Yet Translated
 
 | File | Strings | Menu Options | Description | Priority |
 |------|---------|--------------|-------------|----------|
 | **BEAM.DAT** | 2,753 | 686 | Battle/event dialogues | High |
-| **YGUILD.BIN** | 352 | 109 | Guild quest descriptions | Medium |
-| **SMITH.BIN** | 598 | 15 | Equipment/smithing effects | Medium |
-| **SDIC.BIN** | 220 | 0 | Character profiles, monster descriptions | Low |
+| **SMITH.BIN** | 568 | 15 | Equipment/smithing effects | Medium |
 | **YSHOP.BIN** | 1 | 0 | Shop/item text | Low |
 | **YPROP.BIN** | 5 | 0 | Item descriptions | Low |
 | **YSEG.BIN** | 2 | 0 | Character text | Low |

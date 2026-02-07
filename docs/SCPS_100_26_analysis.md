@@ -127,10 +127,10 @@ This clears ~24 KB of BSS (0x8019E850 to 0x801FC834) before proceeding to game i
 
 | Property | Value |
 |----------|-------|
-| Main text region | File `0x0D2600` -- `0x0D7A00` (21,504 bytes) |
+| Main text region | File `0x0D2700` -- `0x0D7A00` (21,248 bytes) |
 | Secondary text region | File `0x0BEF00` -- `0x0C1100` (8,704 bytes) |
-| Extractable strings | **84** (after strict filtering) |
-| Raw scan candidates | 21,090 (mostly MIPS code false positives) |
+| Extractable strings | **1,717** (region-aware scan) |
+| Previous (strict filter) | 123 (missed 1,594 short strings) |
 | Encoding | Game custom (same as STG/BIN files, see `TEXT_ENCODING.md`) |
 
 ### Decoding Challenges
@@ -139,16 +139,20 @@ SCPS_100.26 is a PS1 executable containing ~888 KB of MIPS R3000A machine code. 
 
 **The problem**: MIPS instruction bytes frequently map to valid game character IDs, producing long runs of nonsensical kana/kanji that appear to be text but are actually machine code. For example, the byte sequence `0x28 0x01` (a common MIPS instruction pattern) decodes to "りあ" in the game's encoding.
 
-**Solution**: The decoder uses a **strict filter** for executable files that requires:
-1. Proper Japanese sentence endings (ます、です、ません、か、etc.)
-2. Rejection of repetitive patterns (e.g., "ギギギ" from code loops)
-3. Rejection of excessive katakana "ギ" (charID 0x07, very common in MIPS code)
-4. Rejection of Latin letters mixed randomly with Japanese
-5. Balanced hiragana/katakana ratio checks
+**Solution**: The decoder uses **region-aware scanning** for executable files:
 
-This reduces 21,090 raw candidates to **84 verified text strings**, concentrated in the `0x0D3xxx` region where actual game text is stored.
+1. Identify known text data regions through file analysis (0x0D2700-0x0D7A00)
+2. Only scan these regions, avoiding MIPS code entirely
+3. Use minimal filtering inside text regions (just require valid charIDs)
+4. Skip code regions completely to avoid false positives
 
-### Extracted Text Categories (84 strings)
+This approach captures **1,717 valid strings** (vs 123 with the old strict filter) by:
+
+- Not requiring sentence endings for short strings (names, labels)
+- Not requiring kanji for menu options
+- Avoiding the need for manual `MENU_WORDS` exemptions
+
+### Extracted Text Categories (1,717 strings)
 
 The strict filter extracts strings that have proper Japanese sentence structure. Most extracted strings are from the `0x0D3xxx`-`0x0D6xxx` range:
 
@@ -163,11 +167,24 @@ The strict filter extracts strings that have proper Japanese sentence structure.
 
 **Note**: Many game strings (character names, monster names, item names, location names, menu labels) are **not extracted** by the strict filter because they lack sentence endings. These strings exist in the file but require manual extraction or a region-specific scan. The 84 extracted strings represent the subset with clear sentence structure that can be reliably distinguished from MIPS code bytes.
 
+### Duplicate Character Name Tables
+
+The executable contains **two copies** of the character name table that must both be patched:
+
+| Table | File Offset | RAM Address | Content |
+|-------|-------------|-------------|---------|
+| Table 1 | `0x0D269A` | `0x8019329A` | 15 playable character names |
+| Table 2 | `0x0D4CEA` | `0x801958EA` | 15 playable character names (duplicate) |
+
+Both tables contain the same character names (アーク, ポコ, トシュ, イーガ, ゴーゲン, エルク, リーザ, シャンテ, シュウ, etc.) and must be translated identically. Missing one table causes garbled character name display in certain game contexts.
+
+The offset difference between tables is 0x2650 (9,808 bytes).
+
 ### Strings NOT Extracted (require manual or region-based extraction)
 
 | Category | Estimated Count | File Offset Range | Reason Not Extracted |
 |----------|-----------------|-------------------|---------------------|
-| Character names | ~20 | 0x0D26B2-0x0D2700 | No sentence endings (single words) |
+| Character names | ~30 (2 tables) | 0x0D269A-0x0D26F0, 0x0D4CEA-0x0D4D40 | No sentence endings (single words) |
 | Monster names | ~150 | 0x0D2700-0x0D2A90 | No sentence endings |
 | Skill/ability names | ~100 | 0x0D2F00-0x0D3260 | No sentence endings |
 | Menu/UI labels | ~30 | 0x0D32E0-0x0D33B0 | Short labels without particles |
@@ -380,7 +397,14 @@ SCPS_100.26 contains game text strings that require translation. Due to the diff
 | **High** | **Location names** | **68** | ~68 |
 | Low | Menu labels, FMV labels | 17 | ~55 |
 
-**Translation Status (2026-02-07)**: 250 strings translated, including all location names (map labels). Location names are found at offsets `0x000D690C`-`0x000D7924` and include city names, building names, and area map labels.
+**Translation Status (2026-02-07)**: 854 of 1,717 strings translated (50%), including:
+
+- Monster names (256 entries): 엘리멘탈, 고스트, 스켈레톤, 드래곤 등
+- Character names (53 entries): 아크, 엘크, 리자, 포코 등
+- Skill/ability names (118 entries): 문차베기, 퇴마광탄 등
+- System/UI text (287 entries): 옵션, 장비, 저장 등
+- Location names (68 entries): 프로디아스 길드, 로말리아 공중성 등
+- Title menu: 처음부터, 이어서 계속
 
 ### What Needs Modification
 

@@ -1112,6 +1112,8 @@ def scan_file(data, decode_table, prefix=0, ff08_only=False):
             'はい', 'いいえ', 'やめる', 'もどる', 'つぎへ', 'すすむ',
             'セーブ', 'ロード', 'カード', 'データ', 'メニュー', 'タイトル',
             'アイテム', 'ステータス', 'オプション', 'ゲーム', 'スタート',
+            # Title menu options
+            'はじめから', 'つづきから', 'このままつづける', 'おわる',
         )
         if (clean and scan_pos < length and data[scan_pos] == 0x00
                 and valid_chars >= 2):  # At least 2 chars for menu words
@@ -1188,6 +1190,8 @@ def filter_real_text(results, min_kanji=2, strict=False):
             'はい', 'いいえ', 'やめる', 'もどる', 'つぎへ', 'すすむ',
             'セーブ', 'ロード', 'カード', 'データ', 'メニュー', 'タイトル',
             'アイテム', 'ステータス', 'オプション', 'ゲーム', 'スタート',
+            # Title menu options
+            'はじめから', 'つづきから', 'このままつづける', 'おわる',
         )
         is_menu_word = any(stripped == w or stripped.startswith(w) for w in MENU_WORDS)
 
@@ -1245,6 +1249,101 @@ def filter_real_text(results, min_kanji=2, strict=False):
         filtered.append((offset, consumed, text))
 
     return filtered
+
+
+def scan_text_regions(data, decode_table, text_regions):
+    """Scan known text data regions with minimal filtering.
+
+    For executable files like SCPS_100.26, the main text data is stored in
+    specific regions that can be identified by analysis. Inside these regions,
+    we use minimal filtering (just require valid charIDs) since we know the
+    data is actual game text, not MIPS code.
+
+    Args:
+        data: Binary file data
+        decode_table: Character ID to character mapping
+        text_regions: List of (start, end) tuples defining known text regions
+
+    Returns:
+        List of (offset, consumed, text) tuples for all valid strings.
+    """
+    results = []
+    seen_offsets = set()
+
+    for region_start, region_end in text_regions:
+        pos = region_start
+
+        while pos < region_end:
+            # Skip null bytes
+            while pos < region_end and data[pos] == 0x00:
+                pos += 1
+            if pos >= region_end:
+                break
+
+            # Try to decode string at this position
+            text, consumed = decode_string(data, pos, decode_table)
+
+            if text and consumed > 0:
+                # Strip control codes for validation
+                stripped = text
+                for tag in ("[box:system]", "[box:close]", "[box:speech]",
+                            "[box:narration]", "[cursor]", "[br]", "[opt]"):
+                    stripped = stripped.replace(tag, "")
+                stripped = re.sub(r"\[.*?\]", "", stripped)
+
+                # Only reject if:
+                # 1. Empty after stripping control codes
+                # 2. Contains unknown charIDs [?XXXX]
+                has_unknown = bool(re.search(r"\[\?\d+\]", text))
+
+                if stripped and not has_unknown:
+                    if pos not in seen_offsets:
+                        results.append((pos, consumed, text))
+                        seen_offsets.add(pos)
+
+                pos += consumed
+            else:
+                pos += 1
+
+    results.sort(key=lambda r: r[0])
+    return results
+
+
+def scan_executable(data, decode_table, text_regions):
+    """Scan an executable file using region-aware filtering.
+
+    For executables like SCPS_100.26, we only scan known text data regions
+    where game text is stored. This avoids false positives from MIPS code
+    bytes that happen to look like valid Japanese text.
+
+    Args:
+        data: Binary file data
+        decode_table: Character ID to character mapping
+        text_regions: List of (start, end) tuples for known text data regions
+
+    Returns:
+        List of (offset, consumed, text) tuples.
+    """
+    # Only scan known text regions (minimal filtering)
+    # Code regions are not scanned to avoid false positives
+    return scan_text_regions(data, decode_table, text_regions)
+
+
+# Known text regions for SCPS_100.26 (main executable)
+SCPS_TEXT_REGIONS = [
+    (0x0D2690, 0x0D26F0),  # Character names - Table 1 (15 playable characters)
+    (0x0D2700, 0x0D7A00),  # Main text data (system messages, items, etc.)
+]
+
+# Known text regions for BEAM.DAT (battle/event effects with embedded text)
+# BEAM.DAT has character name tables duplicated across multiple effect entries
+BEAM_TEXT_REGIONS = [
+    (0x0216C720, 0x0216C780),  # Character names - Table 1
+    (0x0216C86C, 0x0216D000),  # Monster names
+    (0x0216D5D0, 0x0216D800),  # Save/load messages
+    (0x0216ECC0, 0x0216ED20),  # Character names - Table 2
+    (0x02170800, 0x02171000),  # Location names
+]
 
 
 def find_text(data, search_str, decode_table, encode_table, prefix=0):

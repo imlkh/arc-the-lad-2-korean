@@ -171,18 +171,18 @@ python python/patch/patch_bin.py "output/patched/Arc the Lad II (Japan)/Arc the 
 
 | File | Entries | Description | Status |
 |------|---------|-------------|--------|
-| SCPS_100.26 | 1,645 | System messages, monsters, skills, locations | **Translated** |
-| SDIC.BIN | 218 | Profiles, monster descriptions | **Translated** |
-| YGUILD.BIN | 351 | Guild quest descriptions | **Translated** |
-| SMITH.BIN | 568 | Equipment effects | **Translated** |
-| **BEAM.DAT** | 2,753 | Battle/event dialogues | Pending |
+| SCPS_100.26 | 1,735 | System messages, monsters, skills, char names (2 tables) | **Translated** |
+| SDIC.BIN | 220 | Profiles, monster descriptions | **Translated** |
+| YGUILD.BIN | 352 | Guild quest descriptions | **Translated** |
+| SMITH.BIN | 598 | Equipment effects | **Translated** |
+| BEAM.DAT | 3,274 | Battle/event dialogues, char names (2 tables) | **Translated** |
 | YSHOP.BIN | 1 | Shop/item text | Pending |
 | YPROP.BIN | 5 | Item descriptions | Pending |
 | YSEG.BIN | 2 | Character text | Pending |
 | YEND.BIN | 155 | ASCII credits (English) | N/A |
 | CHA.BIN | 0 | Character data | N/A |
 
-**High priority:** BEAM.DAT (battle dialogues with 686 menu options)
+**Note:** SCPS_100.26 and BEAM.DAT each contain two duplicate character name tables that must both be patched for correct display.
 
 ## Character/Place Name Mappings
 

@@ -172,14 +172,17 @@ The embedded EXE contains master data tables in its data region:
 
 | File Offset | RAM Address | Content |
 |-------------|-------------|---------|
-| `0x0216C720` | `0x80190320` | Character name table (~12 names) |
+| `0x0216C720` | `0x80190320` | Character name table 1 (15 playable characters) |
 | `0x0216C86C` | `0x8019046C` | Monster name table (~150+ names) |
 | `0x0216D03E` | `0x80190C3E` | Skill/technique name table (~50+ names) |
 | `0x0216D5D0` | `0x801911D0` | Save/load system messages (~20 strings) |
+| `0x0216ECC0` | `0x801928C0` | Character name table 2 (15 playable characters) |
 | `0x02170800` | `0x80194400` | Location/map name table (~80+ names) |
 | `0x021716D0` | `0x801952D0` | Movie/cutscene name table (24 entries) |
 
 These tables are structurally similar to the equivalent tables in SCPS_100.26 but are a separate copy maintained within the battle engine.
+
+**Important:** Character names appear in **two separate tables** (0x0216C720 and 0x0216ECC0). Both tables must be patched for character names to display correctly in all battle contexts. The offset difference between tables is 0x25A0 (9,632 bytes).
 
 ## Zone D: Tail Graphics (0x21DF000-0x21E7FFF)
 

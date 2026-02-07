@@ -14,6 +14,36 @@
 | Remaining dialogues | ~13,192 |
 | Batch progress | 34/434 (7.8%) |
 
+## Patched Files Status
+
+| File | Total Strings | Translated | Notes |
+|------|---------------|------------|-------|
+| COMM.IMG | - | 1,014 glyphs | Unified Korean font |
+| SCPS_100.26 | 1,735 | 1,732 | Includes 2 character name tables |
+| S100.STG | 1,309 | 1,309 | Variable-length VLUT |
+| SG00.STG | 2,391 | 2,391 | Variable-length VLUT |
+| SDIC.BIN | 220 | 220 | Character/monster descriptions |
+| YGUILD.BIN | 352 | 352 | Guild quest descriptions |
+| SMITH.BIN | 598 | 598 | Equipment descriptions |
+| BEAM.DAT | 3,274 | 2,831 | Includes 2 character name tables |
+
+## Decoder Improvements (2026-02-07)
+
+### Duplicate Character Name Tables Fix
+
+Both SCPS_100.26 and BEAM.DAT contain **two copies** of the character name table:
+
+| File | Table 1 | Table 2 | Offset Difference |
+|------|---------|---------|-------------------|
+| SCPS_100.26 | 0x0D269A | 0x0D4CEA | 0x2650 (9,808 bytes) |
+| BEAM.DAT | 0x0216C720 | 0x0216ECC0 | 0x25A0 (9,632 bytes) |
+
+The decoder now scans these additional regions:
+- SCPS_TEXT_REGIONS includes 0x0D2690-0x0D26F0 for Table 1
+- BEAM_TEXT_REGIONS includes both 0x0216C720 and 0x0216ECC0 regions
+
+Missing either table causes garbled character names (e.g., "주같겠" instead of "엘크").
+
 ## Decoder Improvements (2026-02-06)
 
 ### Paired Signature Validation
@@ -181,6 +211,14 @@ The translation uses a batch system for large files:
 - **Batch files**: `translated/ko/batches/`
 - **Manifest**: `translated/ko/batches/manifest.json`
 - **Unique chars**: `translated/ko/unique_korean_chars.txt`
+
+### Patched Output
+
+After running `python python/patch/patch_workflow.py`:
+
+- **Patched disc image**: `output/patched/Arc the Lad II (Japan)/Arc the Lad II (Japan).bin`
+- **Translations used**: `output/patched/translation/*.txt` (copy of translations used for patching)
+- **Character mapping**: `output/patched/unified_charmap.txt`
 
 ## Completion History
 
