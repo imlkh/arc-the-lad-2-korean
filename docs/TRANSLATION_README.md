@@ -24,11 +24,19 @@ atl2_korean_translation/
 │   │   ├── validate_dupes.py    # Find duplicate characters
 │   │   └── validate_*.py        # Other validation scripts
 │   │
-│   └── translation/             # Batch translation pipeline
-│       ├── translate_batch_prep.py   # Prepare batches of 30 lines
-│       ├── translate_batch_run.py    # Instructions for batch translation
-│       ├── translate_batch_merge.py  # Merge completed batches
-│       └── extract_unique_korean.py  # Extract unique Hangul syllables
+│   ├── translation/             # Batch translation pipeline
+│   │   ├── translate_batch_prep.py   # Prepare batches of 30 lines
+│   │   ├── translate_batch_run.py    # Instructions for batch translation
+│   │   ├── translate_batch_merge.py  # Merge completed batches
+│   │   └── extract_unique_korean.py  # Extract unique Hangul syllables
+│   │
+│   └── patch/                   # Patching tools
+│       ├── patch_workflow.py        # Orchestrator: runs complete patch workflow
+│       ├── patch_all.py             # Font + fixed-length patching
+│       ├── patch_variable_length_multi.py  # Variable-length VLUT patching
+│       ├── patch_korean.py          # Core patching functions
+│       ├── apply_hook.py            # Apply variable-length hook to EXE
+│       └── patch_bin.py             # Apply patches to disc image
 │
 ├── scripts/                     # One-off translation scripts (legacy)
 │   └── stg_translators/         # Stage-specific translation attempts
@@ -41,6 +49,12 @@ atl2_korean_translation/
 │   │   ├── korean_chars/        # Generated Korean glyph PNGs
 │   │   ├── COMM_IMG_KR.IMG      # Modified font with Korean
 │   │   └── *.png                # Font visualizations
+│   ├── patched/
+│   │   ├── translation/         # Copy of translation files used for patching
+│   │   ├── Arc the Lad II (Japan)/  # Patched disc image
+│   │   ├── *.STG                # Patched stage files
+│   │   ├── COMM.IMG             # Patched font
+│   │   └── unified_charmap.txt  # Korean character mapping
 │   └── validation/              # Validation output images
 │
 ├── translated/                  # Korean translations
@@ -97,32 +111,78 @@ python python/font/replace_kana_with_korean.py
 # Output: output/font/korean_chars/, output/font/COMM_IMG_KR.IMG
 ```
 
+### 4. Apply Patches (Recommended)
+
+Use the orchestrator script to run the complete patch workflow:
+
+```bash
+# Patch S100 and SG00 (default)
+python python/patch/patch_workflow.py
+
+# Patch specific stages
+python python/patch/patch_workflow.py S100 SG00 S200
+
+# Patch all available stages
+python python/patch/patch_workflow.py --all
+
+# Output: output/patched/Arc the Lad II (Japan)/Arc the Lad II (Japan).bin
+```
+
+The workflow runs these steps automatically:
+0. **Validation** - Check for truncation issues and invalid control codes
+1. **Copy translations** - Copy `translated/ko/*.txt` to `output/patched/translation/`
+2. **patch_all.py** - Font patching + fixed-length text patching
+3. **patch_variable_length_multi.py** - Variable-length VLUT for each stage
+4. **apply_hook.py** - Apply variable-length hook to SCPS_100.26
+5. **patch_bin.py** - Apply all patches to disc image
+
+The patching scripts read from `output/patched/translation/` to ensure the exact translations used are preserved alongside the patched game files.
+
+### 4b. Manual Patching (Alternative)
+
+If you need more control, run each step manually:
+
+```bash
+# Step 1: Font + fixed-length patching
+python python/patch/patch_all.py
+
+# Step 2: Variable-length patching (per stage)
+python python/patch/patch_variable_length_multi.py S100
+python python/patch/patch_variable_length_multi.py SG00
+
+# Step 3: Apply hook
+python python/patch/apply_hook.py --variable-length-multi
+
+# Step 4: Apply to disc image
+python python/patch/patch_bin.py "output/patched/Arc the Lad II (Japan)/Arc the Lad II (Japan).bin"
+```
+
 ## Translation Status
 
 ### STG Files (Main Story)
 
-| File | Strings | Mode | Patched | Status |
-|------|---------|------|---------|--------|
-| S100.STG | 1,321 | variable | 1,053 | **Translated** |
-| SG00.STG | 2,445 | variable | 685 | **Translated** |
+| File | Strings | Fixed-Length | Variable-Length | Status |
+|------|---------|--------------|-----------------|--------|
+| S100.STG | 1,309 | 1,309 | 1,204 | **Translated** |
+| SG00.STG | 2,391 | 2,391 | 1,149 | **Translated** |
 | Other STG (17 files) | ~17,000 | - | - | Pending |
 
 ### Non-STG Files
 
-| File | Total Strings | Menu [opt] | Description | Status |
-|------|---------------|------------|-------------|--------|
-| **BEAM.DAT** | 2,753 | 686 | Battle/event dialogues | **Missing** |
-| **YGUILD.BIN** | 352 | 109 | Guild quest descriptions | **Missing** |
-| **SMITH.BIN** | 598 | 15 | Equipment effects | **Missing** |
-| **SDIC.BIN** | 220 | 0 | Profiles, monster descriptions | **Missing** |
-| SCPS_100.26 | 250+ | 3 | System messages, location names | **Translated** |
-| YSHOP.BIN | 1 | 0 | Shop/item text | Pending |
-| YPROP.BIN | 5 | 0 | Item descriptions | Pending |
-| YSEG.BIN | 2 | 0 | Character text | Pending |
-| YEND.BIN | 155 | 0 | ASCII credits (English) | N/A |
-| CHA.BIN | 0 | 0 | Character data | N/A |
+| File | Entries | Description | Status |
+|------|---------|-------------|--------|
+| SCPS_100.26 | 1,645 | System messages, monsters, skills, locations | **Translated** |
+| SDIC.BIN | 218 | Profiles, monster descriptions | **Translated** |
+| YGUILD.BIN | 351 | Guild quest descriptions | **Translated** |
+| SMITH.BIN | 568 | Equipment effects | **Translated** |
+| **BEAM.DAT** | 2,753 | Battle/event dialogues | Pending |
+| YSHOP.BIN | 1 | Shop/item text | Pending |
+| YPROP.BIN | 5 | Item descriptions | Pending |
+| YSEG.BIN | 2 | Character text | Pending |
+| YEND.BIN | 155 | ASCII credits (English) | N/A |
+| CHA.BIN | 0 | Character data | N/A |
 
-**High priority for menu translation:** BEAM.DAT (686 menu options), YGUILD.BIN (109 quest menus)
+**High priority:** BEAM.DAT (battle dialogues with 686 menu options)
 
 ## Character/Place Name Mappings
 
@@ -331,6 +391,70 @@ This merges translations with the decoded source metadata to produce the correct
 ```
 
 All hex offsets, opcodes, script references, and control codes are preserved exactly from the decoded source.
+
+## Non-STG Translation File Format
+
+Translation files for non-STG binary files (`translated/ko/*_BIN.txt`, `translated/ko/SCPS_100_26.txt`) must also mirror the decoded source format exactly.
+
+### Non-STG Format Specification
+
+```text
+# SCPS_100.26 — 1717 strings (Korean translations)   <- Header comment
+                                                      <- Blank line
+  0x000D2708 [   7] 엘리멘탈                          <- Entry line
+  0x000D2710 [   7] 빙염귀
+  0x000D2718 [  11] 엘리멘탈 마스터
+```
+
+### Entry Line Components
+
+| Component | Format | Example | Description |
+|-----------|--------|---------|-------------|
+| Indent | 2 spaces | `  ` | Fixed indentation |
+| Offset | `0xXXXXXXXX` | `0x000D2708` | File byte offset (uppercase hex) |
+| Length | `[NNNN]` | `[   7]` | Original Japanese byte length (right-justified, 4 chars) |
+| Text | Korean text | `엘리멘탈` | Translated text |
+
+### Important Notes
+
+1. **Keep the length field from the decoded source** - The `[length]` value shows the original Japanese text's byte length. The patcher uses this for validation and will warn if Korean translations exceed the original slot size.
+
+2. **Length validation** - Before patching, the patcher validates that each Korean translation fits within the original slot. If a translation is too long, a warning is shown and the text will be truncated.
+
+3. **Preserve untranslated entries** - If a string is not translated, keep the original Japanese text.
+
+4. **No section comments required** - Unlike the CSV format, the proper format doesn't need section headers like `# ===== MONSTERS =====`.
+
+### Converting from CSV Format
+
+If you have translations in simplified CSV format (`offset,korean_text`):
+
+```bash
+# Convert a specific file
+python python/translation/convert_bin_format.py SDIC_BIN
+
+# Convert all available files
+python python/translation/convert_bin_format.py --all
+```
+
+This merges translations with the decoded source to produce the correct format with length fields.
+
+Available file keys: `SCPS_100_26`, `SDIC_BIN`, `YGUILD_BIN`, `SMITH_BIN`, `BEAM_DAT`
+
+### Example Complete File Structure
+
+```text
+# SCPS_100.26 — 1717 strings (Korean translations)
+
+  0x000D2700 [   2] こ
+  0x000D2702 [   2] ？
+  0x000D2708 [   7] 엘리멘탈
+  0x000D2710 [   7] 빙염귀
+  ...
+  0x000D7990 [  35] [opt]메모리카드를 체크합니다[br]　　잠시만 기다려주세요
+```
+
+The format mirrors the decoded file exactly, with Korean text replacing Japanese where translated.
 
 ## References
 
