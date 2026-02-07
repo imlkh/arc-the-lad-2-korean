@@ -219,6 +219,10 @@ SCRIPT_BLOCK_SIZE = 10
 STG_CHUNK_SIZE = 0xBC800  # 772,096 bytes per chunk
 STG_TEXT_REGION_OFFSET = 0xB4000  # Text region starts at +0xB4000 within each chunk
 STG_TEXT_REGION_SIZE = 0x8800  # ~34,816 bytes text region per chunk
+STG_EVENT_SCRIPT_OFFSET = 0xB0000  # Event script region starts at +0xB0000 within each chunk
+STG_EVENT_SCRIPT_SIZE = 0x4000  # 16,384 bytes event script region per chunk
+STG_PADDING_OFFSET = 0xA0000  # Padding region starts at +0xA0000 within each chunk
+STG_PADDING_SIZE = 0x10000  # 65,536 bytes padding region per chunk (0xA0000-0xB0000)
 
 # Valid speaker opcodes found in templates
 VALID_SPEAKER_OPCODES = {
@@ -411,6 +415,44 @@ def _get_chunk_text_regions(file_size):
         text_end = min(chunk_start + STG_CHUNK_SIZE, file_size)
         if text_start < file_size:
             regions.append((text_start, text_end, i))
+    return regions
+
+
+def _get_chunk_event_script_regions(file_size):
+    """Calculate event script region boundaries for each chunk in an STG file.
+
+    The event script region (0xB0000-0xB4000) can contain embedded dialogue text
+    that is not covered by the main text region scanning.
+
+    Returns list of (event_start, event_end, chunk_index) tuples.
+    """
+    regions = []
+    num_chunks = file_size // STG_CHUNK_SIZE
+    for i in range(num_chunks):
+        chunk_start = i * STG_CHUNK_SIZE
+        event_start = chunk_start + STG_EVENT_SCRIPT_OFFSET
+        event_end = chunk_start + STG_EVENT_SCRIPT_OFFSET + STG_EVENT_SCRIPT_SIZE
+        if event_end <= file_size:
+            regions.append((event_start, event_end, i))
+    return regions
+
+
+def _get_chunk_padding_regions(file_size):
+    """Calculate padding region boundaries for each chunk in an STG file.
+
+    The padding region (0xA0000-0xB0000) can contain embedded dialogue text
+    in some chunks (e.g., Chunk 4 in S100.STG).
+
+    Returns list of (padding_start, padding_end, chunk_index) tuples.
+    """
+    regions = []
+    num_chunks = file_size // STG_CHUNK_SIZE
+    for i in range(num_chunks):
+        chunk_start = i * STG_CHUNK_SIZE
+        padding_start = chunk_start + STG_PADDING_OFFSET
+        padding_end = chunk_start + STG_PADDING_OFFSET + STG_PADDING_SIZE
+        if padding_end <= file_size:
+            regions.append((padding_start, padding_end, i))
     return regions
 
 
@@ -778,6 +820,8 @@ def scan_stg(data, decode_table, use_heuristics=True, filter_garbage=True):
 
     # --- Scan for orphan menu texts (A9 00 texts with [opt] not captured by templates) ---
     # These are standalone menu options that don't have associated templates
+    # Only capture REAL menus with [br][opt] pattern (each option on its own line)
+    # Filter out: tables using [opt] for column spacing, dialogue pauses
     stats['orphan_menus_found'] = 0
     for region_start, region_end, chunk_idx in chunk_regions:
         pos = region_start
@@ -787,7 +831,9 @@ def scan_stg(data, decode_table, use_heuristics=True, filter_garbage=True):
                 if pos not in found_offsets:
                     # Decode and check if it's a menu text
                     text, consumed = decode_string(data, pos + 2, decode_table, prefix=2)
-                    if text and '[opt]' in text:
+                    # Real menus have [br][opt] pattern (option on new line)
+                    # Skip: tables with [opt][opt] or 漢[opt]字, dialogue pauses
+                    if text and '[br][opt]' in text:
                         # Validate it's a real menu (strip tags and check content)
                         stripped = text
                         for tag in ("[box:system]", "[box:close]", "[box:speech]",
@@ -802,6 +848,88 @@ def scan_stg(data, decode_table, use_heuristics=True, filter_garbage=True):
                             dialogues.append((pos + 2, consumed, text, 0x00A9))
                             found_offsets.add(pos + 2)
                             stats['orphan_menus_found'] += 1
+                            pos = pos + 2 + consumed
+                            continue
+            pos += 1
+
+    # --- Scan Event Script region (0xB0000-0xB4000) for dialogues ---
+    # This region contains embedded dialogue text that is not covered by template scanning.
+    # Includes story dialogues, item messages, and system prompts.
+    # IMPORTANT: This region has more binary data, so we use stricter validation:
+    # - Must have [box:] tag (dialogue structure), or
+    # - Must have kanji (real Japanese text), or
+    # - Must be a menu with [br][opt] pattern
+    stats['event_script_dialogues_found'] = 0
+    event_script_regions = _get_chunk_event_script_regions(len(data))
+    for region_start, region_end, chunk_idx in event_script_regions:
+        pos = region_start
+        while pos < region_end - 4:
+            # Look for A9 00 marker (dialogue stream marker)
+            if data[pos:pos + 2] == b'\xA9\x00':
+                if pos + 2 not in found_offsets:
+                    # Decode the text
+                    text, consumed = decode_string(data, pos + 2, decode_table, prefix=2)
+                    if text:
+                        # Strip tags to check content
+                        stripped = text
+                        for tag in ("[box:system]", "[box:close]", "[box:speech]",
+                                    "[box:narration]", "[cursor]", "[br]", "[opt]"):
+                            stripped = stripped.replace(tag, "")
+                        stripped = re.sub(r"\[script:.*?\]", "", stripped)
+                        stripped = re.sub(r"\[.*?\]", "", stripped)
+
+                        # Strict validation for Event Script region:
+                        # 1. Has [box:] tag (proper dialogue structure)
+                        has_box_tag = '[box:' in text
+                        # 2. Has kanji (real Japanese text)
+                        has_kanji = any('\u4e00' <= c <= '\u9fff' for c in stripped)
+                        # 3. Is a menu with [br][opt] pattern
+                        is_menu = '[br][opt]' in text
+
+                        # Require meaningful content and at least one validity indicator
+                        if (len(stripped) >= 2 and not _is_garbage_text(text)
+                                and (has_box_tag or has_kanji or is_menu)):
+                            # Use 0x00B0 as context opcode for Event Script region dialogues
+                            dialogues.append((pos + 2, consumed, text, 0x00B0))
+                            found_offsets.add(pos + 2)
+                            stats['event_script_dialogues_found'] += 1
+                            pos = pos + 2 + consumed
+                            continue
+            pos += 1
+
+    # --- Scan Padding region (0xA0000-0xB0000) for embedded dialogues ---
+    # Some chunks (e.g., Chunk 4 in S100.STG) have dialogues in the padding region.
+    # Uses the same strict validation as Event Script region.
+    stats['padding_dialogues_found'] = 0
+    padding_regions = _get_chunk_padding_regions(len(data))
+    for region_start, region_end, chunk_idx in padding_regions:
+        pos = region_start
+        while pos < region_end - 4:
+            # Look for A9 00 marker (dialogue stream marker)
+            if data[pos:pos + 2] == b'\xA9\x00':
+                if pos + 2 not in found_offsets:
+                    # Decode the text
+                    text, consumed = decode_string(data, pos + 2, decode_table, prefix=2)
+                    if text:
+                        # Strip tags to check content
+                        stripped = text
+                        for tag in ("[box:system]", "[box:close]", "[box:speech]",
+                                    "[box:narration]", "[cursor]", "[br]", "[opt]"):
+                            stripped = stripped.replace(tag, "")
+                        stripped = re.sub(r"\[script:.*?\]", "", stripped)
+                        stripped = re.sub(r"\[.*?\]", "", stripped)
+
+                        # Strict validation (same as Event Script region):
+                        has_box_tag = '[box:' in text
+                        has_kanji = any('\u4e00' <= c <= '\u9fff' for c in stripped)
+                        is_menu = '[br][opt]' in text
+
+                        if (len(stripped) >= 2 and not _is_garbage_text(text)
+                                and (has_box_tag or has_kanji or is_menu)):
+                            # Use 0x00A0 as context opcode for Padding region dialogues
+                            dialogues.append((pos + 2, consumed, text, 0x00A0))
+                            found_offsets.add(pos + 2)
+                            stats['padding_dialogues_found'] += 1
                             pos = pos + 2 + consumed
                             continue
             pos += 1
@@ -941,16 +1069,25 @@ def scan_file(data, decode_table, prefix=0, ff08_only=False):
                 break
 
         # Require null termination, all known charIDs, and a higher minimum
-        # character count (6) for standalone strings to reduce false positives
+        # character count (6) for standalone strings to reduce false positives.
+        # Exception: allow shorter strings if they match known menu words.
         min_standalone = 6
+        MENU_WORDS = (
+            'はい', 'いいえ', 'やめる', 'もどる', 'つぎへ', 'すすむ',
+            'セーブ', 'ロード', 'カード', 'データ', 'メニュー', 'タイトル',
+            'アイテム', 'ステータス', 'オプション', 'ゲーム', 'スタート',
+        )
         if (clean and scan_pos < length and data[scan_pos] == 0x00
-                and valid_chars >= min_standalone):
+                and valid_chars >= 2):  # At least 2 chars for menu words
             if pos not in seen_offsets:
                 text, consumed = decode_string(data, pos, decode_table, prefix=prefix)
-                results.append((pos, consumed, text))
-                seen_offsets.add(pos)
-                pos = pos + consumed
-                continue
+                # Check if it meets min_standalone OR is a menu word
+                is_menu = any(text == w or text.startswith(w) for w in MENU_WORDS)
+                if valid_chars >= min_standalone or is_menu:
+                    results.append((pos, consumed, text))
+                    seen_offsets.add(pos)
+                    pos = pos + consumed
+                    continue
 
         pos += 1
 
@@ -1010,14 +1147,23 @@ def filter_real_text(results, min_kanji=2, strict=False):
         if not stripped:
             continue
 
+        # Allow common menu words without kanji requirement
+        MENU_WORDS = (
+            'はい', 'いいえ', 'やめる', 'もどる', 'つぎへ', 'すすむ',
+            'セーブ', 'ロード', 'カード', 'データ', 'メニュー', 'タイトル',
+            'アイテム', 'ステータス', 'オプション', 'ゲーム', 'スタート',
+        )
+        is_menu_word = any(stripped == w or stripped.startswith(w) for w in MENU_WORDS)
+
         # Count kanji characters
         kanji_count = sum(1 for ch in stripped if '\u4e00' <= ch <= '\u9fff')
-        if kanji_count < min_kanji:
+        if kanji_count < min_kanji and not is_menu_word:
             continue
 
-        if strict:
+        if strict and not is_menu_word:
             # In strict mode, require proper Japanese sentence structure:
             # 1. Must end with a common verb ending, particle, or punctuation
+            # (Menu words are exempt from this check)
 
             has_valid_ending = (
                 any(stripped.endswith(e) for e in SENTENCE_ENDINGS) or
@@ -1201,9 +1347,15 @@ def main():
         orphan_info = ""
         if stats.get('orphan_menus_found', 0) > 0:
             orphan_info = f", {stats['orphan_menus_found']} orphan menus"
+        event_script_info = ""
+        if stats.get('event_script_dialogues_found', 0) > 0:
+            event_script_info = f", {stats['event_script_dialogues_found']} event-script"
+        padding_info = ""
+        if stats.get('padding_dialogues_found', 0) > 0:
+            padding_info = f", {stats['padding_dialogues_found']} padding"
         print(f"Found {len(dialogues)} dialogues across "
               f"{stats['total_templates']} templates in {basename} "
-              f"({stats['bare']} bare gaps, {stats['missed']} missed{chunk_info}{garbage_info}{orphan_info})")
+              f"({stats['bare']} bare gaps, {stats['missed']} missed{chunk_info}{garbage_info}{orphan_info}{event_script_info}{padding_info})")
         print()
 
         prev_opcode = None

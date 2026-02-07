@@ -128,11 +128,22 @@ def get_vlut_offsets(stg_name):
 KOREAN_TEXT_GAP = 0x1000
 
 # Per-chunk end boundaries (where Korean text must stop)
-# Most chunks can use 0xB0000, but chunk 4 has data at 0xAE900
-KOREAN_TEXT_END = {
-    4: 0xAE800,   # Gap ends at 0xAE87C, use 0xAE800 for safety
+# Must not overwrite dialogue data in the padding region
+KOREAN_TEXT_END_S100 = {
+    4: 0xAE800,   # S100 Chunk 4: Dialogues at 0xAE87C (7 dialogues)
+}
+KOREAN_TEXT_END_SG00 = {
+    41: 0xACB00,  # SG00 Chunk 41: Dialogues at 0xACCCC (51 dialogues)
 }
 DEFAULT_KOREAN_TEXT_END = 0xB0000
+
+def get_korean_text_end(stg_name, chunk_idx):
+    """Get the end boundary for Korean text in a chunk."""
+    if stg_name == "S100":
+        return KOREAN_TEXT_END_S100.get(chunk_idx, DEFAULT_KOREAN_TEXT_END)
+    elif stg_name == "SG00":
+        return KOREAN_TEXT_END_SG00.get(chunk_idx, DEFAULT_KOREAN_TEXT_END)
+    return DEFAULT_KOREAN_TEXT_END
 
 
 def get_dialogues_by_chunk(stg_data, decode_table):
@@ -145,10 +156,14 @@ def get_dialogues_by_chunk(stg_data, decode_table):
                                            use_heuristics=True,
                                            filter_garbage=True)
 
+    orphan = stats.get('orphan_menus_found', 0)
+    event_script = stats.get('event_script_dialogues_found', 0)
+    padding = stats.get('padding_dialogues_found', 0)
     print(f"  Template scan: {len(dialogues)} dialogues, "
           f"{stats['total_templates']} templates, "
-          f"{stats.get('garbage_filtered', 0)} garbage filtered, "
-          f"{stats.get('orphan_menus_found', 0)} orphan menus")
+          f"{stats.get('garbage_filtered', 0)} garbage filtered")
+    print(f"  Non-template: {orphan} orphan menus, "
+          f"{event_script} event-script, {padding} padding")
 
     # Group dialogues by chunk
     num_chunks = len(stg_data) // CHUNK_SIZE
@@ -171,7 +186,8 @@ def get_dialogues_by_chunk(stg_data, decode_table):
     return by_chunk
 
 
-def patch_chunk(data, chunk_idx, dialogues, translations, korean_mapping, decode_table, vlut_offsets):
+def patch_chunk(data, chunk_idx, dialogues, translations, korean_mapping, decode_table, vlut_offsets,
+                japanese_to_korean=None, stg_name="S100"):
     """Patch a single chunk with variable-length translations."""
     chunk_start = chunk_idx * CHUNK_SIZE
 
@@ -183,7 +199,7 @@ def patch_chunk(data, chunk_idx, dialogues, translations, korean_mapping, decode
 
     # Korean text starts after VLUT
     korean_start = vlut_offset + KOREAN_TEXT_GAP
-    korean_end = KOREAN_TEXT_END.get(chunk_idx, DEFAULT_KOREAN_TEXT_END)
+    korean_end = get_korean_text_end(stg_name, chunk_idx)
 
     # Build translation lookup by file offset
     trans_by_offset = {}
@@ -191,6 +207,9 @@ def patch_chunk(data, chunk_idx, dialogues, translations, korean_mapping, decode
         offset = entry['offset']
         trans_by_offset[offset] = entry
         trans_by_offset[offset - 2] = entry  # Also key by marker offset
+
+    # Use pre-built Japanese -> Korean mapping for cross-chunk matching
+    trans_by_text = japanese_to_korean or {}
 
     write_pos = chunk_start + korean_start
     vlut_entries = []
@@ -200,8 +219,12 @@ def patch_chunk(data, chunk_idx, dialogues, translations, korean_mapping, decode
     for dlg in dialogues:
         orig_file_offset = dlg['file_offset']
         prefix = dlg['prefix']
+        orig_text = dlg['text']
 
+        # Try offset-based matching first, then fall back to text-based matching
         trans = trans_by_offset.get(orig_file_offset) or trans_by_offset.get(orig_file_offset + 2)
+        if not trans and orig_text in trans_by_text:
+            trans = trans_by_text[orig_text]
 
         if trans:
             korean_text = trans['text']
@@ -325,6 +348,24 @@ def main():
     vlut_offsets = get_vlut_offsets(stg_name)
     print(f"  VLUT offsets configured for {len(vlut_offsets)} chunks")
 
+    # Build Japanese text -> Korean translation mapping for cross-chunk matching
+    # First, create offset -> Japanese text lookup from all dialogues
+    offset_to_japanese = {}
+    for chunk_idx, dlgs in dialogues_by_chunk.items():
+        for dlg in dlgs:
+            offset_to_japanese[dlg['file_offset']] = dlg['text']
+            offset_to_japanese[dlg['file_offset'] + 2] = dlg['text']
+
+    # Then, build Japanese -> Korean entry mapping from translations
+    japanese_to_korean = {}
+    for entry in translations:
+        offset = entry['offset']
+        japanese = offset_to_japanese.get(offset) or offset_to_japanese.get(offset - 2)
+        if japanese:
+            japanese_to_korean[japanese] = entry
+
+    print(f"  Cross-chunk text mappings: {len(japanese_to_korean)}")
+
     # Patch all chunks
     print()
     print("Patching chunks...")
@@ -342,7 +383,8 @@ def main():
             continue
 
         data, stats = patch_chunk(
-            data, chunk_idx, dialogues, translations, korean_mapping, decode_table, vlut_offsets
+            data, chunk_idx, dialogues, translations, korean_mapping, decode_table, vlut_offsets,
+            japanese_to_korean, stg_name
         )
 
         if stats['no_space']:

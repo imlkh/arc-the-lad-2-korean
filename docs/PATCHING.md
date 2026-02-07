@@ -205,18 +205,28 @@ python python/find_truncated.py S100 --output output/truncated_S100.txt
 
 ### Dialogue Types
 
-**Template-associated dialogues**: Have a 48-byte template block pointing to them. Captured by template-driven extraction.
+The decoder captures four types of dialogues:
 
-**Orphan menu texts** (added 2026-02-06): `A9 00` marker texts without templates. Include menu options, yes/no prompts, system messages. Identified by `[opt]` tags and context opcode `0x00A9`.
+| Type | Region | Context Opcode | Detection |
+|------|--------|----------------|-----------|
+| Template-associated | 0xB4000-0xBC7FF | 0xFFFE/0x80XX | 48-byte template block |
+| Orphan menus | 0xB4000-0xBC7FF | 0x00A9 | `[br][opt]` pattern |
+| Event Script | 0xB0000-0xB4000 | 0x00B0 | A9 00 + strict validation |
+| Padding | 0xA0000-0xB0000 | 0x00A0 | A9 00 + strict validation |
+
+**Strict validation** requires: `[box:]` tag OR kanji OR `[br][opt]` pattern.
 
 ```bash
-# Regenerate decoded output with orphan menus
+# Regenerate decoded output with all dialogue types
 python python/decode/decode_text.py /path/to/S100.STG --stg > output/decoded/stg/S100_STG.txt
 ```
 
-S100.STG orphan menu breakdown:
-- 97 orphan menu texts total
-- Tutorial menus, yes/no prompts, system prompts, navigation, submarine controls
+S100.STG dialogue breakdown:
+- 1,165 template-associated dialogues
+- 76 orphan menus (filtered from 97 using `[br][opt]` pattern)
+- 33 Event Script region dialogues
+- 7 Padding region dialogues
+- **Total: 1,281 dialogues**
 
 ### Character Encoding
 
@@ -244,12 +254,12 @@ output/patched/
 
 ### STG Files (Variable-Length Patching)
 
-| File | Mode | Patched | Skipped | Notes |
-|------|------|---------|---------|-------|
-| COMM.IMG | - | 764 glyphs | - | Unified Korean font |
-| S100.STG | variable | 1,053 | 92 | 10/11 chunks with VLUT |
-| SG00.STG | variable | 685 | 785 | 41/56 chunks with VLUT |
-| SCPS_100.26 | fixed | 22 | 0 | System text + trampoline hook |
+| File | Mode | Total Dialogues | Patched | Notes |
+|------|------|-----------------|---------|-------|
+| COMM.IMG | - | - | 764 glyphs | Unified Korean font |
+| S100.STG | variable | 1,281 | 1,053 | 10/11 chunks with VLUT |
+| SG00.STG | variable | 2,068 | 685 | 41/56 chunks with VLUT |
+| SCPS_100.26 | fixed | 123 | 22 | System text + trampoline hook |
 
 ### Non-STG Files (Not Yet Translated)
 
