@@ -289,9 +289,9 @@ def _is_garbage_text(text):
             if jp_before or jp_after:
                 return True
 
-    # Rule 4: Very short text with uppercase ASCII mixed with kana = garbage
-    # e.g., "ぴデいギB", "デあギJ", "BじI" are binary garbage
-    # But "HP回復" or "MP" are valid game terms
+    # Rule 4: Uppercase ASCII mixed with kana = garbage
+    # e.g., "ぴデいギB", "デあギJ", "BじI", "ゾァびJダIゥゾ"
+    # But "HP回復", "BGMセレクト" are valid (kanji or consecutive uppercase tokens)
     if len(stripped) <= 6:
         has_upper = any(c.isupper() and c.isascii() for c in stripped)
         has_kana = any('ぁ' <= c <= 'ん' or 'ァ' <= c <= 'ン' for c in stripped)
@@ -300,6 +300,26 @@ def _is_garbage_text(text):
         # Valid short terms like "HP回復" have kanji
         if has_upper and has_kana and not has_kanji:
             return True
+    elif len(stripped) <= 12:
+        # For medium text, catch isolated uppercase letters mixed with kana
+        # "ゾァびJダIゥゾ" has J,I isolated between kana = garbage
+        # "BGMセレクト" has B,G,M consecutive = valid game term
+        has_upper = any(c.isupper() and c.isascii() for c in stripped)
+        has_kana = any('ぁ' <= c <= 'ん' or 'ァ' <= c <= 'ン' for c in stripped)
+        has_kanji = any('\u4e00' <= c <= '\u9fff' for c in stripped)
+        if has_upper and has_kana and not has_kanji:
+            isolated_upper = 0
+            for i, c in enumerate(stripped):
+                if c.isupper() and c.isascii():
+                    prev_upper = (i > 0 and stripped[i-1].isupper()
+                                  and stripped[i-1].isascii())
+                    next_upper = (i < len(stripped) - 1
+                                  and stripped[i+1].isupper()
+                                  and stripped[i+1].isascii())
+                    if not prev_upper and not next_upper:
+                        isolated_upper += 1
+            if isolated_upper >= 2:
+                return True
 
     # Rule 5: Short mixed hiragana/katakana without repetition = garbage
     # e.g., "みギづ", "げいう" from binary data
@@ -356,6 +376,25 @@ def _is_garbage_text(text):
                 intervals = [positions[k+1] - positions[k]
                              for k in range(len(positions) - 1)]
                 if len(set(intervals)) == 1 and intervals[0] >= 4:
+                    return True
+
+    # Rule 7: MIPS opcode garbage — multiple distinct "Xあ/Xデ/Xギ" bigrams
+    # VM opcodes produce three characteristic patterns when decoded as text:
+    #   XX 01 → "Xあ" (STORE, CALL, SET, COMPARE opcodes)
+    #   XX 8C → "Xデ" (memory reference operands)
+    #   XX 80 → "Xギ" (register operands)
+    # If 2+ different characters precede any of these markers, it's opcodes.
+    # Texts with kanji or punctuation are excluded (always valid).
+    if 3 <= len(stripped) <= 30:
+        has_kanji_r7 = any('\u4e00' <= c <= '\u9fff' for c in stripped)
+        has_punct_r7 = any(c in '！？…。、' for c in stripped)
+        if not has_kanji_r7 and not has_punct_r7:
+            for marker in ('あぁ', 'デ', 'ギ'):
+                predecessors = set()
+                for i in range(1, len(stripped)):
+                    if stripped[i] in marker and stripped[i-1] not in marker:
+                        predecessors.add(stripped[i-1])
+                if len(predecessors) >= 2:
                     return True
 
     return False
@@ -932,17 +971,31 @@ def scan_stg(data, decode_table, use_heuristics=True, filter_garbage=True):
                         stripped = re.sub(r"\[script:.*?\]", "", stripped)
                         stripped = re.sub(r"\[.*?\]", "", stripped)
 
-                        # Strict validation for Event Script region:
-                        # 1. Has [box:] tag (proper dialogue structure)
+                        # Validation for Event Script region:
+                        # Require structural indicator OR recognized text pattern.
+                        # Rule 7 in garbage filter catches MIPS opcode garbage.
                         has_box_tag = '[box:' in text
-                        # 2. Has kanji (real Japanese text)
-                        has_kanji = any('\u4e00' <= c <= '\u9fff' for c in stripped)
-                        # 3. Is a menu with [br][opt] pattern
+                        has_kanji = any('\u4e00' <= c <= '\u9fff'
+                                        for c in stripped)
                         is_menu = '[br][opt]' in text
+                        has_punct = any(c in '！？…。' for c in stripped)
+                        kana_count = sum(1 for c in stripped
+                                         if 'ぁ' <= c <= 'ん'
+                                         or 'ァ' <= c <= 'ン')
+                        is_pure_kana = (has_punct and kana_count >= 2
+                                        and all(
+                            'ぁ' <= c <= 'ん' or 'ァ' <= c <= 'ン'
+                            or c in 'ー！？…。、「」'
+                            for c in stripped))
+                        # Long pure hiragana = valid dialogue
+                        # (e.g., なにもはいっていないようだ)
+                        is_long_hiragana = (len(stripped) >= 13 and all(
+                            'ぁ' <= c <= 'ん' or c == 'ー'
+                            for c in stripped))
 
-                        # Require meaningful content and at least one validity indicator
                         if (len(stripped) >= 2 and not _is_garbage_text(text)
-                                and (has_box_tag or has_kanji or is_menu)):
+                                and (has_box_tag or has_kanji or is_menu
+                                     or is_pure_kana or is_long_hiragana)):
                             # Use 0x00B0 as context opcode for Event Script region dialogues
                             dialogues.append((pos + 2, consumed, text, 0x00B0))
                             found_offsets.add(pos + 2)
@@ -973,13 +1026,27 @@ def scan_stg(data, decode_table, use_heuristics=True, filter_garbage=True):
                         stripped = re.sub(r"\[script:.*?\]", "", stripped)
                         stripped = re.sub(r"\[.*?\]", "", stripped)
 
-                        # Strict validation (same as Event Script region):
+                        # Validation (same as Event Script region):
                         has_box_tag = '[box:' in text
-                        has_kanji = any('\u4e00' <= c <= '\u9fff' for c in stripped)
+                        has_kanji = any('\u4e00' <= c <= '\u9fff'
+                                        for c in stripped)
                         is_menu = '[br][opt]' in text
+                        has_punct = any(c in '！？…。' for c in stripped)
+                        kana_count = sum(1 for c in stripped
+                                         if 'ぁ' <= c <= 'ん'
+                                         or 'ァ' <= c <= 'ン')
+                        is_pure_kana = (has_punct and kana_count >= 2
+                                        and all(
+                            'ぁ' <= c <= 'ん' or 'ァ' <= c <= 'ン'
+                            or c in 'ー！？…。、「」'
+                            for c in stripped))
+                        is_long_hiragana = (len(stripped) >= 13 and all(
+                            'ぁ' <= c <= 'ん' or c == 'ー'
+                            for c in stripped))
 
                         if (len(stripped) >= 2 and not _is_garbage_text(text)
-                                and (has_box_tag or has_kanji or is_menu)):
+                                and (has_box_tag or has_kanji or is_menu
+                                     or is_pure_kana or is_long_hiragana)):
                             # Use 0x00A0 as context opcode for Padding region dialogues
                             dialogues.append((pos + 2, consumed, text, 0x00A0))
                             found_offsets.add(pos + 2)

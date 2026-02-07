@@ -376,6 +376,20 @@ output/decoded/bin/*.txt
 - **If it recurs:** Check the decoded text — garbage with repeating character
   patterns indicates opcode data. Remove the entry from the translation file.
 
+### Pure Kana Dialogue Missing from Decoded Output
+- **Cause:** Event script (0x00B0) and padding (0x00A0) scanners use strict
+  validation requiring `has_box_tag or has_kanji or is_menu`. Pure kana
+  dialogue like `やめろ！！` or `なにもはいっていないようだ` fails all checks.
+- **Solution (2026-02-08):** Two-pronged approach:
+  1. **Stronger garbage filter (Rule 7):** Detects MIPS opcode garbage by checking
+     for 2+ distinct characters preceding `あ`/`ぁ`, `デ`, or `ギ` — the signature
+     of VM opcodes (XX 01, XX 8C, XX 80) decoded as text.
+  2. **Additional acceptance criteria:**
+     - `is_pure_kana`: kana text with punctuation (`！？…。`)
+     - `is_long_hiragana`: pure hiragana text ≥13 characters
+- **Action required:** Regenerate decoded output and check for new entries with
+  `[0x00A0]` or `[0x00B0]` context opcodes.
+
 ### Menu Options Not Translated
 - **Cause:** Orphan menu texts (without templates) were not captured by the decoder
 - **Solution:** Updated decoder now captures orphan menu texts (2026-02-06)
