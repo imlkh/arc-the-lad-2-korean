@@ -363,6 +363,11 @@ def encode_korean_text(text, korean_mapping, decode_table):
     - Control codes: [delay:XX], [box:type], \n, etc.
     - Preserved characters (Latin, digits, symbols) via decode_table reverse lookup
     """
+    # Normalize special character sequences to single characters
+    # This saves bytes and uses the proper font glyphs
+    text = text.replace('...', '…')  # Three periods -> ellipsis (charID 229)
+    text = text.replace('..', '…')   # Two periods -> ellipsis (rare but handle it)
+
     result = bytearray()
     encode_table = build_encode_table(decode_table)
 
@@ -598,6 +603,111 @@ def parse_system_translation_file(translation_path):
                     continue
 
     return entries
+
+
+def parse_sdic_translation_file(translation_path):
+    """Parse SDIC.BIN translation file.
+
+    Format: offset,korean_text
+    Example: 0x0000644C,처음에는 나쁜 사람인 줄 알았는데...
+
+    Returns: list of dict with offset and text
+    """
+    entries = []
+
+    with open(translation_path, "r", encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if not line or line.startswith("#"):
+                continue
+
+            # Split on first comma only (text may contain commas)
+            if "," in line:
+                offset_str, korean_text = line.split(",", 1)
+                try:
+                    offset = int(offset_str, 16)
+                    entries.append({
+                        "offset": offset,
+                        "text": korean_text
+                    })
+                except ValueError:
+                    continue
+
+    return entries
+
+
+def patch_bin_file(bin_path, translation_entries, korean_mapping, decode_table, dry_run=False):
+    """Patch a BIN file (SDIC.BIN, SMITH.BIN, etc.) with Korean translations.
+
+    Uses fixed-length replacement: Korean text is padded if shorter,
+    or truncated if longer than the original Japanese text.
+    """
+    print(f"Patching BIN file: {bin_path}")
+
+    with open(bin_path, "rb") as f:
+        data = bytearray(f.read())
+
+    patched = 0
+    truncated = 0
+    errors = 0
+
+    for entry in translation_entries:
+        offset = entry["offset"]
+        korean_text = entry["text"]
+
+        if offset >= len(data):
+            print(f"  ERROR: offset 0x{offset:08X} out of bounds")
+            errors += 1
+            continue
+
+        # Find the null terminator of the original string
+        orig_end = offset
+        while orig_end < len(data) and data[orig_end] != 0x00:
+            orig_end += 1
+
+        if orig_end >= len(data):
+            print(f"  ERROR: no null terminator found at 0x{offset:08X}")
+            errors += 1
+            continue
+
+        # Original total size: text + null
+        orig_total = orig_end - offset + 1
+
+        # Encode Korean text
+        encoded = encode_korean_text(korean_text, korean_mapping, decode_table)
+
+        # New total size: encoded + null
+        new_total = len(encoded) + 1
+
+        if new_total <= orig_total:
+            # Fits - pad with nulls if shorter
+            replacement = encoded + b"\x00"
+            padded = replacement + b"\x00" * (orig_total - new_total)
+            if not dry_run:
+                data[offset:offset + orig_total] = padded
+            patched += 1
+        else:
+            # Too long - truncate encoded text to fit
+            available = orig_total - 1
+            truncated_encoded = encoded[:available]
+            replacement = truncated_encoded + b"\x00"
+            padded = replacement + b"\x00" * (orig_total - len(replacement))
+            if not dry_run:
+                data[offset:offset + orig_total] = padded
+            patched += 1
+            truncated += 1
+
+    if not dry_run:
+        with open(bin_path, "wb") as f:
+            f.write(data)
+
+    print(f"  Patched: {patched} entries")
+    if truncated:
+        print(f"  Truncated (too long): {truncated}")
+    if errors:
+        print(f"  Errors: {errors}")
+
+    return patched, truncated, errors
 
 
 def patch_exe_file(exe_path, translation_entries, korean_mapping, decode_table, dry_run=False):
