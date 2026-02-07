@@ -32,6 +32,38 @@ from patch_korean import (
 )
 from decode_text import scan_stg, build_decode_table
 
+
+def load_unified_charmap():
+    """Load the unified Korean character mapping from unified_charmap.txt.
+
+    This ensures variable-length patching uses the SAME character IDs
+    as the font glyphs in COMM.IMG (created by patch_all.py).
+
+    Returns:
+        dict: Korean character -> charID mapping
+    """
+    charmap_path = os.path.join(OUTPUT_DIR, "unified_charmap.txt")
+    if not os.path.exists(charmap_path):
+        print(f"WARNING: unified_charmap.txt not found at {charmap_path}")
+        print("         Run patch_all.py first to create the unified character mapping.")
+        return None
+
+    korean_mapping = {}
+    with open(charmap_path, 'r', encoding='utf-8') as f:
+        for line in f:
+            if line.startswith('#') or not line.strip():
+                continue
+            parts = line.strip().split('\t')
+            if len(parts) >= 2:
+                try:
+                    korean_char = parts[0]
+                    char_id = int(parts[1])
+                    korean_mapping[korean_char] = char_id
+                except (ValueError, IndexError):
+                    continue
+
+    return korean_mapping
+
 CHUNK_SIZE = 0xBC800
 TEXT_REGION_OFFSET = 0xB4000
 
@@ -310,14 +342,13 @@ def main():
     translations = parse_translation_file(trans_path)
     print(f"  Translations: {len(translations)}")
 
-    # Build Korean char mapping
-    korean_chars = set()
-    for entry in translations:
-        for ch in entry['text']:
-            if '\uAC00' <= ch <= '\uD7A3':
-                korean_chars.add(ch)
-    korean_mapping = build_korean_mapping(list(korean_chars), decode_table)
-    print(f"  Korean chars: {len(korean_mapping)}")
+    # Load unified Korean char mapping (must match COMM.IMG font)
+    korean_mapping = load_unified_charmap()
+    if korean_mapping is None:
+        print("ERROR: Cannot proceed without unified_charmap.txt")
+        print("       Run 'python patch_all.py' first to create font and charmap.")
+        return 1
+    print(f"  Loaded unified charmap: {len(korean_mapping)} chars")
 
     # Load STG file
     stg_path = os.path.join(OUTPUT_DIR, f"{stg_name}.STG")
