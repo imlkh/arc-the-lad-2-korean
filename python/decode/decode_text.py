@@ -958,13 +958,15 @@ def _find_dialogue_in_gap(data, gap_start, gap_end, expected_prefix_bytes,
                 found_offsets_in_gap.add(gap_start)
 
     # Continuation: try to decode sequential dialogues after the last found one
-    # Some gaps contain multiple null-terminated dialogues in sequence
+    # Some gaps contain multiple null-terminated dialogues in sequence.
+    # Continuation strings have NO 2-byte prefix — they are raw
+    # null-terminated text following the previous string's null terminator.
     if results and use_heuristics:
         continuation_pos = max(r[0] + r[3] for r in results)
         while continuation_pos + 4 < gap_end:
             text, consumed = decode_string(data, continuation_pos, decode_table,
-                                           prefix=2)
-            if not text or consumed <= 3:
+                                           prefix=0)
+            if not text or consumed <= 2:
                 break
             stripped = text
             for tag in ("[box:system]", "[box:close]", "[box:speech]",
@@ -972,13 +974,13 @@ def _find_dialogue_in_gap(data, gap_start, gap_end, expected_prefix_bytes,
                 stripped = stripped.replace(tag, "")
             stripped = re.sub(r"\[script:.*?\]", "", stripped)
             stripped = re.sub(r"\[.*?\]", "", stripped)
-            text_start = continuation_pos + 2
+            text_start = continuation_pos
             text_end = continuation_pos + consumed
             has_kanji = any('\u4e00' <= c <= '\u9fff' for c in stripped)
             if (len(stripped) >= 5 and has_kanji
                     and not _overlaps_script(text_start, text_end, script_ranges)
                     and not _has_mips_opcode_signature(
-                        data, continuation_pos, consumed, prefix=2)
+                        data, continuation_pos, consumed, prefix=0)
                     and not _is_garbage_text(text)):
                 prefix_val = int.from_bytes(
                     data[continuation_pos:continuation_pos + 2], 'little')

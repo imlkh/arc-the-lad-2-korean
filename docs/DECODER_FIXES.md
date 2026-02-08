@@ -7,8 +7,8 @@ Arc the Lad 2's STG stage files. Because the decoder scans binary data that incl
 MIPS machine code alongside text, it must distinguish real dialogue from garbage produced
 by misinterpreted opcodes.
 
-**Final stats** (2026-02-08): 26,892 dialogues across 20,947 templates in 19 STG files.
-Category 1 garbage: **4**. Category 2 single-char fragments: **0**. Partial decodes: **5**.
+**Final stats** (2026-02-08): 26,844 dialogues across 20,947 templates in 19 STG files.
+Category 1 garbage: **4**. Category 2 single-char fragments: **0**. Partial decodes: **1**.
 
 ## Garbage Filter Rules (`_is_garbage_text()`)
 
@@ -126,7 +126,8 @@ initially misclassified as garbage:
 | + Structural replay (partial decode) | 26,855 | 0 | 111 | 59 | −27 partial decodes fixed (50 total) |
 | + Single-char fragment filter | **26,907** | 4 | **0** | 69 | +68 dialogues, −111 fragments |
 | + Tighten report + FF/F0-FE recovery | 26,907 | 4 | 0 | 20 | −49 partial (19 fixed + 30 false positives removed) |
-| + Discard unfixed [script:00 80] | **26,892** | 4 | 0 | **5** | −15 MIPS garbage discarded |
+| + Discard unfixed [script:00 80] | 26,892 | 4 | 0 | 5 | −15 MIPS garbage discarded |
+| + Continuation prefix=0 fix | **26,844** | 4 | 0 | **1** | −48 (MIPS unmasked), −4 partial fixed |
 
 ## Other Fixes
 
@@ -219,9 +220,28 @@ gap search hitting data blocks in the text region.
 with `second_byte == 0x80` instead of keeping them as partial decodes.
 
 **Results**: 15 MIPS garbage entries eliminated. Partial decodes: 20 → **5**.
-5 remaining partial decodes (all in S200) are known gap search limitations:
-- 4 entries (ュウ ×2, ところで ×2): double-null padding in A9 multi-string dialogue
-- 1 entry (ございました): cross-boundary text at chunk_offset 0xB4000
+
+### Continuation Search prefix=0 Fix (2026-02-08)
+
+**Root cause**: The continuation search in `_find_dialogue_in_gap()` used
+`prefix=2` when decoding sequential dialogues after the first found entry.
+But continuation dialogues are raw null-terminated strings with **no** 2-byte
+script prefix — the first 2 text characters were consumed as `[script:XX YY]`.
+
+**Example**: `[script:0A 19]町のハンターにカッコイイ人がいるの` should be
+`この町のハンターにカッコイイ人がいるの` — charIDs `0A` (こ) and `19` (の)
+were consumed as the 2-byte prefix.
+
+**Scale**: ~180 continuation entries across all 19 STG files were affected.
+
+**Fix**: Changed `decode_string(..., prefix=0)` for continuation search.
+Also adjusted `text_start`, `consumed` threshold, and
+`_has_mips_opcode_signature()` prefix parameter to match.
+
+**Results**:
+- Partial decodes: 5 → **1** (4 ュウ/ところで entries now correctly decoded)
+- Total dialogues: −48 (MIPS garbage unmasked when full text exposed to filters)
+- 1 remaining partial decode: cross-boundary `ございました` in S200
 
 ### Single Character Fragment Filter (2026-02-08)
 
