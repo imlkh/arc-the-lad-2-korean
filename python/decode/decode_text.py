@@ -1141,6 +1141,51 @@ def scan_stg(data, decode_table, use_heuristics=True, filter_garbage=True):
                             continue
             pos += 1
 
+    # --- Fix partial decodes ---
+    # When a dialogue has [script:00 XX] prefix and decode_table[XX] != first_char,
+    # the second prefix byte XX is actually a text character that was consumed as
+    # part of the prefix. Fix by shifting the offset back by 1, so the null
+    # terminator of the preceding dialogue becomes the first prefix byte, and the
+    # original 0x00 becomes the second prefix byte.  The text then correctly
+    # starts with character XX.
+    stats['partial_decode_fixed'] = 0
+    fixed_dialogues = []
+    for offset, consumed, text, opcode in dialogues:
+        m = re.match(r'\[script:00 ([0-9A-F]{2})\]', text)
+        if m:
+            second_byte = int(m.group(1), 16)
+            text_after_script = re.sub(r'\[script:[0-9A-F ]+\]', '', text, count=1)
+            # Strip box/control tags to get the first real text character
+            first_text = text_after_script
+            for tag in ("[box:system]", "[box:close]", "[box:speech]",
+                        "[box:narration]", "[cursor]"):
+                first_text = first_text.replace(tag, "")
+            first_text = re.sub(r'\[.*?\]', '', first_text)
+            if first_text:
+                first_char = first_text[0]
+                expected_char = decode_table.get(second_byte)
+                # Characters that never/rarely start Japanese words.
+                # When the text starts with one of these, the [script:00 XX]
+                # prefix almost certainly consumed a text character (XX) as
+                # the second prefix byte.
+                _NON_STARTERS = set(
+                    'んンっッぁぃぅぇぉゃゅょァィゥェォャュョ、。ー')
+                if (first_char in _NON_STARTERS
+                        and expected_char is not None
+                        and expected_char != first_char
+                        and offset > 0
+                        and data[offset - 1] == 0x00):
+                    new_offset = offset - 1
+                    new_text, new_consumed = decode_string(
+                        data, new_offset, decode_table, prefix=2)
+                    if new_text and new_consumed > consumed:
+                        fixed_dialogues.append(
+                            (new_offset, new_consumed, new_text, opcode))
+                        stats['partial_decode_fixed'] += 1
+                        continue
+        fixed_dialogues.append((offset, consumed, text, opcode))
+    dialogues = fixed_dialogues
+
     # Sort dialogues by offset
     dialogues.sort(key=lambda d: d[0])
 
