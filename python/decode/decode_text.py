@@ -798,7 +798,8 @@ def _has_mips_opcode_signature(data, offset, consumed, prefix=2):
 
 
 def _find_dialogue_in_gap(data, gap_start, gap_end, expected_prefix_bytes,
-                          decode_table, use_heuristics=False):
+                          decode_table, use_heuristics=False,
+                          pointer_validated_offsets=None):
     """Search for a dialogue string in the gap between two templates.
 
     Uses pointer-based extraction: the expected_prefix_bytes are computed
@@ -807,6 +808,10 @@ def _find_dialogue_in_gap(data, gap_start, gap_end, expected_prefix_bytes,
 
     When use_heuristics=False (default), only pointer-validated dialogues are
     returned, eliminating false positives from binary data.
+
+    If pointer_validated_offsets is a set, offsets found by pointer-based
+    primary/secondary search are added to it (used by partial decode fixer
+    to avoid shifting entries whose prefix was confirmed by template pointers).
 
     Returns list of (dialogue_offset, script_prefix_value, text, bytes_consumed).
     Empty list if no dialogue found.
@@ -865,6 +870,8 @@ def _find_dialogue_in_gap(data, gap_start, gap_end, expected_prefix_bytes,
             prefix_val = int.from_bytes(expected_prefix_bytes, 'little')
             results.append((abs_offset, prefix_val, text, consumed))
             found_offsets_in_gap.add(abs_offset)
+            if pointer_validated_offsets is not None:
+                pointer_validated_offsets.add(abs_offset)
             break
         # Try the next occurrence of the prefix in the gap
         search_from = prefix_pos + 1
@@ -901,6 +908,8 @@ def _find_dialogue_in_gap(data, gap_start, gap_end, expected_prefix_bytes,
                     prefix_val = int.from_bytes(alt_bytes, 'little')
                     results.append((abs_offset, prefix_val, text, consumed))
                     found_offsets_in_gap.add(abs_offset)
+                    if pointer_validated_offsets is not None:
+                        pointer_validated_offsets.add(abs_offset)
                     break
                 search_from = prefix_pos + 1
 
@@ -1021,6 +1030,10 @@ def scan_stg(data, decode_table, use_heuristics=True, filter_garbage=True):
     dialogues = []
     stats = {'total_templates': len(templates), 'found': 0, 'missed': 0,
              'bare': 0, 'garbage_filtered': 0, 'chunk_boundary_found': 0}
+    # Track offsets found by pointer-validated primary/secondary search.
+    # These have prefixes confirmed by template Ptr_A fields and must not
+    # be shifted by the partial decode fixer.
+    pointer_validated = set()
 
     if not templates:
         return dialogues, templates, stats
@@ -1057,7 +1070,8 @@ def scan_stg(data, decode_table, use_heuristics=True, filter_garbage=True):
 
                 gap_results = _find_dialogue_in_gap(data, gap_start, gap_end,
                                                     expected_bytes, decode_table,
-                                                    use_heuristics=use_heuristics)
+                                                    use_heuristics=use_heuristics,
+                                                    pointer_validated_offsets=pointer_validated)
                 for offset, prefix_val, text, consumed in gap_results:
                     if offset not in found_offsets:
                         dialogues.append((offset, consumed, text, first_in_chunk[1]))
@@ -1086,6 +1100,7 @@ def scan_stg(data, decode_table, use_heuristics=True, filter_garbage=True):
             if len(stripped) >= 1:
                 dialogues.append((abs_offset, consumed, text, first_tmpl[1]))
                 found_offsets.add(abs_offset)
+                pointer_validated.add(abs_offset)
                 stats['found'] += 1
 
     # --- Loop through consecutive template pairs ---
@@ -1104,7 +1119,8 @@ def scan_stg(data, decode_table, use_heuristics=True, filter_garbage=True):
 
         gap_results = _find_dialogue_in_gap(data, gap_start, gap_end,
                                              expected_bytes, decode_table,
-                                             use_heuristics=use_heuristics)
+                                             use_heuristics=use_heuristics,
+                                             pointer_validated_offsets=pointer_validated)
         if gap_results:
             for offset, prefix_val, text, consumed in gap_results:
                 if offset not in found_offsets:
@@ -1326,47 +1342,55 @@ def scan_stg(data, decode_table, use_heuristics=True, filter_garbage=True):
             pos += 1
 
     # --- Fix partial decodes ---
-    # When a dialogue has [script:00 XX] prefix and decode_table[XX] != first_char,
-    # the second prefix byte XX is actually a text character that was consumed as
-    # part of the prefix. Fix by shifting the offset back by 1, so the null
-    # terminator of the preceding dialogue becomes the first prefix byte, and the
-    # original 0x00 becomes the second prefix byte.  The text then correctly
-    # starts with character XX.
+    # Structural replay: for [script:00 XX] entries where data[offset-1]==0x00,
+    # try decoding from offset-1.  The preceding null byte becomes part of the
+    # new prefix [script:ZZ 00], and XX becomes the first text character.
+    # Accept the shifted decode only when the new content equals the original
+    # with exactly one recovered leading character prepended (endswith check).
     stats['partial_decode_fixed'] = 0
     fixed_dialogues = []
     for offset, consumed, text, opcode in dialogues:
         m = re.match(r'\[script:00 ([0-9A-F]{2})\]', text)
-        if m:
+        # Skip entries found by pointer-validated template search or by
+        # A9 00 marker scanning (where offset-1 is the marker's 0x00 byte,
+        # not a null terminator).
+        _A9_SOURCED = {0x00A9, 0x00B4, 0x00B0, 0x00A0}
+        if (m and offset > 0 and data[offset - 1] == 0x00
+                and offset not in pointer_validated
+                and opcode not in _A9_SOURCED):
             second_byte = int(m.group(1), 16)
-            text_after_script = re.sub(r'\[script:[0-9A-F ]+\]', '', text, count=1)
-            # Strip box/control tags to get the first real text character
-            first_text = text_after_script
-            for tag in ("[box:system]", "[box:close]", "[box:speech]",
-                        "[box:narration]", "[cursor]"):
-                first_text = first_text.replace(tag, "")
-            first_text = re.sub(r'\[.*?\]', '', first_text)
-            if first_text:
-                first_char = first_text[0]
-                expected_char = decode_table.get(second_byte)
-                # Characters that never/rarely start Japanese words.
-                # When the text starts with one of these, the [script:00 XX]
-                # prefix almost certainly consumed a text character (XX) as
-                # the second prefix byte.
-                _NON_STARTERS = set(
-                    'んンっッぁぃぅぇぉゃゅょァィゥェォャュョ、。ー')
-                if (first_char in _NON_STARTERS
-                        and expected_char is not None
-                        and expected_char != first_char
-                        and offset > 0
-                        and data[offset - 1] == 0x00):
-                    new_offset = offset - 1
-                    new_text, new_consumed = decode_string(
-                        data, new_offset, decode_table, prefix=2)
-                    if new_text and new_consumed > consumed:
+            new_offset = offset - 1
+            new_text, new_consumed = decode_string(
+                data, new_offset, decode_table, prefix=2)
+            if (new_text and new_consumed >= consumed
+                    and not _is_garbage_text(new_text)):
+                original_content = re.sub(
+                    r'\[script:[0-9A-F ]+\]', '', text, count=1)
+                new_content = re.sub(
+                    r'\[script:[0-9A-F ]+\]', '', new_text, count=1)
+                # Case 1: Single-character recovery.
+                # Shifted content is original with one char prepended.
+                if (len(new_content) > len(original_content)
+                        and new_content.endswith(original_content)):
+                    recovered = new_content[:len(new_content)
+                                            - len(original_content)]
+                    expected_char = decode_table.get(second_byte)
+                    if expected_char is None or recovered == expected_char:
                         fixed_dialogues.append(
                             (new_offset, new_consumed, new_text, opcode))
                         stats['partial_decode_fixed'] += 1
                         continue
+                # Case 2: FF control code recovery.
+                # 0xFF is always a control code prefix, never a valid script
+                # parameter.  When [script:00 FF], the decoder consumed FF as
+                # prefix byte 2, then mis-decoded the control code parameter
+                # bytes as text (e.g., FF 08 01 01 → "くああ" instead of
+                # [box:system]).  Shifting back restores proper parsing.
+                elif second_byte == 0xFF:
+                    fixed_dialogues.append(
+                        (new_offset, new_consumed, new_text, opcode))
+                    stats['partial_decode_fixed'] += 1
+                    continue
         fixed_dialogues.append((offset, consumed, text, opcode))
     dialogues = fixed_dialogues
 
