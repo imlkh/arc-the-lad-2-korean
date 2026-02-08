@@ -9,7 +9,8 @@ atl2_korean_translation/
 │   │   ├── decode_text.py       # Core decoder (--stg, --scan, --find modes)
 │   │   ├── decode_all_stg.py    # Batch decode all 19 STG files
 │   │   ├── decode_all_bin.py    # Decode BIN files (BEAM.DAT, SDIC, etc.)
-│   │   └── decode_yend.py       # Decode YEND.BIN ASCII credits (special)
+│   │   ├── decode_yend.py       # Decode YEND.BIN ASCII credits (special)
+│   │   └── generate_invalid_reports.py  # Generate invalid entry reports for all STG files
 │   │
 │   ├── font/                    # Font tools
 │   │   ├── view_char.py         # View font cells by row/col or cell index
@@ -44,6 +45,7 @@ atl2_korean_translation/
 ├── output/                      # Generated output (git-ignored)
 │   ├── decoded/
 │   │   ├── stg/                 # Decoded STG dialogue files
+│   │   │   └── *_invalid_report.txt  # Invalid entries reports
 │   │   └── bin/                 # Decoded BIN file text
 │   ├── font/
 │   │   ├── korean_chars/        # Generated Korean glyph PNGs
@@ -161,11 +163,12 @@ python python/patch/patch_bin.py "output/patched/Arc the Lad II (Japan)/Arc the 
 
 ### STG Files (Main Story)
 
-| File | Strings | Fixed-Length | Variable-Length | Status |
-|------|---------|--------------|-----------------|--------|
-| S100.STG | 1,309 | 1,309 | 1,204 | **Translated** |
-| SG00.STG | 2,391 | 2,391 | 1,149 | **Translated** |
-| Other STG (17 files) | ~17,000 | - | - | Pending |
+| File | Strings | Translated | Invalid | Status |
+|------|---------|------------|---------|--------|
+| S100.STG | 1,309 | 1,309 | - | **Translated** |
+| SG00.STG | 2,391 | 2,391 | - | **Translated** |
+| S200.STG | 2,040 | 1,975 | 65 | **Translated** |
+| Other STG (16 files) | ~15,000 | - | - | Pending |
 
 ### Non-STG Files
 
@@ -391,6 +394,86 @@ This merges translations with the decoded source metadata to produce the correct
 ```
 
 All hex offsets, opcodes, script references, and control codes are preserved exactly from the decoded source.
+
+## STG Invalid Entries Report
+
+Each decoded STG file must have an accompanying invalid entries report at `output/decoded/stg/S*_STG_invalid_report.txt`. This report documents all decoded entries that should be **excluded** from translation because they are not valid dialogue.
+
+### Why Invalid Reports Are Required
+
+The decoder (`decode_text.py`) extracts text from binary STG data using heuristics. Some decoded entries are false positives — MIPS opcodes, binary data, or debug messages misinterpreted as text. These must be identified, excluded from translation, and documented so that:
+
+1. The patcher knows which entries are intentionally missing
+2. Future reviewers can verify no real dialogue was accidentally skipped
+3. Partial decodes (truncated first character) are tracked even when included in translation
+
+### Report Format
+
+```
+# S200.STG Invalid Entries Report
+# Total dialogues: 2040
+# Invalid entries excluded from translation: 65
+# Partial decodes included in translation: 15
+
+## Category 1: Garbage / MIPS Opcodes (51 entries)
+## These are misinterpreted MIPS opcodes or binary data, not actual dialogue.
+
+  Line 302:  0x00170936 [0x00B4] [script:0F 19]もあ地ゲ
+  Line 303:  0x00170A00 [0x00B4] [script:74 19]もあ水ゲ
+
+## Category 2: Single Character Fragments (10 entries)
+## Decoder artifacts — single characters with no meaningful dialogue content.
+
+  Line 1244: 0x003A6000 [0x8005] [script:0C 39]な
+
+## Category 3: Debug / Developer Messages (4 entries)
+## Left by developers for internal testing. Not meant for players.
+
+  Line 1467: 0x003AC4D8 [0xFFFE] [script:93 3B]修正しましたので感想をください
+    → "We've made fixes, please give us your feedback"
+
+## Category 4: Partial Decodes (15 entries)
+## INCLUDED in translation with the missing character(s) restored where possible.
+
+  Line 340:  0x001725B9 [0x800A] [script:00 0A]んな所に何の用だい？
+    → Missing そ → そんな所に何の用だい？ (What business do you have here?)
+```
+
+### Invalid Entry Categories
+
+| Category | Description | Action |
+|----------|-------------|--------|
+| **Garbage / MIPS Opcodes** | Binary data misinterpreted as kana (e.g., `もあ煙か`, `ギギギギ`, `ぺデデ`). Common patterns: `もあXデ`, `XギXギ`, repeating chars. | **Exclude** from translation |
+| **Single Character Fragments** | Single character decoder artifacts (e.g., `な`, `J`, `ぱ`). No meaningful content. | **Exclude** from translation |
+| **Debug / Developer Messages** | Internal developer notes left in the game data (e.g., `デバック用だよ` = "This is for debugging"). | **Exclude** from translation |
+| **Partial Decodes** | Valid dialogue with truncated first character(s) due to decoder offset issues. The missing character can usually be inferred from context. | **Include** in translation (restore missing chars), **document** in report |
+
+### Identifying Garbage Entries
+
+Common signatures of garbage (MIPS opcodes decoded as text):
+
+- `もあ` prefix followed by kanji + `デ`/`ゲ`/`ギ` (VM opcodes `XX 01` → "Xあ", `XX 8C` → "Xデ")
+- Repeating katakana patterns: `ギギギギ`, `ッギッギ`, `ぺデデ`
+- Random mix of kana with no grammatical structure
+- `煙` (smoke kanji) mixed with kana fragments
+- Single uppercase ASCII letters (`J`, `I`, `Z`) mixed with kana
+
+### Generating Reports
+
+```bash
+# Generate invalid entry reports for all 19 STG files
+python python/decode/generate_invalid_reports.py
+
+# Output: output/decoded/stg/*_STG_invalid_report.txt
+```
+
+### Report File Naming
+
+| Decoded File | Report File |
+|-------------|-------------|
+| `output/decoded/stg/S100_STG.txt` | `output/decoded/stg/S100_STG_invalid_report.txt` |
+| `output/decoded/stg/S200_STG.txt` | `output/decoded/stg/S200_STG_invalid_report.txt` |
+| `output/decoded/stg/SG00_STG.txt` | `output/decoded/stg/SG00_STG_invalid_report.txt` |
 
 ## Non-STG Translation File Format
 

@@ -154,6 +154,7 @@ python python/patch/patch_all.py
 # 2. Apply variable-length patching with per-chunk VLUTs
 python python/patch/patch_variable_length_multi.py S100
 python python/patch/patch_variable_length_multi.py SG00
+python python/patch/patch_variable_length_multi.py S200
 
 # 3. Apply multi-chunk hook to SCPS_100.26
 python python/patch/apply_hook.py --variable-length-multi
@@ -171,6 +172,11 @@ python python/patch/patch_bin.py "output/patched/Arc the Lad II (Japan)/Arc the 
 - 1,152 dialogues patched with variable-length VLUT
 - 1,244 dialogues use fixed-length fallback
 - 15 chunks have no padding space: 0, 4, 5, 6, 8, 9, 10, 11, 22, 24, 31, 39, 40, 46, 53
+
+**S200.STG Results** (17 chunks, verified 2026-02-08):
+- 1,104 dialogues patched with variable-length VLUT
+- 936 dialogues use fixed-length fallback
+- 7 chunks have no padding space: 0, 5, 9, 10, 14, 15, 16
 
 For implementation details, see `VARIABLE_LENGTH_IMPLEMENTATION.md`.
 
@@ -306,6 +312,7 @@ The `translation/` subdirectory preserves the exact translation files used for p
 | COMM.IMG | font | 895 glyphs | Unified Korean font |
 | S100.STG | variable | 1,309 (fixed) + 1,204 (VLUT) | 10/11 chunks with VLUT |
 | SG00.STG | variable | 2,391 (fixed) + 1,149 (VLUT) | 41/56 chunks with VLUT |
+| S200.STG | variable | 1,872 (fixed) + 1,104 (VLUT) | 10/17 chunks with VLUT |
 | SCPS_100.26 | fixed | 1,645 | System text, monsters, skills, locations + hook |
 | SDIC.BIN | fixed | 218 | Character profiles, monster descriptions |
 | YGUILD.BIN | fixed | 351 | Guild quest descriptions |

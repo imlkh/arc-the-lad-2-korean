@@ -7,8 +7,8 @@ Arc the Lad 2's STG stage files. Because the decoder scans binary data that incl
 MIPS machine code alongside text, it must distinguish real dialogue from garbage produced
 by misinterpreted opcodes.
 
-**Final stats** (2026-02-08): 26,907 dialogues across 20,947 templates in 19 STG files.
-Category 1 garbage: **4**. Category 2 single-char fragments: **0**. Partial decodes: **20**.
+**Final stats** (2026-02-08): 26,892 dialogues across 20,947 templates in 19 STG files.
+Category 1 garbage: **4**. Category 2 single-char fragments: **0**. Partial decodes: **5**.
 
 ## Garbage Filter Rules (`_is_garbage_text()`)
 
@@ -125,7 +125,8 @@ initially misclassified as garbage:
 | + Rules 7f-7i + Rule 4 extension | 26,855 | **0** | 111 | 86 | −41 dialogues, −40 garbage |
 | + Structural replay (partial decode) | 26,855 | 0 | 111 | 59 | −27 partial decodes fixed (50 total) |
 | + Single-char fragment filter | **26,907** | 4 | **0** | 69 | +68 dialogues, −111 fragments |
-| + Tighten report + FF/F0-FE recovery | 26,907 | 4 | 0 | **20** | −49 partial (19 fixed + 30 false positives removed) |
+| + Tighten report + FF/F0-FE recovery | 26,907 | 4 | 0 | 20 | −49 partial (19 fixed + 30 false positives removed) |
+| + Discard unfixed [script:00 80] | **26,892** | 4 | 0 | **5** | −15 MIPS garbage discarded |
 
 ## Other Fixes
 
@@ -205,9 +206,22 @@ indices (would require 0xF000+ = 61,440+ entries per chunk). The
 `pointer_validated` and `_A9_SOURCED` guards are bypassed for these bytes.
 
 **Results**: 69 fixes across all STG files, zero false positives.
-20 partial decodes remain: 14 are MIPS garbage (`[script:00 80]`), 5 are
-known pattern-match truncations (ュウ, ところで, ございました), 1 is a
-region-boundary edge case (`[script:14 03]`).
+
+### Discard Unfixed [script:00 80] MIPS Garbage (2026-02-08)
+
+**Root cause**: 15 entries with `[script:00 80]` prefix survived structural replay
+because the shift loop failed to recover valid text. All 15 are MIPS register
+operand bytes (0x80) consumed as script prefix byte 2. The decoded content
+(`えギクけぽ`, `タゴタギ`, `あギ地ちN`, etc.) is characteristic MIPS garbage from
+gap search hitting data blocks in the text region.
+
+**Fix**: In the structural replay `else` clause (shift failed), discard entries
+with `second_byte == 0x80` instead of keeping them as partial decodes.
+
+**Results**: 15 MIPS garbage entries eliminated. Partial decodes: 20 → **5**.
+5 remaining partial decodes (all in S200) are known gap search limitations:
+- 4 entries (ュウ ×2, ところで ×2): double-null padding in A9 multi-string dialogue
+- 1 entry (ございました): cross-boundary text at chunk_offset 0xB4000
 
 ### Single Character Fragment Filter (2026-02-08)
 

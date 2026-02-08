@@ -116,6 +116,36 @@ The `FF 08` command controls dialogue box lifecycle. The first parameter byte se
 | `FF 08 05 01` | Narration | 42 | Centered narration text (cutscenes) |
 | `FF 08 07 01` | **Page break / cursor wait** | 60 | Shows cursor glyph, waits for button press, then continues |
 
+##### Korean Translation Bug: FF 08 03 01 at String Start
+
+When `FF 08 03 01` (`[box:speech]`) appears at the **very beginning** of a dialogue string (immediately after the script prefix), it causes display corruption with Korean text.
+
+**Root cause**: Korean characters use extended encoding (`F0-FE XX` for charID 239+). When the control code terminator byte `01` is immediately followed by `F0`, the game's text engine misparses the sequence:
+
+```
+87 04 FF 08 03 01 F0 XX ...
+      └─────────┘ └────┘
+      [box:speech] Korean char (F0 = extended)
+```
+
+**Solution**: Insert `[delay:00]` buffer between `[box:speech]` and Korean text. This preserves the speech bubble box style while breaking the problematic `01 F0` byte collision:
+
+```
+[box:speech][delay:00]Korean text
+
+Byte sequence:
+FF 08 03 01 FF 03 00 01 F0 XX ...
+└─────────┘ └─────────┘ └────┘
+[box:speech] [delay:00]  Korean char
+```
+
+The zero-delay (`FF 03 00 01`) has no visual impact but separates the control codes.
+
+**Important Notes**:
+1. `[box:speech]` in the **middle** of text (after some characters) works fine - only the start position causes issues.
+2. **Padding/Event regions (0xA0000-0xB4000)**: Do NOT add `[delay:00]` - these use fixed-length patching with no variable-length support, so every byte counts. The display bug doesn't affect these regions.
+3. **Text region (0xB4000-0xBC800)**: ADD `[delay:00]` after `[box:speech]` at start - variable-length VLUT handles the extra bytes.
+
 #### FF 0C: Insert Stat Level Glyph
 
 The `FF 0C` handler constructs a single two-byte character string from the UI glyph region of the font (cells 420–429: +1 through +9, SS). It writes a 3-byte inline string `[0xF5, computed_byte, 0x00]` into the dialogue struct's text buffer.

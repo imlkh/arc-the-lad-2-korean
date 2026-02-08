@@ -7,15 +7,31 @@ Complete reverse-engineering analysis of the STG (Stage) file format.
 Each STG file contains multiple **chunks** of exactly **772,096 bytes (0xBC800)**.
 Chunks represent individual scenes, stages, or cutscenes in the game.
 
-| File | Size | Chunks | Dialogues |
-|------|------|--------|-----------|
-| S100.STG | 8.3 MB | 11 | 1,321 |
-| SG00.STG | 42.5 MB | 56 | 2,445 |
-| S200.STG | 13.7 MB | 18 | ~1,900 |
-| SF00.STG | 19.2 MB | 25 | ~2,600 |
-| ... | | | |
+| File | Chunks | Templates | Dialogues | Bare | Orphan Menus |
+|------|--------|-----------|-----------|------|-------------|
+| S100.STG | 11 | 1,195 | 1,323 | 25 | 75 |
+| S200.STG | 18 | 1,787 | 2,021 | 26 | 119 |
+| S300.STG | 5 | 320 | 392 | 0 | 66 |
+| S400.STG | 11 | 783 | 883 | 5 | 65 |
+| S500.STG | 8 | 534 | 684 | 4 | 72 |
+| S600.STG | 10 | 754 | 918 | 0 | 90 |
+| S700.STG | 33 | 2,613 | 3,164 | 14 | 269 |
+| S800.STG | 15 | 1,056 | 1,396 | 0 | 118 |
+| S900.STG | 13 | 945 | 1,224 | 2 | 126 |
+| SA00.STG | 17 | 1,321 | 1,530 | 4 | 93 |
+| SB00.STG | 11 | 790 | 917 | 13 | 61 |
+| SC00.STG | 10 | 682 | 878 | 4 | 145 |
+| SD00.STG | 9 | 688 | 953 | 18 | 128 |
+| SE00.STG | 16 | 1,213 | 1,446 | 0 | 129 |
+| SF00.STG | 25 | 2,517 | 3,369 | 17 | 342 |
+| SG00.STG | 56 | 1,510 | 2,439 | 5 | 401 |
+| SH00.STG | 1 | 49 | 738 | 0 | 239 |
+| SI00.STG | 28 | 2,190 | 2,617 | 11 | 269 |
+| SJ00.STG | 1 | 0 | 0 | 0 | 0 |
+| **Total** | **298** | **20,947** | **26,892** | **148** | **2,807** |
 
 **Note**: Dialogue counts include all types (template, bare, orphan menu, event script, padding).
+Decoder quality: 4 garbage, 0 single-char fragments, 5 partial decodes (all in S200).
 
 ## Chunk Layout (0xBC800 = 772,096 bytes)
 
@@ -279,11 +295,13 @@ Possible configurations:
 
 When patching Korean translations:
 
-1. **Text Region Only**: Only modify 0xB4000 - 0xBC7FF
-2. **Length Constraints**: Korean text must not exceed original byte count
+1. **Text Region**: Primary text at 0xB4000 - 0xBC7FF
+2. **Padding Region**: VLUT + Korean overflow text at 0xA0000 - 0xAFFFF
 3. **Template Preservation**: Do not modify the 48-byte templates
 4. **Control Codes**: Preserve all `FF XX YY ZZ` control sequences
 5. **Null Terminators**: Every dialog must end with 0x00
+6. **Variable-Length VLUT**: Chunks with VLUT allow Korean text to exceed original byte count by storing overflow in padding region. Master pointer at chunk+0xAFF00.
+7. **Fixed-Length Fallback**: Chunks without VLUT require Korean text to fit within original byte count (safe truncation applied)
 
 ## See Also
 

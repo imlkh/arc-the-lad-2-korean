@@ -1440,6 +1440,14 @@ def scan_stg(data, decode_table, use_heuristics=True, filter_garbage=True):
                 stats['partial_decode_fixed'] += 1
                 break
         else:
+            # Shift failed — could not recover valid text.
+            # For second_byte == 0x80 (MIPS register operand), all known
+            # cases are garbage from gap search hitting MIPS data in the
+            # text region. Discard instead of keeping as partial decode.
+            if second_byte == 0x80:
+                stats.setdefault('partial_decode_discarded', 0)
+                stats['partial_decode_discarded'] += 1
+                continue  # Discard MIPS garbage
             fixed_dialogues.append((offset, consumed, text, opcode))
             continue
         continue

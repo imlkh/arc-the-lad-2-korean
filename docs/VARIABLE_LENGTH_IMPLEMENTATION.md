@@ -6,12 +6,12 @@ This document outlines the implementation path for enabling variable-length Kore
 
 ## Current Status
 
-**Phase 1-3 COMPLETE**: **MULTI-CHUNK WORKING** (2026-02-06)
+**Phase 1-3 COMPLETE**: **MULTI-CHUNK WORKING** (2026-02-08)
 
 - Passthrough hook: Tested and working
 - Lookup table hook: Tested and working (after branch offset fix)
 - Chunk base calculation (`TextPtr & 0xFFF00000`): Confirmed correct
-- **Multi-chunk variable-length**: **WORKING** (all S100.STG chunks)
+- **Multi-chunk variable-length**: **WORKING** (S100.STG, SG00.STG, S200.STG)
 
 **Fixed-length patching**: Working, but truncates ~5-20% of dialogues.
 
@@ -140,19 +140,25 @@ void trampoline(State* state) {
 }
 ```
 
-**Testing Workflow (Multi-Chunk Variable-Length)**:
+**Recommended Workflow (using orchestrator)**:
+```bash
+# Run complete workflow automatically
+python python/patch/patch_workflow.py S100 SG00
+```
+
+**Manual Workflow**:
 ```bash
 # 1. Patch Korean font and fixed-length text
-python python/patch_all.py
+python python/patch/patch_all.py
 
 # 2. Apply variable-length patching with per-chunk VLUTs
-python python/patch_variable_length_multi.py S100
+python python/patch/patch_variable_length_multi.py S100
 
 # 3. Apply multi-chunk hook to SCPS_100.26
-python python/apply_hook.py --variable-length-multi
+python python/patch/apply_hook.py --variable-length-multi
 
 # 4. Apply to disc image
-python python/patch_bin.py "output/patched/Arc the Lad II (Japan)/Arc the Lad II (Japan).bin"
+python python/patch/patch_bin.py "output/patched/Arc the Lad II (Japan)/Arc the Lad II (Japan).bin"
 ```
 
 ### Phase 2: Full Chunk Support - COMPLETE
@@ -207,11 +213,11 @@ VLUT_OFFSETS_SG00 = {
 
 **Goal**: Support all 19 STG files.
 
-**Status**: **SG00.STG WORKING** (2026-02-06)
+**Status**: **SG00.STG + S200.STG WORKING** (2026-02-08)
 
 **Steps**:
-1. ~~Analyze padding region for each STG file's chunks~~ **DONE for S100, SG00**
-2. ~~Generate VLUT offset tables for all files~~ **DONE for S100, SG00**
+1. ~~Analyze padding region for each STG file's chunks~~ **DONE for S100, SG00, S200**
+2. ~~Generate VLUT offset tables for all files~~ **DONE for S100, SG00, S200**
 3. Comprehensive testing across all files
 
 **SG00.STG Results** (56 chunks, 43MB):
@@ -243,6 +249,48 @@ VLUT_OFFSETS_SG00 = {
 **Chunks without padding space (15 total)**: 0, 4, 5, 6, 8, 9, 10, 11, 22, 24, 31, 39, 40, 46, 53
 
 These chunks use fixed-length fallback (original text region)
+
+**Per-Chunk VLUT Offsets** (S200.STG, 17 chunks):
+```python
+VLUT_OFFSETS_S200 = {
+    1: 0xA0100,
+    2: 0xA0F00,
+    3: 0xA2800,
+    4: 0xA7100,
+    6: 0xA0100,
+    7: 0xADC00,
+    8: 0xA0100,
+    11: 0xA9000,
+    12: 0xA0100,
+    13: 0xA9E00,
+    # Chunks 0, 5, 9, 10, 14, 15, 16 have NO SPACE
+}
+```
+
+**S200.STG Results** (17 chunks, 13MB):
+
+| Chunk | VLUT Offset | Patched | Skipped | Notes |
+|-------|-------------|---------|---------|-------|
+| 0 | N/A | 0 | 249 | No space |
+| 1 | 0xA0100 | 200 | 23 | |
+| 2 | 0xA0F00 | 25 | 0 | |
+| 3 | 0xA2800 | 392 | 5 | |
+| 4 | 0xA7100 | 163 | 14 | |
+| 5 | N/A | 0 | 94 | No space |
+| 6 | 0xA0100 | 45 | 0 | |
+| 7 | 0xADC00 | 33 | 35 | Tight space (~5KB) |
+| 8 | 0xA0100 | 70 | 3 | |
+| 9 | N/A | 0 | 53 | No space |
+| 10 | N/A | 0 | 85 | No space |
+| 11 | 0xA9000 | 121 | 13 | |
+| 12 | 0xA0100 | 11 | 0 | |
+| 13 | 0xA9E00 | 44 | 14 | |
+| 14 | N/A | 0 | 114 | No space |
+| 15 | N/A | 0 | 80 | No space |
+| 16 | N/A | 0 | 154 | No space |
+| **Total** | | **1,104** | **936** | |
+
+**Chunks without padding space (7 total)**: 0, 5, 9, 10, 14, 15, 16
 
 ### Phase 4: Patcher Integration - PENDING
 
