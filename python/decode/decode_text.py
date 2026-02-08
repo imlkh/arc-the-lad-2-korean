@@ -213,7 +213,7 @@ TEMPLATE_SIG_45 = b'\x45\x01\xF0\x8B'  # Secondary signature (always at +16)
 TEMPLATE_SIZE = 48
 SCRIPT_OPCODE_28 = b'\x28\x01'
 SCRIPT_BLOCK_SIZE = 10
-MIPS_OPCODE_MARKER_BYTES = {0x01, 0x80, 0x8C}
+MIPS_OPCODE_MARKER_BYTES = {0x80, 0x8C}
 STG_CHUNK_SIZE = 0xBC800  # 772,096 bytes per chunk
 STG_TEXT_REGION_OFFSET = 0xB4000  # Text region starts at +0xB4000 within each chunk
 STG_TEXT_REGION_SIZE = 0x8800  # ~34,816 bytes text region per chunk
@@ -429,7 +429,7 @@ def _is_garbage_text(text):
         # e.g., グゼノ, クゼゼ, シゼニ, ギギグ — 3-5 char katakana composed
         # entirely of chars produced by MIPS register/memory operand bytes.
         # No real Japanese words use only these characters.
-        MIPS_KATA = set('ギデゲグゼノクシニダヅヂゾ')
+        MIPS_KATA = set('ギデゲグゼノクシニダヅヂゾジ')
         if 3 <= len(stripped) <= 5 and all(c in MIPS_KATA for c in stripped):
             return True
 
