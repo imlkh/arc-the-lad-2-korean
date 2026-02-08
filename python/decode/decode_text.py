@@ -988,8 +988,12 @@ def _find_dialogue_in_gap(data, gap_start, gap_end, expected_prefix_bytes,
                     and not _has_mips_opcode_signature(
                         data, continuation_pos, consumed, prefix=0)
                     and not _is_garbage_text(text)):
-                prefix_val = int.from_bytes(
-                    data[continuation_pos:continuation_pos + 2], 'little')
+                # Prepend synthetic [script:] tag from the first 2 text bytes
+                # so the output format is consistent with prefixed entries.
+                b0 = data[continuation_pos]
+                b1 = data[continuation_pos + 1] if continuation_pos + 1 < len(data) else 0
+                prefix_val = b0 | (b1 << 8)
+                text = f"[script:{b0:02X} {b1:02X}]" + text
                 results.append((continuation_pos, prefix_val, text, consumed))
                 found_offsets_in_gap.add(continuation_pos)
                 continuation_pos += consumed
