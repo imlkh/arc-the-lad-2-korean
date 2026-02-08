@@ -8,7 +8,7 @@ MIPS machine code alongside text, it must distinguish real dialogue from garbage
 by misinterpreted opcodes.
 
 **Final stats** (2026-02-08): 26,907 dialogues across 20,947 templates in 19 STG files.
-Category 1 garbage: **0**. Category 2 single-char fragments: **0**. Partial decodes: **69**.
+Category 1 garbage: **4**. Category 2 single-char fragments: **0**. Partial decodes: **20**.
 
 ## Garbage Filter Rules (`_is_garbage_text()`)
 
@@ -125,6 +125,7 @@ initially misclassified as garbage:
 | + Rules 7f-7i + Rule 4 extension | 26,855 | **0** | 111 | 86 | −41 dialogues, −40 garbage |
 | + Structural replay (partial decode) | 26,855 | 0 | 111 | 59 | −27 partial decodes fixed (50 total) |
 | + Single-char fragment filter | **26,907** | 4 | **0** | 69 | +68 dialogues, −111 fragments |
+| + Tighten report + FF/F0-FE recovery | 26,907 | 4 | 0 | **20** | −49 partial (19 fixed + 30 false positives removed) |
 
 ## Other Fixes
 
@@ -187,22 +188,26 @@ where XX is the eaten character's charID.
 **Example**: `[script:00 0A]んな所に何の用だい？` should be `こんな所に何の用だい？`
 — charID 0x0A (こ) was consumed as prefix byte 2.
 
-**Fix**: Structural replay in `scan_stg()` post-processing. For each
-`[script:00 XX]` entry where `data[offset-1] == 0x00`:
+**Fix**: Structural replay in `scan_stg()` post-processing with three cases:
 
-1. **Guard against false positives**: Skip if offset is in `pointer_validated`
-   set (primary/secondary search confirmed the prefix) or opcode is in
-   `_A9_SOURCED` = {0x00A9, 0x00B4, 0x00B0, 0x00A0} (marker byte at offset-1
-   is the A9 00 marker, not a null terminator).
-2. **Try decode from offset-1**: Re-decode with the shifted offset.
-3. **Validate**: Accept if shifted content `endswith` original content with one
-   recovered leading character, and recovered char matches `decode_table[XX]`.
-4. **FF special case**: `[script:00 FF]` always shifts (FF is always a control
-   code prefix, never a script parameter).
+- **Case 1 (FF control code)**: `[script:00 FF]` — FF is always a control code
+  prefix. Shift restores `FF XX XX XX` as a proper tag (e.g., `[box:system]`).
+  Bypasses `pointer_validated` guard (VLUT index 0xFF00+ is impossible).
+- **Case 2 (F0-FE extended char)**: 2-byte char prefix eaten. Shift restores
+  `F0-FE XX` as the correct extended character. Validates `new_content[1:]
+  == original_content[1:]`. Also bypasses `pointer_validated` guard.
+- **Case 3 (standard)**: Single-char recovery via `endswith` check. Recovered
+  char must match `decode_table[XX]`. Guarded by `pointer_validated` and
+  `_A9_SOURCED` to prevent false positives.
 
-**Results**: 50 fixes across all STG files, zero false positives.
-69 partial decodes remain (pointer-validated or A9-sourced entries correctly
-left alone, plus a few with non-00 prefix bytes).
+**Guard logic**: Bytes F0-FF are always encoding prefixes, never valid VLUT
+indices (would require 0xF000+ = 61,440+ entries per chunk). The
+`pointer_validated` and `_A9_SOURCED` guards are bypassed for these bytes.
+
+**Results**: 69 fixes across all STG files, zero false positives.
+20 partial decodes remain: 14 are MIPS garbage (`[script:00 80]`), 5 are
+known pattern-match truncations (ュウ, ところで, ございました), 1 is a
+region-boundary edge case (`[script:14 03]`).
 
 ### Single Character Fragment Filter (2026-02-08)
 
