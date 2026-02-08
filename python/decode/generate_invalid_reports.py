@@ -9,9 +9,14 @@ BASE = '/Users/kyounghun/WorkSpace/ps1_game_translation/Arc_The_Lad2/atl2_korean
 DECODED_DIR = os.path.join(BASE, 'output/decoded/stg')
 OUTPUT_DIR = os.path.join(BASE, 'output/decoded/stg')
 
-# Regex to parse dialogue lines
+# Regex to parse dialogue lines (with [script:XX XX])
 DIALOGUE_RE = re.compile(
     r'^  (0x[0-9A-Fa-f]+) \[(0x[0-9A-Fa-f]+)\] \[script:([0-9A-Fa-f]+ [0-9A-Fa-f]+)\](.*)'
+)
+
+# Regex for dialogue lines WITHOUT [script:XX XX]
+DIALOGUE_NOSCRIPT_RE = re.compile(
+    r'^  (0x[0-9A-Fa-f]+) \[(0x[0-9A-Fa-f]+)\] (?!\[script:)(.*)'
 )
 
 CONTROL_CODE_RE = re.compile(
@@ -230,39 +235,48 @@ def analyze_file(filepath):
     single_chars = [] # Category 2
     debug_msgs = []   # Category 3
     partial = []      # Category 4
+    no_script = []    # Category 5
     total_dialogues = 0
     header = lines[0].strip() if lines else ''
 
     for line_num, line in enumerate(lines, 1):
         line = line.rstrip('\n')
         m = DIALOGUE_RE.match(line)
-        if not m:
+        if m:
+            total_dialogues += 1
+            offset = m.group(1)
+            speaker = m.group(2)
+            script_tag = m.group(3)
+            text = m.group(4)
+            plain = strip_control_codes(text)
+
+            # Check categories in priority order
+            reason = is_garbage(text, plain)
+            if reason:
+                garbage.append((line_num, offset, speaker, script_tag, text, reason))
+                continue
+
+            if is_single_char(plain):
+                single_chars.append((line_num, offset, speaker, script_tag, text))
+                continue
+
+            if is_debug(text, plain):
+                debug_msgs.append((line_num, offset, speaker, script_tag, text))
+                continue
+
+            reason = is_partial_decode(text, plain, script_tag)
+            if reason:
+                partial.append((line_num, offset, speaker, script_tag, text, reason))
             continue
 
-        total_dialogues += 1
-        offset = m.group(1)
-        speaker = m.group(2)
-        script_tag = m.group(3)
-        text = m.group(4)
-        plain = strip_control_codes(text)
-
-        # Check categories in priority order
-        reason = is_garbage(text, plain)
-        if reason:
-            garbage.append((line_num, offset, speaker, script_tag, text, reason))
-            continue
-
-        if is_single_char(plain):
-            single_chars.append((line_num, offset, speaker, script_tag, text))
-            continue
-
-        if is_debug(text, plain):
-            debug_msgs.append((line_num, offset, speaker, script_tag, text))
-            continue
-
-        reason = is_partial_decode(text, plain, script_tag)
-        if reason:
-            partial.append((line_num, offset, speaker, script_tag, text, reason))
+        # Check for dialogue lines without [script:XX XX]
+        m = DIALOGUE_NOSCRIPT_RE.match(line)
+        if m:
+            total_dialogues += 1
+            offset = m.group(1)
+            speaker = m.group(2)
+            text = m.group(3)
+            no_script.append((line_num, offset, speaker, text))
 
     return {
         'header': header,
@@ -271,6 +285,7 @@ def analyze_file(filepath):
         'single_chars': single_chars,
         'debug': debug_msgs,
         'partial': partial,
+        'no_script': no_script,
     }
 
 
@@ -278,12 +293,14 @@ def write_report(stg_name, result, output_path):
     """Write an invalid entries report."""
     excluded = len(result['garbage']) + len(result['single_chars']) + len(result['debug'])
     partial_count = len(result['partial'])
+    no_script_count = len(result['no_script'])
 
     lines = []
     lines.append(f"# {stg_name} Invalid Entries Report")
     lines.append(f"# Total dialogues: {result['total']}")
     lines.append(f"# Invalid entries excluded from translation: {excluded}")
     lines.append(f"# Partial decodes included in translation: {partial_count}")
+    lines.append(f"# Missing script prefix: {no_script_count}")
 
     if result['garbage']:
         lines.append(f"")
@@ -324,10 +341,19 @@ def write_report(stg_name, result, output_path):
             lines.append(f"  Line {line_num:>4}: {offset} [{speaker}] [script:{script}]{text}")
             lines.append(f"    → {reason}")
 
+    if result['no_script']:
+        lines.append(f"")
+        lines.append(f"## Category 5: Missing Script Prefix ({len(result['no_script'])} entries)")
+        lines.append(f"## Dialogue lines without [script:XX XX] prefix. May need decoder fix.")
+        lines.append(f"")
+        for entry in result['no_script']:
+            line_num, offset, speaker, text = entry
+            lines.append(f"  Line {line_num:>4}: {offset} [{speaker}] {text}")
+
     with open(output_path, 'w', encoding='utf-8') as f:
         f.write('\n'.join(lines) + '\n')
 
-    return excluded, partial_count
+    return excluded, partial_count, no_script_count
 
 
 def main():
@@ -337,8 +363,8 @@ def main():
     ])
 
     print(f"Found {len(stg_files)} decoded STG files\n")
-    print(f"{'File':<16} {'Total':>6} {'Garbage':>8} {'Single':>7} {'Debug':>6} {'Partial':>8} {'Excluded':>9}")
-    print("-" * 75)
+    print(f"{'File':<16} {'Total':>6} {'Garbage':>8} {'Single':>7} {'Debug':>6} {'Partial':>8} {'NoScript':>9} {'Excluded':>9}")
+    print("-" * 85)
 
     for fname in stg_files:
         stg_name = fname.replace('_STG.txt', '.STG')
@@ -346,11 +372,11 @@ def main():
         output_path = os.path.join(OUTPUT_DIR, fname.replace('.txt', '_invalid_report.txt'))
 
         result = analyze_file(input_path)
-        excluded, partial_count = write_report(stg_name, result, output_path)
+        excluded, partial_count, no_script_count = write_report(stg_name, result, output_path)
 
         print(f"{stg_name:<16} {result['total']:>6} {len(result['garbage']):>8} "
               f"{len(result['single_chars']):>7} {len(result['debug']):>6} "
-              f"{len(result['partial']):>8} {excluded:>9}")
+              f"{len(result['partial']):>8} {no_script_count:>9} {excluded:>9}")
 
     print()
     print("Reports written to:", OUTPUT_DIR)
