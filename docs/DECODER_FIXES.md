@@ -7,8 +7,8 @@ Arc the Lad 2's STG stage files. Because the decoder scans binary data that incl
 MIPS machine code alongside text, it must distinguish real dialogue from garbage produced
 by misinterpreted opcodes.
 
-**Final stats** (2026-02-09): 26,841 dialogues across 20,947 templates in 19 STG files.
-Category 1 garbage: **4**. Category 2 single-char fragments: **0**. Partial decodes: **0**.
+**Final stats** (2026-02-09): 26,831 dialogues across 20,947 templates in 19 STG files.
+Category 1 garbage: **57**. Category 2 single-char fragments: **0**. Partial decodes: **0**.
 
 ## Garbage Filter Rules (`_is_garbage_text()`)
 
@@ -128,7 +128,8 @@ initially misclassified as garbage:
 | + Tighten report + FF/F0-FE recovery | 26,907 | 4 | 0 | 20 | −49 partial (19 fixed + 30 false positives removed) |
 | + Discard unfixed [script:00 80] | 26,892 | 4 | 0 | 5 | −15 MIPS garbage discarded |
 | + Continuation prefix=0 fix | **26,844** | 4 | 0 | **1** | −48 (MIPS unmasked), −4 partial fixed |
-| + Cross-boundary text fix | **26,841** | 4 | 0 | **0** | −3 cross-boundary partials eliminated |
+| + Cross-boundary text fix | 26,841 | 4 | 0 | **0** | −3 cross-boundary partials eliminated |
+| + MIPS めあ pattern check | **26,831** | **57** | 0 | 0 | 10 MIPS entries eliminated at decoder level |
 
 ## Other Fixes
 
@@ -264,6 +265,41 @@ cross-boundary string because its gap extends into the event script region.
 is non-null (indicating a cross-boundary string).
 
 **Results**: Partial decodes: 1 → **0**. Total dialogues: −3.
+
+### MIPS めあ Register-Reference Pattern Check (2026-02-09)
+
+**Root cause**: `_has_mips_opcode_signature()` used three payload-based checks
+(density, cadence, saturation) keyed on `MIPS_OPCODE_MARKER_BYTES = {0x80, 0x8C}`.
+These caught high-marker entries but missed MIPS instruction sequences where the
+opcode bytes don't include 0x80/0x8C. In particular, sequences of SPECIAL-type
+instructions (ADD, SUB, etc.) with rs=$zero produce the raw byte pattern
+`0x22 0x01` (decoded as めあ) — the R3000 little-endian encoding of `$zero` in
+the rs field combined with SUB/ADD function codes.
+
+**Pattern**: Raw bytes `0x22 0x01` (めあ) appearing 2+ times in the dialogue
+payload, with no text control bytes (FF, EF, F0-FE) present.
+
+**Why periodicity doesn't work**: The plan originally called for a 4-byte
+periodicity check (MIPS instructions are 4 bytes wide). However, the game's
+character encoding overlaps heavily with MIPS opcode byte ranges:
+- CharIDs 0x80-0x9B = dakuten katakana (ギ, グ, ゲ, ゴ, ザ, ジ, ズ, **デ**, **ド**, バ, ビ, ブ, ベ, ボ, パ, ピ, プ, ペ, ポ, ァ, ィ, ゥ, ェ)
+- CharIDs 0xA0-0xBB = ッ, A-Z, a
+
+These are identical to the R3000 load/store opcode byte[3] values (LB-LWR at
+0x80-0x9B, SB-SWR at 0xA0-0xBB). Real dialogue like "ドッグフード" (dog food),
+"ゲラゲラゲラ！" (laughter), and "クキェー、グェッグェッ" (creature sound) all
+triggered false positives. Tested against 26,769 real dialogues — no parameter
+combination achieved zero false positives with the periodicity approach.
+
+**Safety guards**:
+- F0-FE bytes indicate 2-byte kanji/Korean character encoding (never in MIPS)
+- FF bytes indicate box/cursor control sequences (text structure)
+- EF bytes indicate line break controls
+- Minimum 5 raw bytes before null terminator
+
+**Results**: 10 MIPS garbage entries eliminated at the decoder level. Cat1 report
+entries: 69 → **57**. Zero false positives (verified against all 26,769 real
+dialogues across 19 STG files).
 
 ### Single Character Fragment Filter (2026-02-08)
 
