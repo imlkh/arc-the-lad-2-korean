@@ -120,6 +120,11 @@ def copy_translation_files(stages):
 
     copied = []
 
+    # Remove previously staged STG files so excluded stages are not
+    # accidentally picked up by patch_all.py on later runs.
+    for old_stg in output_dir.glob("*_STG.txt"):
+        old_stg.unlink()
+
     # Copy STG translation files for specified stages
     for stage in stages:
         src = translated_dir / f"{stage}_STG.txt"
@@ -320,10 +325,22 @@ def main():
             print(__doc__)
             return 0
         else:
-            stages = sys.argv[1:]
+            stages = [s.upper() for s in sys.argv[1:]]
     else:
-        # Default: S100 and SG00
-        stages = ["S100", "SG00"]
+        # Default stage selection (edit here).
+        # - include_stages: explicit list to patch by default
+        # - exclude_stages: remove stages from include list
+        # If include_stages is empty, all available stages are included first.
+        include_stages = ["S100", "SG00"]   # e.g. ["S100", "SG00", "S200", "S300"]
+        exclude_stages = []                  # e.g. ["S200"]
+
+        if include_stages:
+            stages = [s.upper() for s in include_stages]
+        else:
+            stages = [s.upper() for s in find_available_stages()]
+
+        exclude_set = {s.upper() for s in exclude_stages}
+        stages = [s for s in stages if s not in exclude_set]
 
     print(f"Stages to patch: {', '.join(stages)}")
 
@@ -392,6 +409,19 @@ def main():
         print_error("Font patching failed. Aborting.")
         return 1
 
+    # Ensure stage STGs were refreshed by patch_all.py.
+    # If this fails, step 2 may re-patch stale VLUT data from a previous run.
+    base_dir = Path(__file__).parent.parent.parent
+    output_dir = base_dir / "output" / "patched"
+    missing_stage_outputs = [s for s in stages if not (output_dir / f"{s}.STG").exists()]
+    if missing_stage_outputs:
+        print_error(
+            "Missing staged STG outputs after patch_all.py: "
+            + ", ".join(missing_stage_outputs)
+        )
+        print("  Expected files in output/patched/<STAGE>.STG before variable-length step.")
+        return 1
+
     # Step 2: Variable-length patching for each stage
     print_header("Step 2: Variable-Length Patching")
     for stage in stages:
@@ -418,8 +448,9 @@ def main():
     bin_path = find_bin_image()
 
     if bin_path:
+        patch_bin_cmd = [sys.executable, "patch_bin.py", str(bin_path), "--stages", *stages]
         results["bin"] = run_command(
-            [sys.executable, "patch_bin.py", str(bin_path)],
+            patch_bin_cmd,
             f"patch_bin.py {bin_path.name}"
         )
     else:

@@ -147,12 +147,24 @@ VLUT_OFFSETS_SG00 = {
     55: 0xA2E00,
 }
 
+# Per-chunk VLUT offsets for S200.STG (17 chunks)
+# Conservative mapping: only chunks with empty padding region.
+# This avoids writing into chunks with dense padding data that can cause instability.
+VLUT_OFFSETS_S200 = {
+    1: 0xA0100,   # Empty padding region, 60KB available after Korean start
+    6: 0xA0100,   # Empty padding region, 60KB available after Korean start
+    8: 0xA0100,   # Empty padding region, 60KB available after Korean start
+    12: 0xA0100,  # Empty padding region, 60KB available after Korean start
+}
+
 # Select VLUT offsets based on STG file
 def get_vlut_offsets(stg_name):
     if stg_name == "S100":
         return VLUT_OFFSETS_S100
     elif stg_name == "SG00":
         return VLUT_OFFSETS_SG00
+    elif stg_name == "S200":
+        return VLUT_OFFSETS_S200
     else:
         # Default: assume all chunks have space at 0xA0100
         return {}
@@ -241,7 +253,10 @@ def patch_chunk(data, chunk_idx, dialogues, translations, korean_mapping, decode
     # Get VLUT offset for this chunk
     vlut_offset = vlut_offsets.get(chunk_idx, 0)
     if vlut_offset == 0:
-        # No space in this chunk, skip
+        # No space in this chunk. Force master pointer to 0 so the
+        # multi-chunk hook falls back to original handler safely.
+        master_pos = chunk_start + MASTER_PTR_OFFSET
+        struct.pack_into('<I', data, master_pos, 0)
         return data, {'patched': 0, 'skipped': len(dialogues), 'no_space': True}
 
     # Korean text starts after VLUT

@@ -267,10 +267,19 @@ def patch_file_in_bin(bin_path, filename, patch_data, dry_run=False):
         return True, f"Patched {sectors} sectors at LBA {lba}"
 
 
-def get_patched_files():
-    """Get list of patchable files."""
+def get_patched_files(stages=None):
+    """Get list of patchable files.
+
+    Args:
+        stages: Optional iterable of stage names (e.g. ["S100", "SG00"]).
+            If provided, only matching *.STG files are included.
+    """
     if not os.path.exists(PATCHED_DIR):
         return {}
+
+    stage_filter = None
+    if stages:
+        stage_filter = {s.upper() for s in stages}
 
     files = {}
     for filename in os.listdir(PATCHED_DIR):
@@ -290,6 +299,13 @@ def get_patched_files():
                 continue
             if '.backup_' in filename:
                 continue
+
+            # If stage filter is set, only include requested STG files.
+            if filename.upper().endswith(".STG") and stage_filter is not None:
+                stage_name = os.path.splitext(filename)[0].upper()
+                if stage_name not in stage_filter:
+                    continue
+
             files[filename] = filepath
 
     return files
@@ -354,6 +370,11 @@ def main():
         action="store_true",
         help="Don't restore from backup before patching (patch in place)"
     )
+    parser.add_argument(
+        "--stages",
+        nargs="+",
+        help="Only patch these STG stages (e.g. --stages S100 SG00 S200)"
+    )
     args = parser.parse_args()
 
     bin_path = os.path.abspath(args.bin_file)
@@ -367,7 +388,7 @@ def main():
         return 1
 
     # Get patched files
-    patched_files = get_patched_files()
+    patched_files = get_patched_files(args.stages)
     if not patched_files:
         print("ERROR: No patched files found in output/patched/")
         print("       Run 'python patch_korean.py <stage> --system' first.")

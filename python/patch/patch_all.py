@@ -76,18 +76,19 @@ def main():
 
     # Read from output/patched/translation/ (copied by patch_workflow.py)
     trans_dir = os.path.join(BASE_DIR, "output", "patched", "translation")
-    s100_path = os.path.join(trans_dir, "S100_STG.txt")
-    sg00_path = os.path.join(trans_dir, "SG00_STG.txt")
     system_path = os.path.join(trans_dir, "SCPS_100_26.txt")
     sdic_path = os.path.join(trans_dir, "SDIC_BIN.txt")
     yguild_path = os.path.join(trans_dir, "YGUILD_BIN.txt")
     smith_path = os.path.join(trans_dir, "SMITH_BIN.txt")
     beam_path = os.path.join(trans_dir, "BEAM_DAT.txt")
 
-    if os.path.exists(s100_path):
-        translation_files.append(("S100", s100_path))
-    if os.path.exists(sg00_path):
-        translation_files.append(("SG00", sg00_path))
+    # Include all staged STG translation files (S100, SG00, S200, ...)
+    for filename in sorted(os.listdir(trans_dir)):
+        if not filename.endswith("_STG.txt"):
+            continue
+        stage_name = filename[:-8].upper()  # Remove "_STG.txt"
+        stage_path = os.path.join(trans_dir, filename)
+        translation_files.append((stage_name, stage_path))
     if os.path.exists(system_path):
         translation_files.append(("SYSTEM", system_path))
     if os.path.exists(sdic_path):
