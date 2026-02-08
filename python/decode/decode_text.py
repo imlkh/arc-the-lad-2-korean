@@ -32,6 +32,16 @@ VALID_SINGLE_CHARS = set(
 )
 
 
+def _is_valid_dialogue_payload(stripped):
+    """Validate decoded payload text after tag removal.
+
+    Accept 2+ visible characters, or an allowlisted single symbol.
+    Whitespace is ignored for this boundary check.
+    """
+    normalized = stripped.strip()
+    return len(normalized) >= 2 or normalized in VALID_SINGLE_CHARS
+
+
 def build_decode_table():
     """Parse COMM_IMG_chars.md and build charID -> character mapping.
 
@@ -868,7 +878,7 @@ def _find_dialogue_in_gap(data, gap_start, gap_end, expected_prefix_bytes,
         # 1. Must have actual text content (reject single-char boundary artifacts)
         # 2. Must not overlap with script opcode blocks
         # 3. Must end within the gap (text_end <= gap_end)
-        if ((len(stripped) >= 2 or stripped in VALID_SINGLE_CHARS)
+        if (_is_valid_dialogue_payload(stripped)
                 and not _overlaps_script(text_start, text_end, script_ranges)
                 and not _has_mips_opcode_signature(
                     data, abs_offset, consumed, prefix=2)
@@ -908,7 +918,7 @@ def _find_dialogue_in_gap(data, gap_start, gap_end, expected_prefix_bytes,
                 stripped = re.sub(r"\[.*?\]", "", stripped)
                 text_start = abs_offset + 2
                 text_end = abs_offset + consumed
-                if ((len(stripped) >= 2 or stripped in VALID_SINGLE_CHARS)
+                if (_is_valid_dialogue_payload(stripped)
                         and not _overlaps_script(text_start, text_end, script_ranges)
                         and not _has_mips_opcode_signature(
                             data, abs_offset, consumed, prefix=2)
@@ -934,7 +944,7 @@ def _find_dialogue_in_gap(data, gap_start, gap_end, expected_prefix_bytes,
             stripped = re.sub(r"\[.*?\]", "", stripped)
             text_start = gap_start + 2
             text_end = gap_start + consumed
-            if ((len(stripped) >= 2 or stripped in VALID_SINGLE_CHARS)
+            if (_is_valid_dialogue_payload(stripped)
                     and not _overlaps_script(text_start, text_end, script_ranges)
                     and not _has_mips_opcode_signature(
                         data, gap_start, consumed, prefix=2)
@@ -1105,7 +1115,7 @@ def scan_stg(data, decode_table, use_heuristics=True, filter_garbage=True):
                 stripped = stripped.replace(tag, "")
             stripped = re.sub(r"\[script:.*?\]", "", stripped)
             stripped = re.sub(r"\[.*?\]", "", stripped)
-            if len(stripped) >= 2 or stripped in VALID_SINGLE_CHARS:
+            if _is_valid_dialogue_payload(stripped):
                 dialogues.append((abs_offset, consumed, text, first_tmpl[1]))
                 found_offsets.add(abs_offset)
                 pointer_validated.add(abs_offset)
