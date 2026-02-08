@@ -72,9 +72,10 @@ def is_garbage(text, plain):
         return "MIPS opcode pattern (ぺデ prefix)"
 
     # Pattern 6: Repeating same 1-2 char pattern 6+ times
+    # Exempt ・ (middle dot) — silence/pause dialogue is common in RPGs
     if len(plain) >= 8:
         m = re.match(r'^(.{1,2})\1{5,}$', plain)
-        if m:
+        if m and m.group(1) != '・':
             return f"Repeating pattern ({m.group(1)} x{len(plain)//len(m.group(1))})"
 
     # Pattern 7: 地+hiragana prefix (VM address pattern)
@@ -117,10 +118,18 @@ def is_garbage(text, plain):
             r'てな|だか|ほう|さん|ちゃん|ょう|しょう|ましょう|'
             r'なんだ|だけど|みたい|そうだ|ような|らしい|ている|'
             r'でしょう|ください|いただ|ありが|すみま|ごめん|'
+            # Archaic/dialect patterns (old characters, regional speech)
+            r'やっぱ|かもしれ|みんな|おぬし|じゃの|もどる|もどっ|'
+            r'きっと|そのうち|あたる|'
             r'を[かきくけこさしすせそたちつてとなにぬねのはひふへほ])',
             plain
         ))
         if not has_grammar:
+            # Check for onomatopoeia (repeated halves like ぴょこぴょこぴょこぴょこ)
+            if len(plain) % 2 == 0:
+                half = len(plain) // 2
+                if plain[:half] == plain[half:]:
+                    return None  # Onomatopoeia, not garbage
             return "Random hiragana without grammar"
 
     # Pattern 11: Mixed random kana + isolated uppercase ASCII
