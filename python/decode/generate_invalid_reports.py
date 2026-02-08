@@ -33,6 +33,11 @@ DEBUG_KEYWORDS = [
 
 # MIPS opcode signature characters
 MIPS_CHARS = set('ギデゲッグゼノ水煙')
+# Extended set for density check — chars that rarely form real Japanese words
+# Excludes ジ/メ (too common in アジト, ゴメン, レジスタンス, etc.)
+MIPS_DENSITY_CHARS = set('デギグダズヌ水')
+# Kanji that appear from MIPS byte decoding (not real game kanji)
+MIPS_KANJI = set('煙水地')
 PARTIAL_HIGH_RISK_BYTES = {'80', 'F5', 'F0', 'FF'}
 
 # Hiragana and katakana ranges
@@ -88,26 +93,30 @@ def is_garbage(text, plain):
     if re.match(r'^地[あうえいお]', plain) and len(plain) >= 5:
         # Check if it has scattered あ characters (opcode fingerprint)
         a_count = plain[2:].count('あ')
-        if a_count >= 2:
+        kanji_count = sum(1 for c in plain if is_kanji(c))
+        if a_count >= 1 and kanji_count <= 1:
             return "MIPS opcode pattern (地+kana address)"
 
     # Pattern 8: ニ alternating with random kana
     if re.match(r'ニ.{1,3}ニ.{1,3}ニ', plain):
         return "MIPS opcode pattern (ニ-alternating)"
 
-    # Pattern 9: Short text with high デ/ギ density (>25% of chars)
-    if len(plain) >= 4:
-        degi_count = sum(1 for c in plain if c in 'デギ')
+    # Pattern 9: Short text with high MIPS char density (>25% of chars)
+    if len(plain) >= 3:
+        degi_count = sum(1 for c in plain if c in MIPS_DENSITY_CHARS)
         if degi_count >= 2 and degi_count / len(plain) >= 0.25:
             # Also check: mostly kana with no meaning
             kanji_count = sum(1 for c in plain if is_kanji(c))
-            if kanji_count == 0 or (kanji_count == 1 and '煙' in plain):
+            real_kanji = kanji_count - sum(1 for c in plain if c in MIPS_KANJI)
+            if real_kanji <= 0:
                 # Check for actual game text patterns -
                 # real text has particles, verb endings, etc.
                 has_grammar = bool(re.search(
                     r'(ます|です|ない|する|した|ている|てる|こと|もの|だろう|'
                     r'かな|のは|には|では|ので|って|けど|から|まで|ても|'
-                    r'なら|だな|だよ|だぜ|わよ|わね|のよ|かし)',
+                    r'なら|だな|だよ|だぜ|わよ|わね|のよ|かし|'
+                    r'モグ|ダメ|'  # katakana words with MIPS density chars
+                    r'ー|ァ{2}|ゥ{2}|ォ{2})',  # long vowels / onomatopoeia
                     plain
                 ))
                 if not has_grammar:
@@ -177,6 +186,41 @@ def is_garbage(text, plain):
         if re.search(r'[あぐ].{0,2}[関際].{0,2}[あギ]', plain):
             return "MIPS opcode pattern (術・ mixed)"
 
+    # Pattern 14: Ends with もあ (MIPS opcode terminator 0x01=あ)
+    if plain.endswith('もあ') and len(plain) <= 8:
+        kanji_count = sum(1 for c in plain if is_kanji(c))
+        if kanji_count == 0:
+            return "MIPS opcode pattern (もあ suffix)"
+
+    # Pattern 15: Short text (<=5 chars) with digits mixed into kana
+    if len(plain) <= 5 and len(plain) >= 2:
+        has_digit = any(c.isdigit() for c in plain)
+        has_kana = any(is_kana(c) for c in plain)
+        has_kanji = any(is_kanji(c) for c in plain)
+        if has_digit and has_kana and not has_kanji:
+            return "MIPS opcode pattern (digit+kana mix)"
+
+    # Pattern 16: Fullwidth asterisk ＊ in short text (non-dialogue data)
+    if '＊' in plain and len(plain) <= 5:
+        return "MIPS opcode pattern (＊ data marker)"
+
+    # Pattern 17: MIPS address register sequence (0x24 XX decoded as ジ/メ + めあ)
+    # Matches the specific byte pattern where めあ (0x01) appears 2+ times
+    # alongside ジ or メ — a signature of MIPS LW/SW instruction decoding.
+    # Safe: ジ/メ in normal Japanese words (アジト, ゴメン, etc.) never co-occur with めあ.
+    if plain.count('めあ') >= 2 and any(c in 'ジメ' for c in plain):
+        return "MIPS opcode pattern (めあ+ジ/メ sequence)"
+
+    # Pattern 19: Starts with small kana (ぉ/ゅ/ょ) — unusual word start
+    if len(plain) <= 8 and plain and plain[0] in 'ぉゅょ':
+        kanji_count = sum(1 for c in plain if is_kanji(c))
+        if kanji_count == 0:
+            return "MIPS opcode pattern (small kana start)"
+
+    # Pattern 20: Starts with fullwidth period 。 (non-dialogue data)
+    if plain.startswith('。') and len(plain) <= 5:
+        return "MIPS opcode pattern (。prefix)"
+
     return None
 
 
@@ -199,6 +243,17 @@ def is_debug(text, plain):
     # Debug menu with FF:04 02 01 items
     if '[FF:04 02 01]' in text and ('ギルド' in text or 'debug' in text.lower() or
                                       'XA再生' in text or '分配器' in text or 'ずかん' in text):
+        return True
+    # Developer shop statistics messages
+    if 'おみせでかいものをした' in plain:
+        return True
+    if 'うりものをみてた' in plain:
+        return True
+    if 'かじやは' in plain and 'レベルアップ' in plain:
+        return True
+    if 'ごいけんくださいね' in plain:
+        return True
+    if 'バランスについても' in plain:
         return True
     return False
 
