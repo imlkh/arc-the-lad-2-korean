@@ -31,6 +31,9 @@ VALID_SINGLE_CHARS = set(
     '→←↑↓○×△□'         # UI / directional symbols
 )
 
+# High-risk script second-byte values that frequently indicate truncated decode.
+PARTIAL_REPLAY_BYTES = {0x80, 0xF5, 0xF0, 0xFF}
+
 
 def _is_valid_dialogue_payload(stripped):
     """Validate decoded payload text after tag removal.
@@ -1360,11 +1363,9 @@ def scan_stg(data, decode_table, use_heuristics=True, filter_garbage=True):
             pos += 1
 
     # --- Fix partial decodes ---
-    # Structural replay: for [script:00 XX] entries where data[offset-1]==0x00,
-    # try decoding from offset-1.  The preceding null byte becomes part of the
-    # new prefix [script:ZZ 00], and XX becomes the first text character.
-    # Accept the shifted decode only when the new content equals the original
-    # with exactly one recovered leading character prepended (endswith check).
+    # Structural replay for high-risk [script:00 XX] entries.
+    # Try decoding from offset-1/offset-2 and accept only if the shifted decode
+    # is a strict superset of original content with a small recovered prefix.
     stats['partial_decode_fixed'] = 0
     fixed_dialogues = []
     for offset, consumed, text, opcode in dialogues:
@@ -1373,42 +1374,49 @@ def scan_stg(data, decode_table, use_heuristics=True, filter_garbage=True):
         # A9 00 marker scanning (where offset-1 is the marker's 0x00 byte,
         # not a null terminator).
         _A9_SOURCED = {0x00A9, 0x00B4, 0x00B0, 0x00A0}
-        if (m and offset > 0 and data[offset - 1] == 0x00
-                and offset not in pointer_validated
-                and opcode not in _A9_SOURCED):
+        if m and offset not in pointer_validated and opcode not in _A9_SOURCED:
             second_byte = int(m.group(1), 16)
-            new_offset = offset - 1
-            new_text, new_consumed = decode_string(
-                data, new_offset, decode_table, prefix=2)
-            if (new_text and new_consumed >= consumed
-                    and not _is_garbage_text(new_text)):
+            if second_byte in PARTIAL_REPLAY_BYTES:
+                expected_char = decode_table.get(second_byte)
                 original_content = re.sub(
                     r'\[script:[0-9A-F ]+\]', '', text, count=1)
-                new_content = re.sub(
-                    r'\[script:[0-9A-F ]+\]', '', new_text, count=1)
-                # Case 1: Single-character recovery.
-                # Shifted content is original with one char prepended.
-                if (len(new_content) > len(original_content)
-                        and new_content.endswith(original_content)):
+                for shift in (1, 2):
+                    new_offset = offset - shift
+                    if new_offset < 0 or data[new_offset] != 0x00:
+                        continue
+                    new_text, new_consumed = decode_string(
+                        data, new_offset, decode_table, prefix=2)
+                    if (not new_text or new_consumed < consumed
+                            or _is_garbage_text(new_text)):
+                        continue
+                    # Must not remain in the same malformed [script:00 XX] form.
+                    if re.match(r'\[script:00 [0-9A-F]{2}\]', new_text):
+                        continue
+                    new_content = re.sub(
+                        r'\[script:[0-9A-F ]+\]', '', new_text, count=1)
+                    if (len(new_content) <= len(original_content)
+                            or not new_content.endswith(original_content)):
+                        continue
                     recovered = new_content[:len(new_content)
                                             - len(original_content)]
-                    expected_char = decode_table.get(second_byte)
-                    if expected_char is None or recovered == expected_char:
+                    if len(recovered) > 2:
+                        continue
+                    # 0xFF is a control-code prefix, so allow structural replay.
+                    # For non-FF, recovered first char must match XX decode.
+                    if second_byte == 0xFF:
                         fixed_dialogues.append(
                             (new_offset, new_consumed, new_text, opcode))
                         stats['partial_decode_fixed'] += 1
-                        continue
-                # Case 2: FF control code recovery.
-                # 0xFF is always a control code prefix, never a valid script
-                # parameter.  When [script:00 FF], the decoder consumed FF as
-                # prefix byte 2, then mis-decoded the control code parameter
-                # bytes as text (e.g., FF 08 01 01 → "くああ" instead of
-                # [box:system]).  Shifting back restores proper parsing.
-                elif second_byte == 0xFF:
-                    fixed_dialogues.append(
-                        (new_offset, new_consumed, new_text, opcode))
-                    stats['partial_decode_fixed'] += 1
+                        break
+                    if expected_char and recovered and recovered[0] == expected_char:
+                        fixed_dialogues.append(
+                            (new_offset, new_consumed, new_text, opcode))
+                        stats['partial_decode_fixed'] += 1
+                        break
+                else:
+                    fixed_dialogues.append((offset, consumed, text, opcode))
                     continue
+                continue
         fixed_dialogues.append((offset, consumed, text, opcode))
     dialogues = fixed_dialogues
 

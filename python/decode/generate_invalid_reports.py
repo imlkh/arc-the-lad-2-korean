@@ -28,6 +28,7 @@ DEBUG_KEYWORDS = [
 
 # MIPS opcode signature characters
 MIPS_CHARS = set('ギデゲッグゼノ水煙')
+PARTIAL_HIGH_RISK_BYTES = {'80', 'F5', 'F0', 'FF'}
 
 # Hiragana and katakana ranges
 def is_hiragana(c):
@@ -199,17 +200,15 @@ def is_debug(text, plain):
 
 def is_partial_decode(text, plain, script_tag):
     """Check if this is a partial decode (missing first char)."""
-    # Script tag starting with 00 (not 00 00) often indicates truncated first byte
+    # Script tag starting with specific high-risk bytes often indicates
+    # truncated first-byte decode (observed mojibake clusters).
     script_bytes = script_tag.split()
-    if len(script_bytes) == 2 and script_bytes[0] == '00' and script_bytes[1] != '00':
-        # Text starts mid-word or with a particle that doesn't start a sentence
+    if (len(script_bytes) == 2 and script_bytes[0] == '00'
+            and script_bytes[1] in PARTIAL_HIGH_RISK_BYTES):
         if plain and len(plain) >= 2:
-            first = plain[0]
-            # Common truncation indicators: starts with verb ending, small kana, etc.
-            if first in 'ュョッっつんた、ころに' or (is_hiragana(first) and len(plain) >= 3):
-                return f"Possible truncated first byte (script:00 {script_bytes[1]})"
+            return f"Possible truncated first byte (script:00 {script_bytes[1]})"
 
-    # Also check for text starting with obvious continuations
+    # Also check explicit continuation fragments independent of script bytes.
     if plain and len(plain) >= 3:
         partial_starts = [
             ('ュウ', 'シュウ'), ('ころで', 'ところで'), ('ございました', 'ありがとうございました'),
