@@ -213,6 +213,7 @@ TEMPLATE_SIG_45 = b'\x45\x01\xF0\x8B'  # Secondary signature (always at +16)
 TEMPLATE_SIZE = 48
 SCRIPT_OPCODE_28 = b'\x28\x01'
 SCRIPT_BLOCK_SIZE = 10
+MIPS_OPCODE_MARKER_BYTES = {0x01, 0x80, 0x8C}
 STG_CHUNK_SIZE = 0xBC800  # 772,096 bytes per chunk
 STG_TEXT_REGION_OFFSET = 0xB4000  # Text region starts at +0xB4000 within each chunk
 STG_TEXT_REGION_SIZE = 0x8800  # ~34,816 bytes text region per chunk
@@ -297,9 +298,10 @@ def _is_garbage_text(text):
         # Valid short terms like "HP回復" have kanji
         if has_upper and has_kana and not has_kanji:
             return True
-    elif len(stripped) <= 12:
-        # For medium text, catch isolated uppercase letters mixed with kana
+    elif len(stripped) >= 7:
+        # For medium+ text, catch isolated uppercase letters mixed with kana
         # "ゾァびJダIゥゾ" has J,I isolated between kana = garbage
+        # "テしEと／ねぇむツたDと－ふれむバるDふ" = MIPS opcodes
         # "BGMセレクト" has B,G,M consecutive = valid game term
         has_upper = any(c.isupper() and c.isascii() for c in stripped)
         has_kana = any('ぁ' <= c <= 'ん' or 'ァ' <= c <= 'ン' for c in stripped)
@@ -375,14 +377,43 @@ def _is_garbage_text(text):
                 if len(set(intervals)) == 1 and intervals[0] >= 4:
                     return True
 
-    # Rule 7: MIPS opcode garbage — multiple distinct "Xあ/Xデ/Xギ" bigrams
-    # VM opcodes produce three characteristic patterns when decoded as text:
+    # Rule 7: MIPS opcode garbage detection
+    # VM opcodes produce characteristic patterns when decoded as text:
     #   XX 01 → "Xあ" (STORE, CALL, SET, COMPARE opcodes)
     #   XX 8C → "Xデ" (memory reference operands)
     #   XX 80 → "Xギ" (register operands)
-    # If 2+ different characters precede any of these markers, it's opcodes.
-    # Texts with kanji or punctuation are excluded (always valid).
-    if 3 <= len(stripped) <= 30:
+    # These patterns are reliable even when kanji is present, because MIPS
+    # byte sequences frequently produce kanji (地/水/火/風/煙/術/関/際/鉛/径).
+    if 3 <= len(stripped) <= 200:
+        # Rule 7a: "もあ" + MIPS katakana within 3 chars → definitive MIPS
+        # "もあ" = charIDs for も + あ from XX 01 opcode pair.
+        # In real Japanese, もあ is always followed by hiragana verb (る/った/れ).
+        # In MIPS, it's followed by kanji or katakana markers.
+        if re.search(r'もあ.{0,3}[デゲギグゼダヅヂゾ]', stripped):
+            return True
+
+        # Rule 7b: "もあ煙" → specific MIPS function signature
+        if 'もあ煙' in stripped:
+            return True
+
+        # Rule 7c: "煙煙" → duplicated opcode kanji
+        if '煙煙' in stripped:
+            return True
+
+        # Rule 7d: High デ/ギ density in short text without grammar
+        # MIPS register/memory operands produce dense デ/ギ characters.
+        if 4 <= len(stripped) <= 30:
+            degi_count = sum(1 for c in stripped if c in 'デギ')
+            if degi_count >= 2 and degi_count / len(stripped) >= 0.25:
+                has_grammar = bool(re.search(
+                    r'(ます|です|ない|する|した|ている|てる|こと|もの|だろう|'
+                    r'って|けど|から|まで|なら|んだ|のか|のは|には|ので)',
+                    stripped))
+                if not has_grammar:
+                    return True
+
+        # Rule 7e: Original predecessor check for non-kanji text
+        # If 2+ different chars precede any MIPS marker → opcodes.
         has_kanji_r7 = any('\u4e00' <= c <= '\u9fff' for c in stripped)
         has_punct_r7 = any(c in '！？…。、' for c in stripped)
         if not has_kanji_r7 and not has_punct_r7:
@@ -393,6 +424,53 @@ def _is_garbage_text(text):
                         predecessors.add(stripped[i-1])
                 if len(predecessors) >= 2:
                     return True
+
+        # Rule 7f: Short all-katakana from MIPS opcode character set
+        # e.g., グゼノ, クゼゼ, シゼニ, ギギグ — 3-5 char katakana composed
+        # entirely of chars produced by MIPS register/memory operand bytes.
+        # No real Japanese words use only these characters.
+        MIPS_KATA = set('ギデゲグゼノクシニダヅヂゾ')
+        if 3 <= len(stripped) <= 5 and all(c in MIPS_KATA for c in stripped):
+            return True
+
+        # Rule 7g: ぺデ prefix — MIPS coprocessor instruction (byte 0x46)
+        # e.g., ぺデデ, ぺデぴしダ. "ぺデ" never starts real Japanese text.
+        if stripped.startswith('ぺデ') and len(stripped) <= 8:
+            return True
+
+        # Rule 7h: 地 + all hiragana with scattered あ — MIPS addiu (byte 0x24)
+        # e.g., 地えあきあつくと, 地あえきあつあと. Real 地 text always pairs
+        # with kanji (地下, 地獄), never with pure scattered hiragana.
+        if stripped.startswith('地') and len(stripped) >= 5:
+            rest = stripped[1:]
+            if all('\u3040' <= c <= '\u309f' for c in rest):
+                if rest.count('あ') >= 2:
+                    return True
+
+        # Rule 7i: Pure hiragana 12+ chars without any grammatical structure
+        # e.g., おつあきけなこたかそいちちて — MIPS opcodes producing
+        # scattered hiragana with no recognizable words or grammar.
+        # Real pure-hiragana dialogue always contains particles or verb forms.
+        if len(stripped) >= 12 and all('\u3040' <= c <= '\u309f' for c in stripped):
+            has_grammar = bool(re.search(
+                r'(ます|です|ない|する|した|ている|てる|こと|もの|だろう|'
+                r'かな|のは|には|では|ので|って|けど|から|まで|ても|'
+                r'なら|だな|だよ|だぜ|よう|れる|られ|せる|させ|'
+                r'やめ|くれ|はい|いい|ああ|おお|うう|しい|かった|'
+                r'たよ|たぜ|たわ|なあ|なの|んだ|のだ|のか|'
+                r'てな|だか|ほう|さん|ちゃん|しょう|ましょう|'
+                r'やっぱ|かもしれ|みんな|おぬし|じゃの|もどる|もどっ|'
+                r'きっと|そのうち|あたる|'
+                r'を[かきくけこさしすせそたちつてとなにぬねのはひふへほ])',
+                stripped
+            ))
+            if not has_grammar:
+                # Allow onomatopoeia (repeated halves)
+                if len(stripped) % 2 == 0:
+                    half = len(stripped) // 2
+                    if stripped[:half] == stripped[half:]:
+                        return False
+                return True
 
     return False
 
@@ -652,6 +730,73 @@ def _overlaps_script(start, end, script_ranges):
     return False
 
 
+def _iter_dialogue_payload_bytes(data, offset, consumed, prefix=2):
+    """Yield payload bytes for structural checks.
+
+    This strips known control sequences and trailing nulls, and skips second
+    bytes of two-byte character encodings (F0-FE xx) so marker checks focus on
+    meaningful opcode-like lead bytes rather than encoded-text artifacts.
+    """
+    start = offset + prefix
+    end = min(len(data), offset + consumed)
+    i = start
+    while i < end:
+        b = data[i]
+        if b == 0x00:
+            break
+        if b == 0xFF and i + 3 < end:
+            i += 4
+            continue
+        if b == 0xEF:
+            i += 1
+            continue
+        if 0xF0 <= b <= 0xFE and i + 1 < end:
+            # Keep lead byte only; skip trailing byte.
+            yield b
+            i += 2
+            continue
+        yield b
+        i += 1
+
+
+def _has_mips_opcode_signature(data, offset, consumed, prefix=2):
+    """Detect opcode-like byte structure in a decoded dialogue candidate.
+
+    This is a structural (byte-level) check intended to reject MIPS/binary
+    payloads that happen to decode as text. It complements text-pattern rules.
+    """
+    payload = list(_iter_dialogue_payload_bytes(data, offset, consumed, prefix))
+    if len(payload) < 8:
+        return False
+
+    marker_positions = [i for i, b in enumerate(payload)
+                        if b in MIPS_OPCODE_MARKER_BYTES]
+    marker_count = len(marker_positions)
+
+    # Dense opcode markers in a short candidate is strongly suspicious.
+    if marker_count >= 3:
+        density = marker_count / len(payload)
+        if density >= 0.20:
+            return True
+
+    # Repeating marker cadence (e.g., every 2-4 bytes) is typical of opcode
+    # operand streams and rare in real text bytes.
+    if len(marker_positions) >= 4:
+        deltas = [marker_positions[i + 1] - marker_positions[i]
+                  for i in range(len(marker_positions) - 1)]
+        if len(set(deltas)) == 1 and deltas[0] in (2, 3, 4):
+            return True
+
+    # Sliding-window marker saturation check.
+    for i in range(0, len(payload) - 7):
+        window = payload[i:i + 8]
+        hits = sum(1 for b in window if b in MIPS_OPCODE_MARKER_BYTES)
+        if hits >= 3:
+            return True
+
+    return False
+
+
 def _find_dialogue_in_gap(data, gap_start, gap_end, expected_prefix_bytes,
                           decode_table, use_heuristics=False):
     """Search for a dialogue string in the gap between two templates.
@@ -712,6 +857,8 @@ def _find_dialogue_in_gap(data, gap_start, gap_end, expected_prefix_bytes,
         # 3. Must end within the gap (text_end <= gap_end)
         if (len(stripped) >= 1
                 and not _overlaps_script(text_start, text_end, script_ranges)
+                and not _has_mips_opcode_signature(
+                    data, abs_offset, consumed, prefix=2)
                 and text_end <= gap_end + TEMPLATE_SIZE):  # Allow ending at next template
             # Skip garbage filter for pointer-validated dialogues
             # The pointer validation itself ensures this is a real dialogue
@@ -748,6 +895,8 @@ def _find_dialogue_in_gap(data, gap_start, gap_end, expected_prefix_bytes,
                 text_end = abs_offset + consumed
                 if (len(stripped) >= 1
                         and not _overlaps_script(text_start, text_end, script_ranges)
+                        and not _has_mips_opcode_signature(
+                            data, abs_offset, consumed, prefix=2)
                         and text_end <= gap_end + TEMPLATE_SIZE):
                     prefix_val = int.from_bytes(alt_bytes, 'little')
                     results.append((abs_offset, prefix_val, text, consumed))
@@ -770,6 +919,8 @@ def _find_dialogue_in_gap(data, gap_start, gap_end, expected_prefix_bytes,
             text_end = gap_start + consumed
             if (len(stripped) >= 1
                     and not _overlaps_script(text_start, text_end, script_ranges)
+                    and not _has_mips_opcode_signature(
+                        data, gap_start, consumed, prefix=2)
                     and text_end <= gap_end + TEMPLATE_SIZE
                     and not _is_garbage_text(text)):
                 prefix_val = int.from_bytes(data[gap_start:gap_start + 2], 'little')
@@ -796,6 +947,8 @@ def _find_dialogue_in_gap(data, gap_start, gap_end, expected_prefix_bytes,
             has_kanji = any('\u4e00' <= c <= '\u9fff' for c in stripped)
             if (len(stripped) >= 5 and has_kanji
                     and not _overlaps_script(text_start, text_end, script_ranges)
+                    and not _has_mips_opcode_signature(
+                        data, continuation_pos, consumed, prefix=2)
                     and not _is_garbage_text(text)):
                 prefix_val = int.from_bytes(
                     data[continuation_pos:continuation_pos + 2], 'little')
@@ -825,6 +978,8 @@ def _find_dialogue_in_gap(data, gap_start, gap_end, expected_prefix_bytes,
                     if (len(stripped) >= MIN_TEXT_RUN
                             and not _overlaps_script(text_start, text_end,
                                                        script_ranges)
+                            and not _has_mips_opcode_signature(
+                                data, candidate, consumed, prefix=2)
                             and not _is_garbage_text(text)):
                         prefix_val = int.from_bytes(data[candidate:candidate + 2],
                                                     'little')
@@ -967,6 +1122,7 @@ def scan_stg(data, decode_table, use_heuristics=True, filter_garbage=True):
     # Filter out: tables using [opt] for column spacing, dialogue pauses
     stats['orphan_menus_found'] = 0
     for region_start, region_end, chunk_idx in chunk_regions:
+        script_ranges = _find_script_ranges(data, region_start, region_end)
         pos = region_start
         while pos < region_end - 4:
             # Look for A9 00 marker
@@ -986,7 +1142,14 @@ def scan_stg(data, decode_table, use_heuristics=True, filter_garbage=True):
                         stripped = re.sub(r"\[.*?\]", "", stripped)
 
                         # Menu text should have meaningful content
-                        if len(stripped) >= 2 and not _is_garbage_text(text):
+                        text_start = pos + 4  # marker(2) + prefix(2)
+                        text_end = pos + 2 + consumed
+                        if (len(stripped) >= 2
+                                and not _overlaps_script(
+                                    text_start, text_end, script_ranges)
+                                and not _has_mips_opcode_signature(
+                                    data, pos + 2, consumed, prefix=2)
+                                and not _is_garbage_text(text)):
                             # Use A9 (0x00A9) as the context opcode for orphan menus
                             dialogues.append((pos + 2, consumed, text, 0x00A9))
                             found_offsets.add(pos + 2)
@@ -1001,6 +1164,7 @@ def scan_stg(data, decode_table, use_heuristics=True, filter_garbage=True):
     # Must have kanji to filter out binary garbage
     stats['bare_dialogues_found'] = 0
     for region_start, region_end, chunk_idx in chunk_regions:
+        script_ranges = _find_script_ranges(data, region_start, region_end)
         pos = region_start
         while pos < region_end - 4:
             # Look for A9 00 marker
@@ -1021,7 +1185,13 @@ def scan_stg(data, decode_table, use_heuristics=True, filter_garbage=True):
                         has_kanji = any('\u4e00' <= c <= '\u9fff' for c in stripped)
 
                         # Bare dialogue should have meaningful kanji content
+                        text_start = pos + 4  # marker(2) + prefix(2)
+                        text_end = pos + 2 + consumed
                         if (has_kanji and len(stripped) >= 3
+                                and not _overlaps_script(
+                                    text_start, text_end, script_ranges)
+                                and not _has_mips_opcode_signature(
+                                    data, pos + 2, consumed, prefix=2)
                                 and not _is_garbage_text(text)):
                             # Use 0x00B4 as context opcode for bare dialogues in text region
                             dialogues.append((pos + 2, consumed, text, 0x00B4))
@@ -1041,6 +1211,7 @@ def scan_stg(data, decode_table, use_heuristics=True, filter_garbage=True):
     stats['event_script_dialogues_found'] = 0
     event_script_regions = _get_chunk_event_script_regions(len(data))
     for region_start, region_end, chunk_idx in event_script_regions:
+        script_ranges = _find_script_ranges(data, region_start, region_end)
         pos = region_start
         while pos < region_end - 4:
             # Look for A9 00 marker (dialogue stream marker)
@@ -1079,7 +1250,13 @@ def scan_stg(data, decode_table, use_heuristics=True, filter_garbage=True):
                             'ぁ' <= c <= 'ん' or c == 'ー'
                             for c in stripped))
 
+                        text_start = pos + 4  # marker(2) + prefix(2)
+                        text_end = pos + 2 + consumed
                         if (len(stripped) >= 2 and not _is_garbage_text(text)
+                                and not _overlaps_script(
+                                    text_start, text_end, script_ranges)
+                                and not _has_mips_opcode_signature(
+                                    data, pos + 2, consumed, prefix=2)
                                 and (has_box_tag or has_kanji or is_menu
                                      or is_pure_kana or is_long_hiragana)):
                             # Use 0x00B0 as context opcode for Event Script region dialogues
@@ -1096,6 +1273,7 @@ def scan_stg(data, decode_table, use_heuristics=True, filter_garbage=True):
     stats['padding_dialogues_found'] = 0
     padding_regions = _get_chunk_padding_regions(len(data))
     for region_start, region_end, chunk_idx in padding_regions:
+        script_ranges = _find_script_ranges(data, region_start, region_end)
         pos = region_start
         while pos < region_end - 4:
             # Look for A9 00 marker (dialogue stream marker)
@@ -1130,7 +1308,13 @@ def scan_stg(data, decode_table, use_heuristics=True, filter_garbage=True):
                             'ぁ' <= c <= 'ん' or c == 'ー'
                             for c in stripped))
 
+                        text_start = pos + 4  # marker(2) + prefix(2)
+                        text_end = pos + 2 + consumed
                         if (len(stripped) >= 2 and not _is_garbage_text(text)
+                                and not _overlaps_script(
+                                    text_start, text_end, script_ranges)
+                                and not _has_mips_opcode_signature(
+                                    data, pos + 2, consumed, prefix=2)
                                 and (has_box_tag or has_kanji or is_menu
                                      or is_pure_kana or is_long_hiragana)):
                             # Use 0x00A0 as context opcode for Padding region dialogues
@@ -1188,6 +1372,24 @@ def scan_stg(data, decode_table, use_heuristics=True, filter_garbage=True):
 
     # Sort dialogues by offset
     dialogues.sort(key=lambda d: d[0])
+
+    # --- Region-based filtering ---
+    # Reject entries from non-text regions within each chunk.
+    # Valid regions: text (0xB4000-0xBC800), event scripts (0xB0000-0xB4000),
+    #               padding (0xA0000-0xB0000).
+    # Invalid regions: graphics (0x00000-0x70000), MIPS code (0x77000-0xA0000).
+    stats['region_filtered'] = 0
+    region_clean = []
+    for d in dialogues:
+        offset = d[0]
+        chunk_offset = offset % STG_CHUNK_SIZE
+        if chunk_offset < 0xA0000:
+            # In graphics (0-0x70000), unknown (0x70000-0x77000),
+            # or MIPS code (0x77000-0xA0000) — not text
+            stats['region_filtered'] += 1
+            continue
+        region_clean.append(d)
+    dialogues = region_clean
 
     # Filter garbage if requested
     if filter_garbage:
