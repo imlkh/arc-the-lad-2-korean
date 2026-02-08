@@ -936,7 +936,13 @@ def _find_dialogue_in_gap(data, gap_start, gap_end, expected_prefix_bytes,
 
     # Try decoding from gap_start directly (handles fixed-prefix dialogues
     # like 03 01 where the prefix doesn't match any expected value)
-    if not results and gap_end - gap_start >= 4:
+    # Skip if gap_start is at the text region boundary (chunk+0xB4000) and
+    # the byte before is non-null — this means a dialogue string straddles
+    # the event script / text region boundary.  The template-pair loop will
+    # find the full cross-boundary string from the event script region.
+    _at_text_boundary = (gap_start % STG_CHUNK_SIZE == 0xB4000
+                         and gap_start > 0 and data[gap_start - 1] != 0x00)
+    if not results and gap_end - gap_start >= 4 and not _at_text_boundary:
         text, consumed = decode_string(data, gap_start, decode_table, prefix=2)
         if text:
             stripped = text

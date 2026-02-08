@@ -7,8 +7,8 @@ Arc the Lad 2's STG stage files. Because the decoder scans binary data that incl
 MIPS machine code alongside text, it must distinguish real dialogue from garbage produced
 by misinterpreted opcodes.
 
-**Final stats** (2026-02-08): 26,844 dialogues across 20,947 templates in 19 STG files.
-Category 1 garbage: **4**. Category 2 single-char fragments: **0**. Partial decodes: **1**.
+**Final stats** (2026-02-09): 26,841 dialogues across 20,947 templates in 19 STG files.
+Category 1 garbage: **4**. Category 2 single-char fragments: **0**. Partial decodes: **0**.
 
 ## Garbage Filter Rules (`_is_garbage_text()`)
 
@@ -128,6 +128,7 @@ initially misclassified as garbage:
 | + Tighten report + FF/F0-FE recovery | 26,907 | 4 | 0 | 20 | −49 partial (19 fixed + 30 false positives removed) |
 | + Discard unfixed [script:00 80] | 26,892 | 4 | 0 | 5 | −15 MIPS garbage discarded |
 | + Continuation prefix=0 fix | **26,844** | 4 | 0 | **1** | −48 (MIPS unmasked), −4 partial fixed |
+| + Cross-boundary text fix | **26,841** | 4 | 0 | **0** | −3 cross-boundary partials eliminated |
 
 ## Other Fixes
 
@@ -241,7 +242,28 @@ Also adjusted `text_start`, `consumed` threshold, and
 **Results**:
 - Partial decodes: 5 → **1** (4 ュウ/ところで entries now correctly decoded)
 - Total dialogues: −48 (MIPS garbage unmasked when full text exposed to filters)
-- 1 remaining partial decode: cross-boundary `ございました` in S200
+
+### Cross-Boundary Text Region Fix (2026-02-09)
+
+**Root cause**: Some dialogue strings physically straddle the event script / text
+region boundary (`chunk+0xB3FFF` → `chunk+0xB4000`). The chunk-boundary scanner's
+gap-start decode starts at `0xB4000` and captures only the tail of the string,
+producing a partial duplicate. The template-pair loop correctly finds the full
+cross-boundary string because its gap extends into the event script region.
+
+**Affected entries** (3 total):
+
+| File | Partial (removed) | Full (kept by template-pair loop) |
+|------|-------------------|----------------------------------|
+| S200 | `ございました` at 0xB4000 | `あの…[br]ありがとうございました` at 0xB3FF4 |
+| S700 | `たも、助けてもらえるまで…` at 0xB4000 | `あなたも、助けてもらえるまで…` at 0xB3FFE |
+| SG00 | `丈夫か？` at 0xB4000 | `大丈夫か？` at 0xB3FFE |
+
+**Fix**: In `_find_dialogue_in_gap()`, skip the gap-start decode fallback when
+`gap_start` is at the text region boundary (`chunk+0xB4000`) and the byte before
+is non-null (indicating a cross-boundary string).
+
+**Results**: Partial decodes: 1 → **0**. Total dialogues: −3.
 
 ### Single Character Fragment Filter (2026-02-08)
 
