@@ -7,8 +7,8 @@ Arc the Lad 2's STG stage files. Because the decoder scans binary data that incl
 MIPS machine code alongside text, it must distinguish real dialogue from garbage produced
 by misinterpreted opcodes.
 
-**Final stats** (2026-02-08): 26,839 dialogues across 20,947 templates in 19 STG files.
-Category 1 garbage (MIPS opcodes): **0**.
+**Final stats** (2026-02-08): 26,907 dialogues across 20,947 templates in 19 STG files.
+Category 1 garbage: **0**. Category 2 single-char fragments: **0**. Partial decodes: **69**.
 
 ## Garbage Filter Rules (`_is_garbage_text()`)
 
@@ -118,11 +118,13 @@ initially misclassified as garbage:
 
 ## Dialogue Count Progression
 
-| Stage | Total Dialogues | Category 1 Garbage | Change |
-|-------|----------------|-------------------|--------|
-| Initial decode (baseline) | 27,211 | 271 | — |
-| + Region filter + Rules 7a-7e | 26,896 | 40 | −315 dialogues, −231 garbage |
-| + Rules 7f-7i + Rule 4 extension | 26,855 | **0** | −41 dialogues, −40 garbage |
+| Stage | Total | Cat 1 | Cat 2 | Cat 4 | Change |
+|-------|-------|-------|-------|-------|--------|
+| Initial decode (baseline) | 27,211 | 271 | — | — | — |
+| + Region filter + Rules 7a-7e | 26,896 | 40 | — | — | −315 dialogues, −231 garbage |
+| + Rules 7f-7i + Rule 4 extension | 26,855 | **0** | 111 | 86 | −41 dialogues, −40 garbage |
+| + Structural replay (partial decode) | 26,855 | 0 | 111 | 59 | −27 partial decodes fixed (50 total) |
+| + Single-char fragment filter | **26,907** | 4 | **0** | 69 | +68 dialogues, −111 fragments |
 
 ## Other Fixes
 
@@ -175,20 +177,56 @@ Reduced missed gaps: 362 → 40 across all 19 STG files.
 CharID 160 is ッ (small katakana tsu) in the original font, NOT a space.
 The `table[160] = " "` override in `build_decode_table()` was removed.
 
-### Partial Decode Fix (2026-02-08)
+### Partial Decode Fix — Structural Replay (2026-02-08)
 
-**Root cause**: Continuation search in `_find_dialogue_in_gap()` starts at
-`continuation_pos` where `data[continuation_pos] == 0x00`. This 0x00 gets
-consumed as prefix byte 1, and the actual first text character becomes
-prefix byte 2, causing the first character to be "eaten" by the prefix.
+**Root cause**: Continuation/fallback search in `_find_dialogue_in_gap()` can
+start at a `0x00` byte. This 0x00 gets consumed as prefix byte 1, and the
+actual first text character becomes prefix byte 2, producing `[script:00 XX]`
+where XX is the eaten character's charID.
 
 **Example**: `[script:00 0A]んな所に何の用だい？` should be `こんな所に何の用だい？`
 — charID 0x0A (こ) was consumed as prefix byte 2.
 
-**Fix**: Post-processing in `scan_stg()` detects `[script:00 XX]` entries
-where the first text character is a NON_STARTER
-(`んンっッぁぃぅぇぉゃゅょァィゥェォャュョ、。ー`). When detected, shifts
-offset back by 1 and re-decodes.
+**Fix**: Structural replay in `scan_stg()` post-processing. For each
+`[script:00 XX]` entry where `data[offset-1] == 0x00`:
 
-**Results**: 19 fixes across all STG files, zero false positives.
-87 partial decodes remain (start with normal chars, cannot be auto-fixed).
+1. **Guard against false positives**: Skip if offset is in `pointer_validated`
+   set (primary/secondary search confirmed the prefix) or opcode is in
+   `_A9_SOURCED` = {0x00A9, 0x00B4, 0x00B0, 0x00A0} (marker byte at offset-1
+   is the A9 00 marker, not a null terminator).
+2. **Try decode from offset-1**: Re-decode with the shifted offset.
+3. **Validate**: Accept if shifted content `endswith` original content with one
+   recovered leading character, and recovered char matches `decode_table[XX]`.
+4. **FF special case**: `[script:00 FF]` always shifts (FF is always a control
+   code prefix, never a script parameter).
+
+**Results**: 50 fixes across all STG files, zero false positives.
+69 partial decodes remain (pointer-validated or A9-sourced entries correctly
+left alone, plus a few with non-00 prefix bytes).
+
+### Single Character Fragment Filter (2026-02-08)
+
+**Root cause**: 97.3% of Category 2 single-character fragments occur at exactly
+`previous_template_offset + 48` (template end boundary). These are template
+opcode parameter bytes at the gap start that get accepted by
+`_find_dialogue_in_gap()` because the minimum text length was `len(stripped) >= 1`.
+
+**Pattern**: Non-dialogue templates have opcode instructions after the 44-byte
+header. Bytes 44-47 are opcodes, and byte 48+ are parameters. A single parameter
+byte that happens to be a valid charID gets decoded as a 1-character "dialogue".
+
+Common fragments: `I` (56), `S` (16), `し` (11), `ぱ`/`ぽ`/`ょ` (8).
+
+**Fix**: Raised minimum accepted payload from `len(stripped) >= 1` to
+`len(stripped) >= 2 or stripped in VALID_SINGLE_CHARS`. Applied in all four
+acceptance paths: primary search, secondary search, gap-start search, and
+first dialogue search.
+
+**VALID_SINGLE_CHARS allowlist**:
+- Punctuation/reactions: `？！…・ー。、`
+- Special symbols: `♪♥♡★☆※`
+- UI/directional: `→←↑↓○×△□`
+
+**Results**: Category 2 fragments: 111 → **0**. Total dialogues: +68 (previously
+masked real dialogues discovered when single-char fragments no longer block
+primary search).
