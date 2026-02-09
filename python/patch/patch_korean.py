@@ -144,7 +144,8 @@ def extract_korean_chars(translation_path):
     return sorted(korean_chars)
 
 
-def build_korean_mapping(korean_chars, decode_table, priority_chars=None, char_frequency=None):
+def build_korean_mapping(korean_chars, decode_table, priority_chars=None, char_frequency=None,
+                         non_stg_frequency=None, stg_frequency=None):
     """Build mapping from Korean characters to font charIDs.
 
     Strategy: Replace hiragana (1-80), katakana (81-160), then kanji (239+).
@@ -155,6 +156,12 @@ def build_korean_mapping(korean_chars, decode_table, priority_chars=None, char_f
         decode_table: The character decode table
         priority_chars: Optional set of characters to prioritize for single-byte slots
         char_frequency: Optional dict mapping char -> usage count for frequency-based ordering
+        non_stg_frequency: Optional dict of char frequency in non-STG files (fixed-length)
+        stg_frequency: Optional dict of char frequency in STG files (variable-length)
+
+    When non_stg_frequency and stg_frequency are both provided, characters are sorted
+    by (-non_stg_freq, -stg_freq) so that characters most used in fixed-length files
+    (where single-byte encoding prevents truncation) get single-byte slots first.
     """
     # CharIDs that encode with 00 byte (unusable - 00 is null terminator)
     # These are charIDs where (charID - 239) % 255 == 0: 239, 494, 749, ...
@@ -186,10 +193,14 @@ def build_korean_mapping(korean_chars, decode_table, priority_chars=None, char_f
     mapping = {}
 
     # Determine character ordering for slot assignment
-    if char_frequency:
-        # Frequency-based ordering: most used chars get single-byte slots
-        ordered_chars = sorted(korean_chars, key=lambda c: -char_frequency.get(c, 0))
-    elif priority_chars:
+    if non_stg_frequency is not None and stg_frequency is not None:
+        # Two-tier priority: non-STG chars first (fixed-length benefits most from single-byte),
+        # then STG-only chars, each tier sorted by its own frequency
+        ordered_chars = sorted(korean_chars, key=lambda c: (
+            -non_stg_frequency.get(c, 0),
+            -stg_frequency.get(c, 0)
+        ))
+    elif char_frequency:
         # Priority chars first, then others
         priority_list = [ch for ch in korean_chars if ch in priority_chars]
         other_list = [ch for ch in korean_chars if ch not in priority_chars]

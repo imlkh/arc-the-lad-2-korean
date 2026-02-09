@@ -105,28 +105,37 @@ def main():
         return 1
 
     # Extract ALL Korean characters from ALL files
+    # Separate frequency counting: non-STG files use fixed-length replacement
+    # (single-byte encoding prevents truncation), STG files use variable-length
     print("\nExtracting Korean characters from all translations...")
     all_korean_chars = set()
-    char_frequency = {}
+    non_stg_frequency = {}  # SCPS, SDIC, YGUILD, SMITH, BEAM
+    stg_frequency = {}      # S*_STG files
+
+    NON_STG_NAMES = {"SYSTEM", "SDIC", "YGUILD", "SMITH", "BEAM"}
 
     for name, path in translation_files:
         chars = extract_korean_chars(path)
         all_korean_chars.update(chars)
         print(f"  {name}: {len(chars)} unique chars")
 
-        # Count frequency
+        # Count frequency into the appropriate dict
+        freq_dict = non_stg_frequency if name in NON_STG_NAMES else stg_frequency
         with open(path, "r", encoding="utf-8") as f:
             for ch in f.read():
                 if '\uAC00' <= ch <= '\uD7A3':
-                    char_frequency[ch] = char_frequency.get(ch, 0) + 1
+                    freq_dict[ch] = freq_dict.get(ch, 0) + 1
 
     print(f"  Total unique Korean characters: {len(all_korean_chars)}")
-    print("  Using frequency-based encoding (most used chars get single-byte)")
+    non_stg_char_count = len([c for c in all_korean_chars if c in non_stg_frequency])
+    print(f"  Non-STG characters: {non_stg_char_count} (prioritized for single-byte slots)")
+    print(f"  STG-only characters: {len(all_korean_chars) - non_stg_char_count}")
 
     # Build unified mapping
     print("\nBuilding unified character mapping...")
     korean_mapping = build_korean_mapping(
-        list(all_korean_chars), decode_table, char_frequency=char_frequency
+        list(all_korean_chars), decode_table,
+        non_stg_frequency=non_stg_frequency, stg_frequency=stg_frequency
     )
     print(f"  Mapped {len(korean_mapping)} Korean characters to font slots")
 
