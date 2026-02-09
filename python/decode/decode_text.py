@@ -719,7 +719,7 @@ def _scan_text_region_for_dialogues(data, region_start, region_end,
         # No templates in region - scan the entire text region heuristically
         if use_heuristics:
             scan_pos = region_start
-            script_ranges = _find_script_ranges(data, region_start, region_end)
+            script_ranges = _build_exclusion_zones(data, region_start, region_end)
             while scan_pos < region_end - 3:
                 if data[scan_pos] == 0x00:
                     candidate = scan_pos + 1
@@ -835,6 +835,80 @@ def _overlaps_script(start, end, script_ranges):
         if ps >= end:
             break
     return False
+
+
+# --- Structural byte classification ---
+# These functions identify non-dialogue byte sequences by their structural
+# signatures, complementing the existing _find_script_ranges() (Type 2).
+
+# Event trigger command byte
+EVENT_TRIGGER_CMD = b'\x67\x00'
+
+
+def _find_event_trigger_ranges(data, start, end):
+    """Find event trigger command ranges (Type 4 bytes).
+
+    Event triggers use command byte 0x0067 followed by a fixed
+    structural pattern:  ``67 00 16 80 23 80 14 80 XX 80 A9 00 B7 02``
+    (14 bytes).  They appear in chains in the text region.
+
+    The key structural constraint is that bytes at positions +3, +5, +7
+    are all 0x80 (speaker opcode high bytes).  This distinguishes
+    real event triggers from accidental ``67 00`` at dialogue boundaries.
+
+    Returns sorted list of (range_start, range_end) tuples.
+    """
+    ranges = []
+    pos = start
+    while pos <= end - 14:
+        idx = data.find(EVENT_TRIGGER_CMD, pos, end)
+        if idx == -1 or idx + 14 > end:
+            break
+        # Validate structural signature: bytes at +3, +5, +7 must be 0x80
+        if (data[idx + 3] == 0x80
+                and data[idx + 5] == 0x80
+                and data[idx + 7] == 0x80):
+            # Valid event trigger — scan forward for consecutive triggers
+            block_start = idx
+            scan = idx
+            while scan <= end - 14:
+                if (data[scan:scan + 2] == EVENT_TRIGGER_CMD
+                        and scan + 14 <= end
+                        and data[scan + 3] == 0x80
+                        and data[scan + 5] == 0x80
+                        and data[scan + 7] == 0x80):
+                    scan += 14  # fixed trigger size
+                else:
+                    break
+            if ranges and block_start <= ranges[-1][1]:
+                ranges[-1] = (ranges[-1][0], max(ranges[-1][1], scan))
+            else:
+                ranges.append((block_start, scan))
+            pos = scan
+        else:
+            pos = idx + 2
+    return ranges
+
+
+def _build_exclusion_zones(data, start, end):
+    """Build merged exclusion zones from script opcodes and event triggers.
+
+    Returns sorted list of (range_start, range_end) tuples.
+    """
+    zones = []
+    zones.extend(_find_script_ranges(data, start, end))
+    zones.extend(_find_event_trigger_ranges(data, start, end))
+    # Sort and merge overlapping ranges
+    if not zones:
+        return []
+    zones.sort()
+    merged = [zones[0]]
+    for zs, ze in zones[1:]:
+        if zs <= merged[-1][1]:
+            merged[-1] = (merged[-1][0], max(merged[-1][1], ze))
+        else:
+            merged.append((zs, ze))
+    return merged
 
 
 def _iter_dialogue_payload_bytes(data, offset, consumed, prefix=2):
@@ -960,10 +1034,8 @@ def _find_dialogue_in_gap(data, gap_start, gap_end, expected_prefix_bytes,
     if gap_size <= 2:
         return []
 
-    # Build exclusion zones for any remaining 28 01 script opcode blocks
-    # that sit in the middle of the gap (context-transition script data
-    # that precedes real dialogue strings).
-    script_ranges = _find_script_ranges(data, gap_start, gap_end)
+    # Build exclusion zones: script opcodes (28 01) and event triggers (67 00).
+    script_ranges = _build_exclusion_zones(data, gap_start, gap_end)
 
     results = []
     found_offsets_in_gap = set()
@@ -1281,7 +1353,7 @@ def scan_stg(data, decode_table, use_heuristics=True, filter_garbage=True):
     # Filter out: tables using [opt] for column spacing, dialogue pauses
     stats['orphan_menus_found'] = 0
     for region_start, region_end, chunk_idx in chunk_regions:
-        script_ranges = _find_script_ranges(data, region_start, region_end)
+        script_ranges = _build_exclusion_zones(data, region_start, region_end)
         pos = region_start
         while pos < region_end - 4:
             # Look for A9 00 marker
@@ -1323,7 +1395,7 @@ def scan_stg(data, decode_table, use_heuristics=True, filter_garbage=True):
     # Must have kanji to filter out binary garbage
     stats['bare_dialogues_found'] = 0
     for region_start, region_end, chunk_idx in chunk_regions:
-        script_ranges = _find_script_ranges(data, region_start, region_end)
+        script_ranges = _build_exclusion_zones(data, region_start, region_end)
         pos = region_start
         while pos < region_end - 4:
             # Look for A9 00 marker
@@ -1370,7 +1442,7 @@ def scan_stg(data, decode_table, use_heuristics=True, filter_garbage=True):
     stats['event_script_dialogues_found'] = 0
     event_script_regions = _get_chunk_event_script_regions(len(data))
     for region_start, region_end, chunk_idx in event_script_regions:
-        script_ranges = _find_script_ranges(data, region_start, region_end)
+        script_ranges = _build_exclusion_zones(data, region_start, region_end)
         pos = region_start
         while pos < region_end - 4:
             # Look for A9 00 marker (dialogue stream marker)
@@ -1432,7 +1504,7 @@ def scan_stg(data, decode_table, use_heuristics=True, filter_garbage=True):
     stats['padding_dialogues_found'] = 0
     padding_regions = _get_chunk_padding_regions(len(data))
     for region_start, region_end, chunk_idx in padding_regions:
-        script_ranges = _find_script_ranges(data, region_start, region_end)
+        script_ranges = _build_exclusion_zones(data, region_start, region_end)
         pos = region_start
         while pos < region_end - 4:
             # Look for A9 00 marker (dialogue stream marker)

@@ -68,8 +68,8 @@ Byte distribution (from S200 first 3 chunks):
 
 ### Type 4: Event Trigger Commands (~14 bytes each)
 
-Event system commands that control dialogue flow. **This is the primary source
-of garbage entries.**
+Event system commands that control dialogue flow. **Structurally detected** by
+`_find_event_trigger_ranges()` since 2026-02-09 (see DECODER_FIXES.md).
 
 ```
 Structure: 67 00 [spk1 80] [spk2 80] [spk3 80] [ctx 80] [ref 00] [param]
@@ -153,7 +153,7 @@ A6 21 DE 21 DE 21 92 → repeating 0xXX21 pattern, decoded as "9む9むボ"
 | 1 | Templates (48B) | 30-147 | 1,440-7,056 | 4-20% | Yes (signature) |
 | 2 | Script opcodes (10B) | 80-261 | 800-2,610 | 2-8% | Yes (signature) |
 | 3 | Dialogue strings | 121-388 | 1,828-4,358 | 5-13% | Target output |
-| 4 | **Event triggers (~14B)** | **309-1,382** | **1,462-6,126** | **4-18%** | **No → garbage** |
+| 4 | Event triggers (~14B) | 309-1,382 | 1,462-6,126 | 4-18% | **Yes** (structural, `67 00` + `XX 80` validation) |
 | 5 | Null padding | — | 8,499-29,321 | 24-84% | Yes (trivial) |
 | 6 | **MIPS code fragments** | misc | mixed | mixed | **No → garbage** |
 | 7 | **Data tables / other** | misc | mixed | mixed | **No → garbage** |
@@ -317,3 +317,34 @@ Zero false positives (6 FP cases identified and fixed with exemptions).
 The zero-false-positive byte-level checks (prefix==text-start, めあ×2)
 remain in `_has_mips_opcode_signature()` as early-exit optimizations
 that reject entries before full text decoding.
+
+## Structural Detection — Event Trigger Exclusion Zones (2026-02-09)
+
+In addition to heuristic text-pattern rules, event trigger commands (Type 4)
+are now **structurally detected** before text decoding via
+`_find_event_trigger_ranges()`. These ranges are merged with script opcode
+ranges into unified exclusion zones (`_build_exclusion_zones()`), which the
+gap search skips entirely.
+
+**Strict validation**: Bytes at positions +3, +5, +7 must ALL be exactly
+`0x80`. This prevents false positives at dialogue boundaries where `67 00`
+might appear coincidentally. The initial implementation used a looser check
+(any byte >= 0x80) which caused a real dialogue ("ヴ、ヴ、ニゲミチナイ") to
+be falsely excluded.
+
+**Key finding**: Structural event trigger detection reduces MIPS pre-filter
+calls by ~25 per decode run, but does NOT eliminate the need for heuristic
+text-pattern rules. All 12 `_is_garbage_text()` rules remain actively used
+(~5,000+ total hits), catching garbage at gap_start, continuation, fallback,
+orphan menu, bare dialogue, event script, and padding scan stages. The
+two-layer approach (structural pre-filter + text heuristic post-filter) is
+the effective architecture.
+
+### Catalog script
+
+A research tool for analyzing non-dialogue byte sequences:
+```bash
+python python/decode/catalog_text_region.py              # scan all STG files
+python python/decode/catalog_text_region.py --verbose    # show all byte runs
+python python/decode/catalog_text_region.py --json       # output full JSON catalog
+```

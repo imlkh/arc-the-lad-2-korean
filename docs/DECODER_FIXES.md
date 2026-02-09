@@ -337,6 +337,82 @@ first dialogue search.
 masked real dialogues discovered when single-char fragments no longer block
 primary search).
 
+### Structural Byte Classification — Event Trigger Exclusion Zones (2026-02-09)
+
+**Goal**: Structurally identify non-dialogue byte sequences in the text region
+BEFORE text decoding, reducing reliance on heuristic garbage filters.
+
+#### Event trigger detection (`_find_event_trigger_ranges()`)
+
+Event triggers (Type 4 bytes) are the largest non-dialogue data category in
+the text region (947-1,382 runs per chunk). They use command byte `0x0067`
+followed by a fixed structural pattern:
+
+```
+67 00  16 80  23 80  14 80  XX 80  A9 00  B7 02   (14 bytes)
+^^^^^  ^^^^^^  ^^^^^^  ^^^^^^  ^^^^^^  ^^^^^^  ^^^^^^
+CMD    Spk1    Spk2    Spk3    Ctx     RefID   Param
+```
+
+**Key constraint**: Bytes at positions +3, +5, +7 must ALL be exactly `0x80`.
+This strict validation prevents false positives at dialogue boundaries (e.g.,
+`67 00 C0 00` at a dialogue boundary must NOT be falsely identified as an
+event trigger).
+
+The function merges consecutive 14-byte triggers into contiguous blocks,
+producing exclusion zones that the gap search skips entirely.
+
+#### Exclusion zones (`_build_exclusion_zones()`)
+
+A new function merges script opcode ranges (`_find_script_ranges()`) and
+event trigger ranges (`_find_event_trigger_ranges()`) into unified exclusion
+zones. All 7 call sites that previously used `_find_script_ranges()` alone
+now use `_build_exclusion_zones()`:
+
+- `_scan_text_region_for_dialogues()` — template scanning
+- `_find_dialogue_in_gap()` — gap search
+- Orphan menu scan (0x00A9)
+- Bare dialogue scan (0x00B4)
+- Event script region scan (0x00B0)
+- Padding region scan (0x00A0)
+
+**Impact**: Event trigger zones reduce MIPS pre-filter calls by ~25
+(1,105 → 1,080 in typical runs). One additional garbage entry ("ギね" in
+S300) is caught as a result of changed gap dynamics, but output is unchanged
+since the post-filter handles it.
+
+#### Template preamble detection — attempted and reverted
+
+Template preamble bytes (`92 00 44 8C 00 80 64 00 00 00`, decoded as
+"XしXしボ") were tested as additional exclusion zones. This correctly
+blocked one garbage pattern but caused **cascade regressions**: when a
+garbage entry is rejected in the gap search, the search falls through to
+more aggressive strategies that find different garbage at earlier positions
+in the same gap. The template preamble approach was reverted.
+
+#### Assessment of heuristic rule removal
+
+All 12 `_is_garbage_text()` rules were instrumented to track hits across all
+19 STG files. **All 12 rules are actively used** with ~5,000+ total hits
+across all decoder call sites (gap_start, continuation, fallback, orphan
+menu, bare dialogue, event script, padding scan). No rules can be safely
+removed — the two-layer approach (structural pre-filter + text heuristic
+post-filter) works better than trying to replace heuristics with structural
+detection alone.
+
+#### Catalog script
+
+A research tool `python/decode/catalog_text_region.py` was created to scan
+all 19 STG files and catalog every non-dialogue byte run in text regions.
+It classifies runs as: event_trigger, data_table_ref, dialogue, mips_code,
+short_binary, unclassified_binary. Usage:
+
+```bash
+python catalog_text_region.py              # scan all STG files
+python catalog_text_region.py --verbose    # show all byte runs
+python catalog_text_region.py --json       # output full JSON catalog
+```
+
 ### Garbage Elimination to Zero (2026-02-09)
 
 **Goal**: Eliminate 57 remaining Category 1 garbage entries that the report

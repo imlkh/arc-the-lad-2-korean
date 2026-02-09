@@ -69,7 +69,11 @@ Decoder quality: 0 garbage, 0 single-char fragments, 0 partial decodes.
 │ 0xB4000 - 0xBC7FF: TEXT REGION (34,816 bytes)              │
 │   - Dialog strings (null-terminated)                       │
 │   - Event script templates (48 bytes each)                 │
+│   - Script opcodes (10 bytes each, 0x2801 signature)       │
+│   - Event trigger commands (14 bytes each, 0x0067 cmd)     │
+│   - MIPS code fragments, data tables, null padding         │
 │   - This is where translations are patched                 │
+│   - See TEXT_REGION_BYTE_ANALYSIS.md for full type catalog  │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -306,6 +310,8 @@ When patching Korean translations:
 ## See Also
 
 - `DIALOGUE_SYSTEM_ANALYSIS.md` - Complete dialogue system reverse-engineering
+- `TEXT_REGION_BYTE_ANALYSIS.md` - 7 byte sequence types in text region
+- `DECODER_FIXES.md` - Decoder garbage filter rules and structural detection
 - `TEXT_ENCODING.md` - Character encoding and control codes
 - `COMM_IMG_chars.md` - Font character table
 - `PATCHING_KOREAN.md` - Patching workflow
