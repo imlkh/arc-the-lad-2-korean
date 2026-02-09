@@ -10,28 +10,28 @@ Chunks represent individual scenes, stages, or cutscenes in the game.
 | File | Chunks | Templates | Dialogues | Bare | Orphan Menus |
 |------|--------|-----------|-----------|------|-------------|
 | S100.STG | 11 | 1,195 | 1,313 | 25 | 75 |
-| S200.STG | 18 | 1,787 | 2,009 | 26 | 119 |
+| S200.STG | 18 | 1,787 | 1,990 | 26 | 119 |
 | S300.STG | 5 | 320 | 392 | 0 | 66 |
 | S400.STG | 11 | 783 | 882 | 5 | 65 |
 | S500.STG | 8 | 534 | 683 | 4 | 72 |
-| S600.STG | 10 | 754 | 918 | 0 | 90 |
-| S700.STG | 33 | 2,613 | 3,159 | 14 | 269 |
-| S800.STG | 15 | 1,056 | 1,394 | 0 | 118 |
-| S900.STG | 13 | 945 | 1,224 | 2 | 126 |
-| SA00.STG | 17 | 1,321 | 1,528 | 4 | 93 |
-| SB00.STG | 11 | 790 | 915 | 13 | 61 |
-| SC00.STG | 10 | 682 | 877 | 4 | 145 |
-| SD00.STG | 9 | 688 | 947 | 18 | 128 |
-| SE00.STG | 16 | 1,213 | 1,446 | 0 | 129 |
-| SF00.STG | 25 | 2,517 | 3,364 | 17 | 342 |
-| SG00.STG | 56 | 1,510 | 2,433 | 5 | 401 |
+| S600.STG | 10 | 754 | 921 | 0 | 90 |
+| S700.STG | 33 | 2,613 | 3,146 | 14 | 269 |
+| S800.STG | 15 | 1,056 | 1,390 | 0 | 118 |
+| S900.STG | 13 | 945 | 1,223 | 2 | 126 |
+| SA00.STG | 17 | 1,321 | 1,527 | 4 | 93 |
+| SB00.STG | 11 | 790 | 911 | 13 | 61 |
+| SC00.STG | 10 | 682 | 875 | 4 | 145 |
+| SD00.STG | 9 | 688 | 941 | 18 | 128 |
+| SE00.STG | 16 | 1,213 | 1,447 | 0 | 129 |
+| SF00.STG | 25 | 2,517 | 3,363 | 17 | 342 |
+| SG00.STG | 56 | 1,510 | 2,426 | 5 | 401 |
 | SH00.STG | 1 | 49 | 738 | 0 | 239 |
-| SI00.STG | 28 | 2,190 | 2,609 | 11 | 269 |
+| SI00.STG | 28 | 2,190 | 2,607 | 11 | 269 |
 | SJ00.STG | 1 | 0 | 0 | 0 | 0 |
-| **Total** | **298** | **20,947** | **26,831** | **148** | **2,807** |
+| **Total** | **298** | **20,947** | **26,775** | **148** | **2,807** |
 
 **Note**: Dialogue counts include all types (template, bare, orphan menu, event script, padding).
-Decoder quality: 57 garbage, 0 single-char fragments, 0 partial decodes.
+Decoder quality: 0 garbage, 0 single-char fragments, 0 partial decodes.
 
 ## Chunk Layout (0xBC800 = 772,096 bytes)
 

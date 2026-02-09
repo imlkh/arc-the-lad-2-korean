@@ -149,10 +149,18 @@ def is_garbage(text, plain):
 
     # Pattern 11: Mixed random kana + isolated uppercase ASCII
     # Exclude: G (gold unit), ON/OFF, HP/MP, common game abbreviations
+    # Exclude: game rank/level patterns (レベルD, ランクA, etc.)
     if len(plain) >= 5:
         # Remove known valid ASCII usage
         check_plain = re.sub(r'\d+G', '', plain)  # Gold amounts
         check_plain = re.sub(r'(ON|OFF|HP|MP|SP|EX|LV|No)', '', check_plain)
+        # Remove rank/level letters (e.g., レベルD → remove D)
+        # Also remove standalone rank letters near punctuation (C、A in "レベルD、…C、…A")
+        has_rank = bool(re.search(r'(レベル|ランク|クラス|タイプ|グレード)', check_plain))
+        check_plain = re.sub(r'(レベル|ランク|クラス|タイプ|グレード)[A-Z]',
+                             lambda m: m.group(1), check_plain)
+        if has_rank:
+            check_plain = re.sub(r'(?<=[、。…])[A-Z](?=[、。…]|$)', '', check_plain)
         ascii_upper = sum(1 for c in check_plain if c.isupper() and c.isascii())
         kana_count = sum(1 for c in plain if is_kana(c))
         if ascii_upper >= 2 and kana_count >= 3:

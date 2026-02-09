@@ -324,22 +324,29 @@ def _is_garbage_text(text):
         # "ゾァびJダIゥゾ" has J,I isolated between kana = garbage
         # "テしEと／ねぇむツたDと－ふれむバるDふ" = MIPS opcodes
         # "BGMセレクト" has B,G,M consecutive = valid game term
+        # Exempt: game terms like レベルD, ランクA, クラスS, タイプB
         has_upper = any(c.isupper() and c.isascii() for c in stripped)
         has_kana = any('ぁ' <= c <= 'ん' or 'ァ' <= c <= 'ン' for c in stripped)
         has_kanji = any('\u4e00' <= c <= '\u9fff' for c in stripped)
         if has_upper and has_kana and not has_kanji:
-            isolated_upper = 0
-            for i, c in enumerate(stripped):
-                if c.isupper() and c.isascii():
-                    prev_upper = (i > 0 and stripped[i-1].isupper()
-                                  and stripped[i-1].isascii())
-                    next_upper = (i < len(stripped) - 1
-                                  and stripped[i+1].isupper()
-                                  and stripped[i+1].isascii())
-                    if not prev_upper and not next_upper:
-                        isolated_upper += 1
-            if isolated_upper >= 2:
-                return True
+            # Check for game rank/level patterns (single letter after katakana word)
+            has_rank_pattern = bool(re.search(
+                r'(レベル|ランク|クラス|タイプ|グレード)[A-Z]', stripped))
+            if has_rank_pattern:
+                pass  # Not garbage
+            else:
+                isolated_upper = 0
+                for i, c in enumerate(stripped):
+                    if c.isupper() and c.isascii():
+                        prev_upper = (i > 0 and stripped[i-1].isupper()
+                                      and stripped[i-1].isascii())
+                        next_upper = (i < len(stripped) - 1
+                                      and stripped[i+1].isupper()
+                                      and stripped[i+1].isascii())
+                        if not prev_upper and not next_upper:
+                            isolated_upper += 1
+                if isolated_upper >= 2:
+                    return True
 
     # Rule 5: Short mixed hiragana/katakana without repetition = garbage
     # e.g., "みギづ", "げいう" from binary data
@@ -385,18 +392,22 @@ def _is_garbage_text(text):
     # producing the same character pair (e.g., "もあ") at positions 0, 6, 12.
     # Real Japanese text never has a distinct pair repeating 3+ times at
     # regular intervals of 4+ characters.
+    # Exempt: pairs containing punctuation are emphasis/onomatopoeia
+    # (e.g., "コロス、コロス、コロスー！", "ふぉっ、ふぉっ、ふぉっ").
     if 8 <= len(stripped) <= 30:
-        for i in range(min(8, len(stripped) - 1)):
-            pair = stripped[i:i+2]
-            if pair[0] == pair[1]:
-                continue
-            positions = [j for j in range(len(stripped) - 1)
-                         if stripped[j:j+2] == pair]
-            if len(positions) >= 3:
-                intervals = [positions[k+1] - positions[k]
-                             for k in range(len(positions) - 1)]
-                if len(set(intervals)) == 1 and intervals[0] >= 4:
-                    return True
+        has_punct_r6 = any(c in '、。！？ー…っッ' for c in stripped)
+        if not has_punct_r6:
+            for i in range(min(8, len(stripped) - 1)):
+                pair = stripped[i:i+2]
+                if pair[0] == pair[1]:
+                    continue
+                positions = [j for j in range(len(stripped) - 1)
+                             if stripped[j:j+2] == pair]
+                if len(positions) >= 3:
+                    intervals = [positions[k+1] - positions[k]
+                                 for k in range(len(positions) - 1)]
+                    if len(set(intervals)) == 1 and intervals[0] >= 4:
+                        return True
 
     # Rule 7: MIPS opcode garbage detection
     # VM opcodes produce characteristic patterns when decoded as text:
@@ -421,8 +432,10 @@ def _is_garbage_text(text):
         if '煙煙' in stripped:
             return True
 
-        # Rule 7d: High デ/ギ density in short text without grammar
-        # MIPS register/memory operands produce dense デ/ギ characters.
+        # Rule 7d: High デ/ギ density (narrow, no kanji exemption)
+        # MIPS data with F0-FE encoded kanji still has high デ/ギ density.
+        # No kanji exemption here because random kanji from F0-FE encoding
+        # co-occurs with ギギ endings (e.g., "タ縄うけギギ").
         if 4 <= len(stripped) <= 30:
             degi_count = sum(1 for c in stripped if c in 'デギ')
             if degi_count >= 2 and degi_count / len(stripped) >= 0.25:
@@ -432,6 +445,26 @@ def _is_garbage_text(text):
                     stripped))
                 if not has_grammar:
                     return True
+
+        # Rule 7d2: Wider MIPS density (with kanji exemption)
+        # Broader charset catches entries like "かグにグォギ" where グ/ダ/ズ
+        # dominate instead of デ/ギ. Kanji exemption needed because real
+        # dialogues with 水/風 exist alongside グ etc.
+        MIPS_DENSITY_CHARS = set('デギグダズヌ水')
+        MIPS_KANJI = set('煙水地火風術関際鉛径')
+        if 3 <= len(stripped) <= 30:
+            degi_count = sum(1 for c in stripped if c in MIPS_DENSITY_CHARS)
+            if degi_count >= 2 and degi_count / len(stripped) >= 0.25:
+                kanji_count = sum(1 for c in stripped if '\u4e00' <= c <= '\u9fff')
+                real_kanji = kanji_count - sum(1 for c in stripped if c in MIPS_KANJI)
+                if real_kanji <= 0:
+                    has_grammar = bool(re.search(
+                        r'(ます|です|ない|する|した|ている|てる|こと|もの|だろう|'
+                        r'って|けど|から|まで|なら|んだ|のか|のは|には|ので|'
+                        r'モグ|ダメ|ー|ァ{2}|ゥ{2}|ォ{2})',
+                        stripped))
+                    if not has_grammar:
+                        return True
 
         # Rule 7e: Original predecessor check for non-kanji text
         # If 2+ different chars precede any MIPS marker → opcodes.
@@ -447,11 +480,13 @@ def _is_garbage_text(text):
                     return True
 
         # Rule 7f: Short all-katakana from MIPS opcode character set
-        # e.g., グゼノ, クゼゼ, シゼニ, ギギグ — 3-5 char katakana composed
-        # entirely of chars produced by MIPS register/memory operand bytes.
+        # e.g., グゼノ, クゼゼ, シゼニ, ギギグ, ギッグ, ッゲタグ
+        # Entirely of chars produced by MIPS register/memory operand bytes.
         # No real Japanese words use only these characters.
-        MIPS_KATA = set('ギデゲグゼノクシニダヅヂゾジ')
-        if 3 <= len(stripped) <= 5 and all(c in MIPS_KATA for c in stripped):
+        MIPS_KATA = set('ギデゲグゼノクシニダヅヂゾジッタ')
+        if (3 <= len(stripped) <= 5
+                and all(c in MIPS_KATA for c in stripped)
+                and len(set(stripped)) >= 2):  # Exempt all-same-char (ククク = laugh)
             return True
 
         # Rule 7g: ぺデ prefix — MIPS coprocessor instruction (byte 0x46)
@@ -460,12 +495,13 @@ def _is_garbage_text(text):
             return True
 
         # Rule 7h: 地 + all hiragana with scattered あ — MIPS addiu (byte 0x24)
-        # e.g., 地えあきあつくと, 地あえきあつあと. Real 地 text always pairs
+        # e.g., 地えあきあつくと, 地いうきあついと. Real 地 text always pairs
         # with kanji (地下, 地獄), never with pure scattered hiragana.
         if stripped.startswith('地') and len(stripped) >= 5:
             rest = stripped[1:]
             if all('\u3040' <= c <= '\u309f' for c in rest):
-                if rest.count('あ') >= 2:
+                kanji_count_r = sum(1 for c in rest if '\u4e00' <= c <= '\u9fff')
+                if rest.count('あ') >= 1 and kanji_count_r <= 0:
                     return True
 
         # Rule 7i: Pure hiragana 12+ chars without any grammatical structure
@@ -492,6 +528,56 @@ def _is_garbage_text(text):
                     if stripped[:half] == stripped[half:]:
                         return False
                 return True
+
+    # Rule 8: Digit+kana mix in short text — MIPS data bytes
+    # e.g., "3ざよ", "4えを", "サデリく1", "っデ7う1"
+    # Exempt: consecutive digits forming a number (e.g., "1000ゴッズだ").
+    # In garbage, digits are scattered among kana ("3ざよ", "1エ1エせ").
+    if 2 <= len(stripped) <= 8:
+        has_digit = any(c.isdigit() for c in stripped)
+        has_kana = any('\u3040' <= c <= '\u309f' or '\u30a0' <= c <= '\u30ff'
+                       for c in stripped)
+        has_kanji = any('\u4e00' <= c <= '\u9fff' for c in stripped)
+        if has_digit and has_kana and not has_kanji:
+            # Check if digits are all consecutive (forming a number)
+            digit_groups = len(re.findall(r'\d+', stripped))
+            if digit_groups >= 2:
+                # Multiple scattered digits (e.g., "1エ1エせ") → garbage
+                return True
+            elif digit_groups == 1:
+                # Single digit group: check if it's a meaningful number prefix/suffix
+                # "1000ゴッズだ" has 4-digit number → likely real
+                # "3ざよ" has 1-digit → likely garbage
+                digit_match = re.search(r'\d+', stripped)
+                if len(digit_match.group()) <= 1:
+                    return True
+                # Multi-digit number + kana → likely game term, allow
+
+    # Rule 9: Fullwidth ＊ in short text — data table marker
+    # e.g., "どと＊", "！と＊", "＊たを". The ＊ character (CharID 237) never
+    # appears in game dialogue, only in binary data parameter bytes.
+    if '\uff0a' in stripped and len(stripped) <= 5:
+        return True
+
+    # Rule 10: Small kana start (ぉ/ゅ/ょ) — unusual word start
+    # e.g., "ぉとす", "ぉあさ". Japanese words never start with these small kana
+    # forms; they only appear after another character (e.g., しょ, きょ, にょ).
+    if stripped and stripped[0] in 'ぉゅょ' and len(stripped) <= 8:
+        has_kanji = any('\u4e00' <= c <= '\u9fff' for c in stripped)
+        if not has_kanji:
+            return True
+
+    # Rule 11: Starts with fullwidth period 。 — data reference marker
+    # e.g., "。つし". Game dialogue never starts with 。.
+    if stripped.startswith('。') and len(stripped) <= 5:
+        return True
+
+    # Rule 12: Ends with もあ (MIPS opcode terminator)
+    # e.g., "ずぞもあ". In real text もあ only appears mid-word (思い→もある).
+    if stripped.endswith('もあ') and len(stripped) <= 8:
+        has_kanji = any('\u4e00' <= c <= '\u9fff' for c in stripped)
+        if not has_kanji:
+            return True
 
     return False
 
@@ -912,8 +998,6 @@ def _find_dialogue_in_gap(data, gap_start, gap_end, expected_prefix_bytes,
                 and not _has_mips_opcode_signature(
                     data, abs_offset, consumed, prefix=2)
                 and text_end <= gap_end + TEMPLATE_SIZE):  # Allow ending at next template
-            # Skip garbage filter for pointer-validated dialogues
-            # The pointer validation itself ensures this is a real dialogue
             prefix_val = int.from_bytes(expected_prefix_bytes, 'little')
             results.append((abs_offset, prefix_val, text, consumed))
             found_offsets_in_gap.add(abs_offset)

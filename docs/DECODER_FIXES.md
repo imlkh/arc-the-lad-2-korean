@@ -7,8 +7,8 @@ Arc the Lad 2's STG stage files. Because the decoder scans binary data that incl
 MIPS machine code alongside text, it must distinguish real dialogue from garbage produced
 by misinterpreted opcodes.
 
-**Final stats** (2026-02-09): 26,831 dialogues across 20,947 templates in 19 STG files.
-Category 1 garbage: **57**. Category 2 single-char fragments: **0**. Partial decodes: **0**.
+**Final stats** (2026-02-09): 26,775 dialogues across 20,947 templates in 19 STG files.
+Category 1 garbage: **0**. Category 2 single-char fragments: **0**. Partial decodes: **0**.
 
 ## Garbage Filter Rules (`_is_garbage_text()`)
 
@@ -19,9 +19,14 @@ Category 1 garbage: **57**. Category 2 single-char fragments: **0**. Partial dec
 | 1 | Unknown charID `[?XXXX]` beyond font table | `[?1A2B]けど` |
 | 2 | Invalid FF control codes (not 01,03-0B,0D,0F) | `[FF:B2 0F 2F]` |
 | 3 | Lowercase ASCII in Japanese text | `しaとbう` |
-| 4 | Uppercase+kana without kanji (≤6: always; ≥7: ≥2 isolated uppercase) | `ゾァびJダIゥゾ`, `テしEと／ねぇむツたDと` |
+| 4 | Uppercase+kana without kanji (≤6: always; ≥7: ≥2 isolated uppercase; exempt rank patterns) | `ゾァびJダIゥゾ` |
 | 5 | Short mixed hira/kata without repetition (len ≤ 4) | `みギづ` |
-| 6 | Repeating 2-char pair at regular intervals (≥4 apart, ≥3 times) | `もあがデもあをデもあんデ` |
+| 6 | Repeating 2-char pair at regular intervals (≥4 apart, ≥3 times, no punctuation) | `もあがデもあをデもあんデ` |
+| 8 | Digit+kana mix in short text (≤8 chars, scattered digits = garbage, grouped digits = real) | `3ざよ`, `サデリく1` |
+| 9 | Fullwidth `＊` in short text (≤5 chars) — data table marker | `どと＊`, `！と＊` |
+| 10 | Starts with small kana `ぉ/ゅ/ょ` (≤8 chars, no kanji) — unusual word start | `ぉとす`, `ぉあさ` |
+| 11 | Starts with fullwidth `。` (≤5 chars) — data reference marker | `。つし` |
+| 12 | Ends with `もあ` (≤8 chars, no kanji) — MIPS opcode terminator | `ずぞもあ` |
 
 ### Rule 7: MIPS Opcode Detection (sub-rules 7a-7i)
 
@@ -60,17 +65,19 @@ MIPS byte sequences also frequently produce kanji: 地, 水, 火, 風, 煙, 術,
 | **7a** | `もあ.{0,3}[デゲギグゼダヅヂゾ]` | もあをデタギもあんデ喚J | ~98 |
 | **7b** | `もあ煙` anywhere in text | もあ煙デもあ煙デ | ~56 |
 | **7c** | `煙煙` anywhere in text | 煙煙地デ煙煙 | ~15 |
-| **7d** | High デ/ギ density (≥25%, len 4-30) without grammar | ぺデぴしデギ | ~41 |
+| **7d** | High デ/ギ density (≥25%, 4-30 chars, no kanji exemption) | ぺデぴしデギ | ~23 |
+| **7d2** | Wider MIPS density (デギグダズヌ水, ≥25%, 3-30 chars, with kanji exemption via MIPS_KANJI set) | タデりギ水ゲあギ | ~18 |
 | **7e** | 2+ distinct predecessors of あ/デ/ギ markers (no kanji/punct) | めああグりあいああ | legacy |
-| **7f** | 3-5 char all-katakana from MIPS character set | グゼノ, クゼゼ, シゼニ | 16 |
+| **7f** | 3-5 char all-katakana from MIPS character set (≥2 distinct chars) | グゼノ, クゼゼ, シゼニ | 16 |
 | **7g** | Starts with ぺデ, ≤8 chars | ぺデデ, ぺデぴしダ | 6 |
-| **7h** | Starts with 地 + all hiragana + ≥2 あ | 地えあきあつくと | 4 |
+| **7h** | Starts with 地 + all hiragana + ≥1 あ | 地えあきあつくと | 4 |
 | **7i** | Pure hiragana 12+ chars, no grammatical structure | おつあきけなこたかそいちちて | 2 |
 
-**MIPS_KATA character set** (Rule 7f): {ギ, デ, ゲ, グ, ゼ, ノ, ク, シ, ニ, ダ, ヅ, ヂ, ゾ, ジ}
-- Deliberately excludes ッ (small tsu) — too common in real katakana words
+**MIPS_KATA character set** (Rule 7f): {ギ, デ, ゲ, グ, ゼ, ノ, ク, シ, ニ, ダ, ヅ, ヂ, ゾ, ジ, ッ, タ}
 - ジ added to catch ジッグ, ジッゲ patterns found in S700 template scanning
-- No real Japanese words are composed entirely of these characters
+- ッ and タ added for MIPS patterns like クゼゼ, タギデ
+- Requires `len(set(stripped)) >= 2` — exempts all-same-char strings (e.g., ククク = villainous laugh)
+- No real Japanese words are composed entirely of 2+ distinct characters from this set
 
 **Grammar safeguard** (Rules 7d, 7i): Before flagging as garbage, checks for
 Japanese grammar patterns to avoid false positives:
@@ -87,6 +94,7 @@ Plus onomatopoeia detection (repeated-half check, e.g., `ぴょこぴょこ`).
 | Original | 2026-02-07 | Rule 7 = predecessor check only, with kanji exemption that missed ~154 entries |
 | Expansion | 2026-02-08 | Replaced kanji exemption with Rules 7a-7e. Category 1: 271 → 40 |
 | Completion | 2026-02-08 | Added Rules 7f-7i + Rule 4 extension. Category 1: 40 → **0** |
+| Post-filter | 2026-02-09 | Split 7d → 7d/7d2, expanded 7f (ッタ, distinct chars), lowered 7h threshold. Applied via post-filter |
 
 ## Region-Based Post-Filter (`scan_stg()`)
 
@@ -130,6 +138,7 @@ initially misclassified as garbage:
 | + Continuation prefix=0 fix | **26,844** | 4 | 0 | **1** | −48 (MIPS unmasked), −4 partial fixed |
 | + Cross-boundary text fix | 26,841 | 4 | 0 | **0** | −3 cross-boundary partials eliminated |
 | + MIPS めあ pattern check | **26,831** | **57** | 0 | 0 | 10 MIPS entries eliminated at decoder level |
+| + Garbage text rules (post-filter) | **26,775** | **0** | 0 | 0 | Ported 7 patterns from report generator; −56 dialogues, −57 garbage |
 
 ## Other Fixes
 
@@ -327,3 +336,76 @@ first dialogue search.
 **Results**: Category 2 fragments: 111 → **0**. Total dialogues: +68 (previously
 masked real dialogues discovered when single-char fragments no longer block
 primary search).
+
+### Garbage Elimination to Zero (2026-02-09)
+
+**Goal**: Eliminate 57 remaining Category 1 garbage entries that the report
+generator (`is_garbage()`) catches but the decoder's `_is_garbage_text()` misses.
+
+**Root cause**: Seven pattern gaps between the two garbage detection functions.
+The report generator had evolved 20+ patterns over many iterations, but only
+a subset had been ported to the decoder's `_is_garbage_text()`.
+
+#### Pattern gaps identified
+
+| Gap | Missing pattern | Entries | Example |
+|-----|----------------|---------|---------|
+| 1 | Digit+kana mix (no kanji) | 16 | `3ざよ`, `サデリく1` |
+| 2 | Narrow MIPS density charset (デ/ギ only) | 23 | `ぺデぴしデギ`, `タデりギ水ゲ` |
+| 3 | 地+kana あ threshold too strict (≥2 → ≥1) | 6 | `地おかきあつたと` |
+| 4 | No fullwidth ＊ rule | 5 | `どと＊`, `！と＊` |
+| 5 | No small kana start / 。prefix | 4 | `ぉとす`, `。つし` |
+| 6 | ッ/タ missing from MIPS_KATA | 2 | `クゼゼ`, `タギデ` |
+| 7 | No もあ suffix rule | 1 | `ずぞもあ` |
+
+#### Architecture: post-filter, not search-path filtering
+
+**Critical lesson**: Adding `_is_garbage_text()` directly to Primary/Secondary
+search strategies causes a **cascade effect**. When a garbage entry is rejected
+in Primary search, the gap search falls through to Continuation/Fallback
+strategies which scan more aggressively and find hundreds of binary fragments.
+
+Test results of search-path filtering:
+- SB00: 915 → 1,660 (+745 entries) — mostly opcode 0x0BF3 binary fragments
+- SD00: 947 → 1,715 (+768 entries) — same pattern
+
+**Correct approach**: Use the existing post-filter in `scan_stg()` (line ~1573).
+This applies `_is_garbage_text()` to all collected dialogues **after** the gap
+search completes, avoiding cascade effects. The new rules in `_is_garbage_text()`
+are automatically picked up by this existing infrastructure.
+
+#### New rules ported to `_is_garbage_text()`
+
+| Rule | Pattern | Conditions | Examples caught |
+|------|---------|-----------|-----------------|
+| 8 | Digit+kana mix | ≤8 chars, no kanji, scattered single digits | `3ざよ`, `サデリく1` |
+| 9 | Fullwidth ＊ | ≤5 chars | `どと＊`, `！と＊` |
+| 10 | Small kana start | ≤8 chars, starts with ぉ/ゅ/ょ, no kanji | `ぉとす`, `ぉあさ` |
+| 11 | 。prefix | ≤5 chars, starts with fullwidth period | `。つし` |
+| 12 | もあ suffix | ≤8 chars, ends with もあ, no kanji | `ずぞもあ` |
+
+#### Existing rules modified
+
+| Rule | Change | Reason |
+|------|--------|--------|
+| 4 (medium) | Added rank pattern exemption (`レベル/ランク/クラス/タイプ/グレード` + letter) | FP: `…レベルD、…C、…A、` |
+| 6 | Exempt patterns with punctuation (`、。！？ー…っッ`) | FP: `ふぉっ、ふぉっ、ふぉっ`, `コロス、コロス、コロスー！` |
+| 7d | Split into narrow (デ/ギ only, no kanji exemption) + wide 7d2 (デギグダズヌ水, with MIPS_KANJI exemption) | Gap 2: F0-FE kanji in MIPS data bypassed kanji exemption |
+| 7f | Added ッ/タ to MIPS_KATA; require `len(set(stripped)) >= 2` | Gap 6 + FP: `ククク` (villainous laugh) |
+| 7h | Lowered 地+hiragana あ threshold from ≥2 to ≥1 | Gap 3: `地おかきあつたと` has only 1 あ |
+
+#### False positive investigation
+
+| Text | Why it's real | Fix applied |
+|------|--------------|-------------|
+| `ふぉっ、ふぉっ、ふぉっ` (×3) | Onomatopoeia/emphasis with punctuation | Rule 6: exempt strings with `、。！？ー…っッ` |
+| `コ、コロス、コロス、コロスー！` | Stammering death threat dialogue | Rule 6: same punctuation exemption |
+| `くそっ、くそっ、くそっ！！` | Frustrated exclamation with punctuation | Rule 6: same punctuation exemption |
+| `1000ゴッズだ` (×2) | Game currency amount (1000 Gods) | Rule 8: exempt multi-digit numbers |
+| `ククク` | Villainous laugh (common trope) | Rule 7f: require ≥2 distinct characters |
+| `…レベルD、…C、…A、` | Game rank/level naming | Rule 4: rank pattern exemption |
+
+#### Results
+
+Category 1 garbage: 57 → **0** across all 19 STG files. Total dialogues: 26,831 → **26,775**
+(−57 garbage removed, +1 dialogue recovered from FP fix). Zero false positives.

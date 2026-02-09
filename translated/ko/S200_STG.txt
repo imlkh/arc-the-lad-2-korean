@@ -1,4 +1,4 @@
-# S200.STG — 2012 dialogues, 1787 templates (26 bare, 2 missed, 119 orphan menus)
+# S200.STG — 2011 dialogues, 1787 templates (26 bare, 2 missed, 119 orphan menus)
 
   0x000B2DCA [0x00B0] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 하시겠습니까?[br][opt]예[br][opt]아니오[box:close]
   0x000B336E [0x00B0] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
@@ -742,7 +742,6 @@
   --- context: 0x8003 -> 0x8000 ---
   0x002E97F4 [0x8000] [script:FB 18]저…[br]감사했습니다
   --- context: 0x8000 -> 0x8001 ---
-  0x002E9800 [0x8001] [script:14 03]감사했습니다
   0x002E983A [0x8001] [script:17 19]괜찮아
   --- context: 0x8001 -> 0x8003 ---
   0x002E9872 [0x8003] [script:36 19]어, 엘크였지?
@@ -1443,10 +1442,40 @@
   --- context: 0x8005 -> 0x8006 ---
   0x003AB5B6 [0x8006] [script:FA 33]아아…
   --- context: 0x8006 -> 0x8005 ---
+  0x003AB5F6 [0x8005] [script:05 80]3ざよ
+  0x003AB7B4 [0x8005] [script:55 87]<노이즈 텍스트>
+  0x003AB7D8 [0x8005] [script:07 80]かグにグォギ
+  0x003AB7F2 [0x8005] [script:08 80]ぼグぶグ水ギ
+  0x003AB843 [0x8005] [script:80 00]ギッグ
+  0x003AB882 [0x8005] [script:44 8C]カじあギじ
+  0x003AB892 [0x8005] [script:06 00]<노이즈 텍스트>
+  0x003AB8AA [0x8005] [script:AA 00]<노이즈 텍스트>
+  0x003AB8BC [0x8005] [script:FF FF]4えを
+  0x003ABA2E [0x8005] [script:36 36]ぷずぷずせ
+  0x003ABA76 [0x8005] [script:04 00]ぶグ水ギぶグ水ギB
   0x003ABB32 [0x8005] [script:BB 36]기간한정
-  --- context: 0x8005 -> 0x8016 ---
+  0x003ABB4A [0x8005] [script:05 80]ずもよ
+  0x003ABBDA [0x8005] [script:07 81]タグタグ
+  0x003ABC02 [0x8005] [script:A9 00]ベぞあ、みつかった
+  0x003ABC0F [0x8005] [script:00 8E]グだけでなく、バランスについても[br]ごいけんくださいね
+  0x003ABC65 [0x8005] [script:00 26]ろしくおねがいしまーす』
+  0x003ABC76 [0x8005] [script:07 20]はいままでに[num:01]かい[br]おみせでかいものをしたね
+  0x003ABC96 [0x8005] [script:FF 07]ああふん[num:02]びょうのあいだ[br]うりものをみてたみたい
+  0x003ABCB8 [0x8005] [script:3C 0C]かじやは[br]あと[num:01]でレベルアップするよ
+  0x003ABCD4 [0x8005] [script:0C 0C]ょうかじやは[br]あと[num:01]でレベルアップするよ
+  --- context: 0x8005 -> 0xFFFE ---
+  0x003ABE26 [0xFFFE] [script:C8 80]ずぞもあ
+  0x003ABE86 [0xFFFE] [script:03 00]ぶズヌぞもあ
+  0x003AC4D8 [0xFFFE] [script:93 3B]修正しましたので感想をください
+  --- context: 0xFFFE -> 0x8014 ---
+  0x003AC526 [0x8014] [script:C2 3B]バグレポートだけでなく[br]感想などもどんどん教えてほしいわ
+  --- context: 0x8014 -> 0x8015 ---
+  0x003AC584 [0x8015] [script:E4 3B]デバック用だよ
+  --- context: 0x8015 -> 0x8016 ---
   0x003AC5C0 [0x8016] [script:06 3C]오[delay:3D]버[delay:3D]로드！！
-  --- context: 0x8016 -> 0x00A9 ---
+  --- context: 0x8016 -> 0x00B4 ---
+  0x003AC604 [0x00B4] [script:5B 3C][box:system][FF:04 02 01]ギルド[br][FF:04 02 01]マザークレアの館[br][FF:04 02 01]弟子かじ屋[br][FF:04 02 01]えらいかじ屋[br][FF:04 02 01]合成かじ屋[br][FF:04 02 01]ずかん[br][FF:04 02 01]分配器[br][FF:04 02 01]XA再生[box:close]
+  --- context: 0x00B4 -> 0x00A9 ---
   0x00464012 [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]켜볼까요？[br][opt]예[br][opt]아니오[box:close]
   0x004645B6 [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
   0x004645E0 [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
@@ -1646,7 +1675,9 @@
   0x005E03AE [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나갈까요？[br][opt]예[br][opt]아니오[box:close]
   0x005E03DA [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
   0x005E0422 [0x00A9] [script:4B 03][box:system]워프 존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
-  --- context: 0x00A9 -> 0x8006 ---
+  --- context: 0x00A9 -> 0x00B4 ---
+  0x005E05CA [0x00B4] [script:24 04]地ういきあつえと
+  --- context: 0x00B4 -> 0x8006 ---
   0x005E084C [0x8006] [script:53 05]막다른 곳인 것 같네
   0x005E0894 [0x8006] [script:7A 05]・・・아무것도 없잖아
   --- context: 0x8006 -> 0x8005 ---
@@ -1659,7 +1690,14 @@
   --- context: 0x8005 -> 0x800A ---
   0x005E0C26 [0x800A] [script:42 07]미안하지만 여기서 죽어줘
   0x005E0E10 [0x800A] [script:36 08]칫,[delay:2E]함정인가！？
-  --- context: 0x800A -> 0x8000 ---
+  --- context: 0x800A -> 0x8005 ---
+  0x005E0E94 [0x8005] [script:5B 8C]サデリく1
+  0x005E106C [0x8005] [script:AA 00]ぴけめありジめあらジメ
+  0x005E113E [0x8005] [script:8E 00]ゅデイしょしりあゅしう
+  0x005E154A [0x8005] [script:0F 00]ぱあさ
+  0x005E1553 [0x8005] [script:80 27]あぴデゅしダ
+  0x005E1706 [0x8005] [script:FF FF]えあを
+  --- context: 0x8005 -> 0x8000 ---
   0x005E1A20 [0x8000] [script:3B 0E]새로운 놈들인가！？
   0x005E1B82 [0x8000] [script:ED 0E]전원 돌입！
   --- context: 0x8000 -> 0x8009 ---
@@ -1682,6 +1720,13 @@
   --- context: 0x8005 -> 0x8007 ---
   0x005E2266 [0x8007] [script:64 12]도망갔다, 쫓아 쫓아！
   --- context: 0x8007 -> 0x8008 ---
+  0x005E24D2 [0x8008] [script:A9 00]。つし
+  0x005E2544 [0x8008] [script:A9 00]どと＊
+  0x005E26A4 [0x8008] [script:A9 00]！と＊
+  0x005E2792 [0x8008] [script:A9 00]ぉとす
+  0x005E298A [0x8008] [script:26 00]ギギぽ
+  0x005E2B5A [0x8008] [script:80 80]기기요
+  0x005E2BAA [0x8008] [script:80 80]기기요
   0x005E2CF8 [0x8008] [script:A9 17]계속 나타나！
   --- context: 0x8008 -> 0x8001 ---
   0x005E2D8E [0x8001] [script:F5 17]젠장, 끝이 없잖아
@@ -2770,6 +2815,11 @@
   0x00C83FFC [0x8005] [script:B9 3C]설마…[br][delay:15]이 술을 노리고 있는 건가?
   --- context: 0x8005 -> 0x8014 ---
   0x00C84126 [0x8014] [script:42 3D]전투에 참가할 캐릭터를[br]선택해 주세요
+  0x00C84160 [0x8014] [script:FF FF]げどを
+  0x00C84288 [0x8014] [script:55 87]<노이즈 텍스트>
+  0x00C84298 [0x8014] [script:0C 34]めありジめあらジメ
+  0x00C842B2 [0x8014] [script:A2 00]せばい
+  0x00C84368 [0x8014] [script:55 87]<노이즈 텍스트>
   0x00C84380 [0x8014] [script:78 3E]몬스터도 노리는 이 술이 대체 뭐야?
   0x00C84398 [0x8014] [script:73 7E]몬스터도 노리는[br]이 술이 대체 뭐야？
   0x00C844A4 [0x8014] [script:02 3F]빨리 프로디아스로 가자
