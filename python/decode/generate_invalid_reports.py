@@ -265,6 +265,24 @@ def is_garbage(text, plain):
     if plain in NOR_LWL_ARTIFACTS:
         return f"Pattern 24 (NOR+LWL shared block artifact): {plain}"
 
+    # Pattern 25: Shared code block artifacts (CDT, template params, jump tables)
+    SHARED_BLOCK_ARTIFACTS = {
+        'げいう', 'えおよ', 'ぴおよ',
+        '火そ火そボ', '火み火みボ', 'ョぬョぬボ',
+        'めあ団ぷあれギ', 'やあ団C',
+        'あギやしめあ団ジ', 'あギ＋おめあ団I', 'あギ管めあ団じ',
+        'あギてそめあ団めあ団ぷあれギ', 'あギぷそめあ団I',
+        'オゼヲ', 'あわしあ',
+        'めありジマ', 'いギめありジマ',
+        'オいめあげグI', 'オいめあげグJ',
+        'ぴしぷしよ', 'ぷずぷずせ', 'しけしけせ',
+        '渡みギC', 'カじあギじ', 'ウえあギじ', 'ヘおあギじ',
+        'てギめあカゼI',
+        'えあを', 'ぎしを', 'へつけ',
+    }
+    if plain in SHARED_BLOCK_ARTIFACTS:
+        return f"Shared code block artifact: {plain}"
+
     return None
 
 

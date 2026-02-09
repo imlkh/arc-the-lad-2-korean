@@ -245,6 +245,30 @@ LW_TABLE_MARKER = (b'\x52\x0C\x4F\x0C\x4D\x0C\x89\x00'
                    b'\x52\x0C\x4E\x0C\x50\x0C\xFF\xFF'
                    b'\xAB\x00\x8E\x00')  # 18 bytes
 LW_TABLE_OFFSET = -1063  # LW table marker start relative to NOR+LWL core
+
+# Shared code block artifacts — exact decoded text strings produced by
+# byte-identical code blocks replicated across chunks (see docs/UNCAUGHT_GARBAGE_ENTRIES.md)
+SHARED_BLOCK_ARTIFACTS = {
+    # Type A: Command Dispatch Table (CDT) — AC 00 32 02 03 00
+    'げいう', 'えおよ', 'ぴおよ',
+    '火そ火そボ', '火み火みボ', 'ョぬョぬボ',
+    # Type B: Template Parameter Block — 22/24 01 F3 81
+    'めあ団ぷあれギ', 'やあ団C',
+    'あギやしめあ団ジ', 'あギ＋おめあ団I', 'あギ管めあ団じ',
+    'あギてそめあ団めあ団ぷあれギ', 'あギぷそめあ団I',
+    # Type C.1: C0 Jump Table — C0 00 55 87 55 87
+    'オゼヲ',
+    # Type C.2: あわしあ Block — 81 28 01 2C 0C 01
+    'あわしあ',
+    # Type C.3: MIPS LW/SW Instruction Blocks
+    'めありジマ', 'いギめありジマ',
+    'オいめあげグI', 'オいめあげグJ',
+    'ぴしぷしよ', 'ぷずぷずせ', 'しけしけせ',
+    '渡みギC', 'カじあギじ', 'ウえあギじ', 'ヘおあギじ',
+    'てギめあカゼI',
+    # Type C.4: FF FF Boundary Blocks
+    'えあを', 'ぎしを', 'へつけ',
+}
 STG_CHUNK_SIZE = 0xBC800  # 772,096 bytes per chunk
 STG_TEXT_REGION_OFFSET = 0xB4000  # Text region starts at +0xB4000 within each chunk
 STG_TEXT_REGION_SIZE = 0x8800  # ~34,816 bytes text region per chunk
@@ -632,6 +656,12 @@ def _is_garbage_text(text):
                 if stripped[j:j + 2] == pair)
             if count >= 20:
                 return True
+
+    # Rule 16: Shared code block artifacts — exact-match blocklist
+    # Byte-identical code blocks (CDT, template params, jump tables)
+    # replicated across chunks always produce the same decoded text.
+    if stripped in SHARED_BLOCK_ARTIFACTS:
+        return True
 
     return False
 
