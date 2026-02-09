@@ -404,6 +404,10 @@ def encode_korean_text(text, korean_mapping, decode_table):
                     result.extend(b"\xFF\x08\x02\x01")
                 elif tag == "box:speech":
                     result.extend(b"\xFF\x08\x03\x01")
+                    # At string start, insert space (0xA0) to prevent
+                    # 01 F0 display bug with Korean two-byte chars.
+                    if len(result) == 4:
+                        result.append(0xA0)
                 elif tag == "box:narration":
                     result.extend(b"\xFF\x08\x05\x01")
                 elif tag == "cursor":

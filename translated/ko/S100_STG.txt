@@ -1593,7 +1593,7 @@
 --- context: 0x8005 -> 0x800B ---
 0x0069FAE0 [0x800B] [script:5F 1D]!!
 --- context: 0x800B -> 0x8006 ---
-0x0069FB1C [0x8006] [script:81 1D][box:speech][delay:00][FF:09 01 01]!!
+0x0069FB1C [0x8006] [script:81 1D][box:speech][FF:09 01 01]!!
 0x0069FBEC [0x8006] [script:E7 1D]이쪽이야!!
 --- context: 0x8006 -> 0x8005 ---
 0x0069FC4A [0x8005] [script:1B 1E]고마워,[delay:15]근데 왜?
@@ -1672,19 +1672,19 @@
 
 
 --- context: 0x800B -> 0x800A ---
-0x0075B992 [0x800A] [script:7D 0B][box:speech][delay:00]엘크, 도망쳐요!
+0x0075B992 [0x800A] [script:7D 0B][box:speech]엘크, 도망쳐요!
 --- context: 0x800A -> 0x8006 ---
-0x0075B9DE [0x8006] [script:A4 0B][box:speech][delay:00]엘크[delay:1F]…왜 그래?
-0x0075BA2C [0x8006] [script:C8 0B][box:speech][delay:00]저…비행선
+0x0075B9DE [0x8006] [script:A4 0B][box:speech]엘크[delay:1F]…왜 그래?
+0x0075BA2C [0x8006] [script:C8 0B][box:speech]저…비행선
 --- context: 0x8006 -> 0x8005 ---
-0x0075BA70 [0x8005] [script:E9 0B][box:speech][delay:00]기억나
-0x0075BAB6 [0x8005] [script:18 0C][box:speech][delay:00]내[delay:0B]・[delay:0B]・[delay:0B]내 마을을 습격한…
+0x0075BA70 [0x8005] [script:E9 0B][box:speech]기억나
+0x0075BAB6 [0x8005] [script:18 0C][box:speech]내[delay:0B]・[delay:0B]・[delay:0B]내 마을을 습격한…
 0x0075BB94 [0x8005] [script:7B 0C][box:close]이봐, 엘크!
 --- context: 0x8005 -> 0x8006 ---
 0x0075BBD6 [0x8006] [script:9E 0C][box:close]왜 그러는 거야!?
-0x0075BC1C [0x8006] [script:C9 0C][box:speech][delay:00]틀림없어[br]저 비행선이 내 마을을…
+0x0075BC1C [0x8006] [script:C9 0C][box:speech]틀림없어[br]저 비행선이 내 마을을…
 --- context: 0x8006 -> 0x8005 ---
-0x0075BC72 [0x8005] [script:EA 0C][box:speech][delay:00]용서 못 해!
+0x0075BC72 [0x8005] [script:EA 0C][box:speech]용서 못 해!
 0x0075BCCE [0x8005] [script:17 0D][box:close]엘크!
 --- context: 0x8005 -> 0x8006 ---
 0x0075BD2A [0x8006] [script:50 0D]젠장, 조금만 더 했으면[br]엄청난 방해가 들어왔군

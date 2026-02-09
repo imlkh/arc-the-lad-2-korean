@@ -229,13 +229,10 @@ def validate_translations(stages):
             within_chunk = offset % CHUNK_SIZE
             is_padding_region = 0xA0000 <= within_chunk < 0xB4000
 
-            # Check 1: [box:speech][delay:00] in padding region
-            if is_padding_region and '[box:speech][delay:00]' in line:
-                delay_in_padding.append({
-                    'line': line_num,
-                    'offset': offset,
-                    'text': line.strip()[:70]
-                })
+            # Note: [box:speech] display bug fix is now handled automatically
+            # by encode_korean_text() inserting a space (0xA0, 1 byte) after
+            # [box:speech] at string start. The old [delay:00] workaround
+            # (4 bytes) is no longer needed in translation files.
 
             # Check 2: Truncation in padding region (only if we can calculate size)
             if is_padding_region and can_check_size and orig_data and charmap:
@@ -281,12 +278,8 @@ def validate_translations(stages):
                     pass
 
         # Report issues for this stage
-        if delay_in_padding:
-            for item in delay_in_padding:
-                errors.append(
-                    f"{stage} line {item['line']}: [box:speech][delay:00] in padding region "
-                    f"(0x{item['offset']:08X}) - remove [delay:00]"
-                )
+        # delay_in_padding check removed — [box:speech] display bug is now
+        # handled automatically by the encoder (1-byte space insertion)
 
         if truncated:
             # Separate critical (>3 bytes) from minor (1-3 bytes) truncation
@@ -357,7 +350,7 @@ def main():
     if errors:
         print(f"\n{Colors.RED}{Colors.BOLD}Found {len(errors)} critical error(s) that will cause display issues.{Colors.END}")
         print(f"{Colors.YELLOW}Fix these issues before patching:{Colors.END}")
-        print(f"  - [box:speech][delay:00] in padding region → remove [delay:00]")
+        print(f"  - [box:speech] display bug → now auto-fixed by encoder")
         print(f"  - CRITICAL truncation (>3 bytes) → shorten Korean text")
 
         if validate_only:

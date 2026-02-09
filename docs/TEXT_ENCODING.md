@@ -128,23 +128,29 @@ When `FF 08 03 01` (`[box:speech]`) appears at the **very beginning** of a dialo
       [box:speech] Korean char (F0 = extended)
 ```
 
-**Solution**: Insert `[delay:00]` buffer between `[box:speech]` and Korean text. This preserves the speech bubble box style while breaking the problematic `01 F0` byte collision:
+**Solution**: The patcher (`encode_korean_text()`) automatically inserts a
+space character (charID 160, `0xA0`, 1 byte) after `[box:speech]` when it
+appears at string start. This breaks the `01 F0` collision:
 
 ```
-[box:speech][delay:00]Korean text
-
 Byte sequence:
-FF 08 03 01 FF 03 00 01 F0 XX ...
-└─────────┘ └─────────┘ └────┘
-[box:speech] [delay:00]  Korean char
+FF 08 03 01 A0 F0 XX ...
+└─────────┘ ^^ └────┘
+[box:speech] SP Korean char
 ```
 
-The zero-delay (`FF 03 00 01`) has no visual impact but separates the control codes.
+The space glyph is blank (cleared by the Korean font patcher) and costs only
+1 byte. This replaces the previous `[delay:00]` workaround (`FF 03 00 01`,
+4 bytes). Translation files no longer need `[delay:00]` after `[box:speech]`.
 
-**Important Notes**:
-1. `[box:speech]` in the **middle** of text (after some characters) works fine - only the start position causes issues.
-2. **Padding/Event regions (0xA0000-0xB4000)**: Do NOT add `[delay:00]` - these use fixed-length patching with no variable-length support, so every byte counts. The display bug doesn't affect these regions.
-3. **Text region (0xB4000-0xBC800)**: ADD `[delay:00]` after `[box:speech]` at start - variable-length VLUT handles the extra bytes.
+**Notes**:
+1. `[box:speech]` in the **middle** of text (after some characters) works
+   fine — the space is only inserted at string start (`len(result) == 0`
+   when `[box:speech]` is encoded).
+2. The bug is specific to the `FF 08` sub-handler `03` (speech box
+   initialization). Other `FF 08` sub-types (`01` system, `02` close,
+   `05` narration) do NOT have this issue — verified with 105+ cases of
+   `[box:system]` + Korean `F0` at string start working correctly.
 
 ##### EF (Choice Option) + Korean: No Bug
 
