@@ -1,7 +1,14 @@
 # Uncaught Garbage Entries (2026-02-09)
 
-123 entries (30 unique strings) across 11 STG files that pass all decoder filters
+**STATUS: RESOLVED** — All 138 entries (123 original + 15 unmasked) eliminated.
+Added to `SHARED_BLOCK_ARTIFACTS` blocklist in `_is_garbage_text()` Rule 16.
+Final decoder stats: 26,631 dialogues, 0 garbage, 0 fragments, 0 partials.
+
+---
+
+Originally 123 entries (30 unique strings) across 11 STG files that passed all decoder filters
 and invalid report patterns. These are shared code block artifacts, not real dialogue.
+Removing the 123 unmasked 15 additional garbage entries (Types D+E below), all also eliminated.
 
 ## Summary
 

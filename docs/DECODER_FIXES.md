@@ -7,7 +7,7 @@ Arc the Lad 2's STG stage files. Because the decoder scans binary data that incl
 MIPS machine code alongside text, it must distinguish real dialogue from garbage produced
 by misinterpreted opcodes.
 
-**Final stats** (2026-02-09): 26,775 dialogues across 20,947 templates in 19 STG files.
+**Final stats** (2026-02-09): 26,591 dialogues across 20,947 templates in 19 STG files.
 Category 1 garbage: **0**. Category 2 single-char fragments: **0**. Partial decodes: **0**.
 
 ## Remaining Items
@@ -60,10 +60,16 @@ These are decoded correctly but not player-facing. Excluded from translation.
 | 5 | Short mixed hira/kata without repetition (len ≤ 4) | `みギづ` |
 | 6 | Repeating 2-char pair at regular intervals (≥4 apart, ≥3 times, no punctuation) | `もあがデもあをデもあんデ` |
 | 8 | Digit+kana mix in short text (≤8 chars, scattered digits = garbage, grouped digits = real) | `3ざよ`, `サデリく1` |
-| 9 | Fullwidth `＊` in short text (≤5 chars) — data table marker | `どと＊`, `！と＊` |
+| 9 | Fullwidth `＊` or `♠` in short text (≤5 chars) — data table marker | `どと＊`, `♠ざた` |
 | 10 | Starts with small kana `ぉ/ゅ/ょ` (≤8 chars, no kanji) — unusual word start | `ぉとす`, `ぉあさ` |
 | 11 | Starts with fullwidth `。` (≤5 chars) — data reference marker | `。つし` |
 | 12 | Ends with `もあ` (≤8 chars, no kanji) — MIPS opcode terminator | `ずぞもあ` |
+| 13 | `水あ` exact match — ADDIU instruction artifact | `水あ` |
+| 14 | 3-char kanji+hiragana+uppercase ASCII (register operand pattern) | `地おI`, `火さI` |
+| 16 | Shared code block artifacts — exact-match blocklist (70 strings, Types A-G) | `げいう`, `めあ団ぷあれギ`, `ずもよ` |
+| 17 | XxXxY pointer table pattern (5 chars, pair+terminator ボ/せ) | `ぺやぺやボ`, `ぢオぢオせ` |
+| 18 | Trailing uppercase ASCII after kana/kanji (exempt rank patterns, consecutive uppercase) | `鉛えほさギ`, `火さI` |
+| 19 | Padding mixed-script gibberish (`[opt]` + lowercase ASCII + kana) | `と疑わエEZ[opt]リXクじギ` |
 
 ### Rule 7: MIPS Opcode Detection (sub-rules 7a-7i)
 
@@ -176,6 +182,10 @@ initially misclassified as garbage:
 | + Cross-boundary text fix | 26,841 | 4 | 0 | **0** | −3 cross-boundary partials eliminated |
 | + MIPS めあ pattern check | **26,831** | **57** | 0 | 0 | 10 MIPS entries eliminated at decoder level |
 | + Garbage text rules (post-filter) | **26,775** | **0** | 0 | 0 | Ported 7 patterns from report generator; −56 dialogues, −57 garbage |
+| + NOR+LWL exclusion zones | **26,754** | 0 | 0 | 0 | Structural detection of shared event engine routine; −6 entries |
+| + Shared block artifacts blocklist (123) | **26,646** | 0 | 0 | 0 | Rule 16: exact-match blocklist for 30 shared code block strings |
+| + Unmasked MIPS fragments (15) | **26,631** | 0 | 0 | 0 | 13 additional strings (Types D+E) added to blocklist; stable (no cascade) |
+| + Expanded garbage rules (17-19) + blocklist (Types F+G) | **26,591** | 0 | 0 | 0 | Rules 17-19 + extended Rules 9,13,14 + 27 new blocklist entries; −40 garbage |
 
 ## Other Fixes
 
@@ -401,9 +411,12 @@ producing exclusion zones that the gap search skips entirely.
 
 #### Exclusion zones (`_build_exclusion_zones()`)
 
-A new function merges script opcode ranges (`_find_script_ranges()`) and
-event trigger ranges (`_find_event_trigger_ranges()`) into unified exclusion
-zones. All 7 call sites that previously used `_find_script_ranges()` alone
+A function merges three exclusion zone sources into unified ranges:
+- `_find_script_ranges()` — script opcode blocks (`28 01`)
+- `_find_event_trigger_ranges()` — event trigger commands (`67 00`)
+- `_find_nor_lwl_block_ranges()` — NOR+LWL shared code blocks
+
+All 7 call sites that previously used `_find_script_ranges()` alone
 now use `_build_exclusion_zones()`:
 
 - `_scan_text_region_for_dialogues()` — template scanning
@@ -429,8 +442,8 @@ in the same gap. The template preamble approach was reverted.
 
 #### Assessment of heuristic rule removal
 
-All 12 `_is_garbage_text()` rules were instrumented to track hits across all
-19 STG files. **All 12 rules are actively used** with ~5,000+ total hits
+All 19 `_is_garbage_text()` rules were instrumented to track hits across all
+19 STG files. **All rules are actively used** with ~5,000+ total hits
 across all decoder call sites (gap_start, continuation, fallback, orphan
 menu, bare dialogue, event script, padding scan). No rules can be safely
 removed — the two-layer approach (structural pre-filter + text heuristic
@@ -522,3 +535,96 @@ are automatically picked up by this existing infrastructure.
 
 Category 1 garbage: 57 → **0** across all 19 STG files. Total dialogues: 26,831 → **26,775**
 (−57 garbage removed, +1 dialogue recovered from FP fix). Zero false positives.
+
+### Expanded Garbage Filter Rules (2026-02-09)
+
+**Goal**: Eliminate 62 remaining garbage/MIPS artifacts documented in
+`TRANSLATION_GARBAGE_ARTIFACTS.md` that were identified by manual review.
+
+#### New rules added to `_is_garbage_text()`
+
+| Rule | Pattern | Conditions | Examples caught |
+|------|---------|-----------|-----------------|
+| 17 | XxXxY pointer table | 5 chars, first pair == second pair, terminator ∈ {ボ, せ} | `ぺやぺやボ`, `ぢオぢオせ` |
+| 18 | Trailing uppercase ASCII | ≥3 chars, kana/kanji followed by isolated uppercase (exempt rank patterns like レベルD, consecutive uppercase) | `鉛えほさギ`, `地おI` |
+| 19 | Padding mixed-script | Contains `[opt]`, ≥8 chars, has both lowercase ASCII and kana | `と疑わエEZ[opt]リXクじギ` |
+
+#### Existing rules extended
+
+| Rule | Change | Reason |
+|------|--------|--------|
+| 4 (short path) | Added rank pattern exemption (`レベル/ランク/クラス/タイプ/グレード` + letter) | FP: `レベルD`, `ランクA` |
+| 9 | Added ♠ symbol alongside ＊ | Catch `♠ざた` data marker |
+| 13 | Added `水あ` 2-char special case | ADDIU instruction artifact (0xDF 0x01) |
+| 14 | Extended from kanji+さ+ギ to kanji+hiragana+uppercase ASCII | Catch `地おI`, `火さI` register operand patterns |
+
+#### SHARED_BLOCK_ARTIFACTS expanded (Types F+G)
+
+Added 27 new entries to the exact-match blocklist (43 → 70 total):
+
+| Type | Count | Description | Examples |
+|------|-------|-------------|---------|
+| F: Residual MIPS | 19 | MIPS artifacts not caught by heuristic rules | `あわし`, `ぁぁぁ`, `ギシよよ` |
+| G: Short hiragana | 8 | 3-char hiragana fragments from data bytes | `ずもよ`, `がゆせ`, `りちよ` |
+
+#### Rules attempted then removed
+
+| Rule | Reason for removal |
+|------|-------------------|
+| 20 (short hiragana fragments) | Too many false positives — valid words like うむ, そうか, ならば, あのね, いちご |
+| 21 (medium repeat threshold) | Redundant after Rule 15 threshold revert |
+
+**Key lesson**: Short hiragana fragment detection via allowlist is infeasible — too many
+valid 2-3 character Japanese words exist. Pattern rules (17-19) work for structurally
+distinctive garbage; for short ambiguous fragments, exact-match blocklist is the only
+safe approach.
+
+#### Results
+
+Total dialogues: 26,631 → **26,591** (−40 entries). Category 1 garbage: **0**.
+Zero false positives verified against 61 real dialogue test entries.
+
+### NOR+LWL Shared Code Block Exclusion Zones (2026-02-09)
+
+**Root cause**: A shared event engine routine (~1,100 bytes) is replicated byte-for-byte
+into every chunk's text region across all 19 STG files (143 instances). The decoder's gap
+search misinterprets portions of this block as dialogue, producing garbage like "ぱあさ"
+and "イしょしりあゅしう".
+
+**Signature** (56-byte fixed block):
+- 15-byte prefix: `4E 00 00 80 0E 00 0F 00 43 01 0B 00 4E 0C 00`
+- 8-byte core (NOR+LWL): `80 27 01 44 8C 4E 0C 89`
+- 33-byte suffix (fixed)
+- LW parameter table at exactly −1,063 bytes from core (18-byte marker)
+
+**Fix**: Added `_find_nor_lwl_block_ranges()` function that scans for the 8-byte core,
+validates the 15-byte prefix, and checks for the LW parameter table at the expected offset.
+Integrated into `_build_exclusion_zones()` alongside script opcodes and event triggers.
+
+**Results**: −6 entries (S200, S700, SD00). Total dialogues: 26,775 → **26,754**.
+
+### Shared Block Artifacts Blocklist — Rule 16 (2026-02-09)
+
+**Root cause**: After all structural exclusion zones and heuristic garbage rules, 123
+entries (30 unique strings) from shared code blocks still passed all filters. These are
+byte-identical code replicated across chunks, always producing the same decoded text.
+
+**Analysis**: Three types of shared code blocks identified via byte-level examination:
+
+| Type | Signature | Example Artifact | Count |
+|------|-----------|-----------------|-------|
+| A: Command Dispatch Table (CDT) | `AC 00 32 02 03 00` | げいう, えおよ, 火そ火そボ | 27 |
+| B: Template Parameter Block | `22/24 01 F3 81` | めあ団ぷあれギ, やあ団C | 29 |
+| C: Various control/jump blocks | C0 jump, あわしあ, MIPS LW/SW, FF FF boundary | オゼヲ, あわしあ, めありジマ | 67 |
+
+**Fix**: Added `SHARED_BLOCK_ARTIFACTS` exact-match set to `_is_garbage_text()`
+as Rule 16. Removing 123 entries unmasked 15 additional garbage entries (Types D+E: pointer
+tables decoded as XxXxチ pattern, and MIPS fragments めあクゼゼ, 団ぷあれギ, あギ1ぬめあ団I).
+Added 13 more strings. Later expanded with Types F (residual MIPS, 19 strings) and G (short
+hiragana fragments, 8 strings) to bring the blocklist to 70 total.
+
+**Results**: −123 − 15 = −138 entries total. Total dialogues: 26,754 → **26,631**. Stable
+(no further unmasking cascade). Zero false positives — all strings are byte-identical shared
+code artifacts that never appear in real dialogue.
+
+Matching Pattern 25 added to `generate_invalid_reports.py` for report-level classification.

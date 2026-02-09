@@ -208,9 +208,9 @@ def is_garbage(text, plain):
         if has_digit and has_kana and not has_kanji:
             return "MIPS opcode pattern (digit+kana mix)"
 
-    # Pattern 16: Fullwidth asterisk ＊ in short text (non-dialogue data)
-    if '＊' in plain and len(plain) <= 5:
-        return "MIPS opcode pattern (＊ data marker)"
+    # Pattern 16: Non-dialogue symbols (＊, ♠) in short text
+    if ('＊' in plain or '♠' in plain) and len(plain) <= 5:
+        return "MIPS opcode pattern (non-dialogue symbol)"
 
     # Pattern 17: MIPS address register sequence (0x24 XX decoded as ジ/メ + めあ)
     # Matches the specific byte pattern where めあ (0x01) appears 2+ times
@@ -230,6 +230,8 @@ def is_garbage(text, plain):
         return "MIPS opcode pattern (。prefix)"
 
     # Pattern 21: 水 + pure kana without grammar — MIPS opcode with 水 (0x90)
+    if plain == '水あ':
+        return "MIPS opcode pattern (水あ ADDIU)"
     if plain.startswith('水') and 5 <= len(plain) <= 12:
         rest = plain[1:]
         has_other_kanji = any(is_kanji(c) for c in rest)
@@ -243,16 +245,25 @@ def is_garbage(text, plain):
             if not has_grammar:
                 return "MIPS opcode pattern (水+kana)"
 
-    # Pattern 22: Single kanji + さ + ギ (3 chars) — MIPS register pattern
+    # Pattern 22: Single kanji + hiragana + MIPS marker (3 chars)
+    # Covers kanji+さ+ギ and kanji+hiragana+uppercase (火さI, 地おI)
     if (len(plain) == 3 and is_kanji(plain[0])
-            and plain[1] == 'さ' and plain[2] == 'ギ'):
-        return "MIPS opcode pattern (kanji+さ+ギ)"
+            and is_hiragana(plain[1])):
+        if plain[2] == 'ギ' or (plain[2].isupper() and plain[2].isascii()):
+            return "MIPS opcode pattern (kanji+hira+register)"
 
-    # Pattern 23: Long text with 2-char pair repeating 20+ times
+    # Pattern 23: Long text (>30 chars) with 2-char pair repeating 20+ times
     if len(plain) > 30:
-        for i in range(min(20, len(plain) - 1)):
+        sample_positions = list(range(min(10, len(plain) - 1)))
+        tail_start = max(10, len(plain) - 11)
+        sample_positions.extend(range(tail_start, len(plain) - 1))
+        seen_pairs = set()
+        for i in sample_positions:
             pair = plain[i:i + 2]
-            if pair[0] == pair[1]:
+            if pair in seen_pairs or pair[0] == pair[1]:
+                continue
+            seen_pairs.add(pair)
+            if any(c in '、。！？ー…っッ' for c in pair):
                 continue
             count = sum(
                 1 for j in range(len(plain) - 1)
@@ -279,9 +290,58 @@ def is_garbage(text, plain):
         '渡みギC', 'カじあギじ', 'ウえあギじ', 'ヘおあギじ',
         'てギめあカゼI',
         'えあを', 'ぎしを', 'へつけ',
+        # Type D: Pointer Table Entries (XxXxチ pattern)
+        'ギけぇけチ', 'サそよそチ', 'のぬ、にチ', 'るこ仲チ',
+        'ふし－さチ', 'サみよみチ', 'クむもむチ', 'トにがにチ',
+        'ロちぺちチ', 'タのろのチ',
+        # Type E: Unmasked MIPS fragments
+        'めあクゼゼ', 'あギ1ぬめあ団I', '団ぷあれギ',
+        # Type F: Residual MIPS artifacts
+        'あわし', 'ぁぁぁ', '！こ～', '！ちい',
+        'おギ！めせ', 'みぴブゥホろルげト',
+        'ギシよよ', 'ぼじ', 'くきけなしたこそあこうちいて',
+        'テえトくザしEた', '鉛えほさギ', 'あ団ぷあれギ',
+        '地たよ', 'ュにりあぷし', 'りあ汎さギ', 'ユク水',
+        'バなれちテデイちすすゾたロヌモぅ',
+        'ぞビぼニぷゴミよ気グ', 'キよ逃ゲルッス', 'ゲ水ゲ',
+        # Type G: Short hiragana fragments
+        'ずもよ', 'がゆせ', 'りちよ', 'てにい', 'せばい', 'げどを',
+        'ねけを', 'がなせ',
     }
     if plain in SHARED_BLOCK_ARTIFACTS:
         return f"Shared code block artifact: {plain}"
+
+    # Pattern 26: XxXxY pointer table pattern (5 chars, repeated pair + terminator)
+    POINTER_TERMINATORS = {'ボ', 'せ'}
+    if (len(plain) == 5
+            and plain[0:2] == plain[2:4]
+            and plain[4] in POINTER_TERMINATORS):
+        return f"Pointer table pattern ({plain[0:2]}+{plain[4]})"
+
+    # Pattern 27: Trailing uppercase ASCII after kana/kanji
+    # Exempt rank patterns: レベルD, ランクA, クラスS, etc.
+    if (len(plain) >= 3
+            and plain[-1].isupper() and plain[-1].isascii()
+            and any(is_kana(c) or is_kanji(c) for c in plain[:-1])):
+        if plain[-2].isupper() and plain[-2].isascii():
+            pass  # Consecutive uppercase (HP, MP) — not garbage
+        elif re.search(r'(レベル|ランク|クラス|タイプ|グレード)[A-Z]$', plain):
+            pass  # Rank pattern — not garbage
+        else:
+            return f"MIPS register trailing ({plain[-1]})"
+
+    # Pattern 28: [opt] + mixed ASCII+kana (padding gibberish)
+    # Strip ALL bracket tags to avoid false positives from [script:XX], [item:XX]
+    plain_all_stripped = re.sub(r'\[[^\]]*?\]', '', text).strip()
+    if '[opt]' in text and len(plain_all_stripped) >= 8:
+        has_lower = any(c.islower() and c.isascii() for c in plain_all_stripped)
+        has_kana_p28 = any(is_kana(c) for c in plain_all_stripped)
+        if has_lower and has_kana_p28:
+            return "Padding mixed-script gibberish"
+
+    # Pattern 29 (REMOVED): Short hiragana fragment — too many false positives
+    # Pattern 30 (REMOVED): Medium repeat threshold — too many false positives
+    # Short garbage fragments are now caught by the SHARED_BLOCK_ARTIFACTS blocklist.
 
     return None
 

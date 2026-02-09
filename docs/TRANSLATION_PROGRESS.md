@@ -1,6 +1,6 @@
 # Arc the Lad 2 Korean Translation Progress
 
-**Last Updated**: 2026-02-07
+**Last Updated**: 2026-02-09
 
 ## Overall Statistics
 
@@ -9,9 +9,9 @@
 | Total STG files | 19 |
 | Fully translated | 5 |
 | In progress | 14 |
-| Total dialogues | 20,484 |
+| Total dialogues | 26,631 |
 | Translated dialogues | ~7,500 |
-| Remaining dialogues | ~13,192 |
+| Remaining dialogues | ~19,131 |
 | Batch progress | 34/434 (7.8%) |
 
 ## Patched Files Status
@@ -64,7 +64,7 @@ Replaced the complex heuristic garbage filter with a simple 4-rule system:
 4. **Short uppercase+kana**: Text ≤6 chars with uppercase + kana but no kanji
 5. **Short mixed kana**: Text ≤4 chars with mixed hiragana/katakana without repetition
 
-**Results**: 20,484 dialogues extracted (filtered 47 false positive templates, 177 garbage strings)
+**Results**: 26,631 dialogues extracted (0 garbage, 0 fragments, 0 partial decodes)
 
 ### Valid FF Control Codes
 
@@ -123,27 +123,27 @@ The decoder uses a multi-phase extraction approach:
 
 | File | Status | Translated | Total | Remaining | Batches |
 |------|--------|------------|-------|-----------|---------|
-| S100 | **DONE** | 1,151 | 1,321 | 170 | 34/34 |
-| S200 | Partial | 351 | ~1,900 | ~1,550 | 0/65 |
-| S300 | **DONE** | 316 | ~350 | ~34 | - |
-| S400 | Partial | 767 | ~850 | ~83 | - |
-| S500 | Partial | 520 | ~580 | ~60 | - |
-| S600 | Partial | 119 | ~830 | ~711 | 0/28 |
-| S700 | Partial | 933 | ~2,800 | ~1,867 | 0/94 |
-| S800 | Partial | 267 | ~1,030 | ~763 | 0/35 |
-| S900 | Partial | 131 | ~1,020 | ~889 | 0/34 |
-| SA00 | Partial | 75 | ~1,400 | ~1,325 | 0/47 |
-| SB00 | Partial | 769 | ~850 | ~81 | - |
-| SC00 | **DONE** | 680 | ~750 | ~70 | - |
-| SD00 | Partial | 650 | ~730 | ~80 | - |
-| SE00 | Partial | 143 | ~1,340 | ~1,197 | 0/45 |
-| SF00 | Partial | 134 | ~2,760 | ~2,626 | 0/92 |
-| SG00 | Partial | 1,466 | 2,445 | 979 | - |
-| SH00 | Partial | 44 | ~60 | ~16 | - |
-| SI00 | Partial | 137 | ~2,330 | ~2,193 | 0/78 |
+| S100 | **DONE** | 1,151 | 1,310 | 159 | 34/34 |
+| S200 | Partial | 351 | 1,980 | 1,629 | 0/65 |
+| S300 | **DONE** | 316 | 392 | 76 | - |
+| S400 | Partial | 767 | 882 | 115 | - |
+| S500 | Partial | 520 | 683 | 163 | - |
+| S600 | Partial | 119 | 921 | 802 | 0/28 |
+| S700 | Partial | 933 | 3,097 | 2,164 | 0/94 |
+| S800 | Partial | 267 | 1,380 | 1,113 | 0/35 |
+| S900 | Partial | 131 | 1,222 | 1,091 | 0/34 |
+| SA00 | Partial | 75 | 1,522 | 1,447 | 0/47 |
+| SB00 | Partial | 769 | 896 | 127 | - |
+| SC00 | **DONE** | 680 | 874 | 194 | - |
+| SD00 | Partial | 650 | 917 | 267 | - |
+| SE00 | Partial | 143 | 1,444 | 1,301 | 0/45 |
+| SF00 | Partial | 134 | 3,352 | 3,218 | 0/92 |
+| SG00 | Partial | 1,466 | 2,415 | 949 | - |
+| SH00 | Partial | 44 | 738 | 694 | - |
+| SI00 | Partial | 137 | 2,606 | 2,469 | 0/78 |
 | SJ00 | **DONE** | 0 | 0 | 0 | - |
 
-**Note**: Total counts now include all dialogue types (template, bare, orphan menu, event script, padding). Counts with ~ are estimates pending full re-scan.
+**Note**: Total counts updated 2026-02-09. All dialogue types included (template, bare, orphan menu, event script, padding). Decoder: 0 garbage, 0 fragments, 0 partials.
 
 ## Translation Workflow
 

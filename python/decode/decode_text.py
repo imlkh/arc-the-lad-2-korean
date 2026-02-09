@@ -268,6 +268,37 @@ SHARED_BLOCK_ARTIFACTS = {
     'てギめあカゼI',
     # Type C.4: FF FF Boundary Blocks
     'えあを', 'ぎしを', 'へつけ',
+    # Type D: Pointer Table Entries — 3 address words + 61 00 (XxXxチ pattern)
+    'ギけぇけチ', 'サそよそチ', 'のぬ、にチ', 'るこ仲チ',
+    'ふし－さチ', 'サみよみチ', 'クむもむチ', 'トにがにチ',
+    'ロちぺちチ', 'タのろのチ',
+    # Type E: Unmasked MIPS fragments — 22/24 01 patterns
+    'めあクゼゼ', 'あギ1ぬめあ団I', '団ぷあれギ',
+    # Type F: Residual MIPS artifacts — entries from TRANSLATION_GARBAGE_ARTIFACTS.md
+    # that don't fit pattern rules (unique text, no generalizable structure)
+    'あわし',                  # S700: shared code block (script:81 28), 3 instances
+    'ぁぁぁ',                  # S700: small-あ repeat, not dialogue
+    '！こ～',                  # S700: incomplete exclamation fragment
+    '！ちい',                  # S700: MIPS data prefix; short fragment
+    'おギ！めせ',              # SI00: MIPS opcode fragment
+    'みぴブゥホろルげト',      # SI00: random kana mix
+    'ギシよよ',                # SE00: MIPS data prefix (script:00 00)
+    'ぼじ',                    # SE00: short fragment
+    'くきけなしたこそあこうちいて',  # SA00: pure hiragana MIPS (ADDIU, no grammar)
+    'テえトくザしEた',         # S800: mixed ASCII+kana MIPS data
+    '鉛えほさギ',              # S900: MIPS kanji fragment (鉛 = MIPS kanji)
+    'あ団ぷあれギ',            # SD00: known MIPS substring (団ぷあれギ)
+    '地たよ',                  # SD00: MIPS kanji + short fragment
+    'ュにりあぷし',            # SD00: MIPS data prefix
+    'りあ汎さギ',              # SE00: MIPS kanji fragment (汎 = rare)
+    'ユク水',                  # SI00: MIPS kanji + short fragment
+    'バなれちテデイちすすゾたロヌモぅ',  # SH00: large MIPS data block
+    'ぞビぼニぷゴミよ気グ',  # SG00/SI00: padding region gibberish
+    'キよ逃ゲルッス',        # SI00: MIPS context with real word 逃ゲル
+    'ゲ水ゲ',                # SI00: MIPS pure opcode chars with kanji 水
+    # Type G: Short hiragana fragments (pure kana 2-3 chars, no valid word)
+    'ずもよ', 'がゆせ', 'りちよ', 'てにい', 'せばい', 'げどを',
+    'ねけを', 'がなせ',
 }
 STG_CHUNK_SIZE = 0xBC800  # 772,096 bytes per chunk
 STG_TEXT_REGION_OFFSET = 0xB4000  # Text region starts at +0xB4000 within each chunk
@@ -351,8 +382,12 @@ def _is_garbage_text(text):
         has_kanji = any('\u4e00' <= c <= '\u9fff' for c in stripped)
         # Short text with uppercase + kana but no kanji = garbage
         # Valid short terms like "HP回復" have kanji
+        # Exempt: rank patterns (レベルD, ランクA, クラスS, タイプB)
         if has_upper and has_kana and not has_kanji:
-            return True
+            if re.search(r'(レベル|ランク|クラス|タイプ|グレード)[A-Z]$', stripped):
+                pass  # Valid rank pattern
+            else:
+                return True
     elif len(stripped) >= 7:
         # For medium+ text, catch isolated uppercase letters mixed with kana
         # "ゾァびJダIゥゾ" has J,I isolated between kana = garbage
@@ -587,10 +622,10 @@ def _is_garbage_text(text):
                     return True
                 # Multi-digit number + kana → likely game term, allow
 
-    # Rule 9: Fullwidth ＊ in short text — data table marker
-    # e.g., "どと＊", "！と＊", "＊たを". The ＊ character (CharID 237) never
-    # appears in game dialogue, only in binary data parameter bytes.
-    if '\uff0a' in stripped and len(stripped) <= 5:
+    # Rule 9: Non-dialogue symbols in short text — data table marker
+    # ＊ (CharID 237) and ♠ (CharID 235) never appear in game dialogue.
+    # e.g., "どと＊", "！と＊", "＊たを", "♠ざた".
+    if ('\uff0a' in stripped or '♠' in stripped) and len(stripped) <= 5:
         return True
 
     # Rule 10: Small kana start (ぉ/ゅ/ょ) — unusual word start
@@ -615,9 +650,12 @@ def _is_garbage_text(text):
             return True
 
     # Rule 13: 水 + pure kana without grammar — MIPS opcodes with 水 (0x90)
-    # e.g., "水つけなえたっと", "水てのなくたリと". Real 水 text pairs with
+    # e.g., "水つけなえたっと", "水てのなくたリと", "水あ". Real 水 text pairs with
     # kanji (水面, 水晶, 水路) or uses の particle (水の). MIPS produces
     # 水 followed by random kana with no grammatical structure.
+    # Special case: "水あ" (2 chars) is a definitive MIPS ADDIU pattern (0xDF 0x01).
+    if stripped == '水あ':
+        return True
     if stripped.startswith('水') and 5 <= len(stripped) <= 12:
         rest = stripped[1:]
         has_other_kanji = any('\u4e00' <= c <= '\u9fff' for c in rest)
@@ -633,23 +671,34 @@ def _is_garbage_text(text):
             if not has_grammar:
                 return True
 
-    # Rule 14: Single kanji + さ + ギ (3 chars) — MIPS register pattern
-    # e.g., "惜さギ", "我さギ". The byte 0x80 (ギ) is a common MIPS register
-    # operand. Real Japanese never ends kanji+さ with ギ (惜さない, not 惜さギ).
+    # Rule 14: Single kanji + hiragana + MIPS marker (3 chars)
+    # e.g., "惜さギ", "我さギ", "火さI", "地おI". The byte 0x80 (ギ) or an
+    # uppercase ASCII (I, J, C, G = MIPS register names) follow kanji+hiragana.
+    # Real Japanese never ends kanji+hiragana with ギ or a bare uppercase letter.
     if (len(stripped) == 3
             and '\u4e00' <= stripped[0] <= '\u9fff'
-            and stripped[1] == 'さ'
-            and stripped[2] == 'ギ'):
-        return True
+            and '\u3040' <= stripped[1] <= '\u309f'):
+        if stripped[2] == 'ギ' or (stripped[2].isupper() and stripped[2].isascii()):
+            return True
 
     # Rule 15: Long text (>30 chars) with 2-char pair repeating 20+ times
     # e.g., "ゆりるぃをハぐヅじヅどセへセへセへセへ..." — MIPS opcode stream
     # where the same instruction pair decodes to the same character pair
     # repeatedly. Real dialogue never has a pair repeating this many times.
+    # Sample pairs from both the start and end of the string to catch
+    # repeating tails (e.g., "...トにトにトにトにト").
     if len(stripped) > 30:
-        for i in range(min(20, len(stripped) - 1)):
+        # Sample positions: first 10 + last 10
+        sample_positions = list(range(min(10, len(stripped) - 1)))
+        tail_start = max(10, len(stripped) - 11)
+        sample_positions.extend(range(tail_start, len(stripped) - 1))
+        seen_pairs = set()
+        for i in sample_positions:
             pair = stripped[i:i + 2]
-            if pair[0] == pair[1]:
+            if pair in seen_pairs or pair[0] == pair[1]:
+                continue
+            seen_pairs.add(pair)
+            if any(c in '、。！？ー…っッ' for c in pair):
                 continue
             count = sum(
                 1 for j in range(len(stripped) - 1)
@@ -662,6 +711,56 @@ def _is_garbage_text(text):
     # replicated across chunks always produce the same decoded text.
     if stripped in SHARED_BLOCK_ARTIFACTS:
         return True
+
+    # Rule 17: XxXxY pointer table pattern — 5-char strings where the first
+    # 2-char pair repeats as chars 2-3, followed by a single terminator.
+    # Pointer tables store 3 address words (6 bytes), and when the 4-byte
+    # address portion decodes as text, the two 16-bit pointer halves produce
+    # identical 2-char pairs. The 5th char is a fixed table terminator byte.
+    # Terminators: ボ (0xAC), せ (0x41). チ (0x61) already in blocklist.
+    # Real onomatopoeia uses grammatical particles (と/に/の), not ボ/せ.
+    POINTER_TABLE_TERMINATORS = {'ボ', 'せ'}
+    if (len(stripped) == 5
+            and stripped[0:2] == stripped[2:4]
+            and stripped[4] in POINTER_TABLE_TERMINATORS):
+        return True
+
+    # Rule 18: Trailing uppercase ASCII letter after kana/kanji text
+    # e.g., "火さI", "地おI", "タギタザタギタザG", "…シ…シーサ…サーサーサーサ…シI"
+    # MIPS register names (I, J, C, G) appear as uppercase ASCII at the end
+    # of decoded text. Real Japanese dialogue never ends with a bare uppercase
+    # ASCII letter — game terms use consecutive uppercase (HP, MP, BGM).
+    # Exempt: rank/level patterns (レベルD, ランクA, クラスS, タイプB, グレードA).
+    if (len(stripped) >= 3
+            and stripped[-1].isupper() and stripped[-1].isascii()
+            and any('\u3040' <= c <= '\u309f' or '\u30a0' <= c <= '\u30ff'
+                    or '\u4e00' <= c <= '\u9fff'
+                    for c in stripped[:-1])):
+        # Exempt if the letter follows another uppercase (HP, MP)
+        if stripped[-2].isupper() and stripped[-2].isascii():
+            pass
+        # Exempt rank/level patterns ending with a single letter grade
+        elif re.search(r'(レベル|ランク|クラス|タイプ|グレード)[A-Z]$', stripped):
+            pass
+        else:
+            return True
+
+    # Rule 19: Padding region mixed-script gibberish — mixed katakana/kanji
+    # with ASCII letters or [opt] control codes. Padding region entries
+    # (opcode 0x00A0) that contain ASCII letters mixed with kana are always
+    # binary data, never real dialogue. Checked externally via scan context.
+    # (This is a text-level check; the scan code passes an is_padding flag.)
+    if '[opt]' in text and len(stripped) >= 8:
+        has_ascii_lower = any(c.islower() and c.isascii() for c in stripped)
+        has_kana = any('\u3040' <= c <= '\u309f' or '\u30a0' <= c <= '\u30ff'
+                       for c in stripped)
+        if has_ascii_lower and has_kana:
+            return True
+
+    # Rule 20: REMOVED — Short hiragana fragment detection had too many
+    # false positives (うむ, そうか, ならば, あのね, いちご, etc.).
+    # The specific garbage entries (ずもよ, がゆせ, りちよ, etc.) are now
+    # caught by the SHARED_BLOCK_ARTIFACTS blocklist (Rule 16) instead.
 
     return False
 

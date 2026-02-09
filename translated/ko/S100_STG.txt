@@ -1,3 +1,12 @@
+# S100.STG — 1310 dialogues, 1195 templates (25 bare, 2 missed, 75 orphan menus)
+
+  0x000B36F6 [0x00B0] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
+  0x000B3CA6 [0x00B0] [script:ED 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
+  0x000B3CD0 [0x00B0] [script:02 03][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x000B3CFA [0x00B0] [script:18 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
+  0x000B3D26 [0x00B0] [script:2B 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x000B3D6E [0x00B0] [script:51 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+  --- context: 0x00B0 -> 0x8006 ---
   0x000B4516 [0x8006] [script:16 07]큰 도시네
   0x000B4564 [0x8006] [script:44 07]알디아의 수도니까,[delay:15]그래서
   --- context: 0x8006 -> 0x8005 ---
@@ -7,6 +16,7 @@
   0x000B4908 [0xFFFE] [script:10 09]알디아 만세~
   0x000B4944 [0xFFFE] [script:32 09]마지막으로, 갈아노 님 만세~
   0x000B498E [0xFFFE] [script:50 09]으윽
+  0x000B49C4 [0xFFFE] [script:6D 09]술 냄새~
   --- context: 0xFFFE -> 0x0006 ---
   0x000B4A52 [0x0006] [script:B8 09]으으, 술이 깨버렸잖아
   --- context: 0x0006 -> 0xFFFE ---
@@ -29,8 +39,11 @@
   0x000B4F5C [0xFFFE] [script:4C 0C]이제 와서 로말리아 원조 없이 살아[br]가려는 놈은 소수파라고
   0x000B4FBC [0xFFFE] [script:72 0C]인간은 편한 게 제일 좋으니까
   0x000B5022 [0xFFFE] [script:A6 0C]오, 엘크 아니야
-  0x000B50ED [0xFFFE] [script:00 3C]어, 티켓이 없으면[br]회장에 못 들어가
+  0x000B5030 [0xFFFE] [script:F2 50]식전을 보러 온 거야?
+  0x000B50B6 [0xFFFE] [script:0D 0D]일부러 식전 보러 돌아온 거야?[br]그럼 아마 비비가가 티켓[br]갖고 있을 거야
   0x000B51C0 [0xFFFE] [script:7D 0D]뭔가 식전이 큰일 났었다며
+  0x000B51E0 [0xFFFE] [script:F2 50]식전은 볼 수 있었어?
+  0x000B5264 [0xFFFE] [script:CB 0D]나도 갔으면 좋았을까
   0x000B5274 [0xFFFE] [script:1F 01]다치지 않아서 다행이네
   0x000B5314 [0xFFFE] [script:17 0E]미리아? 몰라
   0x000B5352 [0xFFFE] [script:42 0E]예쁜 아가씨라면[br]내가 모를 리가 없는데
@@ -49,8 +62,10 @@
   --- context: 0x8016 -> 0x8005 ---
   0x000B56B0 [0x8005] [script:E3 0F]가보자
   0x000B576C [0x8005] [script:4E 10]비비가라면 마을을 나가 서쪽[br]비행선 창고에 있어
-  --- context: 0x8005 -> 0xFFFE ---
-  0x000B5949 [0xFFFE] [script:00 1E]적당히 만족할 수 있으면,[br]다들 행복한 거야
+  --- context: 0x8005 -> 0x8016 ---
+  0x000B5874 [0x8016] [script:DD 10]다들 여신상이다 식전이다 떠들지만
+  --- context: 0x8016 -> 0xFFFE ---
+  0x000B5924 [0xFFFE] [script:3B 11]뒤집어 말하면 그만큼 로말리아를[br]두려워한다는 거지
   0x000B5A1C [0xFFFE] [script:A7 11]아크 일당이란 놈들은 로말리아에[br]싸움을 걸 셈인가
   0x000B5A72 [0xFFFE] [script:DA 11]아크에게 있어서의 정의, 로말리아에[br]있어서의 정의…[delay:1F]진리는 하나가 아니니까
   0x000B5AE8 [0xFFFE] [script:0D 12]아크 일당이란 놈들은 로말리아에[br]싸움을 걸 셈인가
@@ -73,15 +88,18 @@
   0x000B6156 [0xFFFE] [script:38 15]뭐였더라…
   0x000B619A [0xFFFE] [script:5C 15]어라, 점심은 아직인가…
   0x000B61EC [0xFFFE] [script:8D 15]앗, 엘크 오빠다
+  0x000B6284 [0xFFFE] [script:D5 15]오랜만이네
   0x000B628E [0xFFFE] [script:7B 6F]리아에서 보내온 거래
   0x000B6350 [0xFFFE] [script:48 16]나, 여신상이 부서졌을 때[br]히엔이 날아가는 거 봤어
+  0x000B63FA [0xFFFE] [script:9B 16]엘크 오빠가 부쉈어?
   0x000B640C [0xFFFE] [script:6A 7E]터가 돼서 세계를[br]여행할 거야
   0x000B64B4 [0xFFFE] [script:E7 16]미리아? 몰라
   0x000B64F8 [0xFFFE] [script:12 17]갈아노가 나쁜 놈이었다는 거[br]알고 있었어?
   0x000B654E [0xFFFE] [script:35 17]여기는 프로디아스 마을이야
   0x000B658E [0xFFFE] [script:59 17]프로디아스는 알디아의 수도야
   0x000B65E6 [0xFFFE] [script:91 17]곧 식전이 시작된대
-  0x000B66AF [0xFFFE] [script:00 26]꽤 나쁜 놈인 모양이야
+  0x000B65FA [0xFFFE] [script:F2 02]요즘 아크라는 악당 이름을 자주 듣는다
+  0x000B668C [0xFFFE] [script:E6 17]오늘은 가게 문 닫고[br]나도 보러 갈까
   0x000B673C [0xFFFE] [script:2F 18]어서 와, 뭐 살 거 있어?
   0x000B6792 [0xFFFE] [script:64 18]다들 기념식전, 기념식전 하면서[br]바보같이 들떠서
   0x000B67EC [0xFFFE] [script:93 18]로말리아 놈들이 호의만으로[br]물건을 보낸다고 생각하나
@@ -96,7 +114,7 @@
   0x000B6B2A [0xFFFE] [script:30 1A]실력자가 마피아와 통한다는 건[br]놀랄 일도 아니야
   0x000B6B84 [0xFFFE] [script:5E 1A]갈아노 녀석이 해온 일은[br]그 정도가 아닐 것 같은데
   0x000B6BF0 [0xFFFE] [script:93 1A]나도 아빠한테 부탁해서[br]데려가 달라고 할까
-  0x000B6C9A [0xFFFE] [script:42 08]데려가 달라고[br]말해뒀는데
+  0x000B6C90 [0xFFFE] [script:DF 1A]기념식전
   0x000B6D2E [0xFFFE] [script:2A 1B]언니도 갈 거야?
   0x000B6DFA [0xFFFE] [script:92 1B]아빠 위로 여신상이[br]무너져 내렸대
   0x000B6E48 [0xFFFE] [script:B9 1B]아빠가 아니었으면[br]못 피했을 거래
@@ -104,6 +122,7 @@
   0x000B6EF6 [0xFFFE] [script:12 1C]엄마가, 나만 없었으면[br]진작 이혼했을 거래
   0x000B6F48 [0xFFFE] [script:31 1C]이혼이 뭐야?
   0x000B6F96 [0xFFFE] [script:65 1C]우리 집 사람들 놀기만 해서 걱정이야
+  0x000B7034 [0xFFFE] [script:B5 1C]오늘도 집에 안 들여보내 줄 거니까!
   0x000B704C [0xFFFE] [script:F0 B9]장까지 가버린 건가
   0x000B70DA [0xFFFE] [script:FE 1C]나한테 가게도 아이도 떠맡기고…
   --- context: 0xFFFE -> 0x800D ---
@@ -118,7 +137,8 @@
   --- context: 0x8009 -> 0x800A ---
   0x000B736A [0x800A] [script:4C 1E]하지만 난 로말리아라는 나라는[br]별로 좋아하지 않아
   --- context: 0x800A -> 0x8009 ---
-  0x000B73C0 [0x8009] [script:A9 00]뭐, 준다는 걸 거절하는 것도[br]실례지
+  0x000B73C2 [0x8009] [script:90 1E]뭐, 준다는 물건을 거절하는 것도[br]실례니까
+  0x000B73E8 [0x8009] [script:F1 21]기념식전인가..[delay:2E]나는 일부러[br]보러 갈 마음은 안 드는구만
   --- context: 0x8009 -> 0xFFFE ---
   0x000B74C6 [0xFFFE] [script:EF 1E]흔적도 없구나
   --- context: 0xFFFE -> 0x8009 ---
@@ -136,8 +156,10 @@
   --- context: 0x8009 -> 0x800A ---
   0x000B7770 [0x800A] [script:4A 20]모르겠다, 나중에 정 떨어져도
   --- context: 0x800A -> 0x8009 ---
-  0x000B77BC [0x8009] [script:A9 00]너는 안 보러 가? 기념식전
+  0x000B77BE [0x8009] [script:78 20]너는 보러 안 가? 기념식전
+  0x000B77D8 [0x8009] [script:0F 2B]슬슬 가게로 돌아갈까
   --- context: 0x8009 -> 0xFFFE ---
+  0x000B785A [0xFFFE] [script:BC 20]엄마가 엄청 화났을 테니
   0x000B78EC [0xFFFE] [script:07 21]사실 식전 보러 갔었어
   --- context: 0xFFFE -> 0x800A ---
   0x000B7932 [0x800A] [script:34 21]그랬더니 그 소동이잖아, 급히[br]도망치려다가 넘어져서
@@ -150,9 +172,10 @@
   0x000B7B1E [0xFFFE] [script:28 22]요즘 우리 마누라가 내가[br]일 빼먹어도 안 화내
   0x000B7B74 [0xFFFE] [script:4C 22]덕분에 놀기 좋아[br]야호!
   0x000B7BD6 [0xFFFE] [script:94 22]어머,[delay:10]어머,[delay:10]엘크[br][delay:1F]오랜만이네
+  0x000B7C92 [0xFFFE] [script:D8 22]도대체 어디 갔다 온 거야
   0x000B7CF2 [0xFFFE] [script:23 23]언제까지나 헌터 같은[br]위험한 일 하면 안 돼
   0x000B7DEC [0xFFFE] [script:9C 23]아 엘크, 무사했구나[br]다행이야
-  0x000B7EA3 [0xFFFE] [script:24 09]사람은 아무도 안 나왔다고[br]들었는데 역시 걱정했어
+  0x000B7EA2 [0xFFFE] [script:00 24]부상자는 한 명도 없었다고[br]들었지만 역시 걱정했어
   0x000B7F7E [0xFFFE] [script:57 24]미리아? 오른쪽 방에 이사 온[br]지나한테 물어봐
   0x000B7FD8 [0xFFFE] [script:80 24]지나 씨는 또[br]이사 갔어
   0x000B802A [0xFFFE] [script:AA 24]우리 할아버지도[br]완전히 치매가 와서…
@@ -160,6 +183,9 @@
   0x000B8152 [0xFFFE] [script:3B 25]정말 저 사람은 중얼중얼・・
   --- context: 0xFFFE -> 0x800D ---
   0x000B819A [0x800D] [script:61 25]아, 어서 오세요[br]뭘로 드릴까요?
+  --- context: 0x800D -> 0x00A9 ---
+  0x000B81E6 [0x00A9] [script:90 25][box:system]어떻게 하시겠습니까?[br][opt]일반 배[br][opt]디버그 배[box:close]
+  --- context: 0x00A9 -> 0x800D ---
   0x000B8734 [0x800D] [script:2D 28]어서 오세요[br]뭘로 드릴까요?
   0x000B8B2E [0x800D] [script:27 2A]어서 오세요 뭘로 드릴까요?
   --- context: 0x800D -> 0x800E ---
@@ -171,7 +197,21 @@
   0x000BA9FE [0x8005] [script:90 39]일단 거기서 상처 치료하자
   0x000BAA44 [0x8005] [script:B1 39]잠깐만 참아줘
   0x000BC748 [0x8005] [script:2D 48]응~?
-  --- context: 0x8005 -> 0x8009 ---
+  --- context: 0x8005 -> 0x00A9 ---
+  0x000BC77E [0x00A9] [script:57 48]이 아이를 데려가시겠습니까?[br][opt]네[br][opt]아니오
+  --- context: 0x00A9 -> 0x00B0 ---
+  0x0016E1DE [0x00B0] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
+  0x0016E78E [0x00B0] [script:ED 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
+  0x0016E7B8 [0x00B0] [script:02 03][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x0016E7E2 [0x00B0] [script:18 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
+  0x0016E80E [0x00B0] [script:2B 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x0016E856 [0x00B0] [script:51 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+  --- context: 0x00B0 -> 0x00B4 ---
+  0x00172068 [0x00B4] [script:5A 1F]여신 파괴 전은 「0～11」, 통상 처리는 「12～」
+  --- context: 0x00B4 -> 0x00A9 ---
+  0x0017222A [0x00A9] [script:3F 20][box:system]일기장이 있습니다. 기록하겠습니까?[br][opt]네[br][opt]아니오[box:close]
+  --- context: 0x00A9 -> 0x8009 ---
+  0x00172482 [0x8009] [script:63 21]자[br]카운터에서 일 이야기를 들어와라
   0x00172A6E [0x8009] [script:56 24]빨리 다녀와라, 나는 여기서 기다릴게
   0x00172ACE [0x8009] [script:85 24]일 내용은 들어온 것 같군
   0x00172B16 [0x8009] [script:A0 24]응
@@ -184,9 +224,15 @@
   0x00172C14 [0x8000] [script:2D 25]알았어, 알았어[br]일 끝나면 줄게
   --- context: 0x8000 -> 0x8009 ---
   0x00172C66 [0x8009] [script:53 25]그런 것보다, 카운터에서 기록하고 왔어?
+  --- context: 0x8009 -> 0x00A9 ---
+  0x00172CB2 [0x00A9] [script:76 25][opt]물론이지![br][opt]그게 뭔데?
+  --- context: 0x00A9 -> 0x8009 ---
   0x00172D04 [0x8009] [script:A1 25]방법은 하얀 책 앞에서 [FF:06 03 01]버튼이야
   0x00172D4E [0x8009] [script:C0 25]빨리 끝내고 와
   0x00172D94 [0x8009] [script:E5 25]출발해도 되는 거지?
+  --- context: 0x8009 -> 0x00A9 ---
+  0x00172DD6 [0x00A9] [script:08 26][opt]물론이지![br][opt]역시 잠깐만
+  --- context: 0x00A9 -> 0x8009 ---
   0x00172E28 [0x8009] [script:32 26]뭐야, 역시 아직 기록 안 했어?
   0x00172E74 [0x8009] [script:52 26]그럼, 가자
   0x00172EC6 [0x8009] [script:83 26]불꽃술사 엘크군[br]늦었잖아
@@ -237,7 +283,9 @@
   0x0017375C [0x8000] [script:D0 2A]그렇게 말하지 마,[br]좀 들어볼래?
   --- context: 0x8000 -> 0x8007 ---
   0x001737AC [0x8007] [script:F2 2A]아크 더 래드 2 입문 강좌
+  --- context: 0x8007 -> 0x00A9 ---
   0x001737F0 [0x00A9] [script:29 2B][opt]싸우는 법 "공격"[br][opt]싸우는 법 "아이템"[br][opt]주의 "반격"[br][opt]됐어
+  --- context: 0x00A9 -> 0x8007 ---
   0x0017386A [0x8007] [script:62 2B]공격할 때는 이동해서 상대 옆에 가서[br]상대 쪽을 보고 [FF:06 03 01]야
   0x001738D0 [0x8007] [script:8D 2B]단, 무기에 따라서는[br]떨어진 곳에서도 공격할 수 있어
   0x00173926 [0x8007] [script:B5 2B]아, 내가 가진 창도[br]그런 무기 중 하나야
@@ -378,10 +426,10 @@
   0x0017650C [0x8001] [script:A4 41]야야, 거긴 출입금지야
   0x00176554 [0x8001] [script:CE 41]들어갈 수 있는 건 길드 포인트[br]250 이상 헌터뿐이야
   0x00176706 [0x8001] [script:A1 42]아크 더 래드 2 입문 강좌 2야
+  --- context: 0x8001 -> 0x00A9 ---
   0x0017674E [0x00A9] [script:CB 42][opt]조작의 기본[br][opt]배틀의 기본[br][opt]됐어
   0x001767B0 [0x00A9] [script:11 43][opt]조작의 기본: 전투 1[br][opt]조작의 기본: 전투 2[br][opt]조작의 기본: 전투 3[br][opt]됐어
-  0x00176B70 [0x00A9] [script:E6 44][opt]배틀의 기본: 공격 방향[br][opt]배틀의 기본: 무기 특성[br][opt]됐어
-  --- context: 0x8001 -> 0x8007 ---
+  --- context: 0x00A9 -> 0x8007 ---
   0x0017683A [0x8007] [script:51 43]전투가 시작되면 우선 [FF:06 04 01]를 눌러서[br]커서를 [FF:06 05 01]로 움직여 맵 전체를[br]잘 둘러봐
   0x001768AE [0x8007] [script:7F 43]지형이나 적의 수를 잘 보고[br]작전을 세우면 유리하게 싸울 수 있어
   0x0017690E [0x8007] [script:B3 43]자기 턴일 때 [FF:06 01 01]를 누르면[br]그 캐릭터의 행동이 끝나버려
@@ -390,6 +438,9 @@
   0x00176A36 [0x8007] [script:3F 44]3번째 줄의 "확인 메시지"를[br]켜면 OK야
   0x00176A8E [0x8007] [script:7A 44][FF:06 02 01]로 윈도우를 열고 "특수능력"을 선택하면[br]그때 캐릭터가 쓸 수 있는 능력이 표시돼
   0x00176B00 [0x8007] [script:B0 44]거기서 [FF:06 05 01] 상하로 능력을[br][FF:06 05 01] 좌우로 레벨을 골라서[br][FF:06 03 01]로 실행이야
+  --- context: 0x8007 -> 0x00A9 ---
+  0x00176B70 [0x00A9] [script:E6 44][opt]배틀의 기본: 공격 방향[br][opt]배틀의 기본: 무기 특성[br][opt]됐어
+  --- context: 0x00A9 -> 0x8007 ---
   0x00176BE6 [0x8007] [script:2D 45]공격 방향은 중요해, 왜냐면[br]어느 쪽에서 공격하냐에 따라 데미지나[br]반격 여부가 달라지거든
   0x00176C66 [0x8007] [script:62 45]정면이면 반격당할 확률이 가장 높고[br]주는 데미지도 작은 경우가 많아
   0x00176CD0 [0x8007] [script:96 45]반대로 뒤로 돌아가면 가장 유리해서[br]데미지가 크고 반격을 가장 안 받아
@@ -399,7 +450,9 @@
   0x00176E50 [0x8007] [script:58 46]예를 들어 창은 검에 비해 공격력은 떨어지지만[br]정면 2칸까지 공격 범위가 넓어져
   0x00176EBC [0x8007] [script:8E 46]줄 선 적을 꿰뚫거나[br]반격 안 당하게 1칸[br]떨어져서 공격할 수 있어
   0x00176F9A [0x8007] [script:E2 46]뭐?
-  --- context: 0x8007 -> 0xFFFE ---
+  --- context: 0x8007 -> 0x00A9 ---
+  0x00176FD0 [0x00A9] [script:0C 47]이 아이를 데려가시겠습니까?[br][opt]네[br][opt]아니오
+  --- context: 0x00A9 -> 0xFFFE ---
   0x00177B38 [0xFFFE] [script:BE 4C]네가 길드 포인트[br]250을 넘긴 헌터야?
   --- context: 0xFFFE -> 0x8002 ---
   0x00177B88 [0x8002] [script:E9 4C]나 여기서 오래 일했는데[br]그런 놈은 처음 봐
@@ -408,7 +461,23 @@
   --- context: 0x8002 -> 0x8001 ---
   0x00177C82 [0x8001] [script:5E 4D]뒤에 있는 아저씨한테 말 들어
   0x00177D90 [0x8001] [script:EB 4D]싼티 나는 얼굴[opt]답게[br]현상금도 싸군…
-  --- context: 0x8001 -> 0x800C ---
+  --- context: 0x8001 -> 0x00B4 ---
+  0x001782B0 [0x00B4] [script:93 50][box:system]이[opt]름[opt]골자[opt][opt][opt][opt]스켈레톤[br]보[opt]상[opt]540G[br]장소[opt]인디고스 북쪽 폐허의 마을[br]특기[opt]차지
+  0x00178324 [0x00B4] [script:CB 50][box:system]이[opt]름[opt]리랜드[opt][opt]소드맨[br]보[opt]상[opt]990G[br]장소[opt]인디고스 북쪽 폐허의 마을[br]특기[opt]?
+  0x00178394 [0x00B4] [script:04 51][box:system]이[opt]름[opt]부시[opt][opt][opt]양식 헤모지[br]보[opt]상[opt]1350G[br]장소[opt]윌의 바위[br]특기[opt]헤모지화
+  0x00178410 [0x00B4] [script:3D 51][box:system]이[opt]름[opt]발자크[opt][opt]매지션[br]보[opt]상[opt]1755G[br]장소[opt]서 알디아[br]특기[opt]?
+  0x0017846A [0x00B4] [script:6E 51][box:system]이[opt]름[opt]발자크[opt][opt]매지션[br]보[opt]상[opt]1755G[br]장소[opt]서 알디아 돌아오지 못하는 숲[br]특기[opt]?
+  0x001784DA [0x00B4] [script:A7 51][box:system]이[opt]름[opt]메난[opt][opt]자이언트마미[br]보[opt]상[opt]1125G[br]장소[opt]야고스 섬 봉인의 유적[br]특기[opt]?
+  0x0017854C [0x00B4] [script:D8 51][box:system]이[opt]름[opt]티아누스[opt]위저드[br]보[opt]상[opt]2025G[br]장소[opt]?[br]특기[opt]?
+  --- context: 0x00B4 -> 0x00A9 ---
+  0x00231C9E [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
+  0x00232242 [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
+  0x0023226C [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x00232296 [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
+  0x002322C2 [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x0023230A [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+  --- context: 0x00A9 -> 0x800C ---
+  0x00233CB8 [0x800C] [script:15 10]여기는 대장간이야
   0x00233CF6 [0x800C] [script:41 10]돈 내고 무기나 방어구[br]아이템을 강화할 수 있는 곳이야
   0x00233D4E [0x800C] [script:69 10]그리고 효과를 모르는[br]아이템도 조사해 줄게
   0x00233D9E [0x800C] [script:87 10]이건 서비스야
@@ -419,24 +488,45 @@
   0x00233FCC [0x800C] [script:A4 11]야야, 거긴 출입금지야
   --- context: 0x800C -> 0x800A ---
   0x00234066 [0x800A] [script:EA 11]어서 와
+  --- context: 0x800A -> 0x00A9 ---
+  0x002340A0 [0x00A9] [script:19 12][box:system]어떻게 하시겠습니까?[br][opt]일반 배[br][opt]디버그 배[box:close]
+  --- context: 0x00A9 -> 0x800A ---
   0x00234830 [0x800A] [script:CE 15]뭐?
-  --- context: 0x800A -> 0xFFFE ---
+  --- context: 0x800A -> 0x00A9 ---
+  0x00234868 [0x00A9] [script:F8 15]이 아이를 데려가시겠습니까?[br][opt]네[br][opt]아니오
+  --- context: 0x00A9 -> 0xFFFE ---
   0x002348EE [0xFFFE] [script:35 16]네가 길드에서 온 사람이야?
   --- context: 0xFFFE -> 0x800C ---
   0x00234936 [0x800C] [script:5E 16]요즘 도둑에게 자주 습격당해서[br]곤란해
   0x00234988 [0x800C] [script:84 16]그래서 자네들에게[br]퇴치해 달라는 거야
+  --- context: 0x800C -> 0x00A9 ---
+  0x002349D4 [0x00A9] [script:AA 16]준비됐어?[br][opt]네[br][opt]아니오
+  --- context: 0x00A9 -> 0x800C ---
   0x00234A2C [0x800C] [script:D1 16]준비되면 말해줘
+  --- context: 0x800C -> 0x00B4 ---
+  0x00234B4A [0x00B4] [script:5D 17]밤의 대장장이
+  --- context: 0x00B4 -> 0x800C ---
   0x00234BA2 [0x800C] [script:92 17]도둑 퇴치라.[delay:15].[delay:15].[delay:15]
   --- context: 0x800C -> 0x8014 ---
   0x00234BF4 [0x8014] [script:B9 17]나타나 주지 않으면[br]잡을 수가 없네
   0x00234C42 [0x8014] [script:D8 17](달그락)
   --- context: 0x8014 -> 0x8015 ---
-  0x00234C7C [0x8015] [script:F3 17]!?
+  0x00234C7C [0x8015] [script:F3 17]！？
   --- context: 0x8015 -> 0x8014 ---
   0x00234CB2 [0x8014] [script:0F 18]2층인가?
   0x00234E5A [0x8014] [script:E3 18]누구야!
   0x00234E9A [0x8014] [script:02 19]쳇!
-  --- context: 0x8014 -> 0xFFFE ---
+  --- context: 0x8014 -> 0x00A9 ---
+  0x002EE902 [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
+  0x002EEEA6 [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
+  0x002EEED0 [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x002EEEFA [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
+  0x002EEF26 [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x002EEF6E [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+  --- context: 0x00A9 -> 0x8001 ---
+  0x002EF736 [0x8001] [script:20 07]어서오세요
+  0x002EF78A [0x8001] [script:4B 07]어이[opt]마스터
+  --- context: 0x8001 -> 0xFFFE ---
   0x002EF800 [0xFFFE] [script:8D 07]엘크…?[br][delay:3D]엘크잖아!
   --- context: 0xFFFE -> 0x8001 ---
   0x002EF84A [0x8001] [script:AD 07]언제 돌아온 거야!?
@@ -483,7 +573,7 @@
   0x002F063E [0x8015] [script:A6 0E]수고했어
   0x002F081A [0x8015] [script:97 0F]생김새는 이런 느낌이야
   0x002F0862 [0x8015] [script:BA 0F]다시 찾아와 줘
-  0x002F08AA [0x8015] [script:D8 0F]??
+  0x002F08AA [0x8015] [script:D8 0F]？？
   --- context: 0x8015 -> 0xFFFE ---
   0x002F08E6 [0xFFFE] [script:FA 0F]수고했어
   0x002F092A [0xFFFE] [script:19 10]고마워
@@ -505,6 +595,7 @@
   --- context: 0x8000 -> 0xFFFE ---
   0x002F0D50 [0xFFFE] [script:34 12]외지인이 프로디아스에 웬일이야?
   0x002F0D98 [0xFFFE] [script:5E 12]뭐 대충 여신상이나[br]보러 온 거겠지만…
+  0x002F0DEC [0xFFFE] [script:81 12]프로디아스도 시끄러워지겠군…
   0x002F0E38 [0xFFFE] [script:B2 12]오오, 엘크[br]설마 너도 식전 보러 온 건[br]아니겠지
   0x002F0E94 [0xFFFE] [script:CE 12]왜?
   --- context: 0xFFFE -> 0x8000 ---
@@ -531,10 +622,13 @@
   0x002F1454 [0xFFFE] [script:B7 15]딸꾹…낮부터 마시기만 하면 안 돼
   0x002F149E [0xFFFE] [script:DD 15]알고는 있어,[br]근데 못 끊겠어
   0x002F1516 [0xFFFE] [script:1C 16]와하하하![br]여신상이 벌써 완성됐대
+  0x002F1568 [0xFFFE] [script:40 16]알디아의 더 큰 번영을 위해…
   0x002F15B0 [0xFFFE] [script:5E 16]건배!!
   0x002F15F0 [0xFFFE] [script:8B 16]와하하하![br]여신상이 부서져도 로말리아가 있잖아
+  0x002F1646 [0xFFFE] [script:AF 16]알디아의 더 큰 번영을 위해…
   0x002F168E [0xFFFE] [script:CD 16]건배!!
   0x002F16CE [0xFFFE] [script:FD 16]와하하하![br]로말리아가 나쁜 나라라도[br]우린 돈이 있잖아
+  0x002F172A [0xFFFE] [script:21 17]알디아의 더 큰 번영을 위해…
   0x002F1772 [0xFFFE] [script:3F 17]건배!!
   0x002F17C0 [0xFFFE] [script:63 17]우후
   0x002F17F6 [0xFFFE] [script:8F 17]왠지 좀[br]취한…[delay:2E]것・[delay:1F]같・[delay:1F]아
@@ -569,7 +663,18 @@
   0x002F1D52 [0x8000] [script:37 1A]아아~!![br]뭐야아아~, 너어어~!!
   --- context: 0x8000 -> 0xFFFE ---
   0x002F1DA2 [0xFFFE] [script:63 1A](싫어~, 술취한 사람…)
-  --- context: 0xFFFE -> 0x8005 ---
+  0x002F1DB4 [0xFFFE] [script:F0 06](완전히 취해있어…)
+  --- context: 0xFFFE -> 0x00A0 ---
+  0x003A087E [0x00A0] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
+  0x003A0E22 [0x00A0] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
+  0x003A0E4C [0x00A0] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x003A0E76 [0x00A0] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
+  0x003A0EA2 [0x00A0] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x003A0EEA [0x00A0] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+  0x003A10AC [0x00A0] [script:1C 04]그만둬!!
+  0x003A10E0 [0x00A0] [script:38 04]놔 줘!!
+  --- context: 0x00A0 -> 0x8005 ---
+  0x003A10E4 [0x8005] [script:0C 13]줘!!
   0x003A112E [0x8005] [script:65 04]후우・[delay:0B]・[delay:0B]・[delay:0B]
   0x003A117A [0x8005] [script:87 04][box:speech]또 옛날 꿈
   0x003A11BE [0x8005] [script:B6 04]・[delay:0B]・[delay:0B]・[delay:0B]오늘 밤은[br]잠들 수 없겠네
@@ -586,24 +691,57 @@
   0x003A24DC [0x8005] [script:3C 0E]뭐뭐, 그건 그렇고 빨리 준비해
   --- context: 0x8005 -> 0x8006 ---
   0x003A2564 [0x8006] [script:7A 0E]준비됐어?
+  --- context: 0x8006 -> 0x00B0 ---
+  0x003A25A0 [0x00B0] [script:9D 0E][opt]물론![br][opt]잠깐만
+  --- context: 0x00B0 -> 0x8006 ---
   0x003A2644 [0x8006] [script:F3 0E]빨리 끝내,[br]사건은 안 기다려준다고
   0x003A269A [0x8006] [script:14 0F]좋아 가자
-  0x003A2E62 [0x8006] [script:F6 12]!!
-  --- context: 0x8006 -> 0x8005 ---
+  --- context: 0x8006 -> 0x00B0 ---
+  0x003A2E3C [0x00B0] [script:EB 12][br]엘크는 서랍을 열었다
+  --- context: 0x00B0 -> 0x8006 ---
+  0x003A2E62 [0x8006] [script:F6 12]！！
+  --- context: 0x8006 -> 0x00B0 ---
+  0x003A2E98 [0x00B0] [script:1C 13][br]엘크는 「약초」를 손에 넣었다
+  0x003A2ECC [0x00B0] [script:33 13][br]엘크는 서랍을 열었다
+  --- context: 0x00B0 -> 0x8005 ---
   0x003A2EF6 [0x8005] [script:43 13]이젠 아무것도 없구나
+  --- context: 0x8005 -> 0x00B0 ---
+  0x003A2F34 [0x00B0] [script:6F 13][br]엘크는 옷장에서[br]「천 옷」을 꺼냈다
+  --- context: 0x00B0 -> 0x8005 ---
   0x003A2F6C [0x8005] [script:89 13]선인장을 보면[br]태어나 자란 마을이 떠올라
   0x003A2FBE [0x8005] [script:B0 13]지금은 불타서 사라진[br]피르카 마을을
-  0x003A3038 [0x8005] [script:E1 13]!!
+  --- context: 0x8005 -> 0x00B0 ---
+  0x003A3014 [0x00B0] [script:D6 13][br]엘크는 통을 조사했다
+  --- context: 0x00B0 -> 0x8005 ---
+  0x003A3038 [0x8005] [script:E1 13]！！
+  --- context: 0x8005 -> 0x00B0 ---
+  0x003A306E [0x00B0] [script:06 14][br]엘크는 「돌」을 손에 넣었다
+  0x003A30A0 [0x00B0] [script:1C 14][br]엘크는 통을 조사했다
+  --- context: 0x00B0 -> 0x8005 ---
   0x003A30C8 [0x8005] [script:2C 14]이젠 아무것도 없구나
-  0x003A312A [0x8005] [script:5A 14]!!
+  --- context: 0x8005 -> 0x00B0 ---
+  0x003A3106 [0x00B0] [script:4F 14][br]엘크는 통을 조사했다
+  --- context: 0x00B0 -> 0x8005 ---
+  0x003A312A [0x8005] [script:5A 14]！！
+  --- context: 0x8005 -> 0x00B0 ---
+  0x003A3160 [0x00B0] [script:80 14][br]엘크는 「약초」를 손에 넣었다
+  0x003A3194 [0x00B0] [script:96 14][br]엘크는 통을 조사했다
+  --- context: 0x00B0 -> 0x8005 ---
   0x003A31BC [0x8005] [script:A6 14]이젠 아무것도 없구나
+  --- context: 0x8005 -> 0x00B0 ---
+  0x003A31FA [0x00B0] [script:CA 14][br]프로디아스의 거리가 보인다
+  0x003A33A4 [0x00B0] [script:B0 15]문에는 판자가 박혀 있어 열리지 않게 되어 있다.[br]아무도 사용하지 않는 방인 듯하다.
+  --- context: 0x00B0 -> 0x8005 ---
   0x003A3422 [0x8005] [script:E6 15]그러고 보니 여기 2호실에[br]길드 의뢰인이 있었지…
+  --- context: 0x8005 -> 0x00B0 ---
+  0x003A3478 [0x00B0] [script:12 16]어떻게 할까…?[br][opt]내용을 들으러 가기[br][opt]나중에
+  --- context: 0x00B0 -> 0x8005 ---
   0x003A3516 [0x8005] [script:59 16]길드에서 의뢰 받고 온 사람인데요…
   0x003A356C [0x8005] [script:81 16]네, 들어오세요
   --- context: 0x8005 -> 0x801E ---
-  0x003A35C8 [0x801E] [script:AA 16]……!?
+  0x003A35C8 [0x801E] [script:AA 16]……！？
   --- context: 0x801E -> 0x801F ---
-  0x003A3690 [0x801F] [script:0D 17]……?
+  0x003A3690 [0x801F] [script:0D 17]……？
   --- context: 0x801F -> 0x8005 ---
   0x003A36D6 [0x8005] [script:37 17]뭐야, 엘크 동료잖아
   --- context: 0x8005 -> 0x801F ---
@@ -625,7 +763,10 @@
   0x003A39E6 [0x801F] [script:BE 18]뭐, 너무 실망하지 마
   0x003A3B3C [0x801F] [script:68 19]뭐야, 엘크잖아
   0x003A3C0A [0x801F] [script:CA 19]응?
-  --- context: 0x801F -> 0xFFFE ---
+  --- context: 0x801F -> 0x00B0 ---
+  0x003A3C40 [0x00B0] [script:F4 19]이 아이를 데려가겠습니까?[br][opt]네[br][opt]아니오
+  0x003A3D00 [0x00B0] [script:5A 1A][box:system]일기장이 있습니다. 기록하겠습니까?[br][opt]네[br][opt]아니오[box:close]
+  --- context: 0x00B0 -> 0xFFFE ---
   0x003A3EB0 [0xFFFE] [script:22 1B]여기가 엘크 방이구나
   --- context: 0xFFFE -> 0x8006 ---
   0x003A3EF0 [0x8006] [script:48 1B]근처에 소형 비행선도 숨겨뒀어
@@ -654,12 +795,17 @@
   --- context: 0x8006 -> 0x8005 ---
   0x003A4332 [0x8005] [script:6E 1D]집주인이 착하니까[br]말해두면 돌봐줄 거야
   0x003A4388 [0x8005] [script:8A 1D]다행이다
-  --- context: 0x8005 -> 0x8006 ---
+  --- context: 0x8005 -> 0x00B0 ---
+  0x003A4520 [0x00B0] [script:62 1E]쉬었다 가겠습니까?[br][opt]네[br][opt]아니오
+  --- context: 0x00B0 -> 0x8006 ---
   0x003A47B0 [0x8006] [script:9F 1F]차타로
   --- context: 0x8006 -> 0x8005 ---
   0x003A47EE [0x8005] [script:BC 1F]마르
   0x003A4828 [0x8005] [script:DA 1F]스탠디
   0x003A4864 [0x8005] [script:F7 1F]베스
+  --- context: 0x8005 -> 0x00B0 ---
+  0x003A4936 [0x00B0] [script:6A 20]훈련할래?[br][opt]한다[br][opt]안 한다
+  --- context: 0x00B0 -> 0x8005 ---
   0x003A49A4 [0x8005] [script:99 20]개 사료야
   0x003A4A00 [0x8005] [script:CE 20]"손"을 배우면 또 줄게
   0x003A4A4C [0x8005] [script:EC 20]손!
@@ -677,7 +823,17 @@
   0x003A4F48 [0x8005] [script:71 23]엘크, 이 아이한테 이름 지어줘야 해
   --- context: 0x8005 -> 0x8006 ---
   0x003A4F8E [0x8006] [script:93 23]"마르"가 어때?
+  --- context: 0x8006 -> 0x00B0 ---
+  0x003A4FD8 [0x00B0] [script:B8 23][opt]맞아[br][opt]아닌듯
+  --- context: 0x00B0 -> 0x8006 ---
+  0x003A5018 [0x8006] [script:DB 23]그럼, 「스탠디」라고 하면 어때?
+  --- context: 0x8006 -> 0x00B0 ---
+  0x003A5068 [0x00B0] [script:00 24][opt]맞아[br][opt]아닌듯
+  --- context: 0x00B0 -> 0x8006 ---
   0x003A50A8 [0x8006] [script:1F 24]그럼 "베스"는?
+  --- context: 0x8006 -> 0x00B0 ---
+  0x003A50F0 [0x00B0] [script:44 24][opt]맞아[br][opt]아닌듯
+  --- context: 0x00B0 -> 0x8006 ---
   0x003A513E [0x8006] [script:65 24]정말!!
   0x003A5176 [0x8006] [script:85 24]그럼 엘크가 정해
   0x003A51B6 [0x8006] [script:BC 24]그래[delay:0B]・[delay:0B]・[delay:0B]・[delay:0B]・,[delay:15]그럼[br]"차타로"는 어때?
@@ -723,7 +879,8 @@
   0x003A5B3E [0x8006] [script:6A 29]어쨌든 오늘 밤은 쉬자
   --- context: 0x8006 -> 0x8005 ---
   0x003A6048 [0x8005] [script:EC 2B]후아아…잘 잤다
-  0x003A6090 [0x8005] [script:55 87]オゼヲ
+  0x003A6594 [0x8005] [script:B7 2E]「데생 입문」「나르사프 화집」…[br]뭔가 재미없어 보이는 책뿐이네
+  0x003A65CA [0x8005] [script:F0 0C]「데생 입문」, 「나르사프 화집」..?
   --- context: 0x8005 -> 0x0006 ---
   0x003A667A [0x0006] [script:0B 2F]아, 고양이 그림이다…[br]귀엽다~
   --- context: 0x0006 -> 0x8005 ---
@@ -741,7 +898,9 @@
   0x003A6958 [0xFFFE] [script:80 30]그렇군요, 약이 있으면…[br]부디 잘 부탁드려요
   0x003A69E2 [0xFFFE] [script:B6 30]………
   0x003A6A18 [0xFFFE] [script:D7 30](어두운 표정이다)
-  --- context: 0xFFFE -> 0x0006 ---
+  --- context: 0xFFFE -> 0x00A9 ---
+  0x003A6A5A [0x00A9] [script:02 31](웃겨볼까…?)[br][opt]웃긴다[br][opt]웃기지 않는다
+  --- context: 0x00A9 -> 0x0006 ---
   0x003A6AB2 [0x0006] [script:22 31]간지럼간지럼!
   0x003A6AF0 [0x0006] [script:3F 31]하하하!
   --- context: 0x0006 -> 0xFFFE ---
@@ -765,7 +924,7 @@
   0x003A6ED8 [0x8005] [script:34 33]당신을 죽여!?
   0x003A6F24 [0x8005] [script:59 33]뭐라고!!
   --- context: 0x8005 -> 0x800A ---
-  0x003A6F5E [0x800A] [script:74 33]!?
+  0x003A6F5E [0x800A] [script:74 33]！？
   --- context: 0x800A -> 0x8005 ---
   0x003A6FDC [0x8005] [script:B7 33]누구세요, 당신!?
   --- context: 0x8005 -> 0x800A ---
@@ -804,6 +963,9 @@
   0x003A74E8 [0x800A] [script:3D 36]미안해 아르웬
   --- context: 0x800A -> 0x800B ---
   0x003A7526 [0x800B] [script:5D 36]하지만 더는 나는…
+  --- context: 0x800B -> 0x00A9 ---
+  0x003A76CA [0x00A9] [script:37 37][br][br][br][br][opt][opt][opt][opt][opt][opt][opt][opt][opt]그날 밤
+  --- context: 0x00A9 -> 0x800B ---
   0x003A7708 [0x800B] [script:4D 37]호프, 또야?
   --- context: 0x800B -> 0x800A ---
   0x003A7746 [0x800A] [script:6F 37]부탁이야, 아르웬…도…망쳐…
@@ -812,7 +974,7 @@
   --- context: 0x800B -> 0x8005 ---
   0x003A7804 [0x8005] [script:CC 37]당신은 낮에…!?
   --- context: 0x8005 -> 0x800A ---
-  0x003A7864 [0x800A] [script:F7 37]!!
+  0x003A7864 [0x800A] [script:F7 37]！！
   0x003A78BA [0x800A] [script:23 38]크아아…
   0x003A7920 [0x800A] [script:56 38]가하하하
   --- context: 0x800A -> 0x800C ---
@@ -833,7 +995,7 @@
   --- context: 0x800C -> 0x8005 ---
   0x003A7CBA [0x8005] [script:28 3A]아직 생존자가 있었군
   0x003A7CFC [0x8005] [script:57 3A]하지만 얼굴 내민 건 실수였어[br]이 자리에서 해치워 줄게
-  0x003A7D5A [0x8005] [script:72 3A]!!
+  0x003A7D5A [0x8005] [script:72 3A]！！
   --- context: 0x8005 -> 0x800A ---
   0x003A7DA6 [0x800A] [script:9B 3A]그만해 주세요!!
   0x003A7DE2 [0x800A] [script:C7 3A]그녀는 나쁘지 않아요!![br]저 악령만 어떻게 할 수 있다면…
@@ -877,7 +1039,7 @@
   --- context: 0x800B -> 0x800A ---
   0x003A85C0 [0x800A] [script:AC 3E]소문은 들었어요, 엘크 씨
   --- context: 0x800A -> 0x800B ---
-  0x003A8604 [0x800B] [script:C7 3E]!?
+  0x003A8604 [0x800B] [script:C7 3E]！？
   --- context: 0x800B -> 0x8005 ---
   0x003A863A [0x8005] [script:E7 3E]이미 아셨죠…
   --- context: 0x8005 -> 0x800B ---
@@ -968,7 +1130,7 @@
   --- context: 0x800C -> 0x800B ---
   0x003A9ADC [0x800B] [script:37 49]잠깐 기다려!!
   --- context: 0x800B -> 0x8005 ---
-  0x003A9B1E [0x8005] [script:54 49]!!
+  0x003A9B1E [0x8005] [script:54 49]！！
   --- context: 0x8005 -> 0x800C ---
   0x003A9B9A [0x800C] [script:96 49]헌터 꼬마야…
   0x003A9BD8 [0x800C] [script:B8 49]좋은 데야, 방해하지 마!
@@ -1006,7 +1168,7 @@
   --- context: 0x800C -> 0x800B ---
   0x003AA1FA [0x800B] [script:C4 4C]으, 으으…
   --- context: 0x800B -> 0x800A ---
-  0x003AA234 [0x800A] [script:DF 4C]!!
+  0x003AA234 [0x800A] [script:DF 4C]！！
   --- context: 0x800A -> 0x800B ---
   0x003AA296 [0x800B] [script:13 4D]미안해요!!
   0x003AA2D2 [0x800B] [script:32 4D]내…내 탓에
@@ -1026,14 +1188,16 @@
   0x003AA54C [0x8005] [script:6C 4E]호프…
   --- context: 0x8005 -> 0x800A ---
   0x003AA584 [0x800A] [script:89 4E]아르웬…
-  --- context: 0x800A -> 0x800B ---
+  --- context: 0x800A -> 0x00A9 ---
+  0x003AA656 [0x00A9] [script:FF 4E][br][br][br][br][opt][opt][opt][opt][opt][opt]그리고 밤이 밝았다
+  --- context: 0x00A9 -> 0x800B ---
   0x003AA6FA [0x800B] [script:49 4F]정말 감사합니다
   0x003AA73E [0x800B] [script:6D 4F]게다가 의사까지 불러주시고…
   --- context: 0x800B -> 0x800A ---
   0x003AA786 [0x800A] [script:8C 4F]별거 아니야
   --- context: 0x800A -> 0x8005 ---
   0x003AA7C4 [0x8005] [script:B5 4F]그보다…빨리 그릴 수 있으면 좋겠네[br]그녀의 웃는 얼굴을!
-  0x003AA816 [0x8005] [script:D0 4F]……!
+  0x003AA816 [0x8005] [script:D0 4F]……！
   --- context: 0x8005 -> 0x800B ---
   0x003AA84C [0x800B] [script:FE 4F]지금은 아직 무리일지도 몰라요…[br]하지만 언젠가 꼭 그려 보일게요!
   --- context: 0x800B -> 0x800A ---
@@ -1044,7 +1208,7 @@
   0x003AAAB6 [0x800C] [script:29 51]살리고 싶으면 네 몸을 내놔!
   0x003AAB02 [0x800C] [script:53 51]그런…그 후에 아르웬을[br]죽일 셈이죠…?
   --- context: 0x800C -> 0x800B ---
-  0x003AAB56 [0x800B] [script:70 51]……!
+  0x003AAB56 [0x800B] [script:70 51]……！
   --- context: 0x800B -> 0x800C ---
   0x003AAB8C [0x800C] [script:8F 51]크크크, 맞아
   0x003AABCA [0x800C] [script:AD 51]잘 알았네~
@@ -1054,7 +1218,7 @@
   --- context: 0x800B -> 0x800C ---
   0x003AAC90 [0x800C] [script:1D 52]정말 안타깝겠다, 꿈 이루지 못하고[br]죽어가니까
   0x003AACE6 [0x800C] [script:3E 52]화가가 되겠다는 꿈이!
-  0x003AAD2C [0x800C] [script:5C 52]………!!
+  0x003AAD2C [0x800C] [script:5C 52]………！！
   --- context: 0x800C -> 0x800B ---
   0x003AAD64 [0x800B] [script:79 52]설, 설마…
   0x003AADEE [0x800B] [script:BD 52]그…런
@@ -1066,11 +1230,11 @@
   --- context: 0x800C -> 0x800B ---
   0x003AAF4A [0x800B] [script:6E 53]잠깐 기다려!!
   --- context: 0x800B -> 0x8005 ---
-  0x003AAF8C [0x8005] [script:8B 53]!!
+  0x003AAF8C [0x8005] [script:8B 53]！！
   --- context: 0x8005 -> 0x800C ---
   0x003AB008 [0x800C] [script:CD 53]헌터 꼬마야…
   0x003AB046 [0x800C] [script:ED 53]좀 늦었구나
-  0x003AB08A [0x800C] [script:0A 54]!!
+  0x003AB08A [0x800C] [script:0A 54]！！
   --- context: 0x800C -> 0x8005 ---
   0x003AB0C4 [0x8005] [script:2D 54]하하하, 내 승리야!!
   --- context: 0x8005 -> 0x800C ---
@@ -1101,6 +1265,9 @@
   0x003AB5D8 [0x800B] [script:B7 56]왜…나 같은 것 때문에…
   0x003AB61A [0x800B] [script:D8 56]부탁이야, 눈 떠…
   0x003AB65C [0x800B] [script:F7 56]싫어----!!
+  --- context: 0x800B -> 0x00A9 ---
+  0x003AB76C [0x00A9] [script:89 57][br][br][br][br][opt][opt][opt][opt][opt][opt][opt][opt]며칠 후…
+  --- context: 0x00A9 -> 0x800B ---
   0x003AB7AC [0x800B] [script:A1 57]정말 가는 거야?
   --- context: 0x800B -> 0x8005 ---
   0x003AB7EE [0x8005] [script:C5 57]네, 잠시 여행을 떠나려고요
@@ -1143,7 +1310,7 @@
   0x003ABFD0 [0x8005] [script:B0 5B]아, 그 얘기구나…
   --- context: 0x8005 -> 0x8006 ---
   0x003AC00C [0x8006] [script:D4 5B]여기 살던 화가는 죽었어…
-  0x003AC054 [0x8006] [script:EF 5B]!?
+  0x003AC054 [0x8006] [script:EF 5B]！？
   --- context: 0x8006 -> 0x8005 ---
   0x003AC08A [0x8005] [script:12 5C]아니, 정확히는 살해당한 거야
   --- context: 0x8005 -> 0x8006 ---
@@ -1156,6 +1323,7 @@
   0x003AC240 [0x8006] [script:F2 5C]늦었구나…[br]젠장…젠…장…
   --- context: 0x8006 -> 0x8005 ---
   0x003AC4A6 [0x8005] [script:22 5E]이 방은 아무도 안 사는 것 같군
+  0x003AC656 [0x8005] [script:F6 5E]하아~, 날씨 좋다
   --- context: 0x8005 -> 0x0006 ---
   0x003AC6B6 [0x0006] [script:27 5F]으아, 왠지 졸려지네
   0x003ACBD6 [0x0006] [script:B2 61]이 방?
@@ -1192,7 +1360,7 @@
   0x003ADE5E [0x800A] [script:08 6B]딸 잃고 슬픈 사람을[br]놀리면서 뭐가 재밌어요?
   0x003ADEC4 [0x800A] [script:30 6B]더 이상 내 마음을 어지럽히지 마세요!
   0x003ADF40 [0x800A] [script:67 6B]나가요!!
-  0x003ADF8A [0x800A] [script:89 6B]?
+  0x003ADF8A [0x800A] [script:89 6B]？
   --- context: 0x800A -> 0x8005 ---
   0x003ADFCA [0x8005] [script:AD 6B]엘크, 가자
   --- context: 0x8005 -> 0x8006 ---
@@ -1209,8 +1377,15 @@
   0x003AE6F4 [0x8006] [script:45 6F]그만해, 혼자 있게 해줘!
   --- context: 0x8006 -> 0x800A ---
   0x003AE74C [0x800A] [script:6C 6F]안녕하세요
-  0x00456643 [0x800A] [script:B5 04]く
-  --- context: 0x800A -> 0x8014 ---
+  --- context: 0x800A -> 0x00A9 ---
+  0x004661BE [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
+  0x00466762 [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
+  0x0046678C [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x004667B6 [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
+  0x004667E2 [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x0046682A [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+  --- context: 0x00A9 -> 0x8014 ---
+  0x00466B18 [0x8014] [script:B5 04]캬! 도와줘!!
   0x00466BEA [0x8014] [script:1E 05]아직도 모르겠어!!
   0x00466C28 [0x8014] [script:43 05]너희들 정도로는 상대가 안 돼!
   0x00466C76 [0x8014] [script:64 05]알,[delay:0B]알았어
@@ -1225,7 +1400,7 @@
   0x00466DCC [0x800D] [script:1E 06]지금 상공에서는 세인트디아나호가[br]착륙 준비에 들어갔다고!
   0x00466E28 [0x800D] [script:4C 06]세인트디아나호라면[br]식전 참가 요인이 타고 있을 텐데?
   --- context: 0x800D -> 0x800E ---
-  0x00466E84 [0x800E] [script:67 06]!!
+  0x00466E84 [0x800E] [script:67 06]！！
   --- context: 0x800E -> 0x800D ---
   0x00466EBA [0x800D] [script:87 06]혹시 그게 목적이야!?
   0x00466F0C [0x800D] [script:AF 06]목적이 뭐야?
@@ -1248,9 +1423,9 @@
   0x0046729E [0x800E] [script:82 08]신원은 모르지만[br]실력은 확실하다고・・・
   0x0046778C [0x800E] [script:F9 0A]좀 화려하게 했나[delay:15]・[delay:15]・[delay:15]・
   --- context: 0x800E -> 0x8000 ---
-  0x004677DE [0x8000] [script:1A 0B]・・・・・・・?
+  0x004677DE [0x8000] [script:1A 0B]・・・・・・・？
   --- context: 0x8000 -> 0x8014 ---
-  0x0046783E [0x8014] [script:44 0B]!!
+  0x0046783E [0x8014] [script:44 0B]！！
   0x00467880 [0x8014] [script:65 0B]윽!
   0x004678B6 [0x8014] [script:8A 0B]뭐야 너![delay:2E]뭐 하러 온 거야!?
   0x00467900 [0x8014] [script:AF 0B]헌터야[br]널 처리하러 왔어
@@ -1364,528 +1539,393 @@
   --- context: 0x8013 -> 0x8015 ---
   0x0046AA20 [0x8015] [script:39 24]빨리 쫓아가
   0x0046AA5E [0x8015] [script:58 24]자, 가, 가
-  --- context: 0x8015 -> 0x8006 ---
-  0x005244F0 [0x8006] [script:EF 09]저[delay:1F]・[delay:1F]・[delay:1F]계단[delay:0B]에[delay:0B]서[delay:1F]・[delay:1F]・[br][delay:1F]갑판[delay:0E]으[delay:10]로[delay:14]나[delay:1F]・[delay:1F]・[delay:1F]・
-  0x005245C8 [0x8006] [script:34 0A]・・・・・・
-  0x00524D22 [0x8006] [script:E1 0D]・・・・・・
-0x00524FB8 [0x8006] [script:3E 0F][delay:15]・[delay:15]・[delay:15]・[delay:15]기척이 느껴져[delay:15]・[delay:15]・[delay:3D]여기인가?
-0x0052508C [0x8006] [script:A8 0F][delay:15]・[delay:15]・[delay:15]・[delay:15]기척이 느껴져[delay:15]・[delay:15]・[delay:3D]여기인가?
---- context: 0x8006 -> 0x8005 ---
-0x0052572A [0x8005] [script:EE 12]뭔가 있었나 보군[br][delay:1F]나는 상황을 살펴보겠다
---- context: 0x8005 -> 0x800A ---
-0x0052577C [0x800A] [script:11 13]넌 이놈들을 감시하고 있어
-0x005257CC [0x800A] [script:31 13]넵
---- context: 0x800A -> 0x800B ---
-0x00525836 [0x800B] [script:6A 13]죄송해요, 몸이…
---- context: 0x800B -> 0x8005 ---
-0x00525874 [0x8005] [script:86 13]왜 그래
---- context: 0x8005 -> 0x800B ---
-0x0052590E [0x800B] [script:D4 13]도망쳐요
---- context: 0x800B -> 0x8006 ---
-0x00525ADE [0x8006] [script:BF 14]빨리!![delay:0B]이쪽이야
-0x00525B28 [0x8006] [script:E3 14]여기 숨어요
-0x005269FC [0x8006] [script:4A 1C]간다!!
---- context: 0x8006 -> 0x8005 ---
-0x00526A42 [0x8005] [script:6E 1C]무서워요~
---- context: 0x8005 -> 0x800A ---
-0x00526A7C [0x800A] [script:91 1C]남자라면 좀 더 의젓하게 굴어!!
---- context: 0x800A -> 0x800C ---
-0x00526AC2 [0x800C] [script:AC 1C]네~
---- context: 0x800C -> 0x800A ---
-0x00526B0C [0x800A] [script:D9 1C]이 근처부터 조사를 시작하자
---- context: 0x800A -> 0x8006 ---
-0x00526B52 [0x8006] [script:F7 1C]엘크, 부탁해
-0x00526BEA [0x8006] [script:42 1D]멈췄다
---- context: 0x8006 -> 0x8007 ---
-0x00526C28 [0x8007] [script:61 1D]부상했다
-0x00526C66 [0x8007] [script:80 1D]잠수했다
-0x00526CFC [0x8007] [script:CB 1D]전진했다
-0x00526D3A [0x8007] [script:EA 1D]후진했다
-0x00526D78 [0x8007] [script:0A 1E]좌회전했다
-0x00526DB8 [0x8007] [script:2A 1E]우회전했다
-0x00526DF8 [0x8007] [script:47 1E]!!
-0x00526E2E [0x8007] [script:6C 1E]엘크, 전방에서 거대 생물 접근
-0x00526E84 [0x8007] [script:8E 1E]뭐!?
---- context: 0x8007 -> 0x8005 ---
-0x00526F18 [0x8005] [script:DB 1E]멈춰서 어쩔 거야!!
---- context: 0x8005 -> 0x8007 ---
-0x00526F5A [0x8007] [script:FD 1E]안 돼, 피할 수 없어!!
-0x00526FF6 [0x8007] [script:4A 1F]안 돼, 부딪친다!!
-0x00527038 [0x8007] [script:68 1F]안 돼!
-
-
-0x00527070 [0x8007] [script:88 1F]점점 다가오고 있어!!
-0x005270B4 [0x8007] [script:A8 1F]좌회전!!
-0x005270F4 [0x8007] [script:C7 1F]피할 수 없어!!
-0x00527138 [0x8007] [script:E9 1F]무서워요~
---- context: 0x8007 -> 0x800A ---
-0x0052717C [0x800A] [script:0F 20]어떻게든 피한 것 같군
---- context: 0x800A -> 0x8006 ---
-0x005271C2 [0x8006] [script:2C 20]휴~
---- context: 0x8006 -> 0x8005 ---
-0x005271F8 [0x8005] [script:48 20]큰일 났네
-0x00527234 [0x8005] [script:68 20]우회전!!
---- context: 0x8005 -> 0x8007 ---
-0x00527274 [0x8007] [script:87 20]피할 수 없어!!
-0x005272B8 [0x8007] [script:A9 20]무서워요~
---- context: 0x8007 -> 0x800A ---
-0x005272F6 [0x800A] [script:CC 20]어떻게든 피한 것 같군
---- context: 0x800A -> 0x8006 ---
-0x00527346 [0x8006] [script:EE 20]휴~
---- context: 0x8006 -> 0x8005 ---
-0x0052737C [0x8005] [script:0A 21]큰일 났네
-0x00527400 [0x8005] [script:4F 21]미사일 발사!!
---- context: 0x8005 -> 0x8007 ---
-0x00527442 [0x8007] [script:6D 21]명중
-0x00527486 [0x8007] [script:92 21]안 돼!!너무 가까웠어
-0x0052751A [0x8007] [script:DB 21]안 돼!!안 통해
-0x005E2B7A [0x8007] [script:5B 04]쳇,[delay:15]어둡네・・・
---- context: 0x8007 -> 0x8005 ---
-0x005E2BD8 [0x8005] [script:84 04]거기냐!
-0x005E2C8A [0x8005] [script:E0 04]안 돼! 판딧
---- context: 0x8005 -> 0x8006 ---
-0x005E2D80 [0x8006] [script:58 05]그만해!!
-0x005E2DB8 [0x8006] [script:78 05]이 아이는 아무것도 안 했어
-0x005E2DFC [0x8006] [script:9D 05]이 아이라니, 그건 몬스터잖아
---- context: 0x8006 -> 0x8005 ---
-0x005E2E46 [0x8005] [script:C6 05]이 아이는 괜찮아[br]나한테는 거역하지 않아
---- context: 0x8005 -> 0x8006 ---
-0x005E2E94 [0x8006] [script:E1 05]!!
---- context: 0x8006 -> 0x8005 ---
-0x005E2ECA [0x8005] [script:03 06]너, 몬스터를 조종할 수 있어?
-0x005E2F0E [0x8005] [script:27 06]・[delay:0B]・[delay:0B]・[delay:0B]・
---- context: 0x8005 -> 0x8006 ---
-0x005E2F5A [0x8006] [script:45 06]그렇구나…
---- context: 0x8006 -> 0x8005 ---
-0x005E2F92 [0x8005] [script:66 06]엮이고 싶지 않은 거구나
-0x005E2FD8 [0x8005] [script:8C 06]뭐, 나도 지금 그럴 때가 아니야
-
-
-0x005E3020 [0x8005] [script:B8 06]그런데, 지금 이 배에[br]도망쳐 들어온 놈 못 봤어?
-0x005E3078 [0x8005] [script:D9 06]나는 그놈을 쫓고 있거든
-0x005E30BA [0x8005] [script:F3 06]…
---- context: 0x8005 -> 0x8006 ---
-0x005E30EE [0x8006] [script:11 07]모르는 것 같군
---- context: 0x8006 -> 0x8005 ---
-0x005E314C [0x8005] [script:46 07]당신[delay:0B]・[delay:0B]・[delay:0B]・
---- context: 0x8005 -> 0x8006 ---
-0x005E31A4 [0x8006] [script:68 07]?
---- context: 0x8006 -> 0x8005 ---
-0x005E31D8 [0x8005] [script:8A 07]나를 찾으러 온 게 아니네?
---- context: 0x8005 -> 0x8006 ---
-0x005E3220 [0x8006] [script:AA 07]무슨 뜻이야?
---- context: 0x8006 -> 0x8005 ---
-0x005E325C [0x8005] [script:C4 07]…
---- context: 0x8005 -> 0x8006 ---
-0x005E3290 [0x8006] [script:E4 07]가만히 있으면 모르잖아
---- context: 0x8006 -> 0x8005 ---
-0x005E32D0 [0x8005] [script:0F 08]・[delay:0B]・[delay:0B]・[delay:0B]나를 여기서 도망치게 해줘
---- context: 0x8005 -> 0x8006 ---
-0x005E3326 [0x8006] [script:2B 08]도망치게?
---- context: 0x8006 -> 0x8005 ---
-0x005E33EC [0x8005] [script:91 08]꺄악, 살려줘!
---- context: 0x8005 -> 0x8008 ---
-0x005E344A [0x8008] [script:C0 08]젠장, 저쪽이야!?
---- context: 0x8008 -> 0x8005 ---
-0x005E349C [0x8005] [script:EE 08]일 끝내면 돌아올게
-0x005E3DB8 [0x8005] [script:7B 0D]복도에서 비명이 들렸어!
---- context: 0x8005 -> 0x8006 ---
-0x005E3E06 [0x8006] [script:9E 0D]안 가도 돼?
-0x005E3E4C [0x8006] [script:BF 0D]그르르르르
---- context: 0x8006 -> 0x8007 ---
-0x005E3E8E [0x8007] [script:E0 0D]크르르르르
---- context: 0x8007 -> 0x8005 ---
-0x0069CD40 [0x8005] [script:97 06]왜 그래?[br]더 이상 안 도망쳐?
-0x0069CD8A [0x8005] [script:BD 06]네가 지금 몰아넣었다고 했지?
---- context: 0x8005 -> 0x8008 ---
-0x0069CDE6 [0x8008] [script:E3 06]아니야…
-0x0069CE1E [0x8008] [script:04 07]네가 유인당한 거야
-0x0069CE60 [0x8008] [script:23 07]멍청한 헌터 녀석!!
-0x0069D132 [0x8008] [script:8A 08]이건 어때!
-0x0069D16C [0x8008] [script:A6 08]크…!!
---- context: 0x8008 -> 0x8005 ---
-0x0069D1A4 [0x8005] [script:C8 08]다친 몸으로 싸울 수 있겠어?
---- context: 0x8005 -> 0x8008 ---
-0x0069D1F0 [0x8008] [script:EA 08]푸하하하하핫!!
-0x0069D2EC [0x8008] [script:6A 09]몸에 힘이 돌아온다!
---- context: 0x8008 -> 0x8005 ---
-0x0069D334 [0x8005] [script:8C 09]이제 괜찮아
-
-
---- context: 0x8005 -> 0x8006 ---
-0x0069D370 [0x8006] [script:A7 09]!?
---- context: 0x8006 -> 0x8005 ---
-0x0069D3B6 [0x8005] [script:CE 09]너는 아까 그…
-0x0069D3F4 [0x8005] [script:EF 09]이제 마음껏 싸울 수 있어
---- context: 0x8005 -> 0x8006 ---
-0x0069D43C [0x8006] [script:0F 0A]고마워!!
---- context: 0x8006 -> 0x8005 ---
-0x0069D476 [0x8005] [script:30 0A]자, 결판을 내자!
-0x0069E19C [0x8005] [script:BF 10]살려줘…
---- context: 0x8005 -> 0x8004 ---
-0x0069E1D6 [0x8004] [script:E4 10]얌전히 하면[br]목숨은 살려줄게
---- context: 0x8004 -> 0x8005 ---
-0x0069E220 [0x8005] [script:10 11]헌터즈 길드에 너를[br]넘기면 내 일은 끝이야
-0x0069E278 [0x8005] [script:2D 11]아니야!!
---- context: 0x8005 -> 0x8004 ---
-0x0069E2B2 [0x8004] [script:4F 11]그놈들은 실패를 용서하지 않아
-0x0069E2F6 [0x8004] [script:74 11]그놈들한테…[delay:0B]그놈들한테 죽어!
-0x0069E340 [0x8004] [script:92 11]그놈들이라니?
---- context: 0x8004 -> 0x8005 ---
-0x0069E37C [0x8005] [script:AC 11]…
---- context: 0x8005 -> 0x8006 ---
-0x0069E3B0 [0x8006] [script:CE 11]무서운 힘을 가진 조직이야
---- context: 0x8006 -> 0x8004 ---
-0x0069E4E4 [0x8004] [script:61 12]!?
---- context: 0x8004 -> 0x8005 ---
-0x0069E522 [0x8005] [script:89 12]죽다 만 놈이 쓸데없는 소리를 떠들고
---- context: 0x8005 -> 0x8008 ---
-0x0069E5AA [0x8008] [script:C7 12]뭐야, 너희들!
---- context: 0x8008 -> 0x8005 ---
-0x0069E5E6 [0x8005] [script:E2 12]!!
---- context: 0x8005 -> 0x8006 ---
-0x0069E61C [0x8006] [script:01 13]그 여자를 넘겨라
---- context: 0x8006 -> 0x8008 ---
-0x0069E662 [0x8008] [script:25 13]야, 무슨 상황이야?
---- context: 0x8008 -> 0x8005 ---
-0x0069E6C6 [0x8005] [script:53 13]닥쳐!
---- context: 0x8005 -> 0x8008 ---
-0x0069E702 [0x8008] [script:76 13]너무 깊이 관여하지 마
-0x0069E744 [0x8008] [script:95 13]목숨이 아까우면
-0x0069E78A [0x8008] [script:B5 13]뭐라고!
---- context: 0x8008 -> 0x8005 ---
-0x0069E872 [0x8005] [script:28 14]!!
-0x0069E8DA [0x8005] [script:63 14]어디로 도망치려는 거지?
---- context: 0x8005 -> 0x8008 ---
-0x0069E948 [0x8008] [script:94 14]크……!
---- context: 0x8008 -> 0x8005 ---
-0x0069EA18 [0x8005] [script:FB 14]으!
-0x0069EA52 [0x8005] [script:21 15]슬슬[br]포기하는 게 어때?
---- context: 0x8005 -> 0x8011 ---
-0x0069EAF8 [0x8011] [script:72 15]저…[delay:15]그쪽으로 갈게요
-
-
---- context: 0x8011 -> 0x8006 ---
-0x0069EB52 [0x8006] [script:99 15]야!!
---- context: 0x8006 -> 0x8005 ---
-0x0069EB92 [0x8005] [script:BA 15]이제 됐어,
---- context: 0x8005 -> 0x8006 ---
-0x0069EDAE [0x8006] [script:CC 16]그놈들, 보통이 아니야…
---- context: 0x8006 -> 0x8008 ---
-0x0069EDF0 [0x8008] [script:F3 16]젠장, 여기까지 와서[br]죽을 수 없어!!
-0x0069F436 [0x8008] [script:0C 1A]크…바…보…
-0x0069F470 [0x8008] [script:31 1A]이, 이렇게 될 줄은…[br]몰랐는데…
-0x0069F4BA [0x8008] [script:4F 1A]누…나……자……
-0x0069F7D0 [0x8008] [script:E0 1B]뭐 하는 거야?[br]어서 와!!
---- context: 0x8008 -> 0x800B ---
-0x0069F820 [0x800B] [script:FF 1B]……
---- context: 0x800B -> 0x8006 ---
-0x0069F868 [0x8006] [script:28 1C]목숨을 건졌군, 꼬마
---- context: 0x8006 -> 0x800C ---
-0x0069F8A8 [0x800C] [script:48 1C]그 여자한테 감사해
-0x0069F8EC [0x800C] [script:66 1C]…나를…
---- context: 0x800C -> 0x8005 ---
-0x0069F924 [0x8005] [script:80 1C]?
---- context: 0x8005 -> 0x800C ---
-0x0069F960 [0x800C] [script:A5 1C]얕보지 마!!
---- context: 0x800C -> 0x8005 ---
-0x0069FA9C [0x8005] [script:40 1D]이, 이놈!!
---- context: 0x8005 -> 0x800B ---
-0x0069FAE0 [0x800B] [script:5F 1D]!!
---- context: 0x800B -> 0x8006 ---
-0x0069FB1C [0x8006] [script:81 1D][box:speech][FF:09 01 01]!!
-0x0069FBEC [0x8006] [script:E7 1D]이쪽이야!!
---- context: 0x8006 -> 0x8005 ---
-0x0069FC4A [0x8005] [script:1B 1E]고마워,[delay:15]근데 왜?
---- context: 0x8005 -> 0x8006 ---
-0x0069FCB8 [0x8006] [script:50 1E]얘기는 나중에, 가자!!
---- context: 0x8006 -> 0x8005 ---
-0x0069FD00 [0x8005] [script:73 1E]우오오오오오옷!!
-0x0069FDAE [0x8005] [script:CA 1E]놓칠 줄 알아!!
---- context: 0x8005 -> 0x800C ---
-0x0069FE24 [0x800C] [script:02 1F]뭐!!
---- context: 0x800C -> 0x8005 ---
-0x0069FE76 [0x8005] [script:2C 1F]그만둬!!
---- context: 0x8005 -> 0x8008 ---
-0x0069FEB0 [0x8008] [script:50 1F]산 채로 잡지 않으면 의미가 없어
-0x0069FEF8 [0x8008] [script:6B 1F]넵…
---- context: 0x8008 -> 0x800C ---
-0x0069FFAA [0x800C] [script:C5 1F]루가타
---- context: 0x800C -> 0x8008 ---
-0x0069FFF8 [0x8008] [script:EB 1F]넵
---- context: 0x8008 -> 0x8009 ---
-0x006A002E [0x8009] [script:0E 20]갈아노 님께 보고해 둬
---- context: 0x8009 -> 0x8008 ---
-0x006A0074 [0x8008] [script:2A 20]넵!!
-
-
---- context: 0x8008 -> 0x8009 ---
-0x006A00CA [0x8009] [script:5F 20]꼬마라고[br]너무 만만하게 봤나…
---- context: 0x8009 -> 0x8008 ---
-0x006A0580 [0x8008] [script:B1 22]살려줘…
---- context: 0x8008 -> 0x8004 ---
-0x006A05BA [0x8004] [script:D2 22]죽이지 마, 부탁이야
---- context: 0x8004 -> 0x800A ---
-0x0075AB96 [0x800A] [script:78 04]쳇
---- context: 0x800A -> 0x8005 ---
-0x0075AE7E [0x8005] [script:F0 05]모이신 여러분
---- context: 0x8005 -> 0x8018 ---
-0x0075AEBC [0x8018] [script:10 06]이 아름다운 여신상
-0x0075AEFC [0x8018] [script:32 06]로말리아로부터 우호의 증거로
-0x0075AF40 [0x8018] [script:55 06]우리 알디아에 보내온 것입니다
-0x0075AF86 [0x8018] [script:77 06]이제 여러분도 아시겠죠
-0x0075AFCA [0x8018] [script:A0 06]알디아의 미래는[br]로말리아의 힘 없이는 있을 수 없습니다
-0x0075B01C [0x8018] [script:C6 06]이 나라는[delay:04]・[delay:04]・[delay:04]・응?
-0x0075B06C [0x8018] [script:E9 06]미안! 좀 비켜줘
-0x0075B128 [0x8018] [script:48 07]그럼 이야기는 여기까지 하고
-0x0075B16C [0x8018] [script:6C 07]그 아름다운 모습을 보여드리죠!
-0x0075B1BC [0x8018] [script:8C 07]시작해
-0x0075B220 [0x8018] [script:C0 07]뭐야, 이 빛은
---- context: 0x8018 -> 0x800A ---
-0x0075B25C [0x800A] [script:E0 07]몸에서 힘이 빠져
---- context: 0x800A -> 0x8011 ---
-0x0075B29C [0x8011] [script:01 08]아아, 의식이 흐려져
---- context: 0x8011 -> 0x8012 ---
-0x0075B2E2 [0x8012] [script:21 08]엘크! 안 좋아
---- context: 0x8012 -> 0x8007 ---
-0x0075B31E [0x8007] [script:3E 08]・・・
---- context: 0x8007 -> 0x8006 ---
-0x0075B358 [0x8006] [script:64 08]엘[delay:06]・[delay:0B]크[delay:0B]・[delay:0B]・
---- context: 0x8006 -> 0x8007 ---
-0x0075B3C6 [0x8007] [script:90 08]응?
---- context: 0x8007 -> 0x8018 ---
-0x0075B402 [0x8018] [script:AF 08]뭐야!?
---- context: 0x8018 -> 0x8001 ---
-0x0075B446 [0x8001] [script:D3 08]비행선이다!
---- context: 0x8001 -> 0x8002 ---
-0x0075B48E [0x8002] [script:F7 08]뭐야? 뭐야?
---- context: 0x8002 -> 0x8003 ---
-0x0075B4D0 [0x8003] [script:1A 09]여신상에 부딪친다
---- context: 0x8003 -> 0x8002 ---
-0x0075B880 [0x8002] [script:F0 0A][box:close]살려줘!
---- context: 0x8002 -> 0x8009 ---
-0x0075B8C0 [0x8009] [script:13 0B]여신상이 파괴됐다!!
---- context: 0x8009 -> 0x800A ---
-0x0075B906 [0x800A] [script:31 0B]아크다!
---- context: 0x800A -> 0x800B ---
-0x0075B942 [0x800B] [script:52 0B]아크가 나타났다!!
-
-
---- context: 0x800B -> 0x800A ---
-0x0075B992 [0x800A] [script:7D 0B][box:speech]엘크, 도망쳐요!
---- context: 0x800A -> 0x8006 ---
-0x0075B9DE [0x8006] [script:A4 0B][box:speech]엘크[delay:1F]…왜 그래?
-0x0075BA2C [0x8006] [script:C8 0B][box:speech]저…비행선
---- context: 0x8006 -> 0x8005 ---
-0x0075BA70 [0x8005] [script:E9 0B][box:speech]기억나
-0x0075BAB6 [0x8005] [script:18 0C][box:speech]내[delay:0B]・[delay:0B]・[delay:0B]내 마을을 습격한…
-0x0075BB94 [0x8005] [script:7B 0C][box:close]이봐, 엘크!
---- context: 0x8005 -> 0x8006 ---
-0x0075BBD6 [0x8006] [script:9E 0C][box:close]왜 그러는 거야!?
-0x0075BC1C [0x8006] [script:C9 0C][box:speech]틀림없어[br]저 비행선이 내 마을을…
---- context: 0x8006 -> 0x8005 ---
-0x0075BC72 [0x8005] [script:EA 0C][box:speech]용서 못 해!
-0x0075BCCE [0x8005] [script:17 0D][box:close]엘크!
---- context: 0x8005 -> 0x8006 ---
-0x0075BD2A [0x8006] [script:50 0D]젠장, 조금만 더 했으면[br]엄청난 방해가 들어왔군
---- context: 0x8006 -> 0x00A9 ---
-0x00811976 [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
-0x00811F1A [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
-0x00811F44 [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
-0x00811F6E [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
-0x00811F9A [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
-0x00811FE2 [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
-0x0081293E [0x00A9] [script:F4 07]지상으로 돌아갈까요?[br][opt]아니오[br][opt]네
-
-# Additional system prompts for cross-chunk matching
-0x0017222A [0x00A9] [script:3F 20][box:system]일기장이 있습니다. 기입하시겠습니까?[br][opt]네[br][opt]아니오[box:close]
-0x000BC77E [0x00A9] [script:57 48]이 아이를 데려가시겠습니까?[br][opt]네[br][opt]아니오
-0x00172CB2 [0x00A9] [script:76 25][opt]물론![br][opt]그게 뭐야?
-0x00172DD6 [0x00A9] [script:08 26][opt]물론![br][opt]역시 잠깐
-
-# Chunk 0 - Additional dialogues
-  0x000B81E6 [0x00A9] [script:90 25][box:system]어떻게 하시겠습니까?[br][opt]일반 배[br][opt]디버그 배[box:close]
-
-# Chunk 2 - Guild dialogues
-  0x00172482 [0x8009] [script:63 21]자[br]카운터에서 일 이야기를 들어와라
-  0x00176FD0 [0x00A9] [script:0C 47]이 아이를 데려가시겠습니까?[br][opt]네[br][opt]아니오
-
-# Chunk 3 - System prompts
-  0x00231C9E [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
-  0x00232242 [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
-  0x0023226C [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
-  0x00232296 [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
-  0x002322C2 [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
-  0x0023230A [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
-  0x00233CB8 [0x800C] [script:15 10]여기는 대장간이야
-  0x002340A0 [0x00A9] [script:19 12][box:system]어떻게 하시겠습니까?[br][opt]일반 배[br][opt]디버그 배[box:close]
-  0x00234868 [0x00A9] [script:F8 15]이 아이를 데려가시겠습니까?[br][opt]네[br][opt]아니오
-  0x002349D4 [0x00A9] [script:AA 16]준비됐어?[br][opt]네[br][opt]아니오
-
-# Chunk 4 - System prompts
-  0x002EE902 [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
-  0x002EEEA6 [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
-  0x002EEED0 [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
-  0x002EEEFA [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
-  0x002EEF26 [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
-  0x002EEF6E [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
-  0x002EF736 [0x8001] [script:20 07]어서오세요
-  0x002EF78A [0x8001] [script:4B 07]어이[opt]마스터
-  0x002F0DEC [0xFFFE] [script:81 12]프로디아스도 시끄러워지겠군…
-  0x002F1568 [0xFFFE] [script:40 16]알디아의 더 큰 번영을 위해…
-  0x002F1646 [0xFFFE] [script:AF 16]알디아의 더 큰 번영을 위해…
-  0x002F172A [0xFFFE] [script:21 17]알디아의 더 큰 번영을 위해…
-
-# Chunk 5 - Shante's story
-  0x003A5018 [0x8006] [script:DB 23]그럼, 「스탠디」라고 하면 어때?
-  0x003A6A5A [0x00A9] [script:02 31](웃겨볼까…?)[br][opt]웃긴다[br][opt]웃기지 않는다
-  0x003A76CA [0x00A9] [script:37 37][br][br][br][br][opt][opt][opt][opt][opt][opt][opt][opt][opt]그날 밤
-  0x003AA656 [0x00A9] [script:FF 4E][br][br][br][br][opt][opt][opt][opt][opt][opt]그리고 밤이 밝았다
-  0x003AB76C [0x00A9] [script:89 57][br][br][br][br][opt][opt][opt][opt][opt][opt][opt][opt]며칠 후…
-
-# Chunk 6 - System prompts
-  0x004661BE [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
-  0x00466762 [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
-  0x0046678C [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
-  0x004667B6 [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
-  0x004667E2 [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
-  0x0046682A [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
-  0x00466B18 [0x8014] [script:B5 04]캬! 도와줘!!
-
-# Chunk 7 - System prompts and submarine controls
+  --- context: 0x8015 -> 0x00A9 ---
   0x00523172 [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
   0x00523716 [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
   0x00523740 [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
   0x0052376A [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
   0x00523796 [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
   0x005237DE [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+  --- context: 0x00A9 -> 0x8006 ---
   0x005244A8 [0x8006] [script:A0 09]저쪽이야
+  0x005244F0 [0x8006] [script:EF 09]저[delay:1F]・[delay:1F]・[delay:1F]계단[delay:0B]에[delay:0B]서[delay:1F]・[delay:1F]・[br][delay:1F]갑판[delay:0E]으[delay:10]로[delay:14]나[delay:1F]・[delay:1F]・[delay:1F]・
+  0x005245C8 [0x8006] [script:34 0A]・・・・・・
+  0x00524D22 [0x8006] [script:E1 0D]・・・・・・
+  0x00524FB8 [0x8006] [script:3E 0F][delay:15]・[delay:15]・[delay:15]・[delay:15]기척이 느껴진다[delay:15]・[delay:15]・[delay:3D]여기인가?
+  0x0052508C [0x8006] [script:A8 0F][delay:15]・[delay:15]・[delay:15]・[delay:15]기척이 느껴진다[delay:15]・[delay:15]・[delay:3D]여기인가?
+  --- context: 0x8006 -> 0x8005 ---
+  0x0052572A [0x8005] [script:EE 12]무슨 일이 있었나 보다[br][delay:1F]나는 상황을 살펴보겠다
+  --- context: 0x8005 -> 0x800A ---
+  0x0052577C [0x800A] [script:11 13]넌 이놈들을 감시하고 있어라
+  0x005257CC [0x800A] [script:31 13]넵
+  --- context: 0x800A -> 0x800B ---
+  0x00525836 [0x800B] [script:6A 13]죄송합니다, 몸이…
+  --- context: 0x800B -> 0x8005 ---
+  0x00525874 [0x8005] [script:86 13]무슨 일이야
+  --- context: 0x8005 -> 0x800B ---
+  0x0052590E [0x800B] [script:D4 13]도망쳐요
+  --- context: 0x800B -> 0x8006 ---
+  0x00525ADE [0x8006] [script:BF 14]빨리!![delay:0B]이쪽이야
+  0x00525B28 [0x8006] [script:E3 14]여기 숨어요
+  --- context: 0x8006 -> 0x00A9 ---
   0x00525F48 [0x00A9] [script:F9 16]출발할까?[br][opt]예[br][opt]아니오
   0x0052605E [0x00A9] [script:85 17]야고스 섬으로 돌아간다[br][opt]예[br][opt]아니오
+  --- context: 0x00A9 -> 0x8006 ---
+  0x005269FC [0x8006] [script:4A 1C]간다!!
+  --- context: 0x8006 -> 0x8005 ---
+  0x00526A42 [0x8005] [script:6E 1C]무서워요~
+  --- context: 0x8005 -> 0x800A ---
+  0x00526A7C [0x800A] [script:91 1C]남자잖아, 좀 더 정신 차려!!
+  --- context: 0x800A -> 0x800C ---
+  0x00526AC2 [0x800C] [script:AC 1C]네~
+  --- context: 0x800C -> 0x800A ---
+  0x00526B0C [0x800A] [script:D9 1C]이 근처부터 조사를 시작하자
+  --- context: 0x800A -> 0x8006 ---
+  0x00526B52 [0x8006] [script:F7 1C]엘크, 부탁해
+  --- context: 0x8006 -> 0x00A9 ---
   0x00526B8E [0x00A9] [script:25 1D]어떻게 할까?[br][opt]정지[br][opt]부상[br][opt]잠행[br][opt]전진
+  --- context: 0x00A9 -> 0x8006 ---
+  0x00526BEA [0x8006] [script:42 1D]멈췄다
+  --- context: 0x8006 -> 0x8007 ---
+  0x00526C28 [0x8007] [script:61 1D]부상이다
+  0x00526C66 [0x8007] [script:80 1D]잠행했다
+  --- context: 0x8007 -> 0x00A9 ---
   0x00526CA4 [0x00A9] [script:AE 1D]어느 쪽으로 갈까?[br][opt]앞[br][opt]뒤[br][opt]왼쪽[br][opt]오른쪽
+  --- context: 0x00A9 -> 0x8007 ---
+  0x00526CFC [0x8007] [script:CB 1D]전진했다
+  0x00526D3A [0x8007] [script:EA 1D]후퇴했다
+  0x00526D78 [0x8007] [script:0A 1E]좌선회했다
+  0x00526DB8 [0x8007] [script:2A 1E]우선회했다
+  0x00526DF8 [0x8007] [script:47 1E]！！
+  0x00526E2E [0x8007] [script:6C 1E]엘크, 전방에서 거대생물 접근
+  0x00526E84 [0x8007] [script:8E 1E]뭐!?
+  --- context: 0x8007 -> 0x00A9 ---
   0x00526EBC [0x00A9] [script:BC 1E]어떻게 할까?[br][opt]정지[br][opt]부상[br][opt]잠행[br][opt]전진
+  --- context: 0x00A9 -> 0x8005 ---
+  0x00526F18 [0x8005] [script:DB 1E]멈춰서 어쩔 건데!!
+  --- context: 0x8005 -> 0x8007 ---
+  0x00526F5A [0x8007] [script:FD 1E]안 돼, 피하지 못해!!
+  --- context: 0x8007 -> 0x00A9 ---
   0x00526F9E [0x00A9] [script:2B 1F]어느 쪽으로 갈까?[br][opt]앞[br][opt]뒤[br][opt]왼쪽[br][opt]오른쪽
+  --- context: 0x00A9 -> 0x8007 ---
+  0x00526FF6 [0x8007] [script:4A 1F]안 돼, 부딪힌다!!
+  0x00527038 [0x8007] [script:68 1F]안 돼!
+  0x00527070 [0x8007] [script:88 1F]점점 다가오고 있어!!
+  0x005270B4 [0x8007] [script:A8 1F]좌선회!!
+  0x005270F4 [0x8007] [script:C7 1F]피하지 못해!!
+  0x00527138 [0x8007] [script:E9 1F]무서워요~
+  --- context: 0x8007 -> 0x800A ---
+  0x0052717C [0x800A] [script:0F 20]어떻게든 넘긴 것 같군
+  --- context: 0x800A -> 0x8006 ---
+  0x005271C2 [0x8006] [script:2C 20]휴~
+  --- context: 0x8006 -> 0x8005 ---
+  0x005271F8 [0x8005] [script:48 20]참 큰일이군
+  0x00527234 [0x8005] [script:68 20]우선회!!
+  --- context: 0x8005 -> 0x8007 ---
+  0x00527274 [0x8007] [script:87 20]피하지 못해!!
+  0x005272B8 [0x8007] [script:A9 20]무서워요~
+  --- context: 0x8007 -> 0x800A ---
+  0x005272F6 [0x800A] [script:CC 20]어떻게든 넘긴 것 같군
+  --- context: 0x800A -> 0x8006 ---
+  0x00527346 [0x8006] [script:EE 20]휴~
+  --- context: 0x8006 -> 0x8005 ---
+  0x0052737C [0x8005] [script:0A 21]참 큰일이군
+  --- context: 0x8005 -> 0x00A9 ---
   0x005273B8 [0x00A9] [script:32 21]어떻게 할까?[br][opt]공격[br][opt]플래시
+  --- context: 0x00A9 -> 0x8005 ---
+  0x00527400 [0x8005] [script:4F 21]미사일 발사!!
+  --- context: 0x8005 -> 0x8007 ---
+  0x00527442 [0x8007] [script:6D 21]명중
+  0x00527486 [0x8007] [script:92 21]안 돼!! 너무 가까웠어
+  --- context: 0x8007 -> 0x00A9 ---
   0x005274CA [0x00A9] [script:C0 21][br][br][br][opt][opt][opt][opt][opt][opt][FF:01 04 01]GAME[opt]OVER[FF:01 01 01]
+  --- context: 0x00A9 -> 0x8007 ---
+  0x0052751A [0x8007] [script:DB 21]안 돼!! 안 먹힌다
+  --- context: 0x8007 -> 0x00A9 ---
   0x0052756A [0x00A9] [script:0C 22][br][br][br][opt][opt][opt][opt][opt][opt]GAME[opt]OVER
-
-# Chunk 8 - System prompts
   0x005E22DA [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
   0x005E287E [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
   0x005E28A8 [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
   0x005E28D2 [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
   0x005E28FE [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
   0x005E2946 [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
-
-# Chunk 9 - System prompts
+  --- context: 0x00A9 -> 0x8005 ---
+  0x005E2B7A [0x8005] [script:5B 04]쳇,[delay:15]어둡군…
+  0x005E2BD8 [0x8005] [script:84 04]거기냐!
+  0x005E2C8A [0x8005] [script:E0 04]안 돼! 판딧
+  --- context: 0x8005 -> 0x8006 ---
+  0x005E2D80 [0x8006] [script:58 05]그만해!!
+  0x005E2DB8 [0x8006] [script:78 05]이 아이는 아무것도 안 했어
+  0x005E2DFC [0x8006] [script:9D 05]이 아이라니, 그건 몬스터잖아
+  --- context: 0x8006 -> 0x8005 ---
+  0x005E2E46 [0x8005] [script:C6 05]이 아이는 괜찮아[br]나에겐 거스르지 않아
+  --- context: 0x8005 -> 0x8006 ---
+  0x005E2E94 [0x8006] [script:E1 05]！！
+  --- context: 0x8006 -> 0x8005 ---
+  0x005E2ECA [0x8005] [script:03 06]너, 몬스터를 조종할 수 있어?
+  0x005E2F0E [0x8005] [script:27 06]・[delay:0B]・[delay:0B]・[delay:0B]・
+  --- context: 0x8005 -> 0x8006 ---
+  0x005E2F5A [0x8006] [script:45 06]그래…
+  --- context: 0x8006 -> 0x8005 ---
+  0x005E2F92 [0x8005] [script:66 06]관여하고 싶지 않은 거군
+  0x005E2FD8 [0x8005] [script:8C 06]뭐, 이쪽도 지금 그럴 때가 아니야
+  0x005E3020 [0x8005] [script:B8 06]그런데 지금 이 배로[br]도망쳐 온 놈을 보지 못했나?
+  0x005E3078 [0x8005] [script:D9 06]나는 그 놈을 쫓고 있어
+  0x005E30BA [0x8005] [script:F3 06]…
+  --- context: 0x8005 -> 0x8006 ---
+  0x005E30EE [0x8006] [script:11 07]모르는 것 같군
+  --- context: 0x8006 -> 0x8005 ---
+  0x005E314C [0x8005] [script:46 07]당신[delay:0B]・[delay:0B]・[delay:0B]・
+  --- context: 0x8005 -> 0x8006 ---
+  0x005E31A4 [0x8006] [script:68 07]？
+  --- context: 0x8006 -> 0x8005 ---
+  0x005E31D8 [0x8005] [script:8A 07]나를 찾고 있는 게 아닌 거죠?
+  --- context: 0x8005 -> 0x8006 ---
+  0x005E3220 [0x8006] [script:AA 07]무슨 뜻이야?
+  --- context: 0x8006 -> 0x8005 ---
+  0x005E325C [0x8005] [script:C4 07]…
+  --- context: 0x8005 -> 0x8006 ---
+  0x005E3290 [0x8006] [script:E4 07]아무 말도 안 하면 모르겠어
+  --- context: 0x8006 -> 0x8005 ---
+  0x005E32D0 [0x8005] [script:0F 08]・[delay:0B]・[delay:0B]・[delay:0B]나를 여기서 도망치게 해줬으면 해
+  --- context: 0x8005 -> 0x8006 ---
+  0x005E3326 [0x8006] [script:2B 08]도망치게?
+  --- context: 0x8006 -> 0x00B4 ---
+  0x005E335E [0x00B4] [script:50 08]이유는 말 못 하지만, 이 배에는－[delay:3D]
+  --- context: 0x00B4 -> 0x8005 ---
+  0x005E33EC [0x8005] [script:91 08]으악, 살려줘!
+  --- context: 0x8005 -> 0x8008 ---
+  0x005E344A [0x8008] [script:C0 08]젠장, 그쪽이냐!?
+  --- context: 0x8008 -> 0x8005 ---
+  0x005E349C [0x8005] [script:EE 08]일을 끝내면 돌아올 테니까
+  0x005E3DB8 [0x8005] [script:7B 0D]복도에서 비명이 들렸어!
+  --- context: 0x8005 -> 0x8006 ---
+  0x005E3E06 [0x8006] [script:9E 0D]안 가도 돼?
+  0x005E3E4C [0x8006] [script:BF 0D]그르르르르
+  --- context: 0x8006 -> 0x8007 ---
+  0x005E3E8E [0x8007] [script:E0 0D]그르르르르
+  --- context: 0x8007 -> 0x00A9 ---
   0x0069C02A [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
   0x0069C5CE [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
   0x0069C5F8 [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
   0x0069C622 [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
   0x0069C64E [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
   0x0069C696 [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+  --- context: 0x00A9 -> 0x8005 ---
   0x0069CD00 [0x8005] [script:72 06]몰아붙였다…
-
-# Chunk 10 - System prompts and ceremony
+  0x0069CD40 [0x8005] [script:97 06]왜 그래?[br]더 이상 도망치지 않는 거야?
+  0x0069CD8A [0x8005] [script:BD 06]너는 지금 몰아붙였다고 했지?
+  --- context: 0x8005 -> 0x8008 ---
+  0x0069CDE6 [0x8008] [script:E3 06]아니야…
+  0x0069CE1E [0x8008] [script:04 07]네가 유인당한 거야
+  0x0069CE60 [0x8008] [script:23 07]이 멍청한 헌터 녀석!!
+  0x0069D132 [0x8008] [script:8A 08]이래도 어떠냐!
+  0x0069D16C [0x8008] [script:A6 08]크…!!
+  --- context: 0x8008 -> 0x8005 ---
+  0x0069D1A4 [0x8005] [script:C8 08]상처 입은 몸으로 끝까지 싸울 수 있겠어?
+  --- context: 0x8005 -> 0x8008 ---
+  0x0069D1F0 [0x8008] [script:EA 08]푸하하하하핫!!
+  0x0069D2EC [0x8008] [script:6A 09]몸에 힘이 돌아온다!
+  --- context: 0x8008 -> 0x8005 ---
+  0x0069D334 [0x8005] [script:8C 09]이제 괜찮아
+  --- context: 0x8005 -> 0x8006 ---
+  0x0069D370 [0x8006] [script:A7 09]！？
+  --- context: 0x8006 -> 0x8005 ---
+  0x0069D3B6 [0x8005] [script:CE 09]넌 아까 그…
+  0x0069D3F4 [0x8005] [script:EF 09]이제 마음껏 싸울 수 있어
+  --- context: 0x8005 -> 0x8006 ---
+  0x0069D43C [0x8006] [script:0F 0A]고맙다!!
+  --- context: 0x8006 -> 0x8005 ---
+  0x0069D476 [0x8005] [script:30 0A]자, 결판을 내자!
+  0x0069E19C [0x8005] [script:BF 10]살려줘…
+  --- context: 0x8005 -> 0x8004 ---
+  0x0069E1D6 [0x8004] [script:E4 10]얌전히 하면[br]목숨은 살려주지
+  --- context: 0x8004 -> 0x8005 ---
+  0x0069E220 [0x8005] [script:10 11]헌터즈 길드에 너를[br]인도하면 내 일은 끝이다
+  0x0069E278 [0x8005] [script:2D 11]아니야!!
+  --- context: 0x8005 -> 0x8004 ---
+  0x0069E2B2 [0x8004] [script:4F 11]놈들은 실패를 용서하지 않아
+  0x0069E2F6 [0x8004] [script:74 11]놈들에게…[delay:0B]놈들에게 죽임을 당해!
+  0x0069E340 [0x8004] [script:92 11]놈들이라니?
+  --- context: 0x8004 -> 0x8005 ---
+  0x0069E37C [0x8005] [script:AC 11]…
+  --- context: 0x8005 -> 0x8006 ---
+  0x0069E3B0 [0x8006] [script:CE 11]무서운 힘을 가진 조직이야
+  --- context: 0x8006 -> 0x00B4 ---
+  0x0069E3F4 [0x00B4] [script:EF 11]나도, 그놈들한테－[delay:1F]
+  --- context: 0x00B4 -> 0x8004 ---
+  0x0069E4E4 [0x8004] [script:61 12]！？
+  --- context: 0x8004 -> 0x8005 ---
+  0x0069E522 [0x8005] [script:89 12]죽다 만 녀석이 쓸데없는 소릴 떠벌이고
+  --- context: 0x8005 -> 0x8008 ---
+  0x0069E5AA [0x8008] [script:C7 12]뭐야, 너희들!
+  --- context: 0x8008 -> 0x8005 ---
+  0x0069E5E6 [0x8005] [script:E2 12]！！
+  --- context: 0x8005 -> 0x8006 ---
+  0x0069E61C [0x8006] [script:01 13]아가씨를 넘겨받겠다
+  --- context: 0x8006 -> 0x8008 ---
+  0x0069E662 [0x8008] [script:25 13]야, 어떻게 된 거야?
+  --- context: 0x8008 -> 0x00B4 ---
+  0x0069E6A6 [0x00B4] [script:48 13]이 사람들이 나를－[delay:1F]
+  --- context: 0x00B4 -> 0x8005 ---
+  0x0069E6C6 [0x8005] [script:53 13]닥쳐!
+  --- context: 0x8005 -> 0x8008 ---
+  0x0069E702 [0x8008] [script:76 13]너무 깊이 관여하지 않는 게 좋아
+  0x0069E744 [0x8008] [script:95 13]목숨이 아깝다면
+  0x0069E78A [0x8008] [script:B5 13]뭐라고!
+  --- context: 0x8008 -> 0x8005 ---
+  0x0069E872 [0x8005] [script:28 14]！！
+  0x0069E8DA [0x8005] [script:63 14]어디로 도망치겠다는 건가?
+  --- context: 0x8005 -> 0x8008 ---
+  0x0069E948 [0x8008] [script:94 14]크……!
+  --- context: 0x8008 -> 0x8005 ---
+  0x0069EA18 [0x8005] [script:FB 14]윽!
+  0x0069EA52 [0x8005] [script:21 15]이제 그만[br]포기하면 어떨까?
+  --- context: 0x8005 -> 0x8011 ---
+  0x0069EAF8 [0x8011] [script:72 15]나…[delay:15]그쪽으로 가겠습니다
+  --- context: 0x8011 -> 0x8006 ---
+  0x0069EB52 [0x8006] [script:99 15]이봐!!
+  --- context: 0x8006 -> 0x8005 ---
+  0x0069EB92 [0x8005] [script:BA 15]이제 됐어,
+  --- context: 0x8005 -> 0x00B4 ---
+  0x0069EBCC [0x00B4] [script:DE 15]이대로는 둘 다…
+  --- context: 0x00B4 -> 0x8006 ---
+  0x0069EDAE [0x8006] [script:CC 16]놈들, 보통이 아니야…
+  --- context: 0x8006 -> 0x8008 ---
+  0x0069EDF0 [0x8008] [script:F3 16]젠장, 여기까지 와서[br]죽을 수는 없어!!
+  0x0069F436 [0x8008] [script:0C 1A]크…바보…같은…
+  0x0069F470 [0x8008] [script:31 1A]이, 이럴 리가…[br]없었는데…
+  0x0069F4BA [0x8008] [script:4F 1A]누…나……
+  0x0069F7D0 [0x8008] [script:E0 1B]뭐 하는 거야?[br]빨리 와!!
+  --- context: 0x8008 -> 0x800B ---
+  0x0069F820 [0x800B] [script:FF 1B]……
+  --- context: 0x800B -> 0x8006 ---
+  0x0069F868 [0x8006] [script:28 1C]목숨을 건졌군, 꼬마
+  --- context: 0x8006 -> 0x800C ---
+  0x0069F8A8 [0x800C] [script:48 1C]아가씨에게 고마워해라
+  0x0069F8EC [0x800C] [script:66 1C]…나를…
+  --- context: 0x800C -> 0x8005 ---
+  0x0069F924 [0x8005] [script:80 1C]？
+  --- context: 0x8005 -> 0x800C ---
+  0x0069F960 [0x800C] [script:A5 1C]얕보지 마라!!
+  --- context: 0x800C -> 0x8005 ---
+  0x0069FA9C [0x8005] [script:40 1D]이, 이 녀석!!
+  --- context: 0x8005 -> 0x800B ---
+  0x0069FAE0 [0x800B] [script:5F 1D]！！
+  --- context: 0x800B -> 0x8006 ---
+  0x0069FB1C [0x8006] [script:81 1D][box:speech][FF:09 01 01]！！
+  0x0069FBEC [0x8006] [script:E7 1D]이쪽이다!!
+  --- context: 0x8006 -> 0x8005 ---
+  0x0069FC4A [0x8005] [script:1B 1E]고마워,[delay:15]하지만 왜?
+  --- context: 0x8005 -> 0x8006 ---
+  0x0069FCB8 [0x8006] [script:50 1E]얘기는 나중이다, 가자!!
+  --- context: 0x8006 -> 0x8005 ---
+  0x0069FD00 [0x8005] [script:73 1E]우오오오오오!!
+  0x0069FDAE [0x8005] [script:CA 1E]도망치게 둘 수 없다!!
+  --- context: 0x8005 -> 0x800C ---
+  0x0069FE24 [0x800C] [script:02 1F]뭐!!
+  --- context: 0x800C -> 0x8005 ---
+  0x0069FE76 [0x8005] [script:2C 1F]그만하지 못해!!
+  --- context: 0x8005 -> 0x8008 ---
+  0x0069FEB0 [0x8008] [script:50 1F]산 채로 잡아야 의미가 있다
+  0x0069FEF8 [0x8008] [script:6B 1F]넵…
+  --- context: 0x8008 -> 0x800C ---
+  0x0069FFAA [0x800C] [script:C5 1F]루가타
+  --- context: 0x800C -> 0x8008 ---
+  0x0069FFF8 [0x8008] [script:EB 1F]넵
+  --- context: 0x8008 -> 0x8009 ---
+  0x006A002E [0x8009] [script:0E 20]갈아노 님께 보고해 두어라
+  --- context: 0x8009 -> 0x8008 ---
+  0x006A0074 [0x8008] [script:2A 20]넵!!
+  --- context: 0x8008 -> 0x8009 ---
+  0x006A00CA [0x8009] [script:5F 20]어린애라고 생각하고[br]좀 만만하게 봤나…
+  --- context: 0x8009 -> 0x8008 ---
+  0x006A0580 [0x8008] [script:B1 22]살려줘…
+  --- context: 0x8008 -> 0x8004 ---
+  0x006A05BA [0x8004] [script:D2 22]죽이지 마, 부탁이야
+  --- context: 0x8004 -> 0x00A9 ---
   0x0075A2AE [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
   0x0075A852 [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
   0x0075A87C [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
   0x0075A8A6 [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
   0x0075A8D2 [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
   0x0075A91A [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+  --- context: 0x00A9 -> 0x800A ---
   0x0075AB4C [0x800A] [script:5D 04]티켓이 없으면 식전에 참가할 수 없습니다
+  0x0075AB96 [0x800A] [script:78 04]젯
+  --- context: 0x800A -> 0x8005 ---
+  0x0075AE7E [0x8005] [script:F0 05]모여 주신 여러분
+  --- context: 0x8005 -> 0x8018 ---
+  0x0075AEBC [0x8018] [script:10 06]이 아름다운 여신상
+  0x0075AEFC [0x8018] [script:32 06]로말리아에서 우호의 증표로
+  0x0075AF40 [0x8018] [script:55 06]우리 알디아에 보내진 것입니다
+  0x0075AF86 [0x8018] [script:77 06]이제 여러분도 아시겠지요
+  0x0075AFCA [0x8018] [script:A0 06]알디아의 미래는[br]로말리아의 힘 없이는 있을 수 없다
+  0x0075B01C [0x8018] [script:C6 06]이 나라는[delay:04]・[delay:04]・[delay:04]・응?
+  0x0075B06C [0x8018] [script:E9 06]미안! 좀 열어줘
+  --- context: 0x8018 -> 0x8006 ---
   0x0075B0D8 [0x8006] [script:23 07](엘크, 리자, 느긋하게 나타났군)
-
-# Newly found dialogues - Chunk 0 (0x00B0 context - Event Script Region)
-  0x000B36F6 [0x00B0] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
-  0x000B3CA6 [0x00B0] [script:ED 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
-  0x000B3CD0 [0x00B0] [script:02 03][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
-  0x000B3CFA [0x00B0] [script:18 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
-  0x000B3D26 [0x00B0] [script:2B 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
-  0x000B3D6E [0x00B0] [script:51 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
-
-# Chunk 0 - Story dialogues (0x00B4 context)
-  0x000B49C4 [0x00B4] [script:6D 09]술 냄새~
-  0x000B50B6 [0x00B4] [script:0D 0D]일부러 식전 보러 돌아온 거야?[br]그럼 아마 비비가가 티켓[br]갖고 있을 거야
-  0x000B5264 [0x00B4] [script:CB 0D]나도 갔으면 좋았을까
-  0x000B5874 [0x00B4] [script:DD 10]다들 여신상이다 식전이다 떠들지만
-  0x000B5924 [0x00B4] [script:3B 11]뒤집어 말하면 그만큼 로말리아를[br]두려워한다는 거지
-  0x000B63FA [0x00B4] [script:9B 16]엘크 오빠가 부쉈어?
-  0x000B668C [0x00B4] [script:E6 17]오늘은 가게 문 닫고[br]나도 보러 갈까
-  0x000B7034 [0x00B4] [script:B5 1C]오늘도 집에 안 들여보내 줄 거니까!
-  0x000B73C2 [0x00B4] [script:90 1E]뭐, 준다는 물건을 거절하는 것도[br]실례니까
-  0x000B77BE [0x00B4] [script:78 20]너는 보러 안 가? 기념식전
-  0x000B785A [0x00B4] [script:BC 20]엄마가 엄청 화났을 테니
-  0x000B7C92 [0x00B4] [script:D8 22]도대체 어디 갔다 온 거야
-  0x000B7EA2 [0x00B4] [script:00 24]부상자는 한 명도 없었다고[br]들었지만 역시 걱정했어
-
-# Chunk 1 - System prompts (0x00B0 context)
-  0x0016E1DE [0x00B0] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
-  0x0016E78E [0x00B0] [script:ED 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
-  0x0016E7B8 [0x00B0] [script:02 03][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
-  0x0016E7E2 [0x00B0] [script:18 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
-  0x0016E80E [0x00B0] [script:2B 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
-  0x0016E856 [0x00B0] [script:51 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
-
-# Chunk 1 - Bounty tables (display only)
-  0x001782B0 [0x00B4] [script:93 50][box:system]이[opt]름[opt]골자[opt][opt][opt][opt]스켈레톤[br]보[opt]상[opt]540G[br]장소[opt]인디고스 북쪽 폐허의 마을[br]특기[opt]차지
-  0x00178324 [0x00B4] [script:CB 50][box:system]이[opt]름[opt]리랜드[opt][opt]소드맨[br]보[opt]상[opt]990G[br]장소[opt]인디고스 북쪽 폐허의 마을[br]특기[opt]?
-  0x00178394 [0x00B4] [script:04 51][box:system]이[opt]름[opt]부시[opt][opt][opt]양식 헤모지[br]보[opt]상[opt]1350G[br]장소[opt]윌의 바위[br]특기[opt]헤모지화
-  0x00178410 [0x00B4] [script:3D 51][box:system]이[opt]름[opt]발자크[opt][opt]매지션[br]보[opt]상[opt]1755G[br]장소[opt]서 알디아[br]특기[opt]?
-  0x0017846A [0x00B4] [script:6E 51][box:system]이[opt]름[opt]발자크[opt][opt]매지션[br]보[opt]상[opt]1755G[br]장소[opt]서 알디아 돌아오지 못하는 숲[br]특기[opt]?
-  0x001784DA [0x00B4] [script:A7 51][box:system]이[opt]름[opt]메난[opt][opt]자이언트마미[br]보[opt]상[opt]1125G[br]장소[opt]야고스 섬 봉인의 유적[br]특기[opt]?
-  0x0017854C [0x00B4] [script:D8 51][box:system]이[opt]름[opt]티아누스[opt]위저드[br]보[opt]상[opt]2025G[br]장소[opt]?[br]특기[opt]?
-
-# Chunk 3 - Night blacksmith
-  0x00234B4A [0x00B4] [script:5D 17]밤의 대장장이
-
-# Chunk 4 - System prompts (0x00A0 context - Padding Region)
-  0x003A087E [0x00A0] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
-  0x003A0E22 [0x00A0] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
-  0x003A0E4C [0x00A0] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
-  0x003A0E76 [0x00A0] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
-  0x003A0EA2 [0x00A0] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
-  0x003A0EEA [0x00A0] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
-
-# Chunk 4 - Item/event messages
-  0x003A10E0 [0x00A0] [script:38 04]놔 줘!!
-  0x003A25A0 [0x00B0] [script:9D 0E][opt]물론![br][opt]잠깐만
-  0x003A2E3C [0x00B0] [script:EB 12][br]엘크는 서랍을 열었다
-  0x003A2E98 [0x00B0] [script:1C 13][br]엘크는 「약초」를 손에 넣었다
-  0x003A2ECC [0x00B0] [script:33 13][br]엘크는 서랍을 열었다
-  0x003A2F34 [0x00B0] [script:6F 13][br]엘크는 옷장에서[br]「천 옷」을 꺼냈다
-  0x003A3014 [0x00B0] [script:D6 13][br]엘크는 통을 조사했다
-  0x003A306E [0x00B0] [script:06 14][br]엘크는 「돌」을 손에 넣었다
-  0x003A30A0 [0x00B0] [script:1C 14][br]엘크는 통을 조사했다
-  0x003A3106 [0x00B0] [script:4F 14][br]엘크는 통을 조사했다
-  0x003A3160 [0x00B0] [script:80 14][br]엘크는 「약초」를 손에 넣었다
-  0x003A3194 [0x00B0] [script:96 14][br]엘크는 통을 조사했다
-  0x003A31FA [0x00B0] [script:CA 14][br]프로디아스의 거리가 보인다
-  0x003A33A4 [0x00B0] [script:B0 15]문에는 판자가 박혀 있어 열리지 않게 되어 있다.[br]아무도 사용하지 않는 방인 듯하다.
-  0x003A3478 [0x00B0] [script:12 16]어떻게 할까…?[br][opt]내용을 들으러 가기[br][opt]나중에
-  0x003A3C40 [0x00B0] [script:F4 19]이 아이를 데려가겠습니까?[br][opt]네[br][opt]아니오
-  0x003A3D00 [0x00B0] [script:5A 1A][box:system]일기장이 있습니다. 기록하겠습니까?[br][opt]네[br][opt]아니오[box:close]
-  0x003A4520 [0x00B0] [script:62 1E]쉬었다 가겠습니까?[br][opt]네[br][opt]아니오
-  0x003A4936 [0x00B0] [script:6A 20]훈련할래?[br][opt]한다[br][opt]안 한다
-  0x003A4FD8 [0x00B0] [script:B8 23][opt]맞아[br][opt]아닌듯
-  0x003A5068 [0x00B0] [script:00 24][opt]맞아[br][opt]아닌듯
-  0x003A50F0 [0x00B0] [script:44 24][opt]맞아[br][opt]아닌듯
-  0x003A6594 [0x00B4] [script:B7 2E]「데생 입문」「나르사프 화집」…[br]뭔가 재미없어 보이는 책뿐이네
-  0x003AC656 [0x00B4] [script:F6 5E]하아~, 날씨 좋다
-
-# Chunk 6 - Story dialogue
-  0x005E335E [0x00B4] [script:50 08]이유는 말 못 하지만, 이 배에는－[delay:3D]
-
-# Chunk 9 - Story dialogues
-  0x0069E3F4 [0x00B4] [script:EF 11]나도, 그놈들한테－[delay:1F]
-  0x0069E6A6 [0x00B4] [script:48 13]이 사람들이 나를－[delay:1F]
-  0x0069EBCC [0x00B4] [script:DE 15]이대로는 둘 다…
-
-# Chunk 10 - System messages
+  --- context: 0x8006 -> 0x8018 ---
+  0x0075B128 [0x8018] [script:48 07]그럼 이야기는 이쯤 하고
+  0x0075B16C [0x8018] [script:6C 07]그 아름다운 모습을 보여드리겠습니다!
+  0x0075B1BC [0x8018] [script:8C 07]시작하라
+  0x0075B220 [0x8018] [script:C0 07]뭐야, 이 빛은
+  --- context: 0x8018 -> 0x800A ---
+  0x0075B25C [0x800A] [script:E0 07]몸의 힘이 빠져나가
+  --- context: 0x800A -> 0x8011 ---
+  0x0075B29C [0x8011] [script:01 08]아아, 의식이 멀어져 가
+  --- context: 0x8011 -> 0x8012 ---
+  0x0075B2E2 [0x8012] [script:21 08]엘크! 큰일이다
+  --- context: 0x8012 -> 0x8007 ---
+  0x0075B31E [0x8007] [script:3E 08]・・・
+  --- context: 0x8007 -> 0x8006 ---
+  0x0075B358 [0x8006] [script:64 08]엘[delay:06]・[delay:0B]크[delay:0B]・[delay:0B]・
+  --- context: 0x8006 -> 0x8007 ---
+  0x0075B3C6 [0x8007] [script:90 08]응?
+  --- context: 0x8007 -> 0x8018 ---
+  0x0075B402 [0x8018] [script:AF 08]뭐야!?
+  --- context: 0x8018 -> 0x8001 ---
+  0x0075B446 [0x8001] [script:D3 08]비행선이다!
+  --- context: 0x8001 -> 0x8002 ---
+  0x0075B48E [0x8002] [script:F7 08]뭐야? 뭐야?
+  --- context: 0x8002 -> 0x8003 ---
+  0x0075B4D0 [0x8003] [script:1A 09]여신상에 부딪힌다
+  --- context: 0x8003 -> 0x8002 ---
+  0x0075B880 [0x8002] [script:F0 0A][box:close]살려줘!
+  --- context: 0x8002 -> 0x8009 ---
+  0x0075B8C0 [0x8009] [script:13 0B]여신상이 부서졌다!!
+  --- context: 0x8009 -> 0x800A ---
+  0x0075B906 [0x800A] [script:31 0B]아크다!
+  --- context: 0x800A -> 0x800B ---
+  0x0075B942 [0x800B] [script:52 0B]아크가 나타났다!!
+  --- context: 0x800B -> 0x800A ---
+  0x0075B992 [0x800A] [script:7D 0B][box:speech]엘크, 도망치자!
+  --- context: 0x800A -> 0x8006 ---
+  0x0075B9DE [0x8006] [script:A4 0B][box:speech]엘크[delay:1F]…무슨 일이야?
+  0x0075BA2C [0x8006] [script:C8 0B][box:speech]저… 비행선
+  --- context: 0x8006 -> 0x8005 ---
+  0x0075BA70 [0x8005] [script:E9 0B][box:speech]기억하고 있어
+  0x0075BAB6 [0x8005] [script:18 0C][box:speech]내[delay:0B]・[delay:0B]・[delay:0B]내 마을을 습격한…
+  0x0075BB94 [0x8005] [script:7B 0C][box:close]정말, 엘크!
+  --- context: 0x8005 -> 0x8006 ---
+  0x0075BBD6 [0x8006] [script:9E 0C][box:close]어떻게 된 거야!?
+  0x0075BC1C [0x8006] [script:C9 0C][box:speech]틀림없어[br]저 비행선에 내 마을은…
+  --- context: 0x8006 -> 0x8005 ---
+  0x0075BC72 [0x8005] [script:EA 0C][box:speech]용서 못 해!
+  0x0075BCCE [0x8005] [script:17 0D][box:close]엘크!
+  --- context: 0x8005 -> 0x8006 ---
+  0x0075BD2A [0x8006] [script:50 0D]젠장, 조금만 더 하면 되는데[br]엄청난 방해가 들어왔군
+  --- context: 0x8006 -> 0x00A9 ---
+  0x00811976 [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
+  0x00811F1A [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
+  0x00811F44 [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x00811F6E [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
+  0x00811F9A [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x00811FE2 [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+  --- context: 0x00A9 -> 0x00B4 ---
   0x00812338 [0x00B4] [script:EA 04]미정의 스테이지입니다
   0x0081257E [0x00B4] [script:16 06]전투에 참가할 캐릭터를[br]선택해 주세요
+  --- context: 0x00B4 -> 0x00A9 ---
+  0x0081293E [0x00A9] [script:F4 07]지상으로 돌아가겠습니까?[br][opt]아니오[br][opt]네
+  --- context: 0x00A9 -> 0x00B4 ---
   0x00812AF0 [0x00B4] [script:C7 08]유적 던전 [num:01]층
-
-# Chunk 1 - Debug message (internal)
-  0x00172068 [0x00B4] [script:5A 1F]여신 파괴 전은 「0～11」, 통상 처리는 「12～」

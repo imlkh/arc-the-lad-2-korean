@@ -159,19 +159,23 @@ A6 21 DE 21 DE 21 92 → repeating 0xXX21 pattern, decoded as "9む9むボ"
 | 7 | **Data tables / other** | misc | mixed | mixed | **No → garbage** |
 | | **Total** | | **34,816** | 100% | |
 
-## Garbage Entry Analysis
+## Garbage Entry Analysis — RESOLVED (2026-02-09)
 
-### Where the 57 garbage entries come from
+All garbage entries from the text region have been eliminated. The decoder now
+produces **26,631 dialogues** with **0 garbage**, **0 fragments**, **0 partial decodes**.
 
-All 57 entries are in the text region (chunk offset 0xB4000-0xBC7FF).
-They come from the decoder's gap search misinterpreting Types 4, 6, and 7
-as dialogue (Type 3).
+### Historical: Where the garbage entries came from
 
-| Source type | Garbage entries | Examples |
-|-------------|----------------|---------|
-| Type 4 (event triggers) | ~8 | A9 00 entries: "。つし", "ぉとす" |
-| Type 6 (MIPS code) | ~39 | "あぴデゅしダ", "地ういきあつえと", "かグにグォギ" |
-| Type 7 (data tables) | ~10 | "4えを", "9む9むボ", "＊たを" |
+All entries were in the text region (chunk offset 0xB4000-0xBC7FF), from the
+decoder's gap search misinterpreting Types 4, 6, and 7 as dialogue (Type 3).
+
+| Source type | Entries eliminated | Method |
+|-------------|-------------------|--------|
+| Type 4 (event triggers) | ~8 | `_find_event_trigger_ranges()` exclusion zones |
+| Type 6 (MIPS code) | ~39 | `_is_garbage_text()` Rules 7a-7i + めあ check |
+| Type 6 (NOR+LWL block) | 6 | `_find_nor_lwl_block_ranges()` exclusion zones |
+| Type 7 (data tables) | ~10 | `_is_garbage_text()` Rules 8-12 |
+| Shared code blocks | 138 | `SHARED_BLOCK_ARTIFACTS` blocklist (Rule 16) |
 
 ### Raw byte patterns of all 57 entries
 
@@ -311,34 +315,33 @@ gaps were identified and closed:
 (NOT in search-path validation, which causes cascade effects — see
 DECODER_FIXES.md "Garbage Elimination to Zero" section).
 
-**Result**: Category 1 garbage: 57 → **0** across 26,775 dialogues in 19 STG files.
+**Result**: Category 1 garbage: 57 → **0** across 26,631 dialogues in 19 STG files.
 Zero false positives (6 FP cases identified and fixed with exemptions).
+
+Additionally, 138 shared code block artifacts were eliminated via the
+`SHARED_BLOCK_ARTIFACTS` exact-match blocklist (Rule 16 in `_is_garbage_text()`),
+and 6 NOR+LWL block entries were eliminated via structural exclusion zones.
 
 The zero-false-positive byte-level checks (prefix==text-start, めあ×2)
 remain in `_has_mips_opcode_signature()` as early-exit optimizations
 that reject entries before full text decoding.
 
-## Structural Detection — Event Trigger Exclusion Zones (2026-02-09)
+## Structural Detection — Exclusion Zones (2026-02-09)
 
-In addition to heuristic text-pattern rules, event trigger commands (Type 4)
-are now **structurally detected** before text decoding via
-`_find_event_trigger_ranges()`. These ranges are merged with script opcode
-ranges into unified exclusion zones (`_build_exclusion_zones()`), which the
-gap search skips entirely.
+Three types of non-dialogue byte sequences are **structurally detected** before
+text decoding, merged into unified exclusion zones (`_build_exclusion_zones()`):
 
-**Strict validation**: Bytes at positions +3, +5, +7 must ALL be exactly
-`0x80`. This prevents false positives at dialogue boundaries where `67 00`
-might appear coincidentally. The initial implementation used a looser check
-(any byte >= 0x80) which caused a real dialogue ("ヴ、ヴ、ニゲミチナイ") to
-be falsely excluded.
+1. **Script opcodes** (`_find_script_ranges()`): `28 01` opcode blocks (10 bytes)
+2. **Event triggers** (`_find_event_trigger_ranges()`): `67 00` + strict `0x80`
+   validation at positions +3, +5, +7 (14 bytes each)
+3. **NOR+LWL blocks** (`_find_nor_lwl_block_ranges()`): Shared event engine routine
+   with 15-byte prefix + 8-byte core (`80 27 01 44 8C 4E 0C 89`) + 33-byte suffix,
+   plus LW parameter table at −1,063 bytes offset
 
-**Key finding**: Structural event trigger detection reduces MIPS pre-filter
-calls by ~25 per decode run, but does NOT eliminate the need for heuristic
-text-pattern rules. All 12 `_is_garbage_text()` rules remain actively used
-(~5,000+ total hits), catching garbage at gap_start, continuation, fallback,
-orphan menu, bare dialogue, event script, and padding scan stages. The
-two-layer approach (structural pre-filter + text heuristic post-filter) is
-the effective architecture.
+**Key finding**: Structural detection reduces MIPS pre-filter calls but does NOT
+eliminate the need for heuristic text-pattern rules. All 16 `_is_garbage_text()` rules
+remain actively used (~5,000+ total hits). The two-layer approach (structural
+pre-filter + text heuristic post-filter) is the effective architecture.
 
 ### Catalog script
 

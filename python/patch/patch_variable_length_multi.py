@@ -148,26 +148,20 @@ VLUT_OFFSETS_SG00 = {
 }
 
 # Per-chunk VLUT offsets for S200.STG (17 chunks)
-# Conservative mapping: only chunks with empty padding region.
-# This avoids writing into chunks with dense padding data that can cause instability.
+# Full mapping: all chunks with verified free padding space.
+# Chunks 0, 5, 9, 10, 14, 15, 16 have no space (fixed-length fallback).
 VLUT_OFFSETS_S200 = {
-    1: 0xA0100,   # Empty padding region, 60KB available after Korean start
-    6: 0xA0100,   # Empty padding region, 60KB available after Korean start
-    8: 0xA0100,   # Empty padding region, 60KB available after Korean start
-    12: 0xA0100,  # Empty padding region, 60KB available after Korean start
+    1: 0xA0100,   # 64KB free, empty padding
+    2: 0xA0F00,   # 60KB free, data at 0xA0000-0xA0F00
+    3: 0xA2800,   # 54KB free, data at 0xA0000-0xA2800
+    4: 0xA7100,   # 35KB free, data at 0xA0000-0xA7100
+    6: 0xA0100,   # 64KB free, empty padding
+    7: 0xADC00,   # 9KB free (tight: ~5KB after VLUT gap)
+    8: 0xA0100,   # 64KB free, empty padding
+    11: 0xA9000,  # 28KB free, data at 0xA0000-0xA9000
+    12: 0xA0100,  # 64KB free, empty padding
+    13: 0xA9E00,  # 24KB free, data at 0xA0000-0xA9E00
 }
-
-# Select VLUT offsets based on STG file
-def get_vlut_offsets(stg_name):
-    if stg_name == "S100":
-        return VLUT_OFFSETS_S100
-    elif stg_name == "SG00":
-        return VLUT_OFFSETS_SG00
-    elif stg_name == "S200":
-        return VLUT_OFFSETS_S200
-    else:
-        # Default: assume all chunks have space at 0xA0100
-        return {}
 
 # Korean text starts 0x1000 after VLUT (4KB for up to 1000 entries)
 KOREAN_TEXT_GAP = 0x1000
@@ -182,13 +176,91 @@ KOREAN_TEXT_END_SG00 = {
 }
 DEFAULT_KOREAN_TEXT_END = 0xB0000
 
-def get_korean_text_end(stg_name, chunk_idx):
-    """Get the end boundary for Korean text in a chunk."""
+
+def auto_detect_vlut_offsets(data, num_chunks):
+    """Scan each chunk's padding region (0xA0000-0xB0000) for free space.
+
+    Finds the largest contiguous all-zero region in 256-byte blocks.
+    Returns (vlut_offsets, korean_text_ends) where:
+      - vlut_offsets: chunk_idx -> offset of VLUT start within chunk
+      - korean_text_ends: chunk_idx -> end boundary (only if < 0xB0000)
+    """
+    PADDING_START = 0xA0000
+    PADDING_END = 0xB0000
+    MIN_FREE_SPACE = 0x2000  # 8KB minimum for VLUT + Korean text
+    BLOCK_SIZE = 0x100       # 256-byte scan granularity
+
+    vlut_offsets = {}
+    korean_text_ends = {}
+
+    for chunk_idx in range(num_chunks):
+        chunk_base = chunk_idx * CHUNK_SIZE
+
+        # Scan 256-byte blocks, marking each as zero or non-zero
+        num_blocks = (PADDING_END - PADDING_START) // BLOCK_SIZE
+        is_zero = []
+        for b in range(num_blocks):
+            block_start = chunk_base + PADDING_START + b * BLOCK_SIZE
+            block_end = block_start + BLOCK_SIZE
+            is_zero.append(all(x == 0 for x in data[block_start:block_end]))
+
+        # Find the largest contiguous run of zero blocks
+        best_start = -1
+        best_len = 0
+        cur_start = -1
+        cur_len = 0
+        for b in range(num_blocks):
+            if is_zero[b]:
+                if cur_start < 0:
+                    cur_start = b
+                    cur_len = 1
+                else:
+                    cur_len += 1
+            else:
+                if cur_len > best_len:
+                    best_start = cur_start
+                    best_len = cur_len
+                cur_start = -1
+                cur_len = 0
+        # Check final run
+        if cur_len > best_len:
+            best_start = cur_start
+            best_len = cur_len
+
+        free_bytes = best_len * BLOCK_SIZE
+        if free_bytes >= MIN_FREE_SPACE:
+            region_start = PADDING_START + best_start * BLOCK_SIZE
+            region_end = PADDING_START + (best_start + best_len) * BLOCK_SIZE
+
+            # Align VLUT start to 0x100 boundary (already aligned by block scan)
+            vlut_offsets[chunk_idx] = region_start
+
+            # If the free region doesn't extend to 0xB0000, record the boundary
+            if region_end < PADDING_END:
+                korean_text_ends[chunk_idx] = region_end
+
+    return vlut_offsets, korean_text_ends
+
+
+def get_vlut_config(stg_name, data=None):
+    """Get VLUT offsets and Korean text end boundaries for an STG file.
+
+    For S100/SG00/S200: returns hardcoded, tested tables.
+    For all others: auto-detects free space in padding region.
+
+    Returns (vlut_offsets, korean_text_ends) tuple.
+    """
     if stg_name == "S100":
-        return KOREAN_TEXT_END_S100.get(chunk_idx, DEFAULT_KOREAN_TEXT_END)
+        return VLUT_OFFSETS_S100, KOREAN_TEXT_END_S100
     elif stg_name == "SG00":
-        return KOREAN_TEXT_END_SG00.get(chunk_idx, DEFAULT_KOREAN_TEXT_END)
-    return DEFAULT_KOREAN_TEXT_END
+        return VLUT_OFFSETS_SG00, KOREAN_TEXT_END_SG00
+    elif stg_name == "S200":
+        return VLUT_OFFSETS_S200, {}
+    elif data is not None:
+        num_chunks = len(data) // CHUNK_SIZE
+        return auto_detect_vlut_offsets(data, num_chunks)
+    else:
+        return {}, {}
 
 
 def get_dialogues_by_chunk(stg_data, decode_table):
@@ -246,7 +318,7 @@ def get_dialogues_by_chunk(stg_data, decode_table):
 
 
 def patch_chunk(data, chunk_idx, dialogues, translations, korean_mapping, decode_table, vlut_offsets,
-                japanese_to_korean=None, stg_name="S100"):
+                japanese_to_korean=None, korean_text_ends=None):
     """Patch a single chunk with variable-length translations."""
     chunk_start = chunk_idx * CHUNK_SIZE
 
@@ -261,7 +333,7 @@ def patch_chunk(data, chunk_idx, dialogues, translations, korean_mapping, decode
 
     # Korean text starts after VLUT
     korean_start = vlut_offset + KOREAN_TEXT_GAP
-    korean_end = get_korean_text_end(stg_name, chunk_idx)
+    korean_end = (korean_text_ends or {}).get(chunk_idx, DEFAULT_KOREAN_TEXT_END)
 
     # Build translation lookup by file offset
     trans_by_offset = {}
@@ -407,8 +479,17 @@ def main():
     dialogues_by_chunk = get_dialogues_by_chunk(bytes(data), scanner_decode_table)
 
     # Get VLUT offsets for this STG file
-    vlut_offsets = get_vlut_offsets(stg_name)
-    print(f"  VLUT offsets configured for {len(vlut_offsets)} chunks")
+    vlut_offsets, korean_text_ends = get_vlut_config(stg_name, data)
+    is_auto = stg_name not in ("S100", "SG00", "S200")
+    if is_auto and vlut_offsets:
+        print(f"  Auto-detected VLUT placement for {len(vlut_offsets)}/{num_chunks} chunks:")
+        for ci in sorted(vlut_offsets.keys()):
+            end = korean_text_ends.get(ci, DEFAULT_KOREAN_TEXT_END)
+            avail = end - (vlut_offsets[ci] + KOREAN_TEXT_GAP)
+            end_note = f" (end={end:#x})" if ci in korean_text_ends else ""
+            print(f"    Chunk {ci:>2}: VLUT={vlut_offsets[ci]:#07x}  avail={avail // 1024:>2}KB{end_note}")
+    else:
+        print(f"  VLUT offsets configured for {len(vlut_offsets)} chunks")
 
     # Build Japanese text -> Korean translation mapping for cross-chunk matching
     # First, create offset -> Japanese text lookup from all dialogues
@@ -446,7 +527,7 @@ def main():
 
         data, stats = patch_chunk(
             data, chunk_idx, dialogues, translations, korean_mapping, decode_table, vlut_offsets,
-            japanese_to_korean, stg_name
+            japanese_to_korean, korean_text_ends
         )
 
         if stats['no_space']:

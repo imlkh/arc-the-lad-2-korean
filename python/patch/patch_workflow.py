@@ -324,7 +324,28 @@ def main():
         # - include_stages: explicit list to patch by default
         # - exclude_stages: remove stages from include list
         # If include_stages is empty, all available stages are included first.
-        include_stages = ["S100", "SG00", "S200"]   # e.g. ["S100", "SG00", "S200", "S300"]
+        # include_stages = ["S100", "SG00", "S200"]   # e.g. ["S100", "SG00", "S200", "S300"]
+        include_stages = [
+            "S100",
+            "S200",
+            "S300",
+            "S400",
+            "S500",
+            "S600",
+            "S700",
+            "S800",
+            "S900",
+            "SA00",
+            "SB00",
+            "SC00",
+            "SD00",
+            "SE00",
+            "SF00",
+            "SG00",
+            "SH00",
+            "SI00",
+            "SJ00",
+        ]
         exclude_stages = []                  # e.g. ["S200"]
 
         if include_stages:
