@@ -220,7 +220,7 @@ def is_garbage(text, plain):
         return "MIPS opcode pattern (めあ+ジ/メ sequence)"
 
     # Pattern 19: Starts with small kana (ぉ/ゅ/ょ) — unusual word start
-    if len(plain) <= 8 and plain and plain[0] in 'ぉゅょ':
+    if len(plain) <= 12 and plain and plain[0] in 'ぉゅょ':
         kanji_count = sum(1 for c in plain if is_kanji(c))
         if kanji_count == 0:
             return "MIPS opcode pattern (small kana start)"
@@ -228,6 +228,42 @@ def is_garbage(text, plain):
     # Pattern 20: Starts with fullwidth period 。 (non-dialogue data)
     if plain.startswith('。') and len(plain) <= 5:
         return "MIPS opcode pattern (。prefix)"
+
+    # Pattern 21: 水 + pure kana without grammar — MIPS opcode with 水 (0x90)
+    if plain.startswith('水') and 5 <= len(plain) <= 12:
+        rest = plain[1:]
+        has_other_kanji = any(is_kanji(c) for c in rest)
+        all_kana = all(is_kana(c) or c == 'ー' for c in rest)
+        if not has_other_kanji and all_kana:
+            has_grammar = bool(re.search(
+                r'(ます|です|ない|する|した|ている|てる|こと|もの|だろう|'
+                r'って|けど|から|まで|なら|んだ|のか|のは|には|ので|'
+                r'の[がをにはへも])',
+                rest))
+            if not has_grammar:
+                return "MIPS opcode pattern (水+kana)"
+
+    # Pattern 22: Single kanji + さ + ギ (3 chars) — MIPS register pattern
+    if (len(plain) == 3 and is_kanji(plain[0])
+            and plain[1] == 'さ' and plain[2] == 'ギ'):
+        return "MIPS opcode pattern (kanji+さ+ギ)"
+
+    # Pattern 23: Long text with 2-char pair repeating 20+ times
+    if len(plain) > 30:
+        for i in range(min(20, len(plain) - 1)):
+            pair = plain[i:i + 2]
+            if pair[0] == pair[1]:
+                continue
+            count = sum(
+                1 for j in range(len(plain) - 1)
+                if plain[j:j + 2] == pair)
+            if count >= 20:
+                return f"MIPS opcode pattern (repeating '{pair}' x{count})"
+
+    # Pattern 24: NOR+LWL shared code block artifacts
+    NOR_LWL_ARTIFACTS = {'ぱあさ', 'イしょしりあゅしう'}
+    if plain in NOR_LWL_ARTIFACTS:
+        return f"Pattern 24 (NOR+LWL shared block artifact): {plain}"
 
     return None
 

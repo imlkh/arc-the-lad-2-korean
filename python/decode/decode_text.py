@@ -235,6 +235,16 @@ TEMPLATE_SIZE = 48
 SCRIPT_OPCODE_28 = b'\x28\x01'
 SCRIPT_BLOCK_SIZE = 10
 MIPS_OPCODE_MARKER_BYTES = {0x80, 0x8C}
+
+# NOR+LWL shared code block signature (replicated event engine routine)
+NOR_LWL_CORE = b'\x80\x27\x01\x44\x8C\x4E\x0C\x89'
+NOR_LWL_PREFIX = (b'\x4E\x00\x00\x80\x0E\x00\x0F\x00'
+                  b'\x43\x01\x0B\x00\x4E\x0C\x00')  # 15 bytes
+NOR_LWL_SUFFIX_LEN = 33
+LW_TABLE_MARKER = (b'\x52\x0C\x4F\x0C\x4D\x0C\x89\x00'
+                   b'\x52\x0C\x4E\x0C\x50\x0C\xFF\xFF'
+                   b'\xAB\x00\x8E\x00')  # 18 bytes
+LW_TABLE_OFFSET = -1063  # LW table marker start relative to NOR+LWL core
 STG_CHUNK_SIZE = 0xBC800  # 772,096 bytes per chunk
 STG_TEXT_REGION_OFFSET = 0xB4000  # Text region starts at +0xB4000 within each chunk
 STG_TEXT_REGION_SIZE = 0x8800  # ~34,816 bytes text region per chunk
@@ -483,7 +493,7 @@ def _is_garbage_text(text):
         # e.g., グゼノ, クゼゼ, シゼニ, ギギグ, ギッグ, ッゲタグ
         # Entirely of chars produced by MIPS register/memory operand bytes.
         # No real Japanese words use only these characters.
-        MIPS_KATA = set('ギデゲグゼノクシニダヅヂゾジッタ')
+        MIPS_KATA = set('ギデゲグゴゼノクシニダヅヂゾジッタ')
         if (3 <= len(stripped) <= 5
                 and all(c in MIPS_KATA for c in stripped)
                 and len(set(stripped)) >= 2):  # Exempt all-same-char (ククク = laugh)
@@ -560,9 +570,10 @@ def _is_garbage_text(text):
         return True
 
     # Rule 10: Small kana start (ぉ/ゅ/ょ) — unusual word start
-    # e.g., "ぉとす", "ぉあさ". Japanese words never start with these small kana
-    # forms; they only appear after another character (e.g., しょ, きょ, にょ).
-    if stripped and stripped[0] in 'ぉゅょ' and len(stripped) <= 8:
+    # e.g., "ぉとす", "ぉあさ", "ゅデイしょしりあゅしう". Japanese words never
+    # start with these small kana forms; they only appear after another
+    # character (e.g., しょ, きょ, にょ).
+    if stripped and stripped[0] in 'ぉゅょ' and len(stripped) <= 12:
         has_kanji = any('\u4e00' <= c <= '\u9fff' for c in stripped)
         if not has_kanji:
             return True
@@ -578,6 +589,49 @@ def _is_garbage_text(text):
         has_kanji = any('\u4e00' <= c <= '\u9fff' for c in stripped)
         if not has_kanji:
             return True
+
+    # Rule 13: 水 + pure kana without grammar — MIPS opcodes with 水 (0x90)
+    # e.g., "水つけなえたっと", "水てのなくたリと". Real 水 text pairs with
+    # kanji (水面, 水晶, 水路) or uses の particle (水の). MIPS produces
+    # 水 followed by random kana with no grammatical structure.
+    if stripped.startswith('水') and 5 <= len(stripped) <= 12:
+        rest = stripped[1:]
+        has_other_kanji = any('\u4e00' <= c <= '\u9fff' for c in rest)
+        all_kana = all(
+            '\u3040' <= c <= '\u309f' or '\u30a0' <= c <= '\u30ff' or c == 'ー'
+            for c in rest)
+        if not has_other_kanji and all_kana:
+            has_grammar = bool(re.search(
+                r'(ます|です|ない|する|した|ている|てる|こと|もの|だろう|'
+                r'って|けど|から|まで|なら|んだ|のか|のは|には|ので|'
+                r'の[がをにはへも])',
+                rest))
+            if not has_grammar:
+                return True
+
+    # Rule 14: Single kanji + さ + ギ (3 chars) — MIPS register pattern
+    # e.g., "惜さギ", "我さギ". The byte 0x80 (ギ) is a common MIPS register
+    # operand. Real Japanese never ends kanji+さ with ギ (惜さない, not 惜さギ).
+    if (len(stripped) == 3
+            and '\u4e00' <= stripped[0] <= '\u9fff'
+            and stripped[1] == 'さ'
+            and stripped[2] == 'ギ'):
+        return True
+
+    # Rule 15: Long text (>30 chars) with 2-char pair repeating 20+ times
+    # e.g., "ゆりるぃをハぐヅじヅどセへセへセへセへ..." — MIPS opcode stream
+    # where the same instruction pair decodes to the same character pair
+    # repeatedly. Real dialogue never has a pair repeating this many times.
+    if len(stripped) > 30:
+        for i in range(min(20, len(stripped) - 1)):
+            pair = stripped[i:i + 2]
+            if pair[0] == pair[1]:
+                continue
+            count = sum(
+                1 for j in range(len(stripped) - 1)
+                if stripped[j:j + 2] == pair)
+            if count >= 20:
+                return True
 
     return False
 
@@ -890,14 +944,51 @@ def _find_event_trigger_ranges(data, start, end):
     return ranges
 
 
+def _find_nor_lwl_block_ranges(data, start, end):
+    """Find NOR+LWL shared code block ranges.
+
+    The NOR+LWL block is a shared event engine routine replicated
+    identically into every chunk's text region. It has a 56-byte
+    fixed signature (15-byte prefix + 8-byte core + 33-byte suffix).
+    The LW parameter table always appears exactly 1063 bytes before
+    the core.
+
+    Returns sorted list of (range_start, range_end) tuples.
+    """
+    ranges = []
+    pos = start
+    while pos <= end - 8:
+        idx = data.find(NOR_LWL_CORE, pos, end)
+        if idx == -1:
+            break
+        # Validate 15-byte prefix
+        prefix_start = idx - len(NOR_LWL_PREFIX)
+        if (prefix_start >= 0
+                and data[prefix_start:idx] == NOR_LWL_PREFIX):
+            block_end = idx + 8 + NOR_LWL_SUFFIX_LEN  # core + suffix
+            # Check for LW parameter table at expected offset
+            lw_pos = idx + LW_TABLE_OFFSET
+            if (lw_pos >= 0
+                    and data[lw_pos:lw_pos + len(LW_TABLE_MARKER)]
+                    == LW_TABLE_MARKER):
+                block_start = lw_pos
+            else:
+                block_start = prefix_start
+            ranges.append((block_start, block_end))
+        pos = idx + 1
+    return ranges
+
+
 def _build_exclusion_zones(data, start, end):
-    """Build merged exclusion zones from script opcodes and event triggers.
+    """Build merged exclusion zones from script opcodes, event triggers,
+    and NOR+LWL shared code blocks.
 
     Returns sorted list of (range_start, range_end) tuples.
     """
     zones = []
     zones.extend(_find_script_ranges(data, start, end))
     zones.extend(_find_event_trigger_ranges(data, start, end))
+    zones.extend(_find_nor_lwl_block_ranges(data, start, end))
     # Sort and merge overlapping ranges
     if not zones:
         return []
