@@ -10,6 +10,8 @@ Usage:
     python analyze_charids.py --char 行          # Find specific character
     python analyze_charids.py --word 行きます    # Find specific word
     python analyze_charids.py --compare          # Compare BEAM vs STG usage
+    python analyze_charids.py --korean 702       # Find Korean charID usage in translations
+    python analyze_charids.py --korean 쏟        # Find Korean character usage in translations
 """
 
 import argparse
@@ -19,8 +21,11 @@ import sys
 from collections import Counter, defaultdict
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-CHARS_MD_PATH = os.path.join(_SCRIPT_DIR, "..", "..", "docs", "COMM_IMG_chars.md")
-GAME_DIR = os.path.join(_SCRIPT_DIR, "..", "..", "..")
+BASE_DIR = os.path.join(_SCRIPT_DIR, "..", "..")
+CHARS_MD_PATH = os.path.join(BASE_DIR, "docs", "COMM_IMG_chars.md")
+GAME_DIR = os.path.join(BASE_DIR, "..")
+CHARMAP_PATH = os.path.join(BASE_DIR, "output", "patched", "unified_charmap.txt")
+TRANS_DIR = os.path.join(BASE_DIR, "output", "patched", "translation")
 
 
 def build_tables():
@@ -52,6 +57,44 @@ def build_tables():
                 if clean not in char_to_id:
                     char_to_id[clean] = char_id
     return id_to_char, char_to_id
+
+
+def load_korean_charmap():
+    """Load unified_charmap.txt -> (charID_to_korean, korean_to_charID)."""
+    id_to_kr = {}
+    kr_to_id = {}
+    if not os.path.exists(CHARMAP_PATH):
+        return id_to_kr, kr_to_id
+    with open(CHARMAP_PATH, 'r', encoding='utf-8') as f:
+        for line in f:
+            if line.startswith('#') or not line.strip():
+                continue
+            parts = line.strip().split('\t')
+            if len(parts) >= 2:
+                kr_char = parts[0]
+                char_id = int(parts[1])
+                id_to_kr[char_id] = kr_char
+                kr_to_id[kr_char] = char_id
+    return id_to_kr, kr_to_id
+
+
+def find_korean_in_translations(target_char):
+    """Search all translation files for a Korean character. Returns per-file results."""
+    results = {}
+    if not os.path.exists(TRANS_DIR):
+        return results
+    for fname in sorted(os.listdir(TRANS_DIR)):
+        if not fname.endswith('.txt'):
+            continue
+        fpath = os.path.join(TRANS_DIR, fname)
+        matches = []
+        with open(fpath, 'r', encoding='utf-8') as f:
+            for lineno, line in enumerate(f, 1):
+                if target_char in line:
+                    matches.append((lineno, line.rstrip()))
+        if matches:
+            results[fname] = matches
+    return results
 
 
 def char_id_to_bytes(char_id):
@@ -201,8 +244,60 @@ def main():
     parser.add_argument("--char", help="Find specific character across files")
     parser.add_argument("--word", help="Find specific word across files")
     parser.add_argument("--compare", action="store_true", help="Compare BEAM.DAT vs STG charID usage")
+    parser.add_argument("--korean", help="Find Korean charID usage in translation files (charID number or Korean character)")
     parser.add_argument("--top", type=int, default=20, help="Show top N charIDs (default: 20)")
     args = parser.parse_args()
+
+    # Handle --korean early (doesn't need Japanese tables)
+    if args.korean:
+        id_to_kr, kr_to_id = load_korean_charmap()
+        if not id_to_kr:
+            print(f"ERROR: Korean charmap not found: {CHARMAP_PATH}")
+            print("  Run patch_all.py first to generate it.")
+            return
+
+        # Determine target: charID number or Korean character
+        target_char = None
+        target_id = None
+        try:
+            target_id = int(args.korean)
+            target_char = id_to_kr.get(target_id)
+            if not target_char:
+                print(f"CharID {target_id} is not mapped to any Korean character.")
+                return
+        except ValueError:
+            target_char = args.korean
+            target_id = kr_to_id.get(target_char)
+            if not target_id:
+                print(f"Character '{target_char}' not found in Korean charmap.")
+                return
+
+        target_bytes = char_id_to_bytes(target_id)
+        byte_str = ' '.join(f'{b:02X}' for b in target_bytes) if target_bytes else '??'
+        encoding_type = "single-byte" if target_id <= 0xEE else "two-byte"
+
+        print(f"Character: {target_char} (U+{ord(target_char):04X})")
+        print(f"CharID:    {target_id}")
+        print(f"Encoding:  {byte_str} ({encoding_type})")
+        print()
+
+        # Search translation files
+        results = find_korean_in_translations(target_char)
+        if not results:
+            print("Not found in any translation file.")
+            return
+
+        total = sum(len(matches) for matches in results.values())
+        print(f"Found in {len(results)} file(s), {total} line(s):\n")
+
+        for fname, matches in results.items():
+            print(f"  {fname} ({len(matches)} lines):")
+            for lineno, line in matches[:10]:
+                print(f"    L{lineno}: {line.strip()[:80]}")
+            if len(matches) > 10:
+                print(f"    ... and {len(matches) - 10} more")
+            print()
+        return
 
     id_to_char, char_to_id = build_tables()
     print(f"Loaded {len(id_to_char)} character mappings\n")

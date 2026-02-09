@@ -304,6 +304,9 @@ def patch_comm_img(comm_img_path, korean_mapping):
     with open(comm_img_path, "rb") as f:
         data = bytearray(f.read())
 
+    # Clear charID 160 (0xA0) to blank — used as space for [box:speech] workaround
+    clear_glyph(data, 160)
+
     patched = 0
     missing = []
 
