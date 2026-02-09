@@ -146,6 +146,28 @@ The zero-delay (`FF 03 00 01`) has no visual impact but separates the control co
 2. **Padding/Event regions (0xA0000-0xB4000)**: Do NOT add `[delay:00]` - these use fixed-length patching with no variable-length support, so every byte counts. The display bug doesn't affect these regions.
 3. **Text region (0xB4000-0xBC800)**: ADD `[delay:00]` after `[box:speech]` at start - variable-length VLUT handles the extra bytes.
 
+##### EF (Choice Option) + Korean: No Bug
+
+Unlike `[box:speech]`, the `EF` (`[opt]`) control code does NOT cause display
+issues when followed by Korean two-byte characters (`F0-FE XX`).
+
+**Why it's safe**: The `[box:speech]` bug was caused by the trailing parameter
+byte `01` of the 4-byte sequence `FF 08 03 01` colliding with the following
+`F0` byte across the control code boundary. `EF` is a **parameter-less
+single-byte** control code — after the parser consumes `EF`, it returns
+cleanly to the main loop and reads the next byte `F0` as a fresh two-byte
+character prefix. No `01 F0` collision is possible.
+
+```
+EF F0 XX ...
+^^ ^^^^^^
+[opt] Korean char (parsed independently)
+```
+
+**Verified in-game**: S100.STG and SG00.STG both contain `[opt]` + Korean
+two-byte characters (e.g., `[opt]싸우는` = `EF F0 70...`, `[opt]됐어` =
+`EF F0 B5...`) that display correctly. No `[delay:00]` workaround needed.
+
 #### FF 0C: Insert Stat Level Glyph
 
 The `FF 0C` handler constructs a single two-byte character string from the UI glyph region of the font (cells 420–429: +1 through +9, SS). It writes a 3-byte inline string `[0xF5, computed_byte, 0x00]` into the dialogue struct's text buffer.
@@ -588,46 +610,47 @@ The executable also contains Shift-JIS-to-charID mapping tables at file offset `
 
 ## Garbage Text Filter
 
-The STG decoder includes a rule-based garbage filter (`_is_garbage_text()`) to reject false positives from binary data that happens to map to valid character IDs. The filter uses 5 simple rules:
+The STG decoder includes multi-layer garbage filtering to reject false
+positives from MIPS code and binary data that maps to valid character IDs.
+See `DECODER_FIXES.md` for full details (12 rules, sub-rules, false positive
+analysis).
 
-### Rule-Based Detection (5 Rules)
+**Current stats** (2026-02-09): 26,775 dialogues, **0** garbage, **0**
+single-char fragments, **0** partial decodes across 19 STG files.
 
-| Rule | Trigger | Rationale |
-|------|---------|-----------|
-| 1 | Unknown charID `[?XXXX]` | CharID > 1764 is beyond font table (441 cells × 4 bitplanes) |
-| 2 | Invalid FF opcode | Valid opcodes: 01, 03, 04, 05, 06, 07, 08, 09, 0A, 0B, 0D, 0F only |
-| 3 | Lowercase ASCII in Japanese | Game text uses uppercase only (HP, MP, BGM) |
-| 4 | Short uppercase+kana (≤6 chars) | Text with uppercase + kana but no kanji |
-| 5 | Short mixed kana (≤4 chars) | Mixed hiragana/katakana without repetition pattern |
+### Filtering Layers
 
-**Filter Statistics**: Removes ~177 garbage strings (0.86%) while keeping 20,484 valid dialogues (99.14%)
+1. **Structural exclusion zones** — Script opcodes (`28 01`, 10B) and
+   event triggers (`67 00`, 14B) are detected by byte signature and
+   excluded before text decoding.
+
+2. **MIPS opcode pre-filter** (`_has_mips_opcode_signature()`) — Rejects
+   byte sequences with high `0x80`/`0x8C` density, repeating marker
+   cadence, or `めあ` (0x22 0x01) register-reference patterns.
+
+3. **Garbage text post-filter** (`_is_garbage_text()`) — 12 text-pattern
+   rules applied after decoding: unknown charID, invalid FF opcodes,
+   lowercase ASCII, MIPS katakana patterns, digit+kana mix, etc.
+
+4. **Region filter** — Rejects entries from MIPS code regions
+   (chunk offset < 0xA0000).
 
 ### Valid FF Control Codes
 
-| Opcode | Count | Purpose |
-|--------|-------|---------|
-| 01 | 10 | Text highlight |
-| 03 | common | Delay |
-| 04 | 38 | Menu marker |
-| 05 | common | Newline |
-| 06 | 25 | Button icon |
-| 07 | common | Number display |
-| 08 | 90 | Box control |
-| 09 | 4 | Emphasis |
-| 0A | 25 | Currency format |
-| 0B | common | Item name |
-| 0D | common | Character name |
-| 0F | 1 | Unknown effect |
+| Opcode | Purpose |
+|--------|---------|
+| 01 | Text highlight |
+| 03 | Delay |
+| 04 | Menu marker |
+| 05 | Newline |
+| 06 | Button icon |
+| 07 | Number display |
+| 08 | Box control |
+| 09 | Emphasis |
+| 0A | Currency format |
+| 0B | Item name |
+| 0D | Character name |
+| 0F | Inline sprite/graphic |
 
-**Note:** FF:00, FF:02, FF:0C, FF:0E, FF:10+ are NOT valid in dialogue text - they only appear in garbage data.
-
-### Preserved Text Patterns
-
-The filter preserves legitimate Japanese text including:
-
-- **Single character responses**: ？, ！, …
-- **Silence patterns**: ・・・・・・, (・・・・・・・・・)
-- **Laughter/onomatopoeia**: はっはっは, ふふふ, げらげら, コチョコチョ
-- **Stuttering speech**: な、な、な...
-- **Names with katakana**: プロディアス, エルク, リーザ, ノコノコ
-- **Casual dialogue with proper punctuation**: 、。？！…「」()
+**Note:** FF:00, FF:02, FF:0C, FF:0E, FF:10+ are NOT valid in dialogue
+text — they only appear in binary data misinterpreted as text.

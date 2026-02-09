@@ -10,6 +10,43 @@ by misinterpreted opcodes.
 **Final stats** (2026-02-09): 26,775 dialogues across 20,947 templates in 19 STG files.
 Category 1 garbage: **0**. Category 2 single-char fragments: **0**. Partial decodes: **0**.
 
+## Remaining Items
+
+### Missed Gaps: 76 total (down from 362) — all correctly missed
+
+Template gaps where none of the 5 search strategies found dialogue.
+Investigation (2026-02-09) confirmed **all 76 contain no translatable text**.
+
+| Category | Count | What's in the gap |
+|----------|-------|-------------------|
+| Script opcodes only | 59 (77.6%) | `28 01` event script machine code, no text |
+| Binary data | 9 (11.8%) | Empty placeholders, register operands, sentinels |
+| Structural menus | 8 (10.5%) | Pure `[opt][br]` grids with zero visible text |
+
+| File | Missed | Root cause |
+|------|--------|-----------|
+| SI00.STG | 62 | 57 script-only (trimmed to bare prefix) + 5 binary data |
+| S900.STG | 8 | 3x3 menu grid templates — `[box:close][opt][opt][opt][br]...` with no text |
+| S200.STG | 4 | 2 script opcodes + 2 MIPS register data |
+| S100.STG | 2 | Empty dialogue placeholders (A9 00 markers with null text) |
+
+65/76 gaps don't contain the expected prefix bytes at all — the template's
+`ptr_a` points to script code, not dialogue. 11/76 have the prefix but
+decoding correctly fails (empty payloads or single-char fragments).
+The "missed" counter effectively counts "gaps with no dialogue" rather than
+"dialogue we failed to find." Zero coverage loss.
+
+### Debug / Developer Messages: 9 in S200
+
+Real strings left by developers for internal testing, correctly classified
+as Category 3 by `generate_invalid_reports.py`. Examples:
+
+- `デバック用だよ` ("it's for debugging")
+- `修正しましたので感想をください` ("we fixed it, please give feedback")
+- `バグレポートだけでなく感想などもどんどん教えてほしいわ` ("send us impressions, not just bug reports")
+
+These are decoded correctly but not player-facing. Excluded from translation.
+
 ## Garbage Filter Rules (`_is_garbage_text()`)
 
 ### Core Rules (1-6)
