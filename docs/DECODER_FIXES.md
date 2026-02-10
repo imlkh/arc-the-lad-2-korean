@@ -7,7 +7,7 @@ Arc the Lad 2's STG stage files. Because the decoder scans binary data that incl
 MIPS machine code alongside text, it must distinguish real dialogue from garbage produced
 by misinterpreted opcodes.
 
-**Final stats** (2026-02-10): 26,344 dialogues across 20,947 templates in 19 STG files.
+**Final stats** (2026-02-10): 26,541 dialogues across 20,947 templates in 19 STG files.
 Category 1 garbage: **0**. Category 2 single-char fragments: **0**. Partial decodes: **0**.
 String pooling overlaps filtered: **247**.
 
@@ -71,6 +71,7 @@ These are decoded correctly but not player-facing. Excluded from translation.
 | 17 | XxXxY pointer table pattern (5 chars, pair+terminator ボ/せ) | `ぺやぺやボ`, `ぢオぢオせ` |
 | 18 | Trailing uppercase ASCII after kana/kanji (exempt rank patterns, consecutive uppercase) | `鉛えほさギ`, `火さI` |
 | 19 | Padding mixed-script gibberish (`[opt]` + lowercase ASCII + kana) | `と疑わエEZ[opt]リXクじギ` |
+| 20 | `りあ`-prefix MIPS garbage (≤10 chars, no kanji) — SLT/SLTU instruction (byte 0x29 0x01) | `りあきけあ`, `りあすけあ` |
 
 ### Rule 7: MIPS Opcode Detection (sub-rules 7a-7i)
 
@@ -188,6 +189,7 @@ initially misclassified as garbage:
 | + Unmasked MIPS fragments (15) | **26,631** | 0 | 0 | 0 | 13 additional strings (Types D+E) added to blocklist; stable (no cascade) |
 | + Expanded garbage rules (17-19) + blocklist (Types F+G) | **26,591** | 0 | 0 | 0 | Rules 17-19 + extended Rules 9,13,14 + 27 new blocklist entries; −40 garbage |
 | + String pooling overlap filter | **26,344** | 0 | 0 | 0 | Remove 247 sub-entries from string-pooled byte ranges |
+| + Rule 20 (りあ-prefix) + bare scanner relaxation | **26,541** | 0 | 0 | 0 | Rule 20 catches 2,017 りあ MIPS garbage; bare scanner accepts pure-kana/long-hiragana; +197 real dialogues |
 
 ## Other Fixes
 
@@ -212,7 +214,7 @@ mid-sequence:
 - FF XX XX XX control codes (4-byte sequences)
 - F0-F8 XX 2-byte Korean characters
 
-### Pure Kana Dialogue Fix (2026-02-08)
+### Pure Kana Dialogue Fix (2026-02-08, extended 2026-02-10)
 
 Event script (0x00B0) and padding (0x00A0) scanners had strict validation
 requiring `has_box_tag or has_kanji or is_menu`. Pure kana dialogue like
@@ -221,6 +223,10 @@ requiring `has_box_tag or has_kanji or is_menu`. Pure kana dialogue like
 **Fix**: Added targeted acceptance criteria alongside strengthened garbage filter:
 1. **is_pure_kana**: kana + punctuation (`！？…。`), ≥2 kana chars
 2. **is_long_hiragana**: pure hiragana ≥13 chars
+
+**Extension** (2026-02-10): The bare dialogue scanner (0x00B4) in the text region
+had the same kanji-only limitation. Updated to use the same `is_pure_kana` and
+`is_long_hiragana` acceptance criteria. See "Rule 20" section for details.
 
 ### Multi-Dialogue Gap Search (2026-02-08)
 
@@ -573,7 +579,7 @@ Added 27 new entries to the exact-match blocklist (43 → 70 total):
 
 | Rule | Reason for removal |
 |------|-------------------|
-| 20 (short hiragana fragments) | Too many false positives — valid words like うむ, そうか, ならば, あのね, いちご |
+| 20 (short hiragana fragments, original) | Too many false positives — valid words like うむ, そうか, ならば, あのね, いちご. Rule 20 slot later reused for りあ-prefix MIPS garbage. |
 | 21 (medium repeat threshold) | Redundant after Rule 15 threshold revert |
 
 **Key lesson**: Short hiragana fragment detection via allowlist is infeasible — too many
@@ -709,3 +715,50 @@ excluded.
 
 **Results**: Total dialogues: 26,591 → **26,344** (−247). Zero content loss — all removed
 entries are strict suffixes of their parent entries.
+
+### Rule 20: りあ-Prefix MIPS Garbage + Bare Dialogue Scanner Relaxation (2026-02-10)
+
+**Root cause**: Two pure-kana cutscene dialogues in SG00.STG chunk 43 were missing:
+- `はなせ！` at 0x02064C20 ("Release me!")
+- `はなせ、このやろう！` at 0x02064C42 ("Release me, you bastard!")
+
+These are standalone dialogues using `A9 00` markers with `[delay:]` control codes. They are
+pure hiragana+punctuation with no kanji. Two scanner gaps prevented detection:
+
+1. **Orphan menu scanner** requires `[br][opt]` in text — these have `[delay:]` instead
+2. **Bare dialogue scanner** requires `has_kanji` — these are pure kana
+
+The event script and padding scanners already handled pure-kana text via `is_pure_kana` and
+`is_long_hiragana` acceptance criteria, but the bare dialogue scanner in the text region was
+never updated to match.
+
+**Scope**: Relaxing the bare scanner's kanji requirement exposed ~2,800 candidate entries.
+Of these, 2,017 start with `りあ` (bytes 0x29 0x01) — the MIPS SLT/SLTU instruction with
+$zero register, identical in nature to the known `めあ` pattern (0x22 0x01).
+
+**Fix** (two changes):
+
+1. **Rule 20** added to `_is_garbage_text()`: If stripped text starts with `りあ`, has no
+   kanji, and length ≤ 10 → garbage. All 70 unique `りあ`-prefix patterns (2,017 total
+   occurrences) are confirmed MIPS garbage — none are legitimate Japanese.
+
+2. **Bare dialogue scanner** acceptance criteria changed from:
+   ```python
+   if (has_kanji and len(stripped) >= 3 ...):
+   ```
+   to match event/padding scanners:
+   ```python
+   if (len(stripped) >= 2 and not _is_garbage_text(text)
+       and not _overlaps_script(...)
+       and not _has_mips_opcode_signature(...)
+       and (has_box_tag or has_kanji or is_menu
+            or is_pure_kana or is_long_hiragana)):
+   ```
+
+**Results**: Total dialogues: 26,344 → **26,541** (+197). Category 1 garbage: **0**.
+New entries include:
+- Target entries: `はなせ！`, `はなせ、このやろう！`
+- Pure kana exclamations: `きゃっ！`, `ぐっ…`, `ふはっ…は…はは…`
+- Short reactions: `！？`, `！！`, `？？？`
+- Entries with `[box:speech]`: `まずい！`, `はなせ！！`
+- Long pure hiragana sentences (≥13 chars)

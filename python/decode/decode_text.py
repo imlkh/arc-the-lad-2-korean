@@ -757,10 +757,15 @@ def _is_garbage_text(text):
         if has_ascii_lower and has_kana:
             return True
 
-    # Rule 20: REMOVED — Short hiragana fragment detection had too many
-    # false positives (うむ, そうか, ならば, あのね, いちご, etc.).
-    # The specific garbage entries (ずもよ, がゆせ, りちよ, etc.) are now
-    # caught by the SHARED_BLOCK_ARTIFACTS blocklist (Rule 16) instead.
+    # Rule 20: りあ-prefix MIPS garbage — byte pattern 0x29 0x01
+    # MIPS SLT/SLTU instruction with $zero register, identical in nature
+    # to the めあ pattern (0x22 0x01). All りあ-prefix patterns without
+    # kanji are confirmed MIPS garbage — none are legitimate Japanese.
+    # e.g., "りあきけあ", "りあきけあそ", "りあすけあ"
+    if stripped.startswith('りあ') and len(stripped) <= 10:
+        has_kanji = any('\u4e00' <= c <= '\u9fff' for c in stripped)
+        if not has_kanji:
+            return True
 
     return False
 
@@ -1609,10 +1614,10 @@ def scan_stg(data, decode_table, use_heuristics=True, filter_garbage=True):
                             continue
             pos += 1
 
-    # --- Scan for bare dialogues (A9 00 texts with kanji but no [opt] or template) ---
+    # --- Scan for bare dialogues (A9 00 texts without [opt] or template) ---
     # These are standalone dialogues in the text region that don't have templates
-    # Examples: location names, battle messages, scene announcements
-    # Must have kanji to filter out binary garbage
+    # Examples: location names, battle messages, scene announcements, cutscene lines
+    # Uses same acceptance criteria as event/padding scanners
     stats['bare_dialogues_found'] = 0
     for region_start, region_end, chunk_idx in chunk_regions:
         script_ranges = _build_exclusion_zones(data, region_start, region_end)
@@ -1632,18 +1637,32 @@ def scan_stg(data, decode_table, use_heuristics=True, filter_garbage=True):
                         stripped = re.sub(r"\[script:.*?\]", "", stripped)
                         stripped = re.sub(r"\[.*?\]", "", stripped)
 
-                        # Must have kanji (real Japanese text) - strict filter
+                        # Acceptance criteria (matching event/padding scanners):
+                        has_box_tag = '[box:' in text
                         has_kanji = any('\u4e00' <= c <= '\u9fff' for c in stripped)
+                        is_menu = '[br][opt]' in text
+                        has_punct = any(c in '！？…。' for c in stripped)
+                        kana_count = sum(1 for c in stripped
+                                         if 'ぁ' <= c <= 'ん'
+                                         or 'ァ' <= c <= 'ン')
+                        is_pure_kana = (has_punct and kana_count >= 2
+                                        and all(
+                            'ぁ' <= c <= 'ん' or 'ァ' <= c <= 'ン'
+                            or c in 'ー！？…。、「」'
+                            for c in stripped))
+                        is_long_hiragana = (len(stripped) >= 13 and all(
+                            'ぁ' <= c <= 'ん' or c == 'ー'
+                            for c in stripped))
 
-                        # Bare dialogue should have meaningful kanji content
                         text_start = pos + 4  # marker(2) + prefix(2)
                         text_end = pos + 2 + consumed
-                        if (has_kanji and len(stripped) >= 3
+                        if (len(stripped) >= 2 and not _is_garbage_text(text)
                                 and not _overlaps_script(
                                     text_start, text_end, script_ranges)
                                 and not _has_mips_opcode_signature(
                                     data, pos + 2, consumed, prefix=2)
-                                and not _is_garbage_text(text)):
+                                and (has_box_tag or has_kanji or is_menu
+                                     or is_pure_kana or is_long_hiragana)):
                             # Use 0x00B4 as context opcode for bare dialogues in text region
                             dialogues.append((pos + 2, consumed, text, 0x00B4))
                             found_offsets.add(pos + 2)

@@ -1,4 +1,4 @@
-# S200.STG — 1977 dialogues, 1787 templates (26 bare, 4 missed, 119 orphan menus)
+# S200.STG — 1985 dialogues, 1787 templates (26 bare, 4 missed, 119 orphan menus)
 
   0x000B2DCA [0x00B0] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 하시겠습니까?[br][opt]예[br][opt]아니오[box:close]
   0x000B336E [0x00B0] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
@@ -566,6 +566,7 @@
   0x0017805E [0x00B4] [script:8A 54][box:system]이[opt]름[opt]휘슬러[opt][opt]위치크래프트[br]보[opt]수[opt]1125G[br]소재지[opt]살바 사막[br]특기[opt]?
   0x001780CA [0x00B4] [script:BC 54][box:system]이[opt]름[opt]독슨[opt][opt][opt]돌마스터[br]보[opt]수[opt]450G[br]소재지[opt]?[br]특기[opt]?
   0x00178120 [0x00B4] [script:F2 54][box:system]이[opt]름[opt]아크[opt][opt][opt][opt]인간[br]보[opt]수[opt]1000000G[br]소재지[opt]세계 각지에 나타남[br]특기[opt]정령마법을 사용
+  0x0017818C [0x00B4] [script:0C 55][box:system][br]このモンスターは、ハンティングされました
   --- context: 0x00B4 -> 0x00A9 ---
   0x00232EC6 [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]예[br][opt]아니오[box:close]
   0x0023346A [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
@@ -1387,7 +1388,9 @@
   --- context: 0x800B -> 0x800C ---
   0x003A8EC0 [0x800C] [script:84 20]너, 쫓기고 있다고
   0x003A8F00 [0x800C] [script:A8 20]그렇다면, 더더욱 혼자 둘 수 없지?
-  --- context: 0x800C -> 0x800B ---
+  --- context: 0x800C -> 0x00B4 ---
+  0x003A8F48 [0x00B4] [script:C7 20]…いや、でも[delay:15]…
+  --- context: 0x00B4 -> 0x800B ---
   0x003A8F60 [0x800B] [script:D0 20]부탁이야！
   0x003A8F9C [0x800B] [script:F4 20]알았어, 둘이 같이 행동하자
   --- context: 0x800B -> 0x800C ---
@@ -1857,6 +1860,7 @@
   0x0075C986 [0x8005] [script:B7 14]돌아갈까
   --- context: 0x8005 -> 0x00B4 ---
   0x0075CA22 [0x00B4] [script:0A 15]이상한데? 어디서 온 거야?
+  0x0075CFE2 [0x00B4] [script:E5 17]エラーだ！
   --- context: 0x00B4 -> 0x00A9 ---
   0x008142EE [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
   --- context: 0x00A9 -> 0x800A ---
@@ -2318,6 +2322,9 @@
   0x00B066F8 [0x8007] [script:B5 07][FF:08 04 01]이름?[cursor]・・[FF:08 04 01]진[cursor]・・・・[box:close]！！！
   --- context: 0x8007 -> 0x8005 ---
   0x00B06D50 [0x8005] [script:D5 0A][box:speech]너…그 진, 이야?
+  --- context: 0x8005 -> 0x00B4 ---
+  0x00B06D9A [0x00B4] [script:F7 0A][box:speech]・・・まあな
+  --- context: 0x00B4 -> 0x8005 ---
   0x00B06DD8 [0x8005] [script:2A 0B][box:speech]겨우, 날 떠올려준 거냐[cursor]…[br][box:speech]정말, 쌀쌀맞은 녀석이군
   --- context: 0x8005 -> 0x8007 ---
   0x00B06E44 [0x8007] [script:60 0B][box:speech]이쪽은, 혼자 도망쳐버린 너와의[br]재회를, 얼마나 기대했는지
@@ -2333,12 +2340,17 @@
   --- context: 0x00B4 -> 0x8007 ---
   0x00B07E10 [0x8007] [script:35 13][box:speech]큭![br]바, 바보 같은!!
   0x00B07E56 [0x8007] [script:66 13][box:speech]이, 이럴 리가…[br][delay:15]내가…[delay:15]지다니…
-  0x00B07EB8 [0x8007] [script:03 01]크와악!!
+  --- context: 0x8007 -> 0x00B4 ---
+  0x00B07EB4 [0x00B4] [script:82 13][box:speech]ぐわっ！！
+  --- context: 0x00B4 -> 0x8007 ---
   0x00B07EF0 [0x8007] [script:AC 13][box:speech]…머, 머리가…[delay:15]머리가 아파!!
-  0x00B07F44 [0x8007] [script:03 01]머・리・가…[delay:15]크억!!
+  --- context: 0x8007 -> 0x00B4 ---
+  0x00B07F40 [0x00B4] [script:D1 13][box:speech]あ・た・ま・・・[delay:15]ぐがっ！！
+  --- context: 0x00B4 -> 0x8007 ---
   0x00B0810A [0x8007] [script:B4 14][box:speech]진…[delay:15]진!!
-  --- context: 0x8007 -> 0x8005 ---
-  0x00B08154 [0x8005] [script:03 01]정신 차려, 진!!
+  --- context: 0x8007 -> 0x00B4 ---
+  0x00B08150 [0x00B4] [script:D4 14][box:speech]しっかりしろ、ジーン！！
+  --- context: 0x00B4 -> 0x8005 ---
   0x00B0819C [0x8005] [script:FC 14][cursor]엘・・[delay:0B]크・・・
   --- context: 0x8005 -> 0x800A ---
   0x00B081E4 [0x800A] [script:29 15][box:speech]여・러・분…[delay:15]그곳에서, 기다리고 있었・・[delay:0B]어
@@ -2348,6 +2360,8 @@
   0x00B0839E [0x800A] [script:F7 15][box:close]진!?
   --- context: 0x800A -> 0x00B4 ---
   0x00B083E8 [0x00B4] [script:27 16][FF:08 06 01]엘크…[delay:1F]날…
+  0x00B0842E [0x00B4] [script:44 16][box:close]ジーン！！[br]ジーーン！！
+  0x00B08480 [0x00B4] [script:6D 16][box:speech]ジーンがやられるとは・・！
   --- context: 0x00B4 -> 0x8005 ---
   0x00B08504 [0x8005] [script:BA 16][box:speech]너를 하얀 집에서 도망치게 한 게,[br]정말 아쉽구나
   --- context: 0x8005 -> 0x800B ---
@@ -2449,7 +2463,9 @@
   0x00B0A614 [0x800B] [script:31 27][box:close]！？
   --- context: 0x800B -> 0x8006 ---
   0x00B0A652 [0x8006] [script:5E 27][box:speech]너희 따위가, 그분의[br]방해 같은 건 못 해
-  --- context: 0x8006 -> 0x800B ---
+  --- context: 0x8006 -> 0x00B4 ---
+  0x00B0A6AC [0x00B4] [script:83 27][box:speech]さらばだ！！[opt]ははははははっ
+  --- context: 0x00B4 -> 0x800B ---
   0x00B0A746 [0x800B] [script:CB 27][box:speech]그런…
   --- context: 0x800B -> 0x8007 ---
   0x00B0A796 [0x8007] [script:F3 27][box:speech]샨테…
@@ -2457,6 +2473,9 @@
   0x00B0A824 [0x8005] [script:4A 28][box:speech]아지트 안에 남아있는 놈들은,[br]한 명도 빠짐없이 붙잡아라!
   --- context: 0x8005 -> 0x800A ---
   0x00B0A88E [0x800A] [script:7E 28][box:speech]알겠나, 놈들이 어디에 숨어있어도[br]반드시 찾아내!!
+  --- context: 0x800A -> 0x00B4 ---
+  0x00B0A8EC [0x00B4] [script:9D 28][box:close]핫!
+  --- context: 0x00B4 -> 0x800A ---
   0x00B0A900 [0x800A] [script:A7 28][box:close]핫!
   --- context: 0x800A -> 0x8013 ---
   0x00B0A93E [0x8013] [script:C9 28][box:close]좋아, 가라!!
