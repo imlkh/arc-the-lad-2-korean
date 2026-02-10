@@ -469,7 +469,7 @@
   0x0017846A [0x00B4] [script:6E 51][box:system]이[opt]름[opt]발자크[opt][opt]매지션[br]보[opt]상[opt]1755G[br]장소[opt]서 알디아 돌아오지 못하는 숲[br]특기[opt]?
   0x001784DA [0x00B4] [script:A7 51][box:system]이[opt]름[opt]메난[opt][opt]자이언트마미[br]보[opt]상[opt]1125G[br]장소[opt]야고스 섬 봉인의 유적[br]특기[opt]?
   0x0017854C [0x00B4] [script:D8 51][box:system]이[opt]름[opt]티아누스[opt]위저드[br]보[opt]상[opt]2025G[br]장소[opt]?[br]특기[opt]?
-  0x001785A0 [0x00B4] [script:F2 51][box:system][br]このモンスターは、ハンティングされました
+  0x001785A0 [0x00B4] [script:F2 51][box:system][br]이 몬스터는 이미 사냥되었습니다
   --- context: 0x00B4 -> 0x00A9 ---
   0x00231C9E [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
   0x00232242 [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
@@ -1547,7 +1547,7 @@
   0x00523796 [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
   0x005237DE [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
   --- context: 0x00A9 -> 0x00B4 ---
-  0x00524474 [0x00B4] [script:89 09]カギがかかっている。
+  0x00524474 [0x00B4] [script:89 09]열쇠가 잠겨 있다.
   --- context: 0x00B4 -> 0x8006 ---
   0x005244A8 [0x8006] [script:A0 09]저쪽이야
   0x005244F0 [0x8006] [script:EF 09]저[delay:1F]・[delay:1F]・[delay:1F]계단[delay:0B]에[delay:0B]서[delay:1F]・[delay:1F]・[br][delay:1F]갑판[delay:0E]으[delay:10]로[delay:14]나[delay:1F]・[delay:1F]・[delay:1F]・
@@ -1565,7 +1565,7 @@
   --- context: 0x800B -> 0x8005 ---
   0x00525874 [0x8005] [script:86 13]무슨 일이야
   --- context: 0x8005 -> 0x00B4 ---
-  0x005258D2 [0x00B4] [script:B8 13]うぎゃっ！！[delay:3D]
+  0x005258D2 [0x00B4] [script:B8 13]으악!![delay:3D]
   --- context: 0x00B4 -> 0x800B ---
   0x0052590E [0x800B] [script:D4 13]도망쳐요
   --- context: 0x800B -> 0x8006 ---
