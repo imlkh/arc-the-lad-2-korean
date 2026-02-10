@@ -1,4 +1,4 @@
-# SG00.STG — 2429 dialogues, 1510 templates (5 bare, 0 missed, 401 orphan menus)
+# SG00.STG — 2427 dialogues, 1510 templates (5 bare, 0 missed, 401 orphan menus)
 
   0x000B86F2 [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
   0x000B8C96 [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
@@ -1373,7 +1373,6 @@
   0x00BC12F8 [0x00B4] [script:38 05][box:system][opt][opt][opt]수배 몬스터：다리[box:close]
   0x00BC131E [0x00B4] [script:4B 05]수배 몬스터[br]다리를 쓰러뜨렸습니다
   0x00BC1340 [0x00B4] [script:5F 05]전투에 참가할 캐릭터를[br]선택해 주세요
-  0x00BC6002 [0x00B4] [script:C8 2B]さいいきけなくたすそいちいて
   0x00BC76D2 [0x00B4] [script:1C 37]지상[opt]1층
   0x00BC76EE [0x00B4] [script:2A 37]지하[opt]1층
   0x00BC770A [0x00B4] [script:38 37]지하[opt]2층
@@ -2989,7 +2988,6 @@
   --- context: 0x0006 -> 0x8005 ---
   0x02645454 [0x8005] [script:EC 11]자, 가자[br]출구는 바로 저기야
   --- context: 0x8005 -> 0x00B4 ---
-  0x02649EF2 [0x00B4] [script:25 37]ぎあ…グ
   0x02649F2C [0x00B4] [script:5B 37]전투에 참가할 캐릭터를[br]선택해 주세요
   --- context: 0x00B4 -> 0x00A9 ---
   0x026FE46A [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]

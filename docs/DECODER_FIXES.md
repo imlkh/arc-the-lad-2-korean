@@ -7,7 +7,7 @@ Arc the Lad 2's STG stage files. Because the decoder scans binary data that incl
 MIPS machine code alongside text, it must distinguish real dialogue from garbage produced
 by misinterpreted opcodes.
 
-**Final stats** (2026-02-10): 26,541 dialogues across 20,947 templates in 19 STG files.
+**Final stats** (2026-02-10): 26,539 dialogues across 20,947 templates in 19 STG files.
 Category 1 garbage: **0**. Category 2 single-char fragments: **0**. Partial decodes: **0**.
 String pooling overlaps filtered: **247**.
 
@@ -190,6 +190,7 @@ initially misclassified as garbage:
 | + Expanded garbage rules (17-19) + blocklist (Types F+G) | **26,591** | 0 | 0 | 0 | Rules 17-19 + extended Rules 9,13,14 + 27 new blocklist entries; −40 garbage |
 | + String pooling overlap filter | **26,344** | 0 | 0 | 0 | Remove 247 sub-entries from string-pooled byte ranges |
 | + Rule 20 (りあ-prefix) + bare scanner relaxation | **26,541** | 0 | 0 | 0 | Rule 20 catches 2,017 りあ MIPS garbage; bare scanner accepts pure-kana/long-hiragana; +197 real dialogues |
+| + Blocklist Type H (bare scanner false positives) | **26,539** | 0 | 0 | 0 | 2 event script data entries in SG00 text region added to SHARED_BLOCK_ARTIFACTS |
 
 ## Other Fixes
 
@@ -568,12 +569,13 @@ Category 1 garbage: 57 → **0** across all 19 STG files. Total dialogues: 26,83
 
 #### SHARED_BLOCK_ARTIFACTS expanded (Types F+G)
 
-Added 27 new entries to the exact-match blocklist (43 → 70 total):
+Added 27 new entries to the exact-match blocklist (43 → 70 total), later expanded to 72:
 
 | Type | Count | Description | Examples |
 |------|-------|-------------|---------|
 | F: Residual MIPS | 19 | MIPS artifacts not caught by heuristic rules | `あわし`, `ぁぁぁ`, `ギシよよ` |
 | G: Short hiragana | 8 | 3-char hiragana fragments from data bytes | `ずもよ`, `がゆせ`, `りちよ` |
+| H: Bare scanner FPs | 2 | Event script data admitted by relaxed bare scanner | `さいいきけなくたすそいちいて`, `ぎあ…グ` |
 
 #### Rules attempted then removed
 

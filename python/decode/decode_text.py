@@ -299,6 +299,9 @@ SHARED_BLOCK_ARTIFACTS = {
     # Type G: Short hiragana fragments (pure kana 2-3 chars, no valid word)
     'ずもよ', 'がゆせ', 'りちよ', 'てにい', 'せばい', 'げどを',
     'ねけを', 'がなせ',
+    # Type H: Event script data in text region (bare scanner false positives)
+    'さいいきけなくたすそいちいて',  # SG00 chunk 15: event param data (charIDs 0x02-0x15)
+    'ぎあ…グ',                      # SG00 chunk 51: PS1 address bytes (30 01 E5 81)
 }
 STG_CHUNK_SIZE = 0xBC800  # 772,096 bytes per chunk
 STG_TEXT_REGION_OFFSET = 0xB4000  # Text region starts at +0xB4000 within each chunk
