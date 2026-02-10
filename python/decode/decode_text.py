@@ -1888,6 +1888,25 @@ def scan_stg(data, decode_table, use_heuristics=True, filter_garbage=True):
         region_clean.append(d)
     dialogues = region_clean
 
+    # --- Overlap filtering (string pooling) ---
+    # The original game reuses byte ranges: two template pointers can
+    # reference different positions within the same null-terminated string
+    # (e.g., parent "放してくれ！！" at offset X, child "くれ！！" at X+4).
+    # Remove sub-entries whose offset falls within a parent entry's range
+    # to prevent the patcher from corrupting the parent's encoded bytes.
+    stats['overlap_filtered'] = 0
+    overlap_clean = []
+    last_end = 0  # Exclusive end of last accepted entry
+    for d in dialogues:
+        entry_start = d[0]
+        entry_consumed = d[1]
+        if entry_start < last_end:
+            stats['overlap_filtered'] += 1
+            continue
+        overlap_clean.append(d)
+        last_end = entry_start + entry_consumed
+    dialogues = overlap_clean
+
     # Filter garbage if requested
     if filter_garbage:
         clean_dialogues = []

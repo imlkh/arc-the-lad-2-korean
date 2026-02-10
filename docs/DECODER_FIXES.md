@@ -7,8 +7,9 @@ Arc the Lad 2's STG stage files. Because the decoder scans binary data that incl
 MIPS machine code alongside text, it must distinguish real dialogue from garbage produced
 by misinterpreted opcodes.
 
-**Final stats** (2026-02-09): 26,591 dialogues across 20,947 templates in 19 STG files.
+**Final stats** (2026-02-10): 26,344 dialogues across 20,947 templates in 19 STG files.
 Category 1 garbage: **0**. Category 2 single-char fragments: **0**. Partial decodes: **0**.
+String pooling overlaps filtered: **247**.
 
 ## Remaining Items
 
@@ -186,6 +187,7 @@ initially misclassified as garbage:
 | + Shared block artifacts blocklist (123) | **26,646** | 0 | 0 | 0 | Rule 16: exact-match blocklist for 30 shared code block strings |
 | + Unmasked MIPS fragments (15) | **26,631** | 0 | 0 | 0 | 13 additional strings (Types D+E) added to blocklist; stable (no cascade) |
 | + Expanded garbage rules (17-19) + blocklist (Types F+G) | **26,591** | 0 | 0 | 0 | Rules 17-19 + extended Rules 9,13,14 + 27 new blocklist entries; −40 garbage |
+| + String pooling overlap filter | **26,344** | 0 | 0 | 0 | Remove 247 sub-entries from string-pooled byte ranges |
 
 ## Other Fixes
 
@@ -628,3 +630,82 @@ hiragana fragments, 8 strings) to bring the blocklist to 70 total.
 code artifacts that never appear in real dialogue.
 
 Matching Pattern 25 added to `generate_invalid_reports.py` for report-level classification.
+
+### String Pooling Overlap Filter (2026-02-10)
+
+**Root cause**: The original Japanese game uses **string pooling** — a memory optimization
+where two template pointers reference different positions within the same null-terminated
+string. For example, template A points to `放してくれ！！` at offset X, while template B
+points to `くれ！！` at offset X+4. Both are valid pointers into the same byte range.
+
+The decoder correctly finds both as separate entries (their offsets differ, passing
+deduplication). However, the fixed-length patcher writes Korean-encoded bytes at each
+entry's offset. When two entries overlap, the second write corrupts the first:
+
+```
+Parent entry at 0x003A10E0: "놔 줘!!" → encoded as F3 43 F1 23 ED ED (6 bytes)
+Child  entry at 0x003A10E4: "줘!!"   → encoded as F1 23 ED ED (4 bytes)
+
+Step 1: Patcher writes parent at 0x003A10E0:
+  [38 04] F3 43 F1 23 ED ED 00 00 00
+          ^^^^^^^^^^^^^^^^^^^
+Step 2: Patcher writes child at 0x003A10E4 (overwrites bytes 4-7):
+  [38 04] F3 43 [0C 13] F1 23 00 00 00
+                ^^^^^^^^
+                child's [script:0C 13] prefix overwrites parent's F1 23 (줘)
+
+Result: 놔아를줘 instead of 놔줘!!
+```
+
+The child entry's 2-byte script prefix (`0C 13`, decoded as 아를) overwrites the parent's
+Korean-encoded bytes at positions 4-5, corrupting the display.
+
+**Scope**: 247 overlapping entries across 11 STG files:
+
+| File | Overlaps |
+|------|----------|
+| S100 | 1 |
+| S500 | 2 |
+| S600 | 1 |
+| S700 | 35 |
+| S800 | 122 |
+| S900 | 12 |
+| SA00 | 45 |
+| SB00 | 5 |
+| SD00 | 8 |
+| SG00 | 11 |
+| SI00 | 5 |
+
+**Fix**: Added overlap filter in `scan_stg()` post-processing (line ~1891), after the
+region-based filter and before garbage filtering. Entries are sorted by offset; any entry
+whose offset falls within a previously-accepted entry's byte range is discarded:
+
+```python
+stats['overlap_filtered'] = 0
+overlap_clean = []
+last_end = 0  # Exclusive end of last accepted entry
+for d in dialogues:
+    entry_start = d[0]
+    entry_consumed = d[1]
+    if entry_start < last_end:
+        stats['overlap_filtered'] += 1
+        continue
+    overlap_clean.append(d)
+    last_end = entry_start + entry_consumed
+dialogues = overlap_clean
+```
+
+The parent entry (lower offset) is always kept; the child sub-entry is discarded. This is
+correct because:
+1. The parent contains the complete text (the child is always a suffix of the parent)
+2. The game's template system references both, but the parent translation covers
+   the child's content
+3. Keeping the child would corrupt the parent's patched bytes
+
+**Translation file sync**: After updating the decoder, `update_stg_translation.py --all`
+was run to remove the 247 overlapping entries from the translation files in `translated/ko/`.
+The script uses decoded files as the structural template, so removed entries are automatically
+excluded.
+
+**Results**: Total dialogues: 26,591 → **26,344** (−247). Zero content loss — all removed
+entries are strict suffixes of their parent entries.

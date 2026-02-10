@@ -1,4 +1,4 @@
-# S100.STG — 1310 dialogues, 1195 templates (25 bare, 2 missed, 75 orphan menus)
+# S100.STG — 1309 dialogues, 1195 templates (25 bare, 2 missed, 75 orphan menus)
 
   0x000B36F6 [0x00B0] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
   0x000B3CA6 [0x00B0] [script:ED 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
@@ -241,7 +241,7 @@
   0x00172F58 [0x8001] [script:D4 26]장소는 알디아 공항이야[br]이상한 술을 쓰는 놈이 난동 부린대
   0x00172FB4 [0x8001] [script:02 27]경찰이 출동했지만[br]늘 그렇듯이 별 도움이 안 되겠지
   0x00173010 [0x8001] [script:2B 27]보수는 2000골드로[br]비비가에게 선불로 줬어
-  0x00173062 [0x8001] [script:4C 27]뭐!?[delay:0B]비비가 그 녀석
+  0x00173062 [0x8001] [script:4C 27]뭐!?[delay:0B]비비가 녀석
   --- context: 0x8001 -> 0x8000 ---
   0x001730A8 [0x8000] [script:6F 27]돈은 냈으니까 부탁해
   --- context: 0x8000 -> 0x8001 ---
@@ -674,7 +674,6 @@
   0x003A10AC [0x00A0] [script:1C 04]그만둬!!
   0x003A10E0 [0x00A0] [script:38 04]놔 줘!!
   --- context: 0x00A0 -> 0x8005 ---
-  0x003A10E4 [0x8005] [script:0C 13]줘!!
   0x003A112E [0x8005] [script:65 04]후우・[delay:0B]・[delay:0B]・[delay:0B]
   0x003A117A [0x8005] [script:87 04][box:speech]또 옛날 꿈
   0x003A11BE [0x8005] [script:B6 04]・[delay:0B]・[delay:0B]・[delay:0B]오늘 밤은[br]잠들 수 없겠네

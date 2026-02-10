@@ -1,4 +1,4 @@
-# SG00.STG — 2413 dialogues, 1510 templates (5 bare, 0 missed, 401 orphan menus)
+# SG00.STG — 2402 dialogues, 1510 templates (5 bare, 0 missed, 401 orphan menus)
 
   0x000B86F2 [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
   0x000B8C96 [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
@@ -1185,7 +1185,6 @@
   --- context: 0x8000 -> 0x00B4 ---
   0x0098D520 [0x00B4] [script:78 10][box:speech]이대로 순순히 따르면,[br]아프게 하지 않을 거다
   --- context: 0x00B4 -> 0x800A ---
-  0x0098D524 [0x800A] [script:03 01]이대로 얌전히 따르면[br]혼나지 않아도 돼
   0x0098D57C [0x800A] [script:9A 10][box:speech]그건 어떨지 모르지
   --- context: 0x800A -> 0x8000 ---
   0x0098D5CA [0x8000] [script:C9 10][box:speech]나도 물러설 수는[br]없으니까
@@ -1222,7 +1221,6 @@
   --- context: 0x8006 -> 0x00B4 ---
   0x0098E590 [0x00B4] [script:AE 18][box:speech]갈아노와 너 사이에,[br]도대체 무슨 일이 있었던 거야?
   --- context: 0x00B4 -> 0x8006 ---
-  0x0098E594 [0x8006] [script:03 01]갈아노와 너 사이에[br]대체 무슨 일이 있었어?
   0x0098E5E8 [0x8006] [script:D8 18][box:speech]그 놈에게 당한 동료의 원수를[br]갚고 싶어…
   --- context: 0x8006 -> 0x8005 ---
   0x0098E638 [0x8005] [script:03 01]…그것뿐이야
@@ -1230,7 +1228,6 @@
   --- context: 0x8005 -> 0x00B4 ---
   0x0098E6C6 [0x00B4] [script:44 19][box:speech]쉽게 이길 상대가 아니야
   --- context: 0x00B4 -> 0x8006 ---
-  0x0098E6CA [0x8006] [script:03 01]쉽게 쓰러뜨릴 수 있는 상대가 아니야
   0x0098E710 [0x8006] [script:6C 19][box:speech]그렇다고 해서[br]도망칠 수는 없어!!
   --- context: 0x8006 -> 0x8005 ---
   0x0098E79A [0x8005] [script:A9 19][box:speech]…고집 센 녀석이군
@@ -1242,7 +1239,6 @@
   --- context: 0x8005 -> 0x00B4 ---
   0x0098E8B4 [0x00B4] [script:36 1A][box:speech]자, 가자!
   --- context: 0x00B4 -> 0x8006 ---
-  0x0098E8B8 [0x8006] [script:03 01]자, 가자!
   0x0098E908 [0x8006] [script:5D 1A][box:speech]！！
   --- context: 0x8006 -> 0x8005 ---
   0x0098E950 [0x8005] [script:82 1A][box:speech]왜 그래?
@@ -1260,9 +1256,7 @@
   0x0098EB92 [0x8007] [script:AD 1B][box:speech]나, 꼭 레지스탕스가[br]되고 싶어
   --- context: 0x8007 -> 0x00B4 ---
   0x0098EBDE [0x00B4] [script:CC 1B][box:speech]그만 좀 해!
-  --- context: 0x00B4 -> 0x8007 ---
-  0x0098EBE2 [0x8007] [script:03 01]적당히 해라!
-  --- context: 0x8007 -> 0x8005 ---
+  --- context: 0x00B4 -> 0x8005 ---
   0x0098EC4A [0x8005] [script:0A 1C][box:speech]꺼져, 두 번 다시 나를[br]따라오지 마!!
   0x0098ECA0 [0x8005] [script:2A 1C][box:speech]괜찮은 거야?
   --- context: 0x8005 -> 0x8006 ---
@@ -1275,9 +1269,6 @@
   0x0098EE12 [0x8006] [script:E2 1C][box:speech]헤!
   --- context: 0x8006 -> 0x00B4 ---
   0x0098EE48 [0x00B4] [script:03 1D][box:speech]절대 포기 안 해!!
-  --- context: 0x00B4 -> 0x8007 ---
-  0x0098EE4C [0x8007] [script:03 01]절대 포기하지 않을 거야!!
-  --- context: 0x8007 -> 0x00B4 ---
   0x0099025A [0x00B4] [script:12 27]전투에 참가할 캐릭터를[br]선택해 주세요
   --- context: 0x00B4 -> 0x8007 ---
   0x00990A30 [0x8007] [script:FF 2A][box:speech]그럼 내가 줍는 동안[br]확실히 부탁해!
@@ -1754,25 +1745,18 @@
   0x012626A6 [0x800C] [script:12 06][box:speech]너도 레지스탕스의 일원이냐!!
   --- context: 0x800C -> 0x00B4 ---
   0x012626EC [0x00B4] [script:34 06][box:speech]얼른 아지트 위치를 말해!!
-  --- context: 0x00B4 -> 0x800C ---
-  0x012626F0 [0x800C] [script:03 01]빨리 아지트 위치를 불어!!
-  --- context: 0x800C -> 0x00B4 ---
   0x01262730 [0x00B4] [script:5E 06][box:speech]입 다물고 뭔가 말해봐,[br]이 쓰레기 자식아!!
-  --- context: 0x00B4 -> 0x800D ---
-  0x01262734 [0x800D] [script:03 01]잠자코 있지 말고 뭐라도 말해봐라[br]이 쓰레기 녀석!!
-  --- context: 0x800D -> 0x800B ---
+  --- context: 0x00B4 -> 0x800B ---
   0x0126279E [0x800B] [script:87 06][box:speech]그만둬!!
   --- context: 0x800B -> 0x8005 ---
   0x012627E4 [0x8005] [script:AC 06][box:speech]뭐야 너!?
   --- context: 0x8005 -> 0x00B4 ---
   0x01262820 [0x00B4] [script:CF 06][box:speech]너도 레지스탕스의 일원인가!
   --- context: 0x00B4 -> 0x800D ---
-  0x01262824 [0x800D] [script:03 01]너도 레지스탕스의 일원이냐!
   0x0126286E [0x800D] [script:F6 06][box:speech]나는 레지스탕스 따위가 아니다
   --- context: 0x800D -> 0x00B4 ---
   0x012628B4 [0x00B4] [script:26 07][box:speech]단지 저항하지 못하는 자를 괴롭히는[br]비겁한 놈들을 못 본 척할 수 없었을 뿐이다
   --- context: 0x00B4 -> 0x8005 ---
-  0x012628B8 [0x8005] [script:03 01]다만 저항할 수 없는 자를 괴롭히는[br]비겁한 놈을 못 본 척할 수 없을 뿐이야
   0x0126291C [0x8005] [script:4D 07][box:speech]네놈, 우리에게 대들 셈이냐!
   --- context: 0x8005 -> 0x800C ---
   0x01262966 [0x800C] [script:71 07][box:speech]우리가 누군지 모르는 거냐?
@@ -1781,7 +1765,6 @@
   --- context: 0x800B -> 0x00B4 ---
   0x01262A00 [0x00B4] [script:C3 07][box:speech]비겁한 짓은 그만두고[br]그 녀석을 놓아줘라
   --- context: 0x00B4 -> 0x8005 ---
-  0x01262A04 [0x8005] [script:03 01]비겁한 짓은 그만두고[br]그 녀석을 놓아줘라
   0x01262A56 [0x8005] [script:E6 07][box:speech]젠장, 건방진 놈
   --- context: 0x8005 -> 0x800C ---
   0x01262A9C [0x800C] [script:11 08][box:speech]너도 레지스탕스로서[br]끌고 간다!
