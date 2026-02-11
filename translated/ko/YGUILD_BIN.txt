@@ -1,4 +1,4 @@
-# YGUILD.BIN — 352 strings (Korean translations)
+# YGUILD.BIN — 351 strings (Korean translations, fully translated)
 
   0x000047A8 [  15] 인디고스 하수도 조사
   0x000047B8 [ 103] 얼마 전부터 하수도가 막혀서, 많이 곤란하다. 하지만 하수도에는 몬스터가 나오기 때문에,[opt]들어갈 수도 없다.[opt][opt][opt][opt][opt][opt][opt][opt][opt][opt]그래서, 실력 있는 헌터에게 쓰레기를 치워달라고 하고 싶다.
@@ -351,4 +351,3 @@
   0x00008EE2 [  21] 길드 하청 일 100 타이틀
   0x00008EF8 [  17] 길드 하청 일 100
   0x00008F0A [  28] 길드 하청 일 100 대성공 메시지
-  0x00012E48 [  13] [opt]い♦官最戚泥

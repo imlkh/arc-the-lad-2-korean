@@ -505,6 +505,32 @@ def encode_korean_text(text, korean_mapping, decode_table):
     return bytes(result)
 
 
+def find_string_end(data, offset):
+    """Find the true null terminator of a game-encoded string.
+
+    Skips over multi-byte sequences where 0x00 may appear as part of a
+    control code (e.g. [FF:1A 00 XX] item separators) rather than as a
+    null terminator.
+
+    Returns the offset of the null terminator byte.
+    """
+    pos = offset
+    while pos < len(data):
+        b = data[pos]
+        if b == 0x00:
+            return pos  # Real null terminator
+        elif b == 0xFF:
+            # 4-byte control code: FF XX XX XX
+            pos += 4
+        elif 0xF0 <= b <= 0xFE:
+            # 2-byte extended character
+            pos += 2
+        else:
+            # 1-byte character (0x01-0xEE, 0xEF)
+            pos += 1
+    return pos  # End of data (no null found)
+
+
 def safe_truncate(encoded, available):
     """Truncate encoded bytes at a safe boundary.
 
@@ -574,10 +600,9 @@ def patch_stg_file(stg_path, translation_entries, korean_mapping, decode_table, 
             errors += 1
             continue
 
-        # Find the null terminator of the original string
-        orig_end = offset + len(script_prefix)
-        while orig_end < len(data) and data[orig_end] != 0x00:
-            orig_end += 1
+        # Find the null terminator of the original string,
+        # skipping 0x00 bytes inside FF control codes
+        orig_end = find_string_end(data, offset + len(script_prefix))
 
         if orig_end >= len(data):
             print(f"  ERROR: no null terminator found at 0x{offset:08X}")
@@ -820,10 +845,9 @@ def patch_bin_file(bin_path, translation_entries, korean_mapping, decode_table, 
             errors += 1
             continue
 
-        # Find the null terminator of the original string
-        orig_end = offset
-        while orig_end < len(data) and data[orig_end] != 0x00:
-            orig_end += 1
+        # Find the null terminator of the original string,
+        # skipping 0x00 bytes inside FF control codes
+        orig_end = find_string_end(data, offset)
 
         if orig_end >= len(data):
             print(f"  ERROR: no null terminator found at 0x{offset:08X}")
@@ -894,10 +918,9 @@ def patch_exe_file(exe_path, translation_entries, korean_mapping, decode_table, 
             errors += 1
             continue
 
-        # Find the null terminator of the original string
-        orig_end = offset
-        while orig_end < len(data) and data[orig_end] != 0x00:
-            orig_end += 1
+        # Find the null terminator of the original string,
+        # skipping 0x00 bytes inside FF control codes
+        orig_end = find_string_end(data, offset)
 
         if orig_end >= len(data):
             print(f"  ERROR: no null terminator found at 0x{offset:08X}")
