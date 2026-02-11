@@ -2291,14 +2291,16 @@ SCPS_TEXT_REGIONS = [
     (0x0D2700, 0x0D7A00),  # Main text data (system messages, items, etc.)
 ]
 
-# Known text regions for BEAM.DAT (battle/event effects with embedded text)
-# BEAM.DAT has character name tables duplicated across multiple effect entries
+# Known text regions for BEAM.DAT embedded PS-X EXE (Zone C) data tables.
+# See docs/BEAM_DAT_analysis.md for full analysis.
+# Zone B dialogue (entries 5-43) is found by FF08 marker scanning, not regions.
 BEAM_TEXT_REGIONS = [
-    (0x0216C720, 0x0216C780),  # Character names - Table 1
-    (0x0216C86C, 0x0216D000),  # Monster names
-    (0x0216D5D0, 0x0216D800),  # Save/load messages
+    (0x0216C720, 0x0216C780),  # Character names - Table 1 (15 playable characters)
+    (0x0216C86C, 0x0216D5D0),  # Monster names + Skill/technique names
+    (0x0216D5D0, 0x0216D800),  # Save/load system messages
+    (0x0216E4CC, 0x0216ECC0),  # Item/equipment name table (FF:19 separators)
     (0x0216ECC0, 0x0216ED20),  # Character names - Table 2
-    (0x02170800, 0x02171000),  # Location names
+    (0x02170800, 0x02171900),  # Location/map names + Movie/cutscene names
 ]
 
 
