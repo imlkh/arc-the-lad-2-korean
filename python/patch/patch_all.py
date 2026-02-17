@@ -131,11 +131,34 @@ def main():
     print(f"  Non-STG characters: {non_stg_char_count} (prioritized for single-byte slots)")
     print(f"  STG-only characters: {len(all_korean_chars) - non_stg_char_count}")
 
+    # Extract characters used in packed item lists (highest priority for single-byte)
+    # These entries have [FF:1A separators and can't be truncated without breaking game
+    import re
+    packed_list_chars = set()
+    scps_trans_path = os.path.join(BASE_DIR, "translated", "ko", "SCPS_100_26.txt")
+    beam_trans_path = os.path.join(BASE_DIR, "translated", "ko", "BEAM_DAT.txt")
+    for trans_path in [scps_trans_path, beam_trans_path]:
+        if os.path.exists(trans_path):
+            with open(trans_path, "r", encoding="utf-8") as f:
+                for line in f:
+                    if "[FF:1A" not in line:
+                        continue
+                    # Extract Korean chars from packed list entries
+                    m = re.match(r'\s*0x[0-9A-Fa-f]+\s+\[\s*\d+\]\s+(.+)', line)
+                    if m:
+                        text = re.sub(r'\[FF:[0-9A-Fa-f]+ [0-9A-Fa-f]+ [0-9A-Fa-f]+\]', '', m.group(1))
+                        for ch in text:
+                            if '\uAC00' <= ch <= '\uD7A3':
+                                packed_list_chars.add(ch)
+    if packed_list_chars:
+        print(f"  Packed list characters: {len(packed_list_chars)} (highest priority for single-byte)")
+
     # Build unified mapping
     print("\nBuilding unified character mapping...")
     korean_mapping = build_korean_mapping(
         list(all_korean_chars), decode_table,
-        non_stg_frequency=non_stg_frequency, stg_frequency=stg_frequency
+        non_stg_frequency=non_stg_frequency, stg_frequency=stg_frequency,
+        packed_list_chars=packed_list_chars
     )
     print(f"  Mapped {len(korean_mapping)} Korean characters to font slots")
 

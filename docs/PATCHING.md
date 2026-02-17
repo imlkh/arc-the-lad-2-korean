@@ -274,10 +274,28 @@ SG00.STG dialogue breakdown:
 ### Character Encoding
 
 Korean characters are mapped to font cell IDs:
-- CharIDs 1-159: Single-byte encoding (most frequent chars)
+- CharIDs 1-159, 187-212: Single-byte encoding (185 slots, most frequent chars)
 - CharIDs 239+: Two-byte encoding (F0 XX, F1 XX, etc.)
+- Packed list characters (with `[FF:1A]` separators) are prioritized for single-byte slots to avoid byte overflow
 
 **Avoided IDs:** 239, 494, 749, 1004, 1259, 1514 encode with 0x00 byte (null terminator conflict)
+
+### Packed Item List Encoding
+
+SCPS_100.26 and BEAM.DAT contain packed item lists — multiple item names stored in a single null-terminated string, separated by FF control codes.
+
+| File | Separator | Item Prefix (original) | Encoding Function |
+|------|-----------|----------------------|-------------------|
+| SCPS_100.26 | `FF 1A 00 00` | `FF 1B/1C/1D XX YY` (text compression) | `encode_packed_list()` |
+| BEAM.DAT | `FF 19 00 00` | `FF 1A XX YY` (text compression) | `encode_korean_text()` |
+
+**Important**: All FF control codes are 4 bytes (`FF + opcode + param1 + param2`). Separators must always be written as exactly 4 bytes. Writing fewer bytes causes the game to consume the first byte(s) of the next item as separator parameters, resulting in item misalignment.
+
+The original game uses FF prefix codes (`FF 16-1D XX YY`) as text compression macros that insert substrings (e.g., `[FF:16 5F E3]ド` expands to "ソード"). Korean translations replace these with full text, which the game renders correctly without prefix codes.
+
+**SCPS packed lists** (36 entries, 0x0D44AE–0x0D4CB0): Detected by `[FF:1A` in translation text, encoded via `encode_packed_list()`.
+
+**BEAM packed lists** (24+ entries, 0x0216E4CC–0x0216EB72): Use `[FF:19 00 00]` separators in translation text, encoded via the generic `encode_korean_text()` which handles `[FF:XX YY ZZ]` tags as 4-byte codes.
 
 ## Output Files
 
@@ -309,7 +327,7 @@ The `translation/` subdirectory preserves the exact translation files used for p
 
 | File | Mode | Entries | Notes |
 |------|------|---------|-------|
-| COMM.IMG | font | 895 glyphs | Unified Korean font |
+| COMM.IMG | font | ~1,014 glyphs | Unified Korean font |
 | S100.STG | variable | 1,309 (fixed) + 1,204 (VLUT) | 10/11 chunks with VLUT |
 | SG00.STG | variable | 2,391 (fixed) + 1,149 (VLUT) | 41/56 chunks with VLUT |
 | S200.STG | variable | 1,872 (fixed) + 1,104 (VLUT) | 10/17 chunks with VLUT |

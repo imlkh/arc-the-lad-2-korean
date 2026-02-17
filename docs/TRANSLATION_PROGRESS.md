@@ -18,7 +18,7 @@
 
 | File | Total Strings | Translated | Notes |
 |------|---------------|------------|-------|
-| COMM.IMG | - | 1,014 glyphs | Unified Korean font |
+| COMM.IMG | - | ~1,014 glyphs | Unified Korean font (185 single-byte slots) |
 | SCPS_100.26 | 1,735 | 1,732 | Includes 2 character name tables |
 | S100.STG | 1,309 | 1,309 | Variable-length VLUT |
 | SG00.STG | 2,391 | 2,391 | Variable-length VLUT |

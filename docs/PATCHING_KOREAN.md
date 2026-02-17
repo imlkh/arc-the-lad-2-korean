@@ -73,12 +73,12 @@ The patching preserves certain character slots and replaces others:
 | 1-80 | Hiragana (あ-っ) | **Replaced** with Korean |
 | 81-160 | Katakana (ア-ッ) | **Replaced** with Korean |
 | 161-186 | Latin A-Z | **Preserved** |
-| 187-212 | Latin a-z | **Preserved** |
+| 187-212 | Latin a-z | **Replaced** with Korean (priority: packed list chars) |
 | 213-222 | Digits 0-9 | **Preserved** |
 | 223-238 | Symbols (、。！？ etc.) | **Preserved** |
 | 239+ | Kanji | **Replaced** with Korean |
 
-This allows up to ~1,600 unique Korean characters while keeping Latin letters, numbers, and punctuation intact.
+This allows up to ~1,800 unique Korean characters (185 single-byte + ~1,600 two-byte) while keeping uppercase Latin letters, numbers, and punctuation intact. Lowercase a-z (charIDs 187-212) were verified to be unused as standalone bytes in visible game text and are repurposed for Korean to reduce byte usage in packed item lists.
 
 ## Translation File Format
 
@@ -112,6 +112,33 @@ Translation files follow this format:
 | `[cursor]` | `FF 08 07 01` | Page break with cursor (adds 4 bytes - see warning) |
 | `[opt]` | `EF` | Choice option prefix |
 
+## Packed Item Lists
+
+SCPS_100.26 and BEAM.DAT store multiple item names in packed lists, separated by FF control codes:
+
+```
+소드[FF:1A 00 00]블레이드[FF:1A 00 00]에지[FF:1A 00 00]검
+```
+
+### Separator Format
+
+| File | Separator | Bytes |
+|------|-----------|-------|
+| SCPS_100.26 | `[FF:1A 00 00]` | `FF 1A 00 00` (4 bytes) |
+| BEAM.DAT | `[FF:19 00 00]` | `FF 19 00 00` (4 bytes) |
+
+**Critical**: Separators must be exactly 4 bytes. The game reads all FF control codes as 4-byte sequences (`FF + opcode + param1 + param2`). Writing fewer bytes causes the game to eat the first byte(s) of the next item name.
+
+### Original Text Compression
+
+The original Japanese uses FF prefix codes as text compression macros:
+```
+[FF:16 5F E3]ド    → renders as ソード (Sword)
+[FF:1B F1 6D]草    → renders as 薬草 (Herb)
+```
+
+Korean translations replace these with full text (`소드`, `약초`). The game renders flat text correctly without prefix codes.
+
 ## Text Length Constraints
 
 The game uses fixed-length dialogue slots. If a Korean translation is longer than the original Japanese text, it will be **truncated** to fit.
@@ -120,7 +147,7 @@ The game uses fixed-length dialogue slots. If a Korean translation is longer tha
 
 | Character Type | Bytes |
 |----------------|-------|
-| Korean Hangul (charID 1-160) | 1 byte |
+| Korean Hangul (charID 1-159, 187-212) | 1 byte |
 | Korean Hangul (charID 239+) | 2 bytes |
 | Japanese Hiragana/Katakana | 1 byte |
 | Japanese Kanji | 2 bytes |

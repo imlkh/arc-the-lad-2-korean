@@ -286,6 +286,10 @@ Most multi-page conversations are handled by the **event script engine** sequenc
 
 ### Latin Lowercase (0xBB-0xD4)
 
+> **Korean Patch Note:** CharIDs 187-212 are repurposed for Korean Hangul in the Korean patch.
+> The game never uses standalone lowercase bytes in visible text — all occurrences in SCPS_100.26
+> are second bytes of F0 XX two-byte sequences, except 4 in the non-visible font test area (0x0D79D8-0x0D79FB).
+
 | ID | Hex | Char | | ID | Hex | Char | | ID | Hex | Char | | ID | Hex | Char |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | 187 | BB | a | | 188 | BC | b | | 189 | BD | c | | 190 | BE | d |

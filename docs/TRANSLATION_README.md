@@ -226,7 +226,7 @@ python python/patch/patch_bin.py "output/patched/Arc the Lad II (Japan)/Arc the 
 
 ### Font System
 - **Total slots:** 1,764 (441 cells × 4 bitplanes)
-- **Available for Hangul:** ~1,656 (after reserving Latin/digits/symbols)
+- **Available for Hangul:** ~1,682 (after reserving uppercase Latin/digits/symbols; lowercase a-z repurposed)
 - **Cell size:** 11×11 pixels (challenging for complex Korean syllables)
 - **Coverage:** ~99.9% of Korean text at 1,656 syllables
 

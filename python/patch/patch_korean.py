@@ -45,17 +45,27 @@ EVENT_SCRIPT_OFFSET = 0xB4000  # event script starts here in each chunk
 # Cell to charID mapping: charID = cell * 4 + 1 + bitplane (bitplane 0-3)
 #
 # Preserved cells:
-#   - Cells 40-62: Latin A-Z, a-z, 0-9, symbols, punctuation (charIDs 161-252)
+#   - Cells 40-46 (A-Z): charIDs 161-186 — used by game for HP, MP, LV, GP, etc.
+#   - Cells 46-52 (a-z): charIDs 187-212 — NOT preserved (game never uses lowercase)
+#   - Cells 53-62: 0-9, symbols, punctuation (charIDs 213-252)
 #   - Cells 64-67: Special characters (charIDs 257-272)
 #   - Cell 63, bitplane 0 only: Special character (charID 253)
 #
-# Available for Korean (between preserved ranges):
+# Available for Korean (freed slots):
 #   - Cell 63, bitplanes 1-3: charIDs 254-256
+#   - Cells 46-52 (a-z): charIDs 187-212 (26 extra single-byte slots)
+#   - CharID 160 (formerly ッ/space, unused)
 PRESERVE_CHAR_IDS = set()
 
-# Cells 40-62: all bitplanes (charIDs 161-252)
-# Includes: Latin A-Z, a-z, 0-9, symbols, ( ) , . : ; etc.
-PRESERVE_CHAR_IDS.update(range(161, 253))
+# Latin uppercase A-Z only (charIDs 161-186) — game uses these in HP, MP, LV, etc.
+PRESERVE_CHAR_IDS.update(range(161, 187))
+
+# NOTE: Lowercase a-z (charIDs 187-212) are NOT preserved.
+# Verified: game never uses standalone lowercase letters in visible text.
+# Only 4 occurrences exist in the font test area (0x0D79D8-0x0D79FB).
+
+# Digits 0-9 and symbols (charIDs 213-252)
+PRESERVE_CHAR_IDS.update(range(213, 253))
 
 # Cells 64-67: all bitplanes (charIDs 257-272)
 PRESERVE_CHAR_IDS.update(range(257, 273))
@@ -145,11 +155,12 @@ def extract_korean_chars(translation_path):
 
 
 def build_korean_mapping(korean_chars, decode_table, priority_chars=None, char_frequency=None,
-                         non_stg_frequency=None, stg_frequency=None):
+                         non_stg_frequency=None, stg_frequency=None,
+                         packed_list_chars=None):
     """Build mapping from Korean characters to font charIDs.
 
-    Strategy: Replace hiragana (1-80), katakana (81-160), then kanji (239+).
-    Preserve Latin letters, digits, and common symbols.
+    Strategy: Replace hiragana (1-80), katakana (81-160), lowercase a-z (187-212),
+    then kanji (239+). Preserve Latin uppercase, digits, and common symbols.
 
     Args:
         korean_chars: List of Korean characters to map
@@ -158,25 +169,28 @@ def build_korean_mapping(korean_chars, decode_table, priority_chars=None, char_f
         char_frequency: Optional dict mapping char -> usage count for frequency-based ordering
         non_stg_frequency: Optional dict of char frequency in non-STG files (fixed-length)
         stg_frequency: Optional dict of char frequency in STG files (variable-length)
-
-    When non_stg_frequency and stg_frequency are both provided, characters are sorted
-    by (-non_stg_freq, -stg_freq) so that characters most used in fixed-length files
-    (where single-byte encoding prevents truncation) get single-byte slots first.
+        packed_list_chars: Optional set of chars used in packed item lists (highest priority
+            for single-byte slots, since packed lists can't be truncated)
     """
     # CharIDs that encode with 00 byte (unusable - 00 is null terminator)
     # These are charIDs where (charID - 239) % 255 == 0: 239, 494, 749, ...
     NULL_BYTE_CHARIDS = {239 + 255 * i for i in range(7)}  # 239, 494, 749, 1004, 1259, 1514, 1769
 
     # Available slots (can be replaced with Korean):
-    available_single = []  # charIDs 1-160 (single-byte)
+    available_single = []  # charIDs 1-238 that aren't preserved (single-byte)
     available_double = []  # charIDs 239+ (two-byte)
 
     # Hiragana slots (charIDs 1-80)
     for cid in range(1, 81):
         available_single.append(cid)
 
-    # Katakana slots (charIDs 81-159), excluding SPACE_CHAR_ID (160)
+    # Katakana slots (charIDs 81-159), excluding charID 160 (empty space)
     for cid in range(81, 160):
+        available_single.append(cid)
+
+    # Freed lowercase a-z slots (charIDs 187-212)
+    # Game never uses standalone lowercase letters in visible text
+    for cid in range(187, 213):
         available_single.append(cid)
 
     # Kanji slots (charIDs 239+, two-byte encoding)
@@ -193,15 +207,18 @@ def build_korean_mapping(korean_chars, decode_table, priority_chars=None, char_f
     mapping = {}
 
     # Determine character ordering for slot assignment
+    # Priority tiers (highest first):
+    #   1. Packed list chars (can't be truncated, must minimize byte cost)
+    #   2. Other non-STG chars by frequency (fixed-length replacement)
+    #   3. STG-only chars by frequency (variable-length, less byte-sensitive)
     if non_stg_frequency is not None and stg_frequency is not None:
-        # Two-tier priority: non-STG chars first (fixed-length benefits most from single-byte),
-        # then STG-only chars, each tier sorted by its own frequency
+        packed_set = packed_list_chars or set()
         ordered_chars = sorted(korean_chars, key=lambda c: (
+            0 if c in packed_set else 1,   # packed list chars first
             -non_stg_frequency.get(c, 0),
             -stg_frequency.get(c, 0)
         ))
     elif char_frequency:
-        # Priority chars first, then others
         priority_list = [ch for ch in korean_chars if ch in priority_chars]
         other_list = [ch for ch in korean_chars if ch not in priority_chars]
         ordered_chars = priority_list + other_list
@@ -501,6 +518,59 @@ def encode_korean_text(text, korean_mapping, decode_table):
         # Skip unrecognized characters
         # print(f"  Warning: unrecognized char '{ch}' (U+{ord(ch):04X})")
         i += 1
+
+    return bytes(result)
+
+
+def encode_packed_list(text, korean_mapping, decode_table):
+    """Encode a packed item list with proper FF 1A separators.
+
+    Packed item lists store multiple item names in one string, separated
+    by FF 1A control codes. The game treats all FF codes as 4-byte
+    sequences (FF + opcode + param1 + param2), so separators must always
+    be exactly 4 bytes: FF 1A 00 00.
+
+    Args:
+        text: Korean text with [FF:1A 00 00] separators between items
+        korean_mapping: char -> charID mapping
+        decode_table: original game char table for reverse lookup
+
+    Returns:
+        Encoded bytes for the entire packed list (without trailing null)
+    """
+    # Split on [FF:1A 00 00] separator
+    items = text.split("[FF:1A 00 00]")
+
+    # Remove empty trailing items (from trailing separator)
+    while items and not items[-1].strip():
+        items.pop()
+
+    if not items:
+        return b"\x00"
+
+    result = bytearray()
+
+    for i, item_text in enumerate(items):
+        item_text = item_text.strip()
+        if not item_text:
+            # Empty item - encode as minimal placeholder
+            item_bytes = b""
+        else:
+            # Encode this item's Korean text (no FF prefix codes needed)
+            item_bytes = encode_korean_text(item_text, korean_mapping, decode_table)
+
+        is_last = (i == len(items) - 1)
+
+        if is_last:
+            # Last item: just content bytes (null terminator added by caller)
+            result.extend(item_bytes)
+        else:
+            # Non-last item: content + FF 1A 00 00 separator
+            # The game treats FF XX XX XX as 4-byte control codes.
+            # FF 1A is the packed list separator; always write 4 bytes
+            # so the game correctly skips past it to the next item.
+            result.extend(item_bytes)
+            result.extend(b"\xFF\x1A\x00\x00")
 
     return bytes(result)
 
@@ -930,8 +1000,15 @@ def patch_exe_file(exe_path, translation_entries, korean_mapping, decode_table, 
         # Original total size: text + null
         orig_total = orig_end - offset + 1
 
-        # Encode Korean text
-        encoded = encode_korean_text(korean_text, korean_mapping, decode_table)
+        # Detect packed item lists (entries with FF 1A separators)
+        is_packed_list = "[FF:1A" in korean_text
+
+        if is_packed_list:
+            # Packed list: encode with proper FF 1A separators and alignment
+            encoded = encode_packed_list(korean_text, korean_mapping, decode_table)
+        else:
+            # Regular string: encode as flat text
+            encoded = encode_korean_text(korean_text, korean_mapping, decode_table)
 
         # New total size: encoded + null
         new_total = len(encoded) + 1
@@ -945,6 +1022,10 @@ def patch_exe_file(exe_path, translation_entries, korean_mapping, decode_table, 
             patched += 1
         else:
             # Too long - truncate at safe byte boundary
+            if is_packed_list:
+                # For packed lists, truncation is a critical error
+                print(f"  WARNING: packed list at 0x{offset:08X} too long "
+                      f"({new_total}B > {orig_total}B)")
             available = orig_total - 1
             truncated_encoded = safe_truncate(encoded, available)
             replacement = truncated_encoded + b"\x00"
