@@ -173,6 +173,7 @@ def validate_translations(stages):
     try:
         sys.path.insert(0, str(Path(__file__).parent))
         from patch_korean import load_decode_table, encode_korean_text, build_encode_table
+        from patch_variable_length_multi import get_vlut_config
         can_check_size = True
         decode_table = load_decode_table()
 
@@ -207,11 +208,20 @@ def validate_translations(stages):
             except:
                 pass
 
+        # Load VLUT config to know which chunks use variable-length relocation
+        vlut_offsets = {}
+        if orig_data and can_check_size:
+            try:
+                vlut_offsets, _ = get_vlut_config(stage, orig_data)
+            except Exception:
+                pass
+
         with open(trans_file) as f:
             lines = f.readlines()
 
         delay_in_padding = []
         truncated = []
+        vlut_skipped = 0
 
         for line_num, line in enumerate(lines, 1):
             if not line.strip().startswith('0x'):
@@ -235,6 +245,13 @@ def validate_translations(stages):
             # (4 bytes) is no longer needed in translation files.
 
             # Check 2: Truncation in padding region (only if we can calculate size)
+            # Skip VLUT-enabled chunks — the variable-length patcher handles overflows
+            if is_padding_region and vlut_offsets:
+                chunk_idx = offset // CHUNK_SIZE
+                if vlut_offsets.get(chunk_idx, 0) != 0:
+                    vlut_skipped += 1
+                    continue
+
             if is_padding_region and can_check_size and orig_data and charmap:
                 # Extract content after [script:XX XX]
                 script_idx = line.find('[script:')
@@ -280,6 +297,11 @@ def validate_translations(stages):
         # Report issues for this stage
         # delay_in_padding check removed — [box:speech] display bug is now
         # handled automatically by the encoder (1-byte space insertion)
+
+        if vlut_skipped:
+            warnings.append(
+                f"{stage}: {vlut_skipped} padding-region entries skipped (VLUT-enabled chunks handle overflow)"
+            )
 
         if truncated:
             # Separate critical (>3 bytes) from minor (1-3 bytes) truncation
