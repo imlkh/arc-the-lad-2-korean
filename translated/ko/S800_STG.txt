@@ -1215,6 +1215,24 @@
   0x005E2396 [0x8006] [script:E1 0B]아이템을 여러 개 갖고 있다면
   0x005E23DE [0x8006] [script:11 0C]그 아이템을 선택하면 같은 종류의[br]아이템끼리는 교체할 수 있어
   0x005E243E [0x8006] [script:31 0C]어때, 알겠지?
+  --- bare item ---
+  0x005E29D6 [bare]질풍의반다나
+  --- end bare ---
+  --- bare item ---
+  0x005E3E16 [bare]로맨싱스톤
+  --- end bare ---
+  --- bare item ---
+  0x005E3E46 [bare]로맨싱스톤
+  --- end bare ---
+  --- bare item ---
+  0x005E3E76 [bare]로맨싱스톤
+  --- end bare ---
+  --- bare item ---
+  0x005E3EA6 [bare]로맨싱스톤
+  --- end bare ---
+  --- bare item ---
+  0x005E3ED6 [bare]로맨싱스톤
+  --- end bare ---
   0x005E3F46 [0x8006] [script:B2 19]매번 고마워!
   0x005E3F98 [0x8006] [script:DC 19]뭐야, 구경만이냐
   --- context: 0x8006 -> 0x00A9 ---

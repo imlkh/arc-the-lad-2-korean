@@ -398,6 +398,24 @@ def parse_translation_file(translation_path):
                     "script_prefix": script_bytes,
                     "text": korean_text
                 })
+                continue
+
+            # Parse bare entries: 0xOFFSET [bare]Korean text
+            # Used for standalone item/monster names without opcode/script prefix
+            bare_match = re.match(
+                r"0x([0-9A-Fa-f]+)\s+\[bare\](.*)",
+                line
+            )
+            if bare_match:
+                offset = int(bare_match.group(1), 16)
+                korean_text = bare_match.group(2)
+
+                entries.append({
+                    "offset": offset,
+                    "opcode": 0,
+                    "script_prefix": b"",
+                    "text": korean_text
+                })
 
     return entries
 
@@ -997,11 +1015,40 @@ def validate_translation_lengths(entries, korean_mapping, decode_table, file_nam
     return valid, len(warnings), warnings
 
 
+def _detect_box_wrapping(data, offset, orig_total):
+    """Detect FF 08 box:system wrapping around a text entry.
+
+    Many BEAM.DAT entries are wrapped: [box:open][text][box:close][null].
+    The translation text only contains the inner content, so we must
+    detect and preserve the box control codes during patching.
+
+    Returns (prefix, suffix) byte strings, both empty if no wrapping found.
+    """
+    if orig_total < 9:  # Minimum: 4 open + 0 text + 4 close + 1 null
+        return b'', b''
+
+    # Check box open at start: FF 08 XX 01 where XX = 01/03/05/07
+    if (data[offset] == 0xFF and data[offset + 1] == 0x08 and
+            data[offset + 3] == 0x01 and
+            data[offset + 2] in (0x01, 0x03, 0x05, 0x07)):
+        # Check box close before null: FF 08 02 01
+        close_pos = offset + orig_total - 5  # 4 bytes close + 1 null
+        if (data[close_pos] == 0xFF and data[close_pos + 1] == 0x08 and
+                data[close_pos + 2] == 0x02 and data[close_pos + 3] == 0x01):
+            return bytes(data[offset:offset + 4]), bytes(data[close_pos:close_pos + 4])
+
+    return b'', b''
+
+
 def patch_bin_file(bin_path, translation_entries, korean_mapping, decode_table, dry_run=False):
     """Patch a BIN file (SDIC.BIN, SMITH.BIN, etc.) with Korean translations.
 
     Uses fixed-length replacement: Korean text is padded if shorter,
     or truncated if longer than the original Japanese text.
+
+    For box-wrapped entries (FF 08 XX 01 ... FF 08 02 01), the box
+    control codes are automatically detected and preserved. The Korean
+    text only replaces the inner content between box open and box close.
     """
     print(f"Patching BIN file: {bin_path}")
 
@@ -1011,6 +1058,7 @@ def patch_bin_file(bin_path, translation_entries, korean_mapping, decode_table, 
     patched = 0
     truncated = 0
     errors = 0
+    box_preserved = 0
 
     for entry in translation_entries:
         offset = entry["offset"]
@@ -1043,41 +1091,130 @@ def patch_bin_file(bin_path, translation_entries, korean_mapping, decode_table, 
             # Regular string: encode as flat text
             encoded = encode_korean_text(korean_text, korean_mapping, decode_table)
 
-        # New total size: encoded + null
-        new_total = len(encoded) + 1
+        # Detect box wrapping (FF 08 XX 01 ... FF 08 02 01)
+        box_prefix, box_suffix = _detect_box_wrapping(data, offset, orig_total)
 
-        if new_total <= orig_total:
-            # Fits - pad with nulls if shorter
-            replacement = encoded + b"\x00"
-            padded = replacement + b"\x00" * (orig_total - new_total)
+        if box_prefix and box_suffix:
+            # Box-wrapped entry: preserve box codes, only replace inner text
+            inner_space = orig_total - len(box_prefix) - len(box_suffix) - 1
+            if len(encoded) <= inner_space:
+                inner = encoded + b'\x00' * (inner_space - len(encoded))
+            else:
+                inner = safe_truncate(encoded, inner_space)
+                if len(inner) < inner_space:
+                    inner = inner + b'\x00' * (inner_space - len(inner))
+                truncated += 1
+            replacement = box_prefix + inner + box_suffix + b'\x00'
             if not dry_run:
-                data[offset:offset + orig_total] = padded
+                data[offset:offset + orig_total] = replacement
             patched += 1
+            box_preserved += 1
         else:
-            # Too long - truncate at safe byte boundary
-            if is_packed_list:
-                print(f"  WARNING: packed list at 0x{offset:08X} too long "
-                      f"({new_total}B > {orig_total}B)")
-            available = orig_total - 1
-            truncated_encoded = safe_truncate(encoded, available)
-            replacement = truncated_encoded + b"\x00"
-            padded = replacement + b"\x00" * (orig_total - len(replacement))
-            if not dry_run:
-                data[offset:offset + orig_total] = padded
-            patched += 1
-            truncated += 1
+            # Non-box entry: standard replacement
+            new_total = len(encoded) + 1
+
+            if new_total <= orig_total:
+                # Fits - pad with nulls if shorter
+                replacement = encoded + b"\x00"
+                padded = replacement + b"\x00" * (orig_total - new_total)
+                if not dry_run:
+                    data[offset:offset + orig_total] = padded
+                patched += 1
+            else:
+                # Too long - truncate at safe byte boundary
+                if is_packed_list:
+                    print(f"  WARNING: packed list at 0x{offset:08X} too long "
+                          f"({new_total}B > {orig_total}B)")
+                available = orig_total - 1
+                truncated_encoded = safe_truncate(encoded, available)
+                replacement = truncated_encoded + b"\x00"
+                padded = replacement + b"\x00" * (orig_total - len(replacement))
+                if not dry_run:
+                    data[offset:offset + orig_total] = padded
+                patched += 1
+                truncated += 1
 
     if not dry_run:
         with open(bin_path, "wb") as f:
             f.write(data)
 
     print(f"  Patched: {patched} entries")
+    if box_preserved:
+        print(f"  Box-wrapped (preserved): {box_preserved}")
     if truncated:
         print(f"  Truncated (too long): {truncated}")
     if errors:
         print(f"  Errors: {errors}")
 
     return patched, truncated, errors
+
+
+# Equipment item name byte patterns in BEAM.DAT
+# These are pre-composed item names in equipment data records (outside text regions)
+# Japanese bytes are from the game's fixed charmap; Korean text is dynamically encoded
+BEAM_EQUIPMENT_PATTERNS = [
+    # 疾風のバンダナ → 질풍의반다나
+    (b'\xf1\xe9\xe2\x19\x8e\x7e\x89\x65', "질풍의반다나"),
+    # 反撃のバンダナ → 반격의반다나
+    (b'\xf3\x83\xf1\x51\x19\x8e\x7e\x89\x65', "반격의반다나"),
+    # 長老のはちまき → 장로의머리띠
+    (b'\xf2\xed\xf4\x6a\x19\x1a\x11\x1f\x07', "장로의머리띠"),
+    # 女神のいのり → 여신의기도
+    (b'\xf0\x8c\xf0\xc2\x19\x02\x19\x28', "여신의기도"),
+    # ロマンシングストーン → 로맨싱스톤
+    (b'\x7b\x6f\x7e\x5c\x7e\x81\x5d\x64\xe3\x7e', "로맨싱스톤"),
+    # うつせみの衣 → 우츠세미의옷
+    (b'\x03\x12\x0e\x20\x19\xf2\xca', "우츠세미의옷"),
+]
+
+
+def patch_beam_equipment(beam_path, korean_mapping, decode_table, dry_run=False):
+    """Patch equipment item names in BEAM.DAT data records.
+
+    Equipment data records contain pre-composed item names at fixed chunk
+    offsets, repeated across chunks 11-44. These are outside the text regions
+    handled by patch_bin_file(), so they need direct binary replacement.
+    """
+    print(f"  Patching BEAM equipment item names...")
+
+    with open(beam_path, "rb") as f:
+        data = bytearray(f.read())
+
+    total_patched = 0
+
+    for jp_bytes, kr_text in BEAM_EQUIPMENT_PATTERNS:
+        kr_encoded = encode_korean_text(kr_text, korean_mapping, decode_table)
+        # When Korean is longer, extend search pattern with trailing nulls
+        # so the replacement has enough room (item names live in null-padded slots)
+        search_pattern = jp_bytes
+        if len(kr_encoded) > len(jp_bytes):
+            extra = len(kr_encoded) - len(jp_bytes)
+            search_pattern = jp_bytes + b'\x00' * extra
+        # Pad replacement to match search pattern length
+        kr_padded = kr_encoded + b'\x00' * (len(search_pattern) - len(kr_encoded))
+
+        # Find and replace all occurrences
+        count = 0
+        pos = 0
+        while True:
+            idx = data.find(search_pattern, pos)
+            if idx == -1:
+                break
+            if not dry_run:
+                data[idx:idx + len(search_pattern)] = kr_padded
+            count += 1
+            pos = idx + len(search_pattern)
+
+        if count:
+            print(f"    {kr_text}: {count} occurrences patched")
+        total_patched += count
+
+    if not dry_run and total_patched > 0:
+        with open(beam_path, "wb") as f:
+            f.write(data)
+
+    print(f"  Equipment items patched: {total_patched}")
+    return total_patched
 
 
 def patch_exe_file(exe_path, translation_entries, korean_mapping, decode_table, dry_run=False):

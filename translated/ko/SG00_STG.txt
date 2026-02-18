@@ -3333,6 +3333,9 @@
   0x0287DB6E [0x8006] [script:30 17]아무리 지름길이래도[br]이건 좀…
   --- context: 0x8006 -> 0x00B4 ---
   0x0287DD70 [0x00B4] [script:2B 18]유적 던전 [num:01]층
+  --- bare item ---
+  0x0287EBB0 [bare]로맨싱스톤
+  --- end bare ---
   --- context: 0x00B4 -> 0x00A9 ---
   0x0293A5F2 [0x00A9] [script:AE 01][box:system]스위치 발견[br]ON할까?[br][opt]네[br][opt]아니오[box:close]
   0x0293AB96 [0x00A9] [script:E7 02][box:system]계단 발견[br][opt]내려가기[br][opt]그만두기[box:close]

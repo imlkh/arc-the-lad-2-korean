@@ -386,6 +386,9 @@
   0x00177BFC [0x8005] [script:A5 15](탁하잖아・・・)
   0x00177C3E [0x8005] [script:C5 15](생각하는 거 그만두자)
   0x00177C84 [0x8005] [script:F2 15]나, 이렇게나, 깔끔 좋아하는데[br]신부 안 온다・・
+  --- bare item ---
+  0x0017803A [bare]반격의반다나
+  --- end bare ---
   --- context: 0x8005 -> 0x00A9 ---
   0x0022FE7E [0x00A9] [script:AE 01][box:system]스위치 발견[br]ON할까?[br][opt]네[br][opt]아니오[box:close]
   0x00230422 [0x00A9] [script:E7 02][box:system]계단 발견[br][opt]내려가기[br][opt]그만두기[box:close]

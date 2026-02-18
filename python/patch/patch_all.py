@@ -21,7 +21,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from patch_korean import (
     load_decode_table, extract_korean_chars, build_korean_mapping,
-    patch_comm_img, patch_stg_file, patch_exe_file, patch_bin_file,
+    patch_comm_img, patch_stg_file, patch_exe_file, patch_bin_file, patch_beam_equipment,
     parse_translation_file, parse_bin_translation_file, validate_translation_lengths,
     save_mapping, GAME_DIR, BASE_DIR, OUTPUT_DIR
 )
@@ -364,6 +364,9 @@ def main():
 
         print(f"Patching BIN file: {beam_dst}")
         patch_bin_file(beam_dst, beam_entries, korean_mapping, decode_table)
+
+        # Patch equipment item names in data records (outside text regions)
+        patch_beam_equipment(beam_dst, korean_mapping, decode_table)
 
     # Save validation report if there are any warnings
     report_path = os.path.join(OUTPUT_DIR, "validation_report.md")

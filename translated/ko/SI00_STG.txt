@@ -2664,6 +2664,10 @@
   0x00F70302 [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
   --- context: 0x00A9 -> 0x00B4 ---
   0x00F704AA [0x00B4] [script:11 04]뭔가 다르다!!
+  --- bare items ---
+  0x00F75A0C [bare]질풍의반다나
+  0x00F75B26 [bare]질풍의반다나
+  --- end bare ---
   --- context: 0x00B4 -> 0x00B0 ---
   0x0102A2F6 [0x00B0] [script:AE 01][box:system]스위치 발견[br]ON할까?[br][opt]네[br][opt]아니오[box:close]
   --- context: 0x00B0 -> 0x00A9 ---
@@ -2974,6 +2978,18 @@
   0x010E9E4E [0x00A9] [script:12 03][box:system]출구다. 나갈까?[br][opt]네[br][opt]아니오[box:close]
   0x010E9E7A [0x00A9] [script:25 03][box:system]사다리다[br][opt]올라가기[br][opt]그만두기[box:close]
   0x010E9EC2 [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+  --- bare item ---
+  0x010EEDF4 [bare]로맨싱스톤
+  --- end bare ---
+  --- bare item ---
+  0x010EEF0E [bare]로맨싱스톤
+  --- end bare ---
+  --- bare item ---
+  0x010EF028 [bare]로맨싱스톤
+  --- end bare ---
+  --- bare item ---
+  0x010EF142 [bare]로맨싱스톤
+  --- end bare ---
   0x011A4DAA [0x00A9] [script:AE 01][box:system]스위치 발견[br]ON할까?[br][opt]네[br][opt]아니오[box:close]
   0x011A535A [0x00A9] [script:ED 02][box:system]계단 발견[br][opt]내려가기[br][opt]그만두기[box:close]
   0x011A5384 [0x00A9] [script:02 03][box:system]계단 발견[br][opt]올라가기[br][opt]그만두기[box:close]
@@ -3503,6 +3519,24 @@
   0x019C35C6 [0x800C] [script:1A 0F]힘내세요
   --- context: 0x800C -> 0x00A9 ---
   0x019C361C [0x00A9] [script:5F 0F]무슨 용무지?[br][opt]알디아의 대장간[br][opt]브라키아의 대장간[br][opt]합성점[br][opt]용무 없다
+  --- bare item ---
+  0x019C3D56 [bare]질풍의반다나
+  --- end bare ---
+  --- bare item ---
+  0x019C5196 [bare]로맨싱스톤
+  --- end bare ---
+  --- bare item ---
+  0x019C51C6 [bare]로맨싱스톤
+  --- end bare ---
+  --- bare item ---
+  0x019C51F6 [bare]로맨싱스톤
+  --- end bare ---
+  --- bare item ---
+  0x019C5226 [bare]로맨싱스톤
+  --- end bare ---
+  --- bare item ---
+  0x019C5256 [bare]로맨싱스톤
+  --- end bare ---
   --- context: 0x00A9 -> 0x800C ---
   0x019C52C6 [0x800C] [script:97 1D]힘내라
   --- context: 0x800C -> 0x8009 ---
