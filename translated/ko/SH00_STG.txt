@@ -9,69 +9,95 @@
   --- context: 0x00A9 -> 0x00B4 ---
   0x000B4FF8 [0x00B4] [script:E8 06][box:close]식전 회장
   0x000B5032 [0x00B4] [script:05 07][box:close]히엔 격납고
-  0x000B51CC [0x00B4] [script:D1 07][box:close]プロディアス
+  0x000B51CC [0x00B4] [script:D1 07][box:close]프로디아스
   0x000B5242 [0x00B4] [script:0D 08][box:close]알디아 공항
   0x000B5320 [0x00B4] [script:7A 08]알디아 공항
+  0x000B541C [0x00A9] [script:F7 08]프로디아스
   0x000B560C [0x00B4] [script:F0 09]윌의 바위터
   0x000B5708 [0x00B4] [script:6D 0A]폐허의 마을
+  0x000B5802 [0x00A9] [script:EA 0A]인디고스
   0x000B58FC [0x00B4] [script:68 0B]식전 회장
   0x000B59F8 [0x00B4] [script:E6 0B]히엔 격납고
   0x000B5B04 [0x00B4] [script:6C 0C]알디아 공항
+  0x000B5C00 [0x00A9] [script:E9 0C]프로디아스
   0x000B5DF0 [0x00B4] [script:E2 0D]윌의 바위터
   0x000B5EEC [0x00B4] [script:5F 0E]폐허의 마을
+  0x000B5FE6 [0x00A9] [script:DC 0E]인디고스
   0x000B60E0 [0x00B4] [script:5A 0F]식전 회장
   0x000B61DC [0x00B4] [script:D8 0F]히엔 격납고
   0x000B62DE [0x00B4] [script:59 10]알디아 공항
+  0x000B63DA [0x00A9] [script:D6 10]프로디아스
   0x000B65CA [0x00B4] [script:CF 11]윌의 바위터
   0x000B66C6 [0x00B4] [script:4C 12]폐허의 마을
+  0x000B67C0 [0x00A9] [script:C9 12]인디고스
   0x000B68BA [0x00B4] [script:47 13]식전 회장
   0x000B69B6 [0x00B4] [script:C5 13]히엔 격납고
   0x000B6AB8 [0x00B4] [script:46 14]알디아 공항
+  0x000B6BB4 [0x00A9] [script:C3 14]프로디아스
   0x000B6DA4 [0x00B4] [script:BC 15]윌의 바위터
   0x000B6EA0 [0x00B4] [script:39 16]폐허의 마을
+  0x000B6F9A [0x00A9] [script:B6 16]인디고스
   0x000B7094 [0x00B4] [script:34 17]식전 회장
   0x000B7190 [0x00B4] [script:B2 17]히엔 격납고
   0x000B729E [0x00B4] [script:39 18]알디아 공항
+  0x000B739A [0x00A9] [script:B6 18]프로디아스
   0x000B758A [0x00B4] [script:AF 19]윌의 바위터
   0x000B7686 [0x00B4] [script:2C 1A]폐허의 마을
+  0x000B7780 [0x00A9] [script:A9 1A]인디고스
   0x000B787A [0x00B4] [script:27 1B]히엔 격납고
   0x000B797C [0x00B4] [script:A8 1B]알디아 공항
+  0x000B7A78 [0x00A9] [script:25 1C]프로디아스
   0x000B7B72 [0x00B4] [script:A4 1C]갈아노의 저택
   0x000B7C70 [0x00B4] [script:22 1D]윌의 바위터
   0x000B7D6C [0x00B4] [script:9F 1D]폐허의 마을
+  0x000B7E66 [0x00A9] [script:1C 1E]인디고스
   0x000B7F60 [0x00B4] [script:9A 1E]히엔 격납고
   0x000B8074 [0x00B4] [script:24 1F]알디아 공항
+  0x000B8170 [0x00A9] [script:A1 1F]프로디아스
   0x000B826A [0x00B4] [script:1F 20]윌의 바위터
   0x000B8366 [0x00B4] [script:9C 20]폐허의 마을
+  0x000B8460 [0x00A9] [script:19 21]인디고스
   0x000B855A [0x00B4] [script:97 21]히엔 격납고
   0x000B8660 [0x00B4] [script:1A 22]알디아 공항
+  0x000B875C [0x00A9] [script:97 22]프로디아스
   0x000B894C [0x00B4] [script:90 23]윌의 바위터
   0x000B8A48 [0x00B4] [script:0D 24]폐허의 마을
+  0x000B8B42 [0x00A9] [script:8A 24]인디고스
   0x000B8C3C [0x00B4] [script:08 25]식전 회장
   0x000B8D38 [0x00B4] [script:86 25]히엔 격납고
   0x000B8E44 [0x00B4] [script:0C 26]알디아 공항
+  0x000B8F40 [0x00A9] [script:89 26]프로디아스
   0x000B9130 [0x00B4] [script:82 27]윌의 바위터
   0x000B922C [0x00B4] [script:FF 27]폐허의 마을
+  0x000B9326 [0x00A9] [script:7C 28]인디고스
   0x000B9420 [0x00B4] [script:FA 28]식전 회장
   0x000B951C [0x00B4] [script:78 29]히엔 격납고
   0x000B961E [0x00B4] [script:F9 29]알디아 공항
+  0x000B971A [0x00A9] [script:76 2A]프로디아스
   0x000B990A [0x00B4] [script:6F 2B]윌의 바위터
   0x000B9A06 [0x00B4] [script:EC 2B]폐허의 마을
+  0x000B9B00 [0x00A9] [script:69 2C]인디고스
   0x000B9BFA [0x00B4] [script:E7 2C]식전 회장
   0x000B9CF6 [0x00B4] [script:65 2D]히엔 격납고
   0x000B9DF8 [0x00B4] [script:E6 2D]알디아 공항
+  0x000B9EF4 [0x00A9] [script:63 2E]프로디아스
   0x000BA0E4 [0x00B4] [script:5C 2F]윌의 바위터
   0x000BA1E0 [0x00B4] [script:D9 2F]폐허의 마을
+  0x000BA2DA [0x00A9] [script:56 30]인디고스
   0x000BA3D4 [0x00B4] [script:D4 30]식전 회장
   0x000BA4D0 [0x00B4] [script:52 31]히엔 격납고
   0x000BA5E4 [0x00B4] [script:DC 31]알디아 공항
+  0x000BA6E0 [0x00A9] [script:59 32]프로디아스
   0x000BA7DA [0x00B4] [script:D7 32]윌의 바위터
   0x000BA8D6 [0x00B4] [script:54 33]폐허의 마을
+  0x000BA9D0 [0x00A9] [script:D1 33]인디고스
   0x000BAACA [0x00B4] [script:4F 34]히엔 격납고
   0x000BABD0 [0x00B4] [script:D2 34]알디아 공항
+  0x000BACCC [0x00A9] [script:4F 35]프로디아스
   0x000BADC6 [0x00B4] [script:CE 35]갈아노의 저택
   0x000BAEC4 [0x00B4] [script:4C 36]윌의 바위터
   0x000BAFC0 [0x00B4] [script:C9 36]폐허의 마을
+  0x000BB0BA [0x00A9] [script:46 37]인디고스
   0x000BB1B4 [0x00B4] [script:C4 37]식전 회장
   0x000BB2B0 [0x00B4] [script:42 38]히엔 격납고
   0x000BB3AC [0x00B4] [script:BF 38]알디아 다리
@@ -754,14 +780,14 @@
   0x00BC591E [0x00A9] [script:5A 04]다 됐나?[br][opt]예[br][opt]아니오
   0x00BC5C1C [0x00A9] [script:E2 05]총갈라 「로말리아 성에 쳐들어가는 건가?」[br][opt]예[br][opt]아니오
   --- context: 0x00A9 -> 0x00B4 ---
-  0x00BC5C74 [0x00B4] [script:09 06]チョンガラ[br]「よっしゃ、しっかりつかまっとれ！！」
+  0x00BC5C74 [0x00B4] [script:09 06]총갈라[br]「좋아, 꽉 잡고 있거라!!」
   0x00BC5CB4 [0x00B4] [script:28 06]총갈라[br]「뭐냐, 아직 뭔가 있는 겐가?」
   0x00BC6916 [0x00B4] [script:50 0C][FF:01 04 01]동 알디아
   0x00BC692C [0x00B4] [script:5B 0C][FF:01 04 01]서 알디아
   0x00BC6942 [0x00B4] [script:66 0C][FF:01 04 01][opt]야고스 섬
   0x00BC696C [0x00B4] [script:7B 0C][FF:01 04 01]크레니아 섬
-  0x00BC6A50 [0x00B4] [script:ED 0C][FF:01 04 01][opt][opt]北極
-  0x00BC6A66 [0x00B4] [script:F8 0C][FF:01 04 01][opt][opt]南極
+  0x00BC6A50 [0x00B4] [script:ED 0C][FF:01 04 01][opt][opt]북극
+  0x00BC6A66 [0x00B4] [script:F8 0C][FF:01 04 01][opt][opt]남극
   0x00BC6A7C [0x00B4] [script:04 0D][FF:01 04 01][opt]해저 유전
   0x00BC6EC4 [0x00B4] [script:3E 0F]알디아는 이미 알고 있겠지.[br]문명도 발달한 나라로, 돈으로 뭐든 해결하는[br]나라지.
   0x00BC6F1A [0x00B4] [script:63 0F]헌터 제도가 생긴 것도 그런 이유겠지. 나도 옛날에는 돈이 전부였지만 말이야.
