@@ -120,14 +120,18 @@ SCPS_100.26 and BEAM.DAT store multiple item names in packed lists, separated by
 소드[FF:1A 00 00]블레이드[FF:1A 00 00]에지[FF:1A 00 00]검
 ```
 
-### Separator Format
+### Separator Preservation and Item Padding
 
-| File | Separator | Bytes |
-|------|-----------|-------|
-| SCPS_100.26 | `[FF:1A 00 00]` | `FF 1A 00 00` (4 bytes) |
-| BEAM.DAT | `[FF:19 00 00]` | `FF 19 00 00` (4 bytes) |
+The patcher preserves original separator bytes **verbatim** from the binary. Each Korean item is padded with charID 160 (byte `0xA0`, blank glyph) to match the original item's exact byte length.
 
-**Critical**: Separators must be exactly 4 bytes. The game reads all FF control codes as 4-byte sequences (`FF + opcode + param1 + param2`). Writing fewer bytes causes the game to eat the first byte(s) of the next item name.
+| File | Separator opcode | Translation tag |
+|------|-----------------|-----------------|
+| SCPS_100.26 | `FF 1A` | `[FF:1A 00 00]` |
+| BEAM.DAT | `FF 19` | `[FF:19 00 00]` |
+
+**How it works**: `parse_original_packed_list()` scans the original binary at the entry offset to find item boundaries and separator bytes. Each Korean item is encoded, then padded/truncated to match the original item's byte count. Separator bytes are copied from the original binary without modification.
+
+**Translation tags** (`[FF:1A 00 00]` / `[FF:19 00 00]`) in translation files are used only as delimiters to split the Korean text into items. The actual bytes written to the binary come from the original.
 
 ### Original Text Compression
 

@@ -522,55 +522,146 @@ def encode_korean_text(text, korean_mapping, decode_table):
     return bytes(result)
 
 
-def encode_packed_list(text, korean_mapping, decode_table):
-    """Encode a packed item list with proper FF 1A separators.
+def parse_original_packed_list(data, offset):
+    """Parse the original packed list to find item boundaries and separators.
 
-    Packed item lists store multiple item names in one string, separated
-    by FF 1A control codes. The game treats all FF codes as 4-byte
-    sequences (FF + opcode + param1 + param2), so separators must always
-    be exactly 4 bytes: FF 1A 00 00.
+    Scans from offset until null terminator, identifying each item's byte
+    range and the separator bytes between items. The separator bytes are
+    preserved exactly as-is when patching.
+
+    Returns:
+        List of dicts with 'start', 'end' (item content range) and
+        'sep_bytes' (raw separator bytes after this item, or None for last).
+    """
+    items = []
+    i = offset
+    item_start = i
+
+    while i < len(data):
+        b = data[i]
+        if b == 0x00:
+            # Null terminator - end of last item
+            items.append({
+                'start': item_start,
+                'end': i,
+                'sep_bytes': None,
+            })
+            break
+        elif b == 0xFF and i + 1 < len(data) and data[i + 1] in (0x1A, 0x19):
+            # Separator found - record item and separator bytes
+            # The separator is FF XX 00 (3 bytes) possibly followed by
+            # a 0x00 alignment pad. Scan forward to find separator end.
+            item_end = i
+            sep_start = i
+            # Read FF XX
+            sep_end = i + 2
+            # Read bytes until we hit a non-zero byte or reach the next
+            # item. The separator pattern is FF XX followed by one or
+            # more 0x00 bytes.
+            while sep_end < len(data) and data[sep_end] == 0x00:
+                sep_end += 1
+                # Stop after at most 2 zero bytes (FF XX 00 00 max)
+                if sep_end - (i + 2) >= 2:
+                    break
+
+            raw_sep = bytes(data[sep_start:sep_end])
+            items.append({
+                'start': item_start,
+                'end': item_end,
+                'sep_bytes': raw_sep,
+            })
+            i = sep_end
+            item_start = i
+            continue
+        elif b >= 0xF0:
+            i += 2  # 2-byte character
+        else:
+            i += 1
+
+    return items
+
+
+# Padding byte for packed list items (charID 160 = blank glyph)
+PACKED_LIST_PAD_BYTE = 0xA0
+
+
+def encode_packed_list(text, korean_mapping, decode_table, orig_data=None, base_offset=0):
+    """Encode a packed item list, preserving original separator bytes.
+
+    Each Korean item is encoded and padded (with charID 160 = 0xA0) to
+    match the original item's byte length exactly. Separator bytes from
+    the original binary are preserved verbatim.
 
     Args:
-        text: Korean text with [FF:1A 00 00] separators between items
+        text: Korean text with [FF:1A 00 00] or [FF:19 00 00] separators
         korean_mapping: char -> charID mapping
         decode_table: original game char table for reverse lookup
+        orig_data: original binary data (for reading separator bytes)
+        base_offset: file offset where this packed list starts
 
     Returns:
         Encoded bytes for the entire packed list (without trailing null)
     """
-    # Split on [FF:1A 00 00] separator
-    items = text.split("[FF:1A 00 00]")
+    # Detect separator tag
+    if "[FF:1A 00 00]" in text:
+        sep_tag = "[FF:1A 00 00]"
+    elif "[FF:19 00 00]" in text:
+        sep_tag = "[FF:19 00 00]"
+    else:
+        sep_tag = "[FF:1A 00 00]"
 
-    # Remove empty trailing items (from trailing separator)
-    while items and not items[-1].strip():
-        items.pop()
+    korean_items = text.split(sep_tag)
 
-    if not items:
+    # Parse original packed list to get item boundaries and separators
+    if orig_data is not None:
+        orig_items = parse_original_packed_list(orig_data, base_offset)
+    else:
+        orig_items = []
+
+    if orig_items:
+        # Match Korean item count to original item count
+        # Extend with empty items if Korean has fewer
+        while len(korean_items) < len(orig_items):
+            korean_items.append("")
+        # Trim to original count if Korean has more
+        korean_items = korean_items[:len(orig_items)]
+    else:
+        # No original data - strip trailing empties as fallback
+        while korean_items and not korean_items[-1].strip():
+            korean_items.pop()
+
+    if not korean_items:
         return b"\x00"
 
     result = bytearray()
 
-    for i, item_text in enumerate(items):
+    for i, item_text in enumerate(korean_items):
         item_text = item_text.strip()
         if not item_text:
-            # Empty item - encode as minimal placeholder
             item_bytes = b""
         else:
-            # Encode this item's Korean text (no FF prefix codes needed)
             item_bytes = encode_korean_text(item_text, korean_mapping, decode_table)
 
-        is_last = (i == len(items) - 1)
+        is_last = (i == len(korean_items) - 1)
 
-        if is_last:
-            # Last item: just content bytes (null terminator added by caller)
+        if i < len(orig_items):
+            orig_item = orig_items[i]
+            orig_len = orig_item['end'] - orig_item['start']
+
+            # Pad or truncate to match original item byte length
+            if len(item_bytes) < orig_len:
+                item_bytes = item_bytes + bytes([PACKED_LIST_PAD_BYTE] * (orig_len - len(item_bytes)))
+            elif len(item_bytes) > orig_len:
+                item_bytes = item_bytes[:orig_len]
+
             result.extend(item_bytes)
+
+            if not is_last and orig_item['sep_bytes'] is not None:
+                # Preserve original separator bytes exactly
+                result.extend(orig_item['sep_bytes'])
         else:
-            # Non-last item: content + FF 1A 00 00 separator
-            # The game treats FF XX XX XX as 4-byte control codes.
-            # FF 1A is the packed list separator; always write 4 bytes
-            # so the game correctly skips past it to the next item.
+            # No original item info - just write content
             result.extend(item_bytes)
-            result.extend(b"\xFF\x1A\x00\x00")
 
     return bytes(result)
 
@@ -927,8 +1018,15 @@ def patch_bin_file(bin_path, translation_entries, korean_mapping, decode_table, 
         # Original total size: text + null
         orig_total = orig_end - offset + 1
 
-        # Encode Korean text
-        encoded = encode_korean_text(korean_text, korean_mapping, decode_table)
+        # Detect packed item lists (entries with FF 1A or FF 19 separators)
+        is_packed_list = "[FF:1A" in korean_text or "[FF:19" in korean_text
+
+        if is_packed_list:
+            # Packed list: preserve original separators and pad items
+            encoded = encode_packed_list(korean_text, korean_mapping, decode_table, orig_data=data, base_offset=offset)
+        else:
+            # Regular string: encode as flat text
+            encoded = encode_korean_text(korean_text, korean_mapping, decode_table)
 
         # New total size: encoded + null
         new_total = len(encoded) + 1
@@ -942,6 +1040,9 @@ def patch_bin_file(bin_path, translation_entries, korean_mapping, decode_table, 
             patched += 1
         else:
             # Too long - truncate at safe byte boundary
+            if is_packed_list:
+                print(f"  WARNING: packed list at 0x{offset:08X} too long "
+                      f"({new_total}B > {orig_total}B)")
             available = orig_total - 1
             truncated_encoded = safe_truncate(encoded, available)
             replacement = truncated_encoded + b"\x00"
@@ -1000,12 +1101,12 @@ def patch_exe_file(exe_path, translation_entries, korean_mapping, decode_table, 
         # Original total size: text + null
         orig_total = orig_end - offset + 1
 
-        # Detect packed item lists (entries with FF 1A separators)
-        is_packed_list = "[FF:1A" in korean_text
+        # Detect packed item lists (entries with FF 1A or FF 19 separators)
+        is_packed_list = "[FF:1A" in korean_text or "[FF:19" in korean_text
 
         if is_packed_list:
-            # Packed list: encode with proper FF 1A separators and alignment
-            encoded = encode_packed_list(korean_text, korean_mapping, decode_table)
+            # Packed list: encode with proper separators and alignment
+            encoded = encode_packed_list(korean_text, korean_mapping, decode_table, orig_data=data, base_offset=offset)
         else:
             # Regular string: encode as flat text
             encoded = encode_korean_text(korean_text, korean_mapping, decode_table)

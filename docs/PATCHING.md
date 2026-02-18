@@ -284,18 +284,25 @@ Korean characters are mapped to font cell IDs:
 
 SCPS_100.26 and BEAM.DAT contain packed item lists — multiple item names stored in a single null-terminated string, separated by FF control codes.
 
-| File | Separator | Item Prefix (original) | Encoding Function |
-|------|-----------|----------------------|-------------------|
-| SCPS_100.26 | `FF 1A 00 00` | `FF 1B/1C/1D XX YY` (text compression) | `encode_packed_list()` |
-| BEAM.DAT | `FF 19 00 00` | `FF 1A XX YY` (text compression) | `encode_korean_text()` |
+| File | Separator (3 bytes) | Item Prefix (original) | Encoding Function |
+|------|---------------------|----------------------|-------------------|
+| SCPS_100.26 | `FF 1A 00` | `FF 1B/1C/1D XX YY` (text compression) | `encode_packed_list()` |
+| BEAM.DAT | `FF 19 00` | `FF 1A XX YY` (text compression) | `encode_packed_list()` |
 
-**Important**: All FF control codes are 4 bytes (`FF + opcode + param1 + param2`). Separators must always be written as exactly 4 bytes. Writing fewer bytes causes the game to consume the first byte(s) of the next item as separator parameters, resulting in item misalignment.
+**Halfword Alignment**: The separator is 3 bytes (`FF XX 00`). The game requires each item to start at an even (halfword-aligned) address for `lhu` reads. After the 3-byte separator, a padding byte (`0x00`) is appended when needed to reach an even offset:
+
+```
+[item bytes] FF 1A 00 [item bytes]        ← 3-byte sep (already aligned)
+[item bytes] FF 1A 00 00 [item bytes]     ← 3-byte sep + 1-byte pad (alignment fix)
+```
+
+The `encode_packed_list()` function uses `base_offset` (the file offset of the packed list) to calculate correct alignment automatically. Both SCPS (`FF 1A`) and BEAM (`FF 19`) separator types are handled.
 
 The original game uses FF prefix codes (`FF 16-1D XX YY`) as text compression macros that insert substrings (e.g., `[FF:16 5F E3]ド` expands to "ソード"). Korean translations replace these with full text, which the game renders correctly without prefix codes.
 
-**SCPS packed lists** (36 entries, 0x0D44AE–0x0D4CB0): Detected by `[FF:1A` in translation text, encoded via `encode_packed_list()`.
+**SCPS packed lists** (36 entries, 0x0D44AE–0x0D4CB0): Detected by `[FF:1A` in translation text.
 
-**BEAM packed lists** (24+ entries, 0x0216E4CC–0x0216EB72): Use `[FF:19 00 00]` separators in translation text, encoded via the generic `encode_korean_text()` which handles `[FF:XX YY ZZ]` tags as 4-byte codes.
+**BEAM packed lists** (24+ entries, 0x0216E4CC–0x0216EB72): Detected by `[FF:19` in translation text.
 
 ## Output Files
 
