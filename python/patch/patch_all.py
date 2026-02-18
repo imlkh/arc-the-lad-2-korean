@@ -105,14 +105,20 @@ def main():
         return 1
 
     # Extract ALL Korean characters from ALL files
-    # Separate frequency counting: non-STG files use fixed-length replacement
-    # (single-byte encoding prevents truncation), STG files use variable-length
+    # Per-source frequency counting for tiered single-byte slot priority:
+    #   SCPS_100.26 (top) > BEAM.DAT > other BIN > STG files
     print("\nExtracting Korean characters from all translations...")
     all_korean_chars = set()
-    non_stg_frequency = {}  # SCPS, SDIC, YGUILD, SMITH, BEAM
-    stg_frequency = {}      # S*_STG files
+    scps_frequency = {}         # SCPS_100.26 (top priority)
+    beam_frequency = {}         # BEAM.DAT (second priority)
+    other_non_stg_frequency = {}  # SDIC, YGUILD, SMITH
+    stg_frequency = {}          # S*_STG files
 
-    NON_STG_NAMES = {"SYSTEM", "SDIC", "YGUILD", "SMITH", "BEAM"}
+    FREQ_MAP = {
+        "SYSTEM": "scps",
+        "BEAM": "beam",
+        "SDIC": "other", "YGUILD": "other", "SMITH": "other",
+    }
 
     for name, path in translation_files:
         chars = extract_korean_chars(path)
@@ -120,16 +126,28 @@ def main():
         print(f"  {name}: {len(chars)} unique chars")
 
         # Count frequency into the appropriate dict
-        freq_dict = non_stg_frequency if name in NON_STG_NAMES else stg_frequency
+        freq_type = FREQ_MAP.get(name, "stg")
+        if freq_type == "scps":
+            freq_dict = scps_frequency
+        elif freq_type == "beam":
+            freq_dict = beam_frequency
+        elif freq_type == "other":
+            freq_dict = other_non_stg_frequency
+        else:
+            freq_dict = stg_frequency
         with open(path, "r", encoding="utf-8") as f:
             for ch in f.read():
                 if '\uAC00' <= ch <= '\uD7A3':
                     freq_dict[ch] = freq_dict.get(ch, 0) + 1
 
     print(f"  Total unique Korean characters: {len(all_korean_chars)}")
-    non_stg_char_count = len([c for c in all_korean_chars if c in non_stg_frequency])
-    print(f"  Non-STG characters: {non_stg_char_count} (prioritized for single-byte slots)")
-    print(f"  STG-only characters: {len(all_korean_chars) - non_stg_char_count}")
+    scps_count = len([c for c in all_korean_chars if c in scps_frequency])
+    beam_only = len([c for c in all_korean_chars if c in beam_frequency and c not in scps_frequency])
+    non_stg_all = set(scps_frequency) | set(beam_frequency) | set(other_non_stg_frequency)
+    stg_only = len([c for c in all_korean_chars if c not in non_stg_all])
+    print(f"  SCPS chars: {scps_count} (top priority for single-byte)")
+    print(f"  BEAM-only chars: {beam_only} (second priority)")
+    print(f"  STG-only chars: {stg_only}")
 
     # Extract characters used in packed item lists (highest priority for single-byte)
     # These entries have [FF:1A separators and can't be truncated without breaking game
@@ -141,7 +159,7 @@ def main():
         if os.path.exists(trans_path):
             with open(trans_path, "r", encoding="utf-8") as f:
                 for line in f:
-                    if "[FF:1A" not in line:
+                    if "[FF:1A" not in line and "[FF:19" not in line:
                         continue
                     # Extract Korean chars from packed list entries
                     m = re.match(r'\s*0x[0-9A-Fa-f]+\s+\[\s*\d+\]\s+(.+)', line)
@@ -157,8 +175,9 @@ def main():
     print("\nBuilding unified character mapping...")
     korean_mapping = build_korean_mapping(
         list(all_korean_chars), decode_table,
-        non_stg_frequency=non_stg_frequency, stg_frequency=stg_frequency,
-        packed_list_chars=packed_list_chars
+        non_stg_frequency=other_non_stg_frequency, stg_frequency=stg_frequency,
+        packed_list_chars=packed_list_chars,
+        scps_frequency=scps_frequency, beam_frequency=beam_frequency
     )
     print(f"  Mapped {len(korean_mapping)} Korean characters to font slots")
 

@@ -156,7 +156,8 @@ def extract_korean_chars(translation_path):
 
 def build_korean_mapping(korean_chars, decode_table, priority_chars=None, char_frequency=None,
                          non_stg_frequency=None, stg_frequency=None,
-                         packed_list_chars=None):
+                         packed_list_chars=None,
+                         scps_frequency=None, beam_frequency=None):
     """Build mapping from Korean characters to font charIDs.
 
     Strategy: Replace hiragana (1-80), katakana (81-160), lowercase a-z (187-212),
@@ -171,6 +172,8 @@ def build_korean_mapping(korean_chars, decode_table, priority_chars=None, char_f
         stg_frequency: Optional dict of char frequency in STG files (variable-length)
         packed_list_chars: Optional set of chars used in packed item lists (highest priority
             for single-byte slots, since packed lists can't be truncated)
+        scps_frequency: Optional dict of char frequency in SCPS_100.26 (top priority)
+        beam_frequency: Optional dict of char frequency in BEAM.DAT (second priority)
     """
     # CharIDs that encode with 00 byte (unusable - 00 is null terminator)
     # These are charIDs where (charID - 239) % 255 == 0: 239, 494, 749, ...
@@ -209,9 +212,21 @@ def build_korean_mapping(korean_chars, decode_table, priority_chars=None, char_f
     # Determine character ordering for slot assignment
     # Priority tiers (highest first):
     #   1. Packed list chars (can't be truncated, must minimize byte cost)
-    #   2. Other non-STG chars by frequency (fixed-length replacement)
-    #   3. STG-only chars by frequency (variable-length, less byte-sensitive)
-    if non_stg_frequency is not None and stg_frequency is not None:
+    #   2. SCPS_100.26 chars by frequency (fixed-length, most space-constrained)
+    #   3. BEAM.DAT chars by frequency (fixed-length)
+    #   4. Other non-STG chars by frequency (fixed-length)
+    #   5. STG-only chars by frequency (variable-length, less byte-sensitive)
+    if scps_frequency is not None and beam_frequency is not None:
+        packed_set = packed_list_chars or set()
+        other_non_stg = non_stg_frequency or {}
+        ordered_chars = sorted(korean_chars, key=lambda c: (
+            0 if c in packed_set else 1,   # packed list chars first
+            -scps_frequency.get(c, 0),     # SCPS frequency (top priority)
+            -beam_frequency.get(c, 0),     # BEAM frequency (second)
+            -other_non_stg.get(c, 0),      # other non-STG frequency
+            -stg_frequency.get(c, 0)       # STG frequency (lowest)
+        ))
+    elif non_stg_frequency is not None and stg_frequency is not None:
         packed_set = packed_list_chars or set()
         ordered_chars = sorted(korean_chars, key=lambda c: (
             0 if c in packed_set else 1,   # packed list chars first
