@@ -1,0 +1,1743 @@
+# S900.STG — 1218 dialogues, 945 templates (2 bare, 8 missed, 126 orphan menus)
+
+  0x000BB56E [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
+  0x000BBB12 [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
+  0x000BBB3C [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x000BBB66 [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
+  0x000BBB92 [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x000BBBDA [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+  --- context: 0x00A9 -> 0x8006 ---
+  0x000BBF50 [0x8006] [script:FA 04]아하하, 차가워~!!
+  0x000BBFB8 [0x8006] [script:31 05]아빠~ 빨리, 빨리~!!
+  0x000BC014 [0x8006] [script:5E 05]엘레나, 발밑 조심해라
+  --- context: 0x8006 -> 0x8007 ---
+  0x000BC058 [0x8007] [script:7B 05]알고 있어
+  --- context: 0x8007 -> 0x8006 ---
+  0x000BC0D6 [0x8006] [script:B9 05]꺄악!
+  0x000BC112 [0x8006] [script:D8 05]아야~
+  0x000BC14C [0x8006] [script:F3 05]！？
+  0x000BC182 [0x8006] [script:10 06]사, 사람…?
+  0x000BC1FC [0x8006] [script:4F 06]아빠아아!!
+  0x000BC23A [0x8006] [script:6D 06]왜 그러니?[opt]엘레나
+  --- context: 0x8006 -> 0x8007 ---
+  0x000BC276 [0x8007] [script:8E 06]사, 사람이 쓰러져 있어!!
+  --- context: 0x8007 -> 0x8006 ---
+  0x000BC2DA [0x8006] [script:C4 06]음, 어딘가에서[br]떠밀려온 모양이군…
+  --- context: 0x8006 -> 0x8007 ---
+  0x000BC324 [0x8007] [script:E5 06]엘레나, 잠깐 비켜 있거라
+  0x000BC366 [0x8007] [script:00 07]응
+  --- context: 0x8007 -> 0x8006 ---
+  0x000BC3D4 [0x8006] [script:3C 07]흠, 아직 숨은 쉬는군
+  --- context: 0x8006 -> 0x8007 ---
+  0x000BC41C [0x8007] [script:5E 07]엘레나, 미안하구나
+  0x000BC458 [0x8007] [script:7E 07]산책은 다음에 하자
+  0x000BC498 [0x8007] [script:9E 07]응, 엘레나는 괜찮아
+  --- context: 0x8007 -> 0x8006 ---
+  0x000BC4E0 [0x8006] [script:C3 07]일단 숙소로 옮기자…
+  --- context: 0x8006 -> 0x8007 ---
+  0x000BC58C [0x8007] [script:15 08]살 수 있어?
+  --- context: 0x8007 -> 0x8006 ---
+  0x000BC5C6 [0x8006] [script:37 08]그래, 빨리 발견했으니까
+  --- context: 0x8006 -> 0x8007 ---
+  0x000BC60A [0x8007] [script:53 08]다행이야…
+  --- context: 0x8007 -> 0x00A9 ---
+  0x001752EE [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
+  0x00175892 [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
+  0x001758BC [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x001758E6 [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
+  0x00175912 [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x0017595A [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+  --- context: 0x00A9 -> 0x8007 ---
+  0x00177370 [0x8007] [script:55 10]무투대회 나오는 사람들은[br]다들 무서운 얼굴이지만…
+  0x001773C6 [0x8007] [script:76 10]그루가만은 멋있어
+  0x00177408 [0x8007] [script:9A 10]나도 저런 아빠가 있었으면 좋겠다~
+  0x00177458 [0x8007] [script:BB 10]앗, 그루가다
+  --- context: 0x8007 -> 0xFFFE ---
+  0x00177492 [0xFFFE] [script:D7 10]에헤헤…
+  0x001774E4 [0xFFFE] [script:11 11]무투대회 나오는 사람들은 왜 다들[br]무서운 얼굴이야?
+  --- context: 0xFFFE -> 0x8007 ---
+  0x0017753E [0x8007] [script:3A 11]저 무서운 눈으로 노려보면[br]나 울어버릴지도…
+  0x00177598 [0x8007] [script:5B 11]앗, 그루가다
+  --- context: 0x8007 -> 0xFFFE ---
+  0x001775D2 [0xFFFE] [script:7A 11]대회 힘내!
+  0x0017762A [0xFFFE] [script:AD 11]역시 싸우는 남자는 멋있어~
+  --- context: 0xFFFE -> 0x8008 ---
+  0x0017767E [0x8008] [script:DB 11]나도 크면[br]무투대회에 나가서 싸울 거야!
+  0x001776D2 [0x8008] [script:FD 11]그리고 갈바른을 쓰러뜨릴 거야!
+  0x00177732 [0x8008] [script:3B 12]이 섬은 할시온, 아데네시아,[br]로말리아 3대륙에 둘러싸여 있지
+  --- context: 0x8008 -> 0x800B ---
+  0x00177792 [0x800B] [script:72 12]옛날 각 대륙의 거부들이 자기 대륙의[br]격투왕끼리 싸우게 하고 싶어 해서…
+  0x00177800 [0x800B] [script:9F 12]그 무대로 만들어진 게[br]이 마을의 투기장이라네
+  0x0017785A [0x800B] [script:D2 12]오락을 위해 이런 호화 투기장을[br]만들다니 역시 부자는 다르구나
+  0x001778C8 [0x800B] [script:06 13]이 섬은 할시온, 아데네시아,[br]로말리아 3대륙에 둘러싸여 있지
+  0x00177928 [0x800B] [script:3D 13]옛날 각 대륙의 거부들이 자기 대륙의[br]격투왕끼리 싸우게 하고 싶어 해서…
+  0x00177996 [0x800B] [script:6A 13]그 무대로 만들어진 게[br]이 마을의 무투장이란 거지
+  0x001779F0 [0x800B] [script:9D 13]오락을 위해 이런 호화 투기장을[br]만들다니 역시 부자는 다르구나
+  0x00177A72 [0x800B] [script:CC 13]클레니아 마을에 어서 오세요!
+  --- context: 0x800B -> 0x800A ---
+  0x00177AC8 [0x800A] [script:00 14]아쉽지만 무투대회는[br]이미 끝났어요
+  0x00177B1C [0x800A] [script:23 14]보고 싶다면 3년 뒤에 오세요
+  0x00177B6A [0x800A] [script:48 14]클레니아 마을에 어서 오세요!
+  0x00177BAC [0x800A] [script:73 14]지금 3년에 한 번 열리는[br]무투대회가 열리고 있어요
+  0x00177C02 [0x800A] [script:9C 14]모처럼 왔으니[br]보고 가는 건 어떠세요?
+  0x00177C5C [0x800A] [script:BD 14]어머, 그루가
+  0x00177C96 [0x800A] [script:E3 14]다음 무투대회에도 출전할까?
+  0x00177CFC [0x800A] [script:15 15]니델에서도 대회가 열렸었는데…
+  --- context: 0x800A -> 0x800D ---
+  0x00177D46 [0x800D] [script:42 15]지난번 승부조작 소동이 있어서 그 이후로[br]닫힌 채라더군
+  0x00177DA8 [0x800D] [script:6B 15]니델에서도 대회가 열렸었는데…
+  0x00177DF2 [0x800D] [script:98 15]지난번 승부조작 소동이 있어서 그 이후로[br]닫힌 채라더군
+  0x00177E68 [0x800D] [script:C8 15]오늘도 좋은 날씨네~…
+  --- context: 0x800D -> 0x800C ---
+  0x00177EAC [0x800C] [script:EC 15]무투대회도 겨우 끝났고
+  0x00177EFC [0x800C] [script:12 16]오늘도 좋은 날씨네~…
+  0x00177F40 [0x800C] [script:3C 16]무투대회 때문인지[br]좀 시끄러운 게 흠이지만…
+  0x00177FC4 [0x800C] [script:71 16]아아, 그루가…
+  --- context: 0x800C -> 0x800E ---
+  0x00177FFE [0x800E] [script:8F 16]완전히 불타올랐어요…
+  0x00178042 [0x800E] [script:B1 16]아앙, 그루가…
+  --- context: 0x800E -> 0xFFFE ---
+  0x0017807E [0xFFFE] [script:D3 16]멋・[delay:1F]져・[delay:1F]!
+  0x001780C8 [0xFFFE] [script:F4 16]아아, 갈바른…
+  --- context: 0xFFFE -> 0x800E ---
+  0x00178104 [0x800E] [script:1D 17]두☆[delay:15]근☆[delay:15]두☆[delay:15]근☆[delay:15]해!
+  0x00178186 [0x800E] [script:5A 17]우햐햐햐햐!![br]역시 그루가!
+  --- context: 0x800E -> 0x800F ---
+  0x001781D0 [0x800F] [script:7C 17]한몫 단단히 벌었지!
+  0x00178214 [0x800F] [script:9E 17]오늘 밤은 축하다, 마시자~!!
+  0x00178260 [0x800F] [script:BF 17]오우, 그루가!
+  --- context: 0x800F -> 0xFFFE ---
+  0x0017829A [0xFFFE] [script:E0 17]나이스 파이트다, 헤헤헤
+  0x001782E2 [0xFFFE] [script:0B 18]이번에야말로 이 대회에서[br]큰돈 벌어 주마
+  --- context: 0xFFFE -> 0x800F ---
+  0x00178332 [0x800F] [script:33 18]그러려면 그루가가[br]이겨 줘야지!
+  0x0017838A [0x800F] [script:54 18]오우, 그루가!
+  --- context: 0x800F -> 0xFFFE ---
+  0x001783C4 [0xFFFE] [script:80 18]반드시 우승해라![br]내 생계가 걸려 있으니까!
+  0x00178436 [0xFFFE] [script:AE 18]그루가는 멋있지~
+  --- context: 0xFFFE -> 0x8010 ---
+  0x00178478 [0x8010] [script:DA 18]근데 올해는 그레코가 안 나왔는데[br]어찌 된 걸까?
+  0x001784D8 [0x8010] [script:0E 19]3년 전 대회 결승은 「그루가」와[br]「그레코」가 싸웠어!
+  0x00178538 [0x8010] [script:2F 19]이긴 건 그레코였지만…
+  0x0017857A [0x8010] [script:5D 19]끝까지 누가 이길지 몰랐던[br]굉장한 승부였어!
+  0x001785DE [0x8010] [script:7D 19]냐~앙
+  --- context: 0x8010 -> 0x8001 ---
+  0x00178636 [0x8001] [script:A9 19]그르르르
+  --- context: 0x8001 -> 0x8005 ---
+  0x001786CA [0x8005] [script:F3 19]뀨웅~
+  --- context: 0x8005 -> 0x8004 ---
+  0x00178712 [0x8004] [script:18 1A]부히힝!
+  --- context: 0x8004 -> 0x8003 ---
+  0x00178764 [0x8003] [script:43 1A]이건 제 당나귀입니다
+  --- context: 0x8003 -> 0x8009 ---
+  0x001788B2 [0x8009] [script:EB 1A]딸은…[delay:1F]엘레나는?
+  --- context: 0x8009 -> 0x8006 ---
+  0x001788FE [0x8006] [script:0F 1B]잘 자고 있어…
+  --- context: 0x8006 -> 0x8005 ---
+  0x0017893A [0x8005] [script:2E 1B]역시 지쳐 있었구나
+  0x00178978 [0x8005] [script:4A 1B]그래…
+  --- context: 0x8005 -> 0x8006 ---
+  0x001789B0 [0x8006] [script:6B 1B]그루가…[delay:1F]당신 이제…
+  --- context: 0x8006 -> 0x8005 ---
+  0x001789FE [0x8005] [script:A2 1B]상금 나머지는 저 아이 눈이 보이게 된 뒤[br]쓰라고 부탁해 두었어…
+  --- context: 0x8005 -> 0x8006 ---
+  0x00178A60 [0x8006] [script:C5 1B]당분간 생활엔 곤란 없을 돈이야
+  0x00178AA6 [0x8006] [script:F7 1B]저 아이는 이제…[delay:1F]혼자 살아갈 수 있어[br][delay:3D]이걸로…[delay:1F]이걸로 됐어
+  0x00178B0A [0x8006] [script:18 1C]당신은 이제 어떻게 할 거야?
+  --- context: 0x8006 -> 0x8005 ---
+  0x00178B8A [0x8005] [script:57 1C]새로운 목적이 생겼어
+  --- context: 0x8005 -> 0x8006 ---
+  0x00178BCA [0x8006] [script:73 1C]목적?
+  --- context: 0x8006 -> 0x8005 ---
+  0x00178C1E [0x8005] [script:AD 1C]너와 같아…[br][delay:3D]키메라 연구소를 박살내겠다!
+  --- context: 0x8005 -> 0x8006 ---
+  0x00178C76 [0x8006] [script:DD 1C]아무 죄 없는 아이를 실험 재료로 쓰는[br]놈들을 내버려 둘 수 없어
+  0x00178CD6 [0x8006] [script:F9 1C]그루가…
+  --- context: 0x8006 -> 0x8005 ---
+  0x00178D0E [0x8005] [script:18 1D]로말리아로 가자!
+  --- context: 0x8005 -> 0x8006 ---
+  0x00178D4C [0x8006] [script:42 1D]돌아오게 했지만[br]그만큼 도움이 될 거야
+  0x00178DA0 [0x8006] [script:6E 1D]알겠어…[delay:3D]엘레나에게[br]작별 인사는 안 해도 되는 거지?
+  --- context: 0x8006 -> 0x8005 ---
+  0x00178DF8 [0x8005] [script:8A 1D]물론이다
+  --- context: 0x8005 -> 0x8006 ---
+  0x00178E30 [0x8006] [script:A9 1D]그럼, 가자
+  --- context: 0x8006 -> 0x8005 ---
+  0x00178E7E [0x8005] [script:CC 1D]……
+  --- context: 0x8005 -> 0x00B4 ---
+  0x00178ED2 [0x00B4] [script:0E 1E]두 사람은 클레니아 섬을 뒤로하고 로말리아로 향했[br]다. 각자의 마음을 가슴에 품은 채…
+  --- context: 0x00B4 -> 0x00B0 ---
+  0x00229E12 [0x00B0] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
+  0x0022A3B6 [0x00B0] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
+  0x0022A3E0 [0x00B0] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x0022A40A [0x00B0] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
+  0x0022A436 [0x00B0] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x0022A47E [0x00B0] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+  0x0022A71A [0x00B0] [script:8A 04]으, 으음…
+  --- context: 0x00B0 -> 0x8000 ---
+  0x0022A758 [0x8000] [script:AB 04]아, 눈 떴어?
+  --- context: 0x8000 -> 0x801F ---
+  0x0022A7AA [0x801F] [script:D4 04]이제 일어날 수 있어?
+  --- context: 0x801F -> 0x8014 ---
+  0x0022A7E8 [0x8014] [script:F7 04]…저기, 당신은?[br]여긴 어디죠?
+  --- context: 0x8014 -> 0x8000 ---
+  0x0022A82E [0x8000] [script:14 05]난 엘레나
+  --- context: 0x8000 -> 0x8014 ---
+  0x0022A868 [0x8014] [script:3F 05]여긴 클레니아 섬, 우리가[br]빌린 숙소 방이야
+  0x0022A8BE [0x8014] [script:66 05]언니가 해변으로[br]떠밀려왔어
+  0x0022A90C [0x8014] [script:84 05]엣, 해변에?
+  --- context: 0x8014 -> 0x8000 ---
+  0x0022A94C [0x8000] [script:B1 05]…! 그러고 보니 나는[br]로말리아 전함에서 떨어졌어…
+  0x0022A9A2 [0x8000] [script:DB 05]쓰러져 의식을 잃어서[br]아빠가 데려왔어
+  --- context: 0x8000 -> 0x8014 ---
+  0x0022A9F6 [0x8014] [script:02 06]그랬구나, 구해줘서 정말 고마워
+  --- context: 0x8014 -> 0x8000 ---
+  0x0022AA44 [0x8000] [script:23 06]나는 샨테, 잘 부탁해
+  0x0022AA86 [0x8000] [script:3E 06]응
+  --- context: 0x8000 -> 0x8014 ---
+  0x0022AAE0 [0x8014] [script:6D 06]잠깐만
+  --- context: 0x8014 -> 0x00B0 ---
+  0x0022AB24 [0x00B0] [script:8E 06]꺄악!
+  --- context: 0x00B0 -> 0x8014 ---
+  0x0022AB42 [0x8014] [script:A0 06]아, 괜찮아…?
+  --- context: 0x8014 -> 0x8000 ---
+  0x0022AB84 [0x8000] [script:C2 06]어라, 언니 어디 갔어?
+  --- context: 0x8000 -> 0x8014 ---
+  0x0022ABC4 [0x8014] [script:DD 06]？…！
+  --- context: 0x8014 -> 0x8000 ---
+  0x0022ABFA [0x8000] [script:06 07]그러고 보니 그 지팡이…[br]너, 앞이 안 보이는 거야?
+  0x0022AC56 [0x8000] [script:2E 07]응, 그래도 소리로 알 수 있어서 괜찮아
+  --- context: 0x8000 -> 0x8014 ---
+  0x0022AC9C [0x8014] [script:4A 07]그렇구나…
+  --- context: 0x8014 -> 0x8000 ---
+  0x0022ACD8 [0x8000] [script:6C 07]엘레나라고 했지
+  0x0022AD18 [0x8000] [script:8C 07]아빠는 어디 계셔?
+  0x0022AD58 [0x8000] [script:AD 07]지금 잠깐 나가셨어
+  --- context: 0x8000 -> 0x8014 ---
+  0x0022AD9A [0x8014] [script:CE 07]숙소 아저씨가 알고 있어
+  0x0022ADDC [0x8014] [script:EC 07]그래, 알겠어
+  --- context: 0x8014 -> 0x8000 ---
+  0x0022AE18 [0x8000] [script:14 08]그럼 아빠를 만나서[br]감사 인사하고 올게
+  0x0022AE68 [0x8000] [script:3B 08]하지만… 의사 선생님이[br]아직 누워 있어야 한댔어
+  --- context: 0x8000 -> 0x8014 ---
+  0x0022AEB6 [0x8014] [script:5D 08]걱정해 줘서 고마워
+  --- context: 0x8014 -> 0x8000 ---
+  0x0022AEFA [0x8000] [script:7C 08]이제 아무렇지도 않아
+  0x0022AF38 [0x8000] [script:9D 08]그렇구나, 나아서 다행이야
+  --- context: 0x8000 -> 0x8014 ---
+  0x0022B836 [0x8014] [script:1E 0D]아빠? 잠깐 나갔어
+  --- context: 0x8014 -> 0xFFFE ---
+  0x0022B87C [0xFFFE] [script:3F 0D]숙소 아저씨께 물어봐
+  0x0022B9EC [0xFFFE] [script:F2 0D]오리…
+  --- context: 0xFFFE -> 0x00B0 ---
+  0x0022BB64 [0x00B0] [script:C1 0E][box:system]숙박부가 있습니다. 기입하시겠습니까？[br][opt]예[br][opt]아니오[box:close]
+  --- context: 0x00B0 -> 0x8000 ---
+  0x0022C268 [0x8000] [script:3C 12]당신, 그루가가 해변에서[br]데려온 사람이네
+  --- context: 0x8000 -> 0x8015 ---
+  0x0022C2B8 [0x8015] [script:62 12]샨테라고 합니다,[br]신세졌습니다
+  --- context: 0x8015 -> 0x8000 ---
+  0x0022C304 [0x8000] [script:8D 12]뭐, 곤란할 때는 서로 돕는 거지,[br]당연한 일을 했을 뿐이야
+  --- context: 0x8000 -> 0x8015 ---
+  0x0022C35A [0x8015] [script:BA 12]꽤 기진맥진했던 것 같던데[br]몸은 좀 나았어?
+  0x0022C3B4 [0x8015] [script:D9 12]네, 덕분에요
+  --- context: 0x8015 -> 0x8000 ---
+  0x0022C3F2 [0x8000] [script:06 13]구해줬다는 엘레나의[br]아버지 이름이 그루가였죠?
+  0x0022C44C [0x8000] [script:2D 13]그래, 내 숙소에 둘이 묵고 있어
+  --- context: 0x8000 -> 0x8015 ---
+  0x0022C49A [0x8015] [script:55 13]그런데 그루가에게[br]감사 인사 정도는 하고 싶어
+  --- context: 0x8015 -> 0x8000 ---
+  0x0022C4EA [0x8000] [script:7B 13]나갔다던데,[br]어디 갔어?
+  0x0022C536 [0x8000] [script:9E 13]아마 「단련의 바위터」일 거야
+  --- context: 0x8000 -> 0x8015 ---
+  0x0022C57C [0x8015] [script:C8 13]내일을 대비해 훈련 마무리 중이겠지
+  0x0022C5D0 [0x8015] [script:E4 13]훈련?
+  --- context: 0x8015 -> 0x8000 ---
+  0x0022C608 [0x8000] [script:1B 14]그래, 그 녀석은 지금 이 섬에서 열리는 무투대회의[br]우승 후보 중 한 명이니까
+  --- context: 0x8000 -> 0x8015 ---
+  0x0022C698 [0x8015] [script:55 14]그루가라면[br]「단련의 바위터」에 갔어
+  0x0022C6EA [0x8015] [script:7C 14]몬스터로 오해받지 않게[br]조심해
+  0x0022C738 [0x8015] [script:9A 14]어머, 실례네
+  --- context: 0x8015 -> 0x8000 ---
+  0x0022C774 [0x8000] [script:B7 14]농담이야
+  --- context: 0x8000 -> 0x8015 ---
+  0x0022C7B6 [0x8015] [script:DC 14]무슨 일이니, 아가씨?
+  0x0022C7F8 [0x8015] [script:FC 14]쵸코, 모험 중이야-
+  --- context: 0x8015 -> 0x8000 ---
+  0x0022C838 [0x8000] [script:1E 15]모험 놀이야? 재밌어 보이네
+  --- context: 0x8000 -> 0x8015 ---
+  0x0022C8A2 [0x8015] [script:58 15]당신, 묵을 곳[br]정해지지 않았지?
+  --- context: 0x8015 -> 0xFFFE ---
+  0x0022C8F0 [0xFFFE] [script:76 15]네, 그렇긴 한데…
+  --- context: 0xFFFE -> 0x8000 ---
+  0x0022C92C [0x8000] [script:9B 15]오늘 밤부터 내 방 써도 돼
+  --- context: 0x8000 -> 0xFFFE ---
+  0x0022C976 [0xFFFE] [script:C3 15]배려해 줘서 고마워요,[br]그렇게 할게요
+  --- context: 0xFFFE -> 0x8000 ---
+  0x0022C9CE [0x8000] [script:EF 15]당신, 그루가가 업고 온[br]사람 맞지?
+  --- context: 0x8000 -> 0xFFFE ---
+  0x0022CA1E [0xFFFE] [script:0B 16]그루가…？
+  --- context: 0xFFFE -> 0x8000 ---
+  0x0022CA56 [0x8000] [script:38 16]당신이 자던 방에 없었어?[br]엄청 체격 좋은 사람이야
+  --- context: 0x8000 -> 0xFFFE ---
+  0x0022CAB0 [0xFFFE] [script:5A 16]아니요, 엘레나라는 아이밖에…
+  --- context: 0xFFFE -> 0x8000 ---
+  0x0022CAF4 [0x8000] [script:85 16]그래도 구해줬으니[br]이름 정도는 알아 둬
+  --- context: 0x8000 -> 0xFFFE ---
+  0x0022CB4A [0xFFFE] [script:AE 16]자세한 건 여기 아저씨께[br]물어보는 게 좋아
+  0x0022CB9C [0xFFFE] [script:C9 16]그래
+  --- context: 0xFFFE -> 0x8000 ---
+  0x0022CBDA [0x8000] [script:EE 16]아가씨, 이름이 뭐니?
+  --- context: 0x8000 -> 0xFFFE ---
+  0x0022CC1C [0xFFFE] [script:0F 17]쵸코야-, 쵸코라고 해-
+  --- context: 0xFFFE -> 0x8000 ---
+  0x0022CC5E [0x8000] [script:32 17]쵸코구나, 재밌는 이름이네
+  --- context: 0x8000 -> 0xFFFE ---
+  0x0022CFDE [0xFFFE] [script:F3 18]그루가 만나서[br]얘기해 봤어?
+  --- context: 0xFFFE -> 0x8000 ---
+  0x0022D026 [0x8000] [script:0E 19]그럭저럭
+  0x0022D05C [0x8000] [script:34 19]그럼 엘레나에 대한 얘기도[br]들었겠네?
+  --- context: 0x8000 -> 0x8015 ---
+  0x0022D0A8 [0x8015] [script:56 19]응… 겉핥기 정도만
+  --- context: 0x8015 -> 0x8000 ---
+  0x0022D0EC [0x8000] [script:82 19]그루가의 조국 브라키아는[br]예전에 니델의 지배를 받았어
+  --- context: 0x8000 -> 0x8015 ---
+  0x0022D144 [0x8015] [script:AE 19]하지만 5년 전에 전쟁에서 이겨[br]겨우 독립했지
+  0x0022D19C [0x8015] [script:D8 19]그 아이는 그때 전투에[br]휘말린 모양이야…
+  0x0022D1F0 [0x8015] [script:0C 1A]독립전쟁에서 선두에 섰던 그루가는[br]모든 걸 혼자 짊어지고 있어
+  0x0022D258 [0x8015] [script:38 1A]당신은 좋은 사람 같으니[br]그 녀석을 좀 도와줄 수 없겠어?
+  0x0022D2B0 [0x8015] [script:5E 1A]알겠어, 나도 도움받았으니까
+  --- context: 0x8015 -> 0x8000 ---
+  0x0022D30A [0x8000] [script:8E 1A]아가씨, 샨테 씨로[br]바꿔 줄래?
+  --- context: 0x8000 -> 0x8015 ---
+  0x0022D35C [0x8015] [script:AD 1A]쵸코 아니야-?
+  --- context: 0x8015 -> 0x8000 ---
+  0x0022D3A2 [0x8000] [script:D9 1A][FF:0A 01 01][num:01]G 받을 건데, 오늘은 이제 쉴래?
+  --- context: 0x8000 -> 0x00A9 ---
+  0x0022D3F2 [0x00A9] [script:FB 1A][opt]그렇게 할게요[br][opt]아직 일러요
+  --- context: 0x00A9 -> 0x8015 ---
+  0x0022D45E [0x8015] [script:31 1B]미안하지만 돈이 부족해
+  0x0022D4B2 [0x8015] [script:58 1B]푹 쉬어
+  0x0022D51C [0x8015] [script:95 1B]막 나은 참이니[br]무리하지 마
+  0x0022D572 [0x8015] [script:BA 1B]자는 아이가 큰다잖아
+  0x0022D5D0 [0x8015] [script:EC 1B]당신, 그루가랑 무슨 사이야?
+  --- context: 0x8015 -> 0xFFFE ---
+  0x0022D618 [0xFFFE] [script:0D 1C]그루가에게 도움받았어
+  --- context: 0xFFFE -> 0x8000 ---
+  0x0022D65A [0x8000] [script:2F 1C]뭐야, 난 당연히 그루가의…
+  --- context: 0x8000 -> 0xFFFE ---
+  0x0022D69E [0xFFFE] [script:50 1C]무슨 말 하려는지 알겠어
+  --- context: 0xFFFE -> 0x8000 ---
+  0x0022D6E8 [0x8000] [script:7A 1C]애들은 집에 가서[br]코 자라
+  --- context: 0x8000 -> 0xFFFE ---
+  0x0022D734 [0xFFFE] [script:99 1C]쵸코, 안 졸려-
+  --- context: 0xFFFE -> 0x8000 ---
+  0x0022DE7A [0x8000] [script:46 20]미안하지만 아까 얘기,[br]딸에겐 비밀로 해 줄래?
+  --- context: 0x8000 -> 0xFFFE ---
+  0x0022DECC [0xFFFE] [script:64 20]응… 그렇게 할게
+  --- context: 0xFFFE -> 0x8000 ---
+  0x0022DF08 [0x8000] [script:86 20]미안하군, 언젠간 엘레나에게도…
+  --- context: 0x8000 -> 0xFFFE ---
+  0x0022DF54 [0xFFFE] [script:AC 20]엘레나랑 놀아주지 않을래?
+  0x0022DF98 [0xFFFE] [script:CD 20]응, 쵸코 노는 거 정말 좋아-
+  --- context: 0xFFFE -> 0x8000 ---
+  0x0022DFF6 [0x8000] [script:FF 20]언니, 건강해져서 다행이야
+  --- context: 0x8000 -> 0xFFFE ---
+  0x0022E03E [0xFFFE] [script:21 21]엘레나랑 아버지 덕분이지
+  --- context: 0xFFFE -> 0x8000 ---
+  0x0022E082 [0x8000] [script:44 21]엘레나가 열심히 간호했어
+  --- context: 0x8000 -> 0xFFFE ---
+  0x0022E0C8 [0xFFFE] [script:67 21]고마워, 뭐라도 답례해야겠네
+  --- context: 0xFFFE -> 0x8000 ---
+  0x0022E10E [0x8000] [script:85 21]와, 기쁘다
+  --- context: 0x8000 -> 0xFFFE ---
+  0x0022E152 [0xFFFE] [script:A7 21]쵸코랑 놀자-
+  --- context: 0xFFFE -> 0x8000 ---
+  0x0022E18E [0x8000] [script:C5 21]응, 고마워
+  --- context: 0x8000 -> 0x00A9 ---
+  0x0022E226 [0x00A9] [script:1C 22][br][br][br][br][opt][opt][opt][opt][opt]그리고 다음 날…
+  --- context: 0x00A9 -> 0xFFFE ---
+  0x0022E286 [0xFFFE] [script:40 22]으, 으음…
+  --- context: 0xFFFE -> 0x8000 ---
+  0x0022E2CE [0x8000] [script:66 22]아아, 잘 잤다…
+  0x0022E590 [0x8000] [script:D2 23]아빠가 경기장엔[br]데려가 주지 않아
+  --- context: 0x8000 -> 0xFFFE ---
+  0x0022E5E4 [0xFFFE] [script:EE 23]왜?
+  --- context: 0xFFFE -> 0x8000 ---
+  0x0022E61C [0x8000] [script:0E 24]밖은 위험하대
+  --- context: 0x8000 -> 0xFFFE ---
+  0x0022E65C [0xFFFE] [script:2D 24]그럴지도 모르지
+  --- context: 0xFFFE -> 0x8000 ---
+  0x0022E69A [0x8000] [script:4E 24]그래도 걱정 안 해
+  --- context: 0x8000 -> 0xFFFE ---
+  0x0022E6DC [0xFFFE] [script:6F 24]아빠 엄청 강하거든
+  0x0022E71E [0xFFFE] [script:93 24]아빠를 정말 믿는구나
+  --- context: 0xFFFE -> 0x8000 ---
+  0x0022E76E [0x8000] [script:B5 24]같이 놀자-
+  0x0022E7AA [0x8000] [script:D3 24]응, 같이 놀자
+  --- context: 0x8000 -> 0xFFFE ---
+  0x0022ED62 [0xFFFE] [script:BD 27]오늘은 최종 토너먼트 첫날이야,[br]그루가도 출전해
+  --- context: 0xFFFE -> 0x8015 ---
+  0x0022EDBA [0x8015] [script:E2 27]투기장으로 가서 그 녀석 응원해 줘
+  0x0022F562 [0x8015] [script:B3 2B]드디어 내일은 결승전인가
+  0x0022F5A6 [0x8015] [script:E8 2B]이상하게 이기면 이길수록[br]그 녀석 표정이 더 쓸쓸해지는 것처럼[br]보이더라…
+  0x0022F618 [0x8015] [script:12 2C][FF:0A 01 01][num:01]G 드는데, 슬슬 쉴래?
+  --- context: 0x8015 -> 0x00A9 ---
+  0x0022F664 [0x00A9] [script:34 2C][opt]그렇게 할게요[br][opt]아직 일러요
+  --- context: 0x00A9 -> 0x8015 ---
+  0x0022F6D0 [0x8015] [script:6A 2C]미안하지만 돈이 부족해
+  0x0022F724 [0x8015] [script:91 2C]푹 쉬어
+  0x0022F77A [0x8015] [script:BF 2C]너무 무리하지 마
+  0x0022F7C6 [0x8015] [script:E6 2C]그루가라면 해낼 줄 알았어!
+  --- context: 0x8015 -> 0xFFFE ---
+  0x0022F80C [0xFFFE] [script:0A 2D]이 기세면 우승은 확실해
+  0x0022F854 [0xFFFE] [script:3D 2D]이 대회에서 우승하면[br]평생 고생 안 해도 될[br]돈을 얻는단 말이지
+  0x0022F8BA [0xFFFE] [script:5E 2D]정말 부러운 얘기네
+  0x0022FBE2 [0xFFFE] [script:F2 2E]・[delay:0D]・[delay:0D]・
+  0x0022FC24 [0xFFFE] [script:12 2F]그루가…
+  --- context: 0xFFFE -> 0x0006 ---
+  0x0022FCC6 [0x0006] [script:65 2F]봐, 내가 말한 대로지?
+  --- context: 0x0006 -> 0xFFFE ---
+  0x0022FD0A [0xFFFE] [script:87 2F]아빠 엄청 강하니까
+  0x0022FD4E [0xFFFE] [script:AD 2F]그래… 하지만[br]이겨버리면 그루가는…
+  --- context: 0xFFFE -> 0x8000 ---
+  0x0022FD9A [0x8000] [script:CA 2F]응, 뭐라고?
+  --- context: 0x8000 -> 0xFFFE ---
+  0x0022FDD4 [0xFFFE] [script:E9 2F]아니, 아무것도 아니야
+  --- context: 0xFFFE -> 0x8000 ---
+  0x0022FE1A [0x8000] [script:0E 30]아빠 엄청 강해
+  --- context: 0x8000 -> 0xFFFE ---
+  0x0022FE5C [0xFFFE] [script:2E 30]응, 쵸코도 강해-
+  --- context: 0xFFFE -> 0x8000 ---
+  0x0022FFD4 [0x8000] [script:ED 30]아빠라면 반드시 우승하겠지?
+  --- context: 0x8000 -> 0xFFFE ---
+  0x0023002E [0xFFFE] [script:16 31]나 믿고 있어
+  0x0023006C [0xFFFE] [script:36 31]그래, 믿어 보자…
+  --- context: 0xFFFE -> 0x8000 ---
+  0x002300B4 [0x8000] [script:59 31]응, 꼭 이길 거야-
+  0x0023066E [0x8000] [script:3F 34]드디어 최종 토너먼트도[br]결승까지 왔군
+  --- context: 0x8000 -> 0x8015 ---
+  0x002306BE [0x8015] [script:66 34]투기장에서 그 녀석을[br]응원해 줘
+  --- context: 0x8015 -> 0x00B4 ---
+  0x00230A46 [0x00B4] [script:21 36]！[delay:0D]えっ！？
+  --- context: 0x00B4 -> 0x8015 ---
+  0x00230A60 [0x8015] [script:2E 36]무슨 일이 있었어?
+  --- context: 0x8015 -> 0x800C ---
+  0x00230A9C [0x800C] [script:4B 36]으, 으음…
+  --- context: 0x800C -> 0x8015 ---
+  0x00230B0A [0x8015] [script:87 36]이봐, 괜찮아? 정신 차려
+  --- context: 0x8015 -> 0x800C ---
+  0x00230B4E [0x800C] [script:AB 36]아아, 난 어떻게든 괜찮은 것 같아
+  --- context: 0x800C -> 0x8015 ---
+  0x00230B96 [0x8015] [script:CC 36]대체 무슨 일이야?
+  --- context: 0x8015 -> 0x800C ---
+  0x00230BD8 [0x800C] [script:F4 36]검은 옷 입은 남자가 와서[br]갑자기 엘레나를…
+  --- context: 0x800C -> 0x8015 ---
+  0x00230C3C [0x8015] [script:27 37]막으려 했지만[br]한심하게도 이 꼴이야
+  0x00230C8E [0x8015] [script:43 37]뭐라고!
+  --- context: 0x8015 -> 0x800C ---
+  0x00230CC6 [0x800C] [script:61 37]그루가, 미안해…
+  --- context: 0x800C -> 0x8015 ---
+  0x00230D02 [0x8015] [script:86 37]당신 탓이 아니야…[br][delay:13]엘레나!
+  --- context: 0x8015 -> 0x800C ---
+  0x00230D5A [0x800C] [script:B6 37]앗, 그루가, 기다려…,[br]지금 섣불리 움직여 봐야…
+  --- context: 0x800C -> 0x8000 ---
+  0x0023117A [0x8000] [script:C5 39]난 이제 괜찮으니[br]빨리 엘레나를
+  --- context: 0x8000 -> 0x00B4 ---
+  0x002315E8 [0x00B4] [script:F1 3B]エレナ！どこだ
+  0x0023160E [0x00B4] [script:05 3C]エレナ、エレナー！
+  --- context: 0x00B4 -> 0x8015 ---
+  0x0023163A [0x8015] [script:23 3C]…왜 엘레나가![br]대체 왜지?
+  --- context: 0x8015 -> 0x800C ---
+  0x00231686 [0x800C] [script:3F 3C]그루가…
+  --- context: 0x800C -> 0x8000 ---
+  0x0023186E [0x8000] [script:35 3D]이건, 대체?
+  --- context: 0x8000 -> 0x800C ---
+  0x002318AA [0x800C] [script:54 3D]짐작 가는 거 없어?
+  --- context: 0x800C -> 0x8000 ---
+  0x002318E8 [0x8000] [script:74 3D]아니, 짚이는 게 없어…
+  --- context: 0x8000 -> 0x00B4 ---
+  0x00231936 [0x00B4] [script:9B 3D]？[br][delay:0D]これは！
+  --- context: 0x00B4 -> 0x800C ---
+  0x00231974 [0x800C] [script:B8 3D]그루가, 이걸!
+  --- context: 0x800C -> 0x00B4 ---
+  0x002319C0 [0x00B4] [script:DE 3D]どうしたんだ！？
+  --- context: 0x00B4 -> 0x8000 ---
+  0x002319DA [0x8000] [script:FA 3D]귀여운 딸 목숨이 아깝다면[br]「무인의 관」까지 와 보시지?
+  --- context: 0x8000 -> 0x800C ---
+  0x00231A3A [0x800C] [script:24 3E]네놈들 누구냐?[br]엘레나를 납치하다니 비겁해!
+  0x00231A88 [0x800C] [script:45 3E]그루가, 나도 힘을 보탤게
+  --- context: 0x800C -> 0x8000 ---
+  0x00231ACA [0x8000] [script:67 3E]빨리 엘레나를 구해야 해
+  0x00231B0E [0x8000] [script:85 3E]고마워, 샨테
+  --- context: 0x8000 -> 0x800C ---
+  0x0023200A [0x800C] [script:09 41]이런 엉망인 상태라 미안하군
+  --- context: 0x800C -> 0x8015 ---
+  0x00232052 [0x8015] [script:2E 41][FF:0A 01 01][num:01]G 받을 건데 쉬고 갈래?
+  --- context: 0x8015 -> 0x00A9 ---
+  0x0023209C [0x00A9] [script:51 41][opt]그렇게 할게[br][opt]그럴 때가 아니야
+  --- context: 0x00A9 -> 0x8015 ---
+  0x002320FA [0x8015] [script:7F 41]미안하지만 돈이 부족해
+  0x0023214E [0x8015] [script:A6 41]푹 쉬어
+  0x002321A8 [0x8015] [script:DA 41]빨리 엘레나를[br]구해 줘
+  0x00232A6A [0x8015] [script:34 46]어찌어찌 정리했어
+  0x00232AA8 [0x8015] [script:5A 46][FF:0A 01 01][num:01]G 드는데 묵고 갈래?
+  --- context: 0x8015 -> 0x00A9 ---
+  0x00232AF4 [0x00A9] [script:7D 46][opt]그렇게 할게[br][opt]그럴 수는 없어
+  --- context: 0x00A9 -> 0x8015 ---
+  0x00232B62 [0x8015] [script:B3 46]미안하지만 돈이 부족해
+  0x00232BB6 [0x8015] [script:DA 46]푹 쉬다 가
+  0x00232C10 [0x8015] [script:13 47]아무튼 한시라도 빨리[br]엘레나를 구해 줘
+  0x00232FD6 [0x8015] [script:F3 48]자, 이제 안심해도 되니[br]편히 자렴
+  --- context: 0x8015 -> 0x8000 ---
+  0x00233026 [0x8000] [script:0E 49]응
+  --- context: 0x8000 -> 0x801F ---
+  0x0023307A [0x801F] [script:3E 49]어? 아빠, 어디 가…
+  0x002330C2 [0x801F] [script:62 49]응, 어디도 안 가
+  --- context: 0x801F -> 0x800C ---
+  0x00233104 [0x800C] [script:96 49]내일은 엘레나 눈을 원래대로[br]보이게 고쳐 주실[br]의사 선생님께 가는 거야
+  0x0023316C [0x800C] [script:B8 49]그러니 오늘은 이제 자렴
+  0x002331B0 [0x800C] [script:D8 49]응, 그래, 알았어
+  --- context: 0x800C -> 0x801F ---
+  0x002331F0 [0x801F] [script:F8 49]잘 자요, 아빠
+  0x00233230 [0x801F] [script:18 4A]아아, 잘 자, 엘레나…
+  --- context: 0x801F -> 0x800C ---
+  0x00233284 [0x800C] [script:43 4A]엘레나, 잘 자렴
+  --- context: 0x800C -> 0x8000 ---
+  0x002334FC [0x8000] [script:7F 4B]・[delay:0D]・[delay:13]・
+  --- context: 0x8000 -> 0x801F ---
+  0x00233552 [0x801F] [script:B0 4B]푹 잠들었네,[br]역시 피곤했구나
+  --- context: 0x801F -> 0x8000 ---
+  0x002335A0 [0x8000] [script:D0 4B]깨우지 않게 조심해야지
+  0x002335E8 [0x8000] [script:F5 4B]쵸코도 졸려졌어-
+  0x00233790 [0x8000] [script:C8 4C]샤워라도 할까
+  --- context: 0x8000 -> 0x0006 ---
+  0x002337E8 [0x0006] [script:F5 4C]이왕이면 목욕도 좋겠네
+  0x0023385E [0x0006] [script:36 4D]한숨 돌렸으니[br]목욕하고 와야지
+  --- context: 0x0006 -> 0x8000 ---
+  0x002338EC [0x8000] [script:76 4D]꽤 좋은 물 온도네
+  0x0023397C [0x8000] [script:BC 4D]아아, 개운하다
+  0x00233EA4 [0x8000] [script:53 50]그루가라면 벌써 밖에 나갔어
+  --- context: 0x8000 -> 0x8015 ---
+  0x00233EE6 [0x8015] [script:7B 50]뭐, 엘레나 일은[br]나한테 맡겨 둬
+  0x00233F36 [0x8015] [script:AB 50]다만 내 생각엔 이게 정말[br]좋은 건지는 좀 모르겠어
+  0x00233F96 [0x8015] [script:D1 50]그루가에게도[br]엘레나에게도 말이야
+  0x00233FE2 [0x8015] [script:F4 50]그래, 그래도 그루가가 정한 일이니까
+  --- context: 0x8015 -> 0x8000 ---
+  0x00234028 [0x8000] [script:1B 51]그래, 꽤 오래 고민한[br]결과 같더라
+  --- context: 0x8000 -> 0x8015 ---
+  0x0023407A [0x8015] [script:46 51]그래도 지금까지[br]정말 신세 많이 졌습니다
+  --- context: 0x8015 -> 0x8000 ---
+  0x002340CC [0x8000] [script:6F 51]괜찮아, 괜찮아, 손님 서비스는[br]당연한 거지
+  --- context: 0x8000 -> 0x8015 ---
+  0x0023411E [0x8015] [script:98 51]게다가 숙소 수리까지[br]도와줬잖아
+  0x00234170 [0x8015] [script:C3 51]내 덕분에 몰라보게[br]깨끗한 숙소가 됐지?
+  --- context: 0x8015 -> 0x8000 ---
+  0x002341C6 [0x8000] [script:E5 51]아하하, 그건 정말 고맙네
+  --- context: 0x8000 -> 0x8015 ---
+  0x00234212 [0x8015] [script:0A 52]그루가는 이미 밖에 나갔어
+  0x00234254 [0x8015] [script:31 52]엘레나 일이라면[br]나한테 맡겨 둬
+  0x002342BE [0x8015] [script:5E 52]또 들러줘
+  0x002342FC [0x8015] [script:86 52]이쪽에 올 일 있으면[br]들를게
+  --- context: 0x8015 -> 0x8000 ---
+  0x0023434C [0x8000] [script:A7 52]그래, 언제든 대환영이야
+  --- context: 0x8000 -> 0x8015 ---
+  0x0023438E [0x8015] [script:C5 52]그럼 갈게
+  --- context: 0x8015 -> 0x8000 ---
+  0x002343D2 [0x8000] [script:E6 52]또 와
+  --- context: 0x8000 -> 0x8015 ---
+  0x0023440C [0x8015] [script:05 53]쵸코, 또 올게-
+  --- context: 0x8015 -> 0x8000 ---
+  0x0023444A [0x8000] [script:28 53]그래, 언제든 환영이야
+  --- context: 0x8000 -> 0x8015 ---
+  0x00234490 [0x8015] [script:44 53]그럼 안녕-
+  --- context: 0x8015 -> 0x8000 ---
+  0x002344D0 [0x8000] [script:6E 53]숙박부가 다 써버려서 말이야
+  --- context: 0x8000 -> 0x8015 ---
+  0x0023451C [0x8015] [script:94 53]다음에 올 때까지는 준비해 둘게
+  0x00234C62 [0x8015] [script:30 57]내 숙소에 온 걸 환영해
+  0x00234CA0 [0x8015] [script:56 57][FF:0A 01 01][num:01]G 드는데 쉬고 갈래?
+  --- context: 0x8015 -> 0x00A9 ---
+  0x00234CEC [0x00A9] [script:75 57][opt]예[br][opt]아니오
+  --- context: 0x00A9 -> 0x8015 ---
+  0x00234D3E [0x8015] [script:9D 57]어이, 샨테 씨
+  0x00234D7A [0x8015] [script:C1 57]클레니아에 와서 들렀어
+  --- context: 0x8015 -> 0x8000 ---
+  0x00234DC2 [0x8000] [script:E8 57][FF:0A 01 01][num:01]G 받을 건데 또 쉬고 갈래?
+  --- context: 0x8000 -> 0x00A9 ---
+  0x00234E10 [0x00A9] [script:09 58][opt]그래[br][opt]아직 좀 더
+  --- context: 0x00A9 -> 0x8015 ---
+  0x00234E66 [0x8015] [script:31 58]그루가 아니냐
+  0x00234EA2 [0x8015] [script:53 58]또 신세 좀 지려고
+  --- context: 0x8015 -> 0x8000 ---
+  0x00234EE6 [0x8000] [script:79 58][FF:0A 01 01][num:01]G 받을 건데 쉬고 가지 않겠어?
+  --- context: 0x8000 -> 0x00A9 ---
+  0x00234F32 [0x00A9] [script:9D 58][opt]그러자[br][opt]아니, 그만두자
+  --- context: 0x00A9 -> 0x8015 ---
+  0x00234FA2 [0x8015] [script:D3 58]미안하지만 돈이 부족해
+  0x00234FF6 [0x8015] [script:FA 58]푹 쉬어
+  0x00235054 [0x8015] [script:32 59]여전하네
+  0x00235060 [0x8015] [script:F1 3E]쉴 수 있을 때 쉬는 게 좋아
+  --- context: 0x8015 -> 0xFFFE ---
+  0x002350F2 [0xFFFE] [script:8C 59]무투대회도 끝나고 투기장도 한가해서[br]자유 투기장이 됐어
+  0x0023541A [0xFFFE] [script:0A 5B]엘레나…
+  --- context: 0xFFFE -> 0x0006 ---
+  0x0023546C [0x0006] [script:32 5B]엘레나…
+  0x0023556E [0x0006] [script:B5 5B]정신 들었어!
+  --- context: 0x0006 -> 0x8006 ---
+  0x002355AA [0x8006] [script:D4 5B]괜찮아? 쵸코
+  --- context: 0x8006 -> 0x8007 ---
+  0x002355E8 [0x8007] [script:F3 5B]응, 괜찮아
+  --- context: 0x8007 -> 0x8014 ---
+  0x00235626 [0x8014] [script:0F 5C]다행이야
+  --- context: 0x8014 -> 0x8007 ---
+  0x00235668 [0x8007] [script:35 5C]쵸코는 혼자가 아냐!
+  --- context: 0x8007 -> 0x8014 ---
+  0x002356AA [0x8014] [script:57 5C]쵸코, 모두와 함께 싸울 거야
+  0x002356EE [0x8014] [script:78 5C]모두를 지키기 위해 싸울 거야…
+  0x00235730 [0x8014] [script:9F 5C]이건 또 든든하구나,[br]호호호
+  --- context: 0x8014 -> 0x00A9 ---
+  0x002ED78A [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
+  0x002EDD2E [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
+  0x002EDD58 [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x002EDD82 [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
+  0x002EDDAE [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x002EDDF6 [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+  --- context: 0x00A9 -> 0x8014 ---
+  0x002EE872 [0x8014] [script:7D 08][box:speech]어서 오세요
+  --- context: 0x8014 -> 0x00B4 ---
+  0x002EE8AE [0x00B4] [script:A5 08][box:speech]당신도 무투대회[br]보러 오셨나요?
+  --- context: 0x00B4 -> 0x8014 ---
+  0x002EE90A [0x8014] [script:D4 08][box:speech]손님들은 다 우승자를[br]예상하고 있어요
+  0x002EE964 [0x8014] [script:FE 08][box:speech]저기, 당신은 누가[br]우승할 것 같아?
+  0x002EE9D0 [0x8014] [script:38 09][box:speech]토너먼트 기간엔 서비스로[br]술값을 싸게 하고 있어요
+  --- context: 0x8014 -> 0x00B4 ---
+  0x002EEA24 [0x00B4] [script:65 09][box:speech]그러니까 많이 마시고 많이 떠들고[br]많이 즐기다 가요
+  --- context: 0x00B4 -> 0x8014 ---
+  0x002EEA8A [0x8014] [script:8A 09][box:speech]당신도 술 한잔 어때?
+  0x002EEAD4 [0x8014] [script:B5 09][box:speech]헤헤헤,[br]당신도 배팅할 거야?
+  --- context: 0x8014 -> 0x8015 ---
+  0x002EEB22 [0x8015] [script:DD 09][box:speech]건다면[br]갈바른 추천이야
+  0x002EEB72 [0x8015] [script:0E 0A][box:speech]지금은 39배, 100고즈 걸면[br]3900고즈 돌아온다는 뜻이지
+  0x002EEBD4 [0x8015] [script:32 0A][box:speech]어때, 갈바른에 걸래?
+  --- context: 0x8015 -> 0x00A9 ---
+  0x002EEC1C [0x00A9] [script:58 0A][box:speech][opt]100고즈 건다[br][opt]걸지 않는다
+  --- context: 0x00A9 -> 0x8015 ---
+  0x002EEC7C [0x8015] [script:8A 0A][box:speech]헤헤헤,[br]배팅할 맘이 생겼어?
+  0x002EECCC [0x8015] [script:B2 0A][box:speech]건다면[br]갈바른 추천이야
+  0x002EED1C [0x8015] [script:E3 0A][box:speech]지금은 39배, 100고즈 걸면[br]3900고즈 돌아온다는 뜻이지
+  0x002EED7E [0x8015] [script:07 0B][box:speech]어때, 갈바른에 걸래?
+  --- context: 0x8015 -> 0x00A9 ---
+  0x002EEDC6 [0x00A9] [script:2D 0B][box:speech][opt]100고즈 건다[br][opt]걸지 않는다
+  --- context: 0x00A9 -> 0x8015 ---
+  0x002EEE26 [0x8015] [script:5F 0B][box:speech]대회 끝나는 걸[br]기대하고 있어
+  0x002EEE82 [0x8015] [script:86 0B][box:speech]쳇, 짠돌이 같은 녀석
+  0x002EEEEA [0x8015] [script:BC 0B][box:speech]뭐야, 돈이 없잖아
+  0x002EEF30 [0x8015] [script:E6 0B][box:speech]배팅하려면 돈을[br]마련하고 와 줘
+  0x002EEF94 [0x8015] [script:0F 0C][box:speech]헤헷, 항상 고마워!!
+  0x002EEFD6 [0x8015] [script:37 0C][box:speech]대회 끝나는 걸[br]기대하고 있어
+  0x002EF02E [0x8015] [script:66 0C][box:speech]대회를 보고 우리 애가[br]들떠 버려서 말이야
+  --- context: 0x8015 -> 0x800A ---
+  0x002EF094 [0x800A] [script:92 0C][box:speech]이봐, 빨리 내려와!!
+  0x002EF0E4 [0x800A] [script:B3 0C][box:speech]후우…
+  --- context: 0x800A -> 0x00B4 ---
+  0x002EF11A [0x00B4] [script:D6 0C][box:speech]이럴 때 남편이 있어 줬으면…
+  --- context: 0x00B4 -> 0x800A ---
+  0x002EF16C [0x800A] [script:08 0D][box:speech]내 이름은 갈바른!![br]무투대회 챔피언이다!!
+  --- context: 0x800A -> 0x00B4 ---
+  0x002EF1C4 [0x00B4] [script:2D 0D][box:speech]とおっ！！[br]ガルバーンパンチをくらえ！！
+  --- context: 0x00B4 -> 0x800B ---
+  0x002EF21C [0x800B] [script:52 0D][box:speech]아, 안 먹혀!?
+  0x002EF264 [0x800B] [script:82 0D][box:speech]무투대회는 반드시[br]갈바른이 우승이야!!
+  0x002EF37E [0x800B] [script:13 0E][box:speech]허허허, 나는 질릴 만큼[br]무투대회를 봐 왔지
+  --- context: 0x800B -> 0x00B4 ---
+  0x002EF3DA [0x00B4] [script:3D 0E][box:speech]무투대회라면 뭐든[br]나에게 물어보게
+  --- context: 0x00B4 -> 0x00A9 ---
+  0x002EF432 [0x00A9] [script:7D 0E][box:speech][opt]이번 대회 룰은?[br][opt]우승하면 뭘 받나요?[br][opt]이번 우승자는 누구?[br][opt]할아버지 정체는?
+  --- context: 0x00A9 -> 0x800C ---
+  0x002EF4B6 [0x800C] [script:AB 0E][box:speech]무투대회라면 뭐든[br]나에게 물어보게
+  --- context: 0x800C -> 0x00A9 ---
+  0x002EF50E [0x00A9] [script:EB 0E][box:speech][opt]이번 대회 룰은?[br][opt]우승하면 뭘 받나요?[br][opt]이번 우승자는 누구?[br][opt]할아버지 정체는?
+  --- context: 0x00A9 -> 0x800C ---
+  0x002EF592 [0x800C] [script:10 0F][box:speech]허허허, 알려 주지
+  --- context: 0x800C -> 0x00B4 ---
+  0x002EF5D4 [0x00B4] [script:42 0F][box:speech]그건[delay:0B]・[delay:0B]・[delay:0B]・[delay:15]가장 강한 녀석이[br]이기는 룰이지
+  --- context: 0x00B4 -> 0x800C ---
+  0x002EF644 [0x800C] [script:6A 0F][box:speech]허허허, 듣고 놀라지 말게
+  --- context: 0x800C -> 0x00B4 ---
+  0x002EF688 [0x00B4] [script:9B 0F][box:speech]그건[delay:0B]・[delay:0B]・[delay:0B]・[delay:15]가장 강한 녀석이[br]받아야 할 것이지
+  --- context: 0x00B4 -> 0x800C ---
+  0x002EF6F6 [0x800C] [script:C2 0F][box:speech]허허허, 알고 있지
+  --- context: 0x800C -> 0x00B4 ---
+  0x002EF738 [0x00B4] [script:ED 0F][box:speech]그건[delay:0B]・[delay:0B]・[delay:0B]・[delay:15]가장 강한 녀석이지
+  --- context: 0x00B4 -> 0x800C ---
+  0x002EF79A [0x800C] [script:17 10][box:speech]허허허, 알고 싶다면 알려 주지
+  --- context: 0x800C -> 0x00B4 ---
+  0x002EF7E2 [0x00B4] [script:44 10][box:speech]나는[delay:0B]・[delay:0B]・[delay:0B]・[delay:15]이 술집의 마스터다
+  --- context: 0x00B4 -> 0x800C ---
+  0x002EF848 [0x800C] [script:6A 10][box:speech]무투대회라면,
+  --- context: 0x800C -> 0x800D ---
+  0x002EF88C [0x800D] [script:9D 10][box:speech]이전 니델 대회 우승자는[br]스메리아의 수배자였다더군
+  0x002EF8F2 [0x800D] [script:BF 10][box:speech]오, 그건 놀랍군요
+  --- context: 0x800D -> 0x800E ---
+  0x002EF944 [0x800E] [script:F7 10][box:speech]듣자 하니 그 녀석은[br]엄청나게 강했다던데
+  --- context: 0x800E -> 0x00B4 ---
+  0x002EF9A2 [0x00B4] [script:26 11][box:speech]수배자가 돼 버렸으니[br]이 클레니아 대회엔 못 나오겠지
+  --- context: 0x00B4 -> 0x800D ---
+  0x002EFA08 [0x800D] [script:49 11][box:speech]아쉬운 이야기네요
+  --- context: 0x800D -> 0x800E ---
+  0x002EFA52 [0x800E] [script:7B 11][box:speech]이런 대회를 보고 나면[br]역시 나도 피가 끓어!!
+  --- context: 0x800E -> 0x800D ---
+  0x002EFABC [0x800D] [script:B0 11][box:speech]저도 이 결승전을 보려고[br]다른 마을에서 왔어요
+  --- context: 0x800D -> 0x800E ---
+  0x002EFB18 [0x800E] [script:DE 11][box:speech]이렇게 이름도 모르는 사람들과[br]떠드는 것도 즐겁네요
+  0x002EFB7C [0x800E] [script:06 12][box:speech]어때요, 즐기고 있나요?
+  0x002EFBD0 [0x800E] [script:38 12][box:speech]이 술집 마스터는[br]무투대회를 정말 좋아해서
+  --- context: 0x800E -> 0x800F ---
+  0x002EFC28 [0x800F] [script:6B 12][box:speech]결승전이 시작되면 딸을 가게에 두고[br]대회 보러 가 버려요
+  0x002EFC9E [0x800F] [script:9E 12][box:speech]정말 대단한 아버지를 둔 딸도 힘들지
+  0x002EFD04 [0x800F] [script:CC 12][box:speech]당신들 전혀[br]모르고 있네
+  --- context: 0x800F -> 0x8010 ---
+  0x002EFD50 [0x8010] [script:FF 12][box:speech]나는 모든 나라의 모든 대회를[br]이 눈으로 전부 보고 왔어
+  0x002EFDB6 [0x8010] [script:26 13][box:speech]당신들 전혀[br]모르고 있네
+  0x002EFE14 [0x8010] [script:52 13][box:speech]아, 안 돼, 전혀 모르고 있어
+  0x002EFE68 [0x8010] [script:87 13][box:speech]「옛날과 변함없는 이 마을에서-[br][opt]나는 노래하고- 그 녀석은 싸운다-」
+  --- context: 0x8010 -> 0x8011 ---
+  0x002EFEC6 [0x8011] [script:B6 13][box:speech]「나는 바람을- 소리로 물들이고-[br][opt]그 녀석은 바람을- 피로 물들인다-」
+  0x002EFF24 [0x8011] [script:E4 13][box:speech]「나도 그 녀석도- 물든 바람에-[br][opt]휩쓸려 가는 거야-」
+  0x002EFF84 [0x8011] [script:12 14][box:speech]어때, 내가 만든[br]무투대회 테마송은?
+  0x002EFFE4 [0x8011] [script:47 14][box:speech]난 매일 술집에서 노래만 하지만[br]가끔은 마시고 싶을 때도 있지
+  0x002F004E [0x8011] [script:70 14][box:speech]어때, 좋은 술 마시고 있어?
+  0x002F027E [0x8011] [script:8C 15][box:speech]아아, 대회도 결국[br]끝나 버렸네
+  --- context: 0x8011 -> 0x8014 ---
+  0x002F02D8 [0x8014] [script:B4 15][box:speech]빨리 다음 대회가 왔으면
+  0x002F0328 [0x8014] [script:E1 15][box:speech]대회는 그루가라는 녀석이[br]우승했다더군
+  --- context: 0x8014 -> 0x8015 ---
+  0x002F037A [0x8015] [script:0B 16][box:speech]뭐, 벌이도 괜찮았고[br]이쯤이면 만족해야지
+  0x002F03D6 [0x8015] [script:43 16][box:speech]대회 중에는 우리 가게가 바빠서[br]난 대회를 보러 간 적이 없어
+  --- context: 0x8015 -> 0x800C ---
+  0x002F0446 [0x800C] [script:77 16][box:speech]그래도 아빠가 기뻐하는 걸 보면[br]뭐, 괜찮다고 생각해
+  0x002F04B2 [0x800C] [script:AC 16][box:speech]대회가 끝나면 이 술집도[br]보다시피 한산해지거든
+  --- context: 0x800C -> 0x800F ---
+  0x002F0520 [0x800F] [script:D8 16][box:speech]이제 천천히 술 마실 수 있겠네
+  0x002F0574 [0x800F] [script:0C 17][box:speech]「다시- 노래할- 때까지-[br][opt]다시- 싸울- 때까지-」
+  --- context: 0x800F -> 0x8011 ---
+  0x002F05D0 [0x8011] [script:38 17][box:speech]「이 술이- 이 마을이-[br][opt]마음을 쉬게 해 준다-」
+  0x002F0628 [0x8011] [script:6A 17][box:speech]「그러니- 이곳에서-[br][opt]다시 노래할 때까지- 다시 싸울 때까지-」
+  0x002F0690 [0x8011] [script:9A 17][box:speech]어때, 내가 만든[br]무투대회 종료 테마송은?
+  0x002F06F4 [0x8011] [script:CB 17][box:speech]이렇게 사람이 없으면[br]내가 노래해도 소용없지
+  0x002F0782 [0x8011] [script:0F 18][box:speech]그야 당연히[br]제스터지
+  0x002F0826 [0x8011] [script:64 18][box:speech]그 검술을 보면 누구라도[br]그렇게 생각할 수밖에 없어
+  0x002F089C [0x8011] [script:99 18][box:speech]아니, 난 분명[br]버그즈라고 보네
+  --- context: 0x8011 -> 0x800C ---
+  0x002F093A [0x800C] [script:F0 18][box:speech]몸은 늙었지만 그만큼[br]여기까지 남아온 힘은 얕볼 수 없지
+  0x002F09BA [0x800C] [script:27 19][box:speech]그래도 리샤도[br]버리기 아쉬워
+  --- context: 0x800C -> 0x800F ---
+  0x002F0A56 [0x800F] [script:7C 19][box:speech]결승에 여자가 남다니[br]대회 최초 아니야?
+  0x002F0AB0 [0x800F] [script:A3 19][box:speech]그래서 더 기대돼
+  0x002F0B20 [0x800F] [script:DC 19][box:speech]나라면 클레임을[br]응원하겠어
+  --- context: 0x800F -> 0x800A ---
+  0x002F0BC0 [0x800A] [script:2C 1A][box:speech]딱히 강해 보이는 사람은[br]아니지만,
+  --- context: 0x800A -> 0x00B4 ---
+  0x002F0C0C [0x00B4] [script:54 1A][box:speech]그 눈빛이 죽은 남편과[br]닮아서일까
+  --- context: 0x00B4 -> 0x800A ---
+  0x002F0C76 [0x800A] [script:88 1A][box:speech]아니야, 제일 강한 건[br]저 갈바른이야!
+  --- context: 0x800A -> 0x800B ---
+  0x002F0D18 [0x800B] [script:DC 1A][box:speech]나 커서 갈바른처럼[br]강해질 거야!!
+  0x002F0D98 [0x800B] [script:17 1B][box:speech]당신들 전혀[br]모르고 있네
+  --- context: 0x800B -> 0x8010 ---
+  0x002F0DEA [0x8010] [script:42 1B][box:speech]이번 대회 우승자는[br]라페시아 님이야
+  0x002F0E8C [0x8010] [script:93 1B][box:speech]저 얼굴 봤어요?[br]엄청 강해 보이죠?
+  0x002F0F00 [0x8010] [script:CA 1B][box:speech]나라면 역시[br]그루가지
+  --- context: 0x8010 -> 0x800D ---
+  0x002F0F9C [0x800D] [script:1D 1C][box:speech]대회 시작 후 계속[br]그 녀석을 봐 왔지만,
+  --- context: 0x800D -> 0x00B4 ---
+  0x002F0FEE [0x00B4] [script:47 1C][box:speech]난 그 정도로 강한 놈을[br]본 적이 없어
+  --- context: 0x00B4 -> 0x800D ---
+  0x002F104A [0x800D] [script:73 1C][box:speech]그렇다면 저는 슈레인을[br]응원하겠습니다
+  --- context: 0x800D -> 0x800E ---
+  0x002F10EE [0x800E] [script:CA 1C][box:speech]그루가만큼 힘이 센 사람은[br]본 적 없다지만,
+  --- context: 0x800E -> 0x00B4 ---
+  0x002F1148 [0x00B4] [script:F7 1C][box:speech]저는 슈레인만큼 빠른 사람은[br]본 적이 없거든요
+  --- context: 0x00B4 -> 0x800E ---
+  0x002F11BC [0x800E] [script:28 1D][box:speech]봐요, 다들[br]시끄러울 정도잖아요
+  --- context: 0x800E -> 0x8014 ---
+  0x002F1208 [0x8014] [script:57 1D][box:speech]당신도 좋아하는 사람을 정하면[br]더 재밌게 즐길 수 있어요
+  0x002F163C [0x8014] [script:6E 1F][box:speech]손님, 이 시기에 이 마을엔[br]무슨 일로 오셨나요?
+  0x002F1694 [0x8014] [script:9C 1F][box:speech]여기 명물 무투대회는[br]얼마 전에 끝났어요
+  0x002F170C [0x8014] [script:CE 1F][box:speech]빨리 다음 대회가 왔으면…
+  0x002F175C [0x8014] [script:F5 1F][box:speech]오오, 당신 그루가 아니오!?
+  0x002F17A2 [0x8014] [script:19 20][box:speech]다음 대회도 힘내 줘요
+  0x002F1804 [0x8014] [script:56 20][box:speech]이번 무투대회 우승자는[br]그루가라는 남자래
+  --- context: 0x8014 -> 0x8015 ---
+  0x002F1864 [0x8015] [script:87 20][box:speech]결승을 본 사람들 말로는[br]귀신 같은 강함이었다더군
+  0x002F18E0 [0x8015] [script:BB 20][box:speech]젠장, 나도 대회를[br]보고 싶었는데
+  0x002F1934 [0x8015] [script:E8 20][box:speech]당신이 귀신 같이 강하다는[br]소문의 그루가 맞지?
+  0x002F19A2 [0x8015] [script:1C 21][box:speech]이런 시기에 이 마을에 왔다는 건,
+  --- context: 0x8015 -> 0x800C ---
+  0x002F19F0 [0x800C] [script:48 21][box:speech]손님, 투기장 게임 하러[br]오신 거죠
+  0x002F1A62 [0x800C] [script:7E 21][box:speech]저기, 게임하면[br]결과 알려 줘요
+  0x002F1ABA [0x800C] [script:A0 21][box:speech]그루가 씨!?
+  0x002F1AF8 [0x800C] [script:CA 21][box:speech]당신도 투기장 게임[br]하러 온 거야!?
+  0x002F1B56 [0x800C] [script:FE 21][box:speech]무투대회 할 때는 여기 भी[br]엄청 시끄러웠지만,
+  --- context: 0x800C -> 0x800F ---
+  0x002F1BB4 [0x800F] [script:2D 22][box:speech]지금은 이렇게 조용해져서[br]이제 천천히 술 마실 수 있겠네
+  0x002F1C22 [0x800F] [script:64 22][box:speech]당신도 이 술집에 왔을 땐[br]너무 어슬렁거리지 마
+  0x002F1C8C [0x800F] [script:94 22][box:speech]당신도 투기장 게임[br]하러 온 거야?
+  --- context: 0x800F -> 0x8011 ---
+  0x002F1CE0 [0x8011] [script:C4 22][box:speech]요즘 투기장엔 메달 노리는[br]실력자들이 모이거든
+  0x002F1D40 [0x8011] [script:E7 22][box:speech]메달을 모른다고?
+  --- context: 0x8011 -> 0x00A9 ---
+  0x002F1D86 [0x00A9] [script:0B 23][box:speech][opt]알고 있어[br][opt]몰라
+  --- context: 0x00A9 -> 0x8011 ---
+  0x002F1DD0 [0x8011] [script:39 23][box:speech]당신도 투기장에서 그 메달을[br]모아 보는 게 어때?
+  0x002F1E30 [0x8011] [script:63 23][box:speech]그렇지, 모를 리가 없지
+  0x002F1E7E [0x8011] [script:8F 23][box:speech]게임으로 받는 그 메달은[br]돈으로 환산할 수 없거든
+  0x002F1EDC [0x8011] [script:BF 23][box:speech]뭐야, 정말 모른다고?[br]…이건 놀랐네
+  0x002F1F36 [0x8011] [script:F1 23][box:speech]투기장 게임에서 성적이 좋으면[br]상품으로 메달을 줘
+  0x002F1F9A [0x8011] [script:20 24][box:speech]즉 메달을 많이 가진 놈일수록[br]강한 놈이라는 거지
+  --- context: 0x8011 -> 0x00B0 ---
+  0x003A448E [0x00B0] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
+  0x003A4A32 [0x00B0] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
+  0x003A4A5C [0x00B0] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x003A4A86 [0x00B0] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
+  0x003A4AB2 [0x00B0] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x003A4AFA [0x00B0] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+  0x003A5690 [0x00B0] [script:0D 09]여긴 참가자 대기실입니다
+  --- context: 0x00B0 -> 0xFFFE ---
+  0x003A56D6 [0xFFFE] [script:35 09]최종 토너먼트라면[br]내일 와 주세요
+  0x003A5736 [0xFFFE] [script:60 09]오늘 경기는 이미 끝났습니다
+  0x003A577C [0xFFFE] [script:8B 09]문 너머는 링이므로[br]참가자만 안내합니다
+  0x003A57DE [0xFFFE] [script:BF 09]내일부터 드디어 최종 토너먼트라[br]나도 몸이 근질근질해
+  --- context: 0xFFFE -> 0x8017 ---
+  0x003A583A [0x8017] [script:E1 09]팔보다 목이겠지
+  --- context: 0x8017 -> 0x8014 ---
+  0x003A587E [0x8014] [script:03 0A]그녀, 꽤 잘 아네
+  --- context: 0x8014 -> 0x8017 ---
+  0x003A58CA [0x8017] [script:2A 0A]잠깐 예행연습해 보죠
+  0x003A5910 [0x8017] [script:4A 0A]그녀, 이름은?
+  0x003A5950 [0x8017] [script:68 0A]샨테인데?
+  --- context: 0x8017 -> 0x00B0 ---
+  0x003A59A8 [0x00B0] [script:97 0A]여기, 알디아 출신~
+  0x003A59CC [0x00B0] [script:A8 0A]가희 샨테 씨~
+  0x003A59EA [0x00B0] [script:B2 0A]어때?
+  --- context: 0x00B0 -> 0x8014 ---
+  0x003A5A02 [0x8014] [script:CE 0A]사람들 앞에서 창피 주지 마[br](어떻게 알았어?)
+  0x003A5A64 [0x8014] [script:0B 0B]어떤 놈들이 상대인지 보려고[br]일부러 와줬는데[br]별거 없는 놈들뿐이잖아
+  --- context: 0x8014 -> 0x8019 ---
+  0x003A5AD2 [0x8019] [script:2C 0B]흥, 이긴 거나 마찬가지군
+  0x003A5B14 [0x8019] [script:54 0B]대단한 자신감이네, 뭐[br]열심히 해 보시지
+  --- context: 0x8019 -> 0x8014 ---
+  0x003A5B64 [0x8014] [script:76 0B]건방진 소리 하지 마
+  --- context: 0x8014 -> 0x8019 ---
+  0x003A5BB8 [0x8019] [script:A9 0B]난 내 수련 성과를[br]시험해 보고 싶을 뿐이다
+  --- context: 0x8019 -> 0x801A ---
+  0x003A5C0E [0x801A] [script:C5 0B]어떤?
+  --- context: 0x801A -> 0x8014 ---
+  0x003A5C46 [0x8014] [script:EF 0B]염원으로 정신력을 높여[br]자신의 능력을…
+  --- context: 0x8014 -> 0x801A ---
+  0x003A5C9E [0x801A] [script:0C 0C]흐음
+  --- context: 0x801A -> 0x8014 ---
+  0x003A5CD8 [0x8014] [script:2E 0C]있지, 끝까지 들어줘…
+  --- context: 0x8014 -> 0x801A ---
+  0x003A5D28 [0x801A] [script:59 0C]어머, 무기 같은 걸 써도 돼?
+  --- context: 0x801A -> 0x8014 ---
+  0x003A5D6E [0x8014] [script:7E 0C]아니, 이 대회에선 뭐든 가능해
+  --- context: 0x8014 -> 0x801B ---
+  0x003A5DB8 [0x801B] [script:9E 0C]흐음, 왠지 수상하네
+  --- context: 0x801B -> 0x8014 ---
+  0x003A5DF8 [0x8014] [script:BE 0C]후후후… 뭐 지켜봐
+  --- context: 0x8014 -> 0x801B ---
+  0x003A5E44 [0x801B] [script:F0 0C]여기서 싸우는 놈들 상태를 보고[br]예상에 활용하는 거지
+  --- context: 0x801B -> 0xFFFE ---
+  0x003A5E9C [0xFFFE] [script:0F 0D]예상이라면…?
+  --- context: 0xFFFE -> 0x8014 ---
+  0x003A5EDA [0x8014] [script:39 0D]그야 물론 우승자를 맞히는[br]도박 예상이지
+  --- context: 0x8014 -> 0xFFFE ---
+  0x003A5F36 [0xFFFE] [script:68 0D]누가 이기려나,[br]미덥지 않은 놈들뿐인 것 같은데
+  0x003A5F8C [0xFFFE] [script:84 0D]그래…
+  --- context: 0xFFFE -> 0x8014 ---
+  0x003A5FC4 [0x8014] [script:A4 0D]나보다 약해 보이기도 하고
+  --- context: 0x8014 -> 0xFFFE ---
+  0x003A600C [0xFFFE] [script:C9 0D]왠지 마음이 안 놓여
+  0x003A604E [0xFFFE] [script:EA 0D]당신 참가자잖아
+  --- context: 0xFFFE -> 0x8014 ---
+  0x003A6090 [0x8014] [script:15 0E]나 같은 레슬러여도[br]강해 보이는 놈들뿐이잖아
+  --- context: 0x8014 -> 0xFFFE ---
+  0x003A60E6 [0xFFFE] [script:41 0E]부모 돈 써서 시드 받아서[br]아직 싸워보지도 못했어
+  0x003A613E [0xFFFE] [script:5E 0E]한심하네
+  --- context: 0xFFFE -> 0x8014 ---
+  0x003A62C4 [0x8014] [script:27 0F]당신, 참가자가 아니군요?
+  --- context: 0x8014 -> 0x8015 ---
+  0x003A630A [0x8015] [script:51 0F]링에는 참가자 외 출입금지입니다
+  0x003A636E [0x8015] [script:7E 0F]오늘은 최종 토너먼트 첫날입니다
+  --- context: 0x8015 -> 0x8016 ---
+  0x003A63B8 [0x8016] [script:AD 0F]승자끼리 싸우는 무대라[br]상당한 격전이 되고 있어요
+  0x003A6416 [0x8016] [script:D5 0F]수상한 녀석도 꽤[br]섞여 있는 것 같지만요
+  --- context: 0x8016 -> 0x8014 ---
+  0x003A6472 [0x8014] [script:FC 0F]젠장, 허무하게 져버렸어
+  --- context: 0x8014 -> 0x8019 ---
+  0x003A64B4 [0x8019] [script:25 10]혹독한 시련을 견딘 세월은[br]대체 뭐였지?
+  0x003A6506 [0x8019] [script:4C 10]그 말치고는[br]군살이 꽤 많네
+  --- context: 0x8019 -> 0x8014 ---
+  0x003A6554 [0x8014] [script:75 10]아무리 힘들어도[br]식욕은 안 사라진다
+  --- context: 0x8014 -> 0x8019 ---
+  0x003A65AE [0x8019] [script:97 10]어머, 졌구나
+  --- context: 0x8019 -> 0x8014 ---
+  0x003A65EA [0x8014] [script:C0 10]난도질하려 했는데[br]오히려 당했다랄까…
+  --- context: 0x8014 -> 0x801B ---
+  0x003A663C [0x801B] [script:EB 10]그런 걸 휘두르면[br]상대도 경계하겠지
+  --- context: 0x801B -> 0x8014 ---
+  0x003A6696 [0x8014] [script:0F 11]이거 사실은 모형이야
+  --- context: 0x8014 -> 0x801B ---
+  0x003A66DE [0x801B] [script:32 11]정말 무슨 생각인지
+  --- context: 0x801B -> 0x8014 ---
+  0x003A6728 [0x8014] [script:57 11]그루가는 기합이 대단하군
+  --- context: 0x8014 -> 0xFFFE ---
+  0x003A676A [0xFFFE] [script:78 11]이건 기대되네, 가하하
+  0x003A67AC [0xFFFE] [script:A1 11]주변 소란은 이런 이벤트에선[br]항상 따라오는 법이지
+  --- context: 0xFFFE -> 0x8014 ---
+  0x003A67FE [0x8014] [script:BD 11]맞아
+  --- context: 0x8014 -> 0xFFFE ---
+  0x003A683E [0xFFFE] [script:E2 11]그루가는 강하다더라
+  0x003A6880 [0xFFFE] [script:02 12]어떤 경기가 될까
+  0x003A68C8 [0xFFFE] [script:2F 12]필요 없을지도 모르지만[br]응원할게
+  --- context: 0xFFFE -> 0x8014 ---
+  0x003A691A [0x8014] [script:4D 12]아아, 고마워
+  --- context: 0x8014 -> 0x800C ---
+  0x003A6956 [0x800C] [script:79 12]상대가 누구든[br]나는 질 수 없어
+  0x003A69AE [0x800C] [script:A2 12]아무리 그래도 그렇게까지[br]몰릴 필요는 없잖아…?
+  --- context: 0x800C -> 0x8014 ---
+  0x003A6A04 [0x8014] [script:D0 12]미안하지만 얘긴 나중에 하자,[br]곧 경기 시작이야
+  --- context: 0x8014 -> 0x800C ---
+  0x003A6A5C [0x800C] [script:EE 12]그럼, 힘내
+  --- context: 0x800C -> 0x8014 ---
+  0x003A6E20 [0x8014] [script:DC 14]다음 경기 출전자는[br]링으로 입장해 주세요
+  --- context: 0x8014 -> 0x8017 ---
+  0x003A77CA [0x8017] [script:B1 19]우승 후보라 불릴 만하게[br]역시 강하네
+  --- context: 0x8017 -> 0x8014 ---
+  0x003A781E [0x8014] [script:DD 19]나는 반드시 이 대회에서[br]우승해야만 해
+  --- context: 0x8014 -> 0x800C ---
+  0x003A7876 [0x800C] [script:05 1A]근데 왜 그렇게까지[br]이기려는 거야?
+  --- context: 0x800C -> 0x8014 ---
+  0x003A78C6 [0x8014] [script:2D 1A]나는 속죄를 위해[br]엘레나를 키우고 있어
+  --- context: 0x8014 -> 0x800C ---
+  0x003A7916 [0x800C] [script:62 1A]그리고 이 대회 상금으로[br]그 아이 눈을 고칠 수 있다는[br]의사에게 보여줄 생각이야
+  0x003A7980 [0x800C] [script:96 1A]하지만 예전처럼 눈이 보이게 되면[br]당신이 친아버지가 아니라는 것도…
+  --- context: 0x800C -> 0x8014 ---
+  0x003A79E8 [0x8014] [script:B6 1A]아아… 그렇겠지
+  --- context: 0x8014 -> 0x800C ---
+  0x003A7A28 [0x800C] [script:E1 1A]그래도 이제는 현실을[br]직시해야 할 때야
+  0x003A7A7E [0x800C] [script:FE 1A]딸도 나도
+  0x003A7AB8 [0x800C] [script:1E 1B]정말, 그래도 괜찮아?
+  --- context: 0x800C -> 0x8014 ---
+  0x003A7AF8 [0x8014] [script:44 1B]어쨌든 그렇게[br]해야만 해…
+  --- context: 0x8014 -> 0x800C ---
+  0x003A7B92 [0x800C] [script:90 1B]내일은 최종 토너먼트 결승입니다
+  --- context: 0x800C -> 0xFFFE ---
+  0x003A7BDC [0xFFFE] [script:B1 1B]그루가 씨는 이길 수 있을까요?
+  0x003A7C2E [0xFFFE] [script:DA 1B]오늘은 이미 끝났습니다
+  0x003A7C70 [0xFFFE] [script:01 1C]내일 최종 토너먼트에[br]와 주세요
+  0x003A7CCA [0xFFFE] [script:36 1C]격투가로는 가망 없어 보여서[br]빨리 다른 일 찾으려 해
+  --- context: 0xFFFE -> 0x801A ---
+  0x003A7D28 [0x801A] [script:56 1C]뭔가 방도가 있어?
+  --- context: 0x801A -> 0x8014 ---
+  0x003A7D68 [0x8014] [script:7E 1C]이 차림이면[br]점쟁이라도 될 수 있지 않을까
+  --- context: 0x8014 -> 0x801A ---
+  0x003A7DB8 [0x801A] [script:9D 1C]참 쉽네
+  --- context: 0x801A -> 0x8014 ---
+  0x003A7DF6 [0x8014] [script:C9 1C]당장 점쳐 줄게,[br]빨리 좋은 사람 만나길
+  --- context: 0x8014 -> 0x801A ---
+  0x003A7E52 [0x801A] [script:EA 1C]쓸데없는 참견이야
+  --- context: 0x801A -> 0x8014 ---
+  0x003A7E90 [0x8014] [script:0E 1D]개점 기념으로 싸게 해줄 테니…
+  --- context: 0x8014 -> 0x801A ---
+  0x003A7ED8 [0x801A] [script:2B 1D]됐거든!
+  --- context: 0x801A -> 0x8014 ---
+  0x003A7F1E [0x8014] [script:51 1D]그루가는 역시 강하네
+  --- context: 0x8014 -> 0xFFFE ---
+  0x003A7F5E [0xFFFE] [script:73 1D]내가 눈여겨본 보람이 있군
+  0x003A7FA2 [0xFFFE] [script:96 1D]이대로면 우승해 줄 것 같아
+  0x003A7FF0 [0xFFFE] [script:B9 1D]그루가 진짜 강하네
+  0x003A802E [0xFFFE] [script:E0 1D]결승에서도 좋은 경기[br]보여주면 좋겠다
+  0x003A8084 [0xFFFE] [script:0D 1E]아아, 무서웠어,[br]다들 진심으로 싸우고 있네…
+  0x003A80D6 [0xFFFE] [script:35 1E]당연하지,[br]상금이 얼마인 줄 알아?
+  --- context: 0xFFFE -> 0x8014 ---
+  0x003A8126 [0x8014] [script:57 1E]돈에는 부족함이 없거든
+  --- context: 0x8014 -> 0xFFFE ---
+  0x003A816A [0xFFFE] [script:78 1E]그럼 왜 출전한 거야?
+  --- context: 0xFFFE -> 0x8014 ---
+  0x003A81AC [0x8014] [script:9E 1E]나오고 싶어서 나온 것도 아니랄까…
+  --- context: 0x8014 -> 0xFFFE ---
+  0x003A82E6 [0xFFFE] [script:33 1F]어라? 안 울리네
+  --- context: 0xFFFE -> 0x8014 ---
+  0x003A8322 [0x8014] [script:51 1F]가짜라니…
+  0x003A8476 [0x8014] [script:09 20]링에는 결승 참가자 외[br]들어오지 마세요
+  --- context: 0x8014 -> 0x8015 ---
+  0x003A84DE [0x8015] [script:3A 20]최종 토너먼트 결승은[br]곧 시작됩니다
+  --- context: 0x8015 -> 0x8016 ---
+  0x003A853C [0x8016] [script:6F 20]그루가의 상대 갈바른이라는 녀석,[br]상당히 강한 모양이야
+  --- context: 0x8016 -> 0xFFFE ---
+  0x003A859A [0xFFFE] [script:97 20]이번만큼은 그루가도[br]고전하지 않을까
+  0x003A85F2 [0xFFFE] [script:C4 20]그루가는 브라키아 독립의 용사라며
+  0x003A8644 [0xFFFE] [script:E1 20]그렇다더라
+  --- context: 0xFFFE -> 0x8014 ---
+  0x003A867E [0x8014] [script:0D 21]그런 사람이 왜 여기서[br]돈벌이를 해야 하는 걸까?
+  --- context: 0x8014 -> 0xFFFE ---
+  0x003A86D6 [0xFFFE] [script:30 21]그 나름의 사정이 있는 거겠지…
+  --- context: 0xFFFE -> 0x8014 ---
+  0x003A871C [0x8014] [script:56 21]사정이 있구나, 그런데[br]어떻게 아는 거야?
+  --- context: 0x8014 -> 0xFFFE ---
+  0x003A8768 [0xFFFE] [script:76 21]뭐, 이런저런 일이 있어서…
+  --- context: 0xFFFE -> 0x8014 ---
+  0x003A87B0 [0x8014] [script:9A 21]이 싸움으로 모든 게 끝나
+  --- context: 0x8014 -> 0x800C ---
+  0x003A87F0 [0x800C] [script:B5 21]그래
+  --- context: 0x800C -> 0x8014 ---
+  0x003A8826 [0x8014] [script:DA 21]마음을 집중해서 끌어올리고 싶어
+  --- context: 0x8014 -> 0x800C ---
+  0x003A8870 [0x800C] [script:FC 21]미안하지만 더는 말 걸지 말아줘
+  0x003A88B4 [0x800C] [script:1D 22]・[delay:07]・[delay:07]・
+  --- context: 0x800C -> 0x8014 ---
+  0x003A8BBA [0x8014] [script:A8 23]통일 무투대회 결승전, 전사 입장입니다
+  --- context: 0x8014 -> 0x8017 ---
+  0x003A9456 [0x8017] [script:EC 27]해냈네, 축하해
+  --- context: 0x8017 -> 0x8014 ---
+  0x003A9494 [0x8014] [script:15 28]아아, 이걸로 드디어[br]필요한 돈을 손에 넣었어
+  --- context: 0x8014 -> 0x800C ---
+  0x003A94E6 [0x800C] [script:38 28]바로 엘레나를 의사에게 데려가자
+  0x003A957A [0x800C] [script:7C 28]저기 그루가…
+  --- context: 0x800C -> 0x8014 ---
+  0x003A95B8 [0x8014] [script:A8 28]이제 와서 그렇지만[br]정말 그걸로 괜찮아?
+  0x003A960C [0x8014] [script:D7 28]피가 이어지지 않은 우리는[br]결국 진짜 가족이 될 수 없어
+  --- context: 0x8014 -> 0x800C ---
+  0x003A966A [0x800C] [script:F4 28]그런 건…
+  --- context: 0x800C -> 0x8014 ---
+  0x003A96A4 [0x8014] [script:2B 29]게다가 나는 죄책감을 속이려고[br]엘레나를 이용하고 있는 것뿐인지도 몰라
+  --- context: 0x8014 -> 0x800C ---
+  0x003A9720 [0x800C] [script:4E 29]그루가…
+  --- context: 0x800C -> 0x8014 ---
+  0x003A9A72 [0x8014] [script:FD 2A]무투대회는 끝났습니다
+  --- context: 0x8014 -> 0xFFFE ---
+  0x003A9AB6 [0xFFFE] [script:2C 2B]정리 끝나면 다음 대회까지[br]프리 투기장으로 운영합니다
+  0x003A9B1C [0xFFFE] [script:61 2B]앞으로 운영되는 프리 투기장에는[br]누구나 참가할 수 있습니다
+  0x003A9B7E [0xFFFE] [script:8B 2B]개설 준비도 있으니[br]조금만 더 기다려 주세요
+  0x003A9BDA [0xFFFE] [script:B3 2B]빨리 다음 대회가 시작되면 좋겠다
+  0x003A9C22 [0xFFFE] [script:D5 2B]여기 와도 심심하네
+  0x003A9C6E [0xFFFE] [script:F7 2B]끝나버렸네
+  0x003A9CAA [0xFFFE] [script:17 2C]이제 뭘 하지
+  0x003A9CF2 [0xFFFE] [script:41 2C]내가 봐도 멋진[br]진행 솜씨였지
+  --- context: 0xFFFE -> 0x8017 ---
+  0x003A9D3E [0x8017] [script:6D 2C]대회도 끝났으니 섬 구경 좀 하고 돌아갈게
+  0x003AA05C [0x8017] [script:F6 2D]투기장은 현재 자유롭게 운영하고 있습니다
+  --- context: 0x8017 -> 0xFFFE ---
+  0x003AA0A8 [0xFFFE] [script:21 2E]각각에 대해 자세한 건[br]링 안에서 설명드리겠습니다
+  --- context: 0xFFFE -> 0x00A9 ---
+  0x003AA108 [0x00A9] [script:5E 2E]어느 것에 도전하시겠습니까?[br][opt]묻기만 했다[br][opt]환마진[br][opt]연마진[br][opt]내마진
+  0x003AA18C [0x00A9] [script:A2 2E]어느 것에 도전하시겠습니까?[br][opt]비밀 투기장[br][opt]환마진[br][opt]연마진[br][opt]내마진
+  --- context: 0x00A9 -> 0xFFFE ---
+  0x003AA20C [0xFFFE] [script:C7 2E]・・・・・
+  0x003AA250 [0xFFFE] [script:E9 2E]그럼 링으로 가세요
+  0x003AA29C [0xFFFE] [script:14 2F]투기장은 현재 준비 중입니다
+  0x003AA2E4 [0xFFFE] [script:37 2F]준비가 끝날 때까지 기다려 주세요
+  0x003AA336 [0xFFFE] [script:62 2F]다음 참가를 기다리고 있겠습니다
+  0x003AA38C [0xFFFE] [script:86 2F]환마진이군요
+  0x003AA3CE [0xFFFE] [script:A8 2F]그럼 링으로 가세요
+  0x003AA416 [0xFFFE] [script:CB 2F]연마진이군요
+  0x003AA458 [0xFFFE] [script:ED 2F]그럼 링으로 가세요
+  0x003AA4A0 [0xFFFE] [script:10 30]내마진이군요
+  0x003AA4E2 [0xFFFE] [script:32 30]그럼 링으로 가세요
+  0x003AA52A [0xFFFE] [script:69 30]환마진은 마법진에서 차례로 나오는[br]몬스터를 퇴치하면 됩니다
+  0x003AA58E [0xFFFE] [script:92 30]약간 머리를 쓰는 편이 좋을지도요
+  0x003AA5E8 [0xFFFE] [script:C4 30]연마진은 차례로 출현하는[br]몬스터를 퇴치하면 되는 거다
+  0x003AA644 [0xFFFE] [script:EC 30]환마진과 비슷해 보여도[br]다르단다
+  0x003AA69C [0xFFFE] [script:1D 31]내마진은 우리 밖에서 안쪽의[br]몬스터를 쓰러뜨리면 돼
+  0x003AA6F6 [0xFFFE] [script:40 31]안에는 들어가면 안 돼
+  0x003AA744 [0xFFFE] [script:60 31]어라…?
+  --- context: 0xFFFE -> 0x0006 ---
+  0x003AA790 [0x0006] [script:8A 31]여전하네, 가짜잖아
+  0x003AA7E8 [0x0006] [script:B3 31]가짜…
+  0x003AB68C [0x0006] [script:0F 39][box:speech]투기장 게임에서 받는 그 메달 말이야,
+  --- context: 0x0006 -> 0xFFFE ---
+  0x003AB6DA [0xFFFE] [script:3B 39][box:speech]어딘가에서 아이템과 교환해[br]준다는 얘기야
+  0x003AB742 [0xFFFE] [script:73 39][box:speech]그 메달은 이 마을 기념품으로[br]엄청 인기가 있거든
+  0x003AB7A2 [0xFFFE] [script:9E 39][box:speech]가게로서는 어떻게든[br]손에 넣고 싶은 거지
+  0x003AB808 [0xFFFE] [script:CF 39][box:speech]엇, 메달과 아이템을[br]교환하고 싶다고?
+  0x003AB85A [0xFFFE] [script:F4 39][box:speech]내 옆에 있는 남자한테 말 걸어봐
+  0x003AB8A4 [0xFFFE] [script:26 3A][box:speech]필요한 대답은 「은혜의 물건은[br]그 대신이 된다」야
+  0x003AB914 [0xFFFE] [script:55 3A][box:speech]어때, 좋은 아이템[br]손에 넣었어?
+  0x003AB976 [0xFFFE] [script:89 3A][box:speech]태양의 조각, 금의 조각은[br]사람의 손에 맡겨진다…
+  0x003AB9D8 [0xFFFE] [script:AA 3A][box:speech]？
+  --- context: 0xFFFE -> 0x8014 ---
+  0x003ABA20 [0x8014] [script:D8 3A][box:speech]은혜의 물건은 그 대신이 된다…
+  0x003ABA6C [0x8014] [script:07 3B][box:speech]그래, 네가 가진 메달을[br]내 아이템과 교환하고 싶어
+  --- context: 0x8014 -> 0xFFFE ---
+  0x003ABACE [0xFFFE] [script:2F 3B][box:speech]앞으로도 잘[br]부탁해
+  0x003ABB26 [0xFFFE] [script:59 3B][box:speech]또 교환하러 왔구나…
+  0x003ABB72 [0xFFFE] [script:81 3B][box:speech]앞으로도 잘[br]부탁해
+  0x003ABBC4 [0xFFFE] [script:AC 3B][box:speech]메달에 맞는 아이템을[br]골라줘
+  --- context: 0xFFFE -> 0x00A9 ---
+  0x003ABE7E [0x00A9] [script:24 3D][box:system][opt]다음으로[br][opt]교환 그만[br][opt][name:39][opt][opt][opt][opt][opt][opt][opt][opt][opt]1000[br][opt][name:3A][opt][opt][opt][opt][opt][opt][opt][opt][opt][opt]1500[br][opt]마지막으로
+  0x003ABF52 [0x00A9] [script:90 3D][box:system][opt]다음으로[br][opt][name:39][opt][opt][opt][opt][opt][opt][opt][opt][opt]2000[br][opt][name:3A][opt][opt][opt][opt][opt][opt][opt]2500[br][opt][name:3B][opt][opt][opt][opt][opt][opt][opt][opt][opt]2500[br][opt]이전으로
+  0x003AC02A [0x00A9] [script:FC 3D][box:system][opt]다음으로[br][opt][name:39][opt][opt][opt][opt][opt][opt][opt][opt][opt]2700[br][opt][name:3A][opt][opt][opt][opt][opt][opt][opt][opt]2800[br][opt][name:3B][opt][opt][opt][opt][opt][opt][opt][opt][opt]2800[br][opt]이전으로
+  0x003AC102 [0x00A9] [script:68 3E][box:system][opt]다음으로[br][opt][name:39][opt][opt][opt][opt][opt][opt][opt][opt][opt]3000[br][opt][name:3A][opt][opt][opt][opt][opt][opt][opt]3500[br][opt][name:3B][opt][opt][opt][opt][opt][opt][opt][opt][opt]3800[br][opt]이전으로
+  0x003AC1DA [0x00A9] [script:D2 3E][box:system][opt]다음으로[br][opt][name:39][opt][opt][opt][opt][opt][opt]4000[br][opt][name:3A][opt][opt][opt][opt][opt][opt][opt][opt][opt][opt]4600[br][opt][name:3B][opt][opt][opt][opt][opt][opt]5200[br][opt]이전으로
+  0x003AC2AE [0x00A9] [script:3A 3F][box:system][opt]다음으로[br][opt][name:39][opt][opt][opt][opt][opt][opt][opt][opt]6100[br][opt][name:3A][opt][opt][opt][opt]7100[br][opt][name:3B][opt][opt][opt][opt][opt][opt]7700[br][opt]이전으로
+  0x003AC37E [0x00A9] [script:A5 3F][box:system][opt]다음으로[br][opt][name:39][opt][opt][opt][opt][opt][opt][opt][opt][opt][opt]8200[br][opt][name:3A][opt][opt][opt][opt][opt][opt][opt][opt]9000[br][opt][name:3B][opt][opt][opt][opt][opt][opt]9600[br][opt]이전으로
+  0x003AC454 [0x00A9] [script:0D 40][box:system][opt]다음으로[br][opt][name:39][opt][opt][opt][opt]10300[br][opt][name:3A][opt][opt][opt][opt]11100[br][opt][name:3B][opt][opt][opt][opt][opt][opt]11900[br][opt]이전으로
+  0x003AC524 [0x00A9] [script:79 40][box:system][opt]처음으로[br][opt][name:39][opt][opt][opt][opt][opt][opt][opt][opt][opt]12600[br][opt][name:3A][opt][opt][opt][opt][opt][opt][opt]13900[br][opt][name:3B][opt][opt][opt][opt]15000[br][opt]이전으로
+  0x003AC5D4 [0x00A9] [script:B7 40][box:system][name:39]로 하시겠습니까?[br][opt]이걸로[br][opt]그만둔다
+  0x003AC9FA [0x00A9] [script:CA 42][box:system][name:39]로 하시겠습니까?[br][opt]이걸로[br][opt]그만둔다
+  0x003ACAC8 [0x00A9] [script:31 43][box:system][name:39]로 하시겠습니까?[br][opt]이걸로[br][opt]그만둔다
+  0x003ACB96 [0x00A9] [script:98 43][box:system][name:39]로 하시겠습니까?[br][opt]이걸로[br][opt]그만둔다
+  0x003ACCA0 [0x00A9] [script:1D 44][box:system][name:39]로 하시겠습니까?[br][opt]이걸로[br][opt]그만둔다
+  0x003ACDAA [0x00A9] [script:A2 44][box:system][name:39]로 하시겠습니까?[br][opt]이걸로[br][opt]그만둔다
+  0x003ACE78 [0x00A9] [script:09 45][box:system][name:39]로 하시겠습니까?[br][opt]이걸로[br][opt]그만둔다
+  0x003ACF82 [0x00A9] [script:8E 45][box:system][name:39]로 하시겠습니까?[br][opt]이걸로[br][opt]그만둔다
+  0x003AD050 [0x00A9] [script:F5 45][box:system][name:39]로 하시겠습니까?[br][opt]이걸로[br][opt]그만둔다
+  0x003AD11E [0x00A9] [script:5C 46][box:system][name:39]로 하시겠습니까?[br][opt]이걸로[br][opt]그만둔다
+  0x003AD1EC [0x00A9] [script:C3 46][box:system][name:39]로 하시겠습니까?[br][opt]이걸로[br][opt]그만둔다
+  0x003AD2F6 [0x00A9] [script:48 47][box:system][name:39]로 하시겠습니까?[br][opt]이걸로[br][opt]그만둔다
+  0x003AD400 [0x00A9] [script:CD 47][box:system][name:39]로 하시겠습니까?[br][opt]이걸로[br][opt]그만둔다
+  0x003AD50A [0x00A9] [script:52 48][box:system][name:39]로 하시겠습니까?[br][opt]이걸로[br][opt]그만둔다
+  0x003AD614 [0x00A9] [script:D7 48][box:system][name:39]로 하시겠습니까?[br][opt]이걸로[br][opt]그만둔다
+  --- context: 0x00A9 -> 0x00B4 ---
+  0x003AD680 [0x00B4] [script:13 49]물다짐 완료
+  --- context: 0x00B4 -> 0x00A9 ---
+  0x003AD71E [0x00A9] [script:5C 49][box:system][name:39]로 하시겠습니까?[br][opt]이걸로[br][opt]그만둔다
+  0x003AD828 [0x00A9] [script:E1 49][box:system][name:39]로 하시겠습니까?[br][opt]이걸로[br][opt]그만둔다
+  0x003AD932 [0x00A9] [script:66 4A][box:system][name:39]로 하시겠습니까?[br][opt]이걸로[br][opt]그만둔다
+  0x003ADA3C [0x00A9] [script:EB 4A][box:system][name:39]로 하시겠습니까?[br][opt]이걸로[br][opt]그만둔다
+  0x003ADB46 [0x00A9] [script:70 4B][box:system][name:39]로 하시겠습니까?[br][opt]이걸로[br][opt]그만둔다
+  0x003ADC50 [0x00A9] [script:F5 4B][box:system][name:39]로 하시겠습니까?[br][opt]이걸로[br][opt]그만둔다
+  0x003ADD5A [0x00A9] [script:7A 4C][box:system][name:39]로 하시겠습니까?[br][opt]이걸로[br][opt]그만둔다
+  0x003ADE64 [0x00A9] [script:FF 4C][box:system][name:39]로 하시겠습니까?[br][opt]이걸로[br][opt]그만둔다
+  0x003ADF6E [0x00A9] [script:84 4D][box:system][name:39]로 하시겠습니까?[br][opt]이걸로[br][opt]그만둔다
+  0x003AE03C [0x00A9] [script:EB 4D][box:system][name:39]로 하시겠습니까?[br][opt]이걸로[br][opt]그만둔다
+  0x003AE10A [0x00A9] [script:52 4E][box:system][name:39]로 하시겠습니까?[br][opt]이걸로[br][opt]그만둔다
+  --- context: 0x00A9 -> 0xFFFE ---
+  0x003AE200 [0xFFFE] [script:C7 4E][box:speech]더 이상 아이템을 들 수 없는 것 같군
+  0x003AE24E [0xFFFE] [script:F3 4E][box:speech]그 아이템과 교환하려면[br]메달이 부족해
+  --- context: 0xFFFE -> 0x00A9 ---
+  0x003AE2A6 [0x00A9] [script:24 4F][box:system]메달을 더 교환하시겠습니까?[br][opt]교환한다[br][opt]교환 안 한다
+  --- context: 0x00A9 -> 0x00B0 ---
+  0x0045FE06 [0x00B0] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
+  0x004603AA [0x00B0] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
+  0x004603D4 [0x00B0] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x004603FE [0x00B0] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
+  0x0046042A [0x00B0] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x00460472 [0x00B0] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+  0x0046070A [0x00B0] [script:9C 04]물다짐 완료
+  0x004608B6 [0x00B0] [script:6B 05][box:speech]클레니아 플래그[opt]에러[br](투기장 링)
+  0x00460B42 [0x00B0] [script:BA 06][box:speech]…그렇게 해서 최종 토너먼트 1회전이[br]모두 무사히 종료됐습니다만,
+  0x00460B84 [0x00B0] [script:DF 06][box:speech]1회전 후 휴식도 슬슬 끝나고[br]선수들도 링사이드로 돌아왔습니다
+  0x00460BE6 [0x00B0] [script:0B 07][box:speech]어느 선수든 1회전에서 받은 상처는[br]그리 크지 않은 듯합니다만,
+  0x00460C26 [0x00B0] [script:28 07][box:speech]여러분이 응원하는 선수는 아직 살아남아 있나요?
+  0x00460C78 [0x00B0] [script:56 07][box:speech]그럼 드디어 이 명물 아나운서[br]캐치 마마맨의 중계를 곁들여,
+  0x00460CBC [0x00B0] [script:79 07][box:speech]최종 토너먼트 첫날을 장식할 준결승전을[br]진행하겠습니다!!
+  0x00460D0A [0x00B0] [script:9A 07][box:speech]그럼 준결승 1회전을 치를[br]전사들의 입장입니다!!
+  0x00460DF4 [0x00B0] [script:08 08][box:speech]링 정면에서 소개해 드리겠습니다!
+  0x00460E3C [0x00B0] [script:35 08][box:speech]1회전에서 아리바샤 출신 베테랑[br]버그즈 선수를 꺾은,
+  0x00460E7E [0x00B0] [script:4B 08][box:speech]브라키아 대표 그루가 선수!!
+  0x00460F44 [0x00B0] [script:A6 08][box:speech]그리고…
+  0x00460F6E [0x00B0] [script:CF 08][box:speech]1회전에서 뛰어난 검술을 선보이며[br]라페시아 선수를 꺾은,
+  0x00460FB2 [0x00B0] [script:E6 08][box:speech]니델 대표 제스터 선수!!
+  0x0046108E [0x00B0] [script:60 09][box:speech]과연 결승에 오르는 건 그루가 선수인가?[opt]아니면 제스터 선수인가?
+  0x004610D0 [0x00B0] [script:76 09][box:speech]준결승 1회전, 드디어 시작입니다!!
+  0x004611A6 [0x00B0] [script:E2 09][box:close]준결승이 시작된 지금부터는,
+  0x004611D4 [0x00B0] [script:F8 09][box:close]캐치 마마맨의 중계를 전해드립니다
+  0x00461208 [0x00B0] [script:12 0A][box:close]두 선수 모두 먼저 간격을 재고 있습니다
+  0x00461242 [0x00B0] [script:2F 0A][box:close]여기서 제스터, 단숨에 거리를 좁힙니다!
+  0x004612A0 [0x00B0] [script:5C 0A][box:close]제스터, 이건 엄청난 검놀림입니다!
+  0x0046130E [0x00B0] [script:94 0A][box:close]그루가, 버티며 반격에 나섭니다!
+  0x0046137E [0x00B0] [script:CD 0A][box:close]제스터, 밀리면서도 공격을 이어갑니다!
+  0x00461458 [0x00B0] [script:39 0B][box:close]하지만 그루가, 멈추지 않아요![opt]멈추지 않아요!
+  0x004614A4 [0x00B0] [script:5F 0B][box:close]오오! [opt]제스터, 마법을 썼습니다!!
+  0x0046153C [0x00B0] [script:AE 0B][box:close]이번 대회 첫 마법 사용입니다!
+  0x004615CA [0x00B0] [script:F1 0B][box:close]이에 그루가도 뒤로 물러납니다!
+  0x00461600 [0x00B0] [script:0C 0C][box:close]자, 제스터 여기서 몰아붙일까요!
+  0x004616E6 [0x00B0] [script:7F 0C][box:close]무려! [opt]그루가, 이를 피했습니다!!
+  0x00461772 [0x00B0] [script:C5 0C][box:close]러시![opt]러시![opt]러ーー시!!
+  0x004617BC [0x00B0] [script:EA 0C][box:close]제스터 맞습니다![opt]계속 맞고 있어요!!
+  0x00461806 [0x00B0] [script:0B 0D][box:close]제스터 다운입니다!!
+  0x004618B0 [0x00B0] [script:69 0D][box:close]지금 이 순간 다음 결승 진출권을,
+  0x004618E2 [0x00B0] [script:7F 0D][box:close]브라키아의 그루가 선수가 따냈습니다!
+  0x0046191A [0x00B0] [script:9C 0D][box:close]대단한 승부![opt]말 그대로 사투![opt]그래서 감동!
+  0x0046194C [0x00B0] [script:B5 0D][box:close]준결승 1회전은 숨 막히는 승부였습니다!
+  0x004619E0 [0x00B0] [script:0B 0E][box:speech]자, 1회전 승자와 엇갈려 2회전의[br]선수들이 입장합니다!
+  0x00461E40 [0x00B0] [script:2B 10][box:speech]아-, [delay:15]테스트, [delay:15]테스트
+  0x00461E66 [0x00B0] [script:3F 10][box:speech]음, [delay:15]음, [delay:15]아, [delay:15]아-
+  0x00461EA6 [0x00B0] [script:73 10][box:speech]회장에 모인 여러분!![br][delay:15]오・[delay:0B]래・[delay:0B]기・[delay:0B]다・[delay:15]리셨습니다!!
+  0x00461EF6 [0x00B0] [script:9A 10][box:speech]전 세계 사람들이 「죽기 전에 한 번은 보고 싶다」고[br]꿈꾸는 이 대회,
+  0x00461F44 [0x00B0] [script:BE 10][box:speech]매번 중계하는 저조차 최종일이 되면[br]텐션이 계속 오릅니다!
+  0x00462020 [0x00B0] [script:29 11][box:speech]아, 인사가 늦었습니다…[br][delay:15]저는 무투대회 링 아나운서,
+  0x00462066 [0x00B0] [script:4D 11][box:speech]리프레인 중계의 왕자로 유명한[br]캐치 마마맨입니다!
+  0x004620C2 [0x00B0] [script:7E 11][box:speech]세계 각지 대회 우승자들이 출전하는 이[br]무투대회는, 말하자면 그렇습니다,
+  0x0046210C [0x00B0] [script:A0 11][box:speech]바・로 「세계에서 가장 강한 자」를 정하는 대회입니다!
+  0x00462164 [0x00B0] [script:CC 11][box:speech]그리고 그 무투대회도 남은 경기는 단 하나!!
+  0x004621A8 [0x00B0] [script:EF 11][box:speech]맞습니다![opt]지금부터 무투대회 최종전![br]결승전이 펼쳐집니다!!
+  0x00462282 [0x00B0] [script:60 12][box:speech]유성처럼 빛났다 사라진 명승부들 중에서도[br]가장 뜨겁게 회자될 결승전,
+  0x004622D0 [0x00B0] [script:83 12][box:speech]그 무대를 힘과 기술이라는 두 바람으로[br]감동의 폭풍 색으로 물들일 이는,
+  0x00462316 [0x00B0] [script:A0 12][box:speech]그렇습니다, [delay:15]단 한 줌의 선택된 전사들뿐입니다
+  0x00462350 [0x00B0] [script:C4 12][box:speech]「승부는 운」, 그러나 그 흐름을[br]조금이라도 뜻대로 바꿀 수 있다면,
+  0x00462398 [0x00B0] [script:E6 12][box:speech]어떤 고난과 수련도 이겨내는[br]강한 의지를 가진 사나이들입니다
+  0x004623F4 [0x00B0] [script:17 13][box:speech]지금 그 전사들은 몸과 마음을 가다듬고[br]그때를 조용히 기다리고 있습니다
+  0x0046243E [0x00B0] [script:38 13][box:speech]왜냐하면 이 영광의 무대에는 그들조차 흔들릴 만한,
+  0x00462480 [0x00B0] [script:5D 13][box:speech]경기 전 불안, 패배의 공포, 자신을 넘을지 모를 상대가 있기 때문입니다
+  0x004624E2 [0x00B0] [script:89 13][box:speech]그들은 마음을 가라앉히기 위해 지금 링사이드에서 조용히 서 있습니다
+  0x0046253A [0x00B0] [script:B0 13][box:speech]자, 이제 그 마음의 망설임도 사라졌을까요…
+  0x004625A8 [0x00B0] [script:F2 13][box:speech]그럼 결승을 치를 전사로서[br]전투의 신에게 선택된 선수들의 입장입니다!!
+  0x00462608 [0x00B0] [script:12 14][box:speech]링 정면에서 소개해 드리겠습니다!
+  0x00462650 [0x00B0] [script:44 14][box:speech]준결승에서 수많은 마법을 뚫고[br]니델의 제스터 선수를 꺾은,
+  0x0046269C [0x00B0] [script:57 14][box:speech]브라키아의 영웅, 그루가!!
+  0x00462766 [0x00B0] [script:CE 14][box:speech]브라키아 독립이라는 대사건은[br]여러분 기억에도 생생할 겁니다
+  0x004627AC [0x00B0] [script:F3 14][box:speech]그루가 선수는 그 독립운동 중심 인물이었다는[br]소문이 돌고 있습니다
+  0x004627F6 [0x00B0] [script:15 15][box:speech]그 때문에 「브라키아의 영웅」이라는[br]별명이 어느새 붙었지요
+  --- context: 0x00B0 -> 0x00B4 ---
+  0x0046283A [0x00B4] [script:37 15][box:speech]물론 힘과 기술 모두 영웅의 이름에[br]걸맞은 전사이기 때문이기도 하겠지만요
+  0x0046288C [0x00B4] [script:5C 15][box:speech]그리고 그 영웅과 맞서는 건[br]이 또 다른 전사입니다!
+  0x004628DA [0x00B4] [script:87 15][box:speech]준결승에서 클레임 선수의 공격을[br]한 번도 허용하지 않고 쓰러뜨린,
+  0x00462922 [0x00B4] [script:AB 15][box:speech]그야말로 그림자의 영웅, 마스터 헌터[br]「하얀 환영」 갈바른!!
+  0x00462A0E [0x00B4] [script:25 16][box:speech]헌터인 그는 지금까지 여러 차례 우리의[br]생활을 위협한 범죄자를 잡아왔습니다
+  0x00462A5A [0x00B4] [script:49 16][box:speech]브라키아의 영웅이 그루가라면[br]우리의 영웅은 갈바른일까요
+  0x00462AA2 [0x00B4] [script:5F 16][box:speech]영웅의 라이벌은 역시 영웅…
+  0x00462ACE [0x00B4] [script:75 16][box:speech]그 말이 딱 맞는 결승전입니다!
+  0x00462B12 [0x00B4] [script:A1 16][box:speech]그럼 슬슬 이 수다쟁이 링 아나운서가 물러날 시간입니다
+  0x00462B52 [0x00B4] [script:C4 16][box:speech]그래요, 두 사람이 무대에 선 순간부터[br]여기엔 말이 필요 없을지도 모릅니다…
+  0x00462BB0 [0x00B4] [script:E8 16][box:speech]그럼, [delay:15]결승전, [delay:15]시작입니다!!
+  0x00462C5A [0x00B4] [script:3C 17][box:close]결승전이 시작된 지금부터는,
+  0x00462C88 [0x00B4] [script:52 17][box:close]캐치 마마맨의 중계를 전해드립니다
+  0x00462CBC [0x00B4] [script:6B 17][box:close]자, 누가 먼저 걸어 들어갈까요?
+  0x00462CF4 [0x00B4] [script:89 17][box:close]그루가, 상황을 보며 공격하는 느낌입니다
+  0x00462D68 [0x00B4] [script:C1 17][box:close]음, 갈바른도 같은 생각인 듯합니다
+  0x00462DF0 [0x00B4] [script:05 18][box:close]오오! [opt]먼저 그루가가 들어갑니다!!
+  0x00462E60 [0x00B4] [script:3C 18][box:close]しかし、さほどのダメージはないようです！
+  0x00462ECE [0x00B4] [script:74 18][box:close]여기서 갈바른의 마법 적중! 
+  0x00462F56 [0x00B4] [script:B9 18][box:close]두 선수 잠시 떨어져 상황을 봅니다
+  0x00462F90 [0x00B4] [script:D4 18][box:close]갈바른, 브레스로 카운터 성공!
+  0x00463016 [0x00B4] [script:18 19][box:close]하지만 그루가, 더 밀어붙입니다![opt]밀어붙입니다![opt]계속!
+  0x0046306C [0x00B4] [script:44 19][box:close]그러나 그루가의 필사적인 공격이 맞지 않습니다!
+  0x004630DE [0x00B4] [script:7C 19][box:close]그루가, 여기서 흐름을 바꾸려는 걸까요?
+  0x00463166 [0x00B4] [script:BF 19][box:close]그런데 갈바른, 거기서 몰아칩니다!
+  0x004631EC [0x00B4] [script:03 1A][box:close]그루가, 움직이지 않아요![opt]아니, 못 움직이는 건가!?
+  0x00463274 [0x00B4] [script:47 1A][box:close]갈바른 공격해！[opt]공격해！[opt]공격해！！
+  0x0046335C [0x00B4] [script:BA 1A][box:close]무슨 일인가! [opt]그루가가 전혀 움직이지 않습니다!!
+  0x004633E6 [0x00B4] [script:01 1B][box:close]오오! [opt]그루가, 기합 폭발!!
+  0x00463470 [0x00B4] [script:44 1B][box:close]이, 이건 엄청난 러시가 들어갔습니다!
+  0x004634DE [0x00B4] [script:74 1B][box:close]멈추지 않아요!
+  0x0046351A [0x00B4] [script:95 1B][box:close][opt][opt][opt][opt][opt]멈추지 않는다!
+  0x0046355C [0x00B4] [script:BA 1B][box:close][opt][opt][opt][opt][opt][opt][opt][opt][opt][opt]멈추지 않는다ーー!!
+  0x004635AA [0x00B4] [script:E1 1B][box:close]안 됩니다, 갈바른 일어서지 못해요![opt]다운!!
+  0x004635D4 [0x00B4] [script:F7 1B][box:close]다운![opt]갈바른 완전히 다운입니다!
+  0x0046363A [0x00B4] [script:2B 1C][box:close]그루가 선수의 멋진 역전극이었습니다!!
+  0x00463672 [0x00B4] [script:45 1C][box:close]이제 눈물로 무대가 보이지 않습니다!!
+  0x0046369E [0x00B4] [script:5D 1C][box:close]이것이 결승전, 이것이 명승부입니다!!
+  --- context: 0x00B4 -> 0x8005 ---
+  0x004637AE [0x8005] [script:DF 1C][box:speech]축하드립니다!!
+  0x0046382E [0x8005] [script:36 1D][box:speech]우승한 그루가 선수에게는 우승상금으로[br]대회 기관에서 10만 고즈가 지급됩니다!!
+  0x00463906 [0x8005] [script:99 1D][box:speech]링 안팎을 가리지 않고 이 열기는[br]식을 줄 모릅니다
+  0x00463966 [0x8005] [script:D1 1D][box:speech]무투대회 우승 축하합니다 그루가 선수!![br]멋진 경기 감사합니다 그루가 선수!!
+  --- context: 0x8005 -> 0x00A9 ---
+  0x00463D10 [0x00A9] [script:AC 1F][box:close]클레니아 투기장 「환마진」에 오신 것을 환영합니다!![br][opt]게임 플레이[br][opt]설명 듣기[br][opt]대기실로 돌아간다
+  --- context: 0x00A9 -> 0x8005 ---
+  0x00463DBA [0x8005] [script:FC 1F][box:speech]그럼 이 투기장 명물 「환마진」의 룰을[br]투기장 명물 아나운서인 제가
+  0x00463E2C [0x8005] [script:2B 20][box:speech]저, 캐치 마마만이[br]설명해 드리겠습니다
+  0x00463E96 [0x8005] [script:55 20][box:speech]무엇을 듣고 싶으신가요?
+  --- context: 0x8005 -> 0x00A9 ---
+  0x00463EE2 [0x00A9] [script:91 20][box:close][opt]룰에 대해 듣는다[br][opt]상금에 대해 듣는다[br][opt]게임의 힌트를 듣는다[br][opt]처음 선택으로 돌아간다
+  --- context: 0x00A9 -> 0x8005 ---
+  0x00463FBC [0x8005] [script:E8 20][box:speech]그럼 룰을 설명해 드리겠습니다
+  0x00464014 [0x8005] [script:3B 21][box:speech]「환마진」 게임에서는 무대가 되는 링 곳곳에[br]아라라토스국의 거대 던전에서 발견된 「대마법진」이 배치되어 있습니다
+  0x004640C4 [0x8005] [script:87 21][box:speech]그리고 그 「마법진」에는 마물의 환영…[br]즉 「환마」를 불러내는 힘이 봉인돼 있습니다
+  0x0046422C [0x8005] [script:3C 22][box:speech]하지만 물론 이 마법에도 한계가 있어[br]잠시 후 「환마」는 「마법진」으로 돌아가 버립니다
+  0x00464548 [0x8005] [script:C0 23][box:speech]이 「환마진」 게임에서 도전자는 출현하는[br]「환마」들을 모두
+  0x0046476A [0x8005] [script:CF 24][box:speech]다시 「마법진」으로 돌아가기 전에[br]쓰러뜨려야 합니다
+  0x004647F4 [0x8005] [script:09 25][box:speech]이상이 「환마진」 게임의 룰입니다
+  0x0046485A [0x8005] [script:38 25][box:speech]그럼 상금을 설명해 드리겠습니다
+  0x004648B4 [0x8005] [script:76 25][box:speech]모든 투기장 게임에서 상금은 메달이라는[br]형태로 도전자들에게 지급됩니다
+  0x00464920 [0x8005] [script:AD 25][box:speech]메달의 단위는 "세움"이며, 획득한 개수는[br]투기장 대기실에서 확인할 수 있습니다
+  0x0046498E [0x8005] [script:DE 25][box:speech]또한 그곳에서는 일정 메달 수마다[br]아이템과 교환할 수도 있습니다
+  0x00464A00 [0x8005] [script:37 26][box:speech]이 「환마진」 게임에서는 「환마」 1체당[br]10세움이 지급되며, 모든 「환마」를 쓰러뜨리면[br]보너스로 30세움이 지급됩니다
+  0x00464AB2 [0x8005] [script:66 26][box:speech]이상이 이 게임의 상금 설명입니다
+  0x00464B14 [0x8005] [script:96 26][box:speech]그럼 게임의 힌트를 드리겠습니다
+  0x00464BE2 [0x8005] [script:10 27][box:speech]「환마진」 게임에서 「환마」는 금방[br]「마법진」으로 사라집니다
+  0x00464C54 [0x8005] [script:54 27][box:speech]무기로 접근해 공격하는 것뿐 아니라[br]마법이나 아이템으로 원거리 공격도 활용하며[br]균형 있게 싸우는 게 좋습니다
+  0x00464CF8 [0x8005] [script:A7 27][box:speech]「환마진」 게임에서는 1게임에 12체의 「환마」가 출현하며[br]출현 패턴은 완전한 운입니다
+  0x00464D82 [0x8005] [script:EC 27][box:speech]출현 위치에 따라 먼 마법진까지 가야 할 때가 있습니다만[br]그럴 때일수록 한정된 마법을 잘 활용하세요
+  0x00464E28 [0x8005] [script:32 28][box:speech]「환마진」 게임 중 출현하는 「환마」는[br]종류별로 강함이 정해져 있습니다
+  0x00464E98 [0x8005] [script:75 28][box:speech]어떤 「환마」를 어느 정도 대미지로 쓰러뜨릴 수 있는지[br]파악해두면 게임 작전 수립에 도움이 됩니다
+  0x00464F3E [0x8005] [script:A9 28][box:speech]옷, 그렇군요 그렇군요…
+  0x00464F86 [0x8005] [script:D0 28][box:speech]그럼 처음 선택으로 돌아가겠습니다
+  --- context: 0x8005 -> 0x00B4 ---
+  0x004650E6 [0x00B4] [script:84 29][box:close]「환마진」 도전자 1명을 선택해 주세요
+  0x00465120 [0x00B4] [script:9F 29]전투에 참가할 캐릭터를[br]선택해 주세요
+  0x00465254 [0x00B4] [script:34 2A][box:close]さあ、ゲーム・スタートです！！
+  0x00465DC6 [0x00B4] [script:EC 2F][box:close]여기서 게임 종료입니다!!
+  --- context: 0x00B4 -> 0x8005 ---
+  0x00465E10 [0x8005] [script:19 30][box:speech]도전자의 기록은[FF:0A 03 01][num:01]체였습니다!![FF:0A 01 01]
+  --- context: 0x8005 -> 0x8017 ---
+  0x00465E74 [0x8017] [script:54 30][box:speech]도전자에게는 게임 상금으로[br][FF:0A 03 01][num:01]세움을 드리겠습니다!![FF:0A 01 01]
+  0x00465F4E [0x8017] [script:B1 30][box:speech]훌륭합니다![opt]퍼펙트입니다!!
+  0x00465F96 [0x8017] [script:E8 30][box:speech]도전자에게는 게임 상금 120세움과[br]보너스 30세움을[br]드립니다!
+  0x00466076 [0x8017] [script:4F 31][box:speech]도전자, 이번에는 게임을[br]전혀 따라가지 못했습니다…
+  0x004660D2 [0x8017] [script:7A 31][box:speech]다음번에는 최소 1체라도[br]쓰러뜨려 주세요!
+  0x0046613C [0x8017] [script:A9 31][box:speech]자, 다시 한번 도전하시겠습니까?
+  --- context: 0x8017 -> 0x00A9 ---
+  0x0046618A [0x00A9] [script:D0 31][box:speech][opt]도전한다[br][opt]도전하지 않는다
+  --- context: 0x00A9 -> 0x8017 ---
+  0x004661D8 [0x8017] [script:F8 31][box:speech]네![opt]그럼 새로운 도전을!!
+  0x0046628E [0x8017] [script:57 32][box:speech]그럼 다음 도전을[br]기다리고 있겠습니다!!
+  --- context: 0x8017 -> 0x00A9 ---
+  0x0046823C [0x00A9] [script:42 42][box:close]클레니아 투기장 「연마진」에 오신 것을 환영합니다!![br][opt]게임 플레이[br][opt]설명 듣기[br][opt]대기실로 돌아간다
+  --- context: 0x00A9 -> 0x8017 ---
+  0x004682E6 [0x8017] [script:92 42][box:speech]그럼 이 투기장 명물 「연마진」의 룰을[br]투기장 명물 아나운서인 제가
+  --- context: 0x8017 -> 0x8005 ---
+  0x00468358 [0x8005] [script:C1 42][box:speech]저, 캐치 마마만이[br]설명해 드리겠습니다
+  0x004683C2 [0x8005] [script:EB 42][box:speech]무엇을 듣고 싶으신가요?
+  --- context: 0x8005 -> 0x00A9 ---
+  0x0046840E [0x00A9] [script:27 43][box:close][opt]룰에 대해 듣는다[br][opt]상금에 대해 듣는다[br][opt]게임의 힌트를 듣는다[br][opt]처음 선택으로 돌아간다
+  --- context: 0x00A9 -> 0x8005 ---
+  0x00468496 [0x8005] [script:55 43][box:speech]그럼 룰을 설명해 드리겠습니다
+  0x004684F2 [0x8005] [script:A9 43][box:speech]「연마진」 게임에서는 넓은 링 위에[br]아라라토스국 거대 던전에서 발견된 「소마법진」이 촘촘히 깔려 있습니다
+  0x00468586 [0x8005] [script:E6 43][box:speech]그리고 「마법진」에는 마물의 환영…[br]즉 「환마」를 부르는 힘이 봉인돼 있습니다
+  0x00468636 [0x8005] [script:41 44][box:speech]물론 매우 작은 「마법진」이므로[br]「환마」를 불러낼 수 있는 시간도[br]겨우 1턴 정도입니다
+  0x004686D4 [0x8005] [script:6E 44][box:speech]하지만…
+  0x00468710 [0x8005] [script:A6 44][box:speech]때로는 이 「마법진」이 진짜 마물까지[br]불러낸다는 얘기도 전해집니다
+  0x00468808 [0x8005] [script:1E 45][box:speech]「연마진」 게임에서 도전자는 이 「환마」들을[br]차례차례 모두
+  0x004688DE [0x8005] [script:86 45][box:speech]나타났다가 사라지는 짧은 시간 안에[br]쓰러뜨려야 합니다
+  0x004689B8 [0x8005] [script:F4 45][box:speech]단 1턴이라도 「환마」가 남으면[br]게임은 종료됩니다
+  0x00468A86 [0x8005] [script:54 46][box:speech]…물론 「실상의 마」는 예외지만요
+  0x00468AFA [0x8005] [script:8C 46][box:speech]이상이 「연마진」 게임의 룰입니다
+  0x00468B60 [0x8005] [script:BB 46][box:speech]그럼 상금을 설명해 드리겠습니다
+  0x00468BBA [0x8005] [script:F9 46][box:speech]모든 투기장 게임에서 상금은 메달이라는[br]형태로 도전자들에게 지급됩니다
+  0x00468C26 [0x8005] [script:30 47][box:speech]메달의 단위는 "세움"이며, 획득한 개수는[br]투기장 대기실에서 확인할 수 있습니다
+  0x00468C94 [0x8005] [script:61 47][box:speech]또한 그곳에서는 일정 메달 수마다[br]아이템과 교환할 수도 있습니다
+  0x00468D06 [0x8005] [script:BC 47][box:speech]이 「연마진」 게임은 「환마」 1체당 5세움이 지급되며[br]가끔 출현하는 「실상의 마」를 쓰러뜨리면 보너스 20세움이 지급됩니다
+  0x00468DAC [0x8005] [script:FF 47][box:speech]예를 들어 「환마」 8체, 「실상의 마」 2체를 쓰러뜨리면[br]각각 40세움씩, 합계 80세움이 됩니다
+  0x00468E42 [0x8005] [script:2E 48][box:speech]이상이 이 게임의 상금 설명입니다
+  0x00468EA4 [0x8005] [script:5E 48][box:speech]그럼 게임의 힌트를 드리겠습니다
+  0x00468F72 [0x8005] [script:D1 48][box:speech]이 게임에 필요한 건 적을 쓰러뜨리는 힘보다[br]속도, 즉 이동력입니다
+  0x00468FD6 [0x8005] [script:04 49][box:speech]게임 시작 전 속도 중시 장비로 바꾸는 걸 추천합니다
+  0x00469058 [0x8005] [script:46 49][box:speech]게임이 진행될수록 「환마」 출현 위치가 멀어집니다
+  0x004690C0 [0x8005] [script:77 49][box:speech]전반엔 마법/아이템을 아끼고 후반을 대비하세요
+  0x0046913E [0x8005] [script:BC 49][box:speech]가끔 출현하는 「실상의 마」는 도전자의 체력을 깎는 성가신 상대입니다
+  0x004691AC [0x8005] [script:F6 49][box:speech]쓰러뜨린 뒤 회복하려 해도 다음 「환마」가 출현해[br]게임이 진행돼 버립니다
+  0x00469220 [0x8005] [script:2C 4A][box:speech]체력 회복은 「실상의 마」와 싸우는 사이에 해두는 편이 좋습니다
+  0x004692AC [0x8005] [script:60 4A][box:speech]옷, 그렇군요 그렇군요…
+  0x004692F4 [0x8005] [script:87 4A][box:speech]그럼 처음 선택으로 돌아가겠습니다
+  --- context: 0x8005 -> 0x00B4 ---
+  0x00469436 [0x00B4] [script:2C 4B][box:close]「연마진」 도전자 1명을 선택해 주세요
+  0x00469592 [0x00B4] [script:D3 4B][box:close]さあ、ゲーム・スタートです！！
+  0x00469892 [0x00B4] [script:54 4D][box:speech]오- 도전자는 여기까지입니다!!
+  --- context: 0x00B4 -> 0x8005 ---
+  0x004698E0 [0x8005] [script:88 4D][box:speech]이번에 쓰러뜨린 「환마」의 수는[br][FF:0A 05 01][num:01]체였습니다!![FF:0A 01 01]
+  --- context: 0x8005 -> 0x8017 ---
+  0x00469954 [0x8017] [script:C3 4D][box:speech]그리고 쓰러뜨린 「실상의 마」의 수는[br][FF:0A 05 01][num:01]체였습니다!![FF:0A 01 01]
+  0x004699E0 [0x8017] [script:0B 4E][box:speech]도전자에게는 게임 상금으로[br][FF:0A 05 01][num:01]세움을 드리겠습니다!![FF:0A 01 01]
+  0x00469A6E [0x8017] [script:42 4E][box:speech]자, 다시 한번 도전하시겠습니까?
+  --- context: 0x8017 -> 0x00A9 ---
+  0x00469ABC [0x00A9] [script:69 4E][box:speech][opt]도전한다[br][opt]도전하지 않는다
+  --- context: 0x00A9 -> 0x8017 ---
+  0x00469B0A [0x8017] [script:91 4E][box:speech]네![opt]그럼 새로운 도전을!!
+  0x00469BB4 [0x8017] [script:EA 4E][box:speech]그럼 다음 도전을[br]기다리고 있겠습니다!!
+  --- context: 0x8017 -> 0x00A9 ---
+  0x005262A2 [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
+  0x00526846 [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
+  0x00526870 [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x0052689A [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
+  0x005268C6 [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x0052690E [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+  --- context: 0x00A9 -> 0x8006 ---
+  0x00526F72 [0x8006] [script:70 06]그루가、잠깐만
+  0x00526FBE [0x8006] [script:9E 06]문 너머엔 아무도[br]없는 것 같은데…
+  0x00527016 [0x8006] [script:C1 06]상관없다, 샨테
+  --- context: 0x8006 -> 0x8005 ---
+  0x0052705E [0x8005] [script:E3 06]그루가…
+  --- context: 0x8005 -> 0x8006 ---
+  0x00527096 [0x8006] [script:11 07]어차피 엘레나를 인질로 잡힌 이상[br]우리에겐 선택권이 없어
+  --- context: 0x8006 -> 0x8005 ---
+  0x005270F2 [0x8005] [script:3F 07]누가 무슨 생각인지 모르겠지만[br]난 갈 수밖에 없어
+  0x0052714E [0x8005] [script:5C 07]그것도 그래…
+  --- context: 0x8005 -> 0x8006 ---
+  0x00527194 [0x8006] [script:87 07]샨테, 이건 너와 관계없는 일이다
+  --- context: 0x8006 -> 0x8005 ---
+  0x005271DE [0x8005] [script:B4 07]어떤 함정이 기다릴지 몰라[br]여기서 되돌아가도 괜찮다
+  0x00527244 [0x8005] [script:D6 07]싫어!
+  --- context: 0x8005 -> 0x8006 ---
+  0x00527280 [0x8006] [script:FC 07]그런가…[delay:1F]그럼 더는 말하지 않겠다
+  --- context: 0x8006 -> 0x8005 ---
+  0x005272D4 [0x8005] [script:35 08]더는 누군가가…[delay:3D]소중한 가족을 잃고 슬퍼하는[br]모습을 보고 싶지 않을 뿐이야
+  --- context: 0x8005 -> 0x8006 ---
+  0x00527346 [0x8006] [script:5C 08]고마워…[delay:3D]샨테
+  --- context: 0x8006 -> 0x00B0 ---
+  0x005DB78A [0x00B0] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
+  --- context: 0x00B0 -> 0x00A9 ---
+  0x005DBD2E [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
+  0x005DBD58 [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x005DBD82 [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
+  0x005DBDAE [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x005DBDF6 [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+  --- context: 0x00A9 -> 0x00B4 ---
+  0x005DC190 [0x00B4] [script:15 05]전투에 참가할 캐릭터를[br]선택해 주세요
+  0x005DC37A [0x00B4] [script:00 06]네놈이 그루가냐?
+  --- context: 0x00B4 -> 0x800A ---
+  0x005DC3D4 [0x800A] [script:3A 06]큭큭, 우선 챔피언 실력부터[br][delay:15]보여줘 보시지
+  0x005DC4A2 [0x800A] [script:93 06]엘레나는 어디 있지!?
+  --- context: 0x800A -> 0x8005 ---
+  0x005DC4E6 [0x8005] [script:BF 06]글쎄, [delay:15]나를 이기면 만날 수도 있지
+  --- context: 0x8005 -> 0x800A ---
+  0x005DEE98 [0x800A] [script:98 1B]뭐야, 도망간 줄 알았는데?[br]챔피언
+  0x005DEEE8 [0x800A] [script:C6 1B]준비됐으면 덤벼[br]영원히 기다려주진 않는다
+  0x005DFE42 [0x800A] [script:64 23]훌륭한 솜씨군
+  0x005DFE80 [0x800A] [script:8E 23]전사의 피에 굶주린 본능은[br]감출 수 없는 모양이군
+  0x005DFED4 [0x800A] [script:AD 23]네놈들 정체가 뭐냐?
+  --- context: 0x800A -> 0x8005 ---
+  0x005DFF12 [0x8005] [script:CF 23]무슨 목적으로 엘레나를 납치했지?
+  0x005DFF56 [0x8005] [script:ED 23]목적은 너다
+  --- context: 0x8005 -> 0x800A ---
+  0x005DFF92 [0x800A] [script:20 24]그 뛰어난 전투능력을[br]우리 연구소에서 이용해 주겠다는 거지
+  0x005DFFF8 [0x800A] [script:3F 24]키메라 연구소!
+  --- context: 0x800A -> 0x8006 ---
+  0x005E0046 [0x8006] [script:65 24]알고 있는 건가?
+  --- context: 0x8006 -> 0x8005 ---
+  0x005E0082 [0x8005] [script:87 24]난 이놈들에게 동생을 잃었어
+  --- context: 0x8005 -> 0x8006 ---
+  0x005E00C6 [0x8006] [script:B1 24]그래서 이놈들 보스를 쫓아[br]로말리아로 가는 길이야
+  0x005E011A [0x8006] [script:CD 24]뭐라고!
+  --- context: 0x8006 -> 0x800A ---
+  0x005E015E [0x800A] [script:F4 24]좋아, 그럼 말이 빠르군
+  0x005E01A0 [0x800A] [script:15 25]여기서 한꺼번에 끝내주지
+  0x005E02A4 [0x800A] [script:99 25]일단 말해두지…
+  0x005E02EA [0x800A] [script:BB 25]저항하면 딸 목숨은 없다
+  0x005E032E [0x800A] [script:D7 25]뭐…!!
+  --- context: 0x800A -> 0x8005 ---
+  0x005E0366 [0x8005] [script:F6 25]유감이네!!
+  --- context: 0x8005 -> 0x8006 ---
+  0x005E03A4 [0x8006] [script:1A 26]엘레나는 그루가의 딸이 아니야!
+  0x005E03EC [0x8006] [script:35 26]！！
+  --- context: 0x8006 -> 0x800A ---
+  0x005E0422 [0x800A] [script:59 26]좀만 봐도 알 법한데…
+  --- context: 0x800A -> 0x8006 ---
+  0x005E046A [0x8006] [script:7C 26]너희들 정말 무능하구나
+  0x005E04B0 [0x8006] [script:A4 26]흥, 정면으로 붙어도[br]이길 수 있다고 생각하나…
+  --- context: 0x8006 -> 0x800A ---
+  0x005E0500 [0x800A] [script:CD 26]좋다, 재밌군,[br]상대해 주지
+  0x005E0606 [0x800A] [script:47 27]놓치지 않는다, 챔피언
+  0x005E0646 [0x800A] [script:68 27](그루가… 미안해…)
+  --- context: 0x800A -> 0x8006 ---
+  0x005E0688 [0x8006] [script:96 27](상관없다, 이런 부류와의[br]협상에선 올바른 대답이야)
+  --- context: 0x8006 -> 0x8005 ---
+  0x005E06E4 [0x8005] [script:BE 27](…[delay:15]그리고…[delay:1F]거짓말도 아니야…)
+  0x005E0958 [0x8005] [script:F3 28]엘레나![delay:15]거기 있느냐? 엘레나!!
+  0x005E09F2 [0x8005] [script:4A 29]아[delay:11]・[delay:11]・[delay:11]빠[delay:11]・[delay:11]・[delay:11]?
+  0x005E0A50 [0x8005] [script:68 29]엘레나!
+  0x005E0A88 [0x8005] [script:89 29]괜찮니? 무서웠지
+  0x005E0ACE [0x8005] [script:BE 29]아니, 분명 아빠가 와서[br]나쁜 사람들을 혼내줄 거라[br]믿고 있었어
+  0x005E0B3E [0x8005] [script:E5 29]그렇지, 아빠는 강하니까
+  --- context: 0x8005 -> 0x8006 ---
+  0x005E0B82 [0x8006] [script:08 2A]응![delay:0B]챔피언이잖아
+  --- context: 0x8006 -> 0x8005 ---
+  0x005E0BC8 [0x8005] [script:29 2A]언니도 와줬구나
+  0x005E0C12 [0x8005] [script:4A 2A]자, 돌아가자
+  --- context: 0x8005 -> 0x00B4 ---
+  0x005E1B94 [0x00B4] [script:15 32][box:system][opt][opt][opt]수배 몬스터: 드라로슈[box:close]
+  0x005E1DD4 [0x00B4] [script:35 33]수배 몬스터[br]드라로슈를 쓰러뜨렸습니다
+  --- context: 0x00B4 -> 0x00A9 ---
+  0x0069C5B6 [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
+  0x0069CB5A [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
+  0x0069CB84 [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x0069CBAE [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
+  0x0069CBDA [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x0069CC22 [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+  --- context: 0x00A9 -> 0x00B4 ---
+  0x0069CFFE [0x00B4] [script:36 05]전투에 참가할 캐릭터를[br]선택해 주세요
+  --- context: 0x00B4 -> 0x8000 ---
+  0x0069D198 [0x8000] [script:F5 05]！？
+  0x0069D1CE [0x8000] [script:13 06]왠지 큰일이야
+  --- context: 0x8000 -> 0x8002 ---
+  0x0069D212 [0x8002] [script:3B 06]네놈들, 야생 몬스터가 아니군!
+  --- context: 0x8002 -> 0x8001 ---
+  0x0069D25A [0x8001] [script:6E 06]네가 인간 주제에 강하다는 소문을 듣고[br]시험하러 왔다
+  --- context: 0x8001 -> 0x800B ---
+  0x0069D2C0 [0x800B] [script:92 06]실망시키지 마라[br]후후후후
+  --- context: 0x800B -> 0x8009 ---
+  0x0069D31E [0x8009] [script:BC 06]상태가 이상해!
+  --- context: 0x8009 -> 0x8000 ---
+  0x0069D35C [0x8000] [script:D9 06]도와야 해
+  0x0069D396 [0x8000] [script:F7 06]쵸코도 도울래!
+  --- context: 0x8000 -> 0x8002 ---
+  0x0069DF94 [0x8002] [script:F6 0C]네가 그루가구나
+  --- context: 0x8002 -> 0x8000 ---
+  0x0069DFD0 [0x8000] [script:13 0D]역시 강하네
+  0x0069E00A [0x8000] [script:2F 0D]강하네
+  --- context: 0x8000 -> 0x8002 ---
+  0x0069E056 [0x8002] [script:59 0D]이제 괜찮은 것 같군
+  --- context: 0x8002 -> 0x8001 ---
+  0x0069E09E [0x8001] [script:7B 0D]그래서 용건은?
+  0x0069E0DA [0x8001] [script:A3 0D]도와준 답례도 하고[br]부탁도 있어서
+  --- context: 0x8001 -> 0x8000 ---
+  0x0069E12A [0x8000] [script:C9 0D]난 로말리아까지 가야 해
+  0x0069E176 [0x8000] [script:F0 0D]근데 여기서 어떻게 가야 할지 모르겠어
+  0x0069E1C4 [0x8000] [script:19 0E]무투대회 기간엔[br]이 섬에서 나가는 배가 없어
+  --- context: 0x8000 -> 0x8001 ---
+  0x0069E216 [0x8001] [script:39 0E]대회는 언제 끝나?
+  --- context: 0x8001 -> 0x8000 ---
+  0x0069E256 [0x8000] [script:56 0E]모레다
+  --- context: 0x8000 -> 0x8001 ---
+  0x0069E290 [0x8001] [script:7C 0E]그 뒤라면[br]로말리아로 쉽게 갈 수 있어
+  0x0069E2DC [0x8001] [script:9A 0E]그래, 고마워
+  --- context: 0x8001 -> 0x8000 ---
+  0x0069E318 [0x8000] [script:BF 0E]그런데 넌[br]우승 후보라며
+  0x0069E362 [0x8000] [script:E5 0E]이겨야만 해,[br]엘레나를 위해서라도
+  --- context: 0x8000 -> 0x8001 ---
+  0x0069E3AE [0x8001] [script:0C 0F]너, 엘레나와는[br]어떤 관계야?
+  --- context: 0x8001 -> 0x8000 ---
+  0x0069E408 [0x8000] [script:33 0F]・[delay:15]・[delay:15]・
+  --- context: 0x8000 -> 0x8001 ---
+  0x0069E44A [0x8001] [script:50 0F]미안해
+  --- context: 0x8001 -> 0x8000 ---
+  0x0069E484 [0x8000] [script:76 0F]누구나 말하고 싶지 않은 일은 있지
+  0x0069E4D0 [0x8000] [script:92 0F]괜찮아
+  --- context: 0x8000 -> 0x8001 ---
+  0x0069E514 [0x8001] [script:BE 0F]난 그 아이의 친아버지가 아니야
+  0x0069E560 [0x8001] [script:EA 0F]아이 눈이 안 보이는 걸 이용해[br]아버지라고 속이고 있어
+  0x0069E5B8 [0x8001] [script:11 10]게다가 그 아이가[br]부모를 잃은 것도,
+  0x0069E606 [0x8001] [script:39 10]눈이 보이지 않게 된 것도[br]내 탓이야[opt][opt][opt]
+  0x0069E656 [0x8001] [script:56 10]・・・
+  --- context: 0x8001 -> 0x8000 ---
+  0x0069E698 [0x8000] [script:7A 10]말이 길어졌군
+  --- context: 0x8000 -> 0x8001 ---
+  0x0069E6D8 [0x8001] [script:9A 10]먼저 숙소로 돌아가 있겠다
+  --- context: 0x8001 -> 0x00A9 ---
+  0x0075B90E [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
+  0x0075BEB2 [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
+  0x0075BEDC [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x0075BF06 [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
+  0x0075BF32 [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x0075BF7A [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+  0x00817BC6 [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
+  0x0081816A [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
+  0x00818194 [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x008181BE [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
+  0x008181EA [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x00818232 [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+  --- context: 0x00A9 -> 0xFFFE ---
+  0x00818F8C [0xFFFE] [script:F6 09]대회가 끝날 때까지[br]이 섬을 떠나는 편은 없습니다
+  0x00818FE6 [0xFFFE] [script:20 0A]나도 대회를 보고 싶지만[br]일이 있어서…
+  0x0081903A [0xFFFE] [script:4B 0A]참가자 중 오늘 도착할 이가[br]있는데…
+  0x0081908A [0xFFFE] [script:68 0A]아직인가?
+  0x008190CA [0xFFFE] [script:97 0A]난 이 섬에 무투대회 보러 오는 게 꿈이었어
+  0x00819128 [0xFFFE] [script:C0 0A]이번에는[br]그루가가 우승하려나?
+  0x0081917A [0xFFFE] [script:E3 0A]나도 두근두근하구먼
+  0x008191C0 [0xFFFE] [script:0A 0B]나도[br]조금만 더 젊었으면…
+  0x0081920E [0xFFFE] [script:2E 0B]난 지금 특훈 중이야
+  0x00819250 [0xFFFE] [script:59 0B]나중에 모두를 놀라게 할 필살기를 보여주겠어
+  0x008192AC [0xFFFE] [script:87 0B]역시 내 신랑감은[br]강한 사람이어야지
+  0x00819308 [0xFFFE] [script:B2 0B]대회 중엔 공항이 활기로[br]넘쳐요
+  --- context: 0xFFFE -> 0x8014 ---
+  0x0081935E [0x8014] [script:DC 0B]다음 편은[br]대회 끝난 뒤입니다
+  --- context: 0x8014 -> 0x00A9 ---
+  0x008193B2 [0x00A9] [script:0B 0C]당신도 대회 참가자입니까?[br][opt]예[br][opt]아니오
+  --- context: 0x00A9 -> 0xFFFE ---
+  0x00819406 [0xFFFE] [script:33 0C]그만두는 게 좋아요[br]당신으론 그루가 씨를 못 이겨요
+  --- context: 0xFFFE -> 0x8015 ---
+  0x0081945A [0x8015] [script:57 0C]공항 직원인 제가 말하긴 그렇지만…
+  0x008194A8 [0x8015] [script:86 0C]그게 신상에 좋아요[br]당신으론 한 명 이길 수 있을지도 모르겠네요
+  0x00819500 [0x8015] [script:AA 0C]공항 직원인 제가 말하긴 그렇지만…
+  0x0081954E [0x8015] [script:D6 0C]대회 종료 후 첫 편은[br]이미 떠났습니다
+  --- context: 0x8015 -> 0xFFFE ---
+  0x008195A6 [0xFFFE] [script:F7 0C]또 와 주세요
+  0x008195E8 [0xFFFE] [script:1D 0D]결국 그 레슬러는 오지 않았어
+  0x0081962E [0xFFFE] [script:3D 0D]겁먹은 걸까
+  0x00819676 [0xFFFE] [script:6A 0D]그렇게 기대하던 대회가[br]벌써 끝나버렸네
+  0x008196D0 [0xFFFE] [script:8C 0D]그루가는 강하네
+  0x00819710 [0xFFFE] [script:B9 0D]대회가 끝나면 이 공항엔[br]사람이 없어지지
+  --- context: 0xFFFE -> 0x8014 ---
+  0x00819766 [0x8014] [script:D8 0D]뭔가[opt]쓸쓸하네
+  --- context: 0x8014 -> 0x00A9 ---
+  0x008D308A [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
+  0x008D362E [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
+  0x008D3658 [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x008D3682 [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
+  0x008D36AE [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x008D36F6 [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+  0x008D3C16 [0x00A9] [script:D3 05][br][br][opt][opt][opt][opt][opt][opt][opt][opt][opt]엘크…
+  --- context: 0x00A9 -> 0x8000 ---
+  0x008D3C48 [0x8000] [script:E2 05]？
+  0x008D3D0A [0x8000] [script:4E 06]불쌍하게도[br]지쳐버렸구나
+  --- context: 0x8000 -> 0x8005 ---
+  0x008D3D54 [0x8005] [script:69 06]！？
+  --- context: 0x8005 -> 0x8000 ---
+  0x008D3D96 [0x8000] [script:94 06]사는 건[br]힘든 일뿐이야
+  --- context: 0x8000 -> 0x8006 ---
+  0x008D3DE0 [0x8006] [script:B1 06]이리 오렴
+  0x008D3E1A [0x8006] [script:D2 06]아버지?[opt]…어머니인가요?
+  --- context: 0x8006 -> 0x8000 ---
+  0x008D3EA2 [0x8000] [script:12 07]여어, 엘크
+  --- context: 0x8000 -> 0x8007 ---
+  0x008D3EF6 [0x8007] [script:3D 07]진![opt]나는…
+  --- context: 0x8007 -> 0x8000 ---
+  0x008D3F32 [0x8000] [script:5A 07]알고 있어
+  --- context: 0x8000 -> 0x8007 ---
+  0x008D3F6C [0x8007] [script:87 07]너는 우리를 죽인 고통을[br]짊어지고 살아갈 만큼 강하지 않아
+  0x008D3FC6 [0x8007] [script:A7 07]그냥 살아가는 걸 포기해
+  0x008D4006 [0x8007] [script:C4 07]그게 편해
+  0x008D406C [0x8007] [script:F9 07]엘크, 기다리고 있었어
+  --- context: 0x8007 -> 0x8008 ---
+  0x008D40AA [0x8008] [script:1B 08]여기서 함께 살자
+  0x008D40EE [0x8008] [script:3B 08]여긴 좋아, 조용해서
+  0x008D412E [0x8008] [script:5C 08]미리루…[opt]그럴 순 없어
+  --- context: 0x8008 -> 0x8000 ---
+  0x008D4170 [0x8000] [script:84 08]너는 내 말대로[br]해야만 해
+  --- context: 0x8000 -> 0x8008 ---
+  0x008D41C0 [0x8008] [script:A9 08]왜냐하면, 나를 죽인 건[br]너니까
+  0x008D420A [0x8008] [script:D7 08]계속 믿고 기다렸던 너에게[br]죽임당한 내 마음을 알겠어?
+  0x008D4266 [0x8008] [script:F4 08]・・・
+  --- context: 0x8008 -> 0x8000 ---
+  0x008D42A0 [0x8000] [script:1C 09]나는 너를[br]원래 세계로 돌려보내지 않겠어
+  --- context: 0x8000 -> 0x8008 ---
+  0x008D42F8 [0x8008] [script:3A 09]！
+  --- context: 0x8008 -> 0x00B4 ---
+  0x008D51F4 [0x00B4] [script:BB 10]엘크의 아버지
+  0x008D5206 [0x00B4] [script:C4 10]엘크의 어머니
+  --- context: 0x00B4 -> 0x8000 ---
+  0x008D5234 [0x8000] [script:E7 10]젠장…[br]나는 죽어버리는 게 낫다는 건가…
+  0x008D52F2 [0x8000] [script:43 11]엘크, 너는[br]틀리지 않았어
+  --- context: 0x8000 -> 0x8008 ---
+  0x008D5346 [0x8008] [script:63 11]미리루!
+  --- context: 0x8008 -> 0x8000 ---
+  0x008D53E8 [0x8000] [script:C4 11]죽은 사람은 그렇게 될 운명을[br]짊어지고 태어난 거야
+  --- context: 0x8000 -> 0x8005 ---
+  0x008D5498 [0x8005] [script:1E 12]그리고 살아남은 사람도[br]그 운명을 짊어지고 가야 해
+  --- context: 0x8005 -> 0x8006 ---
+  0x008D54F4 [0x8006] [script:3D 12]아버지![opt]어머니!
+  --- context: 0x8006 -> 0x8000 ---
+  0x008D559C [0x8000] [script:9B 12]나는 감사하고 있어,[br]마지막에 인간으로 죽을 수 있어서
+  --- context: 0x8000 -> 0x8007 ---
+  0x008D55F6 [0x8007] [script:C8 12]우린 괜찮아,[br]너는 똑바로 앞만 보고 가
+  --- context: 0x8007 -> 0x8005 ---
+  0x008D5648 [0x8005] [script:E3 12]맞아
+  --- context: 0x8005 -> 0x8008 ---
+  0x008D567E [0x8008] [script:06 13]그러지 않으면[br]엘크답지 않아
+  0x008D56D8 [0x8008] [script:34 13]모두…[delay:15]・[delay:15]・[delay:15]
+  --- context: 0x8008 -> 0x8000 ---
+  0x008D5720 [0x8000] [script:54 13]그럼, 우리는 갈게
+  --- context: 0x8000 -> 0x8008 ---
+  0x008D57A6 [0x8008] [script:96 13]잠깐만, 모두
+  --- context: 0x8008 -> 0x8000 ---
+  0x008D5814 [0x8000] [script:CB 13]기다려 줘!
+  --- context: 0x8000 -> 0x00A9 ---
+  0x008D5860 [0x00A9] [script:FE 13][br][br][opt]지지 마, 죽어 간 사람들을 위해서라도…
+  0x008D589E [0x00A9] [script:1B 14][br][br][opt][opt][opt][opt][opt]끝까지 살아줘, 나를 위해…
+  --- context: 0x00A9 -> 0x00B4 ---
+  0x008D5CA4 [0x00B4] [script:13 16]엘크의 아버지
+  0x008D5CB6 [0x00B4] [script:1C 16]엘크의 어머니
+  --- context: 0x00B4 -> 0x00A9 ---
+  0x0099095A [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
+  0x00990EFE [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
+  0x00990F28 [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x00990F52 [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
+  0x00990F7E [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x00990FC6 [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+  --- context: 0x00A9 -> 0x8005 ---
+  0x00991252 [0x8005] [script:8A 04]제가 모셔다드릴 수 있는 곳은[br]여기까지입니다
+  0x00991304 [0x8005] [script:DE 04]그럼, 조심히 가세요
+  0x00991344 [0x8005] [script:FC 04]정말 고마워요
+  --- context: 0x8005 -> 0x8000 ---
+  0x00991A00 [0x8000] [script:60 08]다음 편은[br]한참 뒤에 있습니다
+  --- context: 0x8000 -> 0x8006 ---
+  0x00991A4E [0x8006] [script:8E 08]모처럼 오셨으니[br]거리라도 구경해 보시는 건 어때요
+  --- context: 0x8006 -> 0x8007 ---
+  0x00991AAA [0x8007] [script:B2 08]지금 출발하는 편은 없습니다
+  --- context: 0x8007 -> 0x8008 ---
+  0x00991AF2 [0x8008] [script:D5 08]왠지 흉흉하구먼
+  --- context: 0x8008 -> 0xFFFE ---
+  0x00991B38 [0xFFFE] [script:FF 08]흉악범이라니[br]벌써 이 도시에 와 있는 걸까
+  0x00991B8C [0xFFFE] [script:1E 09]무섭다
+  0x00991BCA [0xFFFE] [script:4A 09]나쁜 사람이 어딘가로[br]도망쳤다는데, 무섭네
+  0x00991C22 [0xFFFE] [script:7B 09]아크라는 흉악범의 수배서가[br]돌아와서 감시 중이야
+  0x00991C84 [0xFFFE] [script:A9 09]아크라는 녀석은[br]스메리아의 왕을 죽이고 도망쳤대
+  0x00991CDA [0xFFFE] [script:D0 09]찾으면 즉시[br]보고해 주게
+  0x00991D2E [0xFFFE] [script:F7 09]다음 편은[br]한참 뒤에 있습니다
+  --- context: 0xFFFE -> 0x8006 ---
+  0x00991D7C [0x8006] [script:25 0A]모처럼 오셨으니[br]거리라도 구경해 보시는 건 어때요
+  --- context: 0x8006 -> 0x8007 ---
+  0x00991DD8 [0x8007] [script:49 0A]지금 출발하는 편은 없습니다
+  --- context: 0x8007 -> 0x8008 ---
+  0x00991E20 [0x8008] [script:6C 0A]왠지[opt]흉흉하구먼
+  --- context: 0x8008 -> 0xFFFE ---
+  0x00991E66 [0xFFFE] [script:96 0A]흉악범이라니[br]벌써 이 도시에 와 있는 걸까
+  0x00991EBA [0xFFFE] [script:B5 0A]무섭다
+  0x00991EF8 [0xFFFE] [script:E1 0A]나쁜 사람이 어딘가로[br]도망쳤다는데[opt]무섭네
+  0x00991F50 [0xFFFE] [script:12 0B]아크라는 흉악범의 수배서가[br]돌아와서 감시 중이야
+  0x00991FB2 [0xFFFE] [script:40 0B]아크라는 녀석은[br]스메리아의 왕을 죽이고 도망쳤대
+  0x00992008 [0xFFFE] [script:67 0B]찾으면 즉시[br]보고해 주게
+  --- context: 0xFFFE -> 0x00A9 ---
+  0x00A476E2 [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
+  0x00A47C86 [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
+  0x00A47CB0 [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x00A47CDA [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
+  0x00A47D06 [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x00A47D4E [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+  --- context: 0x00A9 -> 0x800A ---
+  0x00A4C29C [0x800A] [script:EE 25][box:speech]나도 젊었을 때는[br]헌터를 했었지
+  0x00A4C2EC [0x800A] [script:16 26][box:speech]여기 일을 펄펄 날면서[br]해냈던 시절이 있었어
+  0x00A4C344 [0x800A] [script:3C 26][box:speech]그 시절이 그립구먼
+  0x00A4C390 [0x800A] [script:69 26][box:speech]이 마을은 대체 어쩌다[br]이렇게 돼 버린 건지…
+  0x00A4C3E2 [0x800A] [script:97 26][box:speech]사람처럼 보이지 않는 그림자가[br]마을 곳곳에서 보여
+  0x00A4C444 [0x800A] [script:BB 26][box:speech]험한 말은 안 하겠지만,
+  0x00A4C486 [0x800A] [script:E8 26][box:speech]헌터라도 이런 때는[br]얌전히 있는 게 좋아
+  0x00A4C4E6 [0x800A] [script:15 27][box:speech]자네, 저 떠 있는[br]성을 봤는가!?
+  0x00A4C53A [0x800A] [script:3F 27][box:speech]어째서 로말리아 성이[br]떠 있는 거지!?
+  0x00A4C594 [0x800A] [script:66 27][box:speech]나도 오래 살았지만,
+  0x00A4C5DC [0x800A] [script:92 27][box:speech]저런 건 지금까지[br]본 적도 들은 적도 없네!?
+  0x00A4C64E [0x800A] [script:C6 27][box:speech]헌터는 부르고 싶고[br]돈은 없고, 딱 그 꼴이지
+  --- context: 0x800A -> 0x800B ---
+  0x00A4C69C [0x800B] [script:EF 27][box:speech]길드 매니저라는 건[br]돈이 꽤 되겠지
+  0x00A4C6F6 [0x800B] [script:20 28][box:speech]마을 곳곳을 눈빛 이상한[br]남자들이 돌아다니고 있어
+  0x00A4C756 [0x800B] [script:4A 28][box:speech]저건 헌터 같은 게 아니야
+  0x00A4C7A4 [0x800B] [script:71 28][box:speech]뭔가 더 다른, 무서운[br]느낌이 들어
+  0x00A4C7F8 [0x800B] [script:9D 28][box:speech]어이, 왜 저 성은[br]떠 있는 거야!?
+  0x00A4C84A [0x800B] [script:C8 28][box:speech]설마 이 마을로 떨어지는 건[br]아니겠지!?
+  0x00A4C8A6 [0x800B] [script:ED 28][box:speech]게다가 저 모양, 저 색…
+  0x00A4C8EA [0x800B] [script:18 29][box:speech]마치 어설픈 악마가[br]올라탄 것 같다고!?
+  0x00A4C95A [0x800B] [script:54 29][box:speech]헌터 녀석들은 싼값에 일을[br]해주니까 도움이 되지
+  --- context: 0x800B -> 0xFFFE ---
+  0x00A4C9C0 [0xFFFE] [script:87 29][box:speech]하지만 헌터라는 녀석들은 뭐든[br]해내니까 대단하긴 해
+  0x00A4CA26 [0xFFFE] [script:B8 29][box:speech]순찰 병사가 늘고, 여자와[br]아이들은 집에 숨고…
+  0x00A4CA80 [0xFFFE] [script:E7 29][box:speech]그리고 남자들은 자기 주변을[br]두리번거리기 시작하지…
+  0x00A4CAE4 [0xFFFE] [script:13 2A][box:speech]이 마을에서 뭔가 끔찍한[br]일이 벌어질 거야…
+  0x00A4CB36 [0xFFFE] [script:3D 2A][box:speech]그 정도는 헌터가 아닌[br]나도 알겠어
+  0x00A4CB90 [0xFFFE] [script:69 2A][box:speech]큰일이 벌어질 줄은[br]알고 있었지만…
+  0x00A4CBE2 [0xFFFE] [script:93 2A][box:speech]설마 저렇게 큰 성이[br]떠오를 줄이야…
+  0x00A4CC3C [0xFFFE] [script:B7 2A][box:speech]・・・・・
+  0x00A4CC7E [0xFFFE] [script:DB 2A][box:speech]난 이제 말도 안 나온다…
+  0x00A4CCE0 [0xFFFE] [script:13 2B][box:speech]요즘은 고철 줍기도[br]제대로 된 물건이 없어서 말이야
+  0x00A4CD36 [0xFFFE] [script:3E 2B][box:speech]차라리 헌터라도[br]될까 생각하게 되네
+  0x00A4CD94 [0xFFFE] [script:6C 2B][box:speech]어떨까?[br]헌터라는 건 돈이 되려나?
+  0x00A4CDF0 [0xFFFE] [script:9B 2B][box:speech]최근 들어 병사 수가[br]유난히 늘고 있어
+  0x00A4CE46 [0xFFFE] [script:C4 2B][box:speech]그 바람에 느긋하게 고철도[br]줍지 못해
+  0x00A4CE9E [0xFFFE] [script:F3 2B][box:speech]저 병사들은 대체 뭘[br]찾고 있는 걸까
+  0x00A4CEFC [0xFFFE] [script:26 2C][box:speech]마을에 넘친 병사들과 저 성은[br]뭔가 관계가 있는 걸까…
+  0x00A4CF5C [0xFFFE] [script:52 2C][box:speech]어쨌든 우리는 떨고 있을[br]수밖에 없겠지…
+  0x00A4CFBA [0xFFFE] [script:82 2C][box:speech]마음 편히 쓰레기를 줍던 때가[br]정말 그리워…
+  0x00A4D3B8 [0xFFFE] [script:76 2E][box:speech]오, 자네 헌터인가?
+  --- context: 0xFFFE -> 0x800A ---
+  0x00A4D468 [0x800A] [script:CE 2E]그럼 오늘 밤 바로 부탁하겠네
+  --- context: 0x800A -> 0x00B4 ---
+  0x00A4D4FA [0x00B4] [script:1B 2F][box:narration][opt][opt][opt][opt][opt][opt][opt]그날 밤[opt][opt][opt][opt][opt][opt][opt][opt][opt]
+  --- context: 0x00B4 -> 0x800A ---
+  0x00A4D552 [0x800A] [script:4D 2F][box:speech]이 안쪽은 길드 관계자 외엔[br]출입 금지다
+  --- context: 0x800A -> 0x800B ---
+  0x00A4D5B2 [0x800B] [script:78 2F][box:speech]문 주변을 너무[br]어슬렁거리지 마
+  0x00A4D608 [0x800B] [script:A7 2F][box:speech]자네, 그 차림새로 봐선[br]병사도 아니잖아
+  0x00A4D65E [0x800B] [script:D0 2F][box:speech]이 길드 안을 이유 없이[br]어슬렁거리지 마
+  0x00A4D6B6 [0x800B] [script:FC 2F][box:speech]이 길드 안을 이유 없이[br]어슬렁거리지 마
+  0x00A4D70E [0x800B] [script:26 30][box:speech]자네는 이 문을[br]열 수 없어
+  0x00A4D762 [0x800B] [script:53 30][box:speech]이런 때 쓸데없는 수고는[br]시키지 말아 줘
+  0x00A4D84C [0x800B] [script:C7 30]싼티 나는 얼굴[opt]답게[br]현상금도 싸군…
+  --- context: 0x800B -> 0x00B4 ---
+  0x00A4DD0C [0x00B4] [script:3E 33][box:system]이[opt]름[opt]그라비스[opt][opt]코프스[br]보[opt]수[opt]2160G[br]위치[opt]고철 더미[br]특기[opt]포이즌 윈드
+  0x00A4DD98 [0x00B4] [script:7D 33][box:system]이[opt]름[opt]SA-200SP[br]보[opt]수[opt]2115G[br]위치[opt]?[br]특기[opt]스피드 다운
+  0x00A4DDFC [0x00B4] [script:B6 33][box:system]이[opt]름[opt]재컬[opt][opt]아누비스[br]보[opt]수[opt]3330G[br]위치[opt]로말리아 성벽 주변[br]특기[opt]홀리 브레스
+  0x00A4DE6E [0x00B4] [script:F0 33][box:system]이[opt]름[opt]드라로슈[opt]다크 위저드[br]보[opt]수[opt]2475G[br]위치[opt]클레니아 섬 내[br]특기[opt]윈드 슬래셔
+  0x00A4DEEE [0x00B4] [script:17 34][box:system][br]このモンスターは、ハンティングされました

@@ -1,0 +1,804 @@
+# SH00.STG — 742 dialogues, 49 templates (0 bare, 0 missed, 239 orphan menus)
+
+  0x000B423A [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해보시겠습니까?[br][opt]예[br][opt]아니오[box:close]
+  0x000B47DE [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
+  0x000B4808 [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x000B4832 [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나가시겠습니까?[br][opt]예[br][opt]아니오[box:close]
+  0x000B485E [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x000B48A6 [0x00A9] [script:4B 03][box:system]워프 존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+  --- context: 0x00A9 -> 0x00B4 ---
+  0x000B4FF8 [0x00B4] [script:E8 06][box:close]식전 회장
+  0x000B5032 [0x00B4] [script:05 07][box:close]히엔 격납고
+  0x000B51CC [0x00B4] [script:D1 07][box:close]プロディアス
+  0x000B5242 [0x00B4] [script:0D 08][box:close]알디아 공항
+  0x000B5320 [0x00B4] [script:7A 08]알디아 공항
+  0x000B560C [0x00B4] [script:F0 09]윌의 바위터
+  0x000B5708 [0x00B4] [script:6D 0A]폐허의 마을
+  0x000B58FC [0x00B4] [script:68 0B]식전 회장
+  0x000B59F8 [0x00B4] [script:E6 0B]히엔 격납고
+  0x000B5B04 [0x00B4] [script:6C 0C]알디아 공항
+  0x000B5DF0 [0x00B4] [script:E2 0D]윌의 바위터
+  0x000B5EEC [0x00B4] [script:5F 0E]폐허의 마을
+  0x000B60E0 [0x00B4] [script:5A 0F]식전 회장
+  0x000B61DC [0x00B4] [script:D8 0F]히엔 격납고
+  0x000B62DE [0x00B4] [script:59 10]알디아 공항
+  0x000B65CA [0x00B4] [script:CF 11]윌의 바위터
+  0x000B66C6 [0x00B4] [script:4C 12]폐허의 마을
+  0x000B68BA [0x00B4] [script:47 13]식전 회장
+  0x000B69B6 [0x00B4] [script:C5 13]히엔 격납고
+  0x000B6AB8 [0x00B4] [script:46 14]알디아 공항
+  0x000B6DA4 [0x00B4] [script:BC 15]윌의 바위터
+  0x000B6EA0 [0x00B4] [script:39 16]폐허의 마을
+  0x000B7094 [0x00B4] [script:34 17]식전 회장
+  0x000B7190 [0x00B4] [script:B2 17]히엔 격납고
+  0x000B729E [0x00B4] [script:39 18]알디아 공항
+  0x000B758A [0x00B4] [script:AF 19]윌의 바위터
+  0x000B7686 [0x00B4] [script:2C 1A]폐허의 마을
+  0x000B787A [0x00B4] [script:27 1B]히엔 격납고
+  0x000B797C [0x00B4] [script:A8 1B]알디아 공항
+  0x000B7B72 [0x00B4] [script:A4 1C]갈아노의 저택
+  0x000B7C70 [0x00B4] [script:22 1D]윌의 바위터
+  0x000B7D6C [0x00B4] [script:9F 1D]폐허의 마을
+  0x000B7F60 [0x00B4] [script:9A 1E]히엔 격납고
+  0x000B8074 [0x00B4] [script:24 1F]알디아 공항
+  0x000B826A [0x00B4] [script:1F 20]윌의 바위터
+  0x000B8366 [0x00B4] [script:9C 20]폐허의 마을
+  0x000B855A [0x00B4] [script:97 21]히엔 격납고
+  0x000B8660 [0x00B4] [script:1A 22]알디아 공항
+  0x000B894C [0x00B4] [script:90 23]윌의 바위터
+  0x000B8A48 [0x00B4] [script:0D 24]폐허의 마을
+  0x000B8C3C [0x00B4] [script:08 25]식전 회장
+  0x000B8D38 [0x00B4] [script:86 25]히엔 격납고
+  0x000B8E44 [0x00B4] [script:0C 26]알디아 공항
+  0x000B9130 [0x00B4] [script:82 27]윌의 바위터
+  0x000B922C [0x00B4] [script:FF 27]폐허의 마을
+  0x000B9420 [0x00B4] [script:FA 28]식전 회장
+  0x000B951C [0x00B4] [script:78 29]히엔 격납고
+  0x000B961E [0x00B4] [script:F9 29]알디아 공항
+  0x000B990A [0x00B4] [script:6F 2B]윌의 바위터
+  0x000B9A06 [0x00B4] [script:EC 2B]폐허의 마을
+  0x000B9BFA [0x00B4] [script:E7 2C]식전 회장
+  0x000B9CF6 [0x00B4] [script:65 2D]히엔 격납고
+  0x000B9DF8 [0x00B4] [script:E6 2D]알디아 공항
+  0x000BA0E4 [0x00B4] [script:5C 2F]윌의 바위터
+  0x000BA1E0 [0x00B4] [script:D9 2F]폐허의 마을
+  0x000BA3D4 [0x00B4] [script:D4 30]식전 회장
+  0x000BA4D0 [0x00B4] [script:52 31]히엔 격납고
+  0x000BA5E4 [0x00B4] [script:DC 31]알디아 공항
+  0x000BA7DA [0x00B4] [script:D7 32]윌의 바위터
+  0x000BA8D6 [0x00B4] [script:54 33]폐허의 마을
+  0x000BAACA [0x00B4] [script:4F 34]히엔 격납고
+  0x000BABD0 [0x00B4] [script:D2 34]알디아 공항
+  0x000BADC6 [0x00B4] [script:CE 35]갈아노의 저택
+  0x000BAEC4 [0x00B4] [script:4C 36]윌의 바위터
+  0x000BAFC0 [0x00B4] [script:C9 36]폐허의 마을
+  0x000BB1B4 [0x00B4] [script:C4 37]식전 회장
+  0x000BB2B0 [0x00B4] [script:42 38]히엔 격납고
+  0x000BB3AC [0x00B4] [script:BF 38]알디아 다리
+  0x000BB4D4 [0x00B4] [script:53 39]알디아 다리
+  0x000BB5DE [0x00B4] [script:D7 39]빈집
+  0x000BB6E6 [0x00B4] [script:5F 3A]미스터 덱스의 저택
+  0x000BB7F6 [0x00B4] [script:E7 3A]미스터 덱스의 저택
+  0x000BB8F8 [0x00B4] [script:64 3B]빈집
+  0x000BB9F2 [0x00B4] [script:E5 3B]미스터 덱스의 저택
+  --- context: 0x00B4 -> 0xFFFE ---
+  0x000BBB30 [0xFFFE] [script:88 3C]돌아가는 건 위험해[br]그만두자
+  0x000BBB7C [0xFFFE] [script:AB 3C]지금 돌아가면 잡힐 거야
+  0x000BBBC2 [0xFFFE] [script:CC 3C]여기는 위험한 것 같다
+  0x000BBC40 [0xFFFE] [script:0C 3D]이런 곳에 볼일은 없어
+  --- context: 0xFFFE -> 0x0006 ---
+  0x000BBC84 [0x0006] [script:2D 3D]여기에는 볼일이 없어
+  0x000BBCC6 [0x0006] [script:4F 3D]이런 곳에 볼일은 없다
+  --- context: 0x0006 -> 0xFFFE ---
+  0x000BBD34 [0xFFFE] [script:86 3D]프로디아스에 안 가는 거야?
+  --- context: 0xFFFE -> 0x00A9 ---
+  0x000BBDAA [0x00A9] [script:CB 3D]「동 알디아」를 나가시겠습니까?[br][opt]예[br][opt]아니오
+  0x000BBEAC [0x00A9] [script:55 3E]「동 알디아」를 나가시겠습니까?[br][opt]예[br][opt]아니오[br][opt]실버 노아 안으로 들어간다
+  0x000BBFBA [0x00A9] [script:D3 3E]「프로디아스」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x000BC06A [0x00A9] [script:2D 3F]「갈아노의 저택」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x000BC128 [0x00A9] [script:8B 3F]「윌의 바위터」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x000BC1DA [0x00A9] [script:E4 3F]「폐허의 마을」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x000BC28C [0x00A9] [script:3C 40]「인디고스」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x000BC33C [0x00A9] [script:95 40]「식전 회장」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x000BC3EE [0x00A9] [script:ED 40]「인디고스」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x000BC49E [0x00A9] [script:46 41]「히엔 격납고」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x000BC55A [0x00A9] [script:A4 41]「알디아 다리」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x000BC60C [0x00A9] [script:FC 41]「빈집」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x000BC702 [0x00A9] [script:7A 42]「미스터 덱스의 저택」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  --- context: 0x00A9 -> 0x8008 ---
+  0x0015F2BE [0x8008] [script:D0 19]バなれちテデイちすすゾたロヌモぅ[opt]だぅるEと
+  --- context: 0x8008 -> 0x00A9 ---
+  0x0017733E [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해보시겠습니까?[br][opt]예[br][opt]아니오[box:close]
+  0x001778E2 [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
+  0x0017790C [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x00177936 [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나가시겠습니까?[br][opt]예[br][opt]아니오[box:close]
+  0x00177962 [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x001779AA [0x00A9] [script:4B 03][box:system]워프 존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+  --- context: 0x00A9 -> 0x00B4 ---
+  0x00177EDA [0x00B4] [script:D7 05]비행선 착륙 지점
+  0x00177FDA [0x00B4] [script:54 06]살바 사막
+  0x001780D6 [0x00B4] [script:D5 06]비행선 착륙 지점
+  0x001781D6 [0x00B4] [script:52 07]살바 사막
+  0x001782D0 [0x00B4] [script:CF 07]돌아오지 못하는 숲
+  0x001783CC [0x00B4] [script:50 08]비행선 착륙 지점
+  0x001784CC [0x00B4] [script:CD 08]살바 사막
+  0x001785C6 [0x00B4] [script:4A 09]돌아오지 못하는 숲
+  0x001786C0 [0x00B4] [script:C6 09]하얀 집
+  0x001787BA [0x00B4] [script:47 0A]비행선 착륙 지점
+  0x001788BA [0x00B4] [script:C4 0A]살바 사막
+  0x001789B4 [0x00B4] [script:41 0B]돌아오지 못하는 숲
+  --- context: 0x00B4 -> 0x00A9 ---
+  0x00178AB0 [0x00A9] [script:CC 0B]「서 알디아」를 나가시겠습니까?[br][opt]예[br][opt]아니오
+  0x00178C9E [0x00A9] [script:C4 0C]「살바 사막」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x00178D58 [0x00A9] [script:21 0D]「돌아오지 못하는 숲」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x00178E0E [0x00A9] [script:7B 0D]「하얀 집」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x00178EC2 [0x00A9] [script:DE 0D]「서 알디아」를 나가시겠습니까?[br][opt]예[br][opt]아니오[br][opt]실버 노아 안으로 들어간다
+  0x00232E96 [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해보시겠습니까?[br][opt]예[br][opt]아니오[box:close]
+  0x0023343A [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
+  0x00233464 [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x0023348E [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나가시겠습니까?[br][opt]예[br][opt]아니오[box:close]
+  0x002334BA [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x00233502 [0x00A9] [script:4B 03][box:system]워프 존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+  --- context: 0x00A9 -> 0x00B4 ---
+  0x00233A9C [0x00B4] [script:08 06]유드의 마을
+  0x00233B94 [0x00B4] [script:86 06]봉인의 유적
+  0x00233C90 [0x00B4] [script:03 07]합성소
+  0x00233D8A [0x00B4] [script:80 07]합성소
+  0x00233E8E [0x00B4] [script:03 08]임시 공항
+  0x00233F8A [0x00B4] [script:7F 08]유드의 마을
+  0x00234082 [0x00B4] [script:FD 08]봉인의 유적
+  0x0023417E [0x00B4] [script:7A 09]합성소
+  0x00234278 [0x00B4] [script:F7 09]합성소
+  0x00234386 [0x00B4] [script:7F 0A]임시 공항
+  0x00234482 [0x00B4] [script:FB 0A]유드의 마을
+  0x0023457A [0x00B4] [script:79 0B]봉인의 유적
+  0x00234676 [0x00B4] [script:F6 0B]합성소
+  0x00234770 [0x00B4] [script:73 0C]합성소
+  0x00234874 [0x00B4] [script:F6 0C]임시 공항
+  0x00234970 [0x00B4] [script:72 0D]유드의 마을
+  0x00234A68 [0x00B4] [script:F0 0D]봉인의 유적
+  0x00234B64 [0x00B4] [script:6D 0E]합성소
+  0x00234C5E [0x00B4] [script:EA 0E]합성소
+  --- context: 0x00B4 -> 0x00A9 ---
+  0x00234D62 [0x00A9] [script:78 0F]「야고스 섬」을 나가시겠습니까?[br][opt]예[br][opt]아니오
+  0x00234F4A [0x00A9] [script:6D 10]「유드의 마을」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x00234FBE [0x00A9] [script:A9 10]「봉인의 유적」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x00235036 [0x00A9] [script:E4 10]「임시 공항」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x002350E8 [0x00A9] [script:3C 11]「합성소」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x0023515C [0x00A9] [script:7E 11]「야고스 섬」을 나가시겠습니까?[br][opt]예[br][opt]아니오[br][opt]실버 노아 안으로 들어간다
+  0x00235278 [0x00A9] [script:05 12]「진바라의 풍혈」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x002352EE [0x00A9] [script:3F 12]「잠수함」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  --- context: 0x00A9 -> 0x00B4 ---
+  0x002353E8 [0x00B4] [script:B0 12]진바라의 풍혈
+  0x002354F2 [0x00B4] [script:33 13]잠수함
+  --- context: 0x00B4 -> 0x00A9 ---
+  0x002EE79E [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해보시겠습니까?[br][opt]예[br][opt]아니오[box:close]
+  0x002EED42 [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
+  0x002EED6C [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x002EED96 [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나가시겠습니까?[br][opt]예[br][opt]아니오[box:close]
+  0x002EEDC2 [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x002EEE0A [0x00A9] [script:4B 03][box:system]워프 존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+  --- context: 0x00A9 -> 0x00B4 ---
+  0x002EF5CA [0x00B4] [script:1D 07]스메리아 공항
+  0x002EF7C0 [0x00B4] [script:18 08]팔렌시아 성터
+  0x002EF8BC [0x00B4] [script:95 08]라우스 평야
+  0x002EF9B6 [0x00B4] [script:12 09]콜보 평원
+  0x002EFAB0 [0x00B4] [script:8F 09]쿠이나의 언덕
+  0x002EFCA4 [0x00B4] [script:8A 0A]스메리아 공항
+  0x002EFE9A [0x00B4] [script:85 0B]팔렌시아 성터
+  0x002EFF96 [0x00B4] [script:02 0C]라우스 평야
+  0x002F0090 [0x00B4] [script:7F 0C]콜보 평원
+  0x002F018A [0x00B4] [script:FC 0C]쿠이나의 언덕
+  0x002F0484 [0x00B4] [script:7A 0E]스메리아 공항
+  0x002F067A [0x00B4] [script:75 0F]팔렌시아 성터
+  0x002F0776 [0x00B4] [script:F2 0F]라우스 평야
+  0x002F0870 [0x00B4] [script:6F 10]콜보 평원
+  0x002F096A [0x00B4] [script:EC 10]쿠이나의 언덕
+  0x002F0C5A [0x00B4] [script:65 12]스메리아 공항
+  0x002F0E50 [0x00B4] [script:60 13]팔렌시아 성터
+  0x002F0F4C [0x00B4] [script:DD 13]라우스 평야
+  0x002F1046 [0x00B4] [script:5A 14]콜보 평원
+  0x002F1140 [0x00B4] [script:D7 14]쿠이나의 언덕
+  --- context: 0x00B4 -> 0x00A9 ---
+  0x002F123C [0x00A9] [script:62 15]「팔렌시아」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x002F142A [0x00A9] [script:5A 16]「팔렌시아 타워」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x002F1518 [0x00A9] [script:D1 16]「스메리아 공항」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x002F15CA [0x00A9] [script:28 17]「스메리아」를 나가시겠습니까?[br][opt]예[br][opt]아니오
+  0x002F1678 [0x00A9] [script:81 17]「라우스 평야」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x002F1796 [0x00A9] [script:10 18]「콜보 평원」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x002F184E [0x00A9] [script:6B 18]「쿠이나의 언덕」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x002F191C [0x00A9] [script:D2 18]「다운타운」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x002F19D2 [0x00A9] [script:2F 19]「팔렌시아 성터」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x002F1A58 [0x00A9] [script:73 19]어느 비행선에 탑승하시겠습니까?[br][opt]그레이시누행[br][opt]그만둔다
+  --- context: 0x00A9 -> 0xFFFE ---
+  0x002F1B18 [0xFFFE] [script:C6 19]쿠쿠루를 두고 갈 수 없다
+  0x002F1B70 [0xFFFE] [script:F2 19]쿠쿠루를 두고 갈 수 없어
+  0x002F1BC8 [0xFFFE] [script:1F 1A]쿠쿠루를 두고 가면 안 되지
+  0x002F1C22 [0xFFFE] [script:4D 1A]쿠쿠루를 두고 갈 수는 없다
+  0x002F1C7E [0xFFFE] [script:7A 1A]쿠쿠루를 두고 가면 안 되겠구먼
+  0x002F1CD8 [0xFFFE] [script:A6 1A]쿠쿠루를 두고 갈 수 없다
+  0x002F1D30 [0xFFFE] [script:D4 1A]쿠쿠루 씨를 두고 가면 안 돼요
+  0x002F1D8C [0xFFFE] [script:01 1B]쿠쿠루를 두고 가면 안 돼
+  0x002F1DE6 [0xFFFE] [script:2F 1B]쿠쿠루를 두고 갈 수는 없다
+  0x002F1E42 [0xFFFE] [script:59 1B]쿠쿠루가 없잖아?
+  0x002F1E96 [0xFFFE] [script:85 1B]쿠쿠루를 두고 갈 수 없어
+  0x002F1EEE [0xFFFE] [script:B2 1B]쿠쿠루를 두고 가면 안 되겠어
+  --- context: 0xFFFE -> 0x00A9 ---
+  0x003ABC06 [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해보시겠습니까?[br][opt]예[br][opt]아니오[box:close]
+  0x003AC1AA [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
+  0x003AC1D4 [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x003AC1FE [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나가시겠습니까?[br][opt]예[br][opt]아니오[box:close]
+  0x003AC22A [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x003AC272 [0x00A9] [script:4B 03][box:system]워프 존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+  --- context: 0x00A9 -> 0x00B4 ---
+  0x003AC768 [0x00B4] [script:B7 05]크레니아의 마을
+  0x003AC862 [0x00B4] [script:35 06]단련의 바위터
+  0x003AC95E [0x00B4] [script:B2 06]무인의 저택
+  0x003ACA58 [0x00B4] [script:30 07]크레니아 공항
+  0x003ACB56 [0x00B4] [script:AE 07]크레니아의 마을
+  0x003ACC50 [0x00B4] [script:2C 08]단련의 바위터
+  0x003ACD4C [0x00B4] [script:A9 08]무인의 저택
+  0x003ACE46 [0x00B4] [script:27 09]크레니아 공항
+  0x003ACF42 [0x00B4] [script:A3 09]시간의 숲
+  0x003AD03C [0x00B4] [script:21 0A]크레니아의 마을
+  0x003AD136 [0x00B4] [script:9F 0A]단련의 바위터
+  0x003AD232 [0x00B4] [script:1C 0B]무인의 저택
+  0x003AD32C [0x00B4] [script:9A 0B]크레니아 공항
+  0x003AD42A [0x00B4] [script:18 0C]크레니아의 마을
+  0x003AD524 [0x00B4] [script:96 0C]단련의 바위터
+  0x003AD620 [0x00B4] [script:13 0D]무인의 저택
+  0x003AD71A [0x00B4] [script:91 0D]크레니아 공항
+  0x003AD816 [0x00B4] [script:0D 0E]시간의 숲
+  0x003AD910 [0x00B4] [script:8B 0E]크레니아의 마을
+  0x003ADA0A [0x00B4] [script:09 0F]단련의 바위터
+  0x003ADB06 [0x00B4] [script:86 0F]무인의 저택
+  0x003ADC00 [0x00B4] [script:04 10]크레니아 공항
+  0x003ADCFE [0x00B4] [script:82 10]크레니아의 마을
+  0x003ADDF8 [0x00B4] [script:00 11]단련의 바위터
+  0x003ADEF4 [0x00B4] [script:7D 11]무인의 저택
+  0x003ADFEE [0x00B4] [script:FB 11]크레니아 공항
+  0x003AE0EA [0x00B4] [script:77 12]시간의 숲
+  --- context: 0x00B4 -> 0x00A9 ---
+  0x003AE1E4 [0x00A9] [script:03 13]「크레니아의 마을」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x003AE3D0 [0x00A9] [script:FA 13]「단련의 바위터」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x003AE484 [0x00A9] [script:53 14]「무인의 저택」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x003AE536 [0x00A9] [script:B3 14]「크레니아」를 나가시겠습니까?[br][opt]예[br][opt]아니오[br][opt]실버 노아 안으로 들어간다
+  --- context: 0x00A9 -> 0x0006 ---
+  0x003AE642 [0x0006] [script:23 15]들어갈 수 없다
+  --- context: 0x0006 -> 0x00A9 ---
+  0x003AE67C [0x00A9] [script:4F 15]「크레니아 공항」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x003AE72E [0x00A9] [script:A7 15]「시간의 숲」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x00464ACE [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해보시겠습니까?[br][opt]예[br][opt]아니오[box:close]
+  0x0046507E [0x00A9] [script:ED 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
+  0x004650A8 [0x00A9] [script:02 03][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x004650D2 [0x00A9] [script:18 03][box:system]출구입니다. 밖으로 나가시겠습니까?[br][opt]예[br][opt]아니오[box:close]
+  0x004650FE [0x00A9] [script:2B 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x00465146 [0x00A9] [script:51 03][box:system]워프 존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+  --- context: 0x00A9 -> 0x00B4 ---
+  0x0046573E [0x00B4] [script:3E 06]고철의 마을
+  0x00465838 [0x00B4] [script:BC 06]고철 적치장
+  0x00465A30 [0x00B4] [script:B8 07]로말리아 공항
+  0x00465B2C [0x00B4] [script:36 08]고철의 큰 구멍
+  0x00465C2A [0x00B4] [script:B4 08]고철의 마을
+  0x00465D24 [0x00B4] [script:32 09]고철 적치장
+  0x00465F1C [0x00B4] [script:2E 0A]로말리아 공항
+  0x00466018 [0x00B4] [script:AC 0A]고철의 큰 구멍
+  0x00466116 [0x00B4] [script:2A 0B]고철의 마을
+  0x00466210 [0x00B4] [script:A8 0B]고철 적치장
+  0x00466408 [0x00B4] [script:A4 0C]로말리아 공항
+  0x00466504 [0x00B4] [script:22 0D]고철의 큰 구멍
+  0x00466602 [0x00B4] [script:A0 0D]고철의 마을
+  0x004666FC [0x00B4] [script:1E 0E]고철 적치장
+  0x004668F4 [0x00B4] [script:1A 0F]로말리아 공항
+  0x004669F0 [0x00B4] [script:98 0F]고철의 큰 구멍
+  0x00466AEE [0x00B4] [script:16 10]고철의 마을
+  0x00466BE8 [0x00B4] [script:94 10]고철 적치장
+  0x00466DE0 [0x00B4] [script:90 11]로말리아 공항
+  0x00466EDC [0x00B4] [script:0E 12]고철의 큰 구멍
+  0x00466FDA [0x00B4] [script:8C 12]고철의 마을
+  0x004670D4 [0x00B4] [script:0A 13]고철 적치장
+  0x004672CC [0x00B4] [script:06 14]로말리아 공항
+  0x004673C8 [0x00B4] [script:84 14]고철의 큰 구멍
+  0x004674C6 [0x00B4] [script:02 15]고철의 마을
+  0x004675C0 [0x00B4] [script:80 15]고철 적치장
+  0x004677B8 [0x00B4] [script:7C 16]로말리아 공항
+  0x004678B4 [0x00B4] [script:FA 16]고철의 큰 구멍
+  0x004679B2 [0x00B4] [script:78 17]고철의 마을
+  0x00467AAC [0x00B4] [script:F6 17]고철 적치장
+  0x00467CA4 [0x00B4] [script:F2 18]로말리아 공항
+  0x00467DA0 [0x00B4] [script:70 19]고철의 큰 구멍
+  0x00467E9E [0x00B4] [script:EE 19]고철의 마을
+  0x00467F98 [0x00B4] [script:6C 1A]고철 적치장
+  0x00468190 [0x00B4] [script:68 1B]로말리아 공항
+  0x0046828C [0x00B4] [script:E6 1B]고철의 큰 구멍
+  0x0046838A [0x00B4] [script:64 1C]고철의 마을
+  0x00468484 [0x00B4] [script:E2 1C]고철 적치장
+  0x0046867C [0x00B4] [script:DE 1D]로말리아 공항
+  0x00468778 [0x00B4] [script:5C 1E]고철의 큰 구멍
+  0x00468876 [0x00B4] [script:DA 1E]고철의 마을
+  0x00468970 [0x00B4] [script:58 1F]고철 적치장
+  0x00468B68 [0x00B4] [script:54 20]로말리아 공항
+  0x00468C64 [0x00B4] [script:D2 20]고철의 큰 구멍
+  0x00468D62 [0x00B4] [script:50 21]고철의 마을
+  0x00468E5C [0x00B4] [script:CE 21]고철 적치장
+  0x00469054 [0x00B4] [script:CA 22]로말리아 공항
+  0x00469150 [0x00B4] [script:48 23]고철의 큰 구멍
+  0x0046924E [0x00B4] [script:C6 23]고철의 마을
+  0x00469348 [0x00B4] [script:44 24]고철 적치장
+  0x00469540 [0x00B4] [script:40 25]로말리아 공항
+  0x0046963C [0x00B4] [script:BE 25]고철의 큰 구멍
+  --- context: 0x00B4 -> 0x00A9 ---
+  0x0046973A [0x00A9] [script:4A 26]「고철의 마을」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x00469946 [0x00A9] [script:51 27]「고철 적치장」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x004699FA [0x00A9] [script:AA 27]「로말리아 터널」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x00469AAC [0x00A9] [script:0A 28]「로말리아」를 나가시겠습니까?[br][opt]예[br][opt]아니오[br][opt]실버 노아 안으로 들어간다
+  0x00469BB8 [0x00A9] [script:89 28]「로말리아 터널」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x00469C6A [0x00A9] [script:E2 28]「로말리아 터널」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x00469D1C [0x00A9] [script:3B 29]「로말리아 공항」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  --- context: 0x00A9 -> 0x0006 ---
+  0x00469DCE [0x0006] [script:8A 29]지금 돌아갈 수 없다
+  0x00469E8A [0x0006] [script:E9 29]당분간 가까이 안 가는 게 좋겠어
+  0x00469ED0 [0x0006] [script:0C 2A]당분간 가까이 안 가는 게 좋겠네
+  0x00469F18 [0x0006] [script:2D 2A]가까이 안 가는 게 좋겠다
+  0x00469F5A [0x0006] [script:4F 2A]쵸코, 가기 싫어!
+  0x00469F9E [0x0006] [script:71 2A]가까이 안 가는 게 좋겠구먼
+  --- context: 0x0006 -> 0x00A9 ---
+  0x00469FE2 [0x00A9] [script:9E 2A]「고철의 마을」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  --- context: 0x00A9 -> 0x0006 ---
+  0x0046A094 [0x0006] [script:EF 2A]이런 일을 하고 있을 때가 아니다
+  --- context: 0x0006 -> 0x00A9 ---
+  0x0046A0DC [0x00A9] [script:1B 2B]「로말리아 터널」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x0046A18E [0x00A9] [script:74 2B]「로말리아 터널」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x0046A254 [0x00A9] [script:D7 2B]「로말리아 터널」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x0046A306 [0x00A9] [script:30 2C]「로말리아 터널」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x0046A3CC [0x00A9] [script:94 2C]「고철의 큰 구멍」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x00522CAE [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해보시겠습니까?[br][opt]예[br][opt]아니오[box:close]
+  0x00523252 [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
+  0x0052327C [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x005232A6 [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나가시겠습니까?[br][opt]예[br][opt]아니오[box:close]
+  0x005232D2 [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x0052331A [0x00A9] [script:4B 03][box:system]워프 존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+  --- context: 0x00A9 -> 0x00B4 ---
+  0x00523B38 [0x00B4] [script:4C 07]포레스 공항
+  0x00523C34 [0x00B4] [script:C9 07]칼미오의 언덕
+  0x00523D2E [0x00B4] [script:47 08]펠스 고원
+  0x00523E2A [0x00B4] [script:C6 08]마더 클레아의 동굴
+  0x00523F28 [0x00B4] [script:44 09]마더 클레아의 저택
+  0x00524024 [0x00B4] [script:C1 09]기아 사원
+  0x00524312 [0x00B4] [script:39 0B]포레스 공항
+  0x0052440E [0x00B4] [script:B6 0B]칼미오의 언덕
+  0x00524508 [0x00B4] [script:34 0C]펠스 고원
+  0x00524604 [0x00B4] [script:B3 0C]마더 클레아의 동굴
+  0x00524702 [0x00B4] [script:31 0D]마더 클레아의 저택
+  0x005247FE [0x00B4] [script:AE 0D]기아 사원
+  0x00524AEC [0x00B4] [script:26 0F]포레스 공항
+  0x00524BE8 [0x00B4] [script:A3 0F]칼미오의 언덕
+  0x00524CE2 [0x00B4] [script:21 10]펠스 고원
+  0x00524DDE [0x00B4] [script:A0 10]마더 클레아의 동굴
+  0x00524EDC [0x00B4] [script:1E 11]마더 클레아의 저택
+  0x005250CE [0x00B4] [script:16 12]기아 사원
+  0x005253BC [0x00B4] [script:8E 13]포레스 공항
+  0x005254B8 [0x00B4] [script:0B 14]칼미오의 언덕
+  0x005255B2 [0x00B4] [script:89 14]펠스 고원
+  0x005256AE [0x00B4] [script:08 15]마더 클레아의 동굴
+  0x005257AC [0x00B4] [script:86 15]마더 클레아의 저택
+  0x005258A8 [0x00B4] [script:03 16]기아 사원
+  0x00525B96 [0x00B4] [script:7B 17]포레스 공항
+  0x00525C92 [0x00B4] [script:F8 17]칼미오의 언덕
+  0x00525D8C [0x00B4] [script:76 18]펠스 고원
+  0x00525E88 [0x00B4] [script:F5 18]마더 클레아의 동굴
+  0x00525F86 [0x00B4] [script:73 19]마더 클레아의 저택
+  0x00526082 [0x00B4] [script:F0 19]기아 사원
+  0x00526370 [0x00B4] [script:68 1B]포레스 공항
+  0x0052646C [0x00B4] [script:E5 1B]칼미오의 언덕
+  0x00526566 [0x00B4] [script:63 1C]펠스 고원
+  0x00526662 [0x00B4] [script:E2 1C]마더 클레아의 동굴
+  0x00526760 [0x00B4] [script:60 1D]마더 클레아의 저택
+  --- context: 0x00B4 -> 0x00A9 ---
+  0x00526862 [0x00A9] [script:EC 1D]「라뮬」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x00526A12 [0x00A9] [script:C4 1E]「호른」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x00526A8C [0x00A9] [script:04 1F]「포레스 공항」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x00526B0C [0x00A9] [script:41 1F]「???」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x00526BCC [0x00A9] [script:AA 1F]「포레스」를 나가시겠습니까?[br][opt]예[br][opt]아니오[br][opt]실버 노아 안으로 들어간다
+  0x00526CE0 [0x00A9] [script:2E 20]「포레스 공항」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x00526DB0 [0x00A9] [script:93 20]「호른」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x00526E2A [0x00A9] [script:D0 20]「호른」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x00526EE4 [0x00A9] [script:2F 21]「칼미오의 언덕」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x00526F68 [0x00A9] [script:71 21]「펠스 고원」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x00527000 [0x00A9] [script:BF 21]「마더 클레아의 동굴」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x00527088 [0x00A9] [script:0B 22]「마더 클레아의 동굴」에 들어가시겠습니까?[br][opt]동굴에 들어간다[br][opt]저택으로 간다[br][opt]그만둔다
+  --- context: 0x00A9 -> 0x00B4 ---
+  0x0052713A [0x00B4] [script:52 22]여기에 와 있을 때가 아니잖아
+  0x0052716A [0x00B4] [script:6F 22]어서 해야 할 일을[br]처리해야지
+  --- context: 0x00B4 -> 0x00A9 ---
+  0x005271C6 [0x00A9] [script:9E 22]「호른」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x00527248 [0x00A9] [script:DF 22]「호른」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x00527302 [0x00A9] [script:3E 23]「기아 사원」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x00527380 [0x00A9] [script:86 23]「마더 클레아의 저택」에 들어가시겠습니까?[br][opt]저택에 들어간다[br][opt]동굴로 돌아간다[br][opt]그만둔다
+  --- context: 0x00A9 -> 0x0006 ---
+  0x00527436 [0x0006] [script:D0 23]지금 이 나라를 떠날 수는 없다
+  0x00527480 [0x0006] [script:F5 23]그런 일을 하고 있을 때가 아니다
+  --- context: 0x0006 -> 0x00A9 ---
+  0x005274CA [0x00A9] [script:21 24]「숲 외곽」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  --- context: 0x00A9 -> 0x00B4 ---
+  0x005276F0 [0x00B4] [script:26 25]숲 외곽
+  --- context: 0x00B4 -> 0x00A9 ---
+  0x005DF782 [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해보시겠습니까?[br][opt]예[br][opt]아니오[box:close]
+  0x005DFD26 [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
+  0x005DFD50 [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x005DFD7A [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나가시겠습니까?[br][opt]예[br][opt]아니오[box:close]
+  0x005DFDA6 [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x005DFDEE [0x00A9] [script:4B 03][box:system]워프 존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+  --- context: 0x00A9 -> 0x00B4 ---
+  0x005E0336 [0x00B4] [script:E2 05]그레이시누 공항
+  0x005E052C [0x00B4] [script:DA 06]라마다 사원
+  0x005E0624 [0x00B4] [script:58 07]봉인의 유적
+  0x005E0720 [0x00B4] [script:D4 07]라마다 산
+  0x005E0818 [0x00B4] [script:51 08]노얌 원야
+  0x005E0912 [0x00B4] [script:CE 08]아난 대지
+  0x005E0A0C [0x00B4] [script:4C 09]루탈 평야
+  0x005E0B0A [0x00B4] [script:CC 09]그레이시누 공항
+  0x005E0D00 [0x00B4] [script:C4 0A]라마다 사원
+  0x005E0DF8 [0x00B4] [script:42 0B]봉인의 유적
+  0x005E0EF4 [0x00B4] [script:BE 0B]라마다 산
+  0x005E0FEC [0x00B4] [script:3B 0C]노얌 원야
+  0x005E10E6 [0x00B4] [script:B8 0C]아난 대지
+  0x005E11E0 [0x00B4] [script:36 0D]루탈 평야
+  0x005E12DC [0x00B4] [script:B2 0D]국경으로
+  0x005E13D6 [0x00B4] [script:32 0E]그레이시누 공항
+  0x005E15CC [0x00B4] [script:2A 0F]라마다 사원
+  0x005E16C4 [0x00B4] [script:A8 0F]봉인의 유적
+  0x005E17C0 [0x00B4] [script:24 10]라마다 산
+  0x005E18B8 [0x00B4] [script:A1 10]노얌 원야
+  0x005E19B2 [0x00B4] [script:1E 11]아난 대지
+  0x005E1AAC [0x00B4] [script:9C 11]루탈 평야
+  0x005E1BAA [0x00B4] [script:1C 12]그레이시누 공항
+  0x005E1DA0 [0x00B4] [script:14 13]라마다 사원
+  0x005E1E98 [0x00B4] [script:92 13]봉인의 유적
+  0x005E1F94 [0x00B4] [script:0E 14]라마다 산
+  0x005E208C [0x00B4] [script:8B 14]노얌 원야
+  0x005E2186 [0x00B4] [script:08 15]아난 대지
+  0x005E2280 [0x00B4] [script:86 15]루탈 평야
+  0x005E237E [0x00B4] [script:06 16]그레이시누 공항
+  0x005E2574 [0x00B4] [script:FE 16]라마다 사원
+  0x005E266C [0x00B4] [script:7C 17]봉인의 유적
+  0x005E2768 [0x00B4] [script:F8 17]라마다 산
+  0x005E2860 [0x00B4] [script:75 18]노얌 원야
+  0x005E295A [0x00B4] [script:F2 18]아난 대지
+  0x005E2A54 [0x00B4] [script:70 19]루탈 평야
+  0x005E2B52 [0x00B4] [script:F0 19]그레이시누 공항
+  0x005E2D48 [0x00B4] [script:E8 1A]라마다 사원
+  0x005E2E40 [0x00B4] [script:66 1B]봉인의 유적
+  0x005E2F3C [0x00B4] [script:E2 1B]라마다 산
+  0x005E3034 [0x00B4] [script:5F 1C]노얌 원야
+  0x005E312E [0x00B4] [script:DC 1C]아난 대지
+  0x005E3228 [0x00B4] [script:5A 1D]루탈 평야
+  --- context: 0x00B4 -> 0x00A9 ---
+  0x005E3326 [0x00A9] [script:EE 1D]「그레이시누」를 나가시겠습니까?[br][opt]예[br][opt]아니오[br][opt]실버 노아 안으로 들어간다
+  0x005E359A [0x00A9] [script:1E 1F]「페이사스」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x005E3654 [0x00A9] [script:7C 1F]「라마다 사원」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x005E370C [0x00A9] [script:DA 1F]「봉인의 유적」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x005E37C8 [0x00A9] [script:36 20]「라마다 산」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x005E3880 [0x00A9] [script:93 20]「노얌 원야」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x005E3940 [0x00A9] [script:F2 20]「아난 대지」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x005E39FE [0x00A9] [script:52 21]「루탈 평야」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x005E3ABE [0x00A9] [script:B1 21]「국경」으로 향하시겠습니까?[br][opt]예[br][opt]아니오
+  --- context: 0x00A9 -> 0x0006 ---
+  0x005E3BF4 [0x0006] [script:46 22]다른 나라에 가고 있을 때가 아니야
+  0x005E3C3E [0x0006] [script:6C 22]다른 나라에 가고 있을 때가 아니네
+  0x005E3C8C [0x0006] [script:8C 22]어디에도 안 간다!
+  0x005E3CCC [0x0006] [script:AE 22]쵸코, 가기 싫어!
+  0x005E3D10 [0x0006] [script:D4 22]아직 이 나라를 떠날 수는 없겠구먼
+  --- context: 0x0006 -> 0x00A9 ---
+  0x005E3D5C [0x00A9] [script:02 23]어느 비행선에 탑승하시겠습니까?[br][opt]스메리아행[br][opt]그만둔다
+  0x005E3E22 [0x00A9] [script:6B 23]어느 비행선에 탑승하시겠습니까?[br][opt]스메리아행[br][opt]니델행[br][opt]그만둔다
+  0x005E3F4A [0x00A9] [script:F9 23]「그레이시누 공항」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x0069DD96 [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해보시겠습니까?[br][opt]예[br][opt]아니오[box:close]
+  0x0069E33A [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
+  0x0069E364 [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x0069E38E [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나가시겠습니까?[br][opt]예[br][opt]아니오[box:close]
+  0x0069E3BA [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x0069E402 [0x00A9] [script:4B 03][box:system]워프 존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+  --- context: 0x00A9 -> 0x00B4 ---
+  0x0069E93E [0x00B4] [script:DB 05]브라키아 공항
+  0x0069EB30 [0x00B4] [script:D3 06]영주의 저택
+  0x0069ED20 [0x00B4] [script:CC 07]봉인의 유적
+  0x0069EE1C [0x00B4] [script:49 08]대장간
+  0x0069EF16 [0x00B4] [script:C6 08]자나그 평원
+  0x0069F012 [0x00B4] [script:45 09]브라키아 공항
+  0x0069F204 [0x00B4] [script:3D 0A]영주의 저택
+  0x0069F3F4 [0x00B4] [script:34 0B]반자 산
+  0x0069F4EC [0x00B4] [script:B2 0B]봉인의 유적
+  0x0069F5E8 [0x00B4] [script:2F 0C]대장간
+  0x0069F6E2 [0x00B4] [script:AC 0C]자나그 평원
+  0x0069F7DE [0x00B4] [script:2B 0D]브라키아 공항
+  0x0069F9D0 [0x00B4] [script:23 0E]영주의 저택
+  0x0069FBC0 [0x00B4] [script:1A 0F]반자 산
+  0x0069FCB8 [0x00B4] [script:98 0F]봉인의 유적
+  0x0069FDB4 [0x00B4] [script:15 10]대장간
+  0x0069FEAE [0x00B4] [script:92 10]자나그 평원
+  --- context: 0x00B4 -> 0x00A9 ---
+  0x0069FFB4 [0x00A9] [script:2A 11]「브라키아」를 나가시겠습니까?[br][opt]예[br][opt]아니오[br][opt]실버 노아 안으로 들어간다
+  0x006A01FA [0x00A9] [script:46 12]「브라키아 공항」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x006A02AC [0x00A9] [script:9D 12]「구즈」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x006A0366 [0x00A9] [script:FC 12]「영주의 저택」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x006A0420 [0x00A9] [script:57 13]「루와가」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x006A04D6 [0x00A9] [script:B3 13]「반자 산」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x006A058E [0x00A9] [script:11 14]「봉인의 유적」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  --- context: 0x00A9 -> 0xFFFE ---
+  0x006A064A [0xFFFE] [script:63 14]그루가를 두고 갈 수 없다
+  --- context: 0xFFFE -> 0x00A9 ---
+  0x006A068E [0x00A9] [script:8F 14]「대장간」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x006A0746 [0x00A9] [script:EC 14]「자나그 평원」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x0075B2F2 [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해보시겠습니까?[br][opt]예[br][opt]아니오[box:close]
+  0x0075B896 [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
+  0x0075B8C0 [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x0075B8EA [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나가시겠습니까?[br][opt]예[br][opt]아니오[box:close]
+  0x0075B916 [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x0075B95E [0x00A9] [script:4B 03][box:system]워프 존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+  --- context: 0x00A9 -> 0x00B4 ---
+  0x0075BE82 [0x00B4] [script:CF 05]아미그 공항
+  0x0075C074 [0x00B4] [script:C6 06]신의 탑
+  0x0075C16C [0x00B4] [script:44 07]봉인의 유적
+  0x0075C268 [0x00B4] [script:C1 07]마데타의 언덕
+  0x0075C362 [0x00B4] [script:40 08]알토라파스 황야
+  0x0075C462 [0x00B4] [script:BF 08]아미그 공항
+  0x0075C654 [0x00B4] [script:B8 09]봉인의 유적
+  0x0075C750 [0x00B4] [script:35 0A]마데타의 언덕
+  0x0075C84A [0x00B4] [script:B4 0A]알토라파스 황야
+  --- context: 0x00B4 -> 0x00A9 ---
+  0x0075C954 [0x00A9] [script:4C 0B]「아미그」를 나가시겠습니까?[br][opt]예[br][opt]아니오[br][opt]실버 노아 안으로 들어간다
+  0x0075CB9A [0x00A9] [script:68 0C]「아미그 공항」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x0075CC4C [0x00A9] [script:BF 0C]「모레아」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x0075CD06 [0x00A9] [script:1D 0D]「신의 탑」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x0075CDBE [0x00A9] [script:7B 0D]「봉인의 유적」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x0075CE7A [0x00A9] [script:D8 0D]「마데타의 언덕」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x0075CF3A [0x00A9] [script:39 0E]「알토라파스 황야」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x00815FCE [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해보시겠습니까?[br][opt]예[br][opt]아니오[box:close]
+  0x00816572 [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
+  0x0081659C [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x008165C6 [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나가시겠습니까?[br][opt]예[br][opt]아니오[box:close]
+  0x008165F2 [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x0081663A [0x00A9] [script:4B 03][box:system]워프 존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+  --- context: 0x00A9 -> 0x00B4 ---
+  0x00816CC4 [0x00B4] [script:82 06]밀마나 공항
+  0x00816EB8 [0x00B4] [script:7B 07]군본부
+  0x00816FB2 [0x00B4] [script:F8 07]니카라스의 숲
+  0x008170AC [0x00B4] [script:75 08]루와지의 숲
+  0x008171A6 [0x00B4] [script:F2 08]라젠의 늪
+  0x008172A2 [0x00B4] [script:71 09]밀마나 공항
+  0x00817496 [0x00B4] [script:6A 0A]군본부
+  0x00817590 [0x00B4] [script:E7 0A]니엔의 숲
+  0x0081768A [0x00B4] [script:64 0B]니카라스의 숲
+  0x00817784 [0x00B4] [script:E1 0B]루와지의 숲
+  0x0081787E [0x00B4] [script:5E 0C]라젠의 늪
+  0x0081797A [0x00B4] [script:DD 0C]밀마나 공항
+  0x00817B6E [0x00B4] [script:D6 0D]토요케의 숲
+  0x00817C68 [0x00B4] [script:53 0E]니엔의 숲
+  0x00817D62 [0x00B4] [script:D0 0E]니카라스의 숲
+  0x00817E5C [0x00B4] [script:4D 0F]루와지의 숲
+  0x00817F56 [0x00B4] [script:CA 0F]라젠의 늪
+  0x00818052 [0x00B4] [script:49 10]밀마나 공항
+  0x00818246 [0x00B4] [script:42 11]군본부
+  0x00818340 [0x00B4] [script:BF 11]니카라스의 숲
+  0x0081843A [0x00B4] [script:3C 12]루와지의 숲
+  0x00818534 [0x00B4] [script:B9 12]라젠의 늪
+  0x00818630 [0x00B4] [script:38 13]밀마나 공항
+  0x00818824 [0x00B4] [script:31 14]군본부
+  0x0081891E [0x00B4] [script:AE 14]니카라스의 숲
+  0x00818A18 [0x00B4] [script:2B 15]루와지의 숲
+  0x00818B12 [0x00B4] [script:A8 15]라젠의 늪
+  0x00818C0C [0x00B4] [script:25 16]니엔의 숲
+  0x00818D06 [0x00B4] [script:A3 16]열차포 진지
+  --- context: 0x00B4 -> 0x00A9 ---
+  0x00818E0E [0x00A9] [script:3B 17]「밀마나」를 나가시겠습니까?[br][opt]예[br][opt]아니오[br][opt]실버 노아 안으로 들어간다
+  0x00819054 [0x00A9] [script:55 18]「밀마나」를 나가시겠습니까?[br][opt]예[br][opt]아니오
+  0x00819102 [0x00A9] [script:AD 18]「아쟐」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x00819212 [0x00A9] [script:35 19]「군본부」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x008192CA [0x00A9] [script:92 19]「토요케의 숲」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x00819384 [0x00A9] [script:EE 19]「니엔의 숲」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x0081943C [0x00A9] [script:4C 1A]「열차포 진지」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x008194F8 [0x00A9] [script:A8 1A]「아쟐」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x008195B4 [0x00A9] [script:07 1B]「니카라스의 숲」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x00819678 [0x00A9] [script:68 1B]「루와지의 숲」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x0081973A [0x00A9] [script:C9 1B]「라젠의 늪」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x008D2CE6 [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해보시겠습니까?[br][opt]예[br][opt]아니오[box:close]
+  0x008D328A [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
+  0x008D32B4 [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x008D32DE [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나가시겠습니까?[br][opt]예[br][opt]아니오[box:close]
+  0x008D330A [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x008D3352 [0x00A9] [script:4B 03][box:system]워프 존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+  --- context: 0x00A9 -> 0x00B4 ---
+  0x008D3838 [0x00B4] [script:B1 05]발바라드 공항
+  0x008D3A2C [0x00B4] [script:AA 06]튜케의 동굴
+  0x008D3B28 [0x00B4] [script:27 07]카나라 사막
+  0x008D3D1A [0x00B4] [script:21 08]봉인의 유적
+  0x008D3E18 [0x00B4] [script:A1 08]발바라드 공항
+  0x008D400C [0x00B4] [script:9B 09]사류족의 캠프
+  0x008D410A [0x00B4] [script:19 0A]튜케의 동굴
+  0x008D4206 [0x00B4] [script:96 0A]카나라 사막
+  0x008D43F8 [0x00B4] [script:90 0B]봉인의 유적
+  0x008D44F6 [0x00B4] [script:10 0C]발바라드 공항
+  0x008D46EA [0x00B4] [script:09 0D]튜케의 동굴
+  0x008D47E6 [0x00B4] [script:86 0D]카나라 사막
+  0x008D49D8 [0x00B4] [script:80 0E]봉인의 유적
+  0x008D4AD6 [0x00B4] [script:00 0F]발바라드 공항
+  0x008D4CCA [0x00B4] [script:FA 0F]사류족의 캠프
+  0x008D4DC8 [0x00B4] [script:78 10]튜케의 동굴
+  0x008D4EC4 [0x00B4] [script:F5 10]카나라 사막
+  0x008D50B6 [0x00B4] [script:EF 11]봉인의 유적
+  0x008D51B4 [0x00B4] [script:6F 12]발바라드 공항
+  0x008D53A8 [0x00B4] [script:69 13]사류족의 캠프
+  0x008D54A6 [0x00B4] [script:E7 13]튜케의 동굴
+  0x008D55A2 [0x00B4] [script:64 14]카나라 사막
+  0x008D569C [0x00B4] [script:E2 14]봉인의 유적
+  --- context: 0x00B4 -> 0x00A9 ---
+  0x008D5866 [0x00A9] [script:DC 15]「발바라드」를 나가시겠습니까?[br][opt]예[br][opt]아니오[br][opt]실버 노아 안으로 들어간다
+  0x008D5AAE [0x00A9] [script:F7 16]「발바라드」를 나가시겠습니까?[br][opt]예[br][opt]아니오
+  0x008D5B5E [0x00A9] [script:4E 17]「무하드」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x008D5C18 [0x00A9] [script:AE 17]「사류족의 캠프」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x008D5CD4 [0x00A9] [script:0B 18]「튜케의 동굴」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x008D5D8E [0x00A9] [script:68 18]「카나라 사막」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x008D5E48 [0x00A9] [script:C4 18]「피라미드」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x008D5F00 [0x00A9] [script:22 19]「봉인의 유적」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  --- context: 0x00A9 -> 0x0006 ---
+  0x008D5FBC [0x0006] [script:74 19]아크를 두고 가면 안 되겠어
+  --- context: 0x0006 -> 0x00A9 ---
+  0x00990346 [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해보시겠습니까?[br][opt]예[br][opt]아니오[box:close]
+  0x009908EA [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
+  0x00990914 [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x0099093E [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나가시겠습니까?[br][opt]예[br][opt]아니오[box:close]
+  0x0099096A [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x009909B2 [0x00A9] [script:4B 03][box:system]워프 존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+  --- context: 0x00A9 -> 0x00B4 ---
+  0x00990E96 [0x00B4] [script:AF 05]아라라토스 공항
+  0x0099108A [0x00B4] [script:A9 06]총갈라의 가게
+  0x00991186 [0x00B4] [script:26 07]아젠다 고지
+  0x00991280 [0x00B4] [script:A4 07]봉인의 유적
+  0x0099137C [0x00B4] [script:22 08]유적 던전
+  0x0099147A [0x00B4] [script:A1 08]아라라토스 공항
+  0x0099166E [0x00B4] [script:9B 09]총갈라의 가게
+  0x0099176A [0x00B4] [script:18 0A]아젠다 고지
+  0x00991864 [0x00B4] [script:96 0A]봉인의 유적
+  0x00991960 [0x00B4] [script:14 0B]유적 던전
+  0x00991A5E [0x00B4] [script:93 0B]아라라토스 공항
+  0x00991C52 [0x00B4] [script:8D 0C]총갈라의 가게
+  0x00991D4E [0x00B4] [script:0A 0D]아젠다 고지
+  0x00991E48 [0x00B4] [script:88 0D]봉인의 유적
+  0x00991F44 [0x00B4] [script:06 0E]유적 던전
+  --- context: 0x00B4 -> 0x00A9 ---
+  0x00992042 [0x00A9] [script:99 0E]「아라라토스」를 나가시겠습니까?[br][opt]예[br][opt]아니오[br][opt]실버 노아 안으로 들어간다
+  0x00992288 [0x00A9] [script:B3 0F]「가자루아」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x0099233E [0x00A9] [script:10 10]「아젠다 고지」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x009923F4 [0x00A9] [script:6C 10]「봉인의 유적」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x009924AC [0x00A9] [script:C8 10]「유적 던전」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x00992564 [0x00A9] [script:22 11]어느 나라로 가시겠습니까?[br][opt]니델행[br][opt]그만둔다
+  0x00992618 [0x00A9] [script:85 11]어느 비행선에 탑승하시겠습니까?[br][opt]니델행[br][opt]아리바샤행[br][opt]그만둔다
+  0x00992742 [0x00A9] [script:12 12]「총갈라의 가게」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x00A4D50A [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해보시겠습니까?[br][opt]예[br][opt]아니오[box:close]
+  0x00A4DAAE [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
+  0x00A4DAD8 [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x00A4DB02 [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나가시겠습니까?[br][opt]예[br][opt]아니오[box:close]
+  0x00A4DB2E [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x00A4DB76 [0x00A9] [script:4B 03][box:system]워프 존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+  --- context: 0x00A9 -> 0x00B4 ---
+  0x00A4DE70 [0x00B4] [script:BA 04]니델 공항
+  0x00A4E064 [0x00B4] [script:B4 05]니델 공항
+  0x00A4E258 [0x00B4] [script:AE 06]니델 공항
+  0x00A4E44C [0x00B4] [script:A8 07]니델 공항
+  --- context: 0x00B4 -> 0x00A9 ---
+  0x00A4E640 [0x00A9] [script:B6 08]「니델」을 나가시겠습니까?[br][opt]예[br][opt]아니오[br][opt]실버 노아 안으로 들어간다
+  0x00A4E886 [0x00A9] [script:D0 09]「미스로」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  --- context: 0x00A9 -> 0xFFFE ---
+  0x00A4E93C [0xFFFE] [script:25 0A]다른 나라에 가고 있을 때가 아니다
+  0x00A4E99A [0xFFFE] [script:55 0A]다른 나라에 가고 있을 때가 아니지
+  0x00A4E9FA [0xFFFE] [script:85 0A]다른 나라에 가고 있을 때가 아니지
+  0x00A4EA5A [0xFFFE] [script:B4 0A]다른 나라에 가고 있을 때가 아니다
+  0x00A4EAB8 [0xFFFE] [script:E4 0A]다른 나라에 가고 있을 때가 아니겠구먼
+  0x00A4EB18 [0xFFFE] [script:14 0B]다른 나라에 가고 있을 때가 아니야
+  0x00A4EB78 [0xFFFE] [script:44 0B]다른 나라에 가고 있을 때가 아니네
+  0x00A4EBD8 [0xFFFE] [script:74 0B]다른 나라에 가고 있을 때가 아니야
+  0x00A4EC38 [0xFFFE] [script:A3 0B]다른 나라에 가고 있을 때가 아니다
+  0x00A4EC96 [0xFFFE] [script:D0 0B]나갈 때가 아니다
+  0x00A4ECF0 [0xFFFE] [script:00 0C]다른 나라에 가고 있을 때가 아니야
+  0x00A4ED50 [0xFFFE] [script:30 0C]다른 나라에 가고 있을 때가 아니야
+  0x00A4EDB0 [0xFFFE] [script:60 0C]다른 나라에 가고 있을 때가 아니야
+  --- context: 0xFFFE -> 0x00A9 ---
+  0x00A4EE12 [0x00A9] [script:A0 0C]어느 비행선에 탑승하시겠습니까?[br][opt]아라라토스행[br][opt]그레이시누행[br][opt]그만둔다
+  0x00A4EF3C [0x00A9] [script:2F 0D]어느 비행선에 탑승하시겠습니까?[br][opt]그레이시누행[br][opt]그만둔다
+  0x00B08BA6 [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해보시겠습니까?[br][opt]예[br][opt]아니오[box:close]
+  0x00B0914A [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
+  0x00B09174 [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x00B0919E [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나가시겠습니까?[br][opt]예[br][opt]아니오[box:close]
+  0x00B091CA [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x00B09212 [0x00A9] [script:4B 03][box:system]워프 존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+  --- context: 0x00A9 -> 0x00B4 ---
+  0x00B09734 [0x00B4] [script:CF 05]아리바샤 공항
+  0x00B0992A [0x00B4] [script:C8 06]물의 신전
+  0x00B09A24 [0x00B4] [script:46 07]봉인의 유적
+  0x00B09B20 [0x00B4] [script:C5 07]사류족의 마을 터
+  0x00B09C1E [0x00B4] [script:42 08]사라 사막
+  0x00B09D18 [0x00B4] [script:C0 08]레이덴 유적
+  0x00B09E14 [0x00B4] [script:3E 09]이슈마의 바위터
+  0x00B09F12 [0x00B4] [script:BE 09]아리바샤 공항
+  0x00B0A108 [0x00B4] [script:B7 0A]물의 신전
+  0x00B0A202 [0x00B4] [script:35 0B]봉인의 유적
+  0x00B0A2FE [0x00B4] [script:B4 0B]사류족의 마을 터
+  0x00B0A3FC [0x00B4] [script:31 0C]사라 사막
+  0x00B0A4F6 [0x00B4] [script:AF 0C]레이덴 유적
+  0x00B0A5F2 [0x00B4] [script:2D 0D]이슈마의 바위터
+  0x00B0A6F0 [0x00B4] [script:AD 0D]아리바샤 공항
+  0x00B0A8E6 [0x00B4] [script:A6 0E]물의 신전
+  0x00B0A9E0 [0x00B4] [script:24 0F]봉인의 유적
+  0x00B0AADC [0x00B4] [script:A3 0F]사류족의 마을 터
+  0x00B0ABDA [0x00B4] [script:20 10]사라 사막
+  0x00B0ACD4 [0x00B4] [script:9E 10]레이덴 유적
+  0x00B0ADD0 [0x00B4] [script:1C 11]이슈마의 바위터
+  --- context: 0x00B4 -> 0x00A9 ---
+  0x00B0AECE [0x00A9] [script:B0 11]「아리바샤」를 나가시겠습니까?[br][opt]예[br][opt]아니오[br][opt]실버 노아 안으로 들어간다
+  0x00B0B116 [0x00A9] [script:CB 12]「엘자크」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x00B0B1C6 [0x00A9] [script:23 13]「물의 신전」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x00B0B23E [0x00A9] [script:61 13]「봉인의 유적」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x00B0B2F2 [0x00A9] [script:BB 13]「사류족의 마을 터」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x00B0B3A6 [0x00A9] [script:13 14]「사라 사막」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x00B0B45C [0x00A9] [script:6F 14]「레이덴 유적」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x00B0B514 [0x00A9] [script:CC 14]「이슈마의 바위터」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
+  0x00B0B5CE [0x00A9] [script:29 15]어느 비행선에 탑승하시겠습니까?[br][opt]아라라토스행[br][opt]그만둔다
+  0x00B0B686 [0x00A9] [script:8B 15]어느 비행선에 탑승하시겠습니까?[br][opt]아라라토스행[br][opt]스메리아행[br][opt]그만둔다
+  0x00BC5086 [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해보시겠습니까?[br][opt]예[br][opt]아니오[box:close]
+  0x00BC562A [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
+  0x00BC5654 [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x00BC567E [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나가시겠습니까?[br][opt]예[br][opt]아니오[box:close]
+  0x00BC56AA [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x00BC56F2 [0x00A9] [script:4B 03][box:system]워프 존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+  0x00BC591E [0x00A9] [script:5A 04]다 됐나?[br][opt]예[br][opt]아니오
+  0x00BC5C1C [0x00A9] [script:E2 05]총갈라 「로말리아 성에 쳐들어가는 건가?」[br][opt]예[br][opt]아니오
+  --- context: 0x00A9 -> 0x00B4 ---
+  0x00BC5C74 [0x00B4] [script:09 06]チョンガラ[br]「よっしゃ、しっかりつかまっとれ！！」
+  0x00BC5CB4 [0x00B4] [script:28 06]총갈라[br]「뭐냐, 아직 뭔가 있는 겐가?」
+  0x00BC6916 [0x00B4] [script:50 0C][FF:01 04 01]동 알디아
+  0x00BC692C [0x00B4] [script:5B 0C][FF:01 04 01]서 알디아
+  0x00BC6942 [0x00B4] [script:66 0C][FF:01 04 01][opt]야고스 섬
+  0x00BC696C [0x00B4] [script:7B 0C][FF:01 04 01]크레니아 섬
+  0x00BC6A50 [0x00B4] [script:ED 0C][FF:01 04 01][opt][opt]北極
+  0x00BC6A66 [0x00B4] [script:F8 0C][FF:01 04 01][opt][opt]南極
+  0x00BC6A7C [0x00B4] [script:04 0D][FF:01 04 01][opt]해저 유전
+  0x00BC6EC4 [0x00B4] [script:3E 0F]알디아는 이미 알고 있겠지.[br]문명도 발달한 나라로, 돈으로 뭐든 해결하는[br]나라지.
+  0x00BC6F1A [0x00B4] [script:63 0F]헌터 제도가 생긴 것도 그런 이유겠지. 나도 옛날에는 돈이 전부였지만 말이야.
+  0x00BC6F66 [0x00B4] [script:92 0F]알디아 서쪽의 미개발 지역이지.[br]사막과 황야가 펼쳐져 있어서 사람도 별로[br]살지 않는다네.
+  0x00BC6FC2 [0x00B4] [script:B0 0F]나쁜 짓을 꾸미기에 딱 좋은 장소였다는 것이겠구먼.
+  0x00BC7000 [0x00B4] [script:E1 0F]빌마라는 고집불통 학자가 있었지. 이것저것 도움이 될지도 모르니 가끔 들러보는 것도 좋을 거야.
+  0x00BC7080 [0x00B4] [script:22 10]우리를 함정에 빠뜨린 얄미운 안델이 지배하는 나라지. 공항에 내릴 수 없으니 쿠쿠루의 신전에 갈 수밖에 없어.
+  0x00BC70E2 [0x00B4] [script:54 10]아크의 어머니도 잡혀 있는 것 같으니[br]결착을 지어야 하지만,[br]지금은 순교자의 탑을 부수는 게 먼저지.
+  0x00BC7148 [0x00B4] [script:85 10]지금까지보다 강력한 반응이 스메리아에서 나오고 있다. 팔렌시아 타워가 순교자의 탑으로서의 정체를 드러낸 것이겠지.
+  0x00BC71A8 [0x00B4] [script:9C 10]안델과 결착을 지을 때가 왔구나.
+  0x00BC71D8 [0x00B4] [script:C0 10]이 나라에서 일단 로말리아의[br]그림자는 사라졌다. 앞으로 나아가자!
+  0x00BC7220 [0x00B4] [script:EE 10]3개 대륙의 한가운데에 위치한 섬이지.[br]투기장이 있으니 가끔은 여기서 실력 시험도 좋을 거야.
+  0x00BC727C [0x00B4] [script:22 11]적의 본거지가 있는 나라로, 이것저것 수수께끼가 많은 곳이지. 성 주위의 도시째로 성벽에 둘러싸여 있어서 침입은 어렵겠구먼.
+  0x00BC72EE [0x00B4] [script:5B 11]리자가 태어난 나라라더구먼. 아름다운 나라지만, 아무래도 여기서 순교자 계획이 시작되고 있음을 나타내는 반응이 나오고 있다네.
+  0x00BC7354 [0x00B4] [script:7A 11]뭔가 높은 건물이 있다면,[br]그것이 수상한 거겠지.
+  0x00BC7394 [0x00B4] [script:9B 11]이 나라에는 이제 로말리아의 그림자는 없다.[br]앞으로 나아가자!
+  0x00BC73D6 [0x00B4] [script:C4 11]이가의 고향으로, 라마다 사원이 있는 곳이지. 한번 다녀왔으니 이미 알고 있겠지.
+  0x00BC7426 [0x00B4] [script:E7 11]라마다 사원에서는 언제든 수행할 수 있으니, 필요하면 찾아가 보거라.
+  0x00BC7478 [0x00B4] [script:24 12]10년 전쯤에 니델의 식민지에서 전쟁으로 독립한 나라지. 여기서 순교자 계획이 시작되고 있음을 나타내는 반응이 나오고 있다네.
+  0x00BC74E6 [0x00B4] [script:4E 12]그루가가 태어난 나라라더구먼. 뭔가 높은 건물이 있다면 그것이 수상한 건데, 그루가는 모르는 건가.
+  0x00BC753C [0x00B4] [script:6F 12]이 나라에는 이제 로말리아의 그림자는 없다.[br]앞으로 나아가자!
+  0x00BC7588 [0x00B4] [script:96 12]결코 풍요로운 나라는 아닌 것 같지만, 왠지 활기찬 나라인 것 같구먼.
+  0x00BC75CA [0x00B4] [script:C5 12]나도 잘 모르지만, 여기서도 순교자 계획의 반응이 나오고 있다.[br]우선 높은 건물을 찾아야 해.
+  0x00BC762A [0x00B4] [script:E6 12]이 나라에는 이제 로말리아의 그림자는 없다.[br]앞으로 나아가자!
+  0x00BC7680 [0x00B4] [script:16 13]예전에 아크가 성궤의 정보를 얻기 위해 찾아가서 은혜의 정령을 만난 나라다.
+  0x00BC76CA [0x00B4] [script:38 13]지금은 로말리아에서 보내온 장군 야군이 지휘하고 있다고 한다.
+  0x00BC770E [0x00B4] [script:60 13]이 나라에서도 반응이 나오고 있다.[br]아마 그 녀석과 한바탕 싸우게[br]될 것 같구먼.
+  0x00BC7760 [0x00B4] [script:8E 13]사니아 덕분에 야군은 쓰러지고,[br]로말리아군은 괴멸 상태다.[br]단숨에 유전을 치자!!
+  0x00BC77BC [0x00B4] [script:AF 13]이 나라에는 이제 로말리아의 그림자는 없다.[br]앞으로 나아가자!
+  0x00BC7808 [0x00B4] [script:E6 13]아리바샤와 아주 비슷한 사막의 나라지.[br]게다가 아리바샤와 사이가 나쁜 것 같다.[br]여기서도 반응이 나오고 있군.
+  0x00BC786C [0x00B4] [script:07 14]이 나라에는 이제 로말리아의 그림자는 없다.[br]앞으로 나아가자!
+  0x00BC78AE [0x00B4] [script:2E 14]아크 일행을 만나기 전까지 내가 있었던 나라지.[br]빛의 정령과 만난 것도 여기다.
+  0x00BC78FA [0x00B4] [script:5D 14]내 가게에는 엘크 일행을 만나기 전까지 구한 것들이 보관되어 있다네.[br]유적도 있으니 가끔은 들러주게.
+  0x00BC795A [0x00B4] [script:8A 14]크레니아와 같은 투기장이 있는 나라지만,[br]엘크 일행을 만나기 전에 바람의 정령을 만난 것은 이 나라다
+  0x00BC79B4 [0x00B4] [script:BC 14]우리가 물의 정령과 만난 나라다. 지금도 유적은 남아 있지만, 거기를 지키던 사류족은 이제 이 나라에는 없다.
+  0x00BC7A16 [0x00B4] [script:D3 14]슬픈 일이었구먼.
+  0x00BC7A46 [0x00B4] [script:01 15]얼음에 갇힌 장소로, 거기에 간 사람이 있다는 얘기조차 별로 듣지 못했다.[br]분명 뭔가 있을 거야.
+  0x00BC7AA2 [0x00B4] [script:2F 15]얼음에 갇힌 장소로, 거기에 간 사람이 있다는 얘기조차 별로 듣지 못했다.[br]분명 뭔가 있을 거야.
+  0x00BC7AFE [0x00B4] [script:58 15]야군이 만든 해상 요새지. 여기가[br]아마 이 나라의 순교자의 탑이겠지.
+  0x00BC7B4E [0x00B4] [script:7B 15]한번 들어가면 쉽게 데리러 올 수 없으니 잘 준비해서 가도록 해라.
