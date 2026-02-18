@@ -1,10 +1,10 @@
 # S800.STG — 1261 dialogues, 1056 templates (0 bare, 0 missed, 117 orphan menus)
 
-  0x000B8C4A [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
-  0x000B91EE [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
-  0x000B9218 [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
-  0x000B9242 [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
-  0x000B926E [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x000B8C4A [0x00A9] [script:AE 01][box:system]스위치 발견[br]ON할까?[br][opt]네[br][opt]아니오[box:close]
+  0x000B91EE [0x00A9] [script:E7 02][box:system]계단 발견[br][opt]내려가기[br][opt]그만두기[box:close]
+  0x000B9218 [0x00A9] [script:FC 02][box:system]계단 발견[br][opt]올라가기[br][opt]그만두기[box:close]
+  0x000B9242 [0x00A9] [script:12 03][box:system]출구다. 나갈까?[br][opt]네[br][opt]아니오[box:close]
+  0x000B926E [0x00A9] [script:25 03][box:system]사다리다[br][opt]올라가기[br][opt]그만두기[box:close]
   0x000B92B6 [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
   --- context: 0x00A9 -> 0x801A ---
   0x000B97DA [0x801A] [script:D3 05]대체 무슨 일이야?
@@ -31,11 +31,11 @@
   --- context: 0x8015 -> 0x0006 ---
   0x000BAEB2 [0x0006] [script:3D 11]잠깐, 이 방향은…
   --- context: 0x0006 -> 0x00A9 ---
-  0x001723B6 [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
-  0x0017295A [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
-  0x00172984 [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
-  0x001729AE [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
-  0x001729DA [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x001723B6 [0x00A9] [script:AE 01][box:system]스위치 발견[br]ON할까?[br][opt]네[br][opt]아니오[box:close]
+  0x0017295A [0x00A9] [script:E7 02][box:system]계단 발견[br][opt]내려가기[br][opt]그만두기[box:close]
+  0x00172984 [0x00A9] [script:FC 02][box:system]계단 발견[br][opt]올라가기[br][opt]그만두기[box:close]
+  0x001729AE [0x00A9] [script:12 03][box:system]출구다. 나갈까?[br][opt]네[br][opt]아니오[box:close]
+  0x001729DA [0x00A9] [script:25 03][box:system]사다리다[br][opt]올라가기[br][opt]그만두기[box:close]
   0x00172A22 [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
   --- context: 0x00A9 -> 0x8007 ---
   0x00172E8C [0x8007] [script:78 05]할아버지! 큰일이에요! 전함이…
@@ -191,11 +191,11 @@
   --- context: 0x8006 -> 0x8007 ---
   0x00178EA8 [0x8007] [script:83 35]자, 꾸물거릴 틈은 없다
   --- context: 0x8007 -> 0x00A9 ---
-  0x00233FAE [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
-  0x00234552 [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
-  0x0023457C [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
-  0x002345A6 [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
-  0x002345D2 [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x00233FAE [0x00A9] [script:AE 01][box:system]스위치 발견[br]ON할까?[br][opt]네[br][opt]아니오[box:close]
+  0x00234552 [0x00A9] [script:E7 02][box:system]계단 발견[br][opt]내려가기[br][opt]그만두기[box:close]
+  0x0023457C [0x00A9] [script:FC 02][box:system]계단 발견[br][opt]올라가기[br][opt]그만두기[box:close]
+  0x002345A6 [0x00A9] [script:12 03][box:system]출구다. 나갈까?[br][opt]네[br][opt]아니오[box:close]
+  0x002345D2 [0x00A9] [script:25 03][box:system]사다리다[br][opt]올라가기[br][opt]그만두기[box:close]
   0x0023461A [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
   --- context: 0x00A9 -> 0x8000 ---
   0x00234FDE [0x8000] [script:1F 08]침대에서 잘래?
@@ -216,11 +216,11 @@
   0x00235752 [0x8000] [script:DE 0B]아, 이런 데에 일기장이
   0x00235798 [0x8000] [script:00 0C]이건 [delay:13]새까맣게 타 버렸어…
   --- context: 0x8000 -> 0x00A0 ---
-  0x002E3012 [0x00A0] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
-  0x002E35B6 [0x00A0] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
-  0x002E35E0 [0x00A0] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
-  0x002E360A [0x00A0] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
-  0x002E3636 [0x00A0] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x002E3012 [0x00A0] [script:AE 01][box:system]스위치 발견[br]ON할까?[br][opt]네[br][opt]아니오[box:close]
+  0x002E35B6 [0x00A0] [script:E7 02][box:system]계단 발견[br][opt]내려가기[br][opt]그만두기[box:close]
+  0x002E35E0 [0x00A0] [script:FC 02][box:system]계단 발견[br][opt]올라가기[br][opt]그만두기[box:close]
+  0x002E360A [0x00A0] [script:12 03][box:system]출구다. 나갈까?[br][opt]네[br][opt]아니오[box:close]
+  0x002E3636 [0x00A0] [script:25 03][box:system]사다리다[br][opt]올라가기[br][opt]그만두기[box:close]
   0x002E367E [0x00A0] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
   0x002E5084 [0x00A0] [script:50 10][box:speech]아름다운 강을 보고 있으면, 나도 모르게[br]여기서 발길이 멈춰 버려
   0x002E50DC [0x00A0] [script:7B 10][box:speech]그러다 보면, 시간이 흐르는 것도[br]느끼지 못하게 돼
@@ -794,11 +794,11 @@
   0x002F1DC0 [0x8005] [script:EA 76][box:speech]어머니에게는 사실대로[br]말할 수밖에 없어…
   0x002F1EC4 [0x8005] [script:66 77][box:speech]세굴 일행은 괜찮으려나…
   --- context: 0x8005 -> 0x00A9 ---
-  0x003A7A9A [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
-  0x003A803E [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
-  0x003A8068 [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
-  0x003A8092 [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
-  0x003A80BE [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x003A7A9A [0x00A9] [script:AE 01][box:system]스위치 발견[br]ON할까?[br][opt]네[br][opt]아니오[box:close]
+  0x003A803E [0x00A9] [script:E7 02][box:system]계단 발견[br][opt]내려가기[br][opt]그만두기[box:close]
+  0x003A8068 [0x00A9] [script:FC 02][box:system]계단 발견[br][opt]올라가기[br][opt]그만두기[box:close]
+  0x003A8092 [0x00A9] [script:12 03][box:system]출구다. 나갈까?[br][opt]네[br][opt]아니오[box:close]
+  0x003A80BE [0x00A9] [script:25 03][box:system]사다리다[br][opt]올라가기[br][opt]그만두기[box:close]
   0x003A8106 [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
   --- context: 0x00A9 -> 0x8006 ---
   0x003AC1C2 [0x8006] [script:9E 23][box:speech]어서 오세요!!
@@ -888,11 +888,11 @@
   0x003ADD78 [0x00B4] [script:96 31][box:system]이[opt]름[opt]가우크로우[opt][opt][opt]록[br]보[opt]수[opt]2250G[br]출몰지[opt]아라라토스 내[br]특기[opt]그랜드 실드
   0x003ADDD8 [0x00B4] [script:B0 31][box:system][br]このモンスターは、ハンティングされました
   --- context: 0x00B4 -> 0x00A9 ---
-  0x0046661E [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
-  0x00466BC2 [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
-  0x00466BEC [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
-  0x00466C16 [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
-  0x00466C42 [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x0046661E [0x00A9] [script:AE 01][box:system]스위치 발견[br]ON할까?[br][opt]네[br][opt]아니오[box:close]
+  0x00466BC2 [0x00A9] [script:E7 02][box:system]계단 발견[br][opt]내려가기[br][opt]그만두기[box:close]
+  0x00466BEC [0x00A9] [script:FC 02][box:system]계단 발견[br][opt]올라가기[br][opt]그만두기[box:close]
+  0x00466C16 [0x00A9] [script:12 03][box:system]출구다. 나갈까?[br][opt]네[br][opt]아니오[box:close]
+  0x00466C42 [0x00A9] [script:25 03][box:system]사다리다[br][opt]올라가기[br][opt]그만두기[box:close]
   0x00466C8A [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
   --- context: 0x00A9 -> 0x8006 ---
   0x0046783E [0x8006] [script:18 09][box:speech]어서 와
@@ -1059,10 +1059,10 @@
   0x005227F0 [0x8006] [script:FF 08][box:system]아이템이 가득 차서 획득할 수 없습니다[box:close]
   0x00522836 [0x8006] [script:FF 08][box:system][name:01]을(를) 포기하시겠습니까？[br][FF:04 02 01]예[br][FF:04 02 01]아니오[box:close]
   0x005228A6 [0x8006] [script:FF 08]아, [name:01]를 입수할 수 없습니다[br]아이템이 가득합니다. 뭔가 버릴까요?[br][FF:04 02 01]네[br][FF:04 02 01]아니오[box:close]
-  0x00522B34 [0x8006] [script:A9 00][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
-  0x00522B60 [0x8006] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x00522B34 [0x8006] [script:A9 00][box:system]계단 발견[br][opt]내려가기[br][opt]그만두기[box:close]
+  0x00522B60 [0x8006] [script:FC 02][box:system]계단 발견[br][opt]올라가기[br][opt]그만두기[box:close]
   0x00522B88 [0x8006] [script:A9 00][box:system]출구입니다. 밖으로 나가시겠습니까？[br][opt]예[br][opt]아니오[box:close]
-  0x00522BB6 [0x8006] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x00522BB6 [0x8006] [script:25 03][box:system]사다리다[br][opt]올라가기[br][opt]그만두기[box:close]
   0x00522BDA [0x8006] [script:FF 08][box:system]사다리가 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
   0x00522BFC [0x8006] [script:A9 00][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
   0x00522E9A [0x8006] [script:9C 04][box:system]숙박부가 있습니다. 기입하시겠습니까？[br][opt]예[br][opt]아니오[box:close]
@@ -1185,11 +1185,11 @@
   0x00526BF4 [0x8007] [script:41 23][box:speech]모처럼이니까 쉬었다[br]가자, 응?
   --- context: 0x8007 -> 0x00A9 ---
   0x00526C46 [0x00A9] [script:6D 23][box:speech]멋대로 묵겠습니까?[br][opt]예[br][opt]아니오
-  0x005E0BEE [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
-  0x005E1192 [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
-  0x005E11BC [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
-  0x005E11E6 [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
-  0x005E1212 [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x005E0BEE [0x00A9] [script:AE 01][box:system]스위치 발견[br]ON할까?[br][opt]네[br][opt]아니오[box:close]
+  0x005E1192 [0x00A9] [script:E7 02][box:system]계단 발견[br][opt]내려가기[br][opt]그만두기[box:close]
+  0x005E11BC [0x00A9] [script:FC 02][box:system]계단 발견[br][opt]올라가기[br][opt]그만두기[box:close]
+  0x005E11E6 [0x00A9] [script:12 03][box:system]출구다. 나갈까?[br][opt]네[br][opt]아니오[box:close]
+  0x005E1212 [0x00A9] [script:25 03][box:system]사다리다[br][opt]올라가기[br][opt]그만두기[box:close]
   0x005E125A [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
   --- context: 0x00A9 -> 0x8006 ---
   0x005E1C38 [0x8006] [script:2B 08]어서 와！
@@ -1218,11 +1218,11 @@
   0x005E3F46 [0x8006] [script:B2 19]매번 고마워!
   0x005E3F98 [0x8006] [script:DC 19]뭐야, 구경만이냐
   --- context: 0x8006 -> 0x00A9 ---
-  0x0069DBB6 [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
-  0x0069E15A [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
-  0x0069E184 [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
-  0x0069E1AE [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
-  0x0069E1DA [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x0069DBB6 [0x00A9] [script:AE 01][box:system]스위치 발견[br]ON할까?[br][opt]네[br][opt]아니오[box:close]
+  0x0069E15A [0x00A9] [script:E7 02][box:system]계단 발견[br][opt]내려가기[br][opt]그만두기[box:close]
+  0x0069E184 [0x00A9] [script:FC 02][box:system]계단 발견[br][opt]올라가기[br][opt]그만두기[box:close]
+  0x0069E1AE [0x00A9] [script:12 03][box:system]출구다. 나갈까?[br][opt]네[br][opt]아니오[box:close]
+  0x0069E1DA [0x00A9] [script:25 03][box:system]사다리다[br][opt]올라가기[br][opt]그만두기[box:close]
   0x0069E222 [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
   --- context: 0x00A9 -> 0x8005 ---
   0x0069E580 [0x8005] [script:EE 04][box:speech]서장님!!
@@ -1305,11 +1305,11 @@
   --- context: 0x8007 -> 0x8006 ---
   0x006A03EA [0x8006] [script:24 14][box:speech]좋아, 출발이다!!
   --- context: 0x8006 -> 0x00A9 ---
-  0x00758C1E [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
-  0x007591C2 [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
-  0x007591EC [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
-  0x00759216 [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
-  0x00759242 [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x00758C1E [0x00A9] [script:AE 01][box:system]스위치 발견[br]ON할까?[br][opt]네[br][opt]아니오[box:close]
+  0x007591C2 [0x00A9] [script:E7 02][box:system]계단 발견[br][opt]내려가기[br][opt]그만두기[box:close]
+  0x007591EC [0x00A9] [script:FC 02][box:system]계단 발견[br][opt]올라가기[br][opt]그만두기[box:close]
+  0x00759216 [0x00A9] [script:12 03][box:system]출구다. 나갈까?[br][opt]네[br][opt]아니오[box:close]
+  0x00759242 [0x00A9] [script:25 03][box:system]사다리다[br][opt]올라가기[br][opt]그만두기[box:close]
   0x0075928A [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
   --- context: 0x00A9 -> 0x8005 ---
   0x0075966E [0x8005] [script:33 05][box:speech]이, 이건…!?
@@ -1371,17 +1371,17 @@
   --- context: 0x8016 -> 0x8006 ---
   0x0075CF72 [0x8006] [script:B2 21][box:speech]치사하구먼…
   --- context: 0x8006 -> 0x00A9 ---
-  0x00818742 [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
-  0x00818CE6 [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
-  0x00818D10 [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
-  0x00818D3A [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
-  0x00818D66 [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x00818742 [0x00A9] [script:AE 01][box:system]스위치 발견[br]ON할까?[br][opt]네[br][opt]아니오[box:close]
+  0x00818CE6 [0x00A9] [script:E7 02][box:system]계단 발견[br][opt]내려가기[br][opt]그만두기[box:close]
+  0x00818D10 [0x00A9] [script:FC 02][box:system]계단 발견[br][opt]올라가기[br][opt]그만두기[box:close]
+  0x00818D3A [0x00A9] [script:12 03][box:system]출구다. 나갈까?[br][opt]네[br][opt]아니오[box:close]
+  0x00818D66 [0x00A9] [script:25 03][box:system]사다리다[br][opt]올라가기[br][opt]그만두기[box:close]
   0x00818DAE [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
-  0x008D1A32 [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
-  0x008D1FD6 [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
-  0x008D2000 [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
-  0x008D202A [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
-  0x008D2056 [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x008D1A32 [0x00A9] [script:AE 01][box:system]스위치 발견[br]ON할까?[br][opt]네[br][opt]아니오[box:close]
+  0x008D1FD6 [0x00A9] [script:E7 02][box:system]계단 발견[br][opt]내려가기[br][opt]그만두기[box:close]
+  0x008D2000 [0x00A9] [script:FC 02][box:system]계단 발견[br][opt]올라가기[br][opt]그만두기[box:close]
+  0x008D202A [0x00A9] [script:12 03][box:system]출구다. 나갈까?[br][opt]네[br][opt]아니오[box:close]
+  0x008D2056 [0x00A9] [script:25 03][box:system]사다리다[br][opt]올라가기[br][opt]그만두기[box:close]
   0x008D209E [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
   --- context: 0x00A9 -> 0x8006 ---
   0x008D231C [0x8006] [script:7D 04][box:speech]있잖아, 엘크
@@ -1550,11 +1550,11 @@
   0x008D5E38 [0x8002] [script:08 22]기뻐
   0x008D5E78 [0x8002] [script:2E 22]그래도 왠지 기분이 나쁘네
   --- context: 0x8002 -> 0x00A9 ---
-  0x0098B4FA [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
-  0x0098BA9E [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
-  0x0098BAC8 [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
-  0x0098BAF2 [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
-  0x0098BB1E [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x0098B4FA [0x00A9] [script:AE 01][box:system]스위치 발견[br]ON할까?[br][opt]네[br][opt]아니오[box:close]
+  0x0098BA9E [0x00A9] [script:E7 02][box:system]계단 발견[br][opt]내려가기[br][opt]그만두기[box:close]
+  0x0098BAC8 [0x00A9] [script:FC 02][box:system]계단 발견[br][opt]올라가기[br][opt]그만두기[box:close]
+  0x0098BAF2 [0x00A9] [script:12 03][box:system]출구다. 나갈까?[br][opt]네[br][opt]아니오[box:close]
+  0x0098BB1E [0x00A9] [script:25 03][box:system]사다리다[br][opt]올라가기[br][opt]그만두기[box:close]
   0x0098BB66 [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
   --- context: 0x00A9 -> 0x00B4 ---
   0x0098C04C [0x00B4] [script:CA 05][box:speech]여러분![br][delay:15]우리의 평화로운 삶은 앞으로 대체[br]어떻게 되는 걸까요?
@@ -1677,11 +1677,11 @@
   --- context: 0x8005 -> 0x8006 ---
   0x00991388 [0x8006] [script:50 2F][box:speech]끌고 가라!
   --- context: 0x8006 -> 0x00A9 ---
-  0x00A49CAA [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
-  0x00A4A24E [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
-  0x00A4A278 [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
-  0x00A4A2A2 [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
-  0x00A4A2CE [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x00A49CAA [0x00A9] [script:AE 01][box:system]스위치 발견[br]ON할까?[br][opt]네[br][opt]아니오[box:close]
+  0x00A4A24E [0x00A9] [script:E7 02][box:system]계단 발견[br][opt]내려가기[br][opt]그만두기[box:close]
+  0x00A4A278 [0x00A9] [script:FC 02][box:system]계단 발견[br][opt]올라가기[br][opt]그만두기[box:close]
+  0x00A4A2A2 [0x00A9] [script:12 03][box:system]출구다. 나갈까?[br][opt]네[br][opt]아니오[box:close]
+  0x00A4A2CE [0x00A9] [script:25 03][box:system]사다리다[br][opt]올라가기[br][opt]그만두기[box:close]
   0x00A4A316 [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
   --- context: 0x00A9 -> 0x00B4 ---
   0x00A4A57C [0x00B4] [script:7B 04]전투에 참가할 캐릭터를[br]선택해 주세요
@@ -1763,11 +1763,11 @@
   --- context: 0x800D -> 0x800E ---
   0x00A4DAAE [0x800E] [script:13 1F]연설 중에는 교황님께 접근할 수 없습니다
   --- context: 0x800E -> 0x00B0 ---
-  0x00B02452 [0x00B0] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
-  0x00B029F6 [0x00B0] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
-  0x00B02A20 [0x00B0] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
-  0x00B02A4A [0x00B0] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
-  0x00B02A76 [0x00B0] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x00B02452 [0x00B0] [script:AE 01][box:system]스위치 발견[br]ON할까?[br][opt]네[br][opt]아니오[box:close]
+  0x00B029F6 [0x00B0] [script:E7 02][box:system]계단 발견[br][opt]내려가기[br][opt]그만두기[box:close]
+  0x00B02A20 [0x00B0] [script:FC 02][box:system]계단 발견[br][opt]올라가기[br][opt]그만두기[box:close]
+  0x00B02A4A [0x00B0] [script:12 03][box:system]출구다. 나갈까?[br][opt]네[br][opt]아니오[box:close]
+  0x00B02A76 [0x00B0] [script:25 03][box:system]사다리다[br][opt]올라가기[br][opt]그만두기[box:close]
   0x00B02ABE [0x00B0] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
   --- context: 0x00B0 -> 0x00B4 ---
   0x00B03884 [0x00B4] [script:27 0A]이 층에서는 「다시 하기」가 유효합니다
@@ -1828,11 +1828,11 @@
   0x00B093CC [0x801E] [script:D6 37]신성한 장소이므로[br]일체의 「특수능력」 사용을 금합니다
   0x00B0942C [0x801E] [script:FD 37]이 또한 모두 위대한 신 기아 님이 정하신 길…
   --- context: 0x801E -> 0x00A9 ---
-  0x00BC362A [0x00A9] [script:AE 01][box:system]스위치가 있습니다[br]ON으로 해볼까요?[br][opt]네[br][opt]아니오[box:close]
-  0x00BC3BCE [0x00A9] [script:E7 02][box:system]내려가는 계단이 있습니다[br][opt]내려간다[br][opt]그만둔다[box:close]
-  0x00BC3BF8 [0x00A9] [script:FC 02][box:system]올라가는 계단이 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
-  0x00BC3C22 [0x00A9] [script:12 03][box:system]출구입니다. 밖으로 나갈까요?[br][opt]네[br][opt]아니오[box:close]
-  0x00BC3C4E [0x00A9] [script:25 03][box:system]사다리가 있습니다[br][opt]올라간다[br][opt]그만둔다[box:close]
+  0x00BC362A [0x00A9] [script:AE 01][box:system]스위치 발견[br]ON할까?[br][opt]네[br][opt]아니오[box:close]
+  0x00BC3BCE [0x00A9] [script:E7 02][box:system]계단 발견[br][opt]내려가기[br][opt]그만두기[box:close]
+  0x00BC3BF8 [0x00A9] [script:FC 02][box:system]계단 발견[br][opt]올라가기[br][opt]그만두기[box:close]
+  0x00BC3C22 [0x00A9] [script:12 03][box:system]출구다. 나갈까?[br][opt]네[br][opt]아니오[box:close]
+  0x00BC3C4E [0x00A9] [script:25 03][box:system]사다리다[br][opt]올라가기[br][opt]그만두기[box:close]
   0x00BC3C96 [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
   --- context: 0x00A9 -> 0x800A ---
   0x00BC417C [0x800A] [script:BE 05]네놈들이 야군 장군을[br]방해하고 있다는 용사들이군
