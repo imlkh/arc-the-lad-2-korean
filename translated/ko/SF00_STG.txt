@@ -4615,3 +4615,11 @@
   0x0229B58C [0x8005] [script:74 23]자기 약함을 알기에[br]강해질 수 있어
   0x0229B5DC [0x8005] [script:9F 23]그렇게 강해진[br]사람은 누구에게도 지지 않아
   0x0229B64E [0x8005] [script:C8 23]예!
+  --- orphan menu entries (missed) ---
+  0x002EE682 [0x00A9] [script:83 09]하하하, 잘도, 잘도 해줬구나
+  0x002EE940 [0x00A9] [script:DD 0A]알고 있어
+  0x002EF4AE [0x00A9] [script:95 10]정신 차려, 아크
+  0x002F0AA6 [0x00A9] [script:99 1B](그래…곧이다…)
+  0x002F1296 [0x00A9] [script:8B 1F]잘바드가 실패했군요
+  0x002F1702 [0x00A9] [script:BD 21]드디어다
+  0x01268464 [0x00A9] [script:56 0B][FF:04 07 01]엘크, 부탁해

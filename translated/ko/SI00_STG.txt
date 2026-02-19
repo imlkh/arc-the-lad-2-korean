@@ -3797,3 +3797,5 @@
   0x01CB7182 [0x00A9] [script:12 03][box:system]출구다. 나갈까?[br][opt]네[br][opt]아니오[box:close]
   0x01CB71AE [0x00A9] [script:25 03][box:system]사다리다[br][opt]올라가기[br][opt]그만두기[box:close]
   0x01CB71F6 [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
+  --- orphan menu entries (missed) ---
+  0x00234264 [0x00A9] [script:49 59]어질러져 있군

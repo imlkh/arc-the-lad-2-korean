@@ -1100,6 +1100,167 @@ def patch_stg_system_text(stg_path, korean_mapping, decode_table):
     return total_replacements
 
 
+def patch_stg_orphan_names(stg_path, korean_mapping, decode_table):
+    """Replace Japanese orphan name entries with Korean across all chunks.
+
+    Orphan menu entries (opcode 0x00A9) contain standalone names that the
+    normal STG patcher misses. These are character, monster, and location
+    names stored as katakana text in text/event/data regions.
+
+    Searches for [japanese_charID_bytes][0x00] and replaces with
+    [korean_encoded_bytes][padding][0x00], preserving the same byte length.
+    """
+    encode_table = build_encode_table(decode_table)
+
+    # (Japanese name, Korean translation)
+    ORPHAN_NAMES = [
+        # === Location names (SH00 world map) ===
+        ("パレンシア", "팔렌시아"),
+        ("パレンシアタワー", "팔렌시아타워"),
+        ("ダウンタウン", "다운타운"),
+        ("ロマリアトンネル", "로마리아터널"),
+        ("ラムール", "라무르"),
+        ("ホルン", "호른"),
+        ("ペイサス", "페이사스"),
+        ("ルワガ", "루가"),  # 3B limit: shortened from 루와가
+        ("モレア", "모레아"),
+        ("アジャール", "아자르"),
+        ("ムハド", "무하드"),
+        ("ピラミッド", "피라밋드"),
+        ("ガザルア", "가잘아"),
+        ("ミスロ", "미슬로"),
+        ("エルザーク", "엘자크"),
+        # These 6 appear with [br] prefix in SH00; searching the base name
+        # still matches because the name is at the end followed by 0x00
+        ("フォーレス", "포레스"),
+        ("グレイシーヌ", "그레이시누"),
+        ("ミルマーナ", "밀마나"),
+        ("バルバラード", "발바라드"),
+        ("アララトス", "아라라토스"),
+        ("アリバーシャ", "아리바샤"),
+        # === Character / NPC names ===
+        ("ガルアーノ", "갈아노"),
+        ("ネクダス", "네크다스"),
+        ("ジグムント", "지그문트"),
+        ("アンデル", "안델"),
+        ("ダルシオス", "달시"),  # 5B limit: shortened from 달시오스
+        ("ゴーガス", "고가스"),
+        ("クェーガー", "쿠에가"),
+        ("ガウクロウ", "가우크로우"),
+        ("キドウ", "기도"),  # 3B limit: shortened from 키도우
+        ("ビシャモン", "비샤몬"),
+        ("ベラドンナ", "벨라나"),  # 5B limit: shortened from 벨라돈나
+        ("ピエール・ベロニカ", "피에르베로니카"),
+        ("リーランド", "리란드"),
+        ("バルドル", "발도르"),
+        ("ゴルザ", "골자"),
+        ("ティアヌス", "티아누스"),
+        ("グルナグ", "그루나그"),
+        ("バルザック", "발작"),
+        ("シャコウ", "샤코우"),
+        ("ジャド", "자드"),
+        ("ホイスラー", "호이슬러"),
+        ("ダリウス", "다리우스"),
+        ("キッシュ", "킷슈"),
+        ("ギオネス", "기오"),  # 4B limit: shortened from 기오네스
+        ("グロヴィス", "그로비스"),
+        ("レイガル", "레이갈"),
+        ("ジンバラ", "진바라"),
+        ("ミラルダ", "미랄다"),
+        ("マーリン", "마린"),
+        ("リシェーナ", "리셰나"),
+        ("ディロス", "디로스"),
+        ("メナン", "메난"),
+        ("ドラロシュ", "드라로슈"),
+        ("バルグリ", "발그리"),
+        ("デリンガー", "데린가"),
+        ("アミーグロック", "아미그록"),
+        ("ドルゴン", "돌곤"),
+        ("ゴルゴン", "골곤"),
+        ("グラヴィス", "그라비스"),
+        ("ザナック", "자낙"),
+        ("シュヴァイデル", "슈바이델"),
+        ("タスマン", "타스만"),
+        ("ガルムヘッド", "갈름헤드"),
+        ("シャムス", "샤무스"),
+        ("ジャッカル", "자칼"),
+        ("アクラ", "아크라"),
+        ("ジャッジメント", "저지먼트"),
+        ("ドクスン", "독슨"),
+        ("ザルバドビット", "잘바드비트"),
+        # === Onomatopoeia / short words ===
+        # フフフ(3B), ウウッ(3B), セウム(3B), アジュ(3B) skipped: no Korean fits
+        ("ギギギ", "기기기"),
+    ]
+
+    def encode_jp_name(name):
+        """Convert Japanese name string to game charID bytes."""
+        result = bytearray()
+        for ch in name:
+            if ch in encode_table:
+                b = char_id_to_bytes(encode_table[ch])
+                if b:
+                    result.extend(b)
+                else:
+                    return None
+            else:
+                return None
+        return bytes(result)
+
+    with open(stg_path, "rb") as f:
+        data = bytearray(f.read())
+
+    CHUNK_SIZE = 0xBC800
+    # Search from MIPS scene code to end of text region to cover
+    # both text entries and data tables embedded in code sections
+    SEARCH_START = 0x77000
+    num_chunks = len(data) // CHUNK_SIZE
+    total_replacements = 0
+
+    for jp_name, kr_name in ORPHAN_NAMES:
+        jp_bytes = encode_jp_name(jp_name)
+        if jp_bytes is None:
+            continue
+
+        kr_encoded = encode_korean_text(kr_name, korean_mapping, decode_table)
+
+        if len(kr_encoded) > len(jp_bytes):
+            print(f"    WARNING: '{jp_name}'->'{kr_name}' Korean ({len(kr_encoded)}B) > Japanese ({len(jp_bytes)}B), skipping")
+            continue
+
+        search_pattern = jp_bytes + b"\x00"
+        kr_padded = kr_encoded + b"\x00" * (len(jp_bytes) - len(kr_encoded)) + b"\x00"
+
+        count = 0
+        for chunk_idx in range(num_chunks):
+            chunk_start = chunk_idx * CHUNK_SIZE
+            region_start = chunk_start + SEARCH_START
+            region_end = chunk_start + CHUNK_SIZE
+
+            if region_end > len(data):
+                break
+
+            pos = region_start
+            while pos < region_end:
+                idx = data.find(search_pattern, pos, region_end)
+                if idx < 0:
+                    break
+                data[idx:idx + len(search_pattern)] = kr_padded
+                count += 1
+                pos = idx + len(kr_padded)
+
+        if count > 0:
+            total_replacements += count
+
+    if total_replacements > 0:
+        with open(stg_path, "wb") as f:
+            f.write(data)
+
+    stg_name = os.path.basename(stg_path)
+    print(f"  Orphan names: {total_replacements} replacements in {stg_name}")
+    return total_replacements
+
+
 def save_mapping(mapping, output_path):
     """Save the Korean character mapping to a file."""
     with open(output_path, "w", encoding="utf-8") as f:

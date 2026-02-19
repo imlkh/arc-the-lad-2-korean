@@ -4548,3 +4548,8 @@
   0x01908DA6 [0xFFFE] [script:EE 5F]자, 눈을 감아
   --- context: 0xFFFE -> 0x00A9 ---
   0x01908EC2 [0x00A9] [script:8D 60][box:system]일기장이 있습니다. 기입하시겠습니까?[br][opt]네[br][opt]아니오[box:close]
+  --- orphan menu entries (missed) ---
+  0x016D0E98 [0x00A9] [script:6A 0B]엘크, 기다려!
+  0x0184B810 [0x00A9] [script:CE 0B]기다려, 쿠쿠루
+  0x0184B972 [0x00A9] [script:7E 0C]야, 기다려
+  0x0184BEF0 [0x00A9] [script:40 0F]기다려 주세요, 쿠쿠루씨

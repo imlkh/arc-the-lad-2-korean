@@ -1364,3 +1364,5 @@
   0x00BC76EC [0x8005] [script:9C 16]고겐 씨, 리자를,[br][delay:1F]제 손녀를 잘 부탁드립니다
   --- context: 0x8005 -> 0x8009 ---
   0x00BC7778 [0x8009] [script:DC 16]리자[delay:0B]・[delay:0B]・[delay:0B]・
+  --- orphan menu entries (missed) ---
+  0x0069F28C [0x00A9] [script:CD 4A]스위치는 ON입니다

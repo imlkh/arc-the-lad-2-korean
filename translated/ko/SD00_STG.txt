@@ -1247,3 +1247,5 @@
   --- context: 0x8000 -> 0x800A ---
   0x00D3EF28 [0x800A] [script:F9 10]전투에 참가할 캐릭터를[br]선택해 주세요
   0x00D3FB3C [0x800A] [script:FE 16]서둘러, 세뇌 장치가 무너진다!!
+  --- orphan menu entries (missed) ---
+  0x005230E0 [0x00A9] [script:AC 49]트로코를 타고 싶어하는 것 같다

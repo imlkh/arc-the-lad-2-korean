@@ -3358,3 +3358,12 @@
   0x0293BAAC [0x00A9] [script:71 0A]「중계지점 3」에 들어갈까요?[br][opt]네[br][opt]아니오
   0x0293BB68 [0x00A9] [script:CF 0A]「성 앞 광장」에 들어갈까요?[br][opt]네[br][opt]아니오
   0x0293BC24 [0x00A9] [script:2E 0B]「지하도 입구」에 들어갈까요?[br][opt]네[br][opt]아니오
+  --- orphan menu entries (missed) ---
+  0x005DFBE4 [0x00A9] [script:89 3F][br]레이디스 앤드 젠틀멘
+  0x01553936 [0x00A9] [script:58 1D]스위치가 있다
+  0x01553B90 [0x00A9] [script:85 1E]스위치가 있다
+  0x015567CE [0x00A9] [script:A4 34]스위치가 있다
+  0x022961E8 [0x00A9] [script:04 14][box:speech]그렇게 서두르면 안 된다…
+  0x022965C6 [0x00A9] [script:F3 15][box:speech]그렇게 서두르면 안 된다…
+  0x02644CA8 [0x00A9] [script:16 0E]이 트로코에는 레버가[br]달려있지 않은 것 같다
+  0x0264506E [0x00A9] [script:F9 0F]이 트로코에는 레버가[br]달려있지 않은 것 같다

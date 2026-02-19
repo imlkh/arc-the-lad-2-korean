@@ -1349,3 +1349,5 @@
   0x0075BCB0 [0x8000] [script:53 27]큰일이야, 탑이 무너지기 시작했어
   0x0075BCF2 [0x8000] [script:6F 27]서둘러!!
   0x0075BD8A [0x8000] [script:C3 27]귀찮게 하지 마, 이 고물아!
+  --- orphan menu entries (missed) ---
+  0x00758418 [0x00A9] [script:0F 0B]전투에 참가할 캐릭터를[br]선택해 주세요

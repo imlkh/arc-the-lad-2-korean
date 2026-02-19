@@ -1103,3 +1103,6 @@
   0x008D5672 [0x8006] [script:4F 06]이번에는 이쪽에 운이 있었던 것 같군
   0x008D56BA [0x8006] [script:6E 06]안녕이다, 용사님
   0x008D56F8 [0x8006] [script:8E 06]하하하하하하…
+  --- orphan menu entries (missed) ---
+  0x0075CE40 [0x00A9] [script:7C 09]헤모~?
+  0x0075CF5C [0x00A9] [script:0D 0A]헤모~, 헤모~!

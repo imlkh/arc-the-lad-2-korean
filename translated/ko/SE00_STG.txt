@@ -2162,3 +2162,7 @@
   0x00EB9F90 [0x00B4] [script:30 46]남쪽 탑[opt]6층
   0x00EB9FAE [0x00B4] [script:3F 46]남쪽 탑[opt]7층
   0x00EB9FCC [0x00B4] [script:4E 46]남쪽 탑[opt]8층
+  --- orphan menu entries (missed) ---
+  0x004649DC [0x00A9] [script:7D 06]갹갹갹, 쿠에!
+  0x0075B7A6 [0x00A9] [script:CD 52][br][br][br]나머지는 맡겼다, 안델
+  0x00B063FC [0x00A9] [script:A2 39]스위치는 ON이다

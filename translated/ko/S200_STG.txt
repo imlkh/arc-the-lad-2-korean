@@ -2812,3 +2812,5 @@
   0x00C84398 [0x8014] [script:73 7E]몬스터도 노리는[br]이 술이 대체 뭐야？
   0x00C844A4 [0x8014] [script:02 3F]빨리 프로디아스로 가자
   0x00C844B6 [0x8014] [script:F3 27]빨리 프로디아스로 가요
+  --- orphan menu entries (missed) ---
+  0x003ABC04 [0x00A9] [script:91 38]아, 찾았다

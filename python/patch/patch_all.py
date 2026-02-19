@@ -21,7 +21,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from patch_korean import (
     load_decode_table, extract_korean_chars, build_korean_mapping,
-    patch_comm_img, patch_stg_file, patch_stg_system_text,
+    patch_comm_img, patch_stg_file, patch_stg_system_text, patch_stg_orphan_names,
     patch_exe_file, patch_bin_file, patch_beam_equipment,
     parse_translation_file, parse_bin_translation_file, validate_translation_lengths,
     save_mapping, GAME_DIR, BASE_DIR, OUTPUT_DIR
@@ -221,6 +221,7 @@ def main():
         print(f"Patching STG file: {stg_dst}")
         patch_stg_file(stg_dst, entries, korean_mapping, decode_table)
         patch_stg_system_text(stg_dst, korean_mapping, decode_table)
+        patch_stg_orphan_names(stg_dst, korean_mapping, decode_table)
 
     # Patch system file
     if os.path.exists(system_path):
