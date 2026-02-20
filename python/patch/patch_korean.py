@@ -154,7 +154,7 @@ def extract_korean_chars(translation_path):
     return sorted(korean_chars)
 
 
-def build_korean_mapping(korean_chars, decode_table, priority_chars=None, char_frequency=None,
+def build_korean_mapping(korean_chars, decode_table, char_frequency=None,
                          non_stg_frequency=None, stg_frequency=None,
                          packed_list_chars=None,
                          scps_frequency=None, beam_frequency=None):
@@ -163,11 +163,17 @@ def build_korean_mapping(korean_chars, decode_table, priority_chars=None, char_f
     Strategy: Replace hiragana (1-80), katakana (81-160), lowercase a-z (187-212),
     then kanji (239+). Preserve Latin uppercase, digits, and common symbols.
 
+    Characters are ordered by priority for single-byte (1-byte) slot assignment:
+      1. Packed list chars (can't be truncated, must minimize byte cost)
+      2. SCPS_100.26 chars by frequency (fixed-length, most space-constrained)
+      3. BEAM.DAT chars by frequency (fixed-length)
+      4. Other non-STG chars by frequency (fixed-length)
+      5. STG-only chars by frequency (variable-length, less byte-sensitive)
+
     Args:
         korean_chars: List of Korean characters to map
         decode_table: The character decode table
-        priority_chars: Optional set of characters to prioritize for single-byte slots
-        char_frequency: Optional dict mapping char -> usage count for frequency-based ordering
+        char_frequency: Optional dict mapping char -> usage count (flat fallback)
         non_stg_frequency: Optional dict of char frequency in non-STG files (fixed-length)
         stg_frequency: Optional dict of char frequency in STG files (variable-length)
         packed_list_chars: Optional set of chars used in packed item lists (highest priority
@@ -234,9 +240,7 @@ def build_korean_mapping(korean_chars, decode_table, priority_chars=None, char_f
             -stg_frequency.get(c, 0)
         ))
     elif char_frequency:
-        priority_list = [ch for ch in korean_chars if ch in priority_chars]
-        other_list = [ch for ch in korean_chars if ch not in priority_chars]
-        ordered_chars = priority_list + other_list
+        ordered_chars = sorted(korean_chars, key=lambda c: -char_frequency.get(c, 0))
     else:
         ordered_chars = korean_chars
 
@@ -1190,7 +1194,9 @@ def patch_stg_orphan_names(stg_path, korean_mapping, decode_table):
         ("ザルバドビット", "잘바드비트"),
         # === Onomatopoeia / short words ===
         # フフフ(3B), ウウッ(3B), セウム(3B), アジュ(3B) skipped: no Korean fits
-        ("ギギギ", "기기기"),
+        # ギギギ removed: 3-byte pattern 80 80 80 matches event script bytecode (0x80 is common),
+        # causing 18 false-positive replacements that corrupt script parameters and freeze the game.
+        # Handle via offset-based S*_STG.txt entries instead.
     ]
 
     def encode_jp_name(name):
@@ -1230,6 +1236,76 @@ def patch_stg_orphan_names(stg_path, korean_mapping, decode_table):
 
         search_pattern = jp_bytes + b"\x00"
         kr_padded = kr_encoded + b"\x00" * (len(jp_bytes) - len(kr_encoded)) + b"\x00"
+
+        count = 0
+        for chunk_idx in range(num_chunks):
+            chunk_start = chunk_idx * CHUNK_SIZE
+            region_start = chunk_start + SEARCH_START
+            region_end = chunk_start + CHUNK_SIZE
+
+            if region_end > len(data):
+                break
+
+            pos = region_start
+            while pos < region_end:
+                idx = data.find(search_pattern, pos, region_end)
+                if idx < 0:
+                    break
+                data[idx:idx + len(search_pattern)] = kr_padded
+                count += 1
+                pos = idx + len(kr_padded)
+
+        if count > 0:
+            total_replacements += count
+
+    # === Item names with kanji (raw byte patterns) ===
+    # Kanji charIDs may not be in encode_table, so we use raw bytes directly.
+    # Format: (japanese_bytes, korean_text)
+    ORPHAN_ITEM_BYTES = [
+        # Elemental prefix charIDs: DF=地, E0=水, E1=火, E2=風,
+        #   F1 C4=光, F5 24=闇
+        # Stat charIDs: F2 6C=守, F2 69=弱
+        # Common: 19=の, 28=り, F1 6D=薬
+        # --- 守りの薬 (Protective Medicine) series ---
+        (bytes([0xDF, 0x19, 0xF2, 0x6C, 0x28, 0x19, 0xF1, 0x6D]),
+         "대지의수호약"),       # 地の守りの薬
+        (bytes([0xE0, 0x19, 0xF2, 0x6C, 0x28, 0x19, 0xF1, 0x6D]),
+         "물의수호약"),         # 水の守りの薬
+        (bytes([0xE1, 0x19, 0xF2, 0x6C, 0x28, 0x19, 0xF1, 0x6D]),
+         "불의수호약"),         # 火の守りの薬
+        (bytes([0xE2, 0x19, 0xF2, 0x6C, 0x28, 0x19, 0xF1, 0x6D]),
+         "풍의수호약"),         # 風の守りの薬
+        (bytes([0xF1, 0xC4, 0x19, 0xF2, 0x6C, 0x28, 0x19, 0xF1, 0x6D]),
+         "빛의수호약"),         # 光の守りの薬
+        (bytes([0xF5, 0x24, 0x19, 0xF2, 0x6C, 0x28, 0x19, 0xF1, 0x6D]),
+         "어둠의수호약"),       # 闇の守りの薬
+        # --- 弱りの薬 (Weakening Medicine) series ---
+        (bytes([0xDF, 0x19, 0xF2, 0x69, 0x28, 0x19, 0xF1, 0x6D]),
+         "대지의약화약"),       # 地の弱りの薬
+        (bytes([0xE0, 0x19, 0xF2, 0x69, 0x28, 0x19, 0xF1, 0x6D]),
+         "물의약화약"),         # 水の弱りの薬
+        (bytes([0xE1, 0x19, 0xF2, 0x69, 0x28, 0x19, 0xF1, 0x6D]),
+         "불의약화약"),         # 火の弱りの薬
+        (bytes([0xE2, 0x19, 0xF2, 0x69, 0x28, 0x19, 0xF1, 0x6D]),
+         "풍의약화약"),         # 風の弱りの薬
+        (bytes([0xF1, 0xC4, 0x19, 0xF2, 0x69, 0x28, 0x19, 0xF1, 0x6D]),
+         "빛의약화약"),         # 光の弱りの薬
+        (bytes([0xF5, 0x24, 0x19, 0xF2, 0x69, 0x28, 0x19, 0xF1, 0x6D]),
+         "어둠의약화약"),       # 闇の弱りの薬
+    ]
+
+    for jp_bytes, kr_name in ORPHAN_ITEM_BYTES:
+        kr_encoded = encode_korean_text(kr_name, korean_mapping, decode_table)
+
+        if len(kr_encoded) > len(jp_bytes):
+            print(f"    WARNING: item '{kr_name}' Korean ({len(kr_encoded)}B) "
+                  f"> Japanese ({len(jp_bytes)}B), skipping")
+            continue
+
+        search_pattern = jp_bytes + b"\x00"
+        kr_padded = (kr_encoded
+                     + b"\x00" * (len(jp_bytes) - len(kr_encoded))
+                     + b"\x00")
 
         count = 0
         for chunk_idx in range(num_chunks):
@@ -1740,47 +1816,92 @@ def main():
     decode_table = load_decode_table()
     print(f"  Loaded {len(decode_table)} characters")
 
-    # Collect all translation files to extract Korean characters
-    all_translation_paths = []
+    # Collect ALL translation files to build unified charmap with per-source frequency
+    # Priority: SCPS > BEAM > other BIN > STG (fixed-length binaries need single-byte most)
+    trans_dir = os.path.join(BASE_DIR, "translated", "ko")
 
-    if args.system:
-        system_translation = os.path.join(BASE_DIR, "translated", "ko", "SCPS_100_26_system.txt")
-        if os.path.exists(system_translation):
-            all_translation_paths.append(system_translation)
+    # Map file basenames to frequency category
+    FREQ_CATEGORY = {
+        "SCPS_100_26.txt": "scps",
+        "BEAM_DAT.txt": "beam",
+        "SDIC_BIN.txt": "other", "YGUILD_BIN.txt": "other", "SMITH_BIN.txt": "other",
+    }
 
-    if args.stage:
-        stage = args.stage.upper()
-        stage_translation = os.path.join(BASE_DIR, "translated", "ko", f"{stage}_STG.txt")
-        if os.path.exists(stage_translation):
-            all_translation_paths.append(stage_translation)
+    print("Extracting Korean characters from ALL translations...")
+    all_korean_chars = set()
+    scps_frequency = {}
+    beam_frequency = {}
+    other_non_stg_frequency = {}
+    stg_frequency = {}
 
-    if not all_translation_paths:
-        print("ERROR: No translation files found. Specify a stage name or --system.")
+    trans_files_found = []
+    for filename in sorted(os.listdir(trans_dir)):
+        filepath = os.path.join(trans_dir, filename)
+        if not filename.endswith(".txt") or not os.path.isfile(filepath):
+            continue
+        # Skip backup/old/correction/pattern files
+        if any(x in filename.lower() for x in ["_old", "backup", "correction", "pattern", "unique"]):
+            continue
+
+        chars = extract_korean_chars(filepath)
+        if not chars:
+            continue
+        all_korean_chars.update(chars)
+        trans_files_found.append(filename)
+
+        # Determine frequency category
+        if filename in FREQ_CATEGORY:
+            cat = FREQ_CATEGORY[filename]
+        elif filename.endswith("_STG.txt"):
+            cat = "stg"
+        else:
+            continue  # Unknown file, skip frequency counting
+
+        freq_dict = {"scps": scps_frequency, "beam": beam_frequency,
+                     "other": other_non_stg_frequency, "stg": stg_frequency}[cat]
+        with open(filepath, "r", encoding="utf-8") as f:
+            for ch in f.read():
+                if "\uAC00" <= ch <= "\uD7A3":
+                    freq_dict[ch] = freq_dict.get(ch, 0) + 1
+
+        print(f"  {filename}: {len(chars)} unique chars [{cat}]")
+
+    if not all_korean_chars:
+        print("ERROR: No Korean characters found in any translation files.")
         return 1
 
-    # Extract Korean characters and count frequency from all translation files
-    print("Extracting Korean characters from translations...")
-    all_korean_chars = set()
-    char_frequency = {}  # Count character usage for frequency-based encoding
-
-    for trans_path in all_translation_paths:
-        chars = extract_korean_chars(trans_path)
-        all_korean_chars.update(chars)
-        print(f"  {os.path.basename(trans_path)}: {len(chars)} unique chars")
-
-        # Count character frequency
-        with open(trans_path, "r", encoding="utf-8") as f:
-            for line in f:
-                for ch in line:
-                    if "\uAC00" <= ch <= "\uD7A3":
-                        char_frequency[ch] = char_frequency.get(ch, 0) + 1
+    # Extract characters used in packed item lists (highest priority for single-byte)
+    packed_list_chars = set()
+    for packed_file in ["SCPS_100_26.txt", "BEAM_DAT.txt"]:
+        packed_path = os.path.join(trans_dir, packed_file)
+        if os.path.exists(packed_path):
+            with open(packed_path, "r", encoding="utf-8") as f:
+                for line in f:
+                    if "[FF:1A" not in line and "[FF:19" not in line:
+                        continue
+                    m = re.match(r'\s*0x[0-9A-Fa-f]+\s+\[\s*\d+\]\s+(.+)', line)
+                    if m:
+                        text = re.sub(r'\[FF:[0-9A-Fa-f]+ [0-9A-Fa-f]+ [0-9A-Fa-f]+\]', '', m.group(1))
+                        for ch in text:
+                            if "\uAC00" <= ch <= "\uD7A3":
+                                packed_list_chars.add(ch)
 
     korean_chars = sorted(all_korean_chars)
+    non_stg_all = set(scps_frequency) | set(beam_frequency) | set(other_non_stg_frequency)
     print(f"  Total unique Korean characters: {len(korean_chars)}")
-    print(f"  Using frequency-based encoding (most used chars get single-byte)")
+    print(f"  SCPS chars: {len(set(scps_frequency))} (top priority for single-byte)")
+    print(f"  BEAM-only chars: {len(set(beam_frequency) - set(scps_frequency))} (second priority)")
+    print(f"  STG-only chars: {len(set(c for c in all_korean_chars if c not in non_stg_all))}")
+    if packed_list_chars:
+        print(f"  Packed list chars: {len(packed_list_chars)} (highest priority)")
 
     print("Building character mapping...")
-    korean_mapping = build_korean_mapping(korean_chars, decode_table, char_frequency=char_frequency)
+    korean_mapping = build_korean_mapping(
+        korean_chars, decode_table,
+        non_stg_frequency=other_non_stg_frequency, stg_frequency=stg_frequency,
+        packed_list_chars=packed_list_chars,
+        scps_frequency=scps_frequency, beam_frequency=beam_frequency
+    )
     print(f"  Mapped {len(korean_mapping)} Korean characters to font slots")
 
     # Always copy fresh COMM.IMG (don't patch over previously patched file)
