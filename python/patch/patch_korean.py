@@ -1117,6 +1117,45 @@ def patch_stg_system_text(stg_path, korean_mapping, decode_table):
         if count > 0:
             total_replacements += count
 
+    # Bare (non-[box:system]) decoder-missed messages: raw-byte search-replace.
+    # These plain strings end in 0x00 and are not template-referenced, so the
+    # decoder misses them, but they ARE displayed (treasure chest, shop, inn).
+    # Long unique byte patterns -> no false matches; byte-fit + 0x00 pad; skip
+    # if Korean longer. Each appears ~382x across STG files.
+    MISSED_BARE = [
+        ("Treasure chest (おれはたからばこだ)",
+         bytes([0x05, 0x2A, 0x1A, 0x10, 0x06, 0x27, 0x3E, 0x0A, 0x39]),
+         "보물상자다"),
+        ("Not enough money (所持金が足りないようですね)",
+         bytes([0xF2, 0x94, 0xF2, 0x49, 0xF1, 0x62, 0x2F, 0xF0, 0x2B, 0x28,
+                0x15, 0x02, 0x26, 0x03, 0x3C, 0x0D, 0x18]),
+         "소지금이 부족합니다"),
+        ("Inn lodging (宿泊は[num:01]G...)",
+         bytes([0xF5, 0x22, 0xF4, 0x42, 0x1A, 0xFF, 0x07, 0x01, 0x01, 0xA7,
+                0x16, 0x15, 0x28, 0x1F, 0x0D, 0xFF, 0x05, 0x01, 0x01, 0x05,
+                0xF1, 0x3E, 0x20, 0x16, 0x15, 0x28, 0x1F, 0x0D, 0x06, 0xEE]),
+         "[num:01]G에 숙박[br]쉬시겠어요?"),
+    ]
+    for desc, jp_bytes, kr_text in MISSED_BARE:
+        kr_encoded = encode_korean_text(kr_text, korean_mapping, decode_table)
+        if len(kr_encoded) > len(jp_bytes):
+            print(f"  WARNING: bare '{desc}' Korean ({len(kr_encoded)}B) > "
+                  f"Japanese ({len(jp_bytes)}B), skipping")
+            continue
+        search = jp_bytes + b"\x00"
+        replacement = kr_encoded + b"\x00" * (len(jp_bytes) - len(kr_encoded)) + b"\x00"
+        count = 0
+        pos = 0
+        while True:
+            idx = data.find(search, pos)
+            if idx < 0:
+                break
+            data[idx:idx + len(search)] = replacement
+            count += 1
+            pos = idx + len(replacement)
+        if count > 0:
+            total_replacements += count
+
     # Write back
     if total_replacements > 0:
         with open(stg_path, "wb") as f:
