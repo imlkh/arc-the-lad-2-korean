@@ -142,7 +142,7 @@
   0x000B6A14 [0xFFFE] [script:37 1E]아크에게는[br]거액의 현상금이 걸렸대
   0x000B6A66 [0xFFFE] [script:5B 1E]잡으면 평생 놀고 먹을 수 있겠어
   0x000B6AB6 [0xFFFE] [script:83 1E]마을 안에 몬스터가 나타났대
-  0x000B6AFE [0xFFFE] [script:9F 1E]물騷해
+  0x000B6AFE [0xFFFE] [script:9F 1E]험악해
   0x000B6B3E [0xFFFE] [script:C2 1E]있잖아, 알아?
   0x000B6B7C [0xFFFE] [script:E6 1E]아크가 또 사건을 일으켰대
   0x000B6BC4 [0xFFFE] [script:09 1F]또 현상금이 올라가겠네
@@ -195,9 +195,9 @@
   0x000B77B2 [0xFFFE] [script:08 25]샨테를 잡으면[br]마피아한테서 돈을 받을 수 있대
   0x000B7810 [0xFFFE] [script:36 25]찢어발기는 진에게 고액의[br]현상금이 걸렸는데
   0x000B7864 [0xFFFE] [script:58 25]무서워서 아무도 손을 못 대
-  0x000B78C4 [0xFFFE] [script:8C 25]이 마을은 마피아가 없어도 꽤 물騷해
-  0x000B7918 [0xFFFE] [script:B4 25]이 마을은 마피아가 많아서 물騷해
-  0x000B7968 [0xFFFE] [script:DD 25]로말리아 때문에 어느 나라나 물騷해졌어
+  0x000B78C4 [0xFFFE] [script:8C 25]이 마을은 마피아가 없어도 꽤 험악해
+  0x000B7918 [0xFFFE] [script:B4 25]이 마을은 마피아가 많아서 험악해
+  0x000B7968 [0xFFFE] [script:DD 25]로말리아 때문에 어느 나라나 험악해졌어
   0x000B79CE [0xFFFE] [script:0D 26]샨테도 술집을 그만뒀나 봐
   0x000B7A12 [0xFFFE] [script:2E 26]내가 술집에서 일할까
   0x000B7A70 [0xFFFE] [script:61 26]술집에는 샨테라는 가수가 있어
@@ -206,7 +206,7 @@
   0x000B7B68 [0xFFFE] [script:DC 26]그게 꽤 미인이라서 분해…
   0x000B7BB8 [0xFFFE] [script:FE 26]당신이 샨테구나
   0x000B7BF4 [0xFFFE] [script:20 27]꽤 미인이네, 분해…
-  0x000B7C40 [0xFFFE] [script:49 27]여기는 알디아에서 제일 물騷한 마을이야
+  0x000B7C40 [0xFFFE] [script:49 27]여기는 알디아에서 제일 험악한 마을이야
   0x000B7CA6 [0xFFFE] [script:83 27]샨테에게는 남동생이 있고[br]심한 병으로 입원했대
   0x000B7D06 [0xFFFE] [script:A8 27]당신도 젊은데 힘들겠네
   0x000B7D50 [0xFFFE] [script:D8 27]아크라는 악당이[br]세계 곳곳을 해치고 다닌대
@@ -1446,8 +1446,7 @@
   0x003AB5B6 [0x8006] [script:FA 33]아아…
   --- context: 0x8006 -> 0x8005 ---
   0x003ABB32 [0x8005] [script:BB 36]기간한정
-  0x003ABC02 [0x8005] [script:A9 00]ベぞあ、みつかった
-  0x003ABC65 [0x8005] [script:00 26]ろしくおねがいしまーす』
+  0x003ABC02 [0x8005] [script:A9 00]베조아、찾았다
   --- context: 0x8005 -> 0x8016 ---
   0x003AC5C0 [0x8016] [script:06 3C]오[delay:3D]버[delay:3D]로드！！
   --- bare item ---
