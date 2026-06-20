@@ -31,5 +31,33 @@ class TestParseAndClassify(unittest.TestCase):
         self.assertTrue(pc.contains_japanese("おはよう"))
         self.assertFalse(pc.contains_japanese("안녕하세요"))
 
+
+class TestMapAndEmit(unittest.TestCase):
+    def setUp(self):
+        if not (pc.GAME_DIR / "S700.STG").exists():
+            self.skipTest("original STG binaries not present")
+
+    def test_find_offsets_treasure_chest(self):
+        raw = bytes([0x05,0x2A,0x1A,0x10,0x06,0x27,0x3E,0x0A,0x39])
+        hits = pc.find_offsets(raw)
+        self.assertTrue(any(stage and isinstance(off, int) for stage, off in hits),
+                        "treasure-chest bytes should be found in at least one STG")
+
+    def test_process_flags_missed_by_original_match(self):
+        # chest bytes match an original STG -> missed, with offset + readable JP
+        fd, p = tempfile.mkstemp(suffix=".log"); os.close(fd)
+        Path(p).write_text(
+            "addr=0x801A0000 bytes=05 2A 1A 10 06 27 3E 0A 39\n"
+            # bytes that do NOT appear in any original STG -> NOT missed (e.g. a
+            # translated/Korean line); use an implausible run.
+            "addr=0x801A0050 bytes=EE EE EE EE EE EE EE EE EE EE\n",
+            encoding="utf-8")
+        result = pc.process(Path(p))
+        self.assertEqual(len(result["missed"]), 1)   # only the chest matched
+        m = result["missed"][0]
+        self.assertIn("たからばこ", m["text"])
+        self.assertIsNotNone(m["stage"])
+        os.unlink(p)
+
 if __name__ == "__main__":
     unittest.main()
