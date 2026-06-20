@@ -165,3 +165,54 @@ def byte_accountability(data, decode_table, decoded_offsets: set,
     frac = (accounted_bytes / total_bytes) if total_bytes else 1.0
     candidates.sort(key=lambda c: c[2], reverse=True)
     return frac, candidates
+
+
+def check_stage(stage: str, decode_table) -> dict:
+    """Run all tiers for one stage. Returns a result dict; never raises."""
+    binary = GAME_DIR / f"{stage}.STG"
+    decoded = DECODED_DIR / f"{stage}_STG.txt"
+    translation = TRANS_DIR / f"{stage}_STG.txt"
+    result = {"stage": stage, "status": "skipped",
+              "tier1": [], "tier2": [], "byte_acct": 0.0, "tier3": []}
+    if not (binary.exists() and decoded.exists() and translation.exists()):
+        return result
+
+    data = binary.read_bytes()
+    decoded_offsets = parse_decoded_offsets(decoded)
+    invalid_offsets = load_invalid_offsets(stage)
+    translations = parse_translation_file(translation)
+
+    result["status"] = "ok"
+    result["tier1"] = tier1_untranslated(translations)
+    result["tier2"] = tier2_decoder_rejects(
+        data, decode_table, decoded_offsets, invalid_offsets)
+    result["byte_acct"], result["tier3"] = byte_accountability(
+        data, decode_table, decoded_offsets, invalid_offsets)
+    return result
+
+
+def write_report(result: dict):
+    """Write a per-stage coverage report; returns the path (or None if skipped)."""
+    if result["status"] == "skipped":
+        return None
+    COVERAGE_DIR.mkdir(parents=True, exist_ok=True)
+    path = COVERAGE_DIR / f"{result['stage']}_coverage.txt"
+    lines = [
+        f"# {result['stage']} coverage report",
+        f"# byte accountability: {result['byte_acct']:.4f}",
+        f"# (exit 0 never asserts completeness; see Tier 3 below)",
+        "",
+        f"## Tier 1 — decoded-but-untranslated ({len(result['tier1'])})",
+    ]
+    for off, text in result["tier1"]:
+        lines.append(f"  0x{off:08X} {text}")
+    lines.append("")
+    lines.append(f"## Tier 2 — decoder-reject (missing) ({len(result['tier2'])})")
+    for off, text in result["tier2"]:
+        lines.append(f"  0x{off:08X} {text}")
+    lines.append("")
+    lines.append(f"## Tier 3 — review candidates ({len(result['tier3'])})")
+    for off, text, score in result["tier3"]:
+        lines.append(f"  0x{off:08X} [score {score}] {text}")
+    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    return path

@@ -154,5 +154,25 @@ class TestByteAccountability(unittest.TestCase):
         self.assertNotIn(text_off, [c[0] for c in cands])
 
 
+class TestCheckStage(unittest.TestCase):
+    def test_missing_files_skipped(self):
+        table = cov.dt.build_decode_table()
+        result = cov.check_stage("ZZ99", table)  # nonexistent stage
+        self.assertEqual(result["status"], "skipped")
+        self.assertEqual(result["tier1"], [])
+        self.assertEqual(result["tier2"], [])
+
+    def test_write_report_creates_file(self):
+        result = {"stage": "TT00", "status": "ok",
+                  "tier1": [(0x10, "おはよう")], "tier2": [(0x20, "みつかった")],
+                  "byte_acct": 0.97, "tier3": [(0x30, "ほげ", 5)]}
+        path = cov.write_report(result)
+        self.assertTrue(path.exists())
+        body = path.read_text(encoding="utf-8")
+        self.assertIn("0x00000010", body)
+        self.assertIn("byte accountability", body.lower())
+        path.unlink()
+
+
 if __name__ == "__main__":
     unittest.main()
