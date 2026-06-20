@@ -119,5 +119,40 @@ class TestTier2(unittest.TestCase):
         self.assertEqual(out, [(0x20, "みつかった")])
 
 
+class TestByteAccountability(unittest.TestCase):
+    def test_unaccounted_japanese_run_detected(self):
+        table = cov.dt.build_decode_table()
+        # Pick three kana chars that round-trip through the table.
+        inv = {v: k for k, v in table.items() if isinstance(k, int) and 1 <= k <= 0xEE}
+        kana = [c for c in ("お", "は", "よ", "う", "み", "つ") if c in inv][:3]
+        self.assertGreaterEqual(len(kana), 3, "need 3 single-byte kana in table")
+        payload = bytes(inv[c] for c in kana) + b"\x00"
+
+        chunk = cov.dt.STG_CHUNK_SIZE
+        text_off = cov.dt.STG_TEXT_REGION_OFFSET
+        data = bytearray(chunk)
+        data[text_off:text_off + len(payload)] = payload
+
+        frac, cands = cov.byte_accountability(
+            bytes(data), table, decoded_offsets=set(), invalid_offsets=set())
+        offs = [c[0] for c in cands]
+        self.assertIn(text_off, offs)
+        self.assertLess(frac, 1.0)
+
+    def test_decoded_run_is_accounted(self):
+        table = cov.dt.build_decode_table()
+        inv = {v: k for k, v in table.items() if isinstance(k, int) and 1 <= k <= 0xEE}
+        kana = [c for c in ("お", "は", "よ", "う", "み", "つ") if c in inv][:3]
+        payload = bytes(inv[c] for c in kana) + b"\x00"
+        chunk = cov.dt.STG_CHUNK_SIZE
+        text_off = cov.dt.STG_TEXT_REGION_OFFSET
+        data = bytearray(chunk)
+        data[text_off:text_off + len(payload)] = payload
+        # Mark that offset as already decoded -> must NOT be a Tier-3 candidate.
+        _frac, cands = cov.byte_accountability(
+            bytes(data), table, decoded_offsets={text_off}, invalid_offsets=set())
+        self.assertNotIn(text_off, [c[0] for c in cands])
+
+
 if __name__ == "__main__":
     unittest.main()

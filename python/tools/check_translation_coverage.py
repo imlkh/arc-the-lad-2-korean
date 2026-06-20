@@ -121,3 +121,47 @@ def tier2_decoder_rejects(data, decode_table, decoded_offsets: set,
         if contains_japanese(text):
             out.append((off, text))
     return sorted(set(out))
+
+
+_PARTICLES = set("はがをにのへともや")
+
+
+def _score(text: str) -> int:
+    kana = sum(1 for c in text if contains_japanese(c))
+    particle = 2 if any(c in _PARTICLES for c in text) else 0
+    return kana + particle + 1  # +1: it decoded
+
+
+def byte_accountability(data, decode_table, decoded_offsets: set,
+                        invalid_offsets: set):
+    """Fraction of text-region string bytes that are explained, plus the
+    unaccounted Japanese runs (Tier-3 review candidates).
+
+    A run is accounted if its offset is decoded, in the invalid report, or its
+    decoded text is classified garbage by the decoder. Unaccounted Japanese
+    runs are returned as (offset, text, score), sorted by descending score.
+    """
+    total_bytes = 0
+    accounted_bytes = 0
+    candidates = []
+    for start, end, _chunk in dt._get_chunk_text_regions(len(data)):
+        pos = start
+        while pos < end:
+            if data[pos] == 0x00:
+                pos += 1
+                continue
+            text, consumed = dt.decode_string(data, pos, decode_table)
+            run = max(consumed, 1)
+            total_bytes += run
+            is_known = (pos in decoded_offsets or pos in invalid_offsets
+                        or dt._is_garbage_text(text))
+            if is_known:
+                accounted_bytes += run
+            elif contains_japanese(text):
+                candidates.append((pos, text, _score(text)))
+            else:
+                accounted_bytes += run  # non-Japanese unknown = not a miss
+            pos += run
+    frac = (accounted_bytes / total_bytes) if total_bytes else 1.0
+    candidates.sort(key=lambda c: c[2], reverse=True)
+    return frac, candidates
