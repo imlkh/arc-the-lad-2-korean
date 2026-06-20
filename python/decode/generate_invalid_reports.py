@@ -307,6 +307,11 @@ def is_garbage(text, plain):
         # Type G: Short hiragana fragments
         'ずもよ', 'がゆせ', 'りちよ', 'てにい', 'せばい', 'げどを',
         'ねけを', 'がなせ',
+        # Type H: Mis-decode bleeding into the developer debug region.
+        # S200 @0x003ABC02 — katakana+hiragana mash (ベ + ぞあ) sitting 13 bytes
+        # before the debug messages at 0x003ABC0F; not real dialogue. Without this
+        # the update path re-adds it to translated/ko/S200_STG.txt on regeneration.
+        'ベぞあ、みつかった',
     }
     if plain in SHARED_BLOCK_ARTIFACTS:
         return f"Shared code block artifact: {plain}"
