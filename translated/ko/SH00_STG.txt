@@ -132,7 +132,6 @@
   0x000BC60C [0x00A9] [script:FC 41]「빈집」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
   0x000BC702 [0x00A9] [script:7A 42]「미스터 덱스의 저택」에 들어가시겠습니까?[br][opt]예[br][opt]아니오
   --- context: 0x00A9 -> 0x8008 ---
-  0x0015F2BE [0x8008] [script:D0 19]バなれちテデイちすすゾたロヌモぅ[opt]だぅるEと
   --- context: 0x8008 -> 0x00A9 ---
   0x0017733E [0x00A9] [script:AE 01][box:system]스위치 발견[br]ON할까?[br][opt]네[br][opt]아니오[box:close]
   0x001778E2 [0x00A9] [script:E7 02][box:system]계단 발견[br][opt]내려가기[br][opt]그만두기[box:close]

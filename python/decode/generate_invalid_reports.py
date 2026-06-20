@@ -312,6 +312,15 @@ def is_garbage(text, plain):
         # before the debug messages at 0x003ABC0F; not real dialogue. Without this
         # the update path re-adds it to translated/ko/S200_STG.txt on regeneration.
         'ベぞあ、みつかった',
+        # Type I: Binary/event-script data misread as kana (not player dialogue).
+        # Surfaced as Tier-1 false positives by the coverage checker; confirmed
+        # garbled (S800/SG00/SH00/SI00 event-script & padding slots).
+        'ぼたザとEね－みるるデじぎぼモぅがばモぺにトにトにトにトにト',
+        'たザとEね－みるるデじぎぼモぅがばモぺにトにトにトにトにト',
+        'リXクじギ', 'だぅるEと', '！めせ', 'みゲぶズら', 'ッゲみゼら',
+        'タグみゼら', 'くもぱ', 'ギッジタゴッゼ', 'おギジたほ', 'えゆほ',
+        'んゆほ', 'あギBよそあさ', 'づらえ', 'びるえ', 'それえ', '地れえ',
+        'ちわちわヤろリろヤろヤろヤろちわよ', 'どなせ',
     }
     if plain in SHARED_BLOCK_ARTIFACTS:
         return f"Shared code block artifact: {plain}"

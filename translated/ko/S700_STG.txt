@@ -1115,7 +1115,7 @@
   0x00526800 [0x800F] [script:74 30][box:speech]두목？
   --- context: 0x800F -> 0x00B4 ---
   0x00526838 [0x00B4] [script:94 30][box:speech]아, 아니, 아무것도 아니야
-  0x00526878 [0x00B4] [script:BC 30][box:speech]それより、マスターにあいさつを[br]してきたらどうだ？
+  0x00526878 [0x00B4] [script:BC 30][box:speech]그것보다, 마스터에게 인사를[br]하고 오는 게 어때？
   --- context: 0x00B4 -> 0x800F ---
   0x005268E6 [0x800F] [script:EF 30][box:speech]마스터한테 인사하고 왔냐？
   0x00526960 [0x800F] [script:27 31][box:speech]・・・・・
@@ -1836,7 +1836,7 @@
   0x00C7E5DA [0x00A9] [script:25 03][box:system]사다리다[br][opt]올라가기[br][opt]그만두기[box:close]
   0x00C7E622 [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
   --- context: 0x00A9 -> 0x00B4 ---
-  0x00C7E95E [0x00B4] [script:E0 04][box:speech]ラストステージ[opt]チェックエラー
+  0x00C7E95E [0x00B4] [script:E0 04][box:speech]라스트 스테이지[opt]체크 에러
   0x00C7EE0C [0x00B4] [script:32 07][box:speech]와앗！
   --- context: 0x00B4 -> 0x8006 ---
   0x00C7EF26 [0x8006] [script:C1 07][box:speech]아-, 깜짝 놀랐네

@@ -277,7 +277,6 @@
   0x0046AF50 [0x00B4] [script:AE 2A]수배 몬스터[br]키도우를 쓰러뜨렸습니다
   0x0046AFA6 [0x00B4] [script:DA 2A]수배 몬스터[br]비샤몬을 쓰러뜨렸습니다
   --- context: 0x00B4 -> 0x00A0 ---
-  0x005151EE [0x00A0] [script:81 00]と疑わエEZ[opt]リXクじギ
   --- context: 0x00A0 -> 0x00B0 ---
   0x0051B8FE [0x00B0] [script:AE 01][box:system]스위치 발견[br]ON할까?[br][opt]네[br][opt]아니오[box:close]
   0x0051BEA2 [0x00B0] [script:E7 02][box:system]계단 발견[br][opt]내려가기[br][opt]그만두기[box:close]
