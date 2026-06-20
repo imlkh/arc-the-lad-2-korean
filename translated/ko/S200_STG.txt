@@ -1446,7 +1446,6 @@
   0x003AB5B6 [0x8006] [script:FA 33]아아…
   --- context: 0x8006 -> 0x8005 ---
   0x003ABB32 [0x8005] [script:BB 36]기간한정
-  0x003ABC02 [0x8005] [script:A9 00]베조아、찾았다
   --- context: 0x8005 -> 0x8016 ---
   0x003AC5C0 [0x8016] [script:06 3C]오[delay:3D]버[delay:3D]로드！！
   --- bare item ---
