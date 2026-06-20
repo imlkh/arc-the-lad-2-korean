@@ -71,17 +71,24 @@ def parse_decoded_offsets(path: Path) -> set:
     return out
 
 
+_ADDR_RE = re.compile(r"0x([0-9A-Fa-f]+)")
+
+
 def load_invalid_offsets(stage: str) -> set:
     """Offsets the decoder marked invalid (garbage/debug/single-char).
 
     Reads the generated invalid report; returns empty set if absent.
+    Report entry lines look like '  Line 1449: 0x003ABC02 [0x8005] ...'.
     """
     report = DECODED_DIR / f"{stage}_STG_invalid_report.txt"
     if not report.exists():
         return set()
     out = set()
     for line in report.read_text(encoding="utf-8").splitlines():
-        off = _entry_offset(line.split("Line", 1)[-1] if "Line" in line else line)
-        if off is not None:
-            out.add(off)
+        s = line.strip()
+        if not s or s.startswith("#"):
+            continue
+        m = _ADDR_RE.search(line)
+        if m:
+            out.add(int(m.group(1), 16))
     return out

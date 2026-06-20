@@ -56,5 +56,29 @@ class TestParsers(unittest.TestCase):
         self.assertEqual(cov.parse_decoded_offsets(p), {0x000B4000, 0x000B4050})
 
 
+class TestLoadInvalidOffsets(unittest.TestCase):
+    def setUp(self):
+        self._orig = cov.DECODED_DIR
+        self._tmp = Path(tempfile.mkdtemp())
+        cov.DECODED_DIR = self._tmp
+
+    def tearDown(self):
+        cov.DECODED_DIR = self._orig
+
+    def test_parses_line_prefixed_offsets(self):
+        (self._tmp / "S200_STG_invalid_report.txt").write_text(
+            "# header\n"
+            "## Category 1\n"
+            "  Line 1449: 0x003ABC02 [0x8005] [script:A9 00]ガベージ\n"
+            "\n"
+            "  Line 1450: 0x003ABC0F [0x8005] debug\n",
+            encoding="utf-8")
+        self.assertEqual(cov.load_invalid_offsets("S200"),
+                         {0x003ABC02, 0x003ABC0F})
+
+    def test_missing_report_returns_empty(self):
+        self.assertEqual(cov.load_invalid_offsets("ZZ99"), set())
+
+
 if __name__ == "__main__":
     unittest.main()
