@@ -80,5 +80,17 @@ class TestLoadInvalidOffsets(unittest.TestCase):
         self.assertEqual(cov.load_invalid_offsets("ZZ99"), set())
 
 
+class TestTier1(unittest.TestCase):
+    def test_flags_only_kana_entries(self):
+        translations = {
+            0x10: "안녕하세요",        # translated
+            0x20: "おはよう",          # untranslated hiragana
+            0x30: "그렇군・・・",       # translated, middle dot OK
+            0x40: "ベンチ",            # untranslated katakana
+        }
+        out = cov.tier1_untranslated(translations)
+        self.assertEqual(out, [(0x20, "おはよう"), (0x40, "ベンチ")])
+
+
 if __name__ == "__main__":
     unittest.main()

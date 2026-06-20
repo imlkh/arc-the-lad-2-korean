@@ -92,3 +92,11 @@ def load_invalid_offsets(stage: str) -> set:
         if m:
             out.add(int(m.group(1), 16))
     return out
+
+
+def tier1_untranslated(translations: dict) -> list:
+    """Entries whose translated text still contains Japanese kana."""
+    return sorted(
+        (off, text) for off, text in translations.items()
+        if contains_japanese(text)
+    )
