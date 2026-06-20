@@ -3,6 +3,8 @@ from pathlib import Path
 import sys
 import tempfile
 import os
+import io
+import contextlib
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import check_translation_coverage as cov
@@ -161,6 +163,8 @@ class TestCheckStage(unittest.TestCase):
         self.assertEqual(result["status"], "skipped")
         self.assertEqual(result["tier1"], [])
         self.assertEqual(result["tier2"], [])
+        self.assertEqual(result["byte_acct"], 0.0)
+        self.assertEqual(result["tier3"], [])
 
     def test_write_report_creates_file(self):
         result = {"stage": "TT00", "status": "ok",
@@ -189,14 +193,17 @@ class TestIntegration(unittest.TestCase):
 
     def test_run_nonzero_when_findings(self):
         # S700 has Tier-1 findings, so run() must return non-zero.
-        code = cov.run(["S700"])
+        with contextlib.redirect_stdout(io.StringIO()):
+            code = cov.run(["S700"])
         self.assertNotEqual(code, 0)
 
 
 class TestRunExitCode(unittest.TestCase):
     def test_clean_stage_exits_zero(self):
         # A skipped/clean stage list returns 0 (no findings).
-        self.assertEqual(cov.run(["ZZ99"]), 0)
+        with contextlib.redirect_stdout(io.StringIO()):
+            code = cov.run(["ZZ99"])
+        self.assertEqual(code, 0)
 
 
 if __name__ == "__main__":

@@ -200,7 +200,7 @@ def write_report(result: dict):
     lines = [
         f"# {result['stage']} coverage report",
         f"# byte accountability: {result['byte_acct']:.4f}",
-        f"# (exit 0 never asserts completeness; see Tier 3 below)",
+        f"# absence of findings is not proof of completeness; see Tier 3 below",
         "",
         f"## Tier 1 — decoded-but-untranslated ({len(result['tier1'])})",
     ]
