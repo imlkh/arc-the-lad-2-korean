@@ -174,5 +174,30 @@ class TestCheckStage(unittest.TestCase):
         path.unlink()
 
 
+class TestIntegration(unittest.TestCase):
+    def setUp(self):
+        if not (cov.GAME_DIR / "S700.STG").exists() or \
+           not (cov.TRANS_DIR / "S700_STG.txt").exists():
+            self.skipTest("real S700 data not present")
+
+    def test_s700_has_tier1_findings(self):
+        table = cov.dt.build_decode_table()
+        result = cov.check_stage("S700", table)
+        self.assertEqual(result["status"], "ok")
+        # spec: S700 has ~43 residual-kana entries (>0 is the assertion)
+        self.assertGreater(len(result["tier1"]), 0)
+
+    def test_run_nonzero_when_findings(self):
+        # S700 has Tier-1 findings, so run() must return non-zero.
+        code = cov.run(["S700"])
+        self.assertNotEqual(code, 0)
+
+
+class TestRunExitCode(unittest.TestCase):
+    def test_clean_stage_exits_zero(self):
+        # A skipped/clean stage list returns 0 (no findings).
+        self.assertEqual(cov.run(["ZZ99"]), 0)
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -216,3 +216,40 @@ def write_report(result: dict):
         lines.append(f"  0x{off:08X} [score {score}] {text}")
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
     return path
+
+
+def run(stages: list) -> int:
+    """Check the given stages; write reports; print summary; return exit code."""
+    table = dt.build_decode_table()
+    rows = []
+    any_findings = False
+    for stage in stages:
+        result = check_stage(stage, table)
+        write_report(result)
+        t1, t2 = len(result["tier1"]), len(result["tier2"])
+        if t1 or t2:
+            any_findings = True
+        rows.append((stage, result["status"], t1, t2,
+                     result["byte_acct"], len(result["tier3"])))
+
+    print(f"{'Stage':<7}{'Status':<9}{'T1':>5}{'T2':>5}{'ByteAcct':>10}{'T3':>7}")
+    tot1 = tot2 = tot3 = 0
+    for stage, status, t1, t2, acct, t3 in rows:
+        flag = " LOW-COVERAGE" if status == "ok" and acct < 0.95 else ""
+        acct_s = f"{acct:.3f}" if status == "ok" else "-"
+        print(f"{stage:<7}{status:<9}{t1:>5}{t2:>5}{acct_s:>10}{t3:>7}{flag}")
+        tot1 += t1; tot2 += t2; tot3 += t3
+    print(f"{'TOTAL':<7}{'':<9}{tot1:>5}{tot2:>5}{'':>10}{tot3:>7}")
+    print("\nNote: exit 0 means no Tier 1/2 findings; it does NOT assert "
+          "completeness. Review Tier 3 and LOW-COVERAGE stages.")
+    return 1 if any_findings else 0
+
+
+def main(argv=None) -> int:
+    argv = sys.argv[1:] if argv is None else argv
+    stages = [a.upper() for a in argv] if argv else STAGES
+    return run(stages)
+
+
+if __name__ == "__main__":
+    sys.exit(main())
