@@ -6,10 +6,11 @@ dialogue that lives in the text region but is not template-anchored. We use the
 dialogue we already found (K = scan_stg output) as ground truth to DISCOVER and
 VALIDATE locator rules, then apply the validated rule to surface missed dialogue.
 
-Honesty contract: every candidate rule is scored on a HELD-OUT half of K
-(precision = rule-located strings that are known-real / all rule-located strings),
-so a rule cannot be "confirmed" by the offsets that produced it. Output reports the
-discovered rule, its held-out precision/recall, and the deduped missed entries.
+Honesty contract: the only genuinely held-out metric is RECALL on a held-out half
+of K (the rules are fixed hypotheses, not trained, so there is no held-out
+precision to compute). Precision is reported only as a PROXY — the not-garbage rate
+over the rule's novel (non-K) firings — because no ground-truth label exists for
+runs outside K. Output labels the proxy as such and reports the deduped misses.
 
 Usage:
     python python/tools/discover_scan_rules.py            # all stages
@@ -91,30 +92,39 @@ def discover_for_stage(stage, decode_table):
     if len(K) < 20:
         return {"stage": stage, "rule": None, "reason": "too few K", "missed": []}
 
-    # Deterministic train/held-out split (even index = train, odd = held-out).
-    train = set(K[0::2])
+    # Held-out half of K (odd indices) for recall. The rules are fixed
+    # hypotheses, so there is nothing to "train" — the split only enables a
+    # held-out recall measurement, not a held-out precision.
     heldout = set(K[1::2])
+    kset = set(K)
 
     runs = list(_scan_runs(data, decode_table))
     by_off = {off: text for off, text in runs}
 
-    # Evaluate each candidate rule on the held-out set:
-    #   recall  = held-out K offsets the rule fires on / |held-out K|
-    #   precision (proxy) = rule-fired runs that are real (in K OR not garbage)
-    #                       / all rule-fired runs
+    # For each candidate rule: held-out recall (genuine) + a clearly-labelled
+    # proxy precision over the novel (non-K) firings (no ground truth exists for
+    # those, so "real" is proxied by "not garbage-filtered").
     best = None
     for name, fn in CANDIDATE_RULES.items():
         fired = [(off, text) for off, text in runs if fn(text)]
         if not fired:
             continue
+        # Held-out RECALL is the only genuinely held-out quantity: the rules are
+        # fixed hypotheses (not trained on `train`), so a train/test split cannot
+        # produce a held-out *precision*. We compute recall on the held-out half
+        # of K = fraction of held-out known dialogue the rule re-locates.
         ho_hit = sum(1 for off in heldout if off in by_off and fn(by_off[off]))
         recall = ho_hit / len(heldout) if heldout else 0.0
-        real = sum(1 for off, text in fired
-                   if off in train or off in heldout or not dt._is_garbage_text(text))
-        precision = real / len(fired)
-        score = (precision, recall)
+        # PROXY precision: among the rule's NOVEL firings (offsets NOT in K, i.e.
+        # the candidate-miss output), there is no ground-truth label, so we proxy
+        # "real" as "the decoder's garbage filter does not reject it". This is a
+        # proxy, NOT a measured precision — labelled as such in the output.
+        novel = [text for off, text in fired if off not in kset]
+        kept = sum(1 for text in novel if not dt._is_garbage_text(text))
+        proxy_prec = (kept / len(novel)) if novel else 0.0
+        score = (proxy_prec, recall)
         if best is None or score > best["score"]:
-            best = {"name": name, "fn": fn, "precision": precision,
+            best = {"name": name, "fn": fn, "proxy_prec": proxy_prec,
                     "recall": recall, "score": score, "fired": fired}
 
     if best is None:
@@ -122,7 +132,6 @@ def discover_for_stage(stage, decode_table):
 
     # Apply chosen rule: missed = rule-fired runs NOT already in K, that decode to
     # real dialogue and are not garbage. Dedup by text within the stage.
-    kset = set(K)
     seen = set()
     missed = []
     for off, text in best["fired"]:
@@ -136,7 +145,7 @@ def discover_for_stage(stage, decode_table):
         seen.add(key)
         missed.append((off, text))
     missed.sort()
-    return {"stage": stage, "rule": best["name"], "precision": best["precision"],
+    return {"stage": stage, "rule": best["name"], "proxy_prec": best["proxy_prec"],
             "recall": best["recall"], "k": len(K), "missed": missed}
 
 
@@ -144,7 +153,9 @@ def main(argv=None):
     argv = sys.argv[1:] if argv is None else argv
     stages = [a.upper() for a in argv] if argv else STAGES
     table = dt.build_decode_table()
-    print(f"{'Stage':<7}{'Rule':<18}{'HOprec':>8}{'HOrec':>8}{'K':>6}{'Missed(uniq)':>14}")
+    # ProxyPrec = not-garbage rate over novel firings (a PROXY, not a measured
+    # precision). HO-recall = genuine held-out recall on K.
+    print(f"{'Stage':<7}{'Rule':<18}{'ProxyPrec':>10}{'HO-recall':>10}{'K':>6}{'Missed(uniq)':>14}")
     grand = 0
     for stage in stages:
         r = discover_for_stage(stage, table)
@@ -156,9 +167,12 @@ def main(argv=None):
             continue
         n = len(r["missed"])
         grand += n
-        print(f"{stage:<7}{r['rule']:<18}{r['precision']:>8.3f}{r['recall']:>8.3f}"
+        print(f"{stage:<7}{r['rule']:<18}{r['proxy_prec']:>10.3f}{r['recall']:>10.3f}"
               f"{r['k']:>6}{n:>14}")
-    print(f"{'TOTAL':<7}{'':<18}{'':>8}{'':>8}{'':>6}{grand:>14}")
+    print(f"{'TOTAL':<7}{'':<18}{'':>10}{'':>10}{'':>6}{grand:>14}")
+    print("\nNote: ProxyPrec is the not-garbage rate over novel firings (a proxy "
+          "for precision — there is no ground-truth label for non-K runs). Only "
+          "HO-recall is genuinely held-out. Rules are fixed hypotheses, not trained.")
     return 0
 
 
