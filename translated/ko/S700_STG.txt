@@ -3653,7 +3653,7 @@
   0x016D0D1A [0x8002] [script:AD 0A]잘됐네, 엘크!
   --- context: 0x8002 -> 0x00B4 ---
   0x016D0D5E [0x00B4] [script:D1 0A]어서 쿠쿠루에게 알리러 가자
-  0x016D0D90 [0x00B4] [script:E6 0A]야, 또야！
+  0x016D0D90 [0x00B4] [script:E6 0A]야, 기다리라니까！
   --- context: 0x00B4 -> 0x8002 ---
   0x016D0E30 [0x8002] [script:36 0B]해냈네, 엘크!
   --- context: 0x8002 -> 0x00B4 ---
