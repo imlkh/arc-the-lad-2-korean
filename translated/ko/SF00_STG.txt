@@ -525,7 +525,7 @@
   0x002EE710 [0x00B4] [script:D6 09]네놈들 대신 내가 이 세계를[br]지배할 때가 왔다!
   0x002EE7F8 [0x00B4] [script:42 0A]무슨 짓을[delay:0B]·[delay:0B]·[delay:0B]·
   0x002EE82A [0x00B4] [script:52 0A]무슨 짓을!
-  0x002EE84A [0x00B4] [script:63 0A]ちくしょぉぉおお！
+  0x002EE84A [0x00B4]빌어먹을!!
   0x002EE894 [0x00B4] [script:8A 0A][box:close]알겠느냐
   0x002EE8B6 [0x00B4] [script:A4 0A][box:speech]내 힘을![br][delay:15]내 공포를!!
   0x002EE8EE [0x00B4] [script:B8 0A]넌 아무것도 모른다
@@ -534,7 +534,7 @@
   0x002EE988 [0x00B4] [script:07 0B][box:close]이 바보 자식이!!
   0x002EE9B0 [0x00B4] [script:1F 0B][box:speech]네놈의 세계 따윈 남지 않는다!!
   0x002EE9E0 [0x00B4] [script:37 0B]누구의 세계도[delay:0B]·[delay:0B]·[delay:0B]·
-  0x002EEA14 [0x00B4] [script:4B 0B][box:narration][FF:04 09 01]そのとおりだ
+  0x002EEA14 [0x00B4]그렇다
   0x002EEA46 [0x00B4] [script:6D 0B][box:narration]신이 만든 어리석은 인간의 세계는 사라진다
   0x002EEA9E [0x00B4] [script:8E 0B][box:close]무슨 소릴 하느냐
   0x002EEABE [0x00B4] [script:A1 0B][box:speech]내가 힘을 얻었다
@@ -690,7 +690,7 @@
   --- context: 0x8008 -> 0x8005 ---
   0x002F1CBC [0x8005] [script:9B 24]크, 네놈!!
   --- context: 0x8005 -> 0x00B4 ---
-  0x002F1D76 [0x00B4] [script:F7 24]だまれ！
+  0x002F1D76 [0x00B4]닥쳐!
   0x002F1D9C [0x00B4] [script:1F 25]아이라 해도 방심하지 마라![br]놈들은 그 증오스러운 칠용사의 피를 이었다
   0x002F1DE8 [0x00B4] [script:45 25]한때 태고의 시대에[br]나를 거스르고 내 육체를 봉인한 증오스런 놈들
   0x002F1E34 [0x00B4] [script:6B 25]신과 함께 나를 영원의 어둠 속에 가둔[br]놈들을 용서할 수 없다
@@ -988,7 +988,7 @@
   0x00522590 [0x8014] [script:BA 53][box:speech]빨리 가서 보물을[br]챙기는 거야!
   0x005225E4 [0x8014] [script:DA 53][box:speech]알겠습죠!
   --- context: 0x8014 -> 0x00B4 ---
-  0x00522620 [0x00B4] [script:F8 53][box:speech]みんな、いくぜ！
+  0x00522620 [0x00B4][box:speech]모두, 가자!
   --- context: 0x00B4 -> 0x801B ---
   0x005229D8 [0x801B] [script:E1 55][box:speech]여기 있지 말고 얼른[br]도둑을 쫓아내 줘!
   --- context: 0x801B -> 0x800A ---
@@ -2360,7 +2360,7 @@
   0x012680EA [0x00B4] [script:9B 09][FF:04 06 01]아직 끝난 게 아니야
   0x01268154 [0x00B4] [script:D2 09][FF:04 06 01]희망을 계속 품는 한
   0x012681A2 [0x00B4] [script:F1 09]아크！
-  0x012681BC [0x00B4] [script:FF 09]ククルさん！
+  0x012681BC [0x00B4]쿠쿠루!
   0x012681F0 [0x00B4] [script:20 0A][FF:04 06 01]세계는 황폐해졌지만
   0x01268224 [0x00B4] [script:39 0A][FF:04 07 01]완전히 사라진 건 아니야
   0x0126825A [0x00B4] [script:60 0A][FF:04 05 01]생명은 끊기지 않았어[br][FF:04 05 01]모든 걸 잃은 건 아니야
@@ -3067,7 +3067,7 @@
   0x019085E0 [0x00B4] [script:3B 2C][box:system]이[opt]름[opt]타스만[opt]데스 리저드[br]보[opt]수[opt]2250G[br]위치[opt]아리바샤 내 배틀 에리어[br]특기[opt]페트로 브레스
   0x01908654 [0x00B4] [script:78 2C][box:system]이[opt]름[opt]슈바이델[opt]스핑크스[br]보[opt]수[opt]2700G[br]위치[opt]아리바샤 내 배틀 에리어[br]특기[opt]포이즌 브레스
   0x019086CE [0x00B4] [script:AE 2C][box:system]이[opt]름[opt]자낙[opt][opt]다크 팔라딘[br]보[opt]수[opt]3150G[br]위치[opt]？[br]특기[opt]익스플로전
-  0x0190874E [0x00B4] [script:D9 2C][box:system][br]このモンスターは、ハンティングされました
+  0x0190874E [0x00B4][box:system][br]이 몬스터는 헌팅되었습니다
   --- context: 0x00B4 -> 0x00A9 ---
   0x019C26D6 [0x00A9] [script:AE 01][box:system]스위치 발견[br]ON할까?[br][opt]네[br][opt]아니오[box:close]
   0x019C2C7A [0x00A9] [script:E7 02][box:system]계단 발견[br][opt]내려가기[br][opt]그만두기[box:close]
@@ -4128,7 +4128,7 @@
   0x020655E6 [0x00B4] [script:D9 2F][box:system]이름[opt]비샤몬[opt][opt]그레이트 나이트[br]보수[opt]2250G[br]위치[opt]그레이신 내 배틀 지역[br]특기[opt]익스플로전
   0x02065660 [0x00B4] [script:10 30][box:system]이름[opt]요화 3형제[opt][opt]요화[br]보수[opt]2700G[br]위치[opt]라마다 산[br]특기[opt]홀리 브레스
   0x020656CE [0x00B4] [script:46 30][box:system]이름[opt]요미의 사자[opt][opt]데스 드루이드[br]보수[opt]2790G[br]위치[opt]그레이신 내[br]특기[opt]?
-  0x0206574E [0x00B4] [script:71 30][box:system][br]このモンスターは、ハンティングされました
+  0x0206574E [0x00B4][box:system][br]이 몬스터는 헌팅되었습니다
   --- context: 0x00B4 -> 0x00A9 ---
   0x0211ED3E [0x00A9] [script:AE 01][box:system]스위치 발견[br]ON할까?[br][opt]네[br][opt]아니오[box:close]
   0x0211F2E2 [0x00A9] [script:E7 02][box:system]계단 발견[br][opt]내려가기[br][opt]그만두기[box:close]

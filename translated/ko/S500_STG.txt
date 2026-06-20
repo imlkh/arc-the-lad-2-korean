@@ -670,7 +670,7 @@
   --- context: 0x8005 -> 0x8007 ---
   0x005DD9DC [0x8007] [script:0D 14][box:speech]그런데, 몬스터가[br]말을 듣다니…
   --- context: 0x8007 -> 0x00B4 ---
-  0x005DDA2A [0x00B4] [script:2D 14][box:speech]おねえちゃんは、すごいね
+  0x005DDA2A [0x00B4][box:speech][delay:00]언니는 대단하네
   --- context: 0x00B4 -> 0x8007 ---
   0x005DDA72 [0x8007] [script:54 14][box:speech]있잖아, 언니도 호른 사람이야?
   0x005DDABC [0x8007] [script:71 14][box:speech]그래
@@ -1033,7 +1033,7 @@
   --- context: 0x00A9 -> 0x800A ---
   0x0075C408 [0x800A] [script:63 04]이봐, 너희들
   --- context: 0x800A -> 0x00B4 ---
-  0x0075C45E [0x00B4] [script:8B 04]キィー？
+  0x0075C45E [0x00B4]키이~?
   --- context: 0x00B4 -> 0x800A ---
   0x0075C480 [0x800A] [script:A4 04]출발한다, 빨리 올라타
   0x0075C4C8 [0x800A] [script:C2 04]우키키~!?
@@ -1042,7 +1042,7 @@
   --- context: 0x800D -> 0x800E ---
   0x0075CDCE [0x800E] [script:46 09]이봐, 너희들
   --- context: 0x800E -> 0x00B4 ---
-  0x0075CE24 [0x00B4] [script:6E 09]キィー？
+  0x0075CE24 [0x00B4]키이~?
   --- context: 0x00B4 -> 0x800A ---
   0x0075CE62 [0x800A] [script:95 09]출발한다, 빨리 올라타
   0x0075CEAA [0x800A] [script:B3 09]우키키~!?

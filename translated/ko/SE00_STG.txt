@@ -260,7 +260,7 @@
   0x002F1294 [0x00B4] [script:13 2D][box:system]이[opt]름[opt]다리우스[opt][opt][opt]대지의 마인[br]보[opt]수[opt]3600G[br]위치[opt]？[br]특기[opt]그랜드 실드
   0x002F1300 [0x00B4] [script:4A 2D][box:system]이[opt]름[opt]그알데[opt][opt]닌자 마스터[br]보[opt]수[opt]3645G[br]위치[opt]？[br]특기[opt]폭렬 수리검
   0x002F136E [0x00B4] [script:86 2D][box:system]이[opt]름[opt]가우디라스[opt]아크메이지[br]보[opt]수[opt]3915G[br]위치[opt]바르바라드의 봉인의 유적[br]특기[opt]위크니스
-  0x002F13D8 [0x00B4] [script:A0 2D][box:system][br]このモンスターは、ハンティングされました
+  0x002F13D8 [0x00B4][br]이 몬스터는 헌팅되었습니다
   --- context: 0x00B4 -> 0x8005 ---
   0x002F1F7E [0x8005] [script:69 33]여긴 길드다-
   --- context: 0x8005 -> 0x00A9 ---
@@ -594,7 +594,7 @@
   0x005E01F2 [0x8006] [script:2D 08]너희에게 정말[br]신세를 많이 지고 말았군
   0x005E0242 [0x8006] [script:50 08]아무것도 없는 마을이지만 쉬다 가라
   --- context: 0x8006 -> 0x00B4 ---
-  0x005E03E6 [0x00B4] [script:25 09]このふらぐじょうたいでここにいるのはおかしい…はず
+  0x005E03E6 [0x00B4]이 플래그 상태에서 여기 있는 건 이상하다…아마도
   --- context: 0x00B4 -> 0x8006 ---
   0x005E0488 [0x8006] [script:76 09]너희 같은 외지인이 뭘 알아! 나가!!
   0x005E0664 [0x8006] [script:67 0A]나는 라타에게 해둬야 할[br]얘기가 있다
@@ -1669,7 +1669,7 @@
   0x008180C2 [0x8005] [script:99 34]돌아가자!
   --- context: 0x8005 -> 0x00B4 ---
   0x00818176 [0x00B4] [script:FB 34]대답이 없다. 그냥 시체인 것 같다.
-  0x0081834C [0x00B4] [script:EB 35]ぱらりるぱらりるどりりんぱーてぃあらんてぃあなんまりりんぱー
+  0x0081834C [0x00B4]파라리루파라리루도리린파티아란티아난마리린파
   --- context: 0x00B4 -> 0x8005 ---
   0x00818AB8 [0x8005] [script:97 39]뭐냐, 시끄럽구나
   --- context: 0x8005 -> 0x800B ---
@@ -1740,7 +1740,7 @@
   0x008D5C92 [0x801E] [script:BC 04]이대로 끝날 거라 생각하지 마라!!
   0x008D5CD4 [0x801E] [script:E0 04]반드시 이 손으로, 목을 졸라 죽여주겠다!!
   --- context: 0x801E -> 0x00B4 ---
-  0x008D5D6A [0x00B4] [script:23 05]へぶしっ！
+  0x008D5D6A [0x00B4]에취！
   --- context: 0x00B4 -> 0x00A9 ---
   0x0098CE9A [0x00A9] [script:AE 01][box:system]스위치 발견[br]ON할까?[br][opt]네[br][opt]아니오[box:close]
   0x0098D43E [0x00A9] [script:E7 02][box:system]계단 발견[br][opt]내려가기[br][opt]그만두기[box:close]

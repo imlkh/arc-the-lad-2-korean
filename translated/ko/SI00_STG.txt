@@ -377,10 +377,10 @@
   0x000BA6DC [0x00B4] [script:13 3A][box:speech]맞아, 저 아이가 동료를 불렀어
   0x000BA708 [0x00B4] [script:2B 3A][box:speech]저렇게 귀여운 모습을 해도 속지 않아
   0x000BA738 [0x00B4] [script:41 3A][box:speech]저 아이 때문에 모두 죽었어!
-  0x000BA764 [0x00B4] [script:56 3A][box:speech]そうだ、あいつをころしてしまえ！
+  0x000BA764 [0x00B4][box:speech]그래, 저놈을 죽여버려!
   0x000BA78E [0x00B4] [script:64 3A][box:speech]그래
-  0x000BA7AA [0x00B4] [script:74 3A][box:speech]そうだ、そうだ
-  0x000BA7D0 [0x00B4] [script:87 3A][box:speech]つかまえろ！
+  0x000BA7AA [0x00B4][box:speech]맞아, 맞아
+  0x000BA7D0 [0x00B4][box:speech]잡아라!
   --- context: 0x00B4 -> 0x8006 ---
   0x000BA824 [0x8006] [script:B8 3A]곧 너는 달리다 지쳐 마을 사람들에게 붙잡혔다
   --- context: 0x8006 -> 0x800A ---
@@ -1312,7 +1312,7 @@
   0x00232F96 [0x8006] [script:84 4F]좋은 아침이야!
   0x00232FDC [0x8006] [script:A8 4F]좋은 아침[opt]쵸코
   --- context: 0x8006 -> 0x00B4 ---
-  0x0023307A [0x00B4] [script:F5 4F]あさだー！
+  0x0023307A [0x00B4]아침이다ー!
   --- context: 0x00B4 -> 0x8007 ---
   0x00233188 [0x8007] [script:7F 50]잘 주무셨어요?
   0x002331D2 [0x8007] [script:A3 50]쵸코 푹 잤어
@@ -1371,11 +1371,11 @@
   0x002EF906 [0x8006] [script:40 05]무슨 일이 있었던 걸까…
   0x002EFBBE [0x8006] [script:9B 06]어라? 저 애는…
   --- context: 0x8006 -> 0x00B4 ---
-  0x002EFC04 [0x00B4] [script:BB 06]まってなの！
+  0x002EFC04 [0x00B4]기다려줄게!
   --- context: 0x00B4 -> 0x8006 ---
   0x002EFC5A [0x8006] [script:E9 06]쵸코를 뒤쫓아야 해
   --- context: 0x8006 -> 0x00B4 ---
-  0x002EFED0 [0x00B4] [script:25 08][box:narration]ちょこ、どうしたんだ！
+  0x002EFED0 [0x00B4][box:narration]쵸코, 왜 그래!
   --- context: 0x00B4 -> 0x8007 ---
   0x002F0414 [0x8007] [script:C9 0A]우리를 붙잡아 두려는 건가!
   --- context: 0x8007 -> 0x00B4 ---
@@ -1604,7 +1604,7 @@
   0x00756DBA [0x00A9] [script:25 03][box:system]사다리다[br][opt]올라가기[br][opt]그만두기[box:close]
   0x00756E02 [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
   --- context: 0x00A9 -> 0x00B4 ---
-  0x00756FA2 [0x00B4] [script:12 04][box:speech]エラー、イン、しょうげきじょう
+  0x00756FA2 [0x00B4][box:speech]에러, 인, 충격파 구역
   0x0075703C [0x00B4] [script:5B 04]베링갈 소극장
   --- context: 0x00B4 -> 0x8005 ---
   0x00757076 [0x8005] [script:7F 04][box:speech]꽤 더러워졌네요…
@@ -1710,7 +1710,7 @@
   --- context: 0x800B -> 0x800A ---
   0x00758FA0 [0x800A] [script:0F 14][box:speech]・・・・・
   --- context: 0x800A -> 0x00B4 ---
-  0x00758FFC [0x00B4] [script:3B 14][box:speech]リーザさん！！
+  0x00758FFC [0x00B4][box:speech]리자씨！！
   --- context: 0x00B4 -> 0x8005 ---
   0x00759044 [0x8005] [script:64 14][box:speech]정말 감사합니다
   --- context: 0x8005 -> 0x800B ---
@@ -1799,7 +1799,7 @@
   --- context: 0x800B -> 0x800A ---
   0x0075A272 [0x800A] [script:78 1D][box:speech]・・・・・
   --- context: 0x800A -> 0x00B4 ---
-  0x0075A2CE [0x00B4] [script:A5 1D][box:speech]ハンターさん！！
+  0x0075A2CE [0x00B4][box:speech]헌터씨！！
   --- context: 0x00B4 -> 0x8005 ---
   0x0075A318 [0x8005] [script:CE 1D][box:speech]정말 감사합니다
   --- context: 0x8005 -> 0x800B ---
@@ -2707,7 +2707,7 @@
   0x0102B808 [0x8013] [script:95 0A]내 안에 잠든 와이트의 힘이여
   0x0102B84E [0x8013] [script:B9 0A]빛이 되어 암흑의 어둠을 몰아내라!
   --- context: 0x8013 -> 0x00B4 ---
-  0x0102B8D8 [0x00B4] [script:F6 0A]きゃあ！
+  0x0102B8D8 [0x00B4]으아!
   --- context: 0x00B4 -> 0x8013 ---
   0x0102B928 [0x8013] [script:1E 0B]쿠쿠루！
   --- context: 0x8013 -> 0x8015 ---
@@ -3471,7 +3471,7 @@
   0x0155A436 [0x8000] [script:90 16]필요해질 때까지 스스로를 봉인하겠다
   0x0155A480 [0x8000] [script:AE 16]당신처럼…
   --- context: 0x8000 -> 0x00B4 ---
-  0x0155A4BC [0x00B4] [script:CE 16][opt][opt][opt][opt][opt][opt][opt][opt]そうか…
+  0x0155A4BC [0x00B4][opt][opt][opt][opt][opt][opt][opt][opt]그렇군…
   --- context: 0x00B4 -> 0x00A9 ---
   0x016163E2 [0x00A9] [script:AE 01][box:system]스위치 발견[br]ON할까?[br][opt]네[br][opt]아니오[box:close]
   0x01616986 [0x00A9] [script:E7 02][box:system]계단 발견[br][opt]내려가기[br][opt]그만두기[box:close]

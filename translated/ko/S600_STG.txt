@@ -24,7 +24,7 @@
   0x00177FBE [0x00A9] [script:25 03][box:system]사다리다[br][opt]올라가기[br][opt]그만두기[box:close]
   0x00178006 [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
   --- context: 0x00A9 -> 0x00B4 ---
-  0x001782F4 [0x00B4] [script:B5 04][box:speech]レジスタエラー
+  0x001782F4 [0x00B4][box:speech]레지스터 에러
   --- context: 0x00B4 -> 0x8007 ---
   0x001783D2 [0x8007] [script:24 05][box:speech]이건 뭐야？
   0x0017841E [0x8007] [script:57 05][box:speech]내가 아직 꼬마였을 때 다니던,[br]지하수도 입구야
@@ -387,8 +387,8 @@
   --- context: 0x8008 -> 0x8009 ---
   0x003AA9FA [0x8009] [script:15 18][box:speech]샘플 M의 정신, 파괴됩니다！！
   --- context: 0x8009 -> 0x00B4 ---
-  0x003AAAC0 [0x00B4] [script:71 18][box:speech]Xじく、エラー
-  0x003AAB5A [0x00B4] [script:BE 18][box:speech]Yじく、エラー
+  0x003AAAC0 [0x00B4][box:speech]X축, 에러
+  0x003AAB5A [0x00B4][box:speech]Y축, 에러
   0x003AABF0 [0x00B4] [script:09 19][box:speech]방향 오류
   --- context: 0x00B4 -> 0x800A ---
   0x003AAEE6 [0x800A] [script:8F 1A][box:close]샘플 M의 데이터가[br]전부 붕괴되고 있습니다！！
@@ -426,8 +426,8 @@
   0x003AB7EC [0x8005] [script:08 1F][FF:08 04 01]놀이는 끝이다
   0x003AB864 [0x8005] [script:4F 1F][FF:08 04 01]미리르여, 사랑하는 자의 품에서[br]아름답게 스러져라
   --- context: 0x8005 -> 0x00B4 ---
-  0x003AB932 [0x00B4] [script:AA 1F][box:speech]Xじく、エラー
-  0x003AB9B4 [0x00B4] [script:EB 1F][box:speech]Yじく、エラー
+  0x003AB932 [0x00B4][box:speech]X축, 에러
+  0x003AB9B4 [0x00B4][box:speech]Y축, 에러
   --- context: 0x00B4 -> 0x00A9 ---
   0x004671FE [0x00A9] [script:AE 01][box:system]스위치 발견[br]ON할까?[br][opt]네[br][opt]아니오[box:close]
   0x004677A2 [0x00A9] [script:E7 02][box:system]계단 발견[br][opt]내려가기[br][opt]그만두기[box:close]
@@ -489,7 +489,7 @@
   0x005245D2 [0x00A9] [script:25 03][box:system]사다리다[br][opt]올라가기[br][opt]그만두기[box:close]
   0x0052461A [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
   --- context: 0x00A9 -> 0x00B4 ---
-  0x00524BC0 [0x00B4] [script:10 06][box:speech]みんな！
+  0x00524BC0 [0x00B4][box:speech]모두들！
   --- context: 0x00B4 -> 0x8009 ---
   0x00524C18 [0x8009] [script:41 06][box:speech]지금부터 여기서 도망친다！
   --- context: 0x8009 -> 0x8005 ---
@@ -527,7 +527,7 @@
   0x0052550A [0x8005] [script:B6 0A][box:speech]슈우, 부탁해
   0x0052554C [0x8005] [script:DF 0A][box:speech]・[delay:0B]・[delay:0B]・[delay:15]알았어
   --- context: 0x8005 -> 0x00B4 ---
-  0x0052559E [0x00B4] [script:02 0B][FF:08 04 01]はっはっはっはっはっ！
+  0x0052559E [0x00B4][FF:08 04 01]하하하하핫！
   --- context: 0x00B4 -> 0x8008 ---
   0x005255CE [0x8008] [script:19 0B][box:speech]뭐가 우습지！
   --- context: 0x8008 -> 0x00B4 ---
@@ -562,7 +562,7 @@
   0x005E03F6 [0x00A9] [script:25 03][box:system]사다리다[br][opt]올라가기[br][opt]그만두기[box:close]
   0x005E043E [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
   --- context: 0x00A9 -> 0x00B4 ---
-  0x005E05C0 [0x00B4] [script:09 04][box:speech]レジスタ[opt]の[opt]あたい[opt]が[opt]はんいがい[opt]に[opt]なっとります
+  0x005E05C0 [0x00B4][box:speech]레지스터[opt]값이[opt]범위[opt]를[opt]벗어났[opt]습니[opt]다
   --- context: 0x00B4 -> 0x8005 ---
   0x005E0822 [0x8005] [script:35 05][box:speech]내가 뭐가 물렀다는 거야！？
   0x005E087E [0x8005] [script:68 05][box:speech]엘크,[delay:15]너는 물러[cursor]…
@@ -1007,8 +1007,8 @@
   0x008D5166 [0x00A9] [script:25 03][box:system]사다리다[br][opt]올라가기[br][opt]그만두기[box:close]
   0x008D51AE [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
   --- context: 0x00A9 -> 0x00B4 ---
-  0x008D5462 [0x00B4] [script:9A 04][box:speech]なんかようすがヘンです
-  0x008D5556 [0x00B4] [script:14 05][box:speech]なんかようすがヘンです
+  0x008D5462 [0x00B4][box:speech]뭔가 상태가 이상합니다
+  0x008D5556 [0x00B4][box:speech]뭔가 상태가 이상합니다
   --- context: 0x00B4 -> 0x8005 ---
   0x008D57D2 [0x8005] [script:58 06][box:speech]언제 이런 게[cursor]…
   0x008D5834 [0x8005] [script:85 06][box:speech]자, 한바탕 날뛰어 볼까

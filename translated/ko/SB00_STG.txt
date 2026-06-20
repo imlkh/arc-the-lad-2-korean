@@ -545,7 +545,7 @@
   0x002F15E2 [0x00B4] [script:7A 34][box:system]이름[opt] [opt]골곤[opt][opt]프로스트 기간트[br]보수[opt] [opt]3420G[br]위치[opt]아미그 내 배틀 에리어[br]특기[opt]블리자드
   0x002F1674 [0x00B4] [script:C4 34][box:system]이름[opt] [opt]벨라도나[opt]마스터 가고일[br]보수[opt] [opt]3510G[br]위치[opt]아미그의 봉인 유적[br]특기[opt]차지
   0x002F1708 [0x00B4] [script:0E 35][box:system]이름[opt] [opt]달리[opt][opt][opt]스톤 플라이[br]보수[opt] [opt]3510G[br]위치[opt]아미그의 봉인 유적[br]특기[opt]페트로 브레스
-  0x002F1770 [0x00B4] [script:28 35][box:system][br]このモンスターは、ハンティングされました
+  0x002F1770 [0x00B4][box:system][br]이 몬스터는, 헌팅됐습니다
   --- context: 0x00B4 -> 0x00A9 ---
   0x003A9532 [0x00A9] [script:AE 01][box:system]스위치 발견[br]ON할까?[br][opt]네[br][opt]아니오[box:close]
   0x003A9AD6 [0x00A9] [script:E7 02][box:system]계단 발견[br][opt]내려가기[br][opt]그만두기[box:close]
