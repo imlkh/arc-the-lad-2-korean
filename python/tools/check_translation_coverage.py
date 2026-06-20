@@ -41,8 +41,12 @@ def contains_japanese(text: str) -> bool:
         cp = ord(ch)
         if 0x3041 <= cp <= 0x3096:        # hiragana
             return True
-        if 0x30A1 <= cp <= 0x30FA or cp == 0x30FC:  # katakana (skips 30FB ・)
+        if 0x30A1 <= cp <= 0x30FA:        # katakana letters (skips 30FB ・)
             return True
+        # NOTE: U+30FC (ー, prolonged-sound mark) is deliberately NOT treated as
+        # untranslated. The Korean translations use ー intentionally for vowel
+        # elongation (e.g. "쵸코...야ー"); flagging it produced 86 false positives.
+        # A genuinely untranslated Japanese line always contains real kana above.
     return False
 
 

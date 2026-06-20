@@ -27,6 +27,11 @@ class TestContainsJapanese(unittest.TestCase):
     def test_jp_punctuation_not_detected(self):
         self.assertFalse(cov.contains_japanese("「안녕」、반가워。…"))
 
+    def test_choon_in_korean_not_detected(self):
+        # ー (U+30FC) is used intentionally in the Korean for vowel elongation;
+        # a fully-translated line using it must NOT be flagged as untranslated.
+        self.assertFalse(cov.contains_japanese("쵸코 노는 거 아냐ー! 일하는 거야ー"))
+
     def test_mixed_flags_true(self):
         self.assertTrue(cov.contains_japanese("베조아、みつかった"))
 
