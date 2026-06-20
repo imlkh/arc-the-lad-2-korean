@@ -418,7 +418,7 @@
   --- context: 0x8000 -> 0x8015 ---
   0x002306BE [0x8015] [script:66 34]투기장에서 그 녀석을[br]응원해 줘
   --- context: 0x8015 -> 0x00B4 ---
-  0x00230A46 [0x00B4]！[delay:0D]어머!?
+  0x00230A46 [0x00B4] [script:21 36]！[delay:0D]어머!?
   --- context: 0x00B4 -> 0x8015 ---
   0x00230A60 [0x8015] [script:2E 36]무슨 일이 있었어?
   --- context: 0x8015 -> 0x800C ---
@@ -443,8 +443,8 @@
   --- context: 0x800C -> 0x8000 ---
   0x0023117A [0x8000] [script:C5 39]난 이제 괜찮으니[br]빨리 엘레나를
   --- context: 0x8000 -> 0x00B4 ---
-  0x002315E8 [0x00B4]엘레나! 어디 있어
-  0x0023160E [0x00B4]엘레나, 엘레나!
+  0x002315E8 [0x00B4] [script:F1 3B]엘레나! 어디 있어
+  0x0023160E [0x00B4] [script:05 3C]엘레나, 엘레나!
   --- context: 0x00B4 -> 0x8015 ---
   0x0023163A [0x8015] [script:23 3C]…왜 엘레나가![br]대체 왜지?
   --- context: 0x8015 -> 0x800C ---
@@ -456,11 +456,11 @@
   --- context: 0x800C -> 0x8000 ---
   0x002318E8 [0x8000] [script:74 3D]아니, 짚이는 게 없어…
   --- context: 0x8000 -> 0x00B4 ---
-  0x00231936 [0x00B4]？[br][delay:0D]이건!
+  0x00231936 [0x00B4] [script:9B 3D]？[br][delay:0D]이건!
   --- context: 0x00B4 -> 0x800C ---
   0x00231974 [0x800C] [script:B8 3D]그루가, 이걸!
   --- context: 0x800C -> 0x00B4 ---
-  0x002319C0 [0x00B4]어떻게 된 거야!?
+  0x002319C0 [0x00B4] [script:DE 3D]어떻게 된 거야!?
   --- context: 0x00B4 -> 0x8000 ---
   0x002319DA [0x8000] [script:FA 3D]귀여운 딸 목숨이 아깝다면[br]「무인의 관」까지 와 보시지?
   --- context: 0x8000 -> 0x800C ---
@@ -644,7 +644,7 @@
   --- context: 0x00B4 -> 0x800A ---
   0x002EF16C [0x800A] [script:08 0D][box:speech]내 이름은 갈바른!![br]무투대회 챔피언이다!!
   --- context: 0x800A -> 0x00B4 ---
-  0x002EF1C4 [0x00B4][box:speech]토오!![br]갈바른 펀치를 맞아라!!
+  0x002EF1C4 [0x00B4] [script:2D 0D][box:speech]토오!![br]갈바른 펀치를 맞아라!!
   --- context: 0x00B4 -> 0x800B ---
   0x002EF21C [0x800B] [script:52 0D][box:speech]아, 안 먹혀!?
   0x002EF264 [0x800B] [script:82 0D][box:speech]무투대회는 반드시[br]갈바른이 우승이야!!
@@ -1210,7 +1210,7 @@
   0x00462CF4 [0x00B4] [script:89 17][box:close]그루가, 상황을 보며 공격하는 느낌입니다
   0x00462D68 [0x00B4] [script:C1 17][box:close]음, 갈바른도 같은 생각인 듯합니다
   0x00462DF0 [0x00B4] [script:05 18][box:close]오오! [opt]먼저 그루가가 들어갑니다!!
-  0x00462E60 [0x00B4][box:close]하지만, 그다지 데미지는 없는 것 같습니다!
+  0x00462E60 [0x00B4] [script:3C 18][box:close]하지만, 그다지 데미지는 없는 것 같습니다!
   0x00462ECE [0x00B4] [script:74 18][box:close]여기서 갈바른의 마법 적중! 
   0x00462F56 [0x00B4] [script:B9 18][box:close]두 선수 잠시 떨어져 상황을 봅니다
   0x00462F90 [0x00B4] [script:D4 18][box:close]갈바른, 브레스로 카운터 성공!
@@ -1270,7 +1270,7 @@
   --- context: 0x8005 -> 0x00B4 ---
   0x004650E6 [0x00B4] [script:84 29][box:close]「환마진」 도전자 1명을 선택해 주세요
   0x00465120 [0x00B4] [script:9F 29]전투에 참가할 캐릭터를[br]선택해 주세요
-  0x00465254 [0x00B4][box:close]자, 게임 스타트입니다!!
+  0x00465254 [0x00B4] [script:34 2A][box:close]자, 게임 스타트입니다!!
   0x00465DC6 [0x00B4] [script:EC 2F][box:close]여기서 게임 종료입니다!!
   --- context: 0x00B4 -> 0x8005 ---
   0x00465E10 [0x8005] [script:19 30][box:speech]도전자의 기록은[FF:0A 03 01][num:01]체였습니다!![FF:0A 01 01]
@@ -1326,7 +1326,7 @@
   0x004692F4 [0x8005] [script:87 4A][box:speech]그럼 처음 선택으로 돌아가겠습니다
   --- context: 0x8005 -> 0x00B4 ---
   0x00469436 [0x00B4] [script:2C 4B][box:close]「연마진」 도전자 1명을 선택해 주세요
-  0x00469592 [0x00B4][box:close]자, 게임 스타트입니다!!
+  0x00469592 [0x00B4] [script:D3 4B][box:close]자, 게임 스타트입니다!!
   0x00469892 [0x00B4] [script:54 4D][box:speech]오- 도전자는 여기까지입니다!!
   --- context: 0x00B4 -> 0x8005 ---
   0x004698E0 [0x8005] [script:88 4D][box:speech]이번에 쓰러뜨린 「환마」의 수는[br][FF:0A 05 01][num:01]체였습니다!![FF:0A 01 01]
@@ -1740,4 +1740,4 @@
   0x00A4DD98 [0x00B4] [script:7D 33][box:system]이[opt]름[opt]SA-200SP[br]보[opt]수[opt]2115G[br]위치[opt]?[br]특기[opt]스피드 다운
   0x00A4DDFC [0x00B4] [script:B6 33][box:system]이[opt]름[opt]재컬[opt][opt]아누비스[br]보[opt]수[opt]3330G[br]위치[opt]로말리아 성벽 주변[br]특기[opt]홀리 브레스
   0x00A4DE6E [0x00B4] [script:F0 33][box:system]이[opt]름[opt]드라로슈[opt]다크 위저드[br]보[opt]수[opt]2475G[br]위치[opt]클레니아 섬 내[br]특기[opt]윈드 슬래셔
-  0x00A4DEEE [0x00B4][box:system][br]이 몬스터는, 헌팅됐습니다
+  0x00A4DEEE [0x00B4] [script:17 34][box:system][br]이 몬스터는, 헌팅됐습니다

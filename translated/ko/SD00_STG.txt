@@ -219,7 +219,7 @@
   0x002F1518 [0x00B4] [script:83 26][box:system]이[opt]름[opt]기가스[opt][opt][opt][opt]데몬 로드[br]보[opt]수[opt]2925G[br]위치[opt]반자산[br]특기[opt]디스펠
   0x002F1584 [0x00B4] [script:B5 26][box:system]이[opt]름[opt]다바노[opt][opt][opt][opt]피에로[br]보[opt]수[opt]2970G[br]위치[opt]반자산[br]특기[opt]？
   0x002F15E8 [0x00B4] [script:ED 26][box:system]이[opt]름[opt]드레이퍼[opt]스켈레톤 나이트[br]보[opt]수[opt]3060G[br]위치[opt]반자산[br]특기[opt]스트라이크 파워
-  0x002F164A [0x00B4][br]이 몬스터는 헌팅되었습니다
+  0x002F164A [0x00B4] [script:07 27][br]이 몬스터는 헌팅되었습니다
   --- context: 0x00B4 -> 0x00A9 ---
   0x003AC3EA [0x00A9] [script:AE 01][box:system]스위치 발견[br]ON할까?[br][opt]네[br][opt]아니오[box:close]
   0x003AC98E [0x00A9] [script:E7 02][box:system]계단 발견[br][opt]내려가기[br][opt]그만두기[box:close]
@@ -790,7 +790,7 @@
   0x008D5652 [0x8000] [script:FF 14]목걸이를 다시 묻어 드리자
   0x008D56BA [0x8000] [script:30 15]이쪽이야, 따라와
   --- context: 0x8000 -> 0x00B4 ---
-  0x008D57B0 [0x00B4][opt][opt][opt]쿠쿠루냐, 무슨 일이야？
+  0x008D57B0 [0x00B4] [script:AE 15][opt][opt][opt]쿠쿠루냐, 무슨 일이야？
   --- context: 0x00B4 -> 0x00A9 ---
   0x008D57DE [0x00A9] [script:D2 15][opt]너에겐 토우빌에서의 사명이 있을 텐데[br][opt][opt][opt][opt][opt]왜 여기에 왔지?
   --- context: 0x00A9 -> 0x8000 ---
@@ -1218,8 +1218,8 @@
   --- context: 0x800B -> 0x800A ---
   0x00D3E652 [0x800A] [script:81 0C]죽어라!
   --- context: 0x800A -> 0x00B4 ---
-  0x00D3E6A6 [0x00B4]미、[delay:15]미안해요…
-  0x00D3E6C8 [0x00B4]이제 안 되겠어요…
+  0x00D3E6A6 [0x00B4] [script:AF 0C]미、[delay:15]미안해요…
+  0x00D3E6C8 [0x00B4] [script:BC 0C]이제 안 되겠어요…
   --- context: 0x00B4 -> 0x800A ---
   0x00D3E756 [0x800A] [script:0E 0D]흥, 브라키아의 용사도[br]허무하군
   0x00D3E7A4 [0x800A] [script:31 0D]친아버지가 딸을 죽이다니!?

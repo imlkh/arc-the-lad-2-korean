@@ -572,7 +572,7 @@
   --- context: 0x800D -> 0x8005 ---
   0x002EC0D0 [0x8005] [script:6B 48][box:speech]누나, 조심해
   --- context: 0x8005 -> 0x00B4 ---
-  0x002EC112 [0x00B4]그리고, 할아버지도요
+  0x002EC112 [0x00B4] [script:8A 48]그리고, 할아버지도요
   --- context: 0x00B4 -> 0x8008 ---
   0x002EC15A [0x8008] [script:B3 48][box:speech]호른의 마녀가 한 명 잡혔다더라
   --- context: 0x8008 -> 0x00B4 ---
@@ -680,7 +680,7 @@
   --- context: 0xFFFE -> 0x00B4 ---
   0x002ED6B2 [0x00B4] [script:65 53][box:speech]이 마을 사람들은 모두 가까이하려 하지[br]않았단다
   0x002ED706 [0x00B4] [script:88 53][box:speech]게다가 이번 마녀 소동까지
-  0x002ED74C [0x00B4]모두가 무서워하는 것도, 무리는 아니지요
+  0x002ED74C [0x00B4] [script:AB 53]모두가 무서워하는 것도, 무리는 아니지요
   --- context: 0x00B4 -> 0xFFFE ---
   0x002ED796 [0xFFFE] [script:D6 53][box:speech]어쨌든 마녀들을[br]어떻게든 하지 않으면 안 돼
   0x002EE862 [0xFFFE] [script:32 5C][box:speech]・・・・・
@@ -886,7 +886,7 @@
   0x003ADC90 [0x00B4] [script:27 31][box:system]이[opt]름[opt]발그리[opt][opt][opt]데스리자드[br]보[opt]수[opt]1440G[br]출몰지[opt]포레스 내 배틀 에리어[br]특기[opt]주위공격
   0x003ADD08 [0x00B4] [script:5F 31][box:system]이름[opt]데린가[opt][opt]이블아이[br]보수[opt]1485G[br]장소[opt]포레스 내 배틀 지역[br]특기[opt]?
   0x003ADD78 [0x00B4] [script:96 31][box:system]이[opt]름[opt]가우크로우[opt][opt][opt]록[br]보[opt]수[opt]2250G[br]출몰지[opt]아라라토스 내[br]특기[opt]그랜드 실드
-  0x003ADDD8 [0x00B4][box:system][br]이 몬스터는, 헌팅됐습니다
+  0x003ADDD8 [0x00B4] [script:B0 31][box:system][br]이 몬스터는, 헌팅됐습니다
   --- context: 0x00B4 -> 0x00A9 ---
   0x0046661E [0x00A9] [script:AE 01][box:system]스위치 발견[br]ON할까?[br][opt]네[br][opt]아니오[box:close]
   0x00466BC2 [0x00A9] [script:E7 02][box:system]계단 발견[br][opt]내려가기[br][opt]그만두기[box:close]
@@ -897,7 +897,7 @@
   --- context: 0x00A9 -> 0x8006 ---
   0x0046783E [0x8006] [script:18 09][box:speech]어서 와
   --- context: 0x8006 -> 0x00B4 ---
-  0x00467878 [0x00B4][box:speech]천천히 있다 가렴
+  0x00467878 [0x00B4] [script:36 09][box:speech]천천히 있다 가렴
   --- context: 0x00B4 -> 0x8006 ---
   0x004678CC [0x8006] [script:79 09][box:speech]이번에 이 마을에 큰 사원이 생긴대[br][delay:15]그래서 [delay:15]오늘은 그 축하로 마시고 있어
   --- context: 0x8006 -> 0x8007 ---
@@ -955,7 +955,7 @@
   --- context: 0x8005 -> 0xFFFE ---
   0x00468AE4 [0xFFFE] [script:6B 12][box:speech]어서 와
   --- context: 0xFFFE -> 0x00B4 ---
-  0x00468B1E [0x00B4][box:speech]천천히 있다 가렴
+  0x00468B1E [0x00B4] [script:89 12][box:speech]천천히 있다 가렴
   --- context: 0x00B4 -> 0x8006 ---
   0x00468B72 [0x8006] [script:B8 12][box:speech]호른의 마녀는 어떻게 됐을까?
   --- context: 0x8006 -> 0x00B4 ---
@@ -1077,7 +1077,7 @@
   --- context: 0x8016 -> 0x8006 ---
   0x0052428E [0x8006] [script:91 0E][box:speech]…[delay:15]호른은…[delay:15]악마의…[delay:15]마을이다…
   --- context: 0x8006 -> 0x00B4 ---
-  0x005242DE [0x00B4][box:speech]리츠!?
+  0x005242DE [0x00B4] [script:AD 0E][box:speech]리츠!?
   --- context: 0x00B4 -> 0x8006 ---
   0x0052431E [0x8006] [script:D9 0E][box:speech]…[delay:15]호른은…[delay:15]악마의…[delay:15]마을이다…
   --- context: 0x8006 -> 0x8017 ---
@@ -1267,7 +1267,7 @@
   0x0069E96C [0x8014] [script:E4 06][box:speech]하하하하하!!
   0x0069EA22 [0x8014] [script:4E 07][box:speech]엘크를 만나서 다시 사람을,[br]그 다정함을 믿으려 했는데…
   --- context: 0x8014 -> 0x00B4 ---
-  0x0069EA92 [0x00B4][cursor]・・・・・[delay:15][box:speech]이제, 포기해 버리는 건가요
+  0x0069EA92 [0x00B4] [script:83 07][cursor]・・・・・[delay:15][box:speech]이제, 포기해 버리는 건가요
   --- context: 0x00B4 -> 0x8005 ---
   0x0069EAEA [0x8005] [script:A1 07][box:speech]네!?
   0x0069EB34 [0x8005] [script:CB 07][box:speech]누구 없나요?
