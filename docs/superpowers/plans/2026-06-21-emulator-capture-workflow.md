@@ -34,7 +34,8 @@
 - Test: `python/tools/test_process_capture.py`
 
 **Interfaces:**
-- Produces: `parse_capture_log(path: Path) -> list[tuple[int, bytes]]` (addr, raw bytes); `contains_japanese(text: str) -> bool`; `classify(raw: bytes, table) -> tuple[str, bool]` returning `(decoded_text, is_japanese)`.
+- Produces: `parse_capture_log(path: Path) -> list[tuple[int, bytes]]` (addr, raw bytes); `decode_line(raw: bytes, table) -> str` (Japanese-table decode, for human-readable display only); `contains_japanese(text: str) -> bool` (utility for stats; NOT the missed-gate).
+- Note (corrected from spec): "missed" is decided in Task 2 by **exact byte match against the original STG binaries**, not by kana decoding. Decoding captured patched bytes with the Japanese table mislabels translated Korean (e.g. `[0x80,0x80]`→`ギギ`), so decode is display-only here.
 
 - [ ] **Step 1: Write the failing test**
 
@@ -63,18 +64,15 @@ class TestParseAndClassify(unittest.TestCase):
         self.assertEqual(out[0][1], bytes([0x05,0x2A,0x1A,0x10,0x06,0x27,0x3E,0x0A,0x39]))
         self.assertEqual(len(out), 2)
 
-    def test_classify_japanese(self):
+    def test_decode_line_readable(self):
         table = pc.dt.build_decode_table()
-        text, is_jp = pc.classify(bytes([0x05,0x2A,0x1A,0x10,0x06,0x27,0x3E,0x0A,0x39]), table)
-        self.assertTrue(is_jp)
+        text = pc.decode_line(bytes([0x05,0x2A,0x1A,0x10,0x06,0x27,0x3E,0x0A,0x39]), table)
         self.assertIn("たからばこ", text)
 
-    def test_korean_not_flagged(self):
-        # Korean bytes decode without Japanese kana -> is_jp False
-        table = pc.dt.build_decode_table()
-        # 0x80 0x80 decodes via the unified map; assert no hiragana/katakana letters
-        text, is_jp = pc.classify(bytes([0x80, 0x80]), table)
-        self.assertFalse(is_jp)
+    def test_contains_japanese_on_text(self):
+        # utility operates on decoded TEXT, not raw bytes
+        self.assertTrue(pc.contains_japanese("おはよう"))
+        self.assertFalse(pc.contains_japanese("안녕하세요"))
 
 if __name__ == "__main__":
     unittest.main()
@@ -132,9 +130,11 @@ def contains_japanese(text: str) -> bool:
     return False
 
 
-def classify(raw: bytes, table) -> tuple:
+def decode_line(raw: bytes, table) -> str:
+    """Japanese-table decode of captured bytes — for human-readable display only.
+    NOT a missed/translated classifier (patched Korean bytes mis-decode here)."""
     text, _consumed = dt.decode_string(raw + b"\x00", 0, table)
-    return text, contains_japanese(text)
+    return text
 ```
 
 - [ ] **Step 4: Run test to verify it passes**
@@ -158,8 +158,8 @@ git commit -m "feat(capture): parse capture log + decode/classify"
 - Test: `python/tools/test_process_capture.py`
 
 **Interfaces:**
-- Consumes: `parse_capture_log`, `classify`, `GAME_DIR`, `STAGES`, `CAPTURE_DIR`.
-- Produces: `find_offsets(raw: bytes) -> list[tuple[str,int]]` (stage, file offset of every exact byte match across original STGs); `process(log_path: Path) -> dict` with keys `missed` (list of `{text, stage, offset}`), `stats`; `write_worklist(result: dict) -> Path` writing `output/capture/missed_displayed.txt` in `<id> / JP: / KO:` format.
+- Consumes: `parse_capture_log`, `decode_line`, `GAME_DIR`, `STAGES`, `CAPTURE_DIR`.
+- Produces: `find_offsets(raw: bytes) -> list[tuple[str,int]]` (stage, file offset of every exact byte match across original STGs). **A non-empty result is the "missed" gate** — the captured bytes match an untranslated original line. `process(log_path: Path) -> dict` with keys `missed` (list of `{text, stage, offset, all_hits}`), `stats`; `write_worklist(result: dict) -> Path` writing `output/capture/missed_displayed.txt` in `<id> / JP: / KO:` format.
 
 - [ ] **Step 1: Write the failing test**
 
@@ -176,12 +176,17 @@ class TestMapAndEmit(unittest.TestCase):
         self.assertTrue(any(stage and isinstance(off, int) for stage, off in hits),
                         "treasure-chest bytes should be found in at least one STG")
 
-    def test_process_flags_japanese_with_offset(self):
+    def test_process_flags_missed_by_original_match(self):
+        # chest bytes match an original STG -> missed, with offset + readable JP
         fd, p = tempfile.mkstemp(suffix=".log"); os.close(fd)
-        Path(p).write_text("addr=0x801A0000 bytes=05 2A 1A 10 06 27 3E 0A 39\n",
-                           encoding="utf-8")
+        Path(p).write_text(
+            "addr=0x801A0000 bytes=05 2A 1A 10 06 27 3E 0A 39\n"
+            # bytes that do NOT appear in any original STG -> NOT missed (e.g. a
+            # translated/Korean line); use an implausible run.
+            "addr=0x801A0050 bytes=EE EE EE EE EE EE EE EE EE EE\n",
+            encoding="utf-8")
         result = pc.process(Path(p))
-        self.assertEqual(len(result["missed"]), 1)
+        self.assertEqual(len(result["missed"]), 1)   # only the chest matched
         m = result["missed"][0]
         self.assertIn("たからばこ", m["text"])
         self.assertIsNotNone(m["stage"])
@@ -218,23 +223,26 @@ def process(log_path: Path) -> dict:
     seen = set()
     missed = []
     total = 0
-    jp = 0
+    matched = 0
     for _addr, raw in entries:
         total += 1
-        text, is_jp = classify(raw, table)
-        if not is_jp:
-            continue
-        jp += 1
-        key = text.strip()
-        if not key or key in seen:
-            continue
-        seen.add(key)
+        # MISSED gate: the captured bytes appear verbatim in an original STG,
+        # i.e. this displayed line is still the untranslated original. A
+        # translated (Korean-remapped) line will NOT match the original.
         hits = find_offsets(raw)
-        stage, off = (hits[0] if hits else (None, None))
-        missed.append({"text": key, "stage": stage, "offset": off,
+        if not hits:
+            continue
+        matched += 1
+        text = decode_line(raw, table).strip()   # readable JP for the worklist
+        if not text or text in seen:
+            continue
+        seen.add(text)
+        stage, off = hits[0]
+        missed.append({"text": text, "stage": stage, "offset": off,
                        "all_hits": hits})
     return {"missed": missed,
-            "stats": {"total": total, "japanese": jp, "unique_missed": len(missed)}}
+            "stats": {"total": total, "matched_original": matched,
+                      "unique_missed": len(missed)}}
 
 
 def write_worklist(result: dict) -> Path:
@@ -243,7 +251,7 @@ def write_worklist(result: dict) -> Path:
     s = result["stats"]
     lines = [
         "# Missed displayed dialogue (captured at runtime)",
-        f"# total hits={s['total']}  japanese={s['japanese']}  unique={s['unique_missed']}",
+        f"# total hits={s['total']}  matched_original={s['matched_original']}  unique={s['unique_missed']}",
         "# Each entry: <id> / JP / KO (fill KO).  id = STAGE:0xOFFSET or UNMAPPED:n",
         "",
     ]
@@ -273,7 +281,7 @@ def main(argv=None):
     result = process(log_path)
     out = write_worklist(result)
     s = result["stats"]
-    print(f"hits={s['total']} japanese={s['japanese']} unique missed={s['unique_missed']}")
+    print(f"hits={s['total']} matched_original={s['matched_original']} unique missed={s['unique_missed']}")
     print(f"worklist -> {out}")
     return 0
 
@@ -425,8 +433,8 @@ git commit -m "docs(capture): emulator capture runbook"
 ---
 
 ## Self-Review Notes
-- **Spec coverage:** Lua dumb-logger (Task 3); Python decode/classify (Task 1); offset map via binary search + worklist (Task 2); runbook + calibration (Task 4). The spec's `RAM_BASE` math is intentionally replaced by byte-search mapping (simpler, testable) — calibration now only needs `TEXT_REG`; noted in runbook.
-- **Type consistency:** `classify -> (text, is_jp)`, `find_offsets -> [(stage,off)]`, `process -> {missed:[{text,stage,offset,all_hits}], stats}`, `write_worklist -> Path` — consistent across Tasks 1–2.
+- **Spec coverage:** Lua dumb-logger (Task 3); Python parse/decode-for-display (Task 1); byte-match missed-gate + offset map + worklist (Task 2); runbook + calibration (Task 4). The spec's `RAM_BASE` math is replaced by byte-search mapping (simpler, testable) — calibration only needs `TEXT_REG`; noted in runbook. **Correction applied (pre-flight):** the "missed" classifier is exact byte-match against the original STG, NOT kana-decoding (decoding patched Korean bytes via the JP table mislabels them, e.g. `[0x80,0x80]`→`ギギ`); decode is display-only.
+- **Type consistency:** `decode_line -> str`, `contains_japanese -> bool`, `find_offsets -> [(stage,off)]`, `process -> {missed:[{text,stage,offset,all_hits}], stats{total,matched_original,unique_missed}}`, `write_worklist -> Path` — consistent across Tasks 1–2.
 - **No placeholders:** Lua `TEXT_REG` default `'a0'` is a real runnable default refined by calibration (not a TODO); every code step is complete.
 
 ## Out of scope
