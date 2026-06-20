@@ -100,3 +100,24 @@ def tier1_untranslated(translations: dict) -> list:
         (off, text) for off, text in translations.items()
         if contains_japanese(text)
     )
+
+
+def tier2_decoder_rejects(data, decode_table, decoded_offsets: set,
+                          invalid_offsets: set) -> list:
+    """Japanese candidates the garbage filter discarded inside scanned regions.
+
+    Found by diffing scan_stg(filter_garbage=False) against filter_garbage=True.
+    Excludes already-decoded and invalid-report offsets.
+    """
+    kept, _, _ = dt.scan_stg(data, decode_table, filter_garbage=True)
+    full, _, _ = dt.scan_stg(data, decode_table, filter_garbage=False)
+    kept_offsets = {d[0] for d in kept}
+    out = []
+    for off, _consumed, text, _opcode in full:
+        if off in kept_offsets:
+            continue
+        if off in decoded_offsets or off in invalid_offsets:
+            continue
+        if contains_japanese(text):
+            out.append((off, text))
+    return sorted(set(out))

@@ -92,5 +92,32 @@ class TestTier1(unittest.TestCase):
         self.assertEqual(out, [(0x20, "おはよう"), (0x40, "ベンチ")])
 
 
+class TestTier2(unittest.TestCase):
+    def setUp(self):
+        self._real_scan = cov.dt.scan_stg
+
+    def tearDown(self):
+        cov.dt.scan_stg = self._real_scan
+
+    def test_captures_rejected_japanese_only(self):
+        # kept set: offset 0x10 ; full set: 0x10 + rejects 0x20(jp), 0x30(garbage ascii), 0x40(jp but invalid), 0x50(jp but already decoded)
+        def fake_scan(data, table, use_heuristics=True, filter_garbage=True):
+            kept = [(0x10, 4, "안녕", 0xFFFE)]
+            full = kept + [
+                (0x20, 6, "みつかった", 0x8005),   # real reject -> expect captured
+                (0x30, 3, "Xab", 0x8005),          # not japanese -> excluded
+                (0x40, 5, "ほげ", 0x8005),          # japanese but invalid offset
+                (0x50, 5, "ふが", 0x8005),          # japanese but already decoded
+            ]
+            return (kept if filter_garbage else full), [], {}
+        cov.dt.scan_stg = fake_scan
+
+        out = cov.tier2_decoder_rejects(
+            data=b"", decode_table={},
+            decoded_offsets={0x50}, invalid_offsets={0x40},
+        )
+        self.assertEqual(out, [(0x20, "みつかった")])
+
+
 if __name__ == "__main__":
     unittest.main()
