@@ -237,9 +237,9 @@
   0x00234A88 [0x00B4] [script:A3 2B][box:system]이[opt]름[opt]키바[opt][opt][opt][opt][opt]닌자[br]보[opt]수[opt]2115G[br]위치[opt]쿠이나 언덕[br]특기[opt]폭렬 수리검
   0x00234AF8 [0x00B4] [script:D8 2B][box:system]이[opt]름[opt]샤코우[opt][opt][opt]고스트[br]보[opt]수[opt]1800G[br]위치[opt]팔렌시아 성터[br]특기[opt]？
   0x00234B7C [0x00B4] [script:1E 2C][box:system]이[opt]름[opt]디로스[opt][opt][opt]스펠렁커[br]보[opt]수[opt]1890G[br]위치[opt]팔렌시아 성터[br]특기[opt]슬립 윈드
-  0x00234BE0 [0x00B4] [script:38 2C][box:system][br]このモンスターは、ハンティングされました
+  0x00234BE0 [0x00B4]이 몬스터는 헌팅되었습니다
   0x002356D8 [0x00B4] [script:CB 31][box:system]이[opt]름[opt]사룡 기어[opt][opt]블랙 드래곤[br]보[opt]수[opt]3600G[br]위치[opt]스메리아 내부[br]특기[opt]다크 브레스
-  0x0023573A [0x00B4] [script:E5 31][box:system][br]このモンスターは、ハンティングされました
+  0x0023573A [0x00B4]이 몬스터는 헌팅되었습니다
   --- context: 0x00B4 -> 0x00A9 ---
   0x002EF35E [0x00A9] [script:AE 01][box:system]스위치 발견[br]ON할까?[br][opt]네[br][opt]아니오[box:close]
   0x002EF902 [0x00A9] [script:E7 02][box:system]계단 발견[br][opt]내려가기[br][opt]그만두기[box:close]
@@ -720,8 +720,8 @@
   0x00466C36 [0xFFFE] [script:D2 32][box:speech]그래서 이 거리에 군인이 잔뜩[br]온대
   0x00466C90 [0xFFFE] [script:F9 32][box:speech]이 얘기 정말일까
   --- context: 0xFFFE -> 0x00B4 ---
-  0x00466CE0 [0x00B4] [script:22 33][box:speech]レジスタの「あたい」が、はんいがいです
-  0x00466FFA [0x00B4] [script:A9 34][box:speech]やめてください！！
+  0x00466CE0 [0x00B4]레지스터의 「값」이 범위 밖입니다
+  0x00466FFA [0x00B4]그만해 주세요！！
   --- context: 0x00B4 -> 0xFFFE ---
   0x00467076 [0xFFFE] [script:EF 34][box:speech]우리가 뭘 했다는 거죠！？
   --- context: 0xFFFE -> 0x8015 ---
@@ -857,7 +857,7 @@
   0x00521B3C [0x800B] [script:11 0A][box:speech]응？
   0x00521B7A [0x800B] [script:34 0A][box:speech]너희는 뭐지？
   --- context: 0x800B -> 0x00B4 ---
-  0x00521BE4 [0x00B4] [script:65 0A][box:speech]よっと
+  0x00521BE4 [0x00B4]영차
   --- context: 0x00B4 -> 0x800B ---
   0x00521BFC [0x800B] [script:7C 0A][box:speech]너희, 나한테 상담할 일 있지？
   0x00521C4C [0x800B] [script:A2 0A][box:speech]그럼 그 전에 한잔 사줘
@@ -869,7 +869,7 @@
   0x00521DA4 [0x800B] [script:45 0B][box:speech]응？
   0x00521DE2 [0x800B] [script:68 0B][box:speech]뭐야, 또 너희냐
   --- context: 0x800B -> 0x00B4 ---
-  0x00521E34 [0x00B4] [script:8D 0B][box:speech]よっと
+  0x00521E34 [0x00B4]영차
   --- context: 0x00B4 -> 0x800B ---
   0x00521E4C [0x800B] [script:A1 0B][box:speech]어때, 나한테 한잔 살 마음 생겼나？
   --- context: 0x800B -> 0x00A9 ---
@@ -1114,8 +1114,8 @@
   0x005267A4 [0x800F] [script:56 30][box:speech]요즘 반가운 얼굴만 보네,[br]너도 그렇고 두목도 그렇고…
   0x00526800 [0x800F] [script:74 30][box:speech]두목？
   --- context: 0x800F -> 0x00B4 ---
-  0x00526838 [0x00B4] [script:94 30][box:speech]あ、いや、なんでもないよ
-  0x00526878 [0x00B4] [script:BC 30][box:speech]それより、マスターにあいさつを[br]してきたらどうだ？
+  0x00526838 [0x00B4]아, 아니, 아무것도 아니야
+  0x00526878 [0x00B4]하고 오면 어때？
   --- context: 0x00B4 -> 0x800F ---
   0x005268E6 [0x800F] [script:EF 30][box:speech]마스터한테 인사하고 왔냐？
   0x00526960 [0x800F] [script:27 31][box:speech]・・・・・
@@ -1453,19 +1453,19 @@
   --- context: 0x8006 -> 0x8005 ---
   0x0099049E [0x8005] [script:8D 07]됐다！
   --- context: 0x8005 -> 0x00B4 ---
-  0x009905CE [0x00B4] [script:27 08]さてと、あたしも…
+  0x009905CE [0x00B4]그럼, 나도…
   0x00990684 [0x00B4] [script:8B 08]이 레버는…[br]절대로 못 건드리게 해！！
   0x00990760 [0x00B4] [script:F3 08]샨테, 이제 괜찮아！
   0x00990792 [0x00B4] [script:0B 09]빨리 올라와！！
   0x009907F8 [0x00B4] [script:3D 09]쫓아라, 쫓아！！
-  0x00990860 [0x00B4] [script:71 09]くっ、しつこいわね！
+  0x00990860 [0x00B4]윽, 끈질기네！
   0x009908AE [0x00B4] [script:9A 09]잡았다, 포기해라！
-  0x009908D2 [0x00B4] [script:AB 09]どこ、つかんでんのよ！！
-  0x009908F4 [0x00B4] [script:BB 09]この…クソヤロー！！
-  0x00990940 [0x00B4] [script:DF 09]うあぁー！！
-  0x0099096E [0x00B4] [script:F7 09]ふん、いいきみよ！
+  0x009908D2 [0x00B4]어디를 잡는 거야！！
+  0x009908F4 [0x00B4]이…빌어먹을 자식！！
+  0x00990940 [0x00B4]으아아ー！！
+  0x0099096E [0x00B4]흥, 꼴좋다！
   0x009909BE [0x00B4] [script:21 0A]샨테, 괜찮아？
-  0x009909EA [0x00B4] [script:34 0A]なんとかね…
+  0x009909EA [0x00B4]그럭저럭…
   --- context: 0x00B4 -> 0x8005 ---
   0x00990A12 [0x8005] [script:56 0A]이 레버로 비행선을[br]발진 데크로 이동시키는 거네
   0x00990A68 [0x8005] [script:8D 0A]음…[FF:01 03 01]오른쪽 레버가 발진 데크[FF:01 01 01], [br][FF:01 02 01]왼쪽 레버가 리프트 하강[FF:01 01 01]인가…
@@ -1505,7 +1505,7 @@
   --- context: 0x8006 -> 0x801B ---
   0x00991646 [0x801B] [script:62 10]젠장！！
   --- context: 0x801B -> 0x00B4 ---
-  0x00991CB0 [0x00B4] [script:96 13]あっ！？
+  0x00991CB0 [0x00B4]앗！？
   0x00991D94 [0x00B4] [script:13 14]미안…나, [br]짐이 되고 있네…
   0x00991E2A [0x00B4] [script:54 14]아, 아래인가！？
   --- context: 0x00B4 -> 0x801B ---
@@ -1836,12 +1836,12 @@
   0x00C7E5DA [0x00A9] [script:25 03][box:system]사다리다[br][opt]올라가기[br][opt]그만두기[box:close]
   0x00C7E622 [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
   --- context: 0x00A9 -> 0x00B4 ---
-  0x00C7E95E [0x00B4] [script:E0 04][box:speech]ラストステージ[opt]チェックエラー
-  0x00C7EE0C [0x00B4] [script:32 07][box:speech]わぁっ！
+  0x00C7E95E [0x00B4]체크 에러
+  0x00C7EE0C [0x00B4]와앗！
   --- context: 0x00B4 -> 0x8006 ---
   0x00C7EF26 [0x8006] [script:C1 07][box:speech]아-, 깜짝 놀랐네
   --- context: 0x8006 -> 0x00B4 ---
-  0x00C7EF70 [0x00B4] [script:E4 07][box:speech]うわぁ！！
+  0x00C7EF70 [0x00B4]우와！！
   --- context: 0x00B4 -> 0x8006 ---
   0x00C7EFCC [0x8006] [script:14 08][box:speech]모, 몬스터다！
   0x00C7F012 [0x8006] [script:37 08][box:speech]어, 어떻게 하지？
@@ -1915,7 +1915,7 @@
   0x00D3F200 [0x8005] [script:C5 05][box:speech]여기서 어떻게 돌아가라는 거야！？
   0x00D3F24E [0x8005] [script:EA 05][box:speech]어쩔 수 없어, 앞으로 가자
   --- context: 0x8005 -> 0x00B4 ---
-  0x00D3F2C6 [0x00B4] [script:25 06][box:speech]あれ・・・・・
+  0x00D3F2C6 [0x00B4]어라…
   --- context: 0x00B4 -> 0x8006 ---
   0x00D3F2FA [0x8006] [script:3A 06][box:speech]야
   --- context: 0x8006 -> 0x8005 ---
@@ -1970,7 +1970,7 @@
   0x00DFAB92 [0x00A9] [script:25 03][box:system]사다리다[br][opt]올라가기[br][opt]그만두기[box:close]
   0x00DFABDA [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
   --- context: 0x00A9 -> 0x00B4 ---
-  0x00DFAF20 [0x00B4] [script:E5 04][box:speech]らすとすてーじちぇっくえらー
+  0x00DFAF20 [0x00B4]라스트 스테이지 체크 에러
   --- context: 0x00B4 -> 0x8000 ---
   0x00DFB354 [0x8000] [script:FE 06][box:speech]여기에도 몬스터가！？
   --- context: 0x8000 -> 0x00A9 ---
@@ -2076,7 +2076,7 @@
   --- context: 0x8000 -> 0x8001 ---
   0x00EB7B42 [0x8001] [script:9D 1E][box:speech]어떻게든 되겠지, 가자
   --- context: 0x8001 -> 0x00B4 ---
-  0x00EB7BA0 [0x00B4] [script:C9 1E][box:speech]だいじょうぶかなぁ？
+  0x00EB7BA0 [0x00B4]괜찮을까…？
   --- context: 0x00B4 -> 0x8000 ---
   0x00EB7BC8 [0x8000] [script:DF 1E][box:speech]뭐 해, 두고 간다
   0x00EB7C0E [0x8000] [script:FD 1E][box:speech]기다려어
@@ -2227,7 +2227,7 @@
   --- context: 0x8000 -> 0x8001 ---
   0x00EB96AE [0x8001] [script:53 2C][box:speech]…너만큼은 아니야
   --- context: 0x8001 -> 0x00B4 ---
-  0x00EB970C [0x00B4] [script:7E 2C][box:speech]コら、ドこニイク？
+  0x00EB970C [0x00B4]야, 어딜 가？
   --- context: 0x00B4 -> 0x8000 ---
   0x00EB9732 [0x8000] [script:94 2C][box:speech]뭐 해, 두고 간다
   0x00EB9778 [0x8000] [script:B4 2C][box:speech]이봐, 기다리라니까
@@ -2869,7 +2869,7 @@
   --- context: 0x8008 -> 0x8007 ---
   0x0132287E [0x8007] [script:4C 0F]좋아!
   --- context: 0x8007 -> 0x00B4 ---
-  0x013228F8 [0x00B4] [script:8A 0F]きゃっ！！
+  0x013228F8 [0x00B4]꺅！！
   --- context: 0x00B4 -> 0x8007 ---
   0x01322980 [0x8007] [script:CD 0F]！！
   --- context: 0x8007 -> 0x8014 ---
@@ -3653,7 +3653,7 @@
   0x016D0D1A [0x8002] [script:AD 0A]잘됐네, 엘크!
   --- context: 0x8002 -> 0x00B4 ---
   0x016D0D5E [0x00B4] [script:D1 0A]어서 쿠쿠루에게 알리러 가자
-  0x016D0D90 [0x00B4] [script:E6 0A]コらッ、まタんカ！
+  0x016D0D90 [0x00B4]야, 또야！
   --- context: 0x00B4 -> 0x8002 ---
   0x016D0E30 [0x8002] [script:36 0B]해냈네, 엘크!
   --- context: 0x8002 -> 0x00B4 ---
@@ -3902,7 +3902,7 @@
   --- context: 0x8014 -> 0x8013 ---
   0x0184BA7C [0x8013] [script:0A 0D]빨리 이 힘의 근원을 봉인해야 해
   --- context: 0x8013 -> 0x00B4 ---
-  0x0184BACA [0x00B4] [script:2A 0D]こら！まてよ
+  0x0184BACA [0x00B4]야！기다려
   --- context: 0x00B4 -> 0x8013 ---
   0x0184BAF4 [0x8013] [script:4F 0D]여긴 고대의 신전,[br]칠용자가 마지막으로 싸운 장소야
   --- context: 0x8013 -> 0x8014 ---
@@ -3915,7 +3915,7 @@
   0x0184BC16 [0x8013] [script:D3 0D]알겠어, 가자
   --- context: 0x8013 -> 0x00B4 ---
   0x0184BC5C [0x00B4] [script:F7 0D]이런! 서두르면 위험하단다
-  0x0184BC7A [0x00B4] [script:01 0E]まつんだ！
+  0x0184BC7A [0x00B4]기다려！
   --- context: 0x00B4 -> 0x8013 ---
   0x0184BCA0 [0x8013] [script:17 0E]뭐야, 시끄럽게!
   0x0184BCDE [0x8013] [script:37 0E]내 말을 들어 줘
@@ -3924,14 +3924,14 @@
   --- context: 0x8014 -> 0x8013 ---
   0x0184BD6C [0x8013] [script:80 0E]빨리 이 힘을 봉인해야 해
   --- context: 0x8013 -> 0x00B4 ---
-  0x0184BDB6 [0x00B4] [script:A2 0E]まてといっているのだ！
-  0x0184BDD0 [0x00B4] [script:AF 0E]まってくれよ、ククル！
+  0x0184BDB6 [0x00B4]기다리라고 하잖아！
+  0x0184BDD0 [0x00B4]기다려줘, 쿠쿠루！
   --- context: 0x00B4 -> 0x8013 ---
   0x0184BDFC [0x8013] [script:CD 0E]쿠쿠루, 쿠쿠루 하며[br]너무 들이대는 거 아냐?
   0x0184BE4A [0x8013] [script:F3 0E]네가 무슨 상관인데?
   0x0184BE96 [0x8013] [script:10 0F]내버려 둬
   --- context: 0x8013 -> 0x00B4 ---
-  0x0184BED6 [0x00B4] [script:32 0F]ちょっと、まってよ！
+  0x0184BED6 [0x00B4]잠깐, 기다려！
   --- context: 0x00B4 -> 0x8013 ---
   0x0184BF1E [0x8013] [script:58 0F]너도 꽤 끈질기네
   0x0184BF60 [0x8013] [script:7F 0F]부탁이야, 내 말 좀 들어 줘
@@ -3940,8 +3940,8 @@
   --- context: 0x8014 -> 0x8013 ---
   0x0184BFFC [0x8013] [script:C8 0F]빨리 이 힘을 봉인해야 해
   --- context: 0x8013 -> 0x00B4 ---
-  0x0184C046 [0x00B4] [script:EA 0F]あっ、まってください…
-  0x0184C060 [0x00B4] [script:F9 0F]ちょっと、まちなさいよ！ククル
+  0x0184C046 [0x00B4]앗, 기다려 주세요…
+  0x0184C060 [0x00B4]잠깐, 기다리라고！쿠쿠루
   --- context: 0x00B4 -> 0x8013 ---
   0x0184C090 [0x8013] [script:11 10]너도 참 끈질기다
   0x0184C0D2 [0x8013] [script:39 10]부탁이니까 내 말 좀 믿어 줘
@@ -3950,14 +3950,14 @@
   --- context: 0x8014 -> 0x8013 ---
   0x0184C170 [0x8013] [script:82 10]빨리 이 힘을 봉인해야 해
   --- context: 0x8013 -> 0x00B4 ---
-  0x0184C1BA [0x00B4] [script:A2 10]もう！まってよ
+  0x0184C1BA [0x00B4]정말！기다리라니까
   0x0184C1D0 [0x00B4] [script:AC 10]쿠쿠루！
   --- context: 0x00B4 -> 0x8013 ---
   0x0184C1F6 [0x8013] [script:C4 10]좀, 너무 친한 척하는 거 아냐?
   0x0184C238 [0x8013] [script:E9 10]네가 무슨 상관이야?
   0x0184C282 [0x8013] [script:08 11]그냥 날 내버려 둬
   --- context: 0x8013 -> 0x00B4 ---
-  0x0184C2D6 [0x00B4] [script:30 11]クくル！くくル
+  0x0184C2D6 [0x00B4]쿠쿠루！쿠쿠루
   --- context: 0x00B4 -> 0x8013 ---
   0x0184C2FE [0x8013] [script:4C 11]뭐야! 고철 주제에 시끄럽네
   0x0184C348 [0x8013] [script:6B 11]내 말을 듣지 않겠나
@@ -3966,8 +3966,8 @@
   --- context: 0x8014 -> 0x8013 ---
   0x0184C3D4 [0x8013] [script:B4 11]빨리 이 힘을 봉인해야 해
   --- context: 0x8013 -> 0x00B4 ---
-  0x0184C41E [0x00B4] [script:D6 11]ワしノハなシヲきケ！
-  0x0184C438 [0x00B4] [script:E1 11]ククル！まって
+  0x0184C41E [0x00B4]내 말을 들어라！
+  0x0184C438 [0x00B4]쿠쿠루！기다려
   --- context: 0x00B4 -> 0x8013 ---
   0x0184C460 [0x8013] [script:F7 11]너 정말 끈질기구나
   0x0184C49E [0x8013] [script:19 12]부탁이야, 내 말을 믿어 줘
@@ -3976,7 +3976,7 @@
   --- context: 0x8014 -> 0x8013 ---
   0x0184C530 [0x8013] [script:62 12]빨리 이 힘을 봉인해야 해
   --- context: 0x8013 -> 0x00B4 ---
-  0x0184C57A [0x00B4] [script:83 12]まって、ククル！
+  0x0184C57A [0x00B4]기다려, 쿠쿠루！
   0x0184C592 [0x00B4] [script:8D 12]쿠쿠루！
   --- context: 0x00B4 -> 0x8013 ---
   0x0184C5B8 [0x8013] [script:AA 12]쿠쿠루, 쿠쿠루 하며[br]너무 들이대잖아
@@ -3985,7 +3985,7 @@
   --- context: 0x8013 -> 0x8014 ---
   0x0184C69E [0x8014] [script:17 13]그럼 마음대로 해
   --- context: 0x8014 -> 0x00B4 ---
-  0x0184C6E4 [0x00B4] [script:38 13]おい！まってくれ
+  0x0184C6E4 [0x00B4]어이！기다려줘
   0x0184C76E [0x00B4] [script:7D 13]고대의 신전
   --- context: 0x00B4 -> 0x00B0 ---
   0x018FCDDA [0x00B0] [script:AE 01][box:system]스위치 발견[br]ON할까?[br][opt]네[br][opt]아니오[box:close]
@@ -4228,7 +4228,7 @@
   0x01901F2A [0xFFFE] [script:AF 28]아직도 안 일어났나?
   --- context: 0xFFFE -> 0x00B4 ---
   0x01901F78 [0x00B4] [script:D5 28]으, 으음…
-  0x01901F96 [0x00B4] [script:E5 28]やっト、オきたカ！
+  0x01901F96 [0x00B4]드디어 일어났나！
   --- context: 0x00B4 -> 0x800A ---
   0x01901FD6 [0x800A] [script:08 29]꽤 오래 잤군
   0x01902018 [0x800A] [script:26 29]나는 대체…?
