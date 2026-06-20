@@ -534,7 +534,7 @@
   0x002EE988 [0x00B4] [script:07 0B][box:close]이 바보 자식이!!
   0x002EE9B0 [0x00B4] [script:1F 0B][box:speech]네놈의 세계 따윈 남지 않는다!!
   0x002EE9E0 [0x00B4] [script:37 0B]누구의 세계도[delay:0B]·[delay:0B]·[delay:0B]·
-  0x002EEA14 [0x00B4] [script:4B 0B]그렇다
+  0x002EEA14 [0x00B4] [script:4B 0B][box:narration][FF:04 09 01]그렇다
   0x002EEA46 [0x00B4] [script:6D 0B][box:narration]신이 만든 어리석은 인간의 세계는 사라진다
   0x002EEA9E [0x00B4] [script:8E 0B][box:close]무슨 소릴 하느냐
   0x002EEABE [0x00B4] [script:A1 0B][box:speech]내가 힘을 얻었다

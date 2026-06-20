@@ -324,11 +324,11 @@
   0x0017276A [0x00A9] [script:25 03][box:system]사다리다[br][opt]올라가기[br][opt]그만두기[box:close]
   0x001727B2 [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
   --- context: 0x00A9 -> 0x00B4 ---
-  0x001729A6 [0x00B4] [script:3C 04]고철 마을[opt]플래그[opt]에러
-  0x001729FA [0x00B4] [script:66 04]고철 마을[opt]플래그[opt]에러
-  0x00172A4E [0x00B4] [script:90 04]고철 마을[opt]플래그[opt]에러
-  0x00172AA2 [0x00B4] [script:BA 04]고철 마을[opt]플래그[opt]에러
-  0x00172B00 [0x00B4] [script:E9 04]고철 마을[opt]플래그[opt]에러
+  0x001729A6 [0x00B4] [script:3C 04][box:speech]고철 마을[opt]플래그[opt]에러
+  0x001729FA [0x00B4] [script:66 04][box:speech]고철 마을[opt]플래그[opt]에러
+  0x00172A4E [0x00B4] [script:90 04][box:speech]고철 마을[opt]플래그[opt]에러
+  0x00172AA2 [0x00B4] [script:BA 04][box:speech]고철 마을[opt]플래그[opt]에러
+  0x00172B00 [0x00B4] [script:E9 04][box:speech]고철 마을[opt]플래그[opt]에러
   --- context: 0x00B4 -> 0x00A9 ---
   0x00172B48 [0x00A9] [script:19 05][box:system]숙박부가 있습니다. 기입하시겠습니까？[br][opt]예[br][opt]아니오[box:close]
   --- context: 0x00A9 -> 0x8006 ---
@@ -528,7 +528,7 @@
   0x002EA1EE [0x00A9] [script:25 03][box:system]사다리다[br][opt]올라가기[br][opt]그만두기[box:close]
   0x002EA236 [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
   --- context: 0x00A9 -> 0x00B4 ---
-  0x002EA576 [0x00B4] [script:E0 04]고철[opt]플래그[opt]에러
+  0x002EA576 [0x00B4] [script:E0 04][box:speech]고철[opt]플래그[opt]에러
   --- context: 0x00B4 -> 0x8006 ---
   0x002EB03E [0x8006] [script:43 0A][box:speech]뭐야, 너?
   0x002EB082 [0x8006] [script:6D 0A][box:speech]이 마을은 외지인이[br]올 곳이 아니야
@@ -616,7 +616,7 @@
   0x002EC76E [0x8005] [script:E3 15][box:speech]당신에겐 민폐일지 몰라도[br]부탁한다!!
   0x002EC7CC [0x8005] [script:0C 16][box:speech]유감이지만 포기해
   --- context: 0x8005 -> 0x00B4 ---
-  0x002EC80C [0x00B4] [script:28 16]왜 그런 거야！？
+  0x002EC80C [0x00B4] [script:28 16][box:speech]왜 그런 거야！？
   --- context: 0x00B4 -> 0x8005 ---
   0x002EC852 [0x8005] [script:51 16][box:speech]너도 좀 생각해 보라고!
   --- context: 0x8005 -> 0x8006 ---
@@ -923,7 +923,7 @@
   --- context: 0x00B4 -> 0x8007 ---
   0x00463866 [0x8007] [script:F6 0F][box:speech]！！
   --- context: 0x8007 -> 0x00B4 ---
-  0x0046389C [0x00B4] [script:13 10]당신은…！？
+  0x0046389C [0x00B4] [script:13 10][box:speech]당신은…！？
   --- context: 0x00B4 -> 0x8005 ---
   0x004638DE [0x8005] [script:44 10][box:speech]갈아노는 지금 성벽 안에 있는[br]키메라 연구소 본부에 있습니다
   --- context: 0x8005 -> 0x8007 ---
@@ -1089,7 +1089,7 @@
   --- context: 0x8017 -> 0x800A ---
   0x00467BC8 [0x800A] [script:AB 31][box:speech]그런 거 아니야…
   --- context: 0x800A -> 0x00B4 ---
-  0x00467C1C [0x00B4] [script:D3 31]으아아！！
+  0x00467C1C [0x00B4] [script:D3 31][box:close]으아아！！
   --- context: 0x00B4 -> 0x8017 ---
   0x00467CF2 [0x8017] [script:45 32][box:close]로말리아 병사다![br]로말리아 병사가…
   --- context: 0x8017 -> 0x8014 ---
@@ -1170,7 +1170,7 @@
   0x00469FD0 [0x8006] [script:AF 43][box:speech]역시 대단해, 모리스!
   0x0046A012 [0x8006] [script:D1 43][box:speech]아뇨, 그 정도는…
   --- context: 0x8006 -> 0x00B4 ---
-  0x0046A052 [0x00B4] [script:ED 43]놔줘！！
+  0x0046A052 [0x00B4] [script:ED 43][box:speech]놔줘！！
   --- context: 0x00B4 -> 0x8007 ---
   0x0046A090 [0x8007] [script:0F 44][box:speech]응?[opt][delay:15]뭐지?
   --- context: 0x8007 -> 0x8006 ---
@@ -1222,11 +1222,11 @@
   0x005236FA [0x00A9] [script:25 03][box:system]사다리다[br][opt]올라가기[br][opt]그만두기[box:close]
   0x00523742 [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
   --- context: 0x00A9 -> 0x00B4 ---
-  0x00523B64 [0x00B4] [script:51 05]고철[opt]플래그[opt]에러
-  0x00523BA6 [0x00B4] [script:72 05]고철[opt]플래그[opt]에러
-  0x00523BDE [0x00B4] [script:8E 05]고철[opt]플래그[opt]에러
-  0x00523C16 [0x00B4] [script:AA 05]고철[opt]플래그[opt]에러
-  0x00523C58 [0x00B4] [script:CB 05]고철[opt]플래그[opt]에러
+  0x00523B64 [0x00B4] [script:51 05][box:speech]고철[opt]플래그[opt]에러
+  0x00523BA6 [0x00B4] [script:72 05][box:speech]고철[opt]플래그[opt]에러
+  0x00523BDE [0x00B4] [script:8E 05][box:speech]고철[opt]플래그[opt]에러
+  0x00523C16 [0x00B4] [script:AA 05][box:speech]고철[opt]플래그[opt]에러
+  0x00523C58 [0x00B4] [script:CB 05][box:speech]고철[opt]플래그[opt]에러
   --- context: 0x00B4 -> 0x8005 ---
   0x00524668 [0x8005] [script:D3 0A][box:speech]이봐, 정신 차려!
   0x005246AA [0x8005] [script:F4 0A][box:speech]・・・・・
@@ -1271,8 +1271,8 @@
   --- context: 0x8005 -> 0x8007 ---
   0x00525D8A [0x8007] [script:6A 16][box:speech]됐어, 아무 말도 하지 마[FF:08 0A 01]・・・
   --- context: 0x8007 -> 0x00B4 ---
-  0x00526024 [0x00B4] [script:B0 17]뭔가 에러인 것 같은뎁쇼
-  0x005260F6 [0x00B4] [script:19 18]뭔가 에러인 것 같은뎁쇼
+  0x00526024 [0x00B4] [script:B0 17][box:speech]뭔가 에러인 것 같은뎁쇼
+  0x005260F6 [0x00B4] [script:19 18][box:speech]뭔가 에러인 것 같은뎁쇼
   0x005264AA [0x00B4] [script:FB 19]수배 몬스터[br]SA-200SP를 쓰러뜨렸습니다
   --- context: 0x00B4 -> 0x00A9 ---
   0x005DBE46 [0x00A9] [script:AE 01][box:system]스위치 발견[br]ON할까?[br][opt]네[br][opt]아니오[box:close]
@@ -1995,13 +1995,13 @@
   0x008D55B6 [0x8005] [script:9E 11][box:speech]왜 그래, 안 나오는 거냐!
   0x008D55FC [0x8005] [script:C5 11][box:speech]겉멋만 든 겁쟁이 놈들아!
   --- context: 0x8005 -> 0x00B4 ---
-  0x008D568A [0x00B4] [script:07 12]으윽！？[opt]이렇게나！？
+  0x008D568A [0x00B4] [script:07 12][box:speech]으윽！？[opt]이렇게나！？
   --- context: 0x00B4 -> 0x8005 ---
   0x008D56FA [0x8005] [script:46 12][box:speech]우, [delay:15]웃기지 마[delay:0B]・[delay:0B]・[delay:0B]・
   0x008D579A [0x8005] [script:93 12][box:speech]젠장[delay:0B]・[delay:0B]・[delay:0B]・
   0x008D57EA [0x8005] [script:B5 12][box:speech]으샤아아아!!
   --- context: 0x8005 -> 0x00B4 ---
-  0x008D5826 [0x00B4] [script:D5 12]해보자는 거잖아！！
+  0x008D5826 [0x00B4] [script:D5 12][box:speech]해보자는 거잖아！！
   --- context: 0x00B4 -> 0x8005 ---
   0x008D5904 [0x8005] [script:4D 13][box:speech]이 토슈 님이 진짜 싸움을[br]가르쳐 주마!
   --- context: 0x8005 -> 0x8007 ---
@@ -2106,7 +2106,7 @@
   0x00A4D442 [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
   --- context: 0x00A9 -> 0x00B4 ---
   0x00A4D5EA [0x00B4] [script:24 04]물다짐 완료
-  0x00A4D788 [0x00B4] [script:E3 04]고철[opt]플래그[opt]에러
+  0x00A4D788 [0x00B4] [script:E3 04][box:speech]고철[opt]플래그[opt]에러
   --- context: 0x00B4 -> 0x8005 ---
   0x00A4DA00 [0x8005] [script:22 06][box:speech]침입은 지금뿐이야!!
   0x00A4E370 [0x8005] [script:D8 0A]당분간 가까이 안 가는 게 좋겠어

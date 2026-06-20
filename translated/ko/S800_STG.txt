@@ -572,7 +572,7 @@
   --- context: 0x800D -> 0x8005 ---
   0x002EC0D0 [0x8005] [script:6B 48][box:speech]누나, 조심해
   --- context: 0x8005 -> 0x00B4 ---
-  0x002EC112 [0x00B4] [script:8A 48]그리고, 할아버지도요
+  0x002EC112 [0x00B4] [script:8A 48][box:speech]그리고, 할아버지도요
   --- context: 0x00B4 -> 0x8008 ---
   0x002EC15A [0x8008] [script:B3 48][box:speech]호른의 마녀가 한 명 잡혔다더라
   --- context: 0x8008 -> 0x00B4 ---
@@ -680,7 +680,7 @@
   --- context: 0xFFFE -> 0x00B4 ---
   0x002ED6B2 [0x00B4] [script:65 53][box:speech]이 마을 사람들은 모두 가까이하려 하지[br]않았단다
   0x002ED706 [0x00B4] [script:88 53][box:speech]게다가 이번 마녀 소동까지
-  0x002ED74C [0x00B4] [script:AB 53]모두가 무서워하는 것도, 무리는 아니지요
+  0x002ED74C [0x00B4] [script:AB 53][box:speech]모두가 무서워하는 것도, 무리는 아니지요
   --- context: 0x00B4 -> 0xFFFE ---
   0x002ED796 [0xFFFE] [script:D6 53][box:speech]어쨌든 마녀들을[br]어떻게든 하지 않으면 안 돼
   0x002EE862 [0xFFFE] [script:32 5C][box:speech]・・・・・

@@ -670,7 +670,7 @@
   --- context: 0x8005 -> 0x8007 ---
   0x005DD9DC [0x8007] [script:0D 14][box:speech]그런데, 몬스터가[br]말을 듣다니…
   --- context: 0x8007 -> 0x00B4 ---
-  0x005DDA2A [0x00B4] [script:2D 14][box:speech][delay:00]언니는 대단하네
+  0x005DDA2A [0x00B4] [script:2D 14][box:speech]언니는 대단하네
   --- context: 0x00B4 -> 0x8007 ---
   0x005DDA72 [0x8007] [script:54 14][box:speech]있잖아, 언니도 호른 사람이야?
   0x005DDABC [0x8007] [script:71 14][box:speech]그래

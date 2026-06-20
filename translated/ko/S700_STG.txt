@@ -237,9 +237,9 @@
   0x00234A88 [0x00B4] [script:A3 2B][box:system]이[opt]름[opt]키바[opt][opt][opt][opt][opt]닌자[br]보[opt]수[opt]2115G[br]위치[opt]쿠이나 언덕[br]특기[opt]폭렬 수리검
   0x00234AF8 [0x00B4] [script:D8 2B][box:system]이[opt]름[opt]샤코우[opt][opt][opt]고스트[br]보[opt]수[opt]1800G[br]위치[opt]팔렌시아 성터[br]특기[opt]？
   0x00234B7C [0x00B4] [script:1E 2C][box:system]이[opt]름[opt]디로스[opt][opt][opt]스펠렁커[br]보[opt]수[opt]1890G[br]위치[opt]팔렌시아 성터[br]특기[opt]슬립 윈드
-  0x00234BE0 [0x00B4] [script:38 2C]이 몬스터는 헌팅되었습니다
+  0x00234BE0 [0x00B4] [script:38 2C][box:system][br]이 몬스터는 헌팅되었습니다
   0x002356D8 [0x00B4] [script:CB 31][box:system]이[opt]름[opt]사룡 기어[opt][opt]블랙 드래곤[br]보[opt]수[opt]3600G[br]위치[opt]스메리아 내부[br]특기[opt]다크 브레스
-  0x0023573A [0x00B4] [script:E5 31]이 몬스터는 헌팅되었습니다
+  0x0023573A [0x00B4] [script:E5 31][box:system][br]이 몬스터는 헌팅되었습니다
   --- context: 0x00B4 -> 0x00A9 ---
   0x002EF35E [0x00A9] [script:AE 01][box:system]스위치 발견[br]ON할까?[br][opt]네[br][opt]아니오[box:close]
   0x002EF902 [0x00A9] [script:E7 02][box:system]계단 발견[br][opt]내려가기[br][opt]그만두기[box:close]
@@ -720,8 +720,8 @@
   0x00466C36 [0xFFFE] [script:D2 32][box:speech]그래서 이 거리에 군인이 잔뜩[br]온대
   0x00466C90 [0xFFFE] [script:F9 32][box:speech]이 얘기 정말일까
   --- context: 0xFFFE -> 0x00B4 ---
-  0x00466CE0 [0x00B4] [script:22 33]레지스터의 「값」이 범위 밖입니다
-  0x00466FFA [0x00B4] [script:A9 34]그만해 주세요！！
+  0x00466CE0 [0x00B4] [script:22 33][box:speech]레지스터의 「값」이 범위 밖입니다
+  0x00466FFA [0x00B4] [script:A9 34][box:speech]그만해 주세요！！
   --- context: 0x00B4 -> 0xFFFE ---
   0x00467076 [0xFFFE] [script:EF 34][box:speech]우리가 뭘 했다는 거죠！？
   --- context: 0xFFFE -> 0x8015 ---
@@ -857,7 +857,7 @@
   0x00521B3C [0x800B] [script:11 0A][box:speech]응？
   0x00521B7A [0x800B] [script:34 0A][box:speech]너희는 뭐지？
   --- context: 0x800B -> 0x00B4 ---
-  0x00521BE4 [0x00B4] [script:65 0A]영차
+  0x00521BE4 [0x00B4] [script:65 0A][box:speech]영차
   --- context: 0x00B4 -> 0x800B ---
   0x00521BFC [0x800B] [script:7C 0A][box:speech]너희, 나한테 상담할 일 있지？
   0x00521C4C [0x800B] [script:A2 0A][box:speech]그럼 그 전에 한잔 사줘
@@ -869,7 +869,7 @@
   0x00521DA4 [0x800B] [script:45 0B][box:speech]응？
   0x00521DE2 [0x800B] [script:68 0B][box:speech]뭐야, 또 너희냐
   --- context: 0x800B -> 0x00B4 ---
-  0x00521E34 [0x00B4] [script:8D 0B]영차
+  0x00521E34 [0x00B4] [script:8D 0B][box:speech]영차
   --- context: 0x00B4 -> 0x800B ---
   0x00521E4C [0x800B] [script:A1 0B][box:speech]어때, 나한테 한잔 살 마음 생겼나？
   --- context: 0x800B -> 0x00A9 ---
@@ -1114,8 +1114,8 @@
   0x005267A4 [0x800F] [script:56 30][box:speech]요즘 반가운 얼굴만 보네,[br]너도 그렇고 두목도 그렇고…
   0x00526800 [0x800F] [script:74 30][box:speech]두목？
   --- context: 0x800F -> 0x00B4 ---
-  0x00526838 [0x00B4] [script:94 30]아, 아니, 아무것도 아니야
-  0x00526878 [0x00B4] [script:BC 30]하고 오면 어때？
+  0x00526838 [0x00B4] [script:94 30][box:speech]아, 아니, 아무것도 아니야
+  0x00526878 [0x00B4] [script:BC 30][box:speech]それより、マスターにあいさつを[br]してきたらどうだ？
   --- context: 0x00B4 -> 0x800F ---
   0x005268E6 [0x800F] [script:EF 30][box:speech]마스터한테 인사하고 왔냐？
   0x00526960 [0x800F] [script:27 31][box:speech]・・・・・
@@ -1836,12 +1836,12 @@
   0x00C7E5DA [0x00A9] [script:25 03][box:system]사다리다[br][opt]올라가기[br][opt]그만두기[box:close]
   0x00C7E622 [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
   --- context: 0x00A9 -> 0x00B4 ---
-  0x00C7E95E [0x00B4] [script:E0 04]체크 에러
-  0x00C7EE0C [0x00B4] [script:32 07]와앗！
+  0x00C7E95E [0x00B4] [script:E0 04][box:speech]ラストステージ[opt]チェックエラー
+  0x00C7EE0C [0x00B4] [script:32 07][box:speech]와앗！
   --- context: 0x00B4 -> 0x8006 ---
   0x00C7EF26 [0x8006] [script:C1 07][box:speech]아-, 깜짝 놀랐네
   --- context: 0x8006 -> 0x00B4 ---
-  0x00C7EF70 [0x00B4] [script:E4 07]우와！！
+  0x00C7EF70 [0x00B4] [script:E4 07][box:speech]우와！！
   --- context: 0x00B4 -> 0x8006 ---
   0x00C7EFCC [0x8006] [script:14 08][box:speech]모, 몬스터다！
   0x00C7F012 [0x8006] [script:37 08][box:speech]어, 어떻게 하지？
@@ -1915,7 +1915,7 @@
   0x00D3F200 [0x8005] [script:C5 05][box:speech]여기서 어떻게 돌아가라는 거야！？
   0x00D3F24E [0x8005] [script:EA 05][box:speech]어쩔 수 없어, 앞으로 가자
   --- context: 0x8005 -> 0x00B4 ---
-  0x00D3F2C6 [0x00B4] [script:25 06]어라…
+  0x00D3F2C6 [0x00B4] [script:25 06][box:speech]어라…
   --- context: 0x00B4 -> 0x8006 ---
   0x00D3F2FA [0x8006] [script:3A 06][box:speech]야
   --- context: 0x8006 -> 0x8005 ---
@@ -1970,7 +1970,7 @@
   0x00DFAB92 [0x00A9] [script:25 03][box:system]사다리다[br][opt]올라가기[br][opt]그만두기[box:close]
   0x00DFABDA [0x00A9] [script:4B 03][box:system]워프존이 있습니다[br][opt]워프한다[br][opt]그만둔다[box:close]
   --- context: 0x00A9 -> 0x00B4 ---
-  0x00DFAF20 [0x00B4] [script:E5 04]라스트 스테이지 체크 에러
+  0x00DFAF20 [0x00B4] [script:E5 04][box:speech]라스트 스테이지 체크 에러
   --- context: 0x00B4 -> 0x8000 ---
   0x00DFB354 [0x8000] [script:FE 06][box:speech]여기에도 몬스터가！？
   --- context: 0x8000 -> 0x00A9 ---
@@ -2076,7 +2076,7 @@
   --- context: 0x8000 -> 0x8001 ---
   0x00EB7B42 [0x8001] [script:9D 1E][box:speech]어떻게든 되겠지, 가자
   --- context: 0x8001 -> 0x00B4 ---
-  0x00EB7BA0 [0x00B4] [script:C9 1E]괜찮을까…？
+  0x00EB7BA0 [0x00B4] [script:C9 1E][box:speech]괜찮을까…？
   --- context: 0x00B4 -> 0x8000 ---
   0x00EB7BC8 [0x8000] [script:DF 1E][box:speech]뭐 해, 두고 간다
   0x00EB7C0E [0x8000] [script:FD 1E][box:speech]기다려어
@@ -2227,7 +2227,7 @@
   --- context: 0x8000 -> 0x8001 ---
   0x00EB96AE [0x8001] [script:53 2C][box:speech]…너만큼은 아니야
   --- context: 0x8001 -> 0x00B4 ---
-  0x00EB970C [0x00B4] [script:7E 2C]야, 어딜 가？
+  0x00EB970C [0x00B4] [script:7E 2C][box:speech]야, 어딜 가？
   --- context: 0x00B4 -> 0x8000 ---
   0x00EB9732 [0x8000] [script:94 2C][box:speech]뭐 해, 두고 간다
   0x00EB9778 [0x8000] [script:B4 2C][box:speech]이봐, 기다리라니까

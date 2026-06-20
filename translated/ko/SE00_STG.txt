@@ -260,7 +260,7 @@
   0x002F1294 [0x00B4] [script:13 2D][box:system]이[opt]름[opt]다리우스[opt][opt][opt]대지의 마인[br]보[opt]수[opt]3600G[br]위치[opt]？[br]특기[opt]그랜드 실드
   0x002F1300 [0x00B4] [script:4A 2D][box:system]이[opt]름[opt]그알데[opt][opt]닌자 마스터[br]보[opt]수[opt]3645G[br]위치[opt]？[br]특기[opt]폭렬 수리검
   0x002F136E [0x00B4] [script:86 2D][box:system]이[opt]름[opt]가우디라스[opt]아크메이지[br]보[opt]수[opt]3915G[br]위치[opt]바르바라드의 봉인의 유적[br]특기[opt]위크니스
-  0x002F13D8 [0x00B4] [script:A0 2D][br]이 몬스터는 헌팅되었습니다
+  0x002F13D8 [0x00B4] [script:A0 2D][box:system][br]이 몬스터는 헌팅되었습니다
   --- context: 0x00B4 -> 0x8005 ---
   0x002F1F7E [0x8005] [script:69 33]여긴 길드다-
   --- context: 0x8005 -> 0x00A9 ---
