@@ -50,7 +50,7 @@ class TestMapAndEmit(unittest.TestCase):
             "addr=0x801A0000 bytes=05 2A 1A 10 06 27 3E 0A 39\n"
             # bytes that do NOT appear in any original STG -> NOT missed (e.g. a
             # translated/Korean line); use an implausible run.
-            "addr=0x801A0050 bytes=EE EE EE EE EE EE EE EE EE EE\n",
+            "addr=0x801A0050 bytes=FE FD FC FB FA F9 F8 F7 F6 F5\n",
             encoding="utf-8")
         result = pc.process(Path(p))
         self.assertEqual(len(result["missed"]), 1)   # only the chest matched

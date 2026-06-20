@@ -72,16 +72,17 @@ def process(log_path: Path) -> dict:
     matched = 0
     for _addr, raw in entries:
         total += 1
-        # MISSED gate: the captured bytes appear verbatim in an original STG,
-        # i.e. this displayed line is still the untranslated original. A
-        # translated (Korean-remapped) line will NOT match the original.
+        # MISSED gate: byte-match only. The captured bytes appear verbatim in an
+        # original STG, i.e. this displayed line is still the untranslated original.
+        # A translated (Korean-remapped) line will NOT match the original.
+        # (Decode is display-only; kana filter would silently drop all-kanji hits.)
         hits = find_offsets(raw)
         if not hits:
             continue
         matched += 1
         text = decode_line(raw, table).strip()   # readable JP for the worklist
-        # Filter: must have meaningful text and contain actual Japanese hiragana/katakana
-        if not text or text in seen or not contains_japanese(text):
+        # Filter: meaningful text and not already seen (dedup).
+        if not text or text in seen:
             continue
         seen.add(text)
         stage, off = hits[0]
