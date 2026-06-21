@@ -22,7 +22,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                 "..", "font"))
 
-from patch_title_subtitle import patch_title_subtitle
+from patch_title_subtitle import patch_title_subtitle, patch_title_version
 
 from patch_korean import (
     load_decode_table, extract_korean_chars, build_korean_mapping,
@@ -203,6 +203,7 @@ def main():
     # only, which is clear of the 4bpp font zone patched above.
     print("Patching title-screen subtitle -> Korean")
     patch_title_subtitle(comm_dst)
+    patch_title_version(comm_dst)  # small vX.Y.Z mark under the © line
 
     # Save unified mapping
     mapping_path = os.path.join(OUTPUT_DIR, "unified_charmap.txt")

@@ -189,6 +189,85 @@ def patch_title_subtitle(comm_img_path, out_path=None, font_size=28, dry_run=Fal
     return n_gold
 
 
+# Version mark drawn under the ©1996 line. Light text on the dark plate bevel.
+_VERSION_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                             "..", "..", "VERSION")
+_TRANSLATOR = "맹구"   # author/translator credit shown next to the version
+_VER_COLOR = (225, 232, 240)
+_VER_OUTLINE = (15, 25, 40)
+_VER_Y = 193          # baseline-ish row, just below the © line
+_VER_BAND = (191, 205)  # y range of the region written back
+
+
+def _read_version():
+    if os.path.isfile(_VERSION_FILE):
+        v = open(_VERSION_FILE, encoding="utf-8").read().strip()
+        return v or None
+    return None
+
+
+def patch_title_version(comm_img_path, out_path=None, version=None, dry_run=False):
+    """Draw a small 'vX.Y.Z' mark under the title's copyright line.
+
+    Reads the repo VERSION file (single source of truth) unless `version` is
+    given. Skips gracefully if no version or no font. Writes only font-safe
+    bytes (>=636), so the 4bpp font zone is never touched.
+    """
+    out_path = out_path or comm_img_path
+    version = version or _read_version()
+    if not version:
+        print("  (no VERSION; skipping title version mark)")
+        return 0
+    found = _find_font()
+    if found is None:
+        print("  WARNING: no font for version mark; skipping")
+        return 0
+    font_path, _ = found
+    ver = version if version.lower().startswith("v") else "v" + version
+    text = f"번역 {_TRANSLATOR}   {ver}" if _TRANSLATOR else ver
+    try:
+        font = ImageFont.truetype(font_path, 11, index=0)  # small regular weight
+    except Exception as e:
+        print(f"  WARNING: version-mark font load failed: {e}; skipping")
+        return 0
+
+    data = bytearray(open(comm_img_path, "rb").read())
+    tb = font.getbbox(text, stroke_width=1)
+    tw = tb[2] - tb[0]
+    text_x = (320 - tw) // 2 - tb[0]
+    y0, y1 = _VER_BAND
+    x0 = max(0, (320 - tw) // 2 - 2)
+    x1 = min(319, (320 + tw) // 2 + 2)
+    W, H = x1 - x0 + 1, y1 - y0 + 1
+
+    region = Image.new("RGB", (W, H))
+    rp = region.load()
+    for yy in range(H):
+        for xx in range(W):
+            rp[xx, yy] = _from555(
+                struct.unpack_from("<H", data, _vram_off(x0 + xx, y0 + yy))[0])
+    ImageDraw.Draw(region).text((text_x - x0, _VER_Y - tb[1] - y0), text,
+                                font=font, fill=_VER_COLOR,
+                                stroke_width=1, stroke_fill=_VER_OUTLINE)
+
+    written = skipped = 0
+    if not dry_run:
+        for yy in range(H):
+            for xx in range(W):
+                o = _vram_off(x0 + xx, y0 + yy)
+                if o % 896 < 636:          # font/shared zone -> never touch
+                    skipped += 1
+                    continue
+                r, g, b = rp[xx, yy]
+                struct.pack_into("<H", data, o, _to555(r, g, b))
+                written += 1
+        with open(out_path, "wb") as f:
+            f.write(data)
+    print(f"  Title version -> '{text}': {written} px written"
+          + (f", {skipped} font-safe-skipped" if skipped else ""))
+    return 1
+
+
 if __name__ == "__main__":
     import sys
     src = sys.argv[1] if len(sys.argv) > 1 else os.path.join(
