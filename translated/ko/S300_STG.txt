@@ -121,7 +121,7 @@
   --- context: 0x800C -> 0x800D ---
   0x00234C2A [0x800D] [script:EB 04]꺄악!
   --- context: 0x800D -> 0x800B ---
-  0x00234C62 [0x800B] [script:07 05]미리루!
+  0x00234C62 [0x800B] [script:07 05]미릴!
   --- context: 0x800B -> 0x800A ---
   0x00234CA4 [0x800A] [script:2A 05]빨리 일어나!
   0x00234CE0 [0x800A] [script:48 05]나는 이제 안 돼…
@@ -137,7 +137,7 @@
   --- context: 0x800B -> 0x00B4 ---
   0x00234E70 [0x00B4] [script:14 06]이대로면 둘 다…[delay:5B]
   --- context: 0x00B4 -> 0x800A ---
-  0x00235166 [0x800A] [script:89 07]미리루!
+  0x00235166 [0x800A] [script:89 07]미릴!
   0x0023519E [0x800A] [script:A7 07]빨리 일어나!
   0x002351DA [0x800A] [script:C5 07]나는 이제 안 돼…
   --- context: 0x800A -> 0x800B ---
@@ -160,11 +160,11 @@
   --- context: 0x800A -> 0x800B ---
   0x00235492 [0x800B] [script:22 09]저쪽이다! 서둘러!!
   --- context: 0x800B -> 0x800C ---
-  0x002354E0 [0x800C] [script:46 09]미리루!!
+  0x002354E0 [0x800C] [script:46 09]미릴!!
   --- context: 0x800C -> 0x800A ---
   0x0023551C [0x800A] [script:6B 09]엘크…[delay:3D]나, 기다리고 있을게
   --- context: 0x800A -> 0x800B ---
-  0x00235572 [0x800B] [script:91 09]미리루, 기다려!
+  0x00235572 [0x800B] [script:91 09]미릴, 기다려!
   --- context: 0x800B -> 0x800A ---
   0x002355B8 [0x800A] [script:B2 09]있었다!
   --- context: 0x800A -> 0x800E ---
@@ -174,7 +174,7 @@
   --- context: 0x800C -> 0x800D ---
   0x00235672 [0x800D] [script:10 0A]잡아라!!
   --- context: 0x800D -> 0x800E ---
-  0x002356AC [0x800E] [script:36 0A]미리루…[br]반드시, 반드시 구하러 갈게
+  0x002356AC [0x800E] [script:36 0A]미릴…[br]반드시, 반드시 구하러 갈게
   --- context: 0x800E -> 0x00A9 ---
   0x002F1172 [0x00A9] [script:AE 01][box:system]스위치 발견[br]ON할까?[br][opt]네[br][opt]아니오[box:close]
   0x002F1716 [0x00A9] [script:E7 02][box:system]계단 발견[br][opt]내려가기[br][opt]그만두기[box:close]
