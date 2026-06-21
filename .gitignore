@@ -26,3 +26,8 @@ build/
 
 # Claude Code
 .claude/
+translated/ko/batches_bak/
+translated/ko/backup/
+translated/ko/backup_new/
+cache/
+output_bak/
