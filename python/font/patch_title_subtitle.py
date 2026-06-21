@@ -193,10 +193,12 @@ def patch_title_subtitle(comm_img_path, out_path=None, font_size=28, dry_run=Fal
 _VERSION_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                              "..", "..", "VERSION")
 _TRANSLATOR = "맹구"   # author/translator credit shown next to the version
-_VER_COLOR = (225, 232, 240)
-_VER_OUTLINE = (15, 25, 40)
-_VER_Y = 193          # baseline-ish row, just below the © line
-_VER_BAND = (191, 205)  # y range of the region written back
+_VER_COLOR = (250, 252, 255)   # near-white for contrast on the dark bevel
+_VER_OUTLINE = (0, 0, 0)       # solid black outline -> readable on any bg
+_VER_SIZE = 13
+_VER_STROKE = 2
+_VER_CY = 196          # vertical center of the credit, below the © line
+_VER_BAND = (186, 207)  # y range of the region written back
 
 
 def _read_version():
@@ -226,15 +228,16 @@ def patch_title_version(comm_img_path, out_path=None, version=None, dry_run=Fals
     ver = version if version.lower().startswith("v") else "v" + version
     text = f"번역 {_TRANSLATOR}   {ver}" if _TRANSLATOR else ver
     try:
-        font = ImageFont.truetype(font_path, 11, index=0)  # small regular weight
+        font = ImageFont.truetype(font_path, _VER_SIZE, index=0)
     except Exception as e:
         print(f"  WARNING: version-mark font load failed: {e}; skipping")
         return 0
 
     data = bytearray(open(comm_img_path, "rb").read())
-    tb = font.getbbox(text, stroke_width=1)
-    tw = tb[2] - tb[0]
+    tb = font.getbbox(text, stroke_width=_VER_STROKE)
+    tw, th = tb[2] - tb[0], tb[3] - tb[1]
     text_x = (320 - tw) // 2 - tb[0]
+    text_y = _VER_CY - th // 2 - tb[1]   # vertically centered on _VER_CY
     y0, y1 = _VER_BAND
     x0 = max(0, (320 - tw) // 2 - 2)
     x1 = min(319, (320 + tw) // 2 + 2)
@@ -246,9 +249,9 @@ def patch_title_version(comm_img_path, out_path=None, version=None, dry_run=Fals
         for xx in range(W):
             rp[xx, yy] = _from555(
                 struct.unpack_from("<H", data, _vram_off(x0 + xx, y0 + yy))[0])
-    ImageDraw.Draw(region).text((text_x - x0, _VER_Y - tb[1] - y0), text,
+    ImageDraw.Draw(region).text((text_x - x0, text_y - y0), text,
                                 font=font, fill=_VER_COLOR,
-                                stroke_width=1, stroke_fill=_VER_OUTLINE)
+                                stroke_width=_VER_STROKE, stroke_fill=_VER_OUTLINE)
 
     written = skipped = 0
     if not dry_run:
