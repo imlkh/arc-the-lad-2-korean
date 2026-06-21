@@ -197,8 +197,9 @@ _VER_COLOR = (250, 252, 255)   # near-white for contrast on the dark bevel
 _VER_OUTLINE = (0, 0, 0)       # solid black outline -> readable on any bg
 _VER_SIZE = 13
 _VER_STROKE = 2
-_VER_CY = 196          # vertical center of the credit, below the © line
-_VER_BAND = (186, 207)  # y range of the region written back
+_VER_CY = 167          # vertical center: in the gap between the Korean
+                       # subtitle (~y159) and the © line (~y176), over the red II base
+_VER_BAND = (157, 178)  # y range of the region written back
 
 
 def _read_version():
