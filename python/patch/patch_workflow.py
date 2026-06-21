@@ -88,18 +88,25 @@ def find_available_stages():
     return sorted(stages)
 
 def find_bin_image():
-    """Find the BIN disc image."""
+    """Find the BIN disc image (the patched output is the Korean-named disc)."""
     patched_dir = Path(__file__).parent.parent.parent / "output" / "patched"
 
-    # Look for common patterns
+    # Explicit names, in preference order (Korean-patched output first).
     patterns = [
+        "Arc the Lad II (Korean Patch)/Arc the Lad II (Korean Patch).bin",
         "Arc the Lad II (Japan)/Arc the Lad II (Japan).bin",
         "Arc the Lad 2 (Japan)/Arc the Lad 2 (Japan).bin",
-        "*.bin"
     ]
-
     for pattern in patterns:
         matches = list(patched_dir.glob(pattern))
+        if matches:
+            return matches[0]
+
+    # Fallback: any *.bin in a disc subfolder or top level, excluding backups.
+    def _not_backup(p):
+        return ".backup_" not in p.name
+    for pattern in ("*/*.bin", "*.bin"):
+        matches = [p for p in patched_dir.glob(pattern) if _not_backup(p)]
         if matches:
             return matches[0]
 
