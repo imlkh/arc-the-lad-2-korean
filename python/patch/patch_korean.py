@@ -1156,6 +1156,41 @@ def patch_stg_system_text(stg_path, korean_mapping, decode_table):
         if count > 0:
             total_replacements += count
 
+    # Context-anchored orphan-menu entries (opcode 0xA9) the decoder misses.
+    # Unlike MISSED_BARE these end in a control code (e.g. FF 03), not 0x00, so
+    # they slip past both the decoder and the bare-string patcher. The bare text
+    # bytes are not unique on their own, so we anchor on the surrounding opcode
+    # prefix + control-code suffix and replace only the text in between,
+    # preserving byte length (Korean padded with 0x00, suffix untouched).
+    MISSED_ORPHAN = [
+        # SG00 intro (Elk's hometown attack): やめろぉ -> 그만둬 ("Stop it!")
+        ("SG00 yamero",
+         bytes([0xA9, 0x00, 0x51, 0x06]),   # prefix anchor
+         bytes([0x24, 0x22, 0x2B, 0x4C]),   # JP text (やめろぉ)
+         bytes([0xFF, 0x03]),               # suffix anchor (control code)
+         "그만둬"),
+    ]
+    for desc, prefix, jp_text, suffix, kr_text in MISSED_ORPHAN:
+        kr_encoded = encode_korean_text(kr_text, korean_mapping, decode_table)
+        if len(kr_encoded) > len(jp_text):
+            print(f"  WARNING: orphan '{desc}' Korean ({len(kr_encoded)}B) > "
+                  f"Japanese ({len(jp_text)}B), skipping")
+            continue
+        kr_padded = kr_encoded + b"\x00" * (len(jp_text) - len(kr_encoded))
+        search = prefix + jp_text + suffix
+        replacement = prefix + kr_padded + suffix
+        count = 0
+        pos = 0
+        while True:
+            idx = data.find(search, pos)
+            if idx < 0:
+                break
+            data[idx:idx + len(search)] = replacement
+            count += 1
+            pos = idx + len(replacement)
+        if count > 0:
+            total_replacements += count
+
     # Write back
     if total_replacements > 0:
         with open(stg_path, "wb") as f:
