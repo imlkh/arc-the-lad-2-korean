@@ -1236,6 +1236,18 @@ def patch_stg_system_text(stg_path, korean_mapping, decode_table):
          bytes([0x30, 0x4D, 0x50]), bytes([0xED]), "꺅"),               # ぎゃっ
         ("yare", bytes([0xA9, 0x00, 0x90, 0x28, 0xFF, 0x08, 0x03, 0x01]),
          bytes([0x24, 0x2A]), bytes([0xE4]), "해라"),                   # やれ
+        # Empty-slot labels (arena/bounty board). Many frames with different
+        # script params, so anchored prefix-less on the katakana + 0x00
+        # terminator (replace-all; patterns end in なし\0 so they're specific).
+        # 음 truncated to fit 7B (user choice); terminator preserved.
+        ("Monster nashi", b'',
+         bytes([0x73, 0x7E, 0x5D, 0x60, 0xE3, 0x15, 0x0C]),
+         bytes([0x00]), "몬스터없"),                                   # モンスターなし
+        # ポスターなし text is 6B; consume 1 of its 2 trailing nulls (in jp_text)
+        # to fit 7B, keeping the 2nd null as terminator (suffix).
+        ("Poster nashi", b'',
+         bytes([0x97, 0x5D, 0x60, 0xE3, 0x15, 0x0C, 0x00]),
+         bytes([0x00]), "포스터없"),                                   # ポスターなし
     ]
     for desc, prefix, jp_text, suffix, kr_text in MISSED_ORPHAN:
         kr_encoded = encode_korean_text(kr_text, korean_mapping, decode_table)
