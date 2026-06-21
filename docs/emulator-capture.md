@@ -37,3 +37,24 @@ found in any STG (rare — report it).
 - Fill the `KO:` lines, then translate those offsets into `translated/ko/{stage}_STG.txt`
   preserving all control codes (see safe-edit rules), and re-run
   `python python/patch/patch_workflow.py --all`.
+
+## Troubleshooting: breakpoint never fires
+
+If `atl2_capture loaded…` prints but no register dump appears when dialogue shows:
+
+1. **Use the interpreter, not the dynarec.** Configuration → Emulation → uncheck
+   **Dynarec** (that selects the interpreter). The dynamic recompiler ignores
+   breakpoints. Then **reset** the game so the interpreter takes over.
+2. **Enable the debugger** (Configuration → Emulation → Enable Debugger).
+3. **The breakpoint must be stored or it is garbage-collected.** PCSX-Redux
+   removes a breakpoint whose returned object is GC'd; `atl2_capture.lua` keeps it
+   alive in `_G.ATL2_BP`. A bare `PCSX.addBreakpoint(...)` (no assignment) will
+   "arm" then silently never fire.
+4. Reliable order after any change: **set interpreter → reset → re-`dofile` the
+   script → trigger dialogue.**
+
+Quick self-test (paste in the Lua console, trigger a line):
+```lua
+_G.bptest = PCSX.addBreakpoint(0x80101560, 'Exec', 4, 't', function() print('FIRED') end)
+```
+If `FIRED` prints, breakpoints work; load the real script.

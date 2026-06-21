@@ -26,7 +26,10 @@ local function logline(s)
     logf:write(s .. '\n'); logf:flush()
 end
 
-PCSX.addBreakpoint(HANDLER, 'Exec', 4, 'atl2-capture', function()
+-- IMPORTANT: store the breakpoint object in a persistent global. PCSX-Redux
+-- removes the breakpoint if its returned object is garbage-collected, so an
+-- un-stored addBreakpoint(...) "arms" then silently never fires.
+_G.ATL2_BP = PCSX.addBreakpoint(HANDLER, 'Exec', 4, 'atl2-capture', function()
     local gpr = PCSX.getRegisters().GPR.n
     if MODE == 'calibrate' then
         -- Dump every register that looks like a RAM pointer + its bytes,
