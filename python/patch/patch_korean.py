@@ -1299,8 +1299,11 @@ def patch_stg_orphan_names(stg_path, korean_mapping, decode_table):
         ("にせトッシュ", "가짜토슈"),
         ("にせシュウ", "가짜슈우"),
         ("にせアルフレッド", "가짜알프레드"),
+        ("にせエルク", "가짜엘"),   # 5B limit: truncated from 가짜엘크 (드 dropped)
         ("ガウディラス", "가우디라스"),
         ("ブーシー", "부시"),
+        ("マイオス", "마이오"),     # 4B limit: truncated from 마이오스 (s dropped)
+        # にせククル(가짜쿠쿠루 8>5B), モンスターなし, ポスターなし: no clean fit, left untranslated
         # === Onomatopoeia / short words ===
         # フフフ(3B), ウウッ(3B), セウム(3B), アジュ(3B) skipped: no Korean fits
         # ギギギ removed: 3-byte pattern 80 80 80 matches event script bytecode (0x80 is common),
@@ -1406,6 +1409,7 @@ def patch_stg_orphan_names(stg_path, korean_mapping, decode_table):
         (bytes([0xF1, 0x57, 0xF0, 0xB9]), "교회"),   # 教会 (church)
         (bytes([0xF1, 0x57, 0xF1, 0xD5]), "교황"),   # 教皇 (pope)
         (bytes([0xF2, 0xC4, 0xF3, 0xF1]), "식당"),   # 食堂 (dining hall)
+        (bytes([0xF1, 0xBE, 0xF0, 0x44]), "명대로"),  # 御意 ("as you command")
     ]
 
     for jp_bytes, kr_name in ORPHAN_ITEM_BYTES:
