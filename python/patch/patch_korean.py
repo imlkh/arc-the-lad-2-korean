@@ -1289,6 +1289,18 @@ def patch_stg_orphan_names(stg_path, korean_mapping, decode_table):
         ("ジャッジメント", "저지먼트"),
         ("ドクスン", "독슨"),
         ("ザルバドビット", "잘바드비트"),
+        # === Residual-scan finds (2026-06-21): decoder-missed orphan names ===
+        # Surfaced by scan_residual_japanese.py. にせ (fake) boss versions reuse
+        # the established base spelling (엘크/아크/…) with the 가짜 prefix already
+        # used elsewhere. Overflow cases (가짜엘크 6>5B, 가짜쿠쿠루 8>5B) skipped.
+        ("にせアーク", "가짜아크"),
+        ("にせリーザ", "가짜리자"),
+        ("にせゴーゲン", "가짜고겐"),
+        ("にせトッシュ", "가짜토슈"),
+        ("にせシュウ", "가짜슈우"),
+        ("にせアルフレッド", "가짜알프레드"),
+        ("ガウディラス", "가우디라스"),
+        ("ブーシー", "부시"),
         # === Onomatopoeia / short words ===
         # フフフ(3B), ウウッ(3B), セウム(3B), アジュ(3B) skipped: no Korean fits
         # ギギギ removed: 3-byte pattern 80 80 80 matches event script bytecode (0x80 is common),
@@ -1389,6 +1401,11 @@ def patch_stg_orphan_names(stg_path, korean_mapping, decode_table):
          "빛의약화약"),         # 光の弱りの薬
         (bytes([0xF5, 0x24, 0x19, 0xF2, 0x69, 0x28, 0x19, 0xF1, 0x6D]),
          "어둠의약화약"),       # 闇の弱りの薬
+        # === Residual-scan finds (2026-06-21): kanji location labels ===
+        (bytes([0xF4, 0x41, 0xDF]), "묘지"),         # 墓地 (graveyard)
+        (bytes([0xF1, 0x57, 0xF0, 0xB9]), "교회"),   # 教会 (church)
+        (bytes([0xF1, 0x57, 0xF1, 0xD5]), "교황"),   # 教皇 (pope)
+        (bytes([0xF2, 0xC4, 0xF3, 0xF1]), "식당"),   # 食堂 (dining hall)
     ]
 
     for jp_bytes, kr_name in ORPHAN_ITEM_BYTES:
