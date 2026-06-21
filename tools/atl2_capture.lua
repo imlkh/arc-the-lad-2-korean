@@ -25,8 +25,25 @@ end
 
 local seen = {}
 local logf = nil
+local log_failed = false
 local function logline(s)
-    if not logf then logf = io.open(_G.ATL2_LOG or DEFAULT_LOG, 'a') end
+    -- io.open returns nil (not an error) when the path can't be opened — e.g. the
+    -- gitignored output/capture/ dir is missing on a clean checkout, since Lua
+    -- can't mkdir. Surface that LOUDLY once instead of letting logf:write throw
+    -- inside the breakpoint's pcall (which would make capture silently log nothing).
+    if log_failed then return end
+    if not logf then
+        local path = _G.ATL2_LOG or DEFAULT_LOG
+        local f, err = io.open(path, 'a')
+        if not f then
+            log_failed = true
+            print('atl2_capture ERROR: cannot open log "' .. tostring(path) ..
+                  '" (' .. tostring(err) .. '). Create the folder (mkdir -p) or ' ..
+                  "set an absolute ATL2_LOG, then re-run dofile.")
+            return
+        end
+        logf = f
+    end
     logf:write(s .. '\n'); logf:flush()
 end
 
