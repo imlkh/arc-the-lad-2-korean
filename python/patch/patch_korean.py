@@ -1888,6 +1888,38 @@ def patch_beam_equipment(beam_path, korean_mapping, decode_table, dry_run=False)
             print(f"    {kr_text}: {count} occurrences patched")
         total_patched += count
 
+    # Context-anchored replacements: text framed by control codes where a
+    # whole-pattern replace would destroy the framing. Replace only the text
+    # between (prefix, suffix), padding Korean with 0x00 and keeping the frame.
+    BEAM_ANCHORED = [
+        # Battle turn counter: [num:01]ターン[FF:0A ..] -> 턴. The bare ターン
+        # bytes (60 e3 7e) also occur inside other words, so anchor on the
+        # trailing FF 0A (33 turn-counter occurrences; the 9 others untouched).
+        (b'', bytes([0x60, 0xE3, 0x7E]), bytes([0xFF, 0x0A]), "턴"),  # ターン
+    ]
+    for prefix, jp_bytes, suffix, kr_text in BEAM_ANCHORED:
+        kr_encoded = encode_korean_text(kr_text, korean_mapping, decode_table)
+        if len(kr_encoded) > len(jp_bytes):
+            print(f"    WARNING: anchored '{kr_text}' Korean "
+                  f"({len(kr_encoded)}B) > Japanese ({len(jp_bytes)}B), skipping")
+            continue
+        search = prefix + jp_bytes + suffix
+        repl = (prefix + kr_encoded
+                + b'\x00' * (len(jp_bytes) - len(kr_encoded)) + suffix)
+        count = 0
+        pos = 0
+        while True:
+            idx = data.find(search, pos)
+            if idx == -1:
+                break
+            if not dry_run:
+                data[idx:idx + len(search)] = repl
+            count += 1
+            pos = idx + len(repl)
+        if count:
+            print(f"    {kr_text} (anchored): {count} occurrences patched")
+        total_patched += count
+
     if not dry_run and total_patched > 0:
         with open(beam_path, "wb") as f:
             f.write(data)
