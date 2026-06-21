@@ -1185,6 +1185,18 @@ def patch_stg_system_text(stg_path, korean_mapping, decode_table):
          bytes([0x81, 0xE3, 0x86]), bytes([0x00]), "구즈"),   # グーズ
         ("SH00 Guz #3", bytes([0xA9, 0x00, 0xA6, 0x0D]),
          bytes([0x81, 0xE3, 0x86]), bytes([0x00]), "구즈"),   # グーズ
+        # Arena battle-mode labels. The middot ・ (charID 250 = F0 0B) is kept
+        # as the original Japanese byte per user preference; encode_korean_text
+        # emits F0 0B for ・, so just keep ・ literally in the Korean string.
+        # [opt] (0xEF) menu wrappers preserved in the prefix/suffix anchors.
+        ("SG00 Survival Battle",
+         bytes([0xA9, 0x00, 0x00, 0x17, 0xEF]),
+         bytes([0x5B, 0x8E, 0x52, 0x8E, 0x79, 0xF0, 0x0B, 0x8E, 0x64, 0x79]),
+         bytes([0xEF]), "서바이벌・배틀"),     # サバイバル・バトル
+        ("SG00 Time Battle",
+         bytes([0xA9, 0x00, 0x6B, 0x36, 0xEF, 0xEF]),
+         bytes([0x60, 0x52, 0x71, 0xF0, 0x0B, 0x8E, 0x64, 0x79]),
+         bytes([0xEF, 0xEF]), "타임・배틀"),     # タイム・バトル
     ]
     for desc, prefix, jp_text, suffix, kr_text in MISSED_ORPHAN:
         kr_encoded = encode_korean_text(kr_text, korean_mapping, decode_table)
