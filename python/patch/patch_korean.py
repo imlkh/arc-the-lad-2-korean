@@ -1169,6 +1169,22 @@ def patch_stg_system_text(stg_path, korean_mapping, decode_table):
          bytes([0x24, 0x22, 0x2B, 0x4C]),   # JP text (やめろぉ)
          bytes([0xFF, 0x03]),               # suffix anchor (control code)
          "그만둬"),
+        # Short orphan NAMES the decoder missed. Their 2-3B byte patterns are not
+        # unique enough for global search-replace (collision risk), so each is
+        # anchored on its A9 00 + script-param prefix and 0x00 terminator -> the
+        # full anchor is unique (verified matches=1), targeting only the one frame.
+        ("S700 Gina",  bytes([0xA9, 0x00, 0x12, 0x12]),
+         bytes([0x85, 0xE3, 0x65]), bytes([0x00]), "지나"),   # ジーナ
+        ("S700 Lily",  bytes([0xA9, 0x00, 0x28, 0x12]),
+         bytes([0x78, 0x78, 0xE3]), bytes([0x00]), "릴리"),   # リリー
+        ("S800 Gene",  bytes([0xA9, 0x00, 0x5B, 0x20]),
+         bytes([0x85, 0xE3, 0x7E]), bytes([0x00]), "진"),     # ジーン
+        ("SH00 Guz #1", bytes([0xA9, 0x00, 0x56, 0x06]),
+         bytes([0x81, 0xE3, 0x86]), bytes([0x00]), "구즈"),   # グーズ
+        ("SH00 Guz #2", bytes([0xA9, 0x00, 0xC0, 0x09]),
+         bytes([0x81, 0xE3, 0x86]), bytes([0x00]), "구즈"),   # グーズ
+        ("SH00 Guz #3", bytes([0xA9, 0x00, 0xA6, 0x0D]),
+         bytes([0x81, 0xE3, 0x86]), bytes([0x00]), "구즈"),   # グーズ
     ]
     for desc, prefix, jp_text, suffix, kr_text in MISSED_ORPHAN:
         kr_encoded = encode_korean_text(kr_text, korean_mapping, decode_table)
