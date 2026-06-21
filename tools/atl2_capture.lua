@@ -45,25 +45,36 @@ if _G.ATL2_BP then
     _G.ATL2_BP = nil
 end
 
+local function in_ram(v)  -- true only for a numeric main-RAM pointer
+    return type(v) == 'number' and v >= 0x80000000 and v <= 0x801FFFFF
+end
+
+-- The hook runs in the CPU breakpoint context; an error here (e.g. a bad live
+-- ATL2_TEXT_REG making gpr[reg] nil, then nil>=number) would crash on every hit.
+-- So the whole body is wrapped in pcall and every numeric use is type-guarded,
+-- and we NEVER return false (that would make PCSX-Redux delete the breakpoint).
 _G.ATL2_BP = PCSX.addBreakpoint(HANDLER, 'Exec', 4, 'atl2-capture', function()
-    local gpr = PCSX.getRegisters().GPR.n
-    if _G.ATL2_MODE == 'calibrate' then
-        -- Dump every register that looks like a RAM pointer + its bytes,
-        -- so the operator can spot which one holds the text.
-        for _, name in ipairs({'a0','a1','a2','a3','s0','s1','v0','v1','t0'}) do
-            local v = gpr[name]
-            if v >= 0x80000000 and v <= 0x801FFFFF then
-                print(string.format('%s=0x%08X  %s', name, v, read_bytes(v)))
+    pcall(function()
+        local gpr = PCSX.getRegisters().GPR.n
+        local mode = _G.ATL2_MODE
+        if mode == 'calibrate' then
+            for _, name in ipairs({'a0','a1','a2','a3','s0','s1','v0','v1','t0'}) do
+                local v = gpr[name]
+                if in_ram(v) then
+                    print(string.format('%s=0x%08X  %s', name, v, read_bytes(v)))
+                end
+            end
+            print('--- one hit; trigger a KNOWN line, match its bytes to a register ---')
+        elseif mode == 'capture' then
+            local reg = _G.ATL2_TEXT_REG
+            local addr = (type(reg) == 'string') and gpr[reg] or nil
+            if in_ram(addr) and not seen[addr] then
+                seen[addr] = true
+                logline(string.format('addr=0x%08X bytes=%s', addr, read_bytes(addr)))
             end
         end
-        print('--- one hit; trigger a KNOWN line, match its bytes to a register ---')
-    else
-        local addr = gpr[_G.ATL2_TEXT_REG]
-        if addr >= 0x80000000 and addr <= 0x801FFFFF and not seen[addr] then
-            seen[addr] = true
-            logline(string.format('addr=0x%08X bytes=%s', addr, read_bytes(addr)))
-        end
-    end
+        -- any other ATL2_MODE value: do nothing (don't fall into capture)
+    end)
 end)
 print('atl2_capture armed. MODE=' .. _G.ATL2_MODE ..
       '  (switch live: ATL2_MODE=\'capture\'; ATL2_TEXT_REG=\'aN\')')
