@@ -26,28 +26,53 @@ TEXT = "아크 더 래드 II"
 # with a warning (the Japanese subtitle is left intact) rather than crashing the
 # whole rebuild.
 _BUNDLED_FONT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "fonts")
+# (path, face_index) pairs. face_index selects a Bold face inside a .ttc
+# collection (e.g. AppleSDGothicNeo Bold = index 6); 0 for single-face files.
+# A heavier "gothic" weight is preferred for the logo where available.
 _FONT_CANDIDATES = [
-    os.environ.get("ATL2_TITLE_FONT"),
-    os.path.join(_BUNDLED_FONT_DIR, "NanumGothic.ttf"),
-    os.path.join(_BUNDLED_FONT_DIR, "title.ttf"),
-    # macOS
-    "/System/Library/Fonts/AppleSDGothicNeo.ttc",
-    "/System/Library/Fonts/Supplemental/AppleGothic.ttf",
+    (os.path.join(_BUNDLED_FONT_DIR, "title.ttf"), 0),
+    (os.path.join(_BUNDLED_FONT_DIR, "NanumGothicBold.ttf"), 0),
+    (os.path.join(_BUNDLED_FONT_DIR, "NanumGothic.ttf"), 0),
+    # macOS (Apple SD Gothic Neo Bold = face index 6)
+    ("/System/Library/Fonts/AppleSDGothicNeo.ttc", 6),
+    ("/System/Library/Fonts/Supplemental/AppleGothic.ttf", 0),
     # Linux
-    "/usr/share/fonts/truetype/nanum/NanumGothic.ttf",
-    "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
-    "/usr/share/fonts/truetype/noto/NotoSansKR-Bold.otf",
-    # Windows
-    "C:/Windows/Fonts/malgun.ttf",
+    ("/usr/share/fonts/truetype/nanum/NanumGothicBold.ttf", 0),
+    ("/usr/share/fonts/truetype/nanum/NanumGothic.ttf", 0),
+    ("/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc", 0),
+    ("/usr/share/fonts/truetype/noto/NotoSansKR-Bold.otf", 0),
+    # Windows (Malgun Gothic Bold)
+    ("C:/Windows/Fonts/malgunbd.ttf", 0),
+    ("C:/Windows/Fonts/malgun.ttf", 0),
 ]
 
 
 def _find_font():
-    """Return the first available Korean-capable font path, or None."""
-    for path in _FONT_CANDIDATES:
+    """Return (path, face_index) of the first available Korean font, or None.
+
+    $ATL2_TITLE_FONT (read at call time) takes precedence over the built-in list.
+    """
+    env = os.environ.get("ATL2_TITLE_FONT")
+    if env and os.path.isfile(env):
+        return env, 0
+    for path, index in _FONT_CANDIDATES:
         if path and os.path.isfile(path):
-            return path
+            return path, index
     return None
+
+
+def _load_fitted_font(font_path, index, max_size, box_w):
+    """Load the font at the largest size <= max_size whose rendered text still
+    fits box_w (so a bolder/wider font auto-shrinks instead of overflowing)."""
+    size = max_size
+    font = ImageFont.truetype(font_path, size, index=index)
+    while size > 12:
+        font = ImageFont.truetype(font_path, size, index=index)
+        tb = font.getbbox(TEXT, stroke_width=2)
+        if (tb[2] - tb[0]) <= box_w - 2:
+            break
+        size -= 1
+    return font, size
 
 # Gold vertical gradient (top -> bottom) and dark outline, approximating the
 # original subtitle's metallic-gold look.
@@ -78,21 +103,23 @@ def patch_title_subtitle(comm_img_path, out_path=None, font_size=28, dry_run=Fal
 
     # Resolve + load the Korean font up front. If unavailable, skip the whole
     # patch (leave the original Japanese subtitle) so the rebuild never crashes.
-    font_path = _find_font()
-    if font_path is None:
+    found = _find_font()
+    if found is None:
         print("  WARNING: no Korean font found for the title subtitle "
-              "(set $ATL2_TITLE_FONT or add python/font/fonts/NanumGothic.ttf); "
+              "(set $ATL2_TITLE_FONT or add python/font/fonts/NanumGothicBold.ttf); "
               "leaving the Japanese subtitle as-is")
         return 0
+    font_path, font_index = found
+    x0, y0, x1, y1 = BBOX
     try:
-        font = ImageFont.truetype(font_path, font_size)
+        font, fitted = _load_fitted_font(font_path, font_index, font_size,
+                                         x1 - x0 + 1)
     except Exception as e:
         print(f"  WARNING: could not load title font {font_path}: {e}; "
               "leaving the Japanese subtitle as-is")
         return 0
 
     data = bytearray(open(comm_img_path, "rb").read())
-    x0, y0, x1, y1 = BBOX
     W, H = x1 - x0 + 1, y1 - y0 + 1
 
     # 1. Read bbox region from VRAM into an RGB image.
@@ -156,8 +183,9 @@ def patch_title_subtitle(comm_img_path, out_path=None, font_size=28, dry_run=Fal
         with open(out_path, "wb") as f:
             f.write(data)
 
-    print(f"  Title subtitle -> '{TEXT}': inpainted {n_gold} gold px, "
-          f"text {tw}x{th} at ({tx},{ty}) in {W}x{H} box")
+    print(f"  Title subtitle -> '{TEXT}': {os.path.basename(font_path)}"
+          f"[{font_index}] @ {fitted}px, inpainted {n_gold} gold px, "
+          f"text {tw}x{th} in {W}x{H} box")
     return n_gold
 
 
