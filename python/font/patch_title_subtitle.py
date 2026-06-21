@@ -17,8 +17,37 @@ from PIL import Image, ImageDraw, ImageFont
 
 ROW = 896
 BBOX = (70, 128, 231, 159)  # x0, y0, x1, y1 inclusive (unwrapped logo coords)
-FONT_PATH = "/System/Library/Fonts/AppleSDGothicNeo.ttc"
 TEXT = "아크 더 래드 II"
+
+# A Korean-capable TrueType/OpenType font is needed to render the subtitle.
+# Resolution order: $ATL2_TITLE_FONT override -> a repo-bundled font (drop one
+# in python/font/fonts/ for reproducible cross-machine builds) -> common system
+# fonts on macOS / Linux / Windows. If none is found the title patch is skipped
+# with a warning (the Japanese subtitle is left intact) rather than crashing the
+# whole rebuild.
+_BUNDLED_FONT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "fonts")
+_FONT_CANDIDATES = [
+    os.environ.get("ATL2_TITLE_FONT"),
+    os.path.join(_BUNDLED_FONT_DIR, "NanumGothic.ttf"),
+    os.path.join(_BUNDLED_FONT_DIR, "title.ttf"),
+    # macOS
+    "/System/Library/Fonts/AppleSDGothicNeo.ttc",
+    "/System/Library/Fonts/Supplemental/AppleGothic.ttf",
+    # Linux
+    "/usr/share/fonts/truetype/nanum/NanumGothic.ttf",
+    "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
+    "/usr/share/fonts/truetype/noto/NotoSansKR-Bold.otf",
+    # Windows
+    "C:/Windows/Fonts/malgun.ttf",
+]
+
+
+def _find_font():
+    """Return the first available Korean-capable font path, or None."""
+    for path in _FONT_CANDIDATES:
+        if path and os.path.isfile(path):
+            return path
+    return None
 
 # Gold vertical gradient (top -> bottom) and dark outline, approximating the
 # original subtitle's metallic-gold look.
@@ -46,6 +75,22 @@ def _is_gold(r, g, b):
 
 def patch_title_subtitle(comm_img_path, out_path=None, font_size=28, dry_run=False):
     out_path = out_path or comm_img_path
+
+    # Resolve + load the Korean font up front. If unavailable, skip the whole
+    # patch (leave the original Japanese subtitle) so the rebuild never crashes.
+    font_path = _find_font()
+    if font_path is None:
+        print("  WARNING: no Korean font found for the title subtitle "
+              "(set $ATL2_TITLE_FONT or add python/font/fonts/NanumGothic.ttf); "
+              "leaving the Japanese subtitle as-is")
+        return 0
+    try:
+        font = ImageFont.truetype(font_path, font_size)
+    except Exception as e:
+        print(f"  WARNING: could not load title font {font_path}: {e}; "
+              "leaving the Japanese subtitle as-is")
+        return 0
+
     data = bytearray(open(comm_img_path, "rb").read())
     x0, y0, x1, y1 = BBOX
     W, H = x1 - x0 + 1, y1 - y0 + 1
@@ -78,7 +123,6 @@ def patch_title_subtitle(comm_img_path, out_path=None, font_size=28, dry_run=Fal
                                for i in range(3))
 
     # 3. Render Korean text: dark outline+base, then gold gradient interior.
-    font = ImageFont.truetype(FONT_PATH, font_size)
     tb = font.getbbox(TEXT, stroke_width=2)
     tw, th = tb[2] - tb[0], tb[3] - tb[1]
     tx = (W - tw) // 2 - tb[0]
