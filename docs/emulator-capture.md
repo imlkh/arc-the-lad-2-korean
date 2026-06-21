@@ -11,19 +11,24 @@ in Japanese (missed by translation), and maps each to its STG offset.
   `output/patched/Arc the Lad II (Japan)/Arc the Lad II (Japan).cue`
 
 ## 3. Calibrate (one time)
-- Edit `tools/atl2_capture.lua`: ensure `MODE = 'calibrate'`.
-- PCSX-Redux → Lua console → `dofile('<repo>/tools/atl2_capture.lua')`.
+- PCSX-Redux → Lua console → `dofile('<repo>/tools/atl2_capture.lua')` (loads in
+  `calibrate` mode). You should see `atl2_capture armed. MODE=calibrate`.
 - In game, trigger ONE known line: examine an **empty treasure chest**
   (Japanese "おれはたからばこだ", bytes `05 2A 1A 10 06 27 3E 0A 39`).
 - The console prints each pointer-register + its bytes. Find the register whose
-  bytes start `05 2A 1A 10 ...` — that is your `TEXT_REG`.
-- Set `MODE = 'capture'` and `TEXT_REG = '<that register>'` in the Lua file.
+  bytes start `05 2A 1A 10 ...` — that is your text-pointer register.
 
 ## 4. Capture (play for coverage)
-- Reload: `dofile('<repo>/tools/atl2_capture.lua')`.
+- Switch to capture mode **live in the console** (no reload — reloading can stack
+  breakpoints), substituting the register you found:
+  ```lua
+  ATL2_MODE = 'capture'; ATL2_TEXT_REG = 'a1'
+  ```
 - Play through the areas you care about (towns, events, shops). Each new displayed
   line is appended to `output/capture/capture.log`.
 - Coverage = what you visit. Use save states to tour scenes efficiently.
+- Only re-`dofile` the script if you reset the game (which clears the breakpoint);
+  the script removes its prior breakpoint on reload so this won't duplicate.
 
 ## 5. Post-process
 ```bash

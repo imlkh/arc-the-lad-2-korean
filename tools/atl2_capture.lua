@@ -1,9 +1,10 @@
 -- tools/atl2_capture.lua — PCSX-Redux dialogue capture for Arc the Lad 2.
 -- Load via PCSX-Redux Lua console: dofile('.../tools/atl2_capture.lua')
 -- Modes: 'calibrate' (find the text-pointer register) then 'capture'.
-local MODE     = 'calibrate'        -- set to 'capture' after calibration
+-- Switch mode LIVE in the console (no reload): ATL2_MODE='capture'; ATL2_TEXT_REG='a1'
+local MODE     = 'calibrate'        -- initial mode on load
 local HANDLER  = 0x80101560
-local TEXT_REG = 'a0'               -- set after calibration (a0/a1/a2/a3/...)
+local TEXT_REG = 'a0'               -- initial text-pointer register (refine via calibrate)
 local MAX_LEN  = 256
 local LOG_PATH = 'output/capture/capture.log'
 
@@ -26,12 +27,27 @@ local function logline(s)
     logf:write(s .. '\n'); logf:flush()
 end
 
--- IMPORTANT: store the breakpoint object in a persistent global. PCSX-Redux
--- removes the breakpoint if its returned object is garbage-collected, so an
--- un-stored addBreakpoint(...) "arms" then silently never fires.
+-- MODE / TEXT_REG are exposed as LIVE globals so you can switch without
+-- re-loading the script (which would risk stacking breakpoints). To go from
+-- calibrate to capture, just run in the Lua console:
+--     ATL2_MODE = 'capture' ; ATL2_TEXT_REG = 'a1'   -- (your register)
+_G.ATL2_MODE = MODE
+_G.ATL2_TEXT_REG = TEXT_REG
+
+-- IMPORTANT (two PCSX-Redux gotchas):
+-- 1) Store the breakpoint object persistently or it is garbage-collected and
+--    silently removed (an un-stored addBreakpoint "arms" then never fires).
+-- 2) Re-running this file must NOT stack duplicate breakpoints. So first remove
+--    any prior one (best-effort; :remove may not exist on all versions, hence
+--    pcall) and drop the reference, then create exactly one.
+if _G.ATL2_BP then
+    pcall(function() _G.ATL2_BP:remove() end)
+    _G.ATL2_BP = nil
+end
+
 _G.ATL2_BP = PCSX.addBreakpoint(HANDLER, 'Exec', 4, 'atl2-capture', function()
     local gpr = PCSX.getRegisters().GPR.n
-    if MODE == 'calibrate' then
+    if _G.ATL2_MODE == 'calibrate' then
         -- Dump every register that looks like a RAM pointer + its bytes,
         -- so the operator can spot which one holds the text.
         for _, name in ipairs({'a0','a1','a2','a3','s0','s1','v0','v1','t0'}) do
@@ -42,11 +58,12 @@ _G.ATL2_BP = PCSX.addBreakpoint(HANDLER, 'Exec', 4, 'atl2-capture', function()
         end
         print('--- one hit; trigger a KNOWN line, match its bytes to a register ---')
     else
-        local addr = gpr[TEXT_REG]
+        local addr = gpr[_G.ATL2_TEXT_REG]
         if addr >= 0x80000000 and addr <= 0x801FFFFF and not seen[addr] then
             seen[addr] = true
             logline(string.format('addr=0x%08X bytes=%s', addr, read_bytes(addr)))
         end
     end
 end)
-print('atl2_capture loaded in MODE=' .. MODE .. '. Breakpoint @0x80101560.')
+print('atl2_capture armed. MODE=' .. _G.ATL2_MODE ..
+      '  (switch live: ATL2_MODE=\'capture\'; ATL2_TEXT_REG=\'aN\')')
