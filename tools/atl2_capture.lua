@@ -6,7 +6,10 @@ local MODE     = 'calibrate'        -- initial mode on load
 local HANDLER  = 0x80101560
 local TEXT_REG = 'a0'               -- initial text-pointer register (refine via calibrate)
 local MAX_LEN  = 256
-local LOG_PATH = 'output/capture/capture.log'
+-- Default is relative (portable). PCSX-Redux's working dir is usually NOT the
+-- repo, so set an ABSOLUTE path live before capturing, e.g. in the console:
+--   ATL2_LOG = '/Users/you/.../atl2_korean_translation/output/capture/capture.log'
+local DEFAULT_LOG = 'output/capture/capture.log'
 
 local function read_bytes(addr)
     local mem = PCSX.getMemPtr()                 -- 2MB main RAM, 0-indexed
@@ -23,7 +26,7 @@ end
 local seen = {}
 local logf = nil
 local function logline(s)
-    if not logf then logf = io.open(LOG_PATH, 'a') end
+    if not logf then logf = io.open(_G.ATL2_LOG or DEFAULT_LOG, 'a') end
     logf:write(s .. '\n'); logf:flush()
 end
 
