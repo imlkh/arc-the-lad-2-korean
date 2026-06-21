@@ -1248,6 +1248,29 @@ def patch_stg_system_text(stg_path, korean_mapping, decode_table):
         ("Poster nashi", b'',
          bytes([0x97, 0x5D, 0x60, 0xE3, 0x15, 0x0C, 0x00]),
          bytes([0x00]), "포스터없"),                                   # ポスターなし
+        # Exclamations anchored on the SCANNER-flagged frames. The earlier batch
+        # byte-matched the first occurrence and hit the wrong frame, leaving
+        # these untranslated (e.g. the intro やれ shown as "크주"). Anchors are
+        # the exact A9 00 + script(+[opt] wrappers) prefix and 0x00 terminator.
+        ("SG00 intro yare", bytes([0xA9, 0x00, 0x7B, 0x06]),
+         bytes([0x24, 0x2A]), bytes([0x00]), "해라"),                  # やれ
+        ("S700 uwaa", bytes([0xA9, 0x00, 0xB2, 0x26]),
+         bytes([0x03, 0x2C, 0x48]), bytes([0x00]), "우와"),            # うわぁ
+        ("SF00 gya", bytes([0xA9, 0x00, 0x53, 0x06]),
+         bytes([0x30, 0x4D, 0x50]), bytes([0x00]), "꺅"),              # ぎゃっ
+        ("SG00 gutto", bytes([0xA9, 0x00, 0x89, 0x1C]),
+         bytes([0x31, 0x50]), bytes([0x00]), "윽"),                    # ぐっ
+        ("SG00 wakatteru",
+         bytes([0xA9, 0x00, 0xFB, 0x10]) + bytes([0xEF]) * 7,
+         bytes([0x2C, 0x06, 0x50, 0x13, 0x29, 0x26]), bytes([0x00]),
+         "알고있어"),                                                  # わかってるよ
+        ("SA00 gokurou",
+         bytes([0xA9, 0x00, 0x8D, 0x3C]) + bytes([0xEF]) * 7,
+         bytes([0x33, 0x08, 0x2B, 0x03, 0x0B, 0x2E]), bytes([0x00]),
+         "수고했네"),                                                  # ごくろうさん
+        ("SA00 kokoda",
+         bytes([0xA9, 0x00, 0x6C, 0x3D]) + bytes([0xEF]) * 8,
+         bytes([0x0A, 0x0A, 0x39]), bytes([0x00]), "여기"),            # ここだ (3B: だ dropped)
     ]
     for desc, prefix, jp_text, suffix, kr_text in MISSED_ORPHAN:
         kr_encoded = encode_korean_text(kr_text, korean_mapping, decode_table)
