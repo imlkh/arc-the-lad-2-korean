@@ -88,29 +88,18 @@ def find_available_stages():
     return sorted(stages)
 
 def find_bin_image():
-    """Find the BIN disc image (the patched output is the Korean-named disc)."""
+    """Find the patched disc image under output/patched/.
+
+    Rename-proof: any *.bin in a disc subfolder or top level (excluding
+    *.backup_*.bin), preferring a Korean-named disc. The patched output is
+    "Arc the Lad II (Korean Patch).bin", but an unrenamed disc is still found.
+    """
     patched_dir = Path(__file__).parent.parent.parent / "output" / "patched"
-
-    # Explicit names, in preference order (Korean-patched output first).
-    patterns = [
-        "Arc the Lad II (Korean Patch)/Arc the Lad II (Korean Patch).bin",
-        "Arc the Lad II (Japan)/Arc the Lad II (Japan).bin",
-        "Arc the Lad 2 (Japan)/Arc the Lad 2 (Japan).bin",
-    ]
-    for pattern in patterns:
-        matches = list(patched_dir.glob(pattern))
-        if matches:
-            return matches[0]
-
-    # Fallback: any *.bin in a disc subfolder or top level, excluding backups.
-    def _not_backup(p):
-        return ".backup_" not in p.name
-    for pattern in ("*/*.bin", "*.bin"):
-        matches = [p for p in patched_dir.glob(pattern) if _not_backup(p)]
-        if matches:
-            return matches[0]
-
-    return None
+    cands = [p for p in (list(patched_dir.glob("*/*.bin"))
+                         + list(patched_dir.glob("*.bin")))
+             if ".backup_" not in p.name]
+    cands.sort(key=lambda p: (0 if "Korean" in p.name else 1, p.name))
+    return cands[0] if cands else None
 
 
 def copy_translation_files(stages):

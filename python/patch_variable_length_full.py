@@ -12,15 +12,28 @@ Usage:
     python patch_variable_length_full.py [DISC_IMAGE]
 
 Example:
-    python patch_variable_length_full.py "output/patched/Arc the Lad II (Japan)/Arc the Lad II (Japan).bin"
+    python patch_variable_length_full.py "output/patched/Arc the Lad II (Korean Patch)/Arc the Lad II (Korean Patch).bin"
 """
 
+import glob
 import os
 import sys
 import subprocess
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 BASE_DIR = os.path.dirname(SCRIPT_DIR)
+
+
+def find_disc_image():
+    """Locate the patched disc image (rename-proof; excludes backups)."""
+    patched = os.path.join(BASE_DIR, "output", "patched")
+    cands = [p for p in (glob.glob(os.path.join(patched, "*", "*.bin"))
+                         + glob.glob(os.path.join(patched, "*.bin")))
+             if ".backup_" not in os.path.basename(p)]
+    for p in cands:  # prefer a Korean-named disc
+        if "Korean" in os.path.basename(p):
+            return p
+    return cands[0] if cands else None
 
 
 def run_script(script_name, args=None):
@@ -47,14 +60,20 @@ def main():
     parser = argparse.ArgumentParser(
         description="Full variable-length Korean translation patcher"
     )
-    parser.add_argument("disc_image", nargs="?",
-                        default="output/patched/Arc the Lad II (Japan)/Arc the Lad II (Japan).bin",
-                        help="Path to disc image (default: output/patched/...)")
+    parser.add_argument("disc_image", nargs="?", default=None,
+                        help="Path to disc image (default: auto-detect the "
+                             "patched disc under output/patched/)")
     parser.add_argument("--stg", default="S100",
                         help="STG file to patch (default: S100)")
     parser.add_argument("--skip-patch-all", action="store_true",
                         help="Skip patch_all.py (if already run)")
     args = parser.parse_args()
+
+    if not args.disc_image:
+        args.disc_image = find_disc_image()
+        if not args.disc_image:
+            print("ERROR: no patched disc image found under output/patched/")
+            return 1
 
     print("="*60)
     print("Variable-Length Korean Translation - Full Workflow")

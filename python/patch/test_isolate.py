@@ -320,17 +320,12 @@ def mode_full():
 
 
 def build_disc_image():
-    """Find and patch the disc image."""
-    bin_patterns = [
-        OUTPUT_DIR / "Arc the Lad II (Japan)" / "Arc the Lad II (Japan).bin",
-    ]
-    for path in bin_patterns:
-        if path.exists():
-            return run([sys.executable, "patch_bin.py", str(path)],
-                       f"Build disc image: {path.name}")
-
-    # Try glob
-    matches = list(OUTPUT_DIR.glob("**/*.bin"))
+    """Find and patch the disc image (rename-proof; excludes backups)."""
+    # Disc bins live in a subfolder; exclude *.backup_*.bin and prefer the
+    # Korean-named disc.
+    matches = [p for p in OUTPUT_DIR.glob("**/*.bin")
+               if ".backup_" not in p.name]
+    matches.sort(key=lambda p: (0 if "Korean" in p.name else 1, p.name))
     if matches:
         return run([sys.executable, "patch_bin.py", str(matches[0])],
                    f"Build disc image: {matches[0].name}")
