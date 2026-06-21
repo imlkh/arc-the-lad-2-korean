@@ -18,6 +18,11 @@ from datetime import datetime
 
 # Add parent directory to path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+# Title-screen image patcher lives under python/font/
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                "..", "font"))
+
+from patch_title_subtitle import patch_title_subtitle
 
 from patch_korean import (
     load_decode_table, extract_korean_chars, build_korean_mapping,
@@ -192,6 +197,12 @@ def main():
     print(f"Patching COMM.IMG: {comm_dst}")
     patch_comm_img(comm_dst, korean_mapping)
     print(f"  Patched {len(korean_mapping)} Korean glyphs into font")
+
+    # Replace the Japanese title subtitle (アークザラッドII) with Korean
+    # (아크 더 래드 II) in the 16-bit logo region. This edits the subtitle bbox
+    # only, which is clear of the 4bpp font zone patched above.
+    print("Patching title-screen subtitle -> Korean")
+    patch_title_subtitle(comm_dst)
 
     # Save unified mapping
     mapping_path = os.path.join(OUTPUT_DIR, "unified_charmap.txt")
