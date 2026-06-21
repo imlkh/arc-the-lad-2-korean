@@ -1742,7 +1742,7 @@
   0x011ABCC4 [0xFFFE] [script:95 14]도서관 앞에 점쟁이가 있는데
   0x011ABD0E [0xFFFE] [script:B7 14]잘 맞는다고 평판이야
   0x011ABD5A [0xFFFE] [script:DE 14]너도 권법을 배우는 게 좋을 거야
-  0x011ABDA8 [0xFFFE] [script:06 15]라마다 승은 최강의 권법 사용자야
+  0x011ABDA8 [0xFFFE] [script:06 15]라마다 승은 최강의 권법가야
   0x011ABDF0 [0xFFFE] [script:27 15]밀마나 따위 무섭지 않아
   0x011ABE3A [0xFFFE] [script:4D 15]밀마나가 쳐들어왔다던데
   0x011ABE7E [0xFFFE] [script:6F 15]뭐, 이 페이사스는 안전해
@@ -1932,7 +1932,7 @@
   0x0149DCC4 [0xFFFE] [script:95 14]도서관 앞에 점쟁이가 있는데
   0x0149DD0E [0xFFFE] [script:B7 14]잘 맞는다고 평판이야
   0x0149DD5A [0xFFFE] [script:DE 14]너도 권법을 배우는 게 좋을 거야
-  0x0149DDA8 [0xFFFE] [script:06 15]라마다 승은 최강의 권법 사용자야
+  0x0149DDA8 [0xFFFE] [script:06 15]라마다 승은 최강의 권법가야
   0x0149DDF0 [0xFFFE] [script:27 15]밀마나 따위 무섭지 않아
   0x0149DE3A [0xFFFE] [script:4D 15]밀마나가 쳐들어왔다던데
   0x0149DE7E [0xFFFE] [script:6F 15]뭐, 이 페이사스는 안전해
@@ -2061,7 +2061,7 @@
   0x016D34C4 [0xFFFE] [script:95 14]도서관 앞에 점쟁이가 있는데
   0x016D350E [0xFFFE] [script:B7 14]잘 맞는다고 평판이야
   0x016D355A [0xFFFE] [script:DE 14]너도 권법을 배우는 게 좋을 거야
-  0x016D35A8 [0xFFFE] [script:06 15]라마다 승은 최강의 권법 사용자야
+  0x016D35A8 [0xFFFE] [script:06 15]라마다 승은 최강의 권법가야
   0x016D35F0 [0xFFFE] [script:27 15]밀마나 따위 무섭지 않아
   0x016D363A [0xFFFE] [script:4D 15]밀마나가 쳐들어왔다던데
   0x016D367E [0xFFFE] [script:6F 15]뭐, 이 페이사스는 안전해

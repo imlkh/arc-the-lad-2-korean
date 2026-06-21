@@ -1999,7 +1999,7 @@
   0x00B0B4C4 [0xFFFE] [script:95 14]도서관 앞에 점쟁이가 있는데
   0x00B0B50E [0xFFFE] [script:B7 14]잘 맞는다고 평판이야
   0x00B0B55A [0xFFFE] [script:DE 14]너도 권법을 배우는 게 좋을 거야
-  0x00B0B5A8 [0xFFFE] [script:06 15]라마다 승은 최강의 권법 사용자야
+  0x00B0B5A8 [0xFFFE] [script:06 15]라마다 승은 최강의 권법가야
   0x00B0B5F0 [0xFFFE] [script:27 15]밀마나 따위 무섭지 않아
   0x00B0B63A [0xFFFE] [script:4D 15]밀마나가 쳐들어왔다던데
   0x00B0B67E [0xFFFE] [script:6F 15]뭐, 이 페이사스는 안전해
@@ -3463,10 +3463,10 @@
   0x01D72D1A [0xFFFE] [script:40 20]라마다의 유령이라는 건[br]사원에서 죽은 승려들의 유령이래
   0x01D72D74 [0xFFFE] [script:68 20]승려이면서 유령도[br]퇴치 못 하는 거야?
   0x01D72DCC [0xFFFE] [script:97 20]유령 소동도 가라앉았으니[br]맛있는 거나 실컷 먹을까
-  0x01D72E2A [0xFFFE] [script:BF 20]라마다 승은 최강의 권법 사용자야
+  0x01D72E2A [0xFFFE] [script:BF 20]라마다 승은 최강의 권법가야
   0x01D72E86 [0xFFFE] [script:EA 20]밀마나 따위 무섭지 않아
   0x01D72ED0 [0xFFFE] [script:12 21]그래도 대포에는 맞서기 어려울지도
-  0x01D72F28 [0xFFFE] [script:3E 21]라마다 승은 최강의 권법 사용자야
+  0x01D72F28 [0xFFFE] [script:3E 21]라마다 승은 최강의 권법가야
   0x01D72F7A [0xFFFE] [script:65 21]그래도 유령은 약한 모양이야
   0x01D72FC6 [0xFFFE] [script:93 21]저기 사범대리인 분[br]꽤 멋지고 좋은 남자야
   0x01D7304A [0xFFFE] [script:CD 21]밀마나가 쳐들어왔다던데
