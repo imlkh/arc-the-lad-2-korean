@@ -1135,6 +1135,14 @@ def patch_stg_system_text(stg_path, korean_mapping, decode_table):
                 0x16, 0x15, 0x28, 0x1F, 0x0D, 0xFF, 0x05, 0x01, 0x01, 0x05,
                 0xF1, 0x3E, 0x20, 0x16, 0x15, 0x28, 0x1F, 0x0D, 0x06, 0xEE]),
          "[num:01]G에 숙박[br]쉬시겠어요?"),
+        # S200 townswoman about a quiet hunter she fancies (無口なんだけど、
+        # そこがいいのよねぇ). 無 = charID 1509 (F4 FA) has no Korean glyph, so it
+        # rendered blank -> the player saw garble starting at 口. Decoder missed it
+        # (template-walker assumed a 2-byte prefix this entry doesn't have).
+        ("S200 quiet hunter (無口なんだけど、そこがいいのよねぇ)",
+         bytes([0xF4, 0xFA, 0xF1, 0x70, 0x15, 0x2E, 0x39, 0x09, 0x3D, 0xE4,
+                0x0F, 0x0A, 0x2F, 0x02, 0x02, 0x19, 0x26, 0x18, 0x4B]),
+         "무뚝뚝하지만 그게 좋아"),
     ]
     for desc, jp_bytes, kr_text in MISSED_BARE:
         kr_encoded = encode_korean_text(kr_text, korean_mapping, decode_table)
