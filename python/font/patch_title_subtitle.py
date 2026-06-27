@@ -13,6 +13,7 @@ wrapped VRAM offsets.
 """
 import os
 import struct
+import subprocess
 from PIL import Image, ImageDraw, ImageFont
 
 ROW = 896
@@ -190,8 +191,8 @@ def patch_title_subtitle(comm_img_path, out_path=None, font_size=28, dry_run=Fal
 
 
 # Version mark drawn under the ©1996 line. Light text on the dark plate bevel.
-_VERSION_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                             "..", "..", "VERSION")
+_REPO_ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..")
+_VERSION_FILE = os.path.join(_REPO_ROOT, "VERSION")
 _TRANSLATOR = "맹구"   # author/translator credit shown next to the version
 _VER_COLOR = (250, 252, 255)   # near-white for contrast on the dark bevel
 _VER_OUTLINE = (0, 0, 0)       # solid black outline -> readable on any bg
@@ -202,19 +203,44 @@ _VER_CY = 167          # vertical center: in the gap between the Korean
 _VER_BAND = (157, 178)  # y range of the region written back
 
 
-def _read_version():
+def _git_describe():
+    """Return `git describe --tags --long` for the repo (e.g.
+    'v0.1.0-beta-0-gf1e75f5'), pinning the title mark to the exact build commit.
+
+    Returns None if git is unavailable, the tree has no tags, or the build runs
+    outside a checkout (e.g. an exported tarball) -> caller falls back to VERSION.
+    """
+    try:
+        r = subprocess.run(
+            ["git", "describe", "--tags", "--long"],
+            cwd=_REPO_ROOT, capture_output=True, text=True, timeout=5,
+        )
+    except (OSError, subprocess.SubprocessError):
+        return None
+    out = r.stdout.strip()
+    return out if r.returncode == 0 and out else None
+
+
+def _read_version_file():
     if os.path.isfile(_VERSION_FILE):
         v = open(_VERSION_FILE, encoding="utf-8").read().strip()
         return v or None
     return None
 
 
+def _read_version():
+    """Resolve the build version for the title mark: prefer the exact git
+    describe id, fall back to the VERSION file outside a git checkout."""
+    return _git_describe() or _read_version_file()
+
+
 def patch_title_version(comm_img_path, out_path=None, version=None, dry_run=False):
     """Draw a small 'vX.Y.Z' mark under the title's copyright line.
 
-    Reads the repo VERSION file (single source of truth) unless `version` is
-    given. Skips gracefully if no version or no font. Writes only font-safe
-    bytes (>=636), so the 4bpp font zone is never touched.
+    Resolves the version from `git describe --tags --long` (VERSION file
+    fallback) unless `version` is given. Skips gracefully if no version or no
+    font. Writes only font-safe bytes (>=636), so the 4bpp font zone is never
+    touched.
     """
     out_path = out_path or comm_img_path
     version = version or _read_version()
