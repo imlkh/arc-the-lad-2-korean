@@ -11,7 +11,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 from make_release_patch import (  # noqa: E402
     md5_file, sha256_file, verify_source,
-    check_xdelta3, build_patch, verify_patch)
+    check_xdelta3, build_patch, verify_patch, main)
 
 
 def make_pair(tmp):
@@ -101,6 +101,61 @@ def test_verify_patch_rejects_wrong_md5_and_deletes_patch():
         assert leftovers == [], leftovers
 
 
+def test_main_builds_release_package():
+    with tempfile.TemporaryDirectory() as tmp:
+        orig, patched = make_pair(tmp)
+        cue = os.path.join(tmp, "test.cue")
+        with open(cue, "w") as f:
+            f.write('FILE "Arc the Lad II (Korean Patch).bin" BINARY\n'
+                    '  TRACK 01 MODE2/2352\n    INDEX 01 00:00:00\n')
+        out = os.path.join(tmp, "release")
+        main(["--original", orig, "--patched", patched, "--cue", cue,
+              "--out", out,
+              "--expected-md5", md5_file(orig),
+              "--expected-size", str(os.path.getsize(orig))])
+        [vdir] = os.listdir(out)  # one version directory
+        vpath = os.path.join(out, vdir)
+        files = sorted(os.listdir(vpath))
+        patch_names = [f for f in files if f.endswith(".xdelta")]
+        assert len(patch_names) == 1, files
+        assert patch_names[0].startswith("arc-the-lad-2-korean-"), patch_names
+        assert "Arc the Lad II (Korean Patch).cue" in files, files
+        assert "README.txt" in files, files
+        assert "SHA256SUMS.txt" in files, files
+        readme = open(os.path.join(vpath, "README.txt"), encoding="utf-8").read()
+        assert "012B023097777CB6CE6A5DE5E0457022" in readme
+        assert "Rev 1" in readme
+        assert patch_names[0] in readme
+        sums = open(os.path.join(vpath, "SHA256SUMS.txt")).read().splitlines()
+        assert len(sums) == 2, sums  # patch + cue
+        for line in sums:
+            digest, name = line.split("  ", 1)
+            assert digest == sha256_file(os.path.join(vpath, name)), line
+
+
+def test_main_rerun_removes_stale_artifacts():
+    with tempfile.TemporaryDirectory() as tmp:
+        orig, patched = make_pair(tmp)
+        cue = os.path.join(tmp, "test.cue")
+        with open(cue, "w") as f:
+            f.write('FILE "Arc the Lad II (Korean Patch).bin" BINARY\n')
+        out = os.path.join(tmp, "release")
+        argv = ["--original", orig, "--patched", patched, "--cue", cue,
+                "--out", out,
+                "--expected-md5", md5_file(orig),
+                "--expected-size", str(os.path.getsize(orig))]
+        main(argv)
+        [vdir] = os.listdir(out)
+        vpath = os.path.join(out, vdir)
+        # Plant a stale artifact from a hypothetical earlier build.
+        with open(os.path.join(vpath, "stale-old-version.xdelta"), "w") as f:
+            f.write("stale")
+        main(argv)
+        files = sorted(os.listdir(vpath))
+        assert "stale-old-version.xdelta" not in files, files
+        assert len(files) == 4, files  # xdelta, cue, README, SHA256SUMS
+
+
 if __name__ == "__main__":
     test_md5_and_sha256()
     test_verify_source_accepts_matching_file()
@@ -109,4 +164,6 @@ if __name__ == "__main__":
     test_check_xdelta3_found()
     test_build_and_verify_roundtrip()
     test_verify_patch_rejects_wrong_md5_and_deletes_patch()
+    test_main_builds_release_package()
+    test_main_rerun_removes_stale_artifacts()
     print("PASS: all make_release_patch tests")

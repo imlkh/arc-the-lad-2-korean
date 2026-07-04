@@ -131,5 +131,130 @@ def verify_patch(original, patch_path, expected_md5):
             os.remove(tmp)
 
 
+README_TEMPLATE = """\
+================================================================
+ 아크 더 래드 II 한국어 패치 {version}
+ Arc the Lad II Korean Translation Patch {version}
+================================================================
+
+■ 필요한 원본 (직접 덤프한 이미지를 사용하세요)
+   게임    : Arc the Lad II (Japan) (Rev 1)
+             (PlayStation the Best판, SCPS-91071 / SCPS-91310)
+   크기    : 739,144,224 바이트
+   MD5     : 012B023097777CB6CE6A5DE5E0457022
+   ※ 초판(v1.0, SCPS-10026)은 지원하지 않습니다.
+      MD5가 다르면 패치가 적용되지 않습니다.
+
+■ 패치 방법 1 — 웹 브라우저 (설치 불필요)
+   1. https://www.marcrobledo.com/RomPatcher.js/ 접속
+   2. "ROM file"에 원본 BIN 파일 선택
+   3. "Patch file"에 {patch_name} 선택
+   4. "Apply patch"를 누르고 결과 파일 다운로드
+   5. 파일 이름을 "Arc the Lad II (Korean Patch).bin"으로 변경
+   6. 동봉된 .cue 파일과 같은 폴더에 두고,
+      에뮬레이터에서 .cue 파일을 실행
+
+■ 패치 방법 2 — Delta Patcher (Windows / macOS / Linux)
+   1. https://github.com/marco-calautti/DeltaPatcher/releases
+      에서 다운로드
+   2. 원본 BIN을 미리 복사해 두세요 (원본이 직접 수정됩니다)
+   3. "Original file"에 복사본 BIN, "XDelta patch"에
+      {patch_name} 선택 후 "Apply patch"
+   4. 복사본 이름을 "Arc the Lad II (Korean Patch).bin"으로
+      변경하고, 동봉된 .cue와 같은 폴더에서 사용
+
+----------------------------------------------------------------
+
+* Required source (use your own dump)
+   Game : Arc the Lad II (Japan) (Rev 1)
+          (PlayStation the Best, SCPS-91071 / SCPS-91310)
+   Size : 739,144,224 bytes
+   MD5  : 012B023097777CB6CE6A5DE5E0457022
+   The original v1.0 release (SCPS-10026) is NOT supported;
+   the patch will refuse to apply if the MD5 differs.
+
+* How to apply
+   Browser (no install): open
+   https://www.marcrobledo.com/RomPatcher.js/ , choose your BIN as
+   "ROM file" and {patch_name} as "Patch file", apply, then rename
+   the result to "Arc the Lad II (Korean Patch).bin" and keep it
+   next to the bundled .cue file.
+
+   Delta Patcher (Windows/macOS/Linux):
+   https://github.com/marco-calautti/DeltaPatcher/releases
+   Patch a COPY of your BIN (it is modified in place), rename it to
+   "Arc the Lad II (Korean Patch).bin", and use the bundled .cue.
+
+* Project: https://github.com/imlkh/arc-the-lad-2-korean
+"""
+
+
+def get_version():
+    """Release version from git tags, e.g. v0.1.0-beta or v0.1.0-beta-5-gabc123."""
+    try:
+        out = subprocess.run(
+            ["git", "describe", "--tags", "--always"],
+            cwd=BASE_DIR, capture_output=True, text=True, check=True)
+        return out.stdout.strip()
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        return "unversioned"
+
+
+def write_readme(out_dir, version, patch_name):
+    with open(os.path.join(out_dir, "README.txt"), "w", encoding="utf-8") as f:
+        f.write(README_TEMPLATE.format(version=version, patch_name=patch_name))
+
+
+def write_sha256sums(out_dir, filenames):
+    lines = [f"{sha256_file(os.path.join(out_dir, name))}  {name}"
+             for name in filenames]
+    with open(os.path.join(out_dir, "SHA256SUMS.txt"), "w") as f:
+        f.write("\n".join(lines) + "\n")
+
+
+def main(argv=None):
+    parser = argparse.ArgumentParser(
+        description="Build a verified xdelta release package "
+                    "for the Korean translation.")
+    parser.add_argument("--original", default=DEFAULT_ORIGINAL,
+                        help="pristine Japanese BIN (redump Rev 1)")
+    parser.add_argument("--patched", default=DEFAULT_PATCHED,
+                        help="Korean-patched BIN")
+    parser.add_argument("--cue", default=DEFAULT_CUE,
+                        help="cue sheet to bundle")
+    parser.add_argument("--out", default=DEFAULT_OUT_DIR,
+                        help="release output root")
+    parser.add_argument("--expected-md5", default=REDUMP_MD5,
+                        help="required MD5 of --original")
+    parser.add_argument("--expected-size", type=int, default=REDUMP_SIZE,
+                        help="required size of --original in bytes")
+    args = parser.parse_args(argv)
+
+    check_xdelta3()
+    print(f"Verifying source: {args.original}")
+    verify_source(args.original, args.expected_md5, args.expected_size)
+
+    version = get_version()
+    out_dir = os.path.join(args.out, version)
+    if os.path.isdir(out_dir):
+        shutil.rmtree(out_dir)  # rebuilds must not inherit stale artifacts
+    os.makedirs(out_dir)
+    patch_name = f"arc-the-lad-2-korean-{version}.xdelta"
+    patch_path = os.path.join(out_dir, patch_name)
+
+    print(f"Building patch: {patch_path}")
+    build_patch(args.original, args.patched, patch_path)
+
+    print("Verifying round-trip (patch original -> must equal Korean BIN)")
+    verify_patch(args.original, patch_path, md5_file(args.patched))
+
+    cue_name = "Arc the Lad II (Korean Patch).cue"
+    shutil.copyfile(args.cue, os.path.join(out_dir, cue_name))
+    write_readme(out_dir, version, patch_name)
+    write_sha256sums(out_dir, [patch_name, cue_name])
+
+    print(f"OK: release package at {out_dir}")
+
+
 if __name__ == "__main__":
-    sys.exit("Not runnable yet: CLI arrives in Task 3.")
+    main()
