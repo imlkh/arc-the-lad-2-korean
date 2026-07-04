@@ -5,6 +5,24 @@ All notable changes to the Arc the Lad II Korean translation patch.
 The format is based on [Keep a Changelog](https://keepachangelog.com/), and this
 project adheres to [Semantic Versioning](https://semver.org/).
 
+## [0.2.0-beta] - 2026-07-04
+
+Distribution changes only — translation content is unchanged from 0.1.0-beta.
+
+### Added
+- **xdelta release patcher** (`python/patch/make_release_patch.py`) — releases
+  now ship a ~16 MB `.xdelta` patch instead of the 739 MB disc image. The
+  builder refuses any source that is not the pristine redump dump of
+  "Arc the Lad II (Japan) (Rev 1)" (MD5 `012B023097777CB6CE6A5DE5E0457022`),
+  round-trip verifies the patch byte-for-byte before packaging, and emits a
+  versioned release folder with the `.cue`, a bilingual `README.txt`, and
+  `SHA256SUMS.txt`. Users apply the patch to their own dump with
+  Delta Patcher or RomPatcher.js. The original v1.0 release (SCPS-10026) is
+  not supported.
+- **Project README** (`README.md`) — player instructions, build-from-source
+  guide, repository map, and legal notice (Korean + English).
+- Release-build documentation in `docs/PATCHING.md`.
+
 ## [0.1.0-beta] - 2026-06-21
 
 First public beta of the Korean (한국어) translation patch.
