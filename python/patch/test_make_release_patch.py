@@ -156,6 +156,22 @@ def test_main_rerun_removes_stale_artifacts():
         assert len(files) == 4, files  # xdelta, cue, README, SHA256SUMS
 
 
+def test_main_rejects_missing_cue():
+    with tempfile.TemporaryDirectory() as tmp:
+        orig, patched = make_pair(tmp)
+        missing_cue = os.path.join(tmp, "nope.cue")
+        try:
+            main(["--original", orig, "--patched", patched,
+                  "--cue", missing_cue,
+                  "--out", os.path.join(tmp, "release"),
+                  "--expected-md5", md5_file(orig),
+                  "--expected-size", str(os.path.getsize(orig))])
+        except SystemExit as e:
+            assert "--cue file not found" in str(e), e
+        else:
+            raise AssertionError("expected SystemExit for missing cue")
+
+
 if __name__ == "__main__":
     test_md5_and_sha256()
     test_verify_source_accepts_matching_file()
@@ -166,4 +182,5 @@ if __name__ == "__main__":
     test_verify_patch_rejects_wrong_md5_and_deletes_patch()
     test_main_builds_release_package()
     test_main_rerun_removes_stale_artifacts()
+    test_main_rejects_missing_cue()
     print("PASS: all make_release_patch tests")

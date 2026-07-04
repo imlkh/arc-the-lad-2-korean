@@ -234,6 +234,10 @@ def main(argv=None):
     print(f"Verifying source: {args.original}")
     verify_source(args.original, args.expected_md5, args.expected_size)
 
+    for label, path in (("--patched", args.patched), ("--cue", args.cue)):
+        if not os.path.isfile(path):
+            sys.exit(f"ERROR: {label} file not found: {path}")
+
     version = get_version()
     out_dir = os.path.join(args.out, version)
     if os.path.isdir(out_dir):
