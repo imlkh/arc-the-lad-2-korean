@@ -430,3 +430,23 @@ output/decoded/bin/*.txt
   2. Look for lines with `[0x00A9]` context opcode (orphan menus)
   3. Add translations to translation file
   4. Re-run patcher
+
+## Release patch (xdelta)
+
+Releases ship a ~16 MB xdelta patch instead of the 739 MB BIN:
+
+    python python/patch/make_release_patch.py
+
+The script hard-fails unless the source BIN is the pristine redump dump
+of "Arc the Lad II (Japan) (Rev 1)" (SCPS-91071/91310,
+MD5 012B023097777CB6CE6A5DE5E0457022, 739,144,224 bytes), then builds
+`output/release/<git-describe>/` containing the `.xdelta`, the `.cue`,
+a bilingual `README.txt`, and `SHA256SUMS.txt`. The patch is round-trip
+verified (applied back to the original and MD5-compared against the
+Korean BIN) before packaging; a failed verification deletes the patch.
+
+The v1.0 release (SCPS-10026) is a different image and is not supported.
+Requires `xdelta3` (`brew install xdelta` / `apt install xdelta3`).
+Attach the folder contents to the GitHub release. Users apply the patch
+with Delta Patcher or https://www.marcrobledo.com/RomPatcher.js/ (per
+the bundled README.txt).
