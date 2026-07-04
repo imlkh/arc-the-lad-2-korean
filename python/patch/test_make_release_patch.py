@@ -9,7 +9,9 @@ import tempfile
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-from make_release_patch import md5_file, sha256_file, verify_source  # noqa: E402
+from make_release_patch import (  # noqa: E402
+    md5_file, sha256_file, verify_source,
+    check_xdelta3, build_patch, verify_patch)
 
 
 def make_pair(tmp):
@@ -65,9 +67,46 @@ def test_verify_source_rejects_wrong_md5():
             raise AssertionError("expected SystemExit for wrong md5")
 
 
+def test_check_xdelta3_found():
+    path = check_xdelta3()
+    assert os.path.basename(path) == "xdelta3", path
+
+
+def test_build_and_verify_roundtrip():
+    with tempfile.TemporaryDirectory() as tmp:
+        orig, patched = make_pair(tmp)
+        patch = os.path.join(tmp, "test.xdelta")
+        build_patch(orig, patched, patch)
+        assert os.path.getsize(patch) > 0
+        # Must not raise, and must keep the patch file.
+        verify_patch(orig, patch, md5_file(patched))
+        assert os.path.exists(patch)
+
+
+def test_verify_patch_rejects_wrong_md5_and_deletes_patch():
+    with tempfile.TemporaryDirectory() as tmp:
+        orig, patched = make_pair(tmp)
+        patch = os.path.join(tmp, "test.xdelta")
+        build_patch(orig, patched, patch)
+        try:
+            verify_patch(orig, patch, "0" * 32)
+        except SystemExit as e:
+            assert "round-trip" in str(e), e
+            assert not os.path.exists(patch), "bad patch must be deleted"
+        else:
+            raise AssertionError("expected SystemExit for wrong md5")
+        # No temp .bin files may be left behind.
+        leftovers = [f for f in os.listdir(tmp)
+                     if f.endswith(".bin") and f not in ("orig.bin", "patched.bin")]
+        assert leftovers == [], leftovers
+
+
 if __name__ == "__main__":
     test_md5_and_sha256()
     test_verify_source_accepts_matching_file()
     test_verify_source_rejects_wrong_size()
     test_verify_source_rejects_wrong_md5()
+    test_check_xdelta3_found()
+    test_build_and_verify_roundtrip()
+    test_verify_patch_rejects_wrong_md5_and_deletes_patch()
     print("PASS: all make_release_patch tests")
