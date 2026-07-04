@@ -428,12 +428,36 @@ def test_main_builds_release_package():
         for line in sums:
             digest, name = line.split("  ", 1)
             assert digest == sha256_file(os.path.join(vpath, name)), line
+
+
+def test_main_rerun_removes_stale_artifacts():
+    with tempfile.TemporaryDirectory() as tmp:
+        orig, patched = make_pair(tmp)
+        cue = os.path.join(tmp, "test.cue")
+        with open(cue, "w") as f:
+            f.write('FILE "Arc the Lad II (Korean Patch).bin" BINARY\n')
+        out = os.path.join(tmp, "release")
+        argv = ["--original", orig, "--patched", patched, "--cue", cue,
+                "--out", out,
+                "--expected-md5", md5_file(orig),
+                "--expected-size", str(os.path.getsize(orig))]
+        main(argv)
+        [vdir] = os.listdir(out)
+        vpath = os.path.join(out, vdir)
+        # Plant a stale artifact from a hypothetical earlier build.
+        with open(os.path.join(vpath, "stale-old-version.xdelta"), "w") as f:
+            f.write("stale")
+        main(argv)
+        files = sorted(os.listdir(vpath))
+        assert "stale-old-version.xdelta" not in files, files
+        assert len(files) == 4, files  # xdelta, cue, README, SHA256SUMS
 ```
 
 Extend the `__main__` runner:
 
 ```python
     test_main_builds_release_package()
+    test_main_rerun_removes_stale_artifacts()
 ```
 
 - [ ] **Step 2: Run test to verify it fails**
@@ -551,7 +575,9 @@ def main(argv=None):
 
     version = get_version()
     out_dir = os.path.join(args.out, version)
-    os.makedirs(out_dir, exist_ok=True)
+    if os.path.isdir(out_dir):
+        shutil.rmtree(out_dir)  # rebuilds must not inherit stale artifacts
+    os.makedirs(out_dir)
     patch_name = f"arc-the-lad-2-korean-{version}.xdelta"
     patch_path = os.path.join(out_dir, patch_name)
 
