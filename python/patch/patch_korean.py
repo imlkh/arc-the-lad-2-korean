@@ -368,8 +368,22 @@ def patch_comm_img(comm_img_path, korean_mapping):
     return patched
 
 
+# Translator placeholder for decoder false positives (script/data bytes that
+# merely look like text). These entries must never be written: encoding the
+# placeholder overwrites event-script bytecode and crashes the game (e.g. the
+# first Downtown house, S700 chunk 7).
+NOISE_PLACEHOLDER = "<노이즈 텍스트>"
+
+
+def is_noise_placeholder(text):
+    return text.strip() == NOISE_PLACEHOLDER
+
+
 def parse_translation_file(translation_path):
     """Parse translation file to extract offset -> Korean text mappings.
+
+    Entries whose text is the noise placeholder are skipped so the original
+    bytes stay untouched.
 
     Translation file format:
         0x000B4516 [0x8006] [script:16 07]큰 도시네
@@ -395,6 +409,8 @@ def parse_translation_file(translation_path):
                 script_hex = match.group(3).strip()
                 script_bytes = bytes.fromhex(script_hex.replace(" ", ""))
                 korean_text = match.group(4)
+                if is_noise_placeholder(korean_text):
+                    continue
 
                 entries.append({
                     "offset": offset,
@@ -413,6 +429,8 @@ def parse_translation_file(translation_path):
             if bare_match:
                 offset = int(bare_match.group(1), 16)
                 korean_text = bare_match.group(2)
+                if is_noise_placeholder(korean_text):
+                    continue
 
                 entries.append({
                     "offset": offset,
@@ -772,6 +790,29 @@ def safe_truncate(encoded, available):
     return encoded[:last_safe]
 
 
+def realign_entry(data, offset, script_prefix, korean_text):
+    """Fix entries the decoder anchored 2 bytes off.
+
+    In some interior chunks (e.g. S700 chunk 7, the Downtown houses) the
+    decoder mis-anchors the system-message table:
+      - [script:A9 00]: offset points at the A9 00 marker itself, so writing
+        the tag as the prefix overwrites the real 2-byte script operand
+        (e.g. AE 01) and desyncs the event script.
+      - [script:FF 08] + "[box:..." text with no A9 00 marker before it:
+        the "prefix" is really the box control code, so writing prefix +
+        text doubles FF 08 and shifts the string.
+    Returns the corrected (offset, script_prefix).
+    """
+    marker = b"\xA9\x00"
+    if script_prefix == marker and bytes(data[offset:offset + 2]) == marker:
+        offset += 2
+        return offset, bytes(data[offset:offset + 2])
+    if (script_prefix == b"\xFF\x08" and korean_text.startswith("[box:")
+            and bytes(data[offset - 2:offset]) != marker):
+        return offset, b""
+    return offset, script_prefix
+
+
 def patch_stg_file(stg_path, translation_entries, korean_mapping, decode_table, dry_run=False):
     """Patch STG file with Korean translations.
 
@@ -797,6 +838,8 @@ def patch_stg_file(stg_path, translation_entries, korean_mapping, decode_table, 
             print(f"  ERROR: offset 0x{offset:08X} out of bounds")
             errors += 1
             continue
+
+        offset, script_prefix = realign_entry(data, offset, script_prefix, korean_text)
 
         # Find the null terminator of the original string,
         # skipping 0x00 bytes inside FF control codes
