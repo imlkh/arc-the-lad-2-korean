@@ -10,7 +10,7 @@ import sys
 import tempfile
 
 sys.path.insert(0, os.path.dirname(__file__))
-from patch_korean import parse_translation_file  # noqa: E402
+from patch_korean import parse_translation_file, realign_entry  # noqa: E402
 
 
 def test_noise_placeholder_entries_are_skipped():
@@ -32,6 +32,28 @@ def test_noise_placeholder_entries_are_skipped():
     assert entries[0]["text"] == "다운타운 민가"
 
 
+def test_realign_entry_anchored_on_marker():
+    # S700 chunk 7: decoder offset points at A9 00, real operand is AE 01.
+    data = bytes([0, 0, 0xA9, 0x00, 0xAE, 0x01, 0xFF, 0x08, 0x01, 0x01, 0x5D, 0x00])
+    off, prefix = realign_entry(data, 2, b"\xA9\x00", "[box:system]x")
+    assert (off, prefix) == (4, b"\xAE\x01")
+
+
+def test_realign_entry_box_code_taken_as_prefix():
+    # Table string with no A9 00 marker: "prefix" FF 08 is the box code.
+    data = bytes([0x01, 0x00, 0xFF, 0x08, 0x01, 0x01, 0x5D, 0x00])
+    off, prefix = realign_entry(data, 2, b"\xFF\x08", "[box:system]x")
+    assert (off, prefix) == (2, b"")
+
+
+def test_realign_entry_leaves_normal_entries():
+    data = bytes([0xA9, 0x00, 0x16, 0x07, 0x5D, 0x00])
+    assert realign_entry(data, 2, b"\x16\x07", "x") == (2, b"\x16\x07")
+
+
 if __name__ == "__main__":
     test_noise_placeholder_entries_are_skipped()
+    test_realign_entry_anchored_on_marker()
+    test_realign_entry_box_code_taken_as_prefix()
+    test_realign_entry_leaves_normal_entries()
     print("OK")

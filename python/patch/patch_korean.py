@@ -790,6 +790,29 @@ def safe_truncate(encoded, available):
     return encoded[:last_safe]
 
 
+def realign_entry(data, offset, script_prefix, korean_text):
+    """Fix entries the decoder anchored 2 bytes off.
+
+    In some interior chunks (e.g. S700 chunk 7, the Downtown houses) the
+    decoder mis-anchors the system-message table:
+      - [script:A9 00]: offset points at the A9 00 marker itself, so writing
+        the tag as the prefix overwrites the real 2-byte script operand
+        (e.g. AE 01) and desyncs the event script.
+      - [script:FF 08] + "[box:..." text with no A9 00 marker before it:
+        the "prefix" is really the box control code, so writing prefix +
+        text doubles FF 08 and shifts the string.
+    Returns the corrected (offset, script_prefix).
+    """
+    marker = b"\xA9\x00"
+    if script_prefix == marker and bytes(data[offset:offset + 2]) == marker:
+        offset += 2
+        return offset, bytes(data[offset:offset + 2])
+    if (script_prefix == b"\xFF\x08" and korean_text.startswith("[box:")
+            and bytes(data[offset - 2:offset]) != marker):
+        return offset, b""
+    return offset, script_prefix
+
+
 def patch_stg_file(stg_path, translation_entries, korean_mapping, decode_table, dry_run=False):
     """Patch STG file with Korean translations.
 
@@ -815,6 +838,8 @@ def patch_stg_file(stg_path, translation_entries, korean_mapping, decode_table, 
             print(f"  ERROR: offset 0x{offset:08X} out of bounds")
             errors += 1
             continue
+
+        offset, script_prefix = realign_entry(data, offset, script_prefix, korean_text)
 
         # Find the null terminator of the original string,
         # skipping 0x00 bytes inside FF control codes
