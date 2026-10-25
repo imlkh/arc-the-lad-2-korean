@@ -5,6 +5,20 @@ All notable changes to the Arc the Lad II Korean translation patch.
 The format is based on [Keep a Changelog](https://keepachangelog.com/), and this
 project adheres to [Semantic Versioning](https://semver.org/).
 
+## [0.2.1-beta] - 2026-10-25
+
+Bug-fix release.
+
+### Fixed
+- **Crash on entering ダウンタウン民家 (Downtown house, S700).** The patcher
+  wrote Korean text 2 bytes early for the system-message table in interior
+  chunks, overwriting script operands (e.g. `a9 00 ae 01` → `a9 00 ff 08`).
+  Entries anchored on the `A9 00` marker are now realigned before patching.
+  The same fix applies to the matching chunks in S800, SB00 and SD00.
+- **Placeholder text written over script data.** Translation entries marked
+  `<노이즈 텍스트>` (decoder false positives) were encoded and written over
+  event-script bytes in 7 places (S700, S800). They are now skipped.
+
 ## [0.2.0-beta] - 2026-07-04
 
 Distribution changes only — translation content is unchanged from 0.1.0-beta.
