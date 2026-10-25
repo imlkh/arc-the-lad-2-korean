@@ -368,8 +368,22 @@ def patch_comm_img(comm_img_path, korean_mapping):
     return patched
 
 
+# Translator placeholder for decoder false positives (script/data bytes that
+# merely look like text). These entries must never be written: encoding the
+# placeholder overwrites event-script bytecode and crashes the game (e.g. the
+# first Downtown house, S700 chunk 7).
+NOISE_PLACEHOLDER = "<노이즈 텍스트>"
+
+
+def is_noise_placeholder(text):
+    return text.strip() == NOISE_PLACEHOLDER
+
+
 def parse_translation_file(translation_path):
     """Parse translation file to extract offset -> Korean text mappings.
+
+    Entries whose text is the noise placeholder are skipped so the original
+    bytes stay untouched.
 
     Translation file format:
         0x000B4516 [0x8006] [script:16 07]큰 도시네
@@ -395,6 +409,8 @@ def parse_translation_file(translation_path):
                 script_hex = match.group(3).strip()
                 script_bytes = bytes.fromhex(script_hex.replace(" ", ""))
                 korean_text = match.group(4)
+                if is_noise_placeholder(korean_text):
+                    continue
 
                 entries.append({
                     "offset": offset,
@@ -413,6 +429,8 @@ def parse_translation_file(translation_path):
             if bare_match:
                 offset = int(bare_match.group(1), 16)
                 korean_text = bare_match.group(2)
+                if is_noise_placeholder(korean_text):
+                    continue
 
                 entries.append({
                     "offset": offset,
